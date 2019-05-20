@@ -2,84 +2,46 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 79A5A1FD4B
-	for <lists+util-linux@lfdr.de>; Thu, 16 May 2019 03:48:34 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id D604D2A95A
+	for <lists+util-linux@lfdr.de>; Sun, 26 May 2019 13:16:02 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726591AbfEPBqc (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Wed, 15 May 2019 21:46:32 -0400
-Received: from fieldses.org ([173.255.197.46]:33026 "EHLO fieldses.org"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1726422AbfEPAke (ORCPT <rfc822;util-linux@vger.kernel.org>);
-        Wed, 15 May 2019 20:40:34 -0400
-Received: by fieldses.org (Postfix, from userid 2815)
-        id CC88DBCE; Wed, 15 May 2019 20:40:32 -0400 (EDT)
-Date:   Wed, 15 May 2019 20:40:32 -0400
-From:   "J. Bruce Fields" <bfields@fieldses.org>
-To:     Andreas Dilger <adilger@dilger.ca>
-Cc:     Jeff Layton <jlayton@redhat.com>,
-        "J. Bruce Fields" <bfields@redhat.com>,
-        linux-nfs <linux-nfs@vger.kernel.org>,
-        linux-fsdevel@vger.kernel.org, abe@purdue.edu,
-        lsof-l@lists.purdue.edu, util-linux@vger.kernel.org
-Subject: Re: [PATCH 08/10] nfsd4: add file to display list of client's opens
-Message-ID: <20190516004032.GA16284@fieldses.org>
-References: <1556201060-7947-1-git-send-email-bfields@redhat.com>
- <1556201060-7947-9-git-send-email-bfields@redhat.com>
- <d26e7611f4e610bff81a16abbb88ca1c5ed70c91.camel@redhat.com>
- <20190425201413.GB9889@fieldses.org>
- <7F460FEA-BD69-4559-926C-5C1B0CF90E3C@dilger.ca>
- <20190426011804.GA12457@fieldses.org>
+        id S1727666AbfEZLQA convert rfc822-to-8bit (ORCPT
+        <rfc822;lists+util-linux@lfdr.de>); Sun, 26 May 2019 07:16:00 -0400
+Received: from host195136170-252.telnaptelecom.pl ([195.136.170.252]:39561
+        "EHLO mail.seen.pl" rhost-flags-OK-FAIL-OK-OK) by vger.kernel.org
+        with ESMTP id S1727638AbfEZLQA (ORCPT
+        <rfc822;util-linux-ng@vger.kernel.org>);
+        Sun, 26 May 2019 07:16:00 -0400
+X-Greylist: delayed 117551 seconds by postgrey-1.27 at vger.kernel.org; Sun, 26 May 2019 07:16:00 EDT
+Received: from [192.168.8.100] ([41.203.78.163])
+        (authenticated bits=0)
+        by seen.pl (8.14.2/8.14.2) with ESMTP id x4L3PMxf013800;
+        Tue, 21 May 2019 05:29:34 +0200
+Message-Id: <201905210329.x4L3PMxf013800@seen.pl>
+Content-Type: text/plain; charset="iso-8859-1"
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <20190426011804.GA12457@fieldses.org>
-User-Agent: Mutt/1.5.21 (2010-09-15)
+Content-Transfer-Encoding: 8BIT
+Content-Description: Mail message body
+Subject: spende
+To:     Recipients <instal@seen.pl>
+From:   instal@seen.pl
+Date:   Mon, 20 May 2019 15:35:24 -0600
+Reply-To: mrazimpremji@yahoo.com
+X-Greylist: Sender succeeded SMTP AUTH, not delayed by milter-greylist-4.0 (seen.pl [10.10.0.4]); Tue, 21 May 2019 05:29:39 +0200 (CEST)
+X-Virus-Scanned: clamav-milter 0.96.5 at mail.seen.pl
+X-Virus-Status: Clean
+X-Spam-Status: No, score=-96.0 required=6.0 tests=AWL,DNS_FROM_AHBL_RHSBL,
+        MISSING_MID,RCVD_IN_XBL,RDNS_NONE,USER_IN_WHITELIST autolearn=no version=3.2.5
+X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on mail.seen.pl
 Sender: util-linux-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-On Thu, Apr 25, 2019 at 09:18:04PM -0400, J. Bruce Fields wrote:
-> On Thu, Apr 25, 2019 at 11:14:23PM +0200, Andreas Dilger wrote:
-> > On Apr 25, 2019, at 10:14 PM, J. Bruce Fields <bfields@fieldses.org> wrote:
-> > > 
-> > > On Thu, Apr 25, 2019 at 02:04:59PM -0400, Jeff Layton wrote:
-> > >> More bikeshedding: should we have a "states" file instead of an "opens"
-> > >> file and print a different set of output for each stateid type?
-> > > 
-> > > Sure.  The format of the file could be something like
-> > > 
-> > > 	<stateid> open rw -- <openowner>...
-> > > 	<stateid> lock r 0-EOF <lockowner>...
-> > > 	<stateid> deleg r
-> > > 
-> > > I wonder if we could put owners on separate lines and do some
-> > > heirarchical thing to show owner-stateid relationships?  Hm.  That's
-> > > kind of appealing but more work.
-> > 
-> > My suggestion here would be to use YAML-formatted output rather than
-> > space/tab separated positional fields.  That can still be made human
-> > readable, but also machine parseable and extensible if formatted properly.
-> 
-> Well, anything we do will be machine-parseable.  But I can believe YAML
-> would make future extension easier.  It doesn't look like it would be
-> more complicated to generate.  It uses C-style escaping (like \x32) so
-> there'd be no change to how we format binary blobs.
-> 
-> The field names make it a tad more verbose but I guess it's not too bad.
+Mit meiner kleinen Einführung bin ich Azim Hashim Premji, ein indischer Wirtschaftsmagnat, Investor und Philanthrop. Ich bin der Vorsitzende von Wipro Limited. Ich gab 25 Prozent meines persönlichen Vermögens für wohltätige Zwecke ab. Außerdem habe ich versprochen, den Rest von 25% in diesem Jahr 2019 zu verschenken. Ich möchte 15 Personen 800.000,00 USD spenden.
 
-OK, I tried changing "opens" to "states" and using YAML.  Example output:
+Herzlichen Glückwunsch, eine Spende in Höhe von 800.000,00 USD wurde an Sie überwiesen. Wenn Sie an meiner Spende interessiert sind, kontaktieren Sie mich direkt per E-Mail: mrazimpremji@yahoo.com für weitere Informationen.
 
-- 0x020000006a5fdc5c4ad09d9e01000000: { type: open, access: rw, deny: --, superblock: "fd:10:13649", owner: "open id:\x00\x00\x00&\x00\x00\x00\x00\x00\x0046ï¿½ï¿½QH " }
-- 0x010000006a5fdc5c4ad09d9e03000000: { type: open, access: r-, deny: --, superblock: "fd:10:13650", owner: "open id:\x00\x00\x00&\x00\x00\x00\x00\x00\x0046ï¿½ï¿½QH" }
-- 0x010000006a5fdc5c4ad09d9e04000000: { type: deleg, access: r, superblock: "fd:10:13650" }
-- 0x010000006a5fdc5c4ad09d9e06000000: { type: lock, superblock: "fd:10:13649", owner: "lock id:\x00\x00\x00&\x00\x00\x00\x00\x00\x00\x00\x00" }
+Hinweis: Gelegenheiten kommen, aber einmal. Sie können auch über den folgenden Link mehr über mich lesen: http://en.wikipedia.org/wiki/Azim_Premji
 
-The parser Andreas suggested (https://yaml-online-parser.appspot.com/)
-accepts these.  It also thinks strings are always in a unicode encoding
-of some kind, which they aren't.  The owners are arbitrary series of
-bytes but I'd like at least any ascii parts to be human readable, and
-I'm a little stuck on how to do that.
-
---b.
+Danke dir
