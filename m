@@ -2,68 +2,59 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 8DCFE2FC1D
-	for <lists+util-linux@lfdr.de>; Thu, 30 May 2019 15:19:09 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id B9897306B5
+	for <lists+util-linux@lfdr.de>; Fri, 31 May 2019 04:44:29 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726469AbfE3NTI (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Thu, 30 May 2019 09:19:08 -0400
-Received: from mx1.redhat.com ([209.132.183.28]:39906 "EHLO mx1.redhat.com"
+        id S1726535AbfEaCo2 convert rfc822-to-8bit (ORCPT
+        <rfc822;lists+util-linux@lfdr.de>); Thu, 30 May 2019 22:44:28 -0400
+Received: from smtp.tjto.jus.br ([189.10.44.215]:54880 "EHLO smtp.tjto.jus.br"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1725919AbfE3NTI (ORCPT <rfc822;util-linux@vger.kernel.org>);
-        Thu, 30 May 2019 09:19:08 -0400
-Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.phx2.redhat.com [10.5.11.22])
-        (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
-        (No client certificate requested)
-        by mx1.redhat.com (Postfix) with ESMTPS id 6E47F3006370;
-        Thu, 30 May 2019 13:19:08 +0000 (UTC)
-Received: from ws (unknown [10.40.205.108])
-        by smtp.corp.redhat.com (Postfix) with ESMTPS id 7C8CF100203C;
-        Thu, 30 May 2019 13:19:07 +0000 (UTC)
-Date:   Thu, 30 May 2019 15:19:04 +0200
-From:   Karel Zak <kzak@redhat.com>
-To:     Stanislav Brabec <sbrabec@suse.cz>
-Cc:     util-linux@vger.kernel.org, Frederic Crozat <fcrozat@suse.com>
-Subject: Re: [PATCH] raw: Add raw.service
-Message-ID: <20190530131904.zvicpy2djdulxt6n@ws>
-References: <f4c8feb9-2bdc-8a40-7bc1-d24fcd94d0a7@suse.cz>
- <20190530123530.q2ngscgnmgi3s327@ws>
+        id S1726512AbfEaCo2 (ORCPT <rfc822;util-linux@vger.kernel.org>);
+        Thu, 30 May 2019 22:44:28 -0400
+Received: from localhost (localhost [127.0.0.1])
+        by smtp.tjto.jus.br (Postfix) with ESMTP id 910953ED641;
+        Thu, 30 May 2019 20:16:03 -0300 (BRT)
+Received: from smtp.tjto.jus.br ([127.0.0.1])
+        by localhost (mta-in.tjto.jus.br [127.0.0.1]) (amavisd-new, port 10032)
+        with ESMTP id OvEVqFNIl_8l; Thu, 30 May 2019 20:16:03 -0300 (BRT)
+Received: from localhost (localhost [127.0.0.1])
+        by smtp.tjto.jus.br (Postfix) with ESMTP id DCCA53EA4E1;
+        Thu, 30 May 2019 20:08:32 -0300 (BRT)
+X-Virus-Scanned: amavisd-new at mta-in.tjto.jus.br
+Received: from smtp.tjto.jus.br ([127.0.0.1])
+        by localhost (mta-in.tjto.jus.br [127.0.0.1]) (amavisd-new, port 10026)
+        with ESMTP id mS0Vwzjjt0Tu; Thu, 30 May 2019 20:08:32 -0300 (BRT)
+Received: from [192.99.135.118] (ip118.ip-192-99-135.net [192.99.135.118])
+        (Authenticated sender: nelsonsena@tjto.jus.br)
+        by smtp.tjto.jus.br (Postfix) with ESMTPSA id 0917E3EC335;
+        Thu, 30 May 2019 20:01:46 -0300 (BRT)
+Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20190530123530.q2ngscgnmgi3s327@ws>
-User-Agent: NeoMutt/20180716-1584-710bcd
-X-Scanned-By: MIMEDefang 2.84 on 10.5.11.22
-X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16 (mx1.redhat.com [10.5.110.43]); Thu, 30 May 2019 13:19:08 +0000 (UTC)
+Content-Transfer-Encoding: 8BIT
+Content-Description: Mail message body
+Subject: =?utf-8?b?UmU6IOKCrCAyLDAwMCwwMDAuMDAgRXVybw==?=
+To:     Recipients <nelsonsena@tjto.jus.br>
+From:   nelsonsena@tjto.jus.br
+Date:   Thu, 30 May 2019 16:01:40 -0700
+Reply-To: myburghhugohendrik@gmail.com
+Message-Id: <20190530230148.0917E3EC335@smtp.tjto.jus.br>
 Sender: util-linux-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-On Thu, May 30, 2019 at 02:35:35PM +0200, Karel Zak wrote:
-> On Thu, May 30, 2019 at 12:30:16AM +0200, Stanislav Brabec wrote:
-> > Add raw.service that allows to initialize raw devices on boot.
-> 
-> And why not udev?
-...
-> Maybe all we need is to add any info about udev configuration to
-> raw(8).
+Lieber Freund,
 
-And note ... do we really want to improve anything around raw devices?
+Ich bin Herr Richard Wahl der Mega-Gewinner von $ 533M In Mega Millions Jackpot spende ich an 5 zufällige Personen, wenn Sie diese E-Mail erhalten, dann wurde Ihre E-Mail nach einem Spinball ausgewählt. Ich habe den größten Teil meines Vermögens auf eine Reihe von Wohltätigkeitsorganisationen und Organisationen verteilt. Ich habe mich freiwillig dazu entschieden, Ihnen den Betrag von € 2.000.000,00 zu spenden eine der ausgewählten 5, um meine Gewinne zu überprüfen, finden Sie auf meiner You Tube Seite unten.
 
-All we need is to dig really deep grave and keep it there.
+UHR MICH HIER: https://www.youtube.com/watch?v=tne02ExNDrw
 
-So, don't try to make zombies to look nice and user friendly. Zombies
-are ugly, deal with it! :-)
+Das ist dein Spendencode: [DF00430342018]
 
-    Karel
+Antworten Sie mit dem Spendencode auf diese E-Mail: wahlfoundationorg@gmail.com
 
-> 
->     Karel
-> 
-> -- 
->  Karel Zak  <kzak@redhat.com>
->  http://karelzak.blogspot.com
+Ich hoffe, Sie und Ihre Familie glücklich zu machen.
 
--- 
- Karel Zak  <kzak@redhat.com>
- http://karelzak.blogspot.com
+Grüße
+
+Herr Richard Wahl
