@@ -2,22 +2,22 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 8B49E3BD41
-	for <lists+util-linux@lfdr.de>; Mon, 10 Jun 2019 21:59:29 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 507343BD42
+	for <lists+util-linux@lfdr.de>; Mon, 10 Jun 2019 22:00:01 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S2389201AbfFJT7W (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Mon, 10 Jun 2019 15:59:22 -0400
-Received: from mx2.suse.de ([195.135.220.15]:54940 "EHLO mx1.suse.de"
+        id S2389331AbfFJT7q (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Mon, 10 Jun 2019 15:59:46 -0400
+Received: from mx2.suse.de ([195.135.220.15]:54974 "EHLO mx1.suse.de"
         rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org with ESMTP
-        id S2389170AbfFJT7W (ORCPT <rfc822;util-linux@vger.kernel.org>);
-        Mon, 10 Jun 2019 15:59:22 -0400
+        id S2389170AbfFJT7q (ORCPT <rfc822;util-linux@vger.kernel.org>);
+        Mon, 10 Jun 2019 15:59:46 -0400
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.220.254])
-        by mx1.suse.de (Postfix) with ESMTP id 94C8AAF9C
-        for <util-linux@vger.kernel.org>; Mon, 10 Jun 2019 19:59:21 +0000 (UTC)
+        by mx1.suse.de (Postfix) with ESMTP id 7358DAF9C
+        for <util-linux@vger.kernel.org>; Mon, 10 Jun 2019 19:59:45 +0000 (UTC)
 To:     util-linux@vger.kernel.org
 From:   Stanislav Brabec <sbrabec@suse.cz>
-Subject: [PATCH 1/3] fstrim: Fix fstrim_all() comment
+Subject: [PATCH 3/3] fstrim -a/-A: Skip read-only volumes
 Openpgp: preference=signencrypt
 Autocrypt: addr=sbrabec@suse.cz; prefer-encrypt=mutual; keydata=
  mQGiBD6v2X0RBAD3rKn9S5s4iKX9KwKPIE1GCEG0qE1UomcIxYhey5oKEVoQoHtJkKvZpOVH
@@ -38,8 +38,8 @@ Autocrypt: addr=sbrabec@suse.cz; prefer-encrypt=mutual; keydata=
  uRDKekFTiilRRVyiXWDt+zY2aNNMknKBACeIRgQYEQIABgUCPq/ZggAKCRBxfCCfoE/Ndi+t
  AJ958OvQedgG0gsRG1wX/HKXmRZ0dwCfUk0F4qeP5dCiETIHh3gxNIsx8YQ=
 Organization: SUSE Linux, s. r. o.
-Message-ID: <787f49bd-0f57-5616-ca10-2173c3801809@suse.cz>
-Date:   Mon, 10 Jun 2019 21:59:21 +0200
+Message-ID: <a46df663-bdfd-6f53-45e9-c4547e4ee108@suse.cz>
+Date:   Mon, 10 Jun 2019 21:59:45 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
  Thunderbird/60.7.0
 MIME-Version: 1.0
@@ -51,29 +51,37 @@ Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-"convert LABEL=" does not happens in mnt_fs_get_source(), but later in
-mnt_resolve_spec(). To make this more clean, move the comment before this
-chunk of code.
+Calling TRIM on some read-only volumes can fail with:
+fstrim: /win: FITRIM ioctl failed: Bad file descriptor
+
+Skipping all read-only mounts seems to be safe and logical strategy.
+
+Fixes opensuse#1106214.
 
 Signed-off-by: Stanislav Brabec <sbrabec@suse.cz>
 ---
- sys-utils/fstrim.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ sys-utils/fstrim.c | 8 ++++++++
+ 1 file changed, 8 insertions(+)
 
 diff --git a/sys-utils/fstrim.c b/sys-utils/fstrim.c
-index cae38cdff..ff029015e 100644
+index 0491e2b54..e0e9e57a9 100644
 --- a/sys-utils/fstrim.c
 +++ b/sys-utils/fstrim.c
-@@ -290,8 +290,8 @@ static int fstrim_all(struct fstrim_control *ctl)
- 		if (!tgt || mnt_fs_is_pseudofs(fs) || mnt_fs_is_netfs(fs))
+@@ -328,6 +328,14 @@ static int fstrim_all(struct fstrim_control *ctl)
+ 		if (rc)
+ 			continue;	/* overlaying mount */
+ 
++		/* FSTRIM on read-only filesystem can fail, and it can fail */
++		if (access(path, W_OK) != 0) {
++			if (errno == EROFS)
++				continue;
++			if (errno == EACCES)
++				continue;
++		}
++
+ 		if (!has_discard(src, &wholedisk))
  			continue;
- 
-+		/* convert LABEL= (etc.) from fstab to paths */
- 		if (!src && cache) {
--			/* convert LABEL= (etc.) from fstab to paths */
- 			const char *spec = mnt_fs_get_source(fs);
- 
- 			if (!spec)
+ 		cnt++;
 -- 
 2.21.0
 
