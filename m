@@ -2,101 +2,58 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id BB7854390D
-	for <lists+util-linux@lfdr.de>; Thu, 13 Jun 2019 17:11:32 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 7604845100
+	for <lists+util-linux@lfdr.de>; Fri, 14 Jun 2019 03:06:24 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1732502AbfFMPLF convert rfc822-to-8bit (ORCPT
-        <rfc822;lists+util-linux@lfdr.de>); Thu, 13 Jun 2019 11:11:05 -0400
-Received: from mga01.intel.com ([192.55.52.88]:27295 "EHLO mga01.intel.com"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1732301AbfFMNvO (ORCPT <rfc822;util-linux@vger.kernel.org>);
-        Thu, 13 Jun 2019 09:51:14 -0400
-X-Amp-Result: SKIPPED(no attachment in message)
-X-Amp-File-Uploaded: False
-Received: from fmsmga008.fm.intel.com ([10.253.24.58])
-  by fmsmga101.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384; 13 Jun 2019 06:51:14 -0700
-X-ExtLoop1: 1
-Received: from fmsmsx104.amr.corp.intel.com ([10.18.124.202])
-  by fmsmga008.fm.intel.com with ESMTP; 13 Jun 2019 06:51:13 -0700
-Received: from fmsmsx153.amr.corp.intel.com (10.18.125.6) by
- fmsmsx104.amr.corp.intel.com (10.18.124.202) with Microsoft SMTP Server (TLS)
- id 14.3.408.0; Thu, 13 Jun 2019 06:51:13 -0700
-Received: from fmsmsx119.amr.corp.intel.com ([169.254.14.107]) by
- FMSMSX153.amr.corp.intel.com ([169.254.9.44]) with mapi id 14.03.0415.000;
- Thu, 13 Jun 2019 06:51:13 -0700
-From:   "Jakowski, Andrzej" <andrzej.jakowski@intel.com>
-To:     Karel Zak <kzak@redhat.com>
-CC:     "util-linux@vger.kernel.org" <util-linux@vger.kernel.org>
-Subject: RE: [RFC] utility for SED management
-Thread-Topic: [RFC] utility for SED management
-Thread-Index: AdUgHzTZHbWrG9gFS1SXimdOtclYpQBP88mAACP9txA=
-Date:   Thu, 13 Jun 2019 13:51:12 +0000
-Message-ID: <548EA37F71F6AC4BB746F459732504FF7F184907@FMSMSX119.amr.corp.intel.com>
-References: <548EA37F71F6AC4BB746F459732504FF7F1810E3@FMSMSX119.amr.corp.intel.com>
- <20190612134005.cb7m2qhgf2aolrf6@ws.net.home>
-In-Reply-To: <20190612134005.cb7m2qhgf2aolrf6@ws.net.home>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-dlp-product: dlpe-windows
-dlp-version: 11.0.600.7
-dlp-reaction: no-action
-x-ctpclassification: CTP_NT
-x-titus-metadata-40: eyJDYXRlZ29yeUxhYmVscyI6IiIsIk1ldGFkYXRhIjp7Im5zIjoiaHR0cDpcL1wvd3d3LnRpdHVzLmNvbVwvbnNcL0ludGVsMyIsImlkIjoiNGJmMzFiMjAtMWExYS00NWQ5LWI5ZWYtOTlmY2EwNTUwOWM5IiwicHJvcHMiOlt7Im4iOiJDVFBDbGFzc2lmaWNhdGlvbiIsInZhbHMiOlt7InZhbHVlIjoiQ1RQX05UIn1dfV19LCJTdWJqZWN0TGFiZWxzIjpbXSwiVE1DVmVyc2lvbiI6IjE3LjEwLjE4MDQuNDkiLCJUcnVzdGVkTGFiZWxIYXNoIjoiNUN5UmlxRm11ZUtuSFJkNUFMVGRyTlo5K3pidHZLRDkrNUgzb2x3VmRxS0xWcDdXXC8zbW9IYTVhRVFoU3RxMUkifQ==
-x-originating-ip: [10.1.200.106]
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 8BIT
+        id S1725863AbfFNBGX (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Thu, 13 Jun 2019 21:06:23 -0400
+Received: from qf-corp.com ([43.252.215.172]:59695 "EHLO server1.qf-corp.com"
+        rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org with ESMTP
+        id S1725837AbfFNBGX (ORCPT <rfc822;util-linux@vger.kernel.org>);
+        Thu, 13 Jun 2019 21:06:23 -0400
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=qf-corp.com
+        ; s=default; h=Message-ID:Reply-To:Subject:To:From:Date:
+        Content-Transfer-Encoding:Content-Type:MIME-Version:Sender:Cc:Content-ID:
+        Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+        :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+        List-Subscribe:List-Post:List-Owner:List-Archive;
+        bh=x+wk2oDUMoo/hQHPqS9UCKstzOaLw+EthDvW07j7+BE=; b=D+lPgUmpPaSx3FbTDmI3WsYwfu
+        SOWUhRxbbx+nX7+uQJcYyZqnCY00ZZ0uKyjPKHUCVlFsTdzatdM12qvFom3xH+MtQTJL19jxfh/iC
+        ms6FtGe/Cou8mGQ7fkxR2FecD/TgojZhssNiR2l7J2J2+rSiqb0fbxc5MUEqs/WXnlUO76J2dZ71n
+        Gcaq0NGH7lOhbca2Zgp2Y5u6DPUyRW41O21Qaq7g7QVB6p0ph+WBvKnR5WcUZFos+88pN2xw9XiiD
+        d0r9yTIavLprpMB0sjQjQqWiUBNf3c2PO4XDp/n1Q2rEm70G52NGFA9BRLjvGwz+owQXLuevNOUJQ
+        DWFz89Dw==;
+Received: from [::1] (port=57930 helo=server1.qf-corp.com)
+        by server1.qf-corp.com with esmtpa (Exim 4.92)
+        (envelope-from <admin@qf-corp.com>)
+        id 1hbVLJ-0004Pv-Un; Fri, 14 Jun 2019 03:25:02 +0800
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8;
+ format=flowed
+Content-Transfer-Encoding: 8bit
+Date:   Fri, 14 Jun 2019 03:25:01 +0800
+From:   Herr David Williams <admin@qf-corp.com>
+To:     undisclosed-recipients:;
+Subject: dringender Kredit
+Reply-To: david.loanfirm18@gmail.com
+Mail-Reply-To: david.loanfirm18@gmail.com
+Message-ID: <573d10d27026cc7099387eb4144f6f7f@qf-corp.com>
+X-Sender: admin@qf-corp.com
+User-Agent: Roundcube Webmail/1.3.8
+X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
+X-AntiAbuse: Primary Hostname - server1.qf-corp.com
+X-AntiAbuse: Original Domain - vger.kernel.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - qf-corp.com
+X-Get-Message-Sender-Via: server1.qf-corp.com: authenticated_id: admin@qf-corp.com
+X-Authenticated-Sender: server1.qf-corp.com: admin@qf-corp.com
 Sender: util-linux-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-On Wed, Jun 12, 2019 at 01:40:08PM +0000, Karel Zak wrote:
-> From my point of view (and maybe I'm wrong ;-)) it seems complex enough to keep it as an independent stand-alone project ("sed-utils").
-> Not sure if it makes sense to push it to generic util-linux package.
 
-It sounds to me that your major concern for inclusion sedcli into util-linux is
-its complexity. What would be the best method to understand if sedcli fits into
-util-linux?
 
-Thx,
-Andrzej
-
------Original Message-----
-From: util-linux-owner@vger.kernel.org [mailto:util-linux-owner@vger.kernel.org] On Behalf Of Karel Zak
-Sent: Wednesday, June 12, 2019 3:40 PM
-To: Jakowski, Andrzej <andrzej.jakowski@intel.com>
-Cc: util-linux@vger.kernel.org
-Subject: Re: [RFC] utility for SED management
-
-On Tue, Jun 11, 2019 at 06:30:51AM +0000, Jakowski, Andrzej wrote:
-> We have built prototype code covering these functionalities and now we 
-> would like to productize it. We are looking for the right place to 
-> publish our SW, considering util-linux project as one of the options. 
-> The SW will likely consist of:
->  * Libsed - shared object exposing programmatic interface for security
->    management (Opal) of disk
->  * Sedcli - command line utility covering both client and data center flows.
->    Sedcli will use libsed for interaction with the drive, libkmip for
->    interaction with OASIS KMIP based key manager and tpm2-tss to interact with
->    TPM2 key manager
->  * Udev rules - will be used to invoke sedcli to auto-provision or auto-unlock
->    when new device is added to the OS (e.g. hot insert)
->  * System.d  scripts - will be used to invoke sedcli when key needs to be 
->    retrieved from network attached key manager
->  * Config file - will define policies for example on which disk should be 
->    security managed or not
-> 
-> We would like to contribute that SW into util-linux project. What do 
-> you think about adding this SW into util-linux?
-
-From my point of view (and maybe I'm wrong ;-)) it seems complex enough to keep it as an independent stand-alone project ("sed-utils").
-Not sure if it makes sense to push it to generic util-linux package.
-
-    Karel
-
---
- Karel Zak  <kzak@redhat.com>
- http://karelzak.blogspot.com
+-- 
+Benötigen Sie dringend einen Kredit? Wenn ja, antworten Sie für weitere 
+Details
