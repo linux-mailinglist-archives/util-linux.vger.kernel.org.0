@@ -2,57 +2,68 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id C383A460C5
-	for <lists+util-linux@lfdr.de>; Fri, 14 Jun 2019 16:30:57 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 8A03346334
+	for <lists+util-linux@lfdr.de>; Fri, 14 Jun 2019 17:45:31 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1728293AbfFNOaz (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Fri, 14 Jun 2019 10:30:55 -0400
-Received: from bombadil.infradead.org ([198.137.202.133]:55502 "EHLO
-        bombadil.infradead.org" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1728121AbfFNOaz (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Fri, 14 Jun 2019 10:30:55 -0400
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-        d=infradead.org; s=bombadil.20170209; h=In-Reply-To:Content-Transfer-Encoding
-        :Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To:From:Date:
-        Sender:Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:
-        Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:
-        List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
-        bh=g+j545IMwIJikYLXl8ImiYVIWrJ6ceFqhokOAsJBX7s=; b=cM786c65V4kkuIngazZnMLV984
-        naip0mPWhZac9mKV9KODwN08xWW4C000ncgC8+c0HPnIlOHcIATtO/rCFwxw70GeCrODf9MynGlvh
-        6m38ZTtpfwldKgVCKRdbotYqvsYbdCsBJnRgnSqK+drvHDChY7ql/bSEhL4ZbIMeobeyLLPzerQfm
-        xHBc8WISsqWEavTN7ZZcOZlG+o1BpXrSOq2ChfgU6BBy2DXHlMEGTjTRAphi9hJ9a2jp9wt9SPoOi
-        XIeND7qTYR8tnCPWjaBkFDVBUprrR5Xu8E2nTkHEPpQJnI0FucO52NlI13y8iXV70oLxZQeK0sIn8
-        jmilIPbQ==;
-Received: from hch by bombadil.infradead.org with local (Exim 4.92 #3 (Red Hat Linux))
-        id 1hbnEC-0000KR-UG; Fri, 14 Jun 2019 14:30:52 +0000
-Date:   Fri, 14 Jun 2019 07:30:52 -0700
-From:   Christoph Hellwig <hch@infradead.org>
-To:     Pali =?iso-8859-1?Q?Roh=E1r?= <pali.rohar@gmail.com>
-Cc:     "Enrico Weigelt, metux IT consult" <lkml@metux.net>,
+        id S1725886AbfFNPpY (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Fri, 14 Jun 2019 11:45:24 -0400
+Received: from mout.kundenserver.de ([212.227.126.135]:33267 "EHLO
+        mout.kundenserver.de" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1725807AbfFNPpX (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Fri, 14 Jun 2019 11:45:23 -0400
+Received: from [192.168.1.110] ([77.4.92.40]) by mrelayeu.kundenserver.de
+ (mreue010 [212.227.15.167]) with ESMTPSA (Nemesis) id
+ 1MD9nd-1hkMym2NO5-0098ca; Fri, 14 Jun 2019 17:45:21 +0200
+Subject: Re: Help with reviewing dosfstools patches
+From:   "Enrico Weigelt, metux IT consult" <lkml@metux.net>
+To:     =?UTF-8?Q?Pali_Roh=c3=a1r?= <pali.rohar@gmail.com>,
         util-linux@vger.kernel.org, linux-fsdevel@vger.kernel.org,
         linux-kernel@vger.kernel.org
-Subject: Re: Help with reviewing dosfstools patches
-Message-ID: <20190614143052.GA21822@infradead.org>
 References: <20190614102513.4uwsu2wkigg3pimq@pali>
  <ae5097ee-12af-2807-d48c-4274b4fc856d@metux.net>
- <20190614142534.4obcytnq4v3ejdni@pali>
+Organization: metux IT consult
+Message-ID: <9e81aa56-358a-71e1-edc1-50781062f3a4@metux.net>
+Date:   Fri, 14 Jun 2019 17:45:20 +0200
+User-Agent: Mozilla/5.0 (X11; Linux i686 on x86_64; rv:60.0) Gecko/20100101
+ Thunderbird/60.2.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <20190614142534.4obcytnq4v3ejdni@pali>
-User-Agent: Mutt/1.11.4 (2019-03-13)
-X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by bombadil.infradead.org. See http://www.infradead.org/rpr.html
+In-Reply-To: <ae5097ee-12af-2807-d48c-4274b4fc856d@metux.net>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
+X-Provags-ID: V03:K1:qac5b9bV7zvSd7iQ4X0pCft/q2EJPLi7mfSiZbmTpE0sPDGhAC1
+ VRNMAmKV36VozMyK3rWKT7sjIpddFXl8+8x2CHvrKhpMbxmYzvl1NoVwe571TmeQEecoPdd
+ DovXLwbrtAq9WZLC19n+ZGnf3x/CaScxt6QLWiVlIAiPBzjVWmrfKAxWf0pmdnqSlv6YL4w
+ 6DvyI6Ff0MTUYJXdgdC8Q==
+X-Spam-Flag: NO
+X-UI-Out-Filterresults: notjunk:1;V03:K0:wjdDE5rA/mI=:gEuP1f7JUa24CM5jb4oOe+
+ sD2m3zN9pW1yiixDOZ+/BJ5JIiHUV92VLznT91iaUp9iTozKGSTvf33nVmAhwSUQUDNMFrLou
+ 1SKVnufEN40n5extwnYZ80cr1GG4JBZ4TD+ZwFFw0E7amq1OiGoQbV/aP/hFD0P7AvitkEwfK
+ +XocfTWUMhz+pWh9taQMupi9XRo/vBiypNXHxw3FJUO0CEjUDUOrt/20l9D8z3fnhym/2cjRE
+ QcUof+png9r7t2Hbc3J4IL+Jygn+oqmmG7thzGEA4KM7dymvY393GSPE9jvAXOcUMoGyqii6v
+ zRnP7HEORP7tOFtgtz3Ubx2OAvAr8OXrDgUqmzB5iN4I40+rywJMzOpN4cA2y/DRtDEaYh/Y9
+ DinhCpaBT9A4Q2gaj0D6IUFzBhs0IjJNzW1carOcebqe+u5GUyK4PnEYDT3U8Vekn4oauv+iH
+ z+3qoV8hm7swc73sB7s+TmXbSDbAreprvWtGZNuFddY9wszKgoC1xbUPR9JeO6R1r4QGzSee4
+ ucHRPC5pdAJSpd+bTB3g6shDdEH9MYuj+e8EwHK0s+cUMoEKPLKEDzZeUvT+zilPMfiU9qpCw
+ B1kveLg4HX62JhFUcQhpFBMTvRzmsP6LLy8qQxJwjz+ZanHfCUx0t9lZzWQA3D025WBVjWB9I
+ SjLhPmnFmQX9yZ6i24fwR354nhbPOguOXE3Gl2YVC268xO2zMaMRkiT4IuxOtUQB6l/4BWFBX
+ vbTqY8ANnKyjH2TUx/IU3zaxRR3S9TYqDWTHGoPokFtgOCLZm9+dBJW/7M8=
 Sender: util-linux-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-On Fri, Jun 14, 2019 at 04:25:34PM +0200, Pali Rohár wrote:
-> > Does the project already have a maillist ?
-> 
-> No, there is no mailing list. Basically whole development is on github
-> via github pull requests where are also put review comments and where is
-> also whole discussion, including bug reports.
+On 14.06.19 16:20, Enrico Weigelt, metux IT consult wrote:
 
-That could explain why it is lacking qualified reviewers..
+<snip>
+
+Currently working through your branches. Smells like they really deserve
+a rebase and signed-off lines.
+
+
+--mtx
+
+-- 
+Enrico Weigelt, metux IT consult
+Free software and Linux embedded engineering
+info@metux.net -- +49-151-27565287
