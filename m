@@ -2,62 +2,94 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id E30C7495F7
-	for <lists+util-linux@lfdr.de>; Tue, 18 Jun 2019 01:35:13 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 4DCED4DB0B
+	for <lists+util-linux@lfdr.de>; Thu, 20 Jun 2019 22:16:44 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1728845AbfFQXfJ (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Mon, 17 Jun 2019 19:35:09 -0400
-Received: from mx6378.ciavia.eu ([178.156.202.117]:53604 "EHLO
-        slot0.presuure.ga" rhost-flags-OK-FAIL-OK-OK) by vger.kernel.org
-        with ESMTP id S1726121AbfFQXfI (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Mon, 17 Jun 2019 19:35:08 -0400
-X-Greylist: delayed 602 seconds by postgrey-1.27 at vger.kernel.org; Mon, 17 Jun 2019 19:35:07 EDT
-DKIM-Signature: v=1; a=rsa-sha1; c=relaxed/relaxed; s=dkim; d=presuure.ga;
- h=Content-Type:MIME-Version:Content-Transfer-Encoding:Content-Description:Subject:To:From:Date:Reply-To:Message-ID; i=nuekwa@presuure.ga;
- bh=EclTUBt0EgOxKrPKBvCtV8KGfLA=;
- b=M+pUntCOljJ1ENXVFVYKzseAQq5FKUjwAnGvuh36F3udHxBJPmGtzyTkn8fDu8L5mPDFrQD9gUHq
-   YSNraCY08bGlr6LMkFphnxFIekWZbggwroECIHD/osaltPyhEEKfJ7zTahovAL38ymLYek9I8iEp
-   A0Cu40jNg0IsrZi5TiJmoMBuE7E+1keYeYz8pFfirVlBiZzI1sc+nE/3QkSYBc5OK0X8hxEWc85F
-   JUL3Kc816hGjwZZ6ncgMgNiwUNnSG/keVydpSzWDQxBremWIL5DwSyXYuFKOllhV7aBsNI/maB9c
-   o6JMPxqMVBKhAV/09k+wGwWcNN7sewaJq26WrA==
-DomainKey-Signature: a=rsa-sha1; c=nofws; q=dns; s=dkim; d=presuure.ga;
- b=lWrOdXvt1QVdAyRE1BQNhTQyTW0UVDFbL+0zjurz6p5sztHwqxP3Bfdr+tQsMz4VbLdtiR1+qR0C
-   lXeJg+HOn44TgllYmjNQ/yavXG6CgdsVui556kKw+s8A/300MDfHKdUFhwbUK7i2jAoKLJ7Y2OaM
-   fEdHjLvJw8XRqQxRvRnSZwJ2s9b4l7hOLcMO/wqh81aWsTKNyaNiQnap/pozZFboD8CqHQB0qqKa
-   r5XGBOj8Tr22Kvm0jNvV8pQbpFpQjzmuPkCww14+AABqwvc+e+I8NjuNS5EwmM8UnDjjst9DkohS
-   G/0Vj8iBLKxN0I6oh3NURHiYg1Tix/KonstxQw==;
-Content-Type: text/plain; charset="iso-8859-1"
+        id S1726533AbfFTUQn (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Thu, 20 Jun 2019 16:16:43 -0400
+Received: from mx2.suse.de ([195.135.220.15]:42762 "EHLO mx1.suse.de"
+        rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org with ESMTP
+        id S1725907AbfFTUQn (ORCPT <rfc822;util-linux@vger.kernel.org>);
+        Thu, 20 Jun 2019 16:16:43 -0400
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.220.254])
+        by mx1.suse.de (Postfix) with ESMTP id 9624AAC4C
+        for <util-linux@vger.kernel.org>; Thu, 20 Jun 2019 20:16:42 +0000 (UTC)
+To:     util-linux@vger.kernel.org
+From:   Stanislav Brabec <sbrabec@suse.cz>
+Subject: [PATCH] agetty: Remove superfluous fflush()
+Openpgp: preference=signencrypt
+Autocrypt: addr=sbrabec@suse.cz; prefer-encrypt=mutual; keydata=
+ mQGiBD6v2X0RBAD3rKn9S5s4iKX9KwKPIE1GCEG0qE1UomcIxYhey5oKEVoQoHtJkKvZpOVH
+ zXNoPIMdwegZI++89UqY1jz6gI1pyBYRs4qmdnltXToO7NXdCr+LC5XNCStewoCE46gJIsb+
+ 8DpgK+wPoK/k1bF4HbnImTmkWaRLZKjaFsU4dR3+zwCgxqZXdZMiAYA+1mIjiGRZubOctQUE
+ AIZ51+tT+FPkpR8ld+qjHNh1F42y0nCj4dL1oHjWpcq2tzuK+BHzpePsM4rM9ZeYqDSsZIFC
+ 5ol61NYmKaKDMRjwY5KK+tABm/ha+OCl4twcxtHCoLOcK1N/8/kqZ75x3/NLJwL/BRwaoE0Y
+ NsD+BxCW0Rjbiztg2KwkdDWFcCVmBADc/Ka7mKdimHzY6XJ3gIHgFS9fa2rcxKaleajH+dXh
+ SPRW8Qil2n/FaAdUIBWL/woF78BAgDfaOGt7Ize+pRVia0e6KD9aUBjRz3ZXmvG17xv83UmW
+ ZRP0fpVqA28ou+NvjRNKJtd144OUeMLyEhy82YlkGPwn7r6WhaWo6UIpSLQsU3RhbmlzbGF2
+ IEJyYWJlYyAoU3VTRSBDUikgPHNicmFiZWNAc3VzZS5jej6IXwQTEQIAHwQLBwMCAxUCAwMW
+ AgECHgECF4AFAlHS/kkFCSE/csAACgkQcXwgn6BPzXZY/gCghbxE4uexFHVP7qho9TDNxGGR
+ xxgAoKCipPrJQrnXKhFG4RDeRcVE0PoBuQENBD6v2YIQBACt62O2lXle2CPxw2LpdT557Rvr
+ UdoYJ1AeLAn1iDy67rDsGumxJxW254x9CKVsU3609PG58gDKSQ7CvHzErtOdz9xsJLfCCxbk
+ 6LsOhBdCWgYs7HV2xYCkUvKSVQGZN95skfv1aSsO6dXzXISXen4KqY5AnFa+pXDAqMJTGLwp
+ GwADBgQAkZ2/zz99L224sNcFgM+6TuGIQ57fNhKJxYG2HbBqh3oBiiZI9224dKLNCv/2aoV8
+ qd9QUMKQCO7kQKkSH7+Ti1KnCyaDi3SoeFcsV4Z99Xb1bN2EBS1C4qohNUbouTsYEG5qsZPe
+ uRDKekFTiilRRVyiXWDt+zY2aNNMknKBACeIRgQYEQIABgUCPq/ZggAKCRBxfCCfoE/Ndi+t
+ AJ958OvQedgG0gsRG1wX/HKXmRZ0dwCfUk0F4qeP5dCiETIHh3gxNIsx8YQ=
+Organization: SUSE Linux, s. r. o.
+Message-ID: <fe467a7d-eba6-bc0a-baeb-b049e1a473af@suse.cz>
+Date:   Thu, 20 Jun 2019 22:16:42 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+ Thunderbird/60.7.0
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Description: Mail message body
-Subject: June inquiry
-To:     Recipients <nuekwa@presuure.ga>
-From:   "Marketing Dept" <nuekwa@presuure.ga>
-Date:   Tue, 18 Jun 2019 02:24:56 +0300
-Reply-To: great.pacific@aol.com
-Message-ID: <0.0.6.6CD.1D52563D82CCADA.0@slot0.presuure.ga>
+Content-Type: text/plain; charset=iso-8859-2
+Content-Language: en-US
+Content-Transfer-Encoding: 8bit
 Sender: util-linux-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-Hello dear,
- =
+eval_issue_file() contains fflush(stdout). It comes from an old code that
+used fputs() to write to the console.
 
-We are in the market for your products after meeting at your stand during l=
-ast expo.
- =
+In the new code, we write to a temporary memstream, and
+fclose(ie->output) fully replaces possible fflush(ie->output) in this
+implementation.
 
-Please kindly send us your latest catalog and price list so as to start a n=
-ew project/order as promised during the exhibition. =
+The new print_issue_file() does not need it as well, as it uses
+unbuffered write_all().
 
- =
+Signed-off-by: Stanislav Brabec <sbrabec@suse.cz>
+---
+ term-utils/agetty.c | 2 --
+ 1 file changed, 2 deletions(-)
 
-I would appreciate your response about the above details required so we can=
- revert back to you asap.
- =
+diff --git a/term-utils/agetty.c b/term-utils/agetty.c
+index 43dbd6dea..96bf41b36 100644
+--- a/term-utils/agetty.c
++++ b/term-utils/agetty.c
+@@ -1903,8 +1903,6 @@ static void eval_issue_file(struct issue *ie,
+ 			f = NULL;
+ 		} while (dirname);
+ 
+-		fflush(stdout);
+-
+ 		if ((op->flags & F_VCONSOLE) == 0)
+ 			ie->do_tcrestore = 1;
+ 	}
+-- 
+2.21.0
 
-Kind regards
- =
+-- 
+Best Regards / S pozdravem,
 
-Hyuan Cloe
+Stanislav Brabec
+software developer
+---------------------------------------------------------------------
+SUSE LINUX, s. r. o.                         e-mail: sbrabec@suse.com
+Køi¾íkova 148/34 (Corso IIa)                    tel: +420 284 084 060
+186 00 Praha 8-Karlín                          fax:  +420 284 084 001
+Czech Republic                                    http://www.suse.cz/
+PGP: 830B 40D5 9E05 35D8 5E27 6FA3 717C 209F A04F CD76
