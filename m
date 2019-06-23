@@ -2,93 +2,130 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 8897F4FD94
-	for <lists+util-linux@lfdr.de>; Sun, 23 Jun 2019 20:31:21 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id ED6F54FF81
+	for <lists+util-linux@lfdr.de>; Mon, 24 Jun 2019 04:44:41 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726636AbfFWSbV (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Sun, 23 Jun 2019 14:31:21 -0400
-Received: from mail-ed1-f67.google.com ([209.85.208.67]:41775 "EHLO
-        mail-ed1-f67.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726399AbfFWSbU (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Sun, 23 Jun 2019 14:31:20 -0400
-Received: by mail-ed1-f67.google.com with SMTP id p15so18043243eds.8
-        for <util-linux@vger.kernel.org>; Sun, 23 Jun 2019 11:31:20 -0700 (PDT)
+        id S1727138AbfFXCol (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Sun, 23 Jun 2019 22:44:41 -0400
+Received: from mail-qk1-f194.google.com ([209.85.222.194]:32947 "EHLO
+        mail-qk1-f194.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726510AbfFXCok (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Sun, 23 Jun 2019 22:44:40 -0400
+Received: by mail-qk1-f194.google.com with SMTP id r6so8690441qkc.0
+        for <util-linux@vger.kernel.org>; Sun, 23 Jun 2019 19:44:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=mime-version:reply-to:from:date:message-id:subject:to;
-        bh=Un5Ke0Ru3iTFXv9DrHEizflVlYGBaDhARoB+8+C5nXM=;
-        b=Hmr25jCPGaQlDxTXBT0Fy8/s6ljpzcYoYIBqsxDLZ0mWi8F2QobbNpnyrYY26IfhgS
-         SswO0L4dow3QpzRW9u1DdMEgrcpj76vWVgK1j/GwRwBVw5vuamktuvndl6sKGxlfNNsU
-         8h68xPsC4SFoZbpBBL4Pp0jfMpfcV66Gd7iEmsoqAXhKAPAJJlOM8oUMxYru6Evj+2GQ
-         xDN1GkLN1qf/MNDMcVgOIgO22EnWv8O9X9osbyKyeNXblDfO7FKuwNvN4W27rM9deikY
-         E5JglXdfanqQozfUn9emBtEuZiE6GI55zdFDC8fWav7phNgviXJd4qQiuM+QoHeklKvB
-         gcpg==
+        h=from:to:cc:subject:date:message-id;
+        bh=mvlqzzKBKA+mFQpgfFjJZkTs7wdTgfMlUvjLUDnnFBg=;
+        b=b5t0yaqcc5YKRi25MilKqMSknReP3YyoD/TPsUost+7+w8mo/gL3/KM0atsuWMrptJ
+         FgTqvvsLb8XD+x4l+CsjHxUNWL5YFIniiPBOYDn/3gguge0Oq6aXp4PzGlee4VduZRaZ
+         GueRvKAY4+H3Teyb13y6novUOJ+P0uJn1JSX2XtzqDHOZa6IHtsOMPJrRitc8GyyYlWR
+         AwYsF05C5DCptq9bTynwT62miOVM4qo8FW57Ygp7bnPphWfuoEkCSzCmKKP253hVmEWx
+         bopCSmevfIAzgddm7iBoFwNJs0XbtSidae7JP7DdK0SPBH2O2d2PuJ+yGquDMt+y4pR0
+         4sVg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
-         :subject:to;
-        bh=Un5Ke0Ru3iTFXv9DrHEizflVlYGBaDhARoB+8+C5nXM=;
-        b=IEXIB1zSVxGkHsumh/S8VFpSj9Mw2ZKsCt8HjUN5J4GxhQlu2XyYh+epmYMvdFC77j
-         XnWILSweZ8PoYlVstGTocbScJ6fBz7PNXdhLx37SDMsgOe/0axUx14T8kiqCtnk++vpN
-         CkZkR3+RaIXQ5PDjAODzsXgi63gq612GZMGJrL+cvgSuqrezhJl0pJhQfCizVlGvRr++
-         D3a1fhLJ3leB+uOOWMAa30/YZL26GF9TQX338oQkVF8gqVETbnQdAhvFGnU+CCQ1xK3Q
-         PvHGB26oxhahWp8YokVp4GKsjdWL3C88V0N9AUaUil0UcInUjfnw6yLrS9CwkDEkac8i
-         M21g==
-X-Gm-Message-State: APjAAAV0urtvE+7PXFleEw+wbnT/qQbcFWGLojZiDnuPIPQW0vnGwOax
-        mB2jgTeRP4zveyLo2i4QkhDgsIvuZOHiDtBvQn0=
-X-Google-Smtp-Source: APXvYqwVX6RmCbMGI0z/b0B6gY5mZPM67VVOrE1DWUKR82yKFt7vRRrOEOHFDvhLVpRjjvgCYnI5OTYkCJaLwbsiukw=
-X-Received: by 2002:a50:9157:: with SMTP id f23mr48880200eda.79.1561314679196;
- Sun, 23 Jun 2019 11:31:19 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 2002:a17:906:640a:0:0:0:0 with HTTP; Sun, 23 Jun 2019 11:31:18
- -0700 (PDT)
-Reply-To: miss.fatimayusuf11@gmail.com
-From:   "Miss.Fatima Yusuf" <miss.fatimayusuf@gmail.com>
-Date:   Sun, 23 Jun 2019 18:31:18 +0000
-Message-ID: <CAC8N3VQkq4BVYaB6ZTx_8XTk6UQKbxU_L2Z5a8UJYFUp=6Oh1A@mail.gmail.com>
-Subject: From:Miss: Fatima Yusuf.
-To:     undisclosed-recipients:;
-Content-Type: text/plain; charset="UTF-8"
+        h=x-gm-message-state:from:to:cc:subject:date:message-id;
+        bh=mvlqzzKBKA+mFQpgfFjJZkTs7wdTgfMlUvjLUDnnFBg=;
+        b=sRmvTKemZpUSskYjWkRyozS1hl7uGvRbqGteZRDwAfldKTMwYiSCCZR3hQtOvOzi+u
+         zji5H/bbNqIjdrw+nZTvLQhEYO4sUAtTM7/zT2B8IUbHuZ/TEfDesq9zFYeSfjb5QD3J
+         +MgnTZ9BnaLY9EJIBiD/hRfCSPGMhXL47L1KsLhxUGW6Rbr3Jn+vxIjqHmq5zsk2wVmV
+         rEFMvI9+033BdEELdi8lt70fcX9FattDcHavaFRlzdvk4HD9zvXrj26p48ruhM7tQsc7
+         56rd4vOXvEYvkRYvG9C6yqemJ6CVlFeAlRU1+nURR71tT3H+29IcsVsymoDUAu4jpIsy
+         WQnA==
+X-Gm-Message-State: APjAAAXtPiw9mCEedz1+du7kgBPXroK9i2krIy56EPoR8jZdrEst+WuZ
+        2QK1llVGziv9uluzYldDe996dExByqc=
+X-Google-Smtp-Source: APXvYqx/UgtF531xPlOcs0bbbqIkDXaBGfKY+5kDJiFLSTHjPseMyVC9so9P4LPXxVJrDz7O1VFpqA==
+X-Received: by 2002:a37:7147:: with SMTP id m68mr15363270qkc.475.1561329063922;
+        Sun, 23 Jun 2019 15:31:03 -0700 (PDT)
+Received: from casantos.remote.csb (189-71-198-232.user.veloxzone.com.br. [189.71.198.232])
+        by smtp.gmail.com with ESMTPSA id e63sm4844534qkd.57.2019.06.23.15.31.01
+        (version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
+        Sun, 23 Jun 2019 15:31:03 -0700 (PDT)
+From:   unixmania@gmail.com
+To:     util-linux@vger.kernel.org
+Cc:     Carlos Santos <unixmania@gmail.com>
+Subject: [PATCH v2] hwclock: define cmos_interface only if necessary
+Date:   Sun, 23 Jun 2019 19:30:52 -0300
+Message-Id: <20190623223052.3345-1-unixmania@gmail.com>
+X-Mailer: git-send-email 2.18.1
 Sender: util-linux-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-From:Miss: Fatima Yusuf.
+From: Carlos Santos <unixmania@gmail.com>
 
-For sure this mail would definitely come to you as a surprise, but do
-take your good time to go through it, My name is Ms. Fatima Yusuf,i am
-from Ivory Coast.
+Make the static declaration of the cmos_interface struct and related
+functions conditional to i386/x86_64, preventing several "defined but
+not used" compiler warnings.
 
-I lost my parents a year and couple of months ago. My father was a
-serving director of the Agro-exporting board until his death. He was
-assassinated by his business partners.Before his death, he made a
-deposit of US$9.7 Million Dollars here in Cote d'ivoire which was for
-the purchase of cocoa processing machine and development of another
-factory before his untimely death.
+Signed-off-by: Carlos Santos <unixmania@gmail.com>
+---
+ sys-utils/hwclock-cmos.c | 22 ++++------------------
+ 1 file changed, 4 insertions(+), 18 deletions(-)
 
-Being that this part of the world experiences political and crises
-time without number, there is no guarantee of lives and properties. I
-cannot invest this money here any long, despite the fact it had been
-my late father's industrial plans.
+diff --git a/sys-utils/hwclock-cmos.c b/sys-utils/hwclock-cmos.c
+index a11f676b8..51a405f42 100644
+--- a/sys-utils/hwclock-cmos.c
++++ b/sys-utils/hwclock-cmos.c
+@@ -75,17 +75,6 @@ static int inb(int c __attribute__((__unused__)))
+ 	return 0;
+ }
+ # endif				/* __i386__ __x86_64__ */
+-#else
+-# warning "disable cmos access - not i386 or x86_64"
+-static void outb(int a __attribute__((__unused__)),
+-		 int b __attribute__((__unused__)))
+-{
+-}
+-
+-static int inb(int c __attribute__((__unused__)))
+-{
+-	return 0;
+-}
+ #endif				/* for inb, outb */
+ 
+ #include "hwclock.h"
+@@ -100,6 +89,8 @@ static int inb(int c __attribute__((__unused__)))
+  */
+ #define TM_EPOCH 1900
+ 
++#if defined(__i386__) || defined(__x86_64__)
++
+ static unsigned short clock_ctl_addr = 0x70;
+ static unsigned short clock_data_addr = 0x71;
+ 
+@@ -360,7 +351,6 @@ static int set_hardware_clock_cmos(const struct hwclock_control *ctl
+ 	return 0;
+ }
+ 
+-#if defined(__i386__) || defined(__x86_64__)
+ # if defined(HAVE_IOPL)
+ static int i386_iopl(const int level)
+ {
+@@ -373,12 +363,6 @@ static int i386_iopl(const int level __attribute__ ((__unused__)))
+ 	return ioperm(clock_ctl_addr, 2, 1);
+ }
+ # endif
+-#else
+-static int i386_iopl(const int level __attribute__ ((__unused__)))
+-{
+-	return IOPL_NOT_IMPLEMENTED;
+-}
+-#endif
+ 
+ static int get_permissions_cmos(void)
+ {
+@@ -407,6 +391,8 @@ static struct clock_ops cmos_interface = {
+ 	get_device_path,
+ };
+ 
++#endif
++
+ /*
+  * return &cmos if cmos clock present, NULL otherwise.
+  */
+-- 
+2.18.1
 
-I want you to do me a favor to receive this funds into your country or
-any safer place as the beneficiary, I have plans to invest this money
-in continuation with the investment vision of my late father, but not
-in this place again rather in your country. I have the vision of going
-into real estate and industrial production or any profitable business
-venture.
-
-I will be ready to compensate you with 20% of the total Amount, now
-all my hope is banked on you and i really wants to invest this money
-in your country, where there is stability of Government, political and
-economic welfare.
-
-My greatest worry now is how to move out of this country because my
-uncle is threatening to kill me as he killed my father,Please do not
-let anybody hear about this, it is between me and you alone because of
-my security reason.
-
-I am waiting to hear from you.
-Yours Sincerely,
-Miss.Fatima Yusuf.
