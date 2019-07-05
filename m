@@ -2,152 +2,63 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id EA6245FE46
-	for <lists+util-linux@lfdr.de>; Thu,  4 Jul 2019 23:55:29 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 751E460D8B
+	for <lists+util-linux@lfdr.de>; Sat,  6 Jul 2019 00:00:14 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727423AbfGDVz3 (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Thu, 4 Jul 2019 17:55:29 -0400
-Received: from mail-yw1-f47.google.com ([209.85.161.47]:36899 "EHLO
-        mail-yw1-f47.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1727338AbfGDVz2 (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Thu, 4 Jul 2019 17:55:28 -0400
-Received: by mail-yw1-f47.google.com with SMTP id u141so1799584ywe.4
-        for <util-linux@vger.kernel.org>; Thu, 04 Jul 2019 14:55:28 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=googlemail.com; s=20161025;
-        h=mime-version:from:date:message-id:subject:to;
-        bh=Z52z456iztbGPT/DbMU6ZDucf698k5nARHUFsDMebmo=;
-        b=mnTic1FsbLyt4Hd+t7fenT32xeZaAnLmd2fjeaS1ES+WKJD3ceFoA25QykeQ3PMLNa
-         7c0lPuDo2P89pkblZOshRIjJ6IfoSfAEH6yh3qdwqldv1H1UgJVnj0UWfeY7jh1hXDBr
-         0LFvIflxNLRNB0LlZXRsmEso3I3d/D7MTetMOcotyI5+fOABMY82r0PXOmvDi032m7GF
-         1o/Is+u6O7ubk5JoWnKneWJqArtOGkRMwxeGD6stuY8xQF19t3lnZHIFpaqPS6/WO19q
-         pDpP9/7cET77h2zeQu3ShEbDlhxV5NA/f9psQIzefDm4pf2CbBG5B69cDeAk2SGLmCpR
-         GL1A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
-        bh=Z52z456iztbGPT/DbMU6ZDucf698k5nARHUFsDMebmo=;
-        b=T49je9hpHqqGN7CNE4jW+9Hu+hTF/SCZLIhTRHiLdayy+V1UZG+Z34Gg8z5aqNjnf/
-         K9VuD6Zc8s6QUf/PVnw+gvkD4XOO+c0WlHz8gNKrQFxqW4jGpk5lrqGGLCBIAR63Kmcj
-         P3jdJiJyyDCS1Ks5T9m+LCrlfVSgXjImgLxmEGOcsAUCD5xqlmsPc2GkOgF4kwpdTqLi
-         JqPnQDlACPll+GWdZXnfD+G9Pl4j4ZDsSJ7YKRyV3nCHrTBDk5fnlgag2qLh3xTW8WRN
-         DOh0gGCc4AjO6p9Uu6ZDUXcFzZJlZlhy8ZmoLODP1Sijshj3s9ClMrfN5GlKbxf1ifPc
-         XGMw==
-X-Gm-Message-State: APjAAAWRjG6zO+T8hT94u9OwaoM2yJjoNkBRHy2/kakVBnFQqyi49FQ5
-        FrR3vXnZdrdpx2T31h9Dr2fPblJ+YiuF6DRkbjYc6AHO
-X-Google-Smtp-Source: APXvYqxPqe66ndy/k+x8lzgbxy03nR0/CtG5iJJhkuqTPpD7h4hU8A30vH4an7AGdb53WToPF4mOibHRJn0SfvG7FkU=
-X-Received: by 2002:a81:58c5:: with SMTP id m188mr174002ywb.208.1562277327947;
- Thu, 04 Jul 2019 14:55:27 -0700 (PDT)
+        id S1728207AbfGEWAL (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Fri, 5 Jul 2019 18:00:11 -0400
+Received: from out12.masterobox.work ([178.156.202.12]:55451 "EHLO
+        slot0.mathewsons.ga" rhost-flags-OK-FAIL-OK-OK) by vger.kernel.org
+        with ESMTP id S1728210AbfGEWAK (ORCPT
+        <rfc822;util-linux-ng@vger.kernel.org>);
+        Fri, 5 Jul 2019 18:00:10 -0400
+X-Greylist: delayed 638 seconds by postgrey-1.27 at vger.kernel.org; Fri, 05 Jul 2019 18:00:09 EDT
+DKIM-Signature: v=1; a=rsa-sha1; c=relaxed/relaxed; s=dkim; d=mathewsons.ga;
+ h=Content-Type:MIME-Version:Content-Transfer-Encoding:Content-Description:Subject:To:From:Date:Reply-To:Message-ID; i=purchase@mathewsons.ga;
+ bh=onxYcir3NvpNjk2I/gjm/O+ljxo=;
+ b=cqecBHd77BOEJ5LAJFeHFoK/m9CBe5lZwscj0i9YDyP9heHN8eXKOvhZqB1nLN2QeAqVoEk8rX/C
+   3y7mH7Yc5nX2tAW+Gythn7xhOERkYQE1B+H7nztajQg18tt1Y8wRaNuBnrMC/Ce2jg6DcUtBM7hO
+   47QcUjIx0oi5NDH1iZufHryVw3JvLuLisKmK++JR2baM50ty30rSh0Mo7nEKn1APljGZOlJZL6sO
+   +75Y/KyeZlzuIQVRZJ7Fq7XCVfS2c3Mcmi3zgbUEM8iLaULGPVVAyXz2uaX9CCAdvbQ+MCSZZdDv
+   gVlAm8mMDziRXG8t7cctUNSyW3pW+e9S/mm/Yg==
+DomainKey-Signature: a=rsa-sha1; c=nofws; q=dns; s=dkim; d=mathewsons.ga;
+ b=iAaRgqQdx1aR+WqhN3ILI9bzVwGeyeAesfx1vLszULyTqYDgH/iRbAL9Vb0yr37TUoWSCAAb+ck7
+   hbaKTwW9zOSAZtrXlJRlWByysa28a/EofRaQb4qSqeq9veATMfHr25YQrl08Ix3EcD8Xj2wGOyZd
+   7Wh0WOkgVZBUjrorWF+Z+ZpvQ6lN5ZVSPKfcj1xY1vHk18ElHYdX6+RdRhSRNMiWCFbQTPG04njG
+   Lcuko2Ug3L1lzL9XHzVLTKrdqwXjEtvtVMP474UREOq6v3JtsBivemMAGLat2z67PhwQWC7R0/tU
+   3DIjwkhLdwC+UEprwZLMopHubTCPe69Sgku4ng==;
+Content-Type: text/plain; charset="iso-8859-1"
 MIME-Version: 1.0
-From:   Mike Fleetwood <mike.fleetwood@googlemail.com>
-Date:   Thu, 4 Jul 2019 22:55:16 +0100
-Message-ID: <CAMU1PDj4Vtvzw_=o_a5_S=j22Ro7_JqTwwh7k2dBDGk56Ns5LQ@mail.gmail.com>
-Subject: fdisk not wiping sector 0 before writing new MBR
-To:     util-linux@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Content-Description: Mail message body
+Subject: Quotes needed For July Shipments
+To:     Recipients <purchase@mathewsons.ga>
+From:   "Sales -Jpexcc." <purchase@mathewsons.ga>
+Date:   Sat, 06 Jul 2019 00:39:35 +0300
+Reply-To: jpexcc@aol.com
+Message-ID: <0.0.4D.174.1D53379F1EEEEB6.0@slot0.mathewsons.ga>
 Sender: util-linux-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-Hi,
+Hello dear,
+ =
 
-This is a bit more of a speculative than my other recent one, but I saw
-this quote in aix.c:
-    "All fdisk-like programs has to properly wipe the first sector.
-    Everything other is a bug."
+We are in the market for your products after meeting at your stand during l=
+ast expo.
+ =
 
-Using fdisk to create an MBR over the top of a whole disk FAT32 (and
-probably FAT16) file system doesn't clear any of the FAT32 boot record
-(aka super block).  Blkid and wipefs report this as just an MBR, but
-because the boot record is intact, GNU parted reports this still as a
-whole disk FAT32 file system.
+Please kindly send us your latest catalog and price list so as to start a n=
+ew project/order as promised during the exhibition. =
 
-This is from a GParted issue report where a user had an SD card that
-must have originally come with a whole disk FAT32 file system and then
-the user partitioned it over the top with fdisk.
-   GitLab GParted issue 64 - Add support for Nobbs-partitioned SD cards
-    https://gitlab.gnome.org/GNOME/gparted/issues/64
+ =
 
-Test case:
+I would appreciate your response about the above details required so we can=
+ revert back to you asap.
+ =
 
-Create a whole disk FAT32 file system.
-    # dd if=/dev/zero bs=1M of=/dev/sdb
-    # mkfs.fat -F32 -I /dev/sdb
-    # ./blkid /dev/sdb
-    /dev/sdb: UUID="1EF0-1723" TYPE="vfat"
-    # ./wipefs /dev/sdb
-    DEVICE OFFSET TYPE UUID      LABEL
-    sdb    0x52   vfat 1EF0-1723
-    sdb    0x0    vfat 1EF0-1723
-    sdb    0x1fe  vfat 1EF0-1723
+Kind regards
+ =
 
-Create a single primary partition covering the whole disk.
-    # ./fdisk --version
-    lt-fdisk from util-linux 2.34.24-e3bb9
-    # ./fdisk /dev/sdb
-      n
-      p
-      [Return]   (defaults to 1)
-      [Return]   (defaults to 2048)
-      [Return]   (defaults to 16777215)
-      w
-    # ./fdisk -l /dev/sdb
-    Disk /dev/sdb: 8 GiB, 8589934592 bytes, 16777216 sectors
-    Disk model: VBOX HARDDISK
-    Units: sectors of 1 * 512 = 512 bytes
-    Sector size (logical/physical): 512 bytes / 512 bytes
-    I/O size (minimum/optimal): 512 bytes / 512 bytes
-    Disklabel type: dos
-    Disk identifier: 0x00000000
-
-    Device     Boot Start      End  Sectors Size Id Type
-    /dev/sdb1        2048 16777215 16775168   8G 83 Linux
-
-util-linux tools now report this as only containing an MBR.
-    # ./blkid /dev/sdb
-    /dev/sdb: PTTYPE="dos"
-    # ./wipefs /dev/sdb
-    DEVICE OFFSET TYPE UUID LABEL
-    sdb    0x1fe  dos
-
-But GNU parted still sees this as a whole disk FAT32 file system.
-    # parted --version
-    parted (GNU parted) 3.2
-    ...
-    # parted /dev/sdb unit s print
-    Model: ATA VBOX HARDDISK (scsi)
-    Disk /dev/sdb: 16777216s
-    Sector size (logical/physical): 512B/512B
-    Partition Table: loop
-    Disk Flags:
-
-    Number  Start  End
-     1      0s
-
-I used hexdump -C to look at sector 0 after writing the FAT32 and after
-writing the MBR.  The only bytes which changed were those 16 bytes
-storing partition 1 in the MBR.  None of the other bytes in sector 0
-changed, hence why parted was able to misidentify this as a FAT32 file
-system.
-
-Then just remove that partition and blkid and wipefs again detect it as
-a whole disk FAT32 file system.
-    # ./fdisk /dev/sdb
-      d
-      w
-    # ./blkid /dev/sdb
-    /dev/sdb: UUID="1EF0-1723" TYPE="vfat"
-    # ./wipefs /dev/sdb
-    DEVICE OFFSET TYPE UUID      LABEL
-    sdb    0x52   vfat 1EF0-1723
-    sdb    0x0    vfat 1EF0-1723
-    sdb    0x1fe  vfat 1EF0-1723
-
-I don't think a user can have any expectation that if a whole disk FAT32
-file system "superfloppy" was bootable, that after using fdisk to write
-an MBR over the top, that it can still be bootable, without writing new
-boot code to the disk.
-
-Thank you for your consideration,
-Mike
+Rhema Zoeh
