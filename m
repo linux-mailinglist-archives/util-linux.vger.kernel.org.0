@@ -2,47 +2,47 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 997EF610BA
-	for <lists+util-linux@lfdr.de>; Sat,  6 Jul 2019 14:59:59 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 73C0065038
+	for <lists+util-linux@lfdr.de>; Thu, 11 Jul 2019 04:40:15 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726177AbfGFM76 convert rfc822-to-8bit (ORCPT
-        <rfc822;lists+util-linux@lfdr.de>); Sat, 6 Jul 2019 08:59:58 -0400
-Received: from mx1.casacivil.go.gov.br ([177.69.118.33]:37189 "EHLO
-        webmail.palacio.go.gov.br" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726065AbfGFM76 (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Sat, 6 Jul 2019 08:59:58 -0400
-X-Greylist: delayed 868 seconds by postgrey-1.27 at vger.kernel.org; Sat, 06 Jul 2019 08:59:57 EDT
-Received: from localhost (localhost [127.0.0.1])
-        by webmail.palacio.go.gov.br (Postfix) with ESMTP id 6D88A3414F2;
-        Sat,  6 Jul 2019 09:42:11 -0300 (BRT)
-Received: from webmail.palacio.go.gov.br ([127.0.0.1])
-        by localhost (webmail.palacio.go.gov.br [127.0.0.1]) (amavisd-new, port 10032)
-        with ESMTP id s6Bb9Du8IJhY; Sat,  6 Jul 2019 09:42:11 -0300 (BRT)
-Received: from localhost (localhost [127.0.0.1])
-        by webmail.palacio.go.gov.br (Postfix) with ESMTP id 2A8F2341501;
-        Sat,  6 Jul 2019 09:42:11 -0300 (BRT)
-X-Virus-Scanned: amavisd-new at palacio.go.gov.br
-Received: from webmail.palacio.go.gov.br ([127.0.0.1])
-        by localhost (webmail.palacio.go.gov.br [127.0.0.1]) (amavisd-new, port 10026)
-        with ESMTP id N2ZO2r70mgTo; Sat,  6 Jul 2019 09:42:11 -0300 (BRT)
-Received: from [100.89.61.91] (unknown [106.202.106.139])
-        by webmail.palacio.go.gov.br (Postfix) with ESMTPSA id 19DB33412E3;
-        Sat,  6 Jul 2019 09:42:01 -0300 (BRT)
+        id S1727461AbfGKCkN convert rfc822-to-8bit (ORCPT
+        <rfc822;lists+util-linux@lfdr.de>); Wed, 10 Jul 2019 22:40:13 -0400
+Received: from 50-244-196-250-static.hfc.comcastbusiness.net ([50.244.196.250]:62182
+        "EHLO hometime.com" rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org
+        with ESMTP id S1725977AbfGKCkN (ORCPT
+        <rfc822;util-linux-ng@vger.kernel.org>);
+        Wed, 10 Jul 2019 22:40:13 -0400
+Received: from [100.120.45.199] ([195.181.172.132]) by hometime.com with Microsoft SMTPSVC(6.0.3790.4675);
+         Wed, 10 Jul 2019 01:47:51 -0500
 Content-Type: text/plain; charset="iso-8859-1"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8BIT
 Content-Description: Mail message body
-Subject: Hi, This is Clara
-To:     SGT Clara <Faleconosco@casacivil.go.gov.br>
-From:   "Clara Duran" <Faleconosco@casacivil.go.gov.br>
-Date:   Sat, 06 Jul 2019 18:11:45 +0530
-Reply-To: clarastrongduran@gmail.com
-Message-Id: <20190706124202.19DB33412E3@webmail.palacio.go.gov.br>
+Subject: Greetings!
+To:     Recipients <fuqingzheng@asia.com>
+From:   fuqingzheng@asia.com
+Date:   Wed, 10 Jul 2019 08:47:17 +0200
+Reply-To: zhengfuqing@yandex.com
+X-Antivirus: Avast (VPS 190709-4, 09-07-2019), Outbound message
+X-Antivirus-Status: Clean
+Message-ID: <SBSREnRTsMKfwEvteM300009699@hometime.com>
+X-OriginalArrivalTime: 10 Jul 2019 06:47:52.0129 (UTC) FILETIME=[65414B10:01D536EB]
 Sender: util-linux-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
+Good day,
 
-Are you there ?. 
-Can I have a word with you privately?
+  I have a mutual business proposal, which refers to the transfer of a large amount of money to an account abroad, with your help as a foreign partner as a beneficiary of the funds. Everything about this transaction will be legal without any bridge of financial authority both in my country and yours. If you are interested and I will give you more information about the project as soon as I receive your positive response.
+
+Best regards,
+
+Executive Director.
+ 
+ICBC. China
+
+---
+Dit e-mailbericht is gecontroleerd op virussen met Avast antivirussoftware.
+https://www.avast.com/antivirus
+
