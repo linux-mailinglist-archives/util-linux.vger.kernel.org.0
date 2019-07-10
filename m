@@ -2,16 +2,15 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 73C0065038
+	by mail.lfdr.de (Postfix) with ESMTP id DE14965039
 	for <lists+util-linux@lfdr.de>; Thu, 11 Jul 2019 04:40:15 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727461AbfGKCkN convert rfc822-to-8bit (ORCPT
+        id S1727315AbfGKCkN convert rfc822-to-8bit (ORCPT
         <rfc822;lists+util-linux@lfdr.de>); Wed, 10 Jul 2019 22:40:13 -0400
 Received: from 50-244-196-250-static.hfc.comcastbusiness.net ([50.244.196.250]:62182
         "EHLO hometime.com" rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org
         with ESMTP id S1725977AbfGKCkN (ORCPT
-        <rfc822;util-linux-ng@vger.kernel.org>);
-        Wed, 10 Jul 2019 22:40:13 -0400
+        <rfc822;util-linux@vger.kernel.org>); Wed, 10 Jul 2019 22:40:13 -0400
 Received: from [100.120.45.199] ([195.181.172.132]) by hometime.com with Microsoft SMTPSVC(6.0.3790.4675);
          Wed, 10 Jul 2019 01:47:51 -0500
 Content-Type: text/plain; charset="iso-8859-1"
