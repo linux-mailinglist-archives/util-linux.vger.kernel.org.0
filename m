@@ -2,133 +2,86 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id CB9F28D853
-	for <lists+util-linux@lfdr.de>; Wed, 14 Aug 2019 18:45:09 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 76ADD8E0C9
+	for <lists+util-linux@lfdr.de>; Thu, 15 Aug 2019 00:32:06 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727273AbfHNQpI (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Wed, 14 Aug 2019 12:45:08 -0400
-Received: from wout3-smtp.messagingengine.com ([64.147.123.19]:53873 "EHLO
-        wout3-smtp.messagingengine.com" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S1727799AbfHNQpI (ORCPT
-        <rfc822;util-linux@vger.kernel.org>);
-        Wed, 14 Aug 2019 12:45:08 -0400
-Received: from compute1.internal (compute1.nyi.internal [10.202.2.41])
-        by mailout.west.internal (Postfix) with ESMTP id 6486A533
-        for <util-linux@vger.kernel.org>; Wed, 14 Aug 2019 12:45:07 -0400 (EDT)
-Received: from mailfrontend2 ([10.202.2.163])
-  by compute1.internal (MEProxy); Wed, 14 Aug 2019 12:45:07 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=pks.im; h=from
-        :to:cc:subject:date:message-id:in-reply-to:references
-        :mime-version:content-type:content-transfer-encoding; s=fm1; bh=
-        gtqVwhS4ucpOqo+xs63iJzWY3e7tavL/EPWmLUwFP5Y=; b=qA+tDuAKevCZp4h5
-        +pCXpFNwRvDRKlVHSfYdyMdOeilLh0cyzqesVxovJG9fxUd3Hf+Ma38+UNnuVAV9
-        vSadaWK+IpiLcSSztn1GdeIo8XIJC7bhpIQho7A7vvhCbukDAz/pWy1Z1v/z8slt
-        7zyCWt2eoFYQjB6wb+tOKuShJNHA6BaP2de783B1YwLdL8GYQx1H7Q2np2jkeEga
-        4go2nmQUcPmSuzdEa25qNTFu28qe65mQPuzxZJKNVow3Sh++ARxFdgYP70jvXtKh
-        xxG9bRg5JGiTrWPpclA+AOTUFBsRVDlNeeAqFKRcYTKvWhSaoKiLlx49cZ/s2bg3
-        lNx0Ow==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-        messagingengine.com; h=cc:content-transfer-encoding:content-type
-        :date:from:in-reply-to:message-id:mime-version:references
-        :subject:to:x-me-proxy:x-me-proxy:x-me-sender:x-me-sender
-        :x-sasl-enc; s=fm3; bh=gtqVwhS4ucpOqo+xs63iJzWY3e7tavL/EPWmLUwFP
-        5Y=; b=JQL82ljpBSifj8+7GIAmMGOR7JAlFFIVChWhT71nkYgDsTBZ9RKMzTb+0
-        nFv+oRBtvJmimDczmIaQPMM8sUIB2m1yOCufHVx3N5Z6ubEhxdSkcWeV+OiPJZ63
-        pDAmiWY4a2IpOTjlLPyva7B11fdMRtByPd97u9IrTUbdHTLjl3q8j/TzUN4zKstb
-        FY1ltUQKbkZDWDn76GsfW4VM7Xb+9h32Pq55OQJQLx/3hnjyQ04MIgWpx37638d+
-        UfFIzkKY8RwxszBSqr/rDHK7mcjDddhRB2Yswldu6jwnXwZjgF7QhwJ2obrzzbT3
-        nLVdrGVKozZxSSWhoW4arXB7CO0fQ==
-X-ME-Sender: <xms:kjpUXUnZ8xK2FlGbjSQxiic5b1uwwsmE1PmXGexUNou_hKJlkJ-PYA>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeduvddruddvledggedvucetufdoteggodetrfdotf
-    fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
-    uceurghilhhouhhtmecufedttdenucenucfjughrpefhvffufffkofgjfhggtgfgsehtke
-    ertdertdejnecuhfhrohhmpefrrghtrhhitghkucfuthgvihhnhhgrrhguthcuoehpshes
-    phhkshdrihhmqeenucfkphepjeekrdehgedrudejvddrvdduheenucfrrghrrghmpehmrg
-    hilhhfrhhomhepphhssehpkhhsrdhimhenucevlhhushhtvghrufhiiigvpedt
-X-ME-Proxy: <xmx:kjpUXcQRIGNGn-exMXz9FOG6cwEiClj5vp1YUPdqsH79PKMDSh1nQg>
-    <xmx:kjpUXYTS4uoUEktgU-eyfJCltYUSKzqqUuYo6GWlS1K7XKYCOf_jmA>
-    <xmx:kjpUXUph1lhhyKYXFN-d-TWgkZ5v3zdzSXPe7980cDg1JXQNBTII0A>
-    <xmx:kjpUXXozbCS2xDkzYljpuP8ytvfGIlqPzgWG0Oydl_mMyZWQuTesNw>
-Received: from NSJAIL (x4e36acd7.dyn.telefonica.de [78.54.172.215])
-        by mail.messagingengine.com (Postfix) with ESMTPA id 2E447380087
-        for <util-linux@vger.kernel.org>; Wed, 14 Aug 2019 12:45:06 -0400 (EDT)
-Received: from localhost (10.192.0.11 [10.192.0.11])
-        by NSJAIL (OpenSMTPD) with ESMTPSA id 517f9db6 (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256:NO);
-        Wed, 14 Aug 2019 16:45:01 +0000 (UTC)
-From:   Patrick Steinhardt <ps@pks.im>
-To:     util-linux@vger.kernel.org
-Cc:     Patrick Steinhardt <ps@pks.im>
-Subject: [PATCH 4/4] lib/closestream: fix assignment to read-only standard streams
-Date:   Wed, 14 Aug 2019 18:45:07 +0200
-Message-Id: <65bc4f34fde3a24431b1b2ef0403addd72c8f324.1565800625.git.ps@pks.im>
-X-Mailer: git-send-email 2.22.1
-In-Reply-To: <cover.1565800625.git.ps@pks.im>
-References: <cover.1565800625.git.ps@pks.im>
+        id S1728336AbfHNWcF (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Wed, 14 Aug 2019 18:32:05 -0400
+Received: from mail-ot1-f68.google.com ([209.85.210.68]:44065 "EHLO
+        mail-ot1-f68.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726166AbfHNWcF (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Wed, 14 Aug 2019 18:32:05 -0400
+Received: by mail-ot1-f68.google.com with SMTP id w4so1740765ote.11
+        for <util-linux@vger.kernel.org>; Wed, 14 Aug 2019 15:32:04 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=mime-version:reply-to:from:date:message-id:subject:to;
+        bh=Lxdr4bEYoJ7ScUL1XxadEKoq+LLSnT+XOihyk6Whxzo=;
+        b=oNIpcVm6NmKSHQ1XyRun8VKfRRhaTl+elnA0DpZ6bN6cu48upKM+QtszPwTo8xj3aM
+         cjw3BJu52KaD60Gjw1P4k905yEpjuOV2KmxZOW11kS4TgV0FLhVTflRcNrHSA6HWWWDt
+         pkGSgspKffqcdVmI8KPQ8llkOIZorOeZIR+vbK7//hIpLqoWuhOT5jKQ0+D7P1Kw4FBp
+         UCDr4mW+oUQOcaBj6ybftSEOhJG+stneJZk4V4iT4CcTvWGQTPBnlcex2cX9qzN4mDcv
+         hBPGqQ8Qza4GFXWOOXXtqid1x0XOj978P3vhqG77j6MemVEXSNo8jommDIBo5rkfa4ia
+         yyDQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
+         :subject:to;
+        bh=Lxdr4bEYoJ7ScUL1XxadEKoq+LLSnT+XOihyk6Whxzo=;
+        b=TcQTNtMslKuaph9jPTelxYhNnnK8Olcq0g12e+Xl0XBG4fmz/qUNS6hImdeiiudOen
+         fwCTMflg1+wwAEQhB/xyNMlmbs5ie8HfcAFcKLNKim6rTQYlcSQt6+N1JyOt1l2pamry
+         s5HgA1vmHYLzICehtqz3qZfX4vw2AgR7WfLCdz0NUsOVNtskvLvYII/sUReDxCcBFds2
+         o5HvuFA26keM7VZn0WkSshV12x5bZOavzpKhPWTbO4jKS1/3ypFOp4ehAQ12eEtWHR+s
+         VcydZ0XW2ZkqmjuVbB4qWU9pjMrkB1e8z89U8m7QON0kVqImcu0NavCaHg8ifxdP02X5
+         rlQg==
+X-Gm-Message-State: APjAAAUb0yt+vNkiexNQP+KmxMdY63ElDY+9533qYEUgus+kOC4B7fzR
+        5vIY6+PZBSzGw7RrbIF0AsRaTYeRRvHaNwAhXF4=
+X-Google-Smtp-Source: APXvYqwmapOJxL0Q9WrfZLb7V3d948vxHaDaXO8vm9CwTJzkCzb4yJ52gfH/GPE4Ugg4bCawd9AFwZ5PoFhyT5ymtiM=
+X-Received: by 2002:a05:6602:cc:: with SMTP id z12mr2368958ioe.86.1565821924547;
+ Wed, 14 Aug 2019 15:32:04 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Received: by 2002:a6b:f20f:0:0:0:0:0 with HTTP; Wed, 14 Aug 2019 15:32:03
+ -0700 (PDT)
+Reply-To: katerinejones19@gmail.com
+From:   "MS. CATHY JONES" <fedex.expbenin@gmail.com>
+Date:   Wed, 14 Aug 2019 23:32:03 +0100
+Message-ID: <CAF=yAcw10sk4Qyqrrn9pPGGHGFs4wyv1dSDy7xAbnce3VdiU9g@mail.gmail.com>
+Subject: TODAY, Wed, Aug 14, 2019 I AM READY FOR COMING TO YOUR ADDRESS WITH
+ THIS ATM CARD
+To:     undisclosed-recipients:;
+Content-Type: text/plain; charset="UTF-8"
 Sender: util-linux-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-In order to avoid closing standard streams multiple times, commit
-52aa1a661 (include/closestream: avoid close more than once, 2019-06-13)
-started to set the standard output and error streams to `NULL`.
-According to ISO C89, being able to assign to the standard text streams
-is not a requirement for any C implementation. See footnote 238 in
-chapter §7.19.5.6:
+ATTN DEAR PARCEL BENEFICIARY.
 
-    The primary use of the freopen function is to change the file
-    associated with a standard text stream (stderr, stdin, or stdout),
-    as those identifiers need not be modifiable lvalues to which the
-    value returned by the fopen function may be assigned.
+I AM CATHY JONES,DIPLOMATIC AGENT ASIGNED ON THE DELIVERY OF YOUR ATM
+CARD THROUGH MS. MARYANNA B. THOMASON, DHL MANAGEMENT DIRECTOR NEW
+YORK.
+TODAY, Wed, Aug 14, 2019 I AM READY FOR COMING TO YOUR ADDRESS WITH
+THIS ATM CARD, So before i deliver I want you to send me.
+official diplomatic agent delivery fee sum of $150.00 us
+ only. I am here at JFK Airport,Florida. USA
 
-Fix the issue by instead using a local static variable `streams_closed`
-that gets set to `1` when the standard streams have been closed. This
-unbreaks compilation on musl libc systems.
+SEND THIS FEE BY WESTERN UNION OR MONEY WITH RECEIVER'S NAME AND ADDRESS BELOW.
 
-Signed-off-by: Patrick Steinhardt <ps@pks.im>
----
- lib/closestream.c | 9 +++++----
- 1 file changed, 5 insertions(+), 4 deletions(-)
-
-diff --git a/lib/closestream.c b/lib/closestream.c
-index d735e4f01..e5d04fe69 100644
---- a/lib/closestream.c
-+++ b/lib/closestream.c
-@@ -19,6 +19,8 @@
- # define CLOSE_EXIT_CODE EXIT_FAILURE
- #endif
- 
-+static int streams_closed = 0;
-+
- int
- close_stream(FILE * stream)
- {
-@@ -44,7 +46,7 @@ close_stream(FILE * stream)
- static inline void
- close_stdout(void)
- {
--	if (stdout && close_stream(stdout) != 0 && !(errno == EPIPE)) {
-+	if (!streams_closed && close_stream(stdout) != 0 && !(errno == EPIPE)) {
- 		if (errno)
- 			warn(_("write error"));
- 		else
-@@ -52,11 +54,10 @@ close_stdout(void)
- 		_exit(CLOSE_EXIT_CODE);
- 	}
- 
--	if (stderr && close_stream(stderr) != 0)
-+	if (!streams_closed && close_stream(stderr) != 0)
- 		_exit(CLOSE_EXIT_CODE);
- 
--	stdout = NULL;
--	stderr = NULL;
-+	streams_closed = 1;
- }
- 
- void close_stdout_atexit(void)
--- 
-2.22.1
-
+RECEIVER'S NAME-----------------MICHAEL HILAND
+ADDRESS----------------21644 Vaca Dr. Eckert Colorado 81418
+COUNTRY----------------USA
+AMOUNT--------------------$150.00 ONLY
+TEST QUESTION----------------WHO IS THE CREATOR
+ANSWER------------------GOD
+ meanwhile this $150.00 is required by the Custom Service,USA Homeland
+Security,for protection of your delivery, it will make the ATM CARD
+and funds worth $15.8MILLION US DOLLARS secure, Beleiev me, this is my
+word, remark my word,you will receive your delivery from me, Mrs.
+Cathy Jones once you send this only $150.00 today.
+I WAIT ON YOUR PAYMENT CONFIRMATION, ONCE I GOT YOUR PAYMENT, I WILL
+FINALLY ARRIVE TO YOUR NEAREST ADDRESS. today
+THANKS AND MAY GOD BLESS  YOU
+CATHY JONES,DIPLOMATIC AGENT
+EMAIL; katerinejones19@gmail.com
+CALL OR TEXT ME, DIPLOMATIC AGENT MS. CATHY JONES
+Phone Number; (408) 650-6103,
