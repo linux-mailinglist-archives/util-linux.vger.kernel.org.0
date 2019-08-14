@@ -2,115 +2,99 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 612518D854
-	for <lists+util-linux@lfdr.de>; Wed, 14 Aug 2019 18:45:11 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 39FFF8D852
+	for <lists+util-linux@lfdr.de>; Wed, 14 Aug 2019 18:45:09 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727814AbfHNQpK (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Wed, 14 Aug 2019 12:45:10 -0400
-Received: from wout3-smtp.messagingengine.com ([64.147.123.19]:53165 "EHLO
+        id S1727122AbfHNQpI (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Wed, 14 Aug 2019 12:45:08 -0400
+Received: from wout3-smtp.messagingengine.com ([64.147.123.19]:59857 "EHLO
         wout3-smtp.messagingengine.com" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S1727799AbfHNQpJ (ORCPT
+        by vger.kernel.org with ESMTP id S1726126AbfHNQpH (ORCPT
         <rfc822;util-linux@vger.kernel.org>);
-        Wed, 14 Aug 2019 12:45:09 -0400
+        Wed, 14 Aug 2019 12:45:07 -0400
 Received: from compute1.internal (compute1.nyi.internal [10.202.2.41])
-        by mailout.west.internal (Postfix) with ESMTP id 96598536
-        for <util-linux@vger.kernel.org>; Wed, 14 Aug 2019 12:45:05 -0400 (EDT)
+        by mailout.west.internal (Postfix) with ESMTP id 4640653A
+        for <util-linux@vger.kernel.org>; Wed, 14 Aug 2019 12:45:06 -0400 (EDT)
 Received: from mailfrontend1 ([10.202.2.162])
-  by compute1.internal (MEProxy); Wed, 14 Aug 2019 12:45:05 -0400
+  by compute1.internal (MEProxy); Wed, 14 Aug 2019 12:45:06 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=pks.im; h=from
-        :to:cc:subject:date:message-id:mime-version:content-type
-        :content-transfer-encoding; s=fm1; bh=lhW08Dp3wdHwjEdNt9Oh7c5Os4
-        wzzMMVUU4vJlVxncY=; b=TGlYRpA5sSL0buqIJr9tfSNiiLnAovaFoXPcO6T6kB
-        DgK59BaoArZkkqZgwACVIXLUdolZRw5zR/e/cO8vMoCeOh5mn1CKU0oYZSLc03I1
-        knhDBKeFJJKsmJ7rlraY7IruIf7xPP13xMU09FK4i6D4evcEg82dOKXnRHZcINNq
-        Ii8rQC89xMrc8mqU0+wkj27xDNTTYX5DP+oOKa+sLArAxzby47Xm62TiLbAYHaOH
-        QMRVts7871g80y8WFI9v6amFTKjGFt0gtb3FCK15QdzzOsFAy7J16MsJG1DI6CDR
-        0X7KtlCw/oKdPzsC0r2BGwwO8MEjYhlbAMRfu5N4zHhQ==
+        :to:cc:subject:date:message-id:in-reply-to:references
+        :mime-version:content-transfer-encoding; s=fm1; bh=pDE2V8ZElaFDl
+        LEwnrHbQEnKg7h4tPLSSRyp//Z5sns=; b=NX6UaxbGuQ6EUjPKJnuWq4p5lObr2
+        aJHIBlcmDlkk/LCUFm3Pak5O1PdpyNceNvk/RAu3Jkuh+rwxuU3+tQYN7qEGLY/h
+        pOcIcm2R01IMBq4ad1mDRKCw6anyvcEgIKlPbEhG8mmIZsxKMiJI282aO2I0BceB
+        52zWQ3Yj8lN44+tiuYdfAUAkCy/o1SwuO2Ft1BvKnuImHvvRnT9YjDz5cb00evlC
+        viNH7e/zyxdsChkZ/4UUGwSoQZE+WOwpw7TNkSkKLXTSyJeWKVT3N9GjOYKY5qjf
+        G7Bgjnpj38/9/ySo+aegSVIQLKFjGkL6yqCAjHLr5x+XxE/pWut8Eyhqg==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-        messagingengine.com; h=cc:content-transfer-encoding:content-type
-        :date:from:message-id:mime-version:subject:to:x-me-proxy
-        :x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm3; bh=lhW08D
-        p3wdHwjEdNt9Oh7c5Os4wzzMMVUU4vJlVxncY=; b=WwZv/l4QFzibZA+o4VWuyg
-        nQSCryGmIa/Hcew6KBiH+jNe/3Ja5KCuTCHepG5jTBV02844IVUqaWB8nZqnNLQ0
-        /AFWNDrsuhX1hapzAS1owC2Wt1rjHoRYUE5/c+6pJMpBDYWLHs1GVd1iOP/NUKbo
-        hg93aSnMjaAC0v8+ozjS85gz4lhD97QI+SJj1XWPNVzZEY+xmeYsghIoqwb2NZw9
-        hZBRLn8dJGsWYivoYnaBITFJmOv+QsmlUSbfCXsqPVa5HTSsXvKqTkMLfAJrDa1Y
-        ioLnXjohnBK4HoT6SPNHL/PrGEqow4mlLD6KaswYyrdYg+NlRfedD2cOIL6XKq+g
-        ==
-X-ME-Sender: <xms:kDpUXXthbEPJfWVQOJCBFY8mMVnue_72Ll-L5QJUSAZa7fYW-eswOg>
+        messagingengine.com; h=cc:content-transfer-encoding:date:from
+        :in-reply-to:message-id:mime-version:references:subject:to
+        :x-me-proxy:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=
+        fm3; bh=pDE2V8ZElaFDlLEwnrHbQEnKg7h4tPLSSRyp//Z5sns=; b=JrZcEx4W
+        9GgdDudKx3ieGbXGCe2SVwSAkyIql+Iw4vYdq8Pt7ZsO+N7bVd2j4v2Y0p/c9aT/
+        DDjhMRSc1z/tih/ErhBGLw9iVQIrrjYnGf+cacFvVB2xJYOqi86R+fWTrTzlwAHi
+        hOv5UbWXg+DrF7DHYumQyfAJRH+DuGE92OCHVpdR3j9hjhPb9Lw9nm00c+0CZykx
+        5T+Lqdurduj0m6GrjrGd7bgpmj5nF1pBDRu8xysRc+X2H5dHe8N72FpCShY253Qj
+        3GpUWC4AXWRfw6S4y6OoI7K5hpU7lsHsXQUVF8X+tUO7K5fBsk9f2qI5nTSDRfMa
+        j2FB+op4CoJwXA==
+X-ME-Sender: <xms:kTpUXSkKs-9exVnEsmTpC2efIABq44KfQAkU9_ujzuBOQY3SyRgZlQ>
 X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeduvddruddvledggedvucetufdoteggodetrfdotf
     fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
-    uceurghilhhouhhtmecufedttdenucenucfjughrpefhvffufffkofggtgfgsehtkeertd
-    ertdejnecuhfhrohhmpefrrghtrhhitghkucfuthgvihhnhhgrrhguthcuoehpshesphhk
-    shdrihhmqeenucfkphepjeekrdehgedrudejvddrvdduheenucfrrghrrghmpehmrghilh
-    hfrhhomhepphhssehpkhhsrdhimhenucevlhhushhtvghrufhiiigvpedt
-X-ME-Proxy: <xmx:kTpUXdWSkE-SULMIp8i-Qo4m3TziHiyXijp16Yet8qKV3Y1hNDDReQ>
-    <xmx:kTpUXQp5f1bb8iTXyAKjzO98KhWuCirqg8dnwfDE-qxTdifNLxV-wA>
-    <xmx:kTpUXYpL2l_QbKfQBkR-RUWwfgPfKdISCV31jFZwpI92az2zeFyt-w>
-    <xmx:kTpUXV68mF1y3zsyOohT6aNDdraeDtI0uWDqNjnTc7dbBk7xikdlwg>
+    uceurghilhhouhhtmecufedttdenucenucfjughrpefhvffufffkofgjfhgggfestdekre
+    dtredttdenucfhrhhomheprfgrthhrihgtkhcuufhtvghinhhhrghrughtuceophhssehp
+    khhsrdhimheqnecukfhppeejkedrheegrddujedvrddvudehnecurfgrrhgrmhepmhgrih
+    hlfhhrohhmpehpshesphhkshdrihhmnecuvehluhhsthgvrhfuihiivgeptd
+X-ME-Proxy: <xmx:kTpUXdvjJeK7tkzsmQJfjRoCP6ipCUXAScypqzUvrKFTV5QiQAHNLw>
+    <xmx:kTpUXeXgkZ_VuPAMBQPi7gyeVHwccdC-5bayPNPER26S6P4kmepuAA>
+    <xmx:kTpUXfnpW7fkVRP7my20vPqiIr--Bqud0xQ5jUURwBWIIzbS1PqPfg>
+    <xmx:kTpUXXjaeqT0hduaZbv9JPiO8kcazJK9jDefufclx1LxS3-pYGJbMg>
 Received: from NSJAIL (x4e36acd7.dyn.telefonica.de [78.54.172.215])
-        by mail.messagingengine.com (Postfix) with ESMTPA id 767A680063
-        for <util-linux@vger.kernel.org>; Wed, 14 Aug 2019 12:45:04 -0400 (EDT)
+        by mail.messagingengine.com (Postfix) with ESMTPA id 295818005A
+        for <util-linux@vger.kernel.org>; Wed, 14 Aug 2019 12:45:05 -0400 (EDT)
 Received: from localhost (10.192.0.11 [10.192.0.11])
-        by NSJAIL (OpenSMTPD) with ESMTPSA id d6195f75 (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256:NO);
+        by NSJAIL (OpenSMTPD) with ESMTPSA id 7d43684b (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256:NO);
         Wed, 14 Aug 2019 16:45:00 +0000 (UTC)
 From:   Patrick Steinhardt <ps@pks.im>
 To:     util-linux@vger.kernel.org
 Cc:     Patrick Steinhardt <ps@pks.im>
-Subject: [PATCH 0/4] Fix closing of standard text streams for non-glibc system
-Date:   Wed, 14 Aug 2019 18:45:03 +0200
-Message-Id: <cover.1565800625.git.ps@pks.im>
+Subject: [PATCH 1/4] term-utils/ttymsg: fix missing header for ARRAY_SIZE macro
+Date:   Wed, 14 Aug 2019 18:45:04 +0200
+Message-Id: <d7bcc791545f649a1c87ad38366d654b52187760.1565800625.git.ps@pks.im>
 X-Mailer: git-send-email 2.22.1
+In-Reply-To: <cover.1565800625.git.ps@pks.im>
+References: <cover.1565800625.git.ps@pks.im>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 Sender: util-linux-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-Hi,
+While "term-utils/ttymsg.c" makes use of the `ARRAY_SIZE` macro, it
+doesn't include the "c.h" header that declares it. Until now, it has
+been transitively included via "closestream.h", but as closestream's
+implementation is about to get moved to its own compilation unit in
+"lib/", this transitive include is going to be removed.
 
-since commit 52aa1a661 (include/closestream: avoid close more
-than once, 2019-06-13), util-linux fails to build on musl libc
-based systems. The culprit here is that it introduced assignments
-to stderr and stdout, while the C89 standard explicitly notes
-that treating stderr and stdout as valid lvalues is not a
-requirement for any conforming C implementation. musl libc
-implemented these streams as `extern FILE *const`, and as a
-result assigning to these variables causes compiler errors.
+Explicitly include "c.h" to fix this.
 
-Attached is a fix for this. Instead of assigning `NULL` to the
-streams, util-linux now uses a static variable `streams_closed`.
-Unfortunately, this fix necessitated some shifting around as
-closestream was previously implemented as header, only, and
-implementing static variables inside of a header is not going to
-work due to them being static to the single compilation unit,
-only. Thus I converted the code to move the implementation into
-"lib/closestream.c".
+Signed-off-by: Patrick Steinhardt <ps@pks.im>
+---
+ term-utils/ttymsg.c | 1 +
+ 1 file changed, 1 insertion(+)
 
-Regards
-Patrick
-
-Patrick Steinhardt (4):
-  term-utils/ttymsg: fix missing header for ARRAY_SIZE macro
-  login-utils/islocal: fix missing header for err macro
-  lib/closestream: move implementation into its own compilation unit
-  lib/closestream: fix assignment to read-only standard streams
-
- disk-utils/Makemodule.am                   |  2 +
- include/closestream.h                      | 90 +++-------------------
- lib/Makemodule.am                          |  1 +
- include/closestream.h => lib/closestream.c | 27 ++++---
- login-utils/Makemodule.am                  |  4 +-
- login-utils/islocal.c                      |  1 +
- misc-utils/Makemodule.am                   | 10 ++-
- sys-utils/Makemodule.am                    |  9 ++-
- term-utils/ttymsg.c                        |  1 +
- text-utils/Makemodule.am                   |  6 +-
- 10 files changed, 52 insertions(+), 99 deletions(-)
- copy include/closestream.h => lib/closestream.c (75%)
-
+diff --git a/term-utils/ttymsg.c b/term-utils/ttymsg.c
+index 2aab69f10..04c867e95 100644
+--- a/term-utils/ttymsg.c
++++ b/term-utils/ttymsg.c
+@@ -53,6 +53,7 @@
+ #include <string.h>
+ #include <stdlib.h>
+ 
++#include "c.h"
+ #include "nls.h"
+ #include "closestream.h"
+ #include "pathnames.h"
 -- 
 2.22.1
 
