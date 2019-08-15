@@ -2,86 +2,96 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 76ADD8E0C9
-	for <lists+util-linux@lfdr.de>; Thu, 15 Aug 2019 00:32:06 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 41AA88E942
+	for <lists+util-linux@lfdr.de>; Thu, 15 Aug 2019 12:50:03 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1728336AbfHNWcF (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Wed, 14 Aug 2019 18:32:05 -0400
-Received: from mail-ot1-f68.google.com ([209.85.210.68]:44065 "EHLO
-        mail-ot1-f68.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726166AbfHNWcF (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Wed, 14 Aug 2019 18:32:05 -0400
-Received: by mail-ot1-f68.google.com with SMTP id w4so1740765ote.11
-        for <util-linux@vger.kernel.org>; Wed, 14 Aug 2019 15:32:04 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:reply-to:from:date:message-id:subject:to;
-        bh=Lxdr4bEYoJ7ScUL1XxadEKoq+LLSnT+XOihyk6Whxzo=;
-        b=oNIpcVm6NmKSHQ1XyRun8VKfRRhaTl+elnA0DpZ6bN6cu48upKM+QtszPwTo8xj3aM
-         cjw3BJu52KaD60Gjw1P4k905yEpjuOV2KmxZOW11kS4TgV0FLhVTflRcNrHSA6HWWWDt
-         pkGSgspKffqcdVmI8KPQ8llkOIZorOeZIR+vbK7//hIpLqoWuhOT5jKQ0+D7P1Kw4FBp
-         UCDr4mW+oUQOcaBj6ybftSEOhJG+stneJZk4V4iT4CcTvWGQTPBnlcex2cX9qzN4mDcv
-         hBPGqQ8Qza4GFXWOOXXtqid1x0XOj978P3vhqG77j6MemVEXSNo8jommDIBo5rkfa4ia
-         yyDQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
-         :subject:to;
-        bh=Lxdr4bEYoJ7ScUL1XxadEKoq+LLSnT+XOihyk6Whxzo=;
-        b=TcQTNtMslKuaph9jPTelxYhNnnK8Olcq0g12e+Xl0XBG4fmz/qUNS6hImdeiiudOen
-         fwCTMflg1+wwAEQhB/xyNMlmbs5ie8HfcAFcKLNKim6rTQYlcSQt6+N1JyOt1l2pamry
-         s5HgA1vmHYLzICehtqz3qZfX4vw2AgR7WfLCdz0NUsOVNtskvLvYII/sUReDxCcBFds2
-         o5HvuFA26keM7VZn0WkSshV12x5bZOavzpKhPWTbO4jKS1/3ypFOp4ehAQ12eEtWHR+s
-         VcydZ0XW2ZkqmjuVbB4qWU9pjMrkB1e8z89U8m7QON0kVqImcu0NavCaHg8ifxdP02X5
-         rlQg==
-X-Gm-Message-State: APjAAAUb0yt+vNkiexNQP+KmxMdY63ElDY+9533qYEUgus+kOC4B7fzR
-        5vIY6+PZBSzGw7RrbIF0AsRaTYeRRvHaNwAhXF4=
-X-Google-Smtp-Source: APXvYqwmapOJxL0Q9WrfZLb7V3d948vxHaDaXO8vm9CwTJzkCzb4yJ52gfH/GPE4Ugg4bCawd9AFwZ5PoFhyT5ymtiM=
-X-Received: by 2002:a05:6602:cc:: with SMTP id z12mr2368958ioe.86.1565821924547;
- Wed, 14 Aug 2019 15:32:04 -0700 (PDT)
+        id S1731171AbfHOKuC (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Thu, 15 Aug 2019 06:50:02 -0400
+Received: from out2-smtp.messagingengine.com ([66.111.4.26]:34471 "EHLO
+        out2-smtp.messagingengine.com" rhost-flags-OK-OK-OK-OK)
+        by vger.kernel.org with ESMTP id S1730969AbfHOKuC (ORCPT
+        <rfc822;util-linux@vger.kernel.org>);
+        Thu, 15 Aug 2019 06:50:02 -0400
+Received: from compute1.internal (compute1.nyi.internal [10.202.2.41])
+        by mailout.nyi.internal (Postfix) with ESMTP id E636721B6A
+        for <util-linux@vger.kernel.org>; Thu, 15 Aug 2019 06:50:00 -0400 (EDT)
+Received: from mailfrontend1 ([10.202.2.162])
+  by compute1.internal (MEProxy); Thu, 15 Aug 2019 06:50:00 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=pks.im; h=from
+        :to:cc:subject:date:message-id:mime-version
+        :content-transfer-encoding; s=fm1; bh=9I04Zxw6M/tqWfvftN/C/4Uap8
+        sIdjLRXpmBqITvIAI=; b=tn6u+3eC3jGMAZZG13sx1w5B62lT0cqR9jopHsPFdx
+        sPAbVwmkEcDB6Xuorf5lr+1nFGl4QAgGlUHwidF6U97y9j5P/cPKZX+qyVFyaaJU
+        huzBIG9I+kqQUgbfyeySd5bXEA0XENtJm64yKXGeLUp6KOovbOuCyhFXROFKsAG2
+        CzhF43fS2P5fZaAHzqTpSjQ3eyU6kaA8mlHvaDl3RA4fjKyWFVDTHC922NlpUCsh
+        fE1CXwYifSdw+DtykTgeXjzqb35+i/Xray+vDptqoA3Lxtz6y/L1K8d5ikrYIjJv
+        hVpmjPtccc5abP+n3cWXL1S+CM8q19+IxRgSBhF7PkVA==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+        messagingengine.com; h=cc:content-transfer-encoding:date:from
+        :message-id:mime-version:subject:to:x-me-proxy:x-me-proxy
+        :x-me-sender:x-me-sender:x-sasl-enc; s=fm3; bh=9I04Zxw6M/tqWfvft
+        N/C/4Uap8sIdjLRXpmBqITvIAI=; b=XOKfUfOpkUICxQk/4piCd8qaOk6pjtS21
+        CqfY7Ize/YMNE/E/HYb2jt1XM7JxJ0YppIQNY0iZxo/rEGDxPr5LRADf13za+7A/
+        8WdlN+XEJ8hYyiDJ6Fdn2QvR1yDpj3dwsH1wdh/KtDcZuv4jWsMHSEzAvTRbNTDl
+        JxZfsiqd0gBF7wJGEYs6imlb5C2KkCKO/1u3KkqcCleNNOmom7IT5rmRdumDsmig
+        Qs5LAoWb8kxgDv96gTyNaDika0n92IiCMX4Fxvsn5oNyCIwUH68dc4/z0Vf5Aife
+        GUx2REANl7fFDkZ1PxHjxSgcO2M0/qyuD3s7eBqc4N/4aPzMO/Vig==
+X-ME-Sender: <xms:2DhVXZvKiYyHsePS0Qfz1DPUTHiM__lAvO3NC9rcKpdNHN25CmdenQ>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeduvddrudefuddgfedvucetufdoteggodetrfdotf
+    fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
+    uceurghilhhouhhtmecufedttdenucenucfjughrpefhvffufffkofgggfestdekredtre
+    dttdenucfhrhhomheprfgrthhrihgtkhcuufhtvghinhhhrghrughtuceophhssehpkhhs
+    rdhimheqnecukfhppeejkedrheegrdeiuddrheefnecurfgrrhgrmhepmhgrihhlfhhroh
+    hmpehpshesphhkshdrihhmnecuvehluhhsthgvrhfuihiivgeptd
+X-ME-Proxy: <xmx:2DhVXZ59aIX-8N21yjjABk7CQa1KUzC2re1YK6RIP3jml9uISmWPlA>
+    <xmx:2DhVXaJ4f7SuH4lUDDfn9g1oQi8mMfq5tvS7A17RV7_j3xr-Ebu4UA>
+    <xmx:2DhVXZ5syvqjwE9M0zy6nyQ2MqoFJFJ5X6HQeshuDsw0LZD_Tyuwsg>
+    <xmx:2DhVXXzk8LAOnQuGSB--7ejlqMxt2XgzNPSAt9azBkefedc1bVCWLw>
+Received: from NSJAIL (x4e363d35.dyn.telefonica.de [78.54.61.53])
+        by mail.messagingengine.com (Postfix) with ESMTPA id 1ED3F80061
+        for <util-linux@vger.kernel.org>; Thu, 15 Aug 2019 06:49:59 -0400 (EDT)
+Received: from localhost (10.192.0.11 [10.192.0.11])
+        by NSJAIL (OpenSMTPD) with ESMTPSA id 98c5fc7a (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256:NO);
+        Thu, 15 Aug 2019 10:49:55 +0000 (UTC)
+From:   Patrick Steinhardt <ps@pks.im>
+To:     util-linux@vger.kernel.org
+Cc:     Patrick Steinhardt <ps@pks.im>
+Subject: [PATCH] libmount: fix comment referring to passno field
+Date:   Thu, 15 Aug 2019 12:50:05 +0200
+Message-Id: <4e258644af41a4170100c49895d1d6efd4374d7a.1565866178.git.ps@pks.im>
+X-Mailer: git-send-email 2.22.1
 MIME-Version: 1.0
-Received: by 2002:a6b:f20f:0:0:0:0:0 with HTTP; Wed, 14 Aug 2019 15:32:03
- -0700 (PDT)
-Reply-To: katerinejones19@gmail.com
-From:   "MS. CATHY JONES" <fedex.expbenin@gmail.com>
-Date:   Wed, 14 Aug 2019 23:32:03 +0100
-Message-ID: <CAF=yAcw10sk4Qyqrrn9pPGGHGFs4wyv1dSDy7xAbnce3VdiU9g@mail.gmail.com>
-Subject: TODAY, Wed, Aug 14, 2019 I AM READY FOR COMING TO YOUR ADDRESS WITH
- THIS ATM CARD
-To:     undisclosed-recipients:;
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 Sender: util-linux-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-ATTN DEAR PARCEL BENEFICIARY.
+There's an obvious copy-paste error in `mnt_parse_table_line` when
+referring to the 6th field of the fstab format, where it says "freq"
+instead of "passno". This has probably been copied from the 5th field,
+which is in fact correctly labelled as "freq".
 
-I AM CATHY JONES,DIPLOMATIC AGENT ASIGNED ON THE DELIVERY OF YOUR ATM
-CARD THROUGH MS. MARYANNA B. THOMASON, DHL MANAGEMENT DIRECTOR NEW
-YORK.
-TODAY, Wed, Aug 14, 2019 I AM READY FOR COMING TO YOUR ADDRESS WITH
-THIS ATM CARD, So before i deliver I want you to send me.
-official diplomatic agent delivery fee sum of $150.00 us
- only. I am here at JFK Airport,Florida. USA
+Fix the mistake by changing the comment to say "passno" instead.
 
-SEND THIS FEE BY WESTERN UNION OR MONEY WITH RECEIVER'S NAME AND ADDRESS BELOW.
+Signed-off-by: Patrick Steinhardt <ps@pks.im>
+---
+ libmount/src/tab_parse.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-RECEIVER'S NAME-----------------MICHAEL HILAND
-ADDRESS----------------21644 Vaca Dr. Eckert Colorado 81418
-COUNTRY----------------USA
-AMOUNT--------------------$150.00 ONLY
-TEST QUESTION----------------WHO IS THE CREATOR
-ANSWER------------------GOD
- meanwhile this $150.00 is required by the Custom Service,USA Homeland
-Security,for protection of your delivery, it will make the ATM CARD
-and funds worth $15.8MILLION US DOLLARS secure, Beleiev me, this is my
-word, remark my word,you will receive your delivery from me, Mrs.
-Cathy Jones once you send this only $150.00 today.
-I WAIT ON YOUR PAYMENT CONFIRMATION, ONCE I GOT YOUR PAYMENT, I WILL
-FINALLY ARRIVE TO YOUR NEAREST ADDRESS. today
-THANKS AND MAY GOD BLESS  YOU
-CATHY JONES,DIPLOMATIC AGENT
-EMAIL; katerinejones19@gmail.com
-CALL OR TEXT ME, DIPLOMATIC AGENT MS. CATHY JONES
-Phone Number; (408) 650-6103,
+diff --git a/libmount/src/tab_parse.c b/libmount/src/tab_parse.c
+index 8e94715d2..2dfa6cbb4 100644
+--- a/libmount/src/tab_parse.c
++++ b/libmount/src/tab_parse.c
+@@ -154,7 +154,7 @@ static int mnt_parse_table_line(struct libmnt_fs *fs, const char *s)
+ 	if (!s || !*s)
+ 		goto done;
+ 
+-	/* (6) freq (optional) */
++	/* (6) passno (optional) */
+ 	s = next_s32(s, &fs->passno, &rc);
+ 	if (s && *s && rc) {
+ 		DBG(TAB, ul_debug("tab parse error: [passno]"));
+-- 
+2.22.1
+
