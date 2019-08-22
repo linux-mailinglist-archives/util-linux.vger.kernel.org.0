@@ -2,170 +2,91 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 07EDC98FDF
-	for <lists+util-linux@lfdr.de>; Thu, 22 Aug 2019 11:40:26 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 1FB22993CB
+	for <lists+util-linux@lfdr.de>; Thu, 22 Aug 2019 14:34:24 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1729455AbfHVJkZ (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Thu, 22 Aug 2019 05:40:25 -0400
-Received: from out1-smtp.messagingengine.com ([66.111.4.25]:41585 "EHLO
-        out1-smtp.messagingengine.com" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S1727484AbfHVJkZ (ORCPT
-        <rfc822;util-linux@vger.kernel.org>);
-        Thu, 22 Aug 2019 05:40:25 -0400
-Received: from compute1.internal (compute1.nyi.internal [10.202.2.41])
-        by mailout.nyi.internal (Postfix) with ESMTP id 61A592102F;
-        Thu, 22 Aug 2019 05:40:23 -0400 (EDT)
-Received: from mailfrontend1 ([10.202.2.162])
-  by compute1.internal (MEProxy); Thu, 22 Aug 2019 05:40:23 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=pks.im; h=from
-        :to:cc:subject:date:message-id:in-reply-to:references
-        :mime-version:content-type:content-transfer-encoding; s=fm1; bh=
-        MT7nRMTqciKmioiI7+85H7yv2Vzahkpkx1y3TrUVOzY=; b=DYIeYzShad451Yk1
-        vFYxGW6vpKk6lXSSzdeAqcETw3xHyAZOkkNxAUx6B/f0Iy1v/U5g1aCXvW1K7t0p
-        qXMCdFnNEh3nc7rfKkbtkxql9dssI5vK1sTVx9ggJwiM5UB+VMqg5sONbezMfiNk
-        BlA5UZoVMkR5diKx/6gyVqek1rqEGuzyHDug+U6PNwxDbZe2Tveae3VTW5prx80r
-        x4QZu1Xy/mneV+Fyv+HBljHaSmuJ60a2owatH2LaRGrdxK5TlUxzL7rvWuNSWYyI
-        t66XvorzZYPVon4r9VdwEJV6AZ+FYd57eaf509lgtIauhy/H5WGVuaXmHqdhhxeG
-        NtV6wQ==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-        messagingengine.com; h=cc:content-transfer-encoding:content-type
-        :date:from:in-reply-to:message-id:mime-version:references
-        :subject:to:x-me-proxy:x-me-proxy:x-me-sender:x-me-sender
-        :x-sasl-enc; s=fm3; bh=MT7nRMTqciKmioiI7+85H7yv2Vzahkpkx1y3TrUVO
-        zY=; b=P4A2sxFd12gZfvU95D9pQPCC9VbrYz70TBkYck/zyFu8sc0h0pxt+Y9LB
-        FMqMGpbTYqc3JiUNYoMLBRD8as2qDm4ngctCCf9U7E7LfyoIbRKs0GHbErJcyyuz
-        Pct6Zr09uumivZCwcN1j/u04LItREPvVonZWkAUQs3U459dqbQzhBzB+aFQ7QEtg
-        RAflGVIgGlMScJZbBq2RdIfnLHETOk/d2GmM6XRHdtPYp0wSOq/YCuiPz8UkB1FA
-        yQiAi1gUsAvdrRRqoyAKm/gNeZr9TV9VjjPN0wH/Yr0ZBslDSUmBEuCpTkNjcazK
-        nT/MC17ejlIdxnQI+zz61IEsV90Lg==
-X-ME-Sender: <xms:BmNeXQpokgvY9VxLFyVNuVRSsbg-G6ws6RIVUwiDg0eNcQWZFPxiRw>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeduvddrudeghedgudekucetufdoteggodetrfdotf
-    fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
-    uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
-    cujfgurhephffvufffkffojghfgggtgfesthekredtredtjeenucfhrhhomheprfgrthhr
-    ihgtkhcuufhtvghinhhhrghrughtuceophhssehpkhhsrdhimheqnecukfhppeejkedrhe
-    egrddvheegrdduhedtnecurfgrrhgrmhepmhgrihhlfhhrohhmpehpshesphhkshdrihhm
-    necuvehluhhsthgvrhfuihiivgeptd
-X-ME-Proxy: <xmx:BmNeXfGAdxQ2vzeHtNf6rlz9QHdzvxTDxqgiYVZ4U8eXnbPnBcx2PA>
-    <xmx:BmNeXTxGOk0RmYWtsvr48zyHAzYFNJoLPcPBTNdj4JBJEgIwA4s3ow>
-    <xmx:BmNeXWqPAr9TmatAM0QC9z6Z3h9OQbqldBGMgHcXxXc_dTPKQj3LMQ>
-    <xmx:B2NeXVRoIyPdJL6H0xQkPpU1-Dl6Rc8oLm5HvUDpPkTRGTLLNwqNOA>
-Received: from NSJAIL (x4e36fe96.dyn.telefonica.de [78.54.254.150])
-        by mail.messagingengine.com (Postfix) with ESMTPA id EEBE980061;
-        Thu, 22 Aug 2019 05:40:21 -0400 (EDT)
-Received: from localhost (10.192.0.11 [10.192.0.11])
-        by NSJAIL (OpenSMTPD) with ESMTPSA id 009774c7 (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256:NO);
-        Thu, 22 Aug 2019 09:40:16 +0000 (UTC)
-From:   Patrick Steinhardt <ps@pks.im>
-To:     util-linux@vger.kernel.org
-Cc:     Patrick Steinhardt <ps@pks.im>, Karel Zak <kzak@redhat.com>,
-        Florian Weimer <fweimer@redhat.com>
-Subject: [PATCH v2] include/closestream: fix assignment to read-only standard streams
-Date:   Thu, 22 Aug 2019 11:40:15 +0200
-Message-Id: <3e5f8ff67edc6ae34ff67124c956a71dcf49ea98.1566466780.git.ps@pks.im>
-X-Mailer: git-send-email 2.23.0
-In-Reply-To: <cover.1565800625.git.ps@pks.im>
-References: <cover.1565800625.git.ps@pks.im>
+        id S2387757AbfHVMeE (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Thu, 22 Aug 2019 08:34:04 -0400
+Received: from mail-lj1-f196.google.com ([209.85.208.196]:37484 "EHLO
+        mail-lj1-f196.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S2387684AbfHVMeD (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Thu, 22 Aug 2019 08:34:03 -0400
+Received: by mail-lj1-f196.google.com with SMTP id t14so5398773lji.4
+        for <util-linux@vger.kernel.org>; Thu, 22 Aug 2019 05:34:02 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=mime-version:reply-to:from:date:message-id:subject:to
+         :content-transfer-encoding;
+        bh=aWwEGZ7IKPwlD1SyN53LweuoS+rG8j2WBRgPDxMagPA=;
+        b=Rbh3JsGIh2x+jDuVbneOEsdobwGn2xF3k9KTKgjnK8Dyd2ODu1sdAQZQ15vVyYnqdt
+         7E9K7FhpCx9S2Dr1Ddo93q8TQvnmC/kE524CSoK66UbjC0Keqf53qhQ3yEqx3HAqneCK
+         QJH+OsNLuiNr6NKxEeJtactPjxkq0IA/anzWTZbfxsdGDFNukm8hCNfpT4lameBjcg1P
+         vMEErESY7RDQugMc/b/MZ0+sk5n2uzgwjXg1V0nNdJsVb5O6VyZacEb0HGljYN7+OPri
+         sm6Rp5BE3EkVBy2/1k5KenPYcnLllMAdQCixAZH/6rT6ERxgPTfrELU8FhhN52TrBApt
+         4Cxw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
+         :subject:to:content-transfer-encoding;
+        bh=aWwEGZ7IKPwlD1SyN53LweuoS+rG8j2WBRgPDxMagPA=;
+        b=lchU77QJxo8LKrKKjFhbYk0KZOUjHkVv4GutEYWoQVq525d3l3QHSFpaPMSG9lZxCd
+         mRd5/qqy4qY6b/s2koAckMTvrxNKTUEjDj3io4ylnupXmxUFI1WKdtwkPbWD7bMRGWFT
+         R8yOgOWfnsdhu/YNF9mjG7zoGZxxvJBzHfZrUjIGW12GLR0zsbCO/xS9FIOeOgAPNFYY
+         x654YhLLOAMkrMUxyRhpp7COUeyyk5nOSfccNrAqwEeaQtUwVB5Tsh4OXaXgNVdfub1X
+         dLiovVRpKdS5GMKlXWjoEpG1V/FJAXgyxEJ1bX2gXwwZo0mE6AYpFFUqjzN0o2XnnBsJ
+         I4rw==
+X-Gm-Message-State: APjAAAWqV7fgr5ORo05pHkXnbdKkze6PRLACAtbwk+iu+QR30kxxz8fi
+        EDymK/fzIRAZnpvoxJmg+E42mWIOO+06TN0l4aQ=
+X-Google-Smtp-Source: APXvYqz3MRqWqCJljuYvGs7Z39vR8szuBA98XmfHPUkBGUeOj4vI/x4jHKyZ57W6CcLrF9xDbGoqKi5bbRMPFZ+Cc3Y=
+X-Received: by 2002:a2e:9a44:: with SMTP id k4mr17910876ljj.96.1566477241520;
+ Thu, 22 Aug 2019 05:34:01 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Received: by 2002:ab3:6a0f:0:0:0:0:0 with HTTP; Thu, 22 Aug 2019 05:34:01
+ -0700 (PDT)
+Reply-To: eku.lawfirm@gmail.com
+From:   "Law firm(Eku and Associates)" <ezeobodo1@gmail.com>
+Date:   Thu, 22 Aug 2019 12:34:01 +0000
+Message-ID: <CAN-_bTZ726ayFtAv4dpjhKOuZFqgxZg3rZFa8VV4nXz4ZvjT-Q@mail.gmail.com>
+Subject: MY $25,000,000.00 INVESTMENT PROPOSAL WITH YOU AND IN YOUR COUNTRY.
+To:     undisclosed-recipients:;
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 Sender: util-linux-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-In order to avoid closing standard streams multiple times, commit
-52aa1a661 (include/closestream: avoid close more than once, 2019-06-13)
-introduced code to set the standard output and error streams to `NULL`.
-As musl libc defines standard streams as constant pointers, the change
-causes compiler errors on systems with that libc. According to ISO C89,
-being able to assign to the standard text streams is not a requirement
-for any C implementation, see footnote 238 in chapter §7.19.5.6:
+--=20
+Dear,
+With due respect this is not spam or Scam mail, because I have
+contacted you before and there was no response from you,I apologise if
+the contents of this mail are contrary to your moral ethics, which I
+feel may be of great disturbance to your person, but please treat this
+with absolute confidentiality, believing that this email reaches you
+in good faith. My contacting you is not a mistake or a coincidence
+because God can use any person known or unknown to accomplish great
+things.
+I am a lawyer and I have an investment business proposal to offer you.
+It is not official but should be considered as legal and confidential
+business. I have a customer's deposit of $US25 million dollars ready
+to be moved for investment if you can partner with us. We are ready to
+offer you 10% of this total amount as your compensation for supporting
+the transaction to completion. If you are interested to help me please
+reply me with your full details as stated below:
+(1) Your full names:
+(2) Your address:
+(3) Your occupation:
+(4) Your mobile telephone number:
+(5) Your nationality:
+(6) Your present location:
+(7) Your age:
+So that I will provide you more details on what to do and what is
+required for successful completion.
+Note: DO NOT REPLY ME IF YOU ARE NOT INTERESTED AND WITHOUT THE ABOVE
+MENTIONED DETAILS
 
-    The primary use of the freopen function is to change the file
-    associated with a standard text stream (stderr, stdin, or stdout),
-    as those identifiers need not be modifiable lvalues to which the
-    value returned by the fopen function may be assigned.
-
-This commit implements a new function `flush_standard_stream` that tries
-to reliably flush standard streams without actually closing them. By not
-calling fclose(3P), we can neatly avoid the issue of accessing standard
-streams in an unspecified state and thus remove the infringing `NULL`
-assignments.
-
-Properly flushing standard streams without fclose(3P) proves to be more
-intricate than one may expect, though, as some filesystems like NFS may
-defer flushing until they see a close(3P) of the underlying descriptor.
-One may call fsync(3P) to remedy that, but this may incur a heavy
-performance penalty in some scenarios. To work around the issue and
-still get proper errors, we duplicate the stream's file descriptor and
-close that one instead, which is sufficient to cause a flush.
-
-Note that both `close_stdout` and `close_stdout_atexit` are misnamed
-after this change, as we do not actually close the streams now. In order
-to avoid unnecessary code churn, we still retain their current names.
-
-Signed-off-by: Patrick Steinhardt <ps@pks.im>
----
- include/closestream.h | 33 ++++++++++++++++++++++++++++-----
- 1 file changed, 28 insertions(+), 5 deletions(-)
-
-diff --git a/include/closestream.h b/include/closestream.h
-index 83df1ee7d..41afbe208 100644
---- a/include/closestream.h
-+++ b/include/closestream.h
-@@ -35,11 +35,37 @@ close_stream(FILE * stream)
- 	return 0;
- }
- 
-+static inline int
-+flush_standard_stream(FILE *stream)
-+{
-+	int fd;
-+
-+	errno = 0;
-+
-+	if (ferror(stream) != 0 || fflush(stream) != 0)
-+		goto error;
-+
-+	/*
-+	 * Calling fflush is not sufficient on some filesystems
-+	 * like e.g. NFS, which may defer the actual flush until
-+	 * close. Calling fsync would help solve this, but would
-+	 * probably result in a performance hit. Thus, we work
-+	 * around this issue by calling close on a dup'd file
-+	 * descriptor from the stream.
-+	 */
-+	if ((fd = fileno(stream)) < 0 || (fd = dup(fd)) < 0 || close(fd) != 0)
-+		goto error;
-+
-+	return 0;
-+error:
-+	return (errno == EBADF) ? 0 : EOF;
-+}
-+
- /* Meant to be used atexit(close_stdout); */
- static inline void
- close_stdout(void)
- {
--	if (stdout && close_stream(stdout) != 0 && !(errno == EPIPE)) {
-+	if (flush_standard_stream(stdout) != 0 && !(errno == EPIPE)) {
- 		if (errno)
- 			warn(_("write error"));
- 		else
-@@ -47,11 +73,8 @@ close_stdout(void)
- 		_exit(CLOSE_EXIT_CODE);
- 	}
- 
--	if (stderr && close_stream(stderr) != 0)
-+	if (flush_standard_stream(stderr) != 0)
- 		_exit(CLOSE_EXIT_CODE);
--
--	stdout = NULL;
--	stderr = NULL;
- }
- 
- static inline void
--- 
-2.23.0
-
+Sinc=C3=A8rement v=C3=B4tre,
+Avocat Etienne Eku Esq.(Lawfirm)
+Procureur principal. De Cabinet d=E2=80=99avocats de l=E2=80=99Afrique de l=
+=E2=80=99ouest.
+Skype:westafricalawfirm
