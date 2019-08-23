@@ -2,42 +2,42 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id D18129B0FC
-	for <lists+util-linux@lfdr.de>; Fri, 23 Aug 2019 15:34:03 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 4AFBB9B0FF
+	for <lists+util-linux@lfdr.de>; Fri, 23 Aug 2019 15:34:05 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1730419AbfHWNdL (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        id S2389780AbfHWNdL (ORCPT <rfc822;lists+util-linux@lfdr.de>);
         Fri, 23 Aug 2019 09:33:11 -0400
-Received: from wout4-smtp.messagingengine.com ([64.147.123.20]:33835 "EHLO
+Received: from wout4-smtp.messagingengine.com ([64.147.123.20]:41581 "EHLO
         wout4-smtp.messagingengine.com" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S2388040AbfHWNdK (ORCPT
+        by vger.kernel.org with ESMTP id S2389164AbfHWNdL (ORCPT
         <rfc822;util-linux@vger.kernel.org>);
-        Fri, 23 Aug 2019 09:33:10 -0400
+        Fri, 23 Aug 2019 09:33:11 -0400
 Received: from compute1.internal (compute1.nyi.internal [10.202.2.41])
-        by mailout.west.internal (Postfix) with ESMTP id 5BA6B3BF;
+        by mailout.west.internal (Postfix) with ESMTP id AC1AA3C4;
         Fri, 23 Aug 2019 09:33:09 -0400 (EDT)
-Received: from mailfrontend2 ([10.202.2.163])
+Received: from mailfrontend1 ([10.202.2.162])
   by compute1.internal (MEProxy); Fri, 23 Aug 2019 09:33:09 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=pks.im; h=from
         :to:cc:subject:date:message-id:in-reply-to:references
-        :mime-version:content-transfer-encoding; s=fm1; bh=thyYpzA7djeUh
-        hXftId3Gk7yNP3naEoA0eoyJ6f6Em8=; b=fkskCfMSfvSBrZsFhQDlSV7dMBl4G
-        gSkvkLs4YqMcbgK4BManGwTXmTJ+WYZBzR8ZoZ7YHQd5kQlVRz9icBY70i6nbw3o
-        7I0vi8mVY4XZZMnL+AfQPSn7Z1skL82CJfm2wL4xc4aujgMDNupLmPbIEKUm9Yvb
-        A9IvWAeK4EL3V1Kxj1w/XzBKAfxR4gJQcC54r/+0AfuTP110eXZklAsFFg5E1A0C
-        EL872ZASDzmnAr3EG0mrHrEY4mVd27PKXatN7amQtPsWsbijDYS6qIehU9fA6keg
-        tTDayCRAtYLpvvqlia++K8VXnFJ50VLoc/wvNv2ZntEOGo4dWkuoRDvQg==
+        :mime-version:content-transfer-encoding; s=fm1; bh=k2okwuta6PeHI
+        93pfYIQLuB/XY4sURo7z4fFu2tjEBA=; b=woPI2Y0a4akNsOWeQt3NHDTuLjAzY
+        tW7XwAXe2crjBUQ+XknayTaS5BeYdJv52NnJtcD4OApcnoir3LA8t2yxbnsHNMAV
+        cr1+WM2i/QYdNbosRamiB8ry1FRIYcAitrllGqYFRKTMXISO7eK1iExpWx3VSIDH
+        Mz7heK7QJowsvM2U8l/tlq5kc4gDR0v2e2MvUHc+6oCRm67RAx3P2QWVHlisMQit
+        owxbCgkIX/AoylLDLweWHlGLnxvcvlaL50+cQIiqTasretnw9g/yMjGz9LmAHGK6
+        EuSIrSop0FKatqhO5pM7dAWli18tbAL920JG8XgJNXooduvK8rhEpq4Xw==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
         messagingengine.com; h=cc:content-transfer-encoding:date:from
         :in-reply-to:message-id:mime-version:references:subject:to
         :x-me-proxy:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=
-        fm3; bh=thyYpzA7djeUhhXftId3Gk7yNP3naEoA0eoyJ6f6Em8=; b=BfPJFcmf
-        rENNy2O8rUhr4XLZ66e8NN9WCuY9h2V1EBcLqtyRLmBq0PtPqIcucgoY3YcLb65Z
-        7cVe0O6uzfNBAQV9eMBnlGWgtRQtJRl61ekx4LpGusq+FM9sGtDcu8p6pmLmBU2h
-        sqfq89Nm/anO6lhr9rsfXAmdMZd7Tm9RMBsMSGZHCZsyy8cXtwfXboMR/JMZ+a9a
-        9/go84p/zn/ObihuqAHC5JPdJrK4QyyiwxOGl0qgAeFbXPG+DS1KoUhrQ8RrdV3y
-        LPJE/inF5lSR09MCF5va36/+AQC/2cFjV+y7JXe8MnAgaFwqYSa8/u4QDRwvHrPA
-        sJUF59DAQhw7xQ==
-X-ME-Sender: <xms:FOtfXTzJkrvrFyIOCFHoZty2uGIxEKJmIfKBvTzJ0GITRIcwwiWWZA>
+        fm3; bh=k2okwuta6PeHI93pfYIQLuB/XY4sURo7z4fFu2tjEBA=; b=KwEF/iuF
+        Zd3OHtH/IRDMB38eR5iV2D8QjB5X5obKNS0UX6eLN4bbtOwRA4ExBCXXZoH4+Jm0
+        L9JuAiwUYqJyTP222i48XPA+SA30I/GGNrRzIMNPAkgT0Z3n7K3KvGIQWqnObGC6
+        Z2TZGW9fHatPUW91ewFm4JQToqLABfhwO+xn+JEIKDjY2XoCfKYp/aajAdcTviI2
+        PQgTi58bLkuD2HGEn897zqC682IfzIO3j1DxLXvbMaTIKymLYcNLT1Grkd5DDDx3
+        GGdyNQhz9pAgGVZOwDV2gwHq1YpnflxlP3jNYA3+zUyUEEdTkOY46ZWSmqTWooL1
+        SsjlkkC4RjTLzg==
+X-ME-Sender: <xms:FetfXSCayuSJAQCmX7MwDC86BrEbYc5-5Wcr99B_XnrZF54lIj2pqQ>
 X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeduvddrudegkedgieefucetufdoteggodetrfdotf
     fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
     uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
@@ -45,22 +45,22 @@ X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeduvddrudegkedgieefucetufdoteggod
     tghkucfuthgvihhnhhgrrhguthcuoehpshesphhkshdrihhmqeenucfkphepjeejrddule
     durddvudefrddvtddtnecurfgrrhgrmhepmhgrihhlfhhrohhmpehpshesphhkshdrihhm
     necuvehluhhsthgvrhfuihiivgeptd
-X-ME-Proxy: <xmx:FOtfXfs6kZF3JI62nQhaXSgk8674W3GcZ2LmadnqC3UQNb7MXKcStQ>
-    <xmx:FOtfXaHWGUUuBYiXUuGct88PFbOo16zZQ6XxNqRs_vOVSscUoGc_3Q>
-    <xmx:FOtfXffbBK13SexnTUM_WGgplwThuTVCyRJhpgRmbWrOwiA34MFqyQ>
-    <xmx:FOtfXYf6S6owTOQJHMn3jDxhWRJrQsWNM1_SHlILfIdJYYuqJIxieQ>
+X-ME-Proxy: <xmx:FetfXQxVYefQR-6vFJtsCxoeyEvn1x1KKjnPEdRgre_LEIpZtrMrxw>
+    <xmx:FetfXQnrlIdaNKiSM9-_X04hOKiKpDlF0KyOePxMne5ULcZzkXXOaA>
+    <xmx:FetfXVEy3Q7UHJx2mIlWbrcXM76oS5SqHzS5Gq13gxnG5MfDzRoM7w>
+    <xmx:FetfXfPbHFxgJmCUJMqjiAacZrTfvvVJU1m2x_J5q3woFQe7D8Sc1g>
 Received: from NSJAIL (x4dbfd5c8.dyn.telefonica.de [77.191.213.200])
-        by mail.messagingengine.com (Postfix) with ESMTPA id 3EF03D60062;
+        by mail.messagingengine.com (Postfix) with ESMTPA id 6551480064;
         Fri, 23 Aug 2019 09:33:08 -0400 (EDT)
 Received: from localhost (10.192.0.11 [10.192.0.11])
-        by NSJAIL (OpenSMTPD) with ESMTPSA id 58646930 (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256:NO);
+        by NSJAIL (OpenSMTPD) with ESMTPSA id a37a52eb (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256:NO);
         Fri, 23 Aug 2019 13:33:04 +0000 (UTC)
 From:   Patrick Steinhardt <ps@pks.im>
 To:     util-linux@vger.kernel.org
 Cc:     Patrick Steinhardt <ps@pks.im>, Karel Zak <kzak@redhat.com>
-Subject: [PATCH v2 1/6] tests: remove reliance on buffer behaviour of stderr/stdout streams
-Date:   Fri, 23 Aug 2019 15:32:53 +0200
-Message-Id: <d503b30d13c847040a8343f0e7299ae1bf7cb120.1566566906.git.ps@pks.im>
+Subject: [PATCH v2 2/6] tests: libfdisk: remove reliance on buffer behaviour of standard streams
+Date:   Fri, 23 Aug 2019 15:32:54 +0200
+Message-Id: <eaea98e968735752999d25db183c36f7c3b38d52.1566566906.git.ps@pks.im>
 X-Mailer: git-send-email 2.23.0
 In-Reply-To: <cover.1566566906.git.ps@pks.im>
 References: <cover.1566555078.git.ps@pks.im> <cover.1566566906.git.ps@pks.im>
@@ -71,159 +71,466 @@ Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-In the test cases "rename::exit_codes" and "rename::exit_codes", we rely
-on the flushing behaviour of stderr and stdout streams relative to each
-other. Streams in glibc will not flush on newlines if stdout is pointing
-to a non-TTY file descriptor, but relying on this is fragile and may
-break on systems with a different behaviour like musl libc.
+The tests in libfdisk/mkpart-full all rely on the buffering behaviour of
+standard output and standard error streams, most importantly that stderr
+is non-buffering and stdout is buffering. This doesn't hold on all libc
+implementations when redirecting to a file, breaking the test suite on
+such platforms.
 
-Fix this by introducing a new parameter "--unbuffered" to `ts_run`. If
-this parameter is passed and stdbuf(1) from coreutils is available, then
-it will use it to disable buffering of standard output completely. Like
-this, we can selectively run tests with this if ordering of messages
-from stdout and stderr is being checked.
+Use `ts_run --unbuffered` to stop buffering of the standard output
+stream to fix this.
 
 Signed-off-by: Patrick Steinhardt <ps@pks.im>
-
-x
 ---
- tests/expected/misc/swaplabel    |  2 +-
- tests/expected/rename/exit_codes |  2 +-
- tests/functions.sh               | 47 +++++++++++++++++++++++---------
- tests/ts/misc/swaplabel          |  4 +--
- tests/ts/rename/exit_codes       |  2 +-
- 5 files changed, 39 insertions(+), 18 deletions(-)
+ tests/expected/libfdisk/mkpart-full-gpt       | 14 +++++-----
+ .../libfdisk/mkpart-full-gpt-err-overlap      |  8 +++---
+ .../libfdisk/mkpart-full-gpt-nopartno         | 14 +++++-----
+ .../libfdisk/mkpart-full-gpt-partno-gap       | 14 +++++-----
+ .../libfdisk/mkpart-full-gpt-space-gap        | 10 +++----
+ .../libfdisk/mkpart-full-mbr-err-logical      | 14 +++++-----
+ .../libfdisk/mkpart-full-mbr-err-nospace      |  6 ++---
+ .../libfdisk/mkpart-full-mbr-err-primary      |  6 ++---
+ .../expected/libfdisk/mkpart-full-mbr-logical | 14 +++++-----
+ .../libfdisk/mkpart-full-mbr-nopartno         | 14 +++++-----
+ .../expected/libfdisk/mkpart-full-mbr-primary |  8 +++---
+ .../libfdisk/mkpart-full-mbr-primary-nopartno |  8 +++---
+ .../libfdisk/mkpart-full-mbr-space-gap        |  6 ++---
+ tests/ts/libfdisk/mkpart-full                 | 26 +++++++++----------
+ 14 files changed, 81 insertions(+), 81 deletions(-)
 
-diff --git a/tests/expected/misc/swaplabel b/tests/expected/misc/swaplabel
-index 172f876af..790a28c6c 100644
---- a/tests/expected/misc/swaplabel
-+++ b/tests/expected/misc/swaplabel
-@@ -1,7 +1,7 @@
- mkswap: error: swap area needs to be at least 10 pages
- mkswap: <swapfile>: insecure permissions <perm>, 0600 suggested.
--mkswap: Label was truncated.
- Setting up swapspace version 1, size = 9 pages (9xPGSZ bytes)
-+mkswap: Label was truncated.
- LABEL=1234567890abcde, UUID=12345678-abcd-abcd-abcd-1234567890ab
- LABEL: 1234567890abcde
- UUID:  12345678-abcd-abcd-abcd-1234567890ab
-diff --git a/tests/expected/rename/exit_codes b/tests/expected/rename/exit_codes
-index c57781788..3d53010b2 100644
---- a/tests/expected/rename/exit_codes
-+++ b/tests/expected/rename/exit_codes
-@@ -2,6 +2,6 @@ RENAME_EXIT_NOTHING: 4
- `rename_exit_codes.1' -> `rename_exit_values.1'
- `rename_exit_codes.2' -> `rename_exit_values.2'
- EXIT_SUCCESS: 0
--rename: rename_exit_values.2: rename to rename_exit_codes.2 failed: Is a directory
- `rename_exit_values.1' -> `rename_exit_codes.1'
-+rename: rename_exit_values.2: rename to rename_exit_codes.2 failed: Is a directory
- RENAME_EXIT_SOMEOK: 2
-diff --git a/tests/functions.sh b/tests/functions.sh
-index 0605a1320..3d7bb89bc 100644
---- a/tests/functions.sh
-+++ b/tests/functions.sh
-@@ -420,26 +420,48 @@ function ts_init_py {
- }
+diff --git a/tests/expected/libfdisk/mkpart-full-gpt b/tests/expected/libfdisk/mkpart-full-gpt
+index d33483ac6..7740454fd 100644
+--- a/tests/expected/libfdisk/mkpart-full-gpt
++++ b/tests/expected/libfdisk/mkpart-full-gpt
+@@ -1,17 +1,17 @@
+-Requested partition: <partno=0,start=2048,size=2048>
+-Requested partition: <partno=1,start=4096,size=2048>
+-Requested partition: <partno=2,start=6144,size=2048>
+-Requested partition: <partno=3,start=8192,size=2048>
+-Requested partition: <partno=4,start=10240,size=2048>
+-Requested partition: <partno=5,start=12288,size=2048>
+-Requested partition: <partno=6,start=14336,size=2048>
+ Created a new <removed>.
++Requested partition: <partno=0,start=2048,size=2048>
+ Created a new <removed>.
++Requested partition: <partno=1,start=4096,size=2048>
+ Created a new <removed>.
++Requested partition: <partno=2,start=6144,size=2048>
+ Created a new <removed>.
++Requested partition: <partno=3,start=8192,size=2048>
+ Created a new <removed>.
++Requested partition: <partno=4,start=10240,size=2048>
+ Created a new <removed>.
++Requested partition: <partno=5,start=12288,size=2048>
+ Created a new <removed>.
++Requested partition: <partno=6,start=14336,size=2048>
+ Created a new <removed>.
+ Disk <removed>: 15 MiB, 15728640 bytes, 30720 sectors
+ Units: sectors of 1 * 512 = 512 bytes
+diff --git a/tests/expected/libfdisk/mkpart-full-gpt-err-overlap b/tests/expected/libfdisk/mkpart-full-gpt-err-overlap
+index 673339230..ebf078415 100644
+--- a/tests/expected/libfdisk/mkpart-full-gpt-err-overlap
++++ b/tests/expected/libfdisk/mkpart-full-gpt-err-overlap
+@@ -1,11 +1,11 @@
+-Requested partition: <partno=0,start=2048,size=2048>
+-Requested partition: <partno=1,start=4096,size=2048>
+-Requested partition: <partno=2,start=6144,size=2048>
+-Requested partition: <partno=3,start=5000,size=2048>
+ Created a new <removed>.
++Requested partition: <partno=0,start=2048,size=2048>
+ Created a new <removed>.
++Requested partition: <partno=1,start=4096,size=2048>
+ Created a new <removed>.
++Requested partition: <partno=2,start=6144,size=2048>
+ Created a new <removed>.
++Requested partition: <partno=3,start=5000,size=2048>
+ Sector 5000 already used.
+ sample-fdisk-mkpart-fullspec: failed to add #4 partition
+ Disk <removed>: 15 MiB, 15728640 bytes, 30720 sectors
+diff --git a/tests/expected/libfdisk/mkpart-full-gpt-nopartno b/tests/expected/libfdisk/mkpart-full-gpt-nopartno
+index 2c1423b75..fc9fdf240 100644
+--- a/tests/expected/libfdisk/mkpart-full-gpt-nopartno
++++ b/tests/expected/libfdisk/mkpart-full-gpt-nopartno
+@@ -1,17 +1,17 @@
+-Requested partition: <partno=<default>,start=2048,size=2048>
+-Requested partition: <partno=<default>,start=4096,size=2048>
+-Requested partition: <partno=<default>,start=6144,size=2048>
+-Requested partition: <partno=<default>,start=8192,size=2048>
+-Requested partition: <partno=<default>,start=10240,size=2048>
+-Requested partition: <partno=<default>,start=12288,size=2048>
+-Requested partition: <partno=<default>,start=14336,size=2048>
+ Created a new <removed>.
++Requested partition: <partno=<default>,start=2048,size=2048>
+ Created a new <removed>.
++Requested partition: <partno=<default>,start=4096,size=2048>
+ Created a new <removed>.
++Requested partition: <partno=<default>,start=6144,size=2048>
+ Created a new <removed>.
++Requested partition: <partno=<default>,start=8192,size=2048>
+ Created a new <removed>.
++Requested partition: <partno=<default>,start=10240,size=2048>
+ Created a new <removed>.
++Requested partition: <partno=<default>,start=12288,size=2048>
+ Created a new <removed>.
++Requested partition: <partno=<default>,start=14336,size=2048>
+ Created a new <removed>.
+ Disk <removed>: 15 MiB, 15728640 bytes, 30720 sectors
+ Units: sectors of 1 * 512 = 512 bytes
+diff --git a/tests/expected/libfdisk/mkpart-full-gpt-partno-gap b/tests/expected/libfdisk/mkpart-full-gpt-partno-gap
+index b142b5efe..3a65d37e4 100644
+--- a/tests/expected/libfdisk/mkpart-full-gpt-partno-gap
++++ b/tests/expected/libfdisk/mkpart-full-gpt-partno-gap
+@@ -1,17 +1,17 @@
+-Requested partition: <partno=0,start=2048,size=2048>
+-Requested partition: <partno=1,start=4096,size=2048>
+-Requested partition: <partno=3,start=6144,size=2048>
+-Requested partition: <partno=4,start=8192,size=2048>
+-Requested partition: <partno=6,start=10240,size=2048>
+-Requested partition: <partno=7,start=12288,size=2048>
+-Requested partition: <partno=8,start=14336,size=2048>
+ Created a new <removed>.
++Requested partition: <partno=0,start=2048,size=2048>
+ Created a new <removed>.
++Requested partition: <partno=1,start=4096,size=2048>
+ Created a new <removed>.
++Requested partition: <partno=3,start=6144,size=2048>
+ Created a new <removed>.
++Requested partition: <partno=4,start=8192,size=2048>
+ Created a new <removed>.
++Requested partition: <partno=6,start=10240,size=2048>
+ Created a new <removed>.
++Requested partition: <partno=7,start=12288,size=2048>
+ Created a new <removed>.
++Requested partition: <partno=8,start=14336,size=2048>
+ Created a new <removed>.
+ Disk <removed>: 15 MiB, 15728640 bytes, 30720 sectors
+ Units: sectors of 1 * 512 = 512 bytes
+diff --git a/tests/expected/libfdisk/mkpart-full-gpt-space-gap b/tests/expected/libfdisk/mkpart-full-gpt-space-gap
+index c26f2896b..64b2da4ab 100644
+--- a/tests/expected/libfdisk/mkpart-full-gpt-space-gap
++++ b/tests/expected/libfdisk/mkpart-full-gpt-space-gap
+@@ -1,13 +1,13 @@
+-Requested partition: <partno=0,start=2048,size=2048>
+-Requested partition: <partno=1,start=6144,size=2048>
+-Requested partition: <partno=2,start=8192,size=2048>
+-Requested partition: <partno=3,start=12288,size=2048>
+-Requested partition: <partno=4,start=14336,size=2048>
+ Created a new <removed>.
++Requested partition: <partno=0,start=2048,size=2048>
+ Created a new <removed>.
++Requested partition: <partno=1,start=6144,size=2048>
+ Created a new <removed>.
++Requested partition: <partno=2,start=8192,size=2048>
+ Created a new <removed>.
++Requested partition: <partno=3,start=12288,size=2048>
+ Created a new <removed>.
++Requested partition: <partno=4,start=14336,size=2048>
+ Created a new <removed>.
+ Disk <removed>: 15 MiB, 15728640 bytes, 30720 sectors
+ Units: sectors of 1 * 512 = 512 bytes
+diff --git a/tests/expected/libfdisk/mkpart-full-mbr-err-logical b/tests/expected/libfdisk/mkpart-full-mbr-err-logical
+index c2c0b0df6..6d48f487a 100644
+--- a/tests/expected/libfdisk/mkpart-full-mbr-err-logical
++++ b/tests/expected/libfdisk/mkpart-full-mbr-err-logical
+@@ -1,17 +1,17 @@
+-Requested partition: <partno=0,start=2048,size=2048>
+-Requested partition: <partno=1,start=4096,size=2048>
+-Requested partition: <partno=2,start=6144,size=2048>
+-Requested partition: <partno=3,start=8192,size=22528>
+-Requested partition: <partno=4,start=10240,size=2048>
+-Requested partition: <partno=5,start=4096,size=2048>
+-sample-fdisk-mkpart-fullspec: failed to add #6 partition
+ Created a new <removed>.
++Requested partition: <partno=0,start=2048,size=2048>
+ Created a new <removed>.
++Requested partition: <partno=1,start=4096,size=2048>
+ Created a new <removed>.
++Requested partition: <partno=2,start=6144,size=2048>
+ Created a new <removed>.
++Requested partition: <partno=3,start=8192,size=22528>
+ Created a new <removed>.
++Requested partition: <partno=4,start=10240,size=2048>
+ Adding logical partition 5
+ Created a new <removed>.
++Requested partition: <partno=5,start=4096,size=2048>
++sample-fdisk-mkpart-fullspec: failed to add #6 partition
+ Disk <removed>: 15 MiB, 15728640 bytes, 30720 sectors
+ Units: sectors of 1 * 512 = 512 bytes
+ Sector size (logical/physical): 512 bytes / 512 bytes
+diff --git a/tests/expected/libfdisk/mkpart-full-mbr-err-nospace b/tests/expected/libfdisk/mkpart-full-mbr-err-nospace
+index d7a006569..a79c5800a 100644
+--- a/tests/expected/libfdisk/mkpart-full-mbr-err-nospace
++++ b/tests/expected/libfdisk/mkpart-full-mbr-err-nospace
+@@ -1,9 +1,9 @@
+-Requested partition: <partno=0,start=2048,size=2048>
+-Requested partition: <partno=1,start=4096,size=2048>
+-Requested partition: <partno=2,start=4096,size=2048>
+ Created a new <removed>.
++Requested partition: <partno=0,start=2048,size=2048>
+ Created a new <removed>.
++Requested partition: <partno=1,start=4096,size=2048>
+ Created a new <removed>.
++Requested partition: <partno=2,start=4096,size=2048>
+ Start sector 4096 out of range.
+ sample-fdisk-mkpart-fullspec: failed to add #3 partition
+ Disk <removed>: 15 MiB, 15728640 bytes, 30720 sectors
+diff --git a/tests/expected/libfdisk/mkpart-full-mbr-err-primary b/tests/expected/libfdisk/mkpart-full-mbr-err-primary
+index 1142f6531..93edf2b07 100644
+--- a/tests/expected/libfdisk/mkpart-full-mbr-err-primary
++++ b/tests/expected/libfdisk/mkpart-full-mbr-err-primary
+@@ -1,9 +1,9 @@
+-Requested partition: <partno=0,start=2048,size=2048>
+-Requested partition: <partno=1,start=4096,size=2048>
+-Requested partition: <partno=6,start=6144,size=2048>
+ Created a new <removed>.
++Requested partition: <partno=0,start=2048,size=2048>
+ Created a new <removed>.
++Requested partition: <partno=1,start=4096,size=2048>
+ Created a new <removed>.
++Requested partition: <partno=6,start=6144,size=2048>
+ Extended partition does not exists. Failed to add logical partition.
+ sample-fdisk-mkpart-fullspec: failed to add #7 partition
+ Disk <removed>: 15 MiB, 15728640 bytes, 30720 sectors
+diff --git a/tests/expected/libfdisk/mkpart-full-mbr-logical b/tests/expected/libfdisk/mkpart-full-mbr-logical
+index 97e7a4a54..ff2611cbb 100644
+--- a/tests/expected/libfdisk/mkpart-full-mbr-logical
++++ b/tests/expected/libfdisk/mkpart-full-mbr-logical
+@@ -1,19 +1,19 @@
+-Requested partition: <partno=0,start=2048,size=2048>
+-Requested partition: <partno=1,start=4096,size=2048>
+-Requested partition: <partno=2,start=6144,size=2048>
+-Requested partition: <partno=3,start=8192,size=22528>
+-Requested partition: <partno=4,start=10240,size=2048>
+-Requested partition: <partno=5,start=14336,size=2048>
+-Requested partition: <partno=6,start=18432,size=12288>
+ Created a new <removed>.
++Requested partition: <partno=0,start=2048,size=2048>
+ Created a new <removed>.
++Requested partition: <partno=1,start=4096,size=2048>
+ Created a new <removed>.
++Requested partition: <partno=2,start=6144,size=2048>
+ Created a new <removed>.
++Requested partition: <partno=3,start=8192,size=22528>
+ Created a new <removed>.
++Requested partition: <partno=4,start=10240,size=2048>
+ Adding logical partition 5
+ Created a new <removed>.
++Requested partition: <partno=5,start=14336,size=2048>
+ Adding logical partition 6
+ Created a new <removed>.
++Requested partition: <partno=6,start=18432,size=12288>
+ Adding logical partition 7
+ Created a new <removed>.
+ Disk <removed>: 15 MiB, 15728640 bytes, 30720 sectors
+diff --git a/tests/expected/libfdisk/mkpart-full-mbr-nopartno b/tests/expected/libfdisk/mkpart-full-mbr-nopartno
+index 23f7ad5a7..c8c449cd1 100644
+--- a/tests/expected/libfdisk/mkpart-full-mbr-nopartno
++++ b/tests/expected/libfdisk/mkpart-full-mbr-nopartno
+@@ -1,19 +1,19 @@
+-Requested partition: <partno=<default>,start=2048,size=2048>
+-Requested partition: <partno=<default>,start=4096,size=2048>
+-Requested partition: <partno=<default>,start=6144,size=2048>
+-Requested partition: <partno=<default>,start=8192,size=22528>
+-Requested partition: <partno=<default>,start=10240,size=2048>
+-Requested partition: <partno=<default>,start=14336,size=2048>
+-Requested partition: <partno=<default>,start=18432,size=12288>
+ Created a new <removed>.
++Requested partition: <partno=<default>,start=2048,size=2048>
+ Created a new <removed>.
++Requested partition: <partno=<default>,start=4096,size=2048>
+ Created a new <removed>.
++Requested partition: <partno=<default>,start=6144,size=2048>
+ Created a new <removed>.
++Requested partition: <partno=<default>,start=8192,size=22528>
+ Created a new <removed>.
++Requested partition: <partno=<default>,start=10240,size=2048>
+ Adding logical partition 5
+ Created a new <removed>.
++Requested partition: <partno=<default>,start=14336,size=2048>
+ Adding logical partition 6
+ Created a new <removed>.
++Requested partition: <partno=<default>,start=18432,size=12288>
+ Adding logical partition 7
+ Created a new <removed>.
+ Disk <removed>: 15 MiB, 15728640 bytes, 30720 sectors
+diff --git a/tests/expected/libfdisk/mkpart-full-mbr-primary b/tests/expected/libfdisk/mkpart-full-mbr-primary
+index 31e84344d..c71ec9e1f 100644
+--- a/tests/expected/libfdisk/mkpart-full-mbr-primary
++++ b/tests/expected/libfdisk/mkpart-full-mbr-primary
+@@ -1,11 +1,11 @@
+-Requested partition: <partno=0,start=2048,size=2048>
+-Requested partition: <partno=1,start=4096,size=2048>
+-Requested partition: <partno=2,start=6144,size=2048>
+-Requested partition: <partno=3,start=8192,size=22528>
+ Created a new <removed>.
++Requested partition: <partno=0,start=2048,size=2048>
+ Created a new <removed>.
++Requested partition: <partno=1,start=4096,size=2048>
+ Created a new <removed>.
++Requested partition: <partno=2,start=6144,size=2048>
+ Created a new <removed>.
++Requested partition: <partno=3,start=8192,size=22528>
+ Created a new <removed>.
+ Disk <removed>: 15 MiB, 15728640 bytes, 30720 sectors
+ Units: sectors of 1 * 512 = 512 bytes
+diff --git a/tests/expected/libfdisk/mkpart-full-mbr-primary-nopartno b/tests/expected/libfdisk/mkpart-full-mbr-primary-nopartno
+index 90a71f3ab..33ba9ff88 100644
+--- a/tests/expected/libfdisk/mkpart-full-mbr-primary-nopartno
++++ b/tests/expected/libfdisk/mkpart-full-mbr-primary-nopartno
+@@ -1,11 +1,11 @@
+-Requested partition: <partno=<default>,start=2048,size=2048>
+-Requested partition: <partno=<default>,start=4096,size=2048>
+-Requested partition: <partno=<default>,start=6144,size=2048>
+-Requested partition: <partno=<default>,start=8192,size=22528>
+ Created a new <removed>.
++Requested partition: <partno=<default>,start=2048,size=2048>
+ Created a new <removed>.
++Requested partition: <partno=<default>,start=4096,size=2048>
+ Created a new <removed>.
++Requested partition: <partno=<default>,start=6144,size=2048>
+ Created a new <removed>.
++Requested partition: <partno=<default>,start=8192,size=22528>
+ Created a new <removed>.
+ Disk <removed>: 15 MiB, 15728640 bytes, 30720 sectors
+ Units: sectors of 1 * 512 = 512 bytes
+diff --git a/tests/expected/libfdisk/mkpart-full-mbr-space-gap b/tests/expected/libfdisk/mkpart-full-mbr-space-gap
+index 45d45071f..881ea9ec7 100644
+--- a/tests/expected/libfdisk/mkpart-full-mbr-space-gap
++++ b/tests/expected/libfdisk/mkpart-full-mbr-space-gap
+@@ -1,9 +1,9 @@
+-Requested partition: <partno=0,start=2048,size=2048>
+-Requested partition: <partno=1,start=6144,size=2048>
+-Requested partition: <partno=2,start=8192,size=2048>
+ Created a new <removed>.
++Requested partition: <partno=0,start=2048,size=2048>
+ Created a new <removed>.
++Requested partition: <partno=1,start=6144,size=2048>
+ Created a new <removed>.
++Requested partition: <partno=2,start=8192,size=2048>
+ Created a new <removed>.
+ Disk <removed>: 15 MiB, 15728640 bytes, 30720 sectors
+ Units: sectors of 1 * 512 = 512 bytes
+diff --git a/tests/ts/libfdisk/mkpart-full b/tests/ts/libfdisk/mkpart-full
+index eda506ef6..9fb46ef67 100755
+--- a/tests/ts/libfdisk/mkpart-full
++++ b/tests/ts/libfdisk/mkpart-full
+@@ -31,7 +31,7 @@ ts_check_test_command "$TS_CMD_WIPEFS"
+ TEST_IMAGE_NAME=$(ts_image_init 15)
  
- function ts_run {
-+	local UNBUFFERED=
-+
-+	while true; do
-+		case "$1" in
-+			--unbuffered)
-+				UNBUFFERED=1
-+				shift;;
-+			--)
-+				shift
-+				break;;
-+			*)
-+				break;;
-+		esac
-+	done
-+
-+	declare -a args
-+
- 	#
--	# valgrind mode
-+	# ASAN mode
- 	#
--	if [ -n "$TS_VALGRIND_CMD" ]; then
--		libtool --mode=execute \
--		$TS_VALGRIND_CMD --tool=memcheck --leak-check=full \
--				 --leak-resolution=high --num-callers=20 \
--				 --log-file="$TS_VGDUMP" "$@"
-+	if [ "$TS_ENABLE_ASAN" == "yes" ]; then
-+		args+=(ASAN_OPTIONS='detect_leaks=1')
-+	fi
-+
- 	#
--	# ASAN mode
-+	# Disable buffering of stdout
- 	#
--	elif [ "$TS_ENABLE_ASAN" == "yes" ]; then
--		ASAN_OPTIONS='detect_leaks=1' "$@"
-+	if [ -n "$UNBUFFERED" ]; then
-+		if type stdbuf >/dev/null 2>&1; then
-+			args+=(stdbuf --output=0)
-+		fi
-+	fi
+ ts_init_subtest "mbr-primary"
+-$TESTPROG --label mbr --device ${TEST_IMAGE_NAME} \
++ts_run --unbuffered $TESTPROG --label mbr --device ${TEST_IMAGE_NAME} \
+ 	1,2048,2048 \
+ 	2,4096,2048 \
+ 	3,6144,2048 \
+@@ -45,7 +45,7 @@ $TS_CMD_WIPEFS --all --force ${TEST_IMAGE_NAME} &> /dev/null
  
- 	#
--	# Default mode
-+	# valgrind mode
- 	#
--	else
--		"$@"
-+	if [ -n "$TS_VALGRIND_CMD" ]; then
-+		args+=(libtool --mode=execute "$TS_VALGRIND_CMD" --tool=memcheck --leak-check=full)
-+		args+=(--leak-resolution=high --num-callers=20 --log-file="$TS_VGDUMP")
- 	fi
-+
-+	"${args[@]}" "$@"
- }
  
- function ts_gen_diff {
-@@ -977,4 +999,3 @@ function ts_has_ncurses_support {
- 		echo "no"
- 	fi
- }
--
-diff --git a/tests/ts/misc/swaplabel b/tests/ts/misc/swaplabel
-index 22858b0ac..106cb7d21 100755
---- a/tests/ts/misc/swaplabel
-+++ b/tests/ts/misc/swaplabel
-@@ -39,7 +39,7 @@ MIN_SWAP_SIZE_KB=$(( MIN_SWAP_SIZE / 1024 ))
+ ts_init_subtest "mbr-primary-nopartno"
+-$TESTPROG --label mbr --device ${TEST_IMAGE_NAME} -- \
++ts_run --unbuffered $TESTPROG --label mbr --device ${TEST_IMAGE_NAME} -- \
+ 	-,2048,2048 \
+ 	-,4096,2048 \
+ 	-,6144,2048 \
+@@ -59,7 +59,7 @@ $TS_CMD_WIPEFS --all --force ${TEST_IMAGE_NAME} &> /dev/null
  
- rm -f $IMAGE
- fallocate_or_skip $(( $MIN_SWAP_SIZE - 1 )) $IMAGE
--$TS_CMD_MKSWAP \
-+ts_run --unbuffered $TS_CMD_MKSWAP \
- 	--label 1234567890abcdef \
- 	--uuid 12345678-abcd-abcd-abcd-1234567890ab \
- 	$IMAGE 2>&1 |\
-@@ -50,7 +50,7 @@ $TS_CMD_MKSWAP \
+ ## no extended but partno > 4 requested
+ ts_init_subtest "mbr-err-primary"
+-$TESTPROG --label mbr --device ${TEST_IMAGE_NAME} \
++ts_run --unbuffered $TESTPROG --label mbr --device ${TEST_IMAGE_NAME} \
+ 	1,2048,2048 \
+ 	2,4096,2048 \
+ 	7,6144,2048 \
+@@ -72,7 +72,7 @@ $TS_CMD_WIPEFS --all --force ${TEST_IMAGE_NAME} &> /dev/null
  
- rm -f $IMAGE
- fallocate_or_skip $MIN_SWAP_SIZE $IMAGE
--$TS_CMD_MKSWAP \
-+ts_run --unbuffered $TS_CMD_MKSWAP \
- 	--label 1234567890abcdef \
- 	--uuid 12345678-abcd-abcd-abcd-1234567890ab \
- 	$IMAGE 2>&1 |\
-diff --git a/tests/ts/rename/exit_codes b/tests/ts/rename/exit_codes
-index 37028162b..d3012ae59 100755
---- a/tests/ts/rename/exit_codes
-+++ b/tests/ts/rename/exit_codes
-@@ -32,7 +32,7 @@ $TS_CMD_RENAME -v codes values rename_exit_codes.? >> $TS_OUTPUT 2>&1
- echo "EXIT_SUCCESS: $?" >> $TS_OUTPUT
+ ## no extended but partno > 4 requested
+ ts_init_subtest "mbr-err-nospace"
+-$TESTPROG --label mbr --device ${TEST_IMAGE_NAME} \
++ts_run --unbuffered $TESTPROG --label mbr --device ${TEST_IMAGE_NAME} \
+ 	1,2048,2048 \
+ 	2,4096,2048 \
+ 	3,4096,2048 \
+@@ -85,7 +85,7 @@ $TS_CMD_WIPEFS --all --force ${TEST_IMAGE_NAME} &> /dev/null
  
- mkdir rename_exit_codes.2
--$TS_CMD_RENAME -v values codes rename_exit_values.? >> $TS_OUTPUT 2>&1
-+ts_run --unbuffered $TS_CMD_RENAME -v values codes rename_exit_values.? >> $TS_OUTPUT 2>&1
- echo "RENAME_EXIT_SOMEOK: $?" >> $TS_OUTPUT
  
- rmdir rename_exit_codes.2
+ ts_init_subtest "mbr-logical"
+-$TESTPROG --label mbr --device ${TEST_IMAGE_NAME} \
++ts_run --unbuffered $TESTPROG --label mbr --device ${TEST_IMAGE_NAME} \
+ 	1,2048,2048 \
+ 	2,4096,2048 \
+ 	3,6144,2048 \
+@@ -101,7 +101,7 @@ ts_finalize_subtest
+ $TS_CMD_WIPEFS --all --force ${TEST_IMAGE_NAME} &> /dev/null
+ 
+ ts_init_subtest "mbr-nopartno"
+-$TESTPROG --label mbr --device ${TEST_IMAGE_NAME} -- \
++ts_run --unbuffered $TESTPROG --label mbr --device ${TEST_IMAGE_NAME} -- \
+ 	-,2048,2048 \
+ 	-,4096,2048 \
+ 	-,6144,2048 \
+@@ -118,7 +118,7 @@ $TS_CMD_WIPEFS --all --force ${TEST_IMAGE_NAME} &> /dev/null
+ 
+ ### 6th partition (logical) out of extended
+ ts_init_subtest "mbr-err-logical"
+-$TESTPROG --label mbr --device ${TEST_IMAGE_NAME} \
++ts_run --unbuffered $TESTPROG --label mbr --device ${TEST_IMAGE_NAME} \
+ 	1,2048,2048 \
+ 	2,4096,2048 \
+ 	3,6144,2048 \
+@@ -134,7 +134,7 @@ ts_finalize_subtest
+ $TS_CMD_WIPEFS --all --force ${TEST_IMAGE_NAME} &> /dev/null
+ 
+ ts_init_subtest "mbr-space-gap"
+-$TESTPROG --label mbr --device ${TEST_IMAGE_NAME} \
++ts_run --unbuffered $TESTPROG --label mbr --device ${TEST_IMAGE_NAME} \
+ 	1,2048,2048 \
+ 	2,6144,2048 \
+ 	3,8192,2048 \
+@@ -146,7 +146,7 @@ ts_finalize_subtest
+ $TS_CMD_WIPEFS --all --force ${TEST_IMAGE_NAME} &> /dev/null
+ 
+ ts_init_subtest "gpt"
+-$TESTPROG --label gpt --device ${TEST_IMAGE_NAME} \
++ts_run --unbuffered $TESTPROG --label gpt --device ${TEST_IMAGE_NAME} \
+ 	1,2048,2048 \
+ 	2,4096,2048 \
+ 	3,6144,2048 \
+@@ -162,7 +162,7 @@ ts_finalize_subtest
+ $TS_CMD_WIPEFS --all --force ${TEST_IMAGE_NAME} &> /dev/null
+ 
+ ts_init_subtest "gpt-nopartno"
+-$TESTPROG --label gpt --device ${TEST_IMAGE_NAME} -- \
++ts_run --unbuffered $TESTPROG --label gpt --device ${TEST_IMAGE_NAME} -- \
+ 	-,2048,2048 \
+ 	-,4096,2048 \
+ 	-,6144,2048 \
+@@ -179,7 +179,7 @@ $TS_CMD_WIPEFS --all --force ${TEST_IMAGE_NAME} &> /dev/null
+ 
+ ### 4th partition overlap 4th and 5th
+ ts_init_subtest "gpt-err-overlap"
+-$TESTPROG --label gpt --device ${TEST_IMAGE_NAME} \
++ts_run --unbuffered $TESTPROG --label gpt --device ${TEST_IMAGE_NAME} \
+ 	1,2048,2048 \
+ 	2,4096,2048 \
+ 	3,6144,2048 \
+@@ -195,7 +195,7 @@ ts_finalize_subtest
+ $TS_CMD_WIPEFS --all --force ${TEST_IMAGE_NAME} &> /dev/null
+ 
+ ts_init_subtest "gpt-partno-gap"
+-$TESTPROG --label gpt --device ${TEST_IMAGE_NAME} \
++ts_run --unbuffered $TESTPROG --label gpt --device ${TEST_IMAGE_NAME} \
+ 	1,2048,2048 \
+ 	2,4096,2048 \
+ 	4,6144,2048 \
+@@ -211,7 +211,7 @@ ts_finalize_subtest
+ $TS_CMD_WIPEFS --all --force ${TEST_IMAGE_NAME} &> /dev/null
+ 
+ ts_init_subtest "gpt-space-gap"
+-$TESTPROG --label gpt --device ${TEST_IMAGE_NAME} \
++ts_run --unbuffered $TESTPROG --label gpt --device ${TEST_IMAGE_NAME} \
+ 	1,2048,2048 \
+ 	2,6144,2048 \
+ 	3,8192,2048 \
 -- 
 2.23.0
 
