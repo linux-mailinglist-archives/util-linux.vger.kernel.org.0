@@ -2,56 +2,140 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 16ED79AA07
-	for <lists+util-linux@lfdr.de>; Fri, 23 Aug 2019 10:18:38 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id BF1A29ACE9
+	for <lists+util-linux@lfdr.de>; Fri, 23 Aug 2019 12:17:10 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1730354AbfHWIQI (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Fri, 23 Aug 2019 04:16:08 -0400
-Received: from box.cmipr.net ([45.79.6.95]:58379 "EHLO box.cmipr.net"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1728591AbfHWIQI (ORCPT <rfc822;util-linux@vger.kernel.org>);
-        Fri, 23 Aug 2019 04:16:08 -0400
-X-Greylist: delayed 508 seconds by postgrey-1.27 at vger.kernel.org; Fri, 23 Aug 2019 04:16:08 EDT
-Received: from authenticated-user (box.cmipr.net [45.79.6.95])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
-        (No client certificate requested)
-        by box.cmipr.net (Postfix) with ESMTPSA id 0E55220E6E;
-        Fri, 23 Aug 2019 04:07:39 -0400 (EDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=cmipr.net; s=mail;
-        t=1566547659; bh=RkBmd2CcJRotb8QGamoXhObMkdt8O4jNwO4QB0FDumo=;
-        h=Date:From:To:Subject:Reply-To:From;
-        b=NmMUOgvWxDiJ8LqR2jw0AXdEfmnY018GPSvApQPq28kggQpbABozIuNQNWcyQv5UX
-         5oDsDKNtPPE+pP42/Ady/GD3121wfi8zD9UKUgD7QRRcntm3g/WqdD8jgqnpSOoHeo
-         qgEOLtQkTPJTyeIOt2xj9nWXiRferl8KX7YzLGET9m5OPA9zPgODU5I/lVxWdnflaj
-         2YqJqQxK/hE2YSsFFP3hbdBuFiL5JEh+h0EpHBxVNbdYZOCloWtPwgzqM1d4wwbKOe
-         OttrM4cInJFanGNjdwelvVDbZF1fkqRjbrekUpVcKhklKHsnEP5d9f74I+U1Ps+5y7
-         Q3FIVhgdO68jg==
+        id S2388935AbfHWKRJ (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Fri, 23 Aug 2019 06:17:09 -0400
+Received: from wout2-smtp.messagingengine.com ([64.147.123.25]:43161 "EHLO
+        wout2-smtp.messagingengine.com" rhost-flags-OK-OK-OK-OK)
+        by vger.kernel.org with ESMTP id S1725893AbfHWKRJ (ORCPT
+        <rfc822;util-linux@vger.kernel.org>);
+        Fri, 23 Aug 2019 06:17:09 -0400
+Received: from compute1.internal (compute1.nyi.internal [10.202.2.41])
+        by mailout.west.internal (Postfix) with ESMTP id 02E89457
+        for <util-linux@vger.kernel.org>; Fri, 23 Aug 2019 06:17:07 -0400 (EDT)
+Received: from mailfrontend2 ([10.202.2.163])
+  by compute1.internal (MEProxy); Fri, 23 Aug 2019 06:17:08 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=pks.im; h=from
+        :to:cc:subject:date:message-id:mime-version:content-type
+        :content-transfer-encoding; s=fm1; bh=rx5QiZ7LLmSOQjBfbtEYO/QQmy
+        8vEv8SCz5D+LddN4c=; b=Xf+3qfkjtEvShPRUSM3Vbt/I4udecZePRivkVnfPeb
+        N/Qbo0ilkpM3PY7EaN5Uv++yZmXk9VmsHdcUyF6QnyAYnEm8LcFgITpWGFwi2fq1
+        qb8CX9NkiOdzmM9Qk/0XJ7vlmdf697+8T7Yov4wuZp7bgaduXoGSB5tQ/0tWAMfH
+        cGYFMTEoPGhYRMckIS3oMkcH1iYQdBFWlkJdxFnyOvXwH/JHn5yDP6095Zl8hSw3
+        HFRlV0n3SELDbMHW6mgV1AUJN+EBe32oPj2VoldQq3d0L8ia54f4r6zrfpiLayy0
+        eEAY50LJhcA1uEOFgZ5mzr9VViTb5WP0qIMPbh5rlaiw==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+        messagingengine.com; h=cc:content-transfer-encoding:content-type
+        :date:from:message-id:mime-version:subject:to:x-me-proxy
+        :x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm3; bh=rx5QiZ
+        7LLmSOQjBfbtEYO/QQmy8vEv8SCz5D+LddN4c=; b=dqql02ucEHJlNXDqn6Ki+M
+        DAK4tSLVjR7r1DvS47pLPWOMC7VfTd3wLhASufLWBg2e2EXzu3kO3+jJ5y7ijK5e
+        CJoobQqcj0bFFbmIYL9bWpp8tVD+CT8rgE9GPa5gGXb1UmehYf8dblInYqy9dWz/
+        o9gfq+7ML7w09LpVUUYMuLXOagU1ZLF77JvrbaFYUoMad1AkvvIitdcvbB/5lrRt
+        vJFS5o6HDYf+PJ13E+uPJn+WiW+xYWCAqtwGY7kGt9gw4RjiHYUIj8/UXGYw63Fe
+        8VyxgMA0otIQ2sfdCgnQCIxUQRTjEyqKE8nxXRtfWLz9yiUSlnlg7VObdQvWiDoA
+        ==
+X-ME-Sender: <xms:I71fXVKMUGyY0iz3K5eRKfjbNC6c0Y_6GlKosBI4bfJrnE1abuYVfQ>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeduvddrudegkedgvdefucetufdoteggodetrfdotf
+    fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
+    uceurghilhhouhhtmecufedttdenucenucfjughrpefhvffufffkofggtgfgsehtkeertd
+    ertdejnecuhfhrohhmpefrrghtrhhitghkucfuthgvihhnhhgrrhguthcuoehpshesphhk
+    shdrihhmqeenucfkphepjeejrdduledurddvudefrddvtddtnecurfgrrhgrmhepmhgrih
+    hlfhhrohhmpehpshesphhkshdrihhmnecuvehluhhsthgvrhfuihiivgeptd
+X-ME-Proxy: <xmx:I71fXdNzOh8Qgn97vMqfcw6I5rSHWIGKsJy6PCwaFDkFX4dlZFuzxg>
+    <xmx:I71fXTqdFScwe-sduW3htdCAxzDRBc6ByjYFajlejMLraSF3EjDxXQ>
+    <xmx:I71fXXUbQEMcpFOWxv170EmysXYEeTwHnxtq1JFETXS6AQSJNLjG4w>
+    <xmx:I71fXc_CXx2oZVeZnfix4_L6e5eFNGa5XGsbRD2iIghiHyrPxrJYnQ>
+Received: from NSJAIL (x4dbfd5c8.dyn.telefonica.de [77.191.213.200])
+        by mail.messagingengine.com (Postfix) with ESMTPA id CB973D6005D
+        for <util-linux@vger.kernel.org>; Fri, 23 Aug 2019 06:17:06 -0400 (EDT)
+Received: from localhost (10.192.0.11 [10.192.0.11])
+        by NSJAIL (OpenSMTPD) with ESMTPSA id 74a7ec9e (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256:NO);
+        Fri, 23 Aug 2019 10:17:04 +0000 (UTC)
+From:   Patrick Steinhardt <ps@pks.im>
+To:     util-linux@vger.kernel.org
+Cc:     Patrick Steinhardt <ps@pks.im>
+Subject: [PATCH 0/6] Test suite fixes for musl libc
+Date:   Fri, 23 Aug 2019 12:16:57 +0200
+Message-Id: <cover.1566555078.git.ps@pks.im>
+X-Mailer: git-send-email 2.23.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII;
- format=flowed
-Content-Transfer-Encoding: 7bit
-Date:   Fri, 23 Aug 2019 10:07:39 +0200
-From:   Chris Lee <framos@cmipr.net>
-To:     undisclosed-recipients:;
-Subject: Re: Investment
-Reply-To: chrislee.787@aol.com
-Mail-Reply-To: chrislee.787@aol.com
-Message-ID: <e4baff4661fea1c688087e9f034cbf99@cmipr.net>
-X-Sender: framos@cmipr.net
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 Sender: util-linux-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
+Hi,
 
-Hello. We are interested in your project as described in the PDF file
-herein annexed.
+on latest master of util-linux, there's currently 20 test- and
+subtest failures on musl based systems. There's three different
+categories of failures:
 
-I am sending a PDF file as your server keeps rejecting details sent
-via plain text. Do send a confirmation of your interest to work with
-us to chrislee.28@aol.com so we may discuss further
+    - Reliance on buffering properties of stdout/stderr.
 
-Yours Sincerely.
+    - Expectance of non-standard error messages returned by
+      strerror(3P).
 
-Chris Lee.
-Tel: + 1 985 315 2070
+    - Expectance of EILSEQ with POSIX locale.
+
+This patch set fixes all of the above, bringing down the number
+of failures from 20 to a single test failure. The remaining
+failure is in getopt(1), which documents and implicitly relies on
+the POSIXLY_CORRECT environment variable when calling getopt_long
+from glibc. Adhering to this variable isn't implemented by musl
+libc, so to get this working correctly one would have to modify
+getopt(1) itself, e.g. by automatically prepending a '+' to the
+optstr if the envvar is set. But I'll leave that to another patch
+series.
+
+Regards
+Patrick
+
+Patrick Steinhardt (6):
+  tests: remove reliance on buffer behaviour of stderr/stdout streams
+  tests: colcrt: fix reliance on EILSEQ in POSIX locale
+  tests: column: use actually invalid multibytes to test encoding
+  tests: col: avoid hardcoding of errno string
+  tests: fdisk: avoid hardcoding of errno string
+  tests: libfdisk: remove reliance on buffer behaviour of standard
+    streams
+
+ tests/commands.sh                             |  1 +
+ tests/expected/col/multibyte                  |  2 +-
+ tests/expected/column/invalid-multibyte       |  2 +-
+ tests/expected/fdisk/oddinput                 |  4 +-
+ tests/expected/libfdisk/mkpart-full-gpt       | 14 +++---
+ .../libfdisk/mkpart-full-gpt-err-overlap      |  8 ++--
+ .../libfdisk/mkpart-full-gpt-nopartno         | 14 +++---
+ .../libfdisk/mkpart-full-gpt-partno-gap       | 14 +++---
+ .../libfdisk/mkpart-full-gpt-space-gap        | 10 ++---
+ .../libfdisk/mkpart-full-mbr-err-logical      | 14 +++---
+ .../libfdisk/mkpart-full-mbr-err-nospace      |  6 +--
+ .../libfdisk/mkpart-full-mbr-err-primary      |  6 +--
+ .../expected/libfdisk/mkpart-full-mbr-logical | 14 +++---
+ .../libfdisk/mkpart-full-mbr-nopartno         | 14 +++---
+ .../expected/libfdisk/mkpart-full-mbr-primary |  8 ++--
+ .../libfdisk/mkpart-full-mbr-primary-nopartno |  8 ++--
+ .../libfdisk/mkpart-full-mbr-space-gap        |  6 +--
+ tests/expected/misc/swaplabel                 |  2 +-
+ tests/expected/rename/exit_codes              |  2 +-
+ tests/functions.sh                            |  7 +++
+ tests/helpers/Makemodule.am                   |  3 ++
+ tests/helpers/test_strerror.c                 | 44 +++++++++++++++++++
+ tests/ts/col/multibyte                        |  5 ++-
+ tests/ts/colcrt/regressions                   |  2 +-
+ tests/ts/column/invalid-multibyte             |  2 +-
+ tests/ts/fdisk/oddinput                       |  6 ++-
+ tests/ts/libfdisk/mkpart-full                 | 26 +++++------
+ tests/ts/misc/swaplabel                       |  4 +-
+ tests/ts/rename/exit_codes                    |  2 +-
+ 29 files changed, 154 insertions(+), 96 deletions(-)
+ create mode 100644 tests/helpers/test_strerror.c
+
+-- 
+2.23.0
+
