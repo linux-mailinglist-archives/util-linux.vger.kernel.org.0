@@ -2,14 +2,14 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id C62F7D2799
-	for <lists+util-linux@lfdr.de>; Thu, 10 Oct 2019 12:57:45 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 3BE78D279A
+	for <lists+util-linux@lfdr.de>; Thu, 10 Oct 2019 12:57:46 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726524AbfJJK5p (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        id S1727761AbfJJK5p (ORCPT <rfc822;lists+util-linux@lfdr.de>);
         Thu, 10 Oct 2019 06:57:45 -0400
 Received: from [162.242.144.135] ([162.242.144.135]:44220 "EHLO dockerbox"
         rhost-flags-FAIL-FAIL-OK-FAIL) by vger.kernel.org with ESMTP
-        id S1726237AbfJJK5o (ORCPT <rfc822;util-linux-ng@vger.kernel.org>);
+        id S1726237AbfJJK5o (ORCPT <rfc822;util-linux@vger.kernel.org>);
         Thu, 10 Oct 2019 06:57:44 -0400
 X-Greylist: delayed 46774 seconds by postgrey-1.27 at vger.kernel.org; Thu, 10 Oct 2019 06:57:44 EDT
 Received: from Shop01 (localhost [127.0.0.1])
