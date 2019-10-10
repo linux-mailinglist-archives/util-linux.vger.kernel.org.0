@@ -2,15 +2,16 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 4942A23CB7A
-	for <lists+util-linux@lfdr.de>; Wed,  5 Aug 2020 16:26:46 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id CC32423CB79
+	for <lists+util-linux@lfdr.de>; Wed,  5 Aug 2020 16:26:45 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1729715AbgHEO0E (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        id S1729714AbgHEO0E (ORCPT <rfc822;lists+util-linux@lfdr.de>);
         Wed, 5 Aug 2020 10:26:04 -0400
 Received: from lindbergh.monkeyblade.net ([23.128.96.19]:35462 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
         with ESMTP id S1727921AbgHEMfj (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Wed, 5 Aug 2020 08:35:39 -0400
+        <rfc822;util-linux-ng@vger.kernel.org>);
+        Wed, 5 Aug 2020 08:35:39 -0400
 Received: from dockerbox (unknown [IPv6:2001:4800:7817:101:be76:4eff:fe04:a215])
         by lindbergh.monkeyblade.net (Postfix) with ESMTP id 6B0ACC034611;
         Wed,  5 Aug 2020 05:21:55 -0700 (PDT)
