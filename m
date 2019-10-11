@@ -2,53 +2,63 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id B47AED3B29
-	for <lists+util-linux@lfdr.de>; Fri, 11 Oct 2019 10:31:13 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 41830D54D1
+	for <lists+util-linux@lfdr.de>; Sun, 13 Oct 2019 08:34:29 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726793AbfJKIbL (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Fri, 11 Oct 2019 04:31:11 -0400
-Received: from mx1.redhat.com ([209.132.183.28]:42544 "EHLO mx1.redhat.com"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1726755AbfJKIbL (ORCPT <rfc822;util-linux@vger.kernel.org>);
-        Fri, 11 Oct 2019 04:31:11 -0400
-Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.phx2.redhat.com [10.5.11.22])
-        (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
-        (No client certificate requested)
-        by mx1.redhat.com (Postfix) with ESMTPS id 73FF66B;
-        Fri, 11 Oct 2019 08:31:11 +0000 (UTC)
-Received: from 10.255.255.10 (unknown [10.40.205.32])
-        by smtp.corp.redhat.com (Postfix) with ESMTPS id B070510495C2;
-        Fri, 11 Oct 2019 08:31:10 +0000 (UTC)
-Date:   Fri, 11 Oct 2019 10:31:08 +0200
-From:   Karel Zak <kzak@redhat.com>
-To:     Masami Hiramatsu <mhiramat@kernel.org>
-Cc:     util-linux@vger.kernel.org
-Subject: Re: [BUGFIX PATCH] libmount: Add libselinux dependency to pkgconfig
- file
-Message-ID: <20191011083108.rg2zlzadhfwakmfo@10.255.255.10>
-References: <157077813529.32660.383807974560795120.stgit@devnote2>
+        id S1727974AbfJMGe2 (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Sun, 13 Oct 2019 02:34:28 -0400
+Received: from [206.81.8.171] ([206.81.8.171]:40414 "EHLO varon.localdomain"
+        rhost-flags-FAIL-FAIL-OK-FAIL) by vger.kernel.org with ESMTP
+        id S1727492AbfJMGe1 (ORCPT <rfc822;util-linux-ng@vger.kernel.org>);
+        Sun, 13 Oct 2019 02:34:27 -0400
+Received: from 127.0.0.1 (varon [127.0.0.1])
+        by varon.localdomain (Postfix) with SMTP id CCE365838CB;
+        Fri, 11 Oct 2019 10:22:46 +0000 (UTC)
+Received: from [48.113.113.253]
+        by 127.0.0.1 with SMTP;
+        Fri, 11 Oct 2019 15:18:50 +0500
+Message-ID: <4$fv5745---$25$61@cp7965nub3n>
+From:   "Mr Barrister Hans Erich" <dave@dbsoundfactory.com>
+Reply-To: "Mr Barrister Hans Erich" <dave@dbsoundfactory.com>
+To:     usjofel@flash.net
+Subject: RE:PERSONAL LETTER FROM MRS RASHIA AMIRA ??
+Date:   Fri, 11 Oct 19 15:18:50 GMT
+X-Mailer: eGroups Message Poster
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <157077813529.32660.383807974560795120.stgit@devnote2>
-X-Scanned-By: MIMEDefang 2.84 on 10.5.11.22
-X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16 (mx1.redhat.com [10.5.110.29]); Fri, 11 Oct 2019 08:31:11 +0000 (UTC)
+Content-Type: multipart/alternative;
+        boundary="_7D4.D0FC9E..5BD4FD0_"
+X-Priority: 3
+X-MSMail-Priority: Normal
 Sender: util-linux-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-On Fri, Oct 11, 2019 at 04:15:35PM +0900, Masami Hiramatsu wrote:
->  Makefile.am          |    6 ++++++
->  libmount/mount.pc.in |    2 +-
->  2 files changed, 7 insertions(+), 1 deletion(-)
 
-Oh, really good catch. It seems libselinux is missing there for years.
+--_7D4.D0FC9E..5BD4FD0_
+Content-Type: text/plain;
+Content-Transfer-Encoding: quoted-printable
 
-Applied, thanks.
+Greetings
 
-    Karel
+My name is Barrister Hans Erich.
 
--- 
- Karel Zak  <kzak@redhat.com>
- http://karelzak.blogspot.com
+I have a client who is interested to invest in your country, she is a well=
+ known politician in her country and deserve a lucrative investment partne=
+rship with you outside her country without any delay   Please can you mana=
+ge such investment please Kindly reply for further details.
+
+Your full nameS -----------
+
+
+Your urgent response will be appreciated
+
+Thank you and God bless you.
+
+Barrister Hans Erich
+
+Yours sincerely,
+Barrister Hans Erich
+
+--_7D4.D0FC9E..5BD4FD0_--
+
