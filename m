@@ -2,14 +2,14 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 41830D54D1
-	for <lists+util-linux@lfdr.de>; Sun, 13 Oct 2019 08:34:29 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id C5E66D54D2
+	for <lists+util-linux@lfdr.de>; Sun, 13 Oct 2019 08:34:31 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727974AbfJMGe2 (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Sun, 13 Oct 2019 02:34:28 -0400
+        id S1728080AbfJMGeb (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Sun, 13 Oct 2019 02:34:31 -0400
 Received: from [206.81.8.171] ([206.81.8.171]:40414 "EHLO varon.localdomain"
         rhost-flags-FAIL-FAIL-OK-FAIL) by vger.kernel.org with ESMTP
-        id S1727492AbfJMGe1 (ORCPT <rfc822;util-linux-ng@vger.kernel.org>);
+        id S1727492AbfJMGe1 (ORCPT <rfc822;util-linux@vger.kernel.org>);
         Sun, 13 Oct 2019 02:34:27 -0400
 Received: from 127.0.0.1 (varon [127.0.0.1])
         by varon.localdomain (Postfix) with SMTP id CCE365838CB;
