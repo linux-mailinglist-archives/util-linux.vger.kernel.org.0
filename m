@@ -2,14 +2,14 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 20B51DBF5A
+	by mail.lfdr.de (Postfix) with ESMTP id 8B1FADBF5B
 	for <lists+util-linux@lfdr.de>; Fri, 18 Oct 2019 10:05:22 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S2442136AbfJRIFV (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        id S2438539AbfJRIFV (ORCPT <rfc822;lists+util-linux@lfdr.de>);
         Fri, 18 Oct 2019 04:05:21 -0400
 Received: from zaovasilisa.ru ([88.200.194.99]:55299 "EHLO usrv.lan"
         rhost-flags-OK-FAIL-OK-FAIL) by vger.kernel.org with ESMTP
-        id S1727888AbfJRIFV (ORCPT <rfc822;util-linux-ng@vger.kernel.org>);
+        id S1727888AbfJRIFV (ORCPT <rfc822;util-linux@vger.kernel.org>);
         Fri, 18 Oct 2019 04:05:21 -0400
 X-Greylist: delayed 38501 seconds by postgrey-1.27 at vger.kernel.org; Fri, 18 Oct 2019 04:05:19 EDT
 Received: from 127.0.0.1 (localhost [127.0.0.1])
