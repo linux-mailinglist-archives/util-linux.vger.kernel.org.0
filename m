@@ -2,67 +2,73 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 18017D9305
-	for <lists+util-linux@lfdr.de>; Wed, 16 Oct 2019 15:52:25 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id BF658DA4D9
+	for <lists+util-linux@lfdr.de>; Thu, 17 Oct 2019 06:51:41 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S2405611AbfJPNwV (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Wed, 16 Oct 2019 09:52:21 -0400
-Received: from mail-il1-f195.google.com ([209.85.166.195]:41680 "EHLO
-        mail-il1-f195.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S2405603AbfJPNwU (ORCPT
-        <rfc822;util-linux-ng@vger.kernel.org>);
-        Wed, 16 Oct 2019 09:52:20 -0400
-Received: by mail-il1-f195.google.com with SMTP id z10so2656801ilo.8
-        for <util-linux-ng@vger.kernel.org>; Wed, 16 Oct 2019 06:52:20 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:reply-to:from:date:message-id:subject:to;
-        bh=Z2z/un3vtrbkCk12Wg65s07hqzysyTW0CQpuYgUb6+8=;
-        b=cTqQQ7LZGBmMPbf4n1jw3rkS90t/Z68dygHiy7Lwc6e+iFEyKzGrKLgK8mRVbGefP+
-         CwXqkS/Uv8mhgDlhPgLp4iecQ29Y246z/REmkWp/vhU3ymZlU3GEf+q/le025e5J5KEo
-         Ij3jwQM1ExLgoqscuTy7ecTyfeNPOtRiDYhHahU/BNWut33VMKLF+5vdOpukelq2x4qJ
-         97rTVoPSt7tNlZFtnNukW0KjWILkWC0s98GojDrUJZFkXj07SNGrU2aJ43Xqu+dpfALI
-         +hjyEnwBhAjXKM2xAJ5jR9gJkj6bv9HH9S0Hr3D/dpW7/Rgxzg9eBLXjFd0dOMuvIOvv
-         PIuA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
-         :subject:to;
-        bh=Z2z/un3vtrbkCk12Wg65s07hqzysyTW0CQpuYgUb6+8=;
-        b=dIYyFJm/8i82OHph21jkME1d7OPhEIPlNtDzVICeo7rLaAKGrq8U61H56VoUicVPg6
-         EhPVXNitfcHohX39V4Ly5vNBMie4VVNJ8puGFWR3DMcGm6t0k9+bBiIyXIMFoberMbrY
-         +3J7Zu5Im47nmu9c0X8FzWuP0jyLIaOncLrhU7xwKiKuQxOPrXBUrQAnwe1uwExiQV3o
-         7WgcwDMWqx8ZuNvZNaKqJAGODQV7IzkcO5BPTbPpyitmFs6A30R2w1KMGoTYfsOQ+beE
-         +22w4CcRsVeKpgxEC6h8jq7YM/Prc2FbQhts4IJXskSnGwqyEcoJvVzcBWnbDqpv7e4s
-         JdhQ==
-X-Gm-Message-State: APjAAAU/IXYUq07XzHU4uIG9uVybJpqhSF8G0lAh5IrR01+/dxpMZj4g
-        g3/lXeO46lDGc5eIVo9+Gp8OapoKQisRo7W4Gqo=
-X-Google-Smtp-Source: APXvYqxJYfyXoK4/SKzqOrx9fnJus7lHEuFDdXP1plU+yrCyxJfwULKb7KAYTpWqHaVxc7TzDSbgy5x3BFqRpjPfuz4=
-X-Received: by 2002:a92:8116:: with SMTP id e22mr12025779ild.2.1571233939743;
- Wed, 16 Oct 2019 06:52:19 -0700 (PDT)
+        id S1730718AbfJQEvk (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Thu, 17 Oct 2019 00:51:40 -0400
+Received: from smtp1.rz.tu-harburg.de ([134.28.205.38]:34474 "EHLO
+        smtp1.rz.tu-harburg.de" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1728755AbfJQEvk (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Thu, 17 Oct 2019 00:51:40 -0400
+X-Greylist: delayed 371 seconds by postgrey-1.27 at vger.kernel.org; Thu, 17 Oct 2019 00:51:39 EDT
+Received: from mail.tu-harburg.de (mail4.rz.tu-harburg.de [134.28.202.83])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        (Client CN "mail.tuhh.de", Issuer "DFN-Verein Global Issuing CA" (verified OK))
+        by smtp1.rz.tu-harburg.de (Postfix) with ESMTPS id 46txRp1nr1zxb1
+        for <util-linux@vger.kernel.org>; Thu, 17 Oct 2019 06:45:26 +0200 (CEST)
+Received: from mailspring.rz.tuhh.de (mailspring.rz.tuhh.de [134.28.202.181])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        (No client certificate requested)
+        (Authenticated sender: cmz7792@KERBEROS.TU-HARBURG.DE)
+        by mail.tu-harburg.de (Postfix) with ESMTPSA id 46txRp0DYfzJrC3;
+        Thu, 17 Oct 2019 06:45:25 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=tuhh.de; s=x2019-42;
+        t=1571287526; bh=H+NSxOMwbxN2d9w1viZ3K5t1oSbPRwq22dfENHI+lko=;
+        h=From:To:Cc:Subject:Date:Message-Id:MIME-Version:
+         Content-Transfer-Encoding;
+        b=fYTB4RJg293JNNMG0hQzSirBtjYndm3mgo4eaGcr8ADrSlC2dWvD7IPmPIy093ir9
+         3JmcSxD8x+ZjyoEvkUR3BiEU78s3MAQj2xsOs1dWy/TpNVvfx7kKPN8je+5KYR4C9s
+         qb6trKHEgRG6CMEnCuFS3VXKeIhNWDrwihPbzV+M=
+From:   =?UTF-8?q?Merlin=20B=C3=BCge?= <merlin.buege@tuhh.de>
+To:     util-linux@vger.kernel.org
+Cc:     =?UTF-8?q?Merlin=20B=C3=BCge?= <merlin.buege@tuhh.de>
+Subject: [PATCH] mount.8: small typo fixes
+Date:   Thu, 17 Oct 2019 06:45:22 +0200
+Message-Id: <20191017044522.130193-1-merlin.buege@tuhh.de>
+X-Mailer: git-send-email 2.23.0
 MIME-Version: 1.0
-Received: by 2002:a02:c72e:0:0:0:0:0 with HTTP; Wed, 16 Oct 2019 06:52:19
- -0700 (PDT)
-Reply-To: gencampbelljohnson13@gmail.com
-From:   Barrister Roy <barristerroy1@gmail.com>
-Date:   Wed, 16 Oct 2019 06:52:19 -0700
-Message-ID: <CALaxcrsis+5upxMzYLBMGOwa=NZi_Ku47D1AKaZz63G2RXjoYA@mail.gmail.com>
-Subject: I NEED YOUR URGENT RESPONSE,
-To:     undisclosed-recipients:;
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 Sender: util-linux-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-Compliment of the day to you. I am Gen.Johnson Campbell of US Army, I
-am sending this brief letter to solicit your partnership of Two
-Hundred and Sixty  Million United States Dollars ($260,000,000 USD). I
-shall send you more information and procedures when I receive positive
-response from you.
+---
+ sys-utils/mount.8 | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
-Best Regards,
+diff --git a/sys-utils/mount.8 b/sys-utils/mount.8
+index 0c55e1b43..7b3f87661 100644
+--- a/sys-utils/mount.8
++++ b/sys-utils/mount.8
+@@ -149,12 +149,12 @@ or UUID (see the \fB\-L\fR and \fB\-U\fR options below), or its partition label
+ or UUID.  Partition identifiers are supported for example for GUID Partition
+ Tables (GPT).
+ 
+-The device name of disk partitions are unstable; hardware reconfiguration,
+-adding or removing a device can cause change in names. This is reason why it's
+-strongly recommended to use filesystem or partition identificators like UUID or
++The device names of disk partitions are unstable; hardware reconfiguration,
++adding or removing a device can cause changes in names. This is the reason why it's
++strongly recommended to use filesystem or partition identifiers like UUID or
+ LABEL.
+ 
+-The command \fBlsblk --fs\fR provides overview of filesystems, LABELs and UUIDs
++The command \fBlsblk --fs\fR provides an overview of filesystems, LABELs and UUIDs
+ on available block devices.  The command \fBblkid -p <device>\fR provides details about
+ a filesystem on the specified device.
+ 
+-- 
+2.23.0
 
-CONTACT ME: gencampbelljohnson13@gmail.com
-
-Gen.Johnson Campbell
