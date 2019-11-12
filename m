@@ -2,54 +2,78 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 08DE7F7528
-	for <lists+util-linux@lfdr.de>; Mon, 11 Nov 2019 14:38:16 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 33176F8A78
+	for <lists+util-linux@lfdr.de>; Tue, 12 Nov 2019 09:27:44 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726843AbfKKNiO (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Mon, 11 Nov 2019 08:38:14 -0500
-Received: from static-dsl-170.87-197-152.telecom.sk ([87.197.152.170]:53784
-        "EHLO sldom.sldom" rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org
-        with ESMTP id S1726910AbfKKNiN (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Mon, 11 Nov 2019 08:38:13 -0500
-Received: from 127.0.0.1 (localhost [127.0.0.1])
-        by sldom.sldom (Postfix) with SMTP id 6F92A1D46C8;
-        Fri,  8 Nov 2019 11:12:05 +0100 (CET)
-Received: from (HELO wqmei) [79.178.73.150] by 127.0.0.1 with SMTP; Fri, 08 Nov 2019 05:05:17 -0500
-Message-ID: <68r1$pbu-2--mckg$-5$7-g60fud-3a@v7c.qqt7.26e>
-From:   "Simon Oliver" <olivia_simon@lihat.dds-akaun.com>
-Reply-To: "Simon Oliver" <olivia_simon@lihat.dds-akaun.com>
-To:     sales@shapirowholesale.com
-Subject: Seeking Investment Opportunities
-Date:   Fri, 08 Nov 19 05:05:17 GMT
-X-Mailer: Microsoft Outlook Express 6.00.2462.0000
+        id S1725781AbfKLI1n (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Tue, 12 Nov 2019 03:27:43 -0500
+Received: from mail-ed1-f65.google.com ([209.85.208.65]:33505 "EHLO
+        mail-ed1-f65.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1725775AbfKLI1n (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Tue, 12 Nov 2019 03:27:43 -0500
+Received: by mail-ed1-f65.google.com with SMTP id a24so10540915edt.0
+        for <util-linux@vger.kernel.org>; Tue, 12 Nov 2019 00:27:40 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc:content-transfer-encoding;
+        bh=i2/zelHFWZr+5tP2ULiXq2wWcLOSXV+53f7tNiYKqE8=;
+        b=BlSPNV8WfbppZ0rBRow6GePP9jyTfQ9P4AgVDhUIsvEn7+3N0UD+VKZnZxSbOyQCmb
+         4AZoY28eG9fFJhJgfi0gVKfcDywPDafSjjpyUKmREWzBWY4yQSKB2nOgTxn3rc8fXrEc
+         Js/s52cXVmc2tjsmZ70rtPrNie1+1yuwF3CHbkJPcL65ZcmRGHuYmhiHEs3QcKoyrv5I
+         XH5pljMxGuM3yF93bt2TF4iID7eemk1BDBd0QRigqEkvM/D3Twbgk2LFUCMTeeBPSgJJ
+         zo29vk6W9l1oOy5I156x54NBAUyqebClR5EShA3jN4xw6Thz7otLlTFimsFHC1eDbCL5
+         ZuvA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc:content-transfer-encoding;
+        bh=i2/zelHFWZr+5tP2ULiXq2wWcLOSXV+53f7tNiYKqE8=;
+        b=hU+rR8w9Mw7tLknXvV1rYoIv1BoukmmEEk1ug30Asf3K587EhYugPlxEkJavGz9YKK
+         xUZ2fYGo2gVsXU0NnsCLYcDHGuNGHeHbBCNBEZW8/nCsFNbZY3yP0td9/S8wGTm9pmZK
+         I1xZ2ef+d0imKro8mUuM5d7k1GqEMzbu6DGJTVPRyU23hoq6xJBRajG/ks3cbWY8EThD
+         kAdU3Lh6Pzu7l/qiA2Xk8l6r4vt0pnMPthmhb8H+SxMY2KuBJssGHiIQdsk8gLbHzC8X
+         8jnX7x3EhEn9ba7Nq3aGOed4X7An9pcIk1eg+0h31Y0SFsuRdmD2Bh+vf92hZSNN7mrj
+         oZEQ==
+X-Gm-Message-State: APjAAAVbdjOoqpF4i31oYg7GS/nVnPNfPW1u1mL4SwfYhechBJcF3txs
+        VEnen1hRizUdj9f9O6TeaPLLlQScGjwOa28GJuqDYfZ8hys=
+X-Google-Smtp-Source: APXvYqxZR1LyMD9v+bxmiJmS1GZK3GC1J29hgWeq+CWqOqs+8L2ZLwzuQKUlEbdkxw0QM/rdjKXNkcKgczghgcF9KNc=
+X-Received: by 2002:aa7:c94b:: with SMTP id h11mr31593372edt.252.1573547259275;
+ Tue, 12 Nov 2019 00:27:39 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: multipart/alternative;
-        boundary="B55DC02_9CEF"
-X-Priority: 3
-X-MSMail-Priority: Normal
+References: <20191104202315.4879-1-msuchanek@suse.de> <20191105114122.o3cjzfnoy3hp2rbm@10.255.255.10>
+ <20191105171357.GV1384@kitsune.suse.cz> <20191106080256.GA19254@kitsune.suse.cz>
+ <20191106084833.nx3agnj36brw7i42@10.255.255.10>
+In-Reply-To: <20191106084833.nx3agnj36brw7i42@10.255.255.10>
+From:   Anatoly Pugachev <matorola@gmail.com>
+Date:   Tue, 12 Nov 2019 11:27:28 +0300
+Message-ID: <CADxRZqxToUUgwR4DqEnS84TBQ7y8hy+s0fBoZYn3_Q-Zit1Ktg@mail.gmail.com>
+Subject: Re: [PATCH] blkid: open device in nonblock mode.
+To:     Karel Zak <kzak@redhat.com>
+Cc:     =?UTF-8?Q?Michal_Such=C3=A1nek?= <msuchanek@suse.de>,
+        util-linux <util-linux@vger.kernel.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 Sender: util-linux-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
+On Wed, Nov 6, 2019 at 11:52 AM Karel Zak <kzak@redhat.com> wrote:
+>> On Wed, Nov 06, 2019 at 09:02:56AM +0100, Michal Such=C3=A1nek wrote:
+> > > First off you need to explain it to all authors of all random scripts
+> > > out there.
+>
+> That's what I'm doing for years :)
 
---B55DC02_9CEF
-Content-Type: text/plain;
-Content-Transfer-Encoding: quoted-printable
+considering lsblk / findmnt , how they are supposed to replace blkid
+in the following example (taken from os-prober):
 
-I consider it very important to introduce to you my client who is interest=
-ed to invest $250 million to $500 million dollars in a reputable project  =
-investment, She is well known in her country holding a political office .
+                output=3D"$(blkid -o device -t LABEL=3D"$1")" || return 1
 
-She deserve a secret investment outside her country without direct involve=
-ment.  she needs an experience individual or company that can profitably i=
-nvestment and manage the above funds for the period of 15 years or more.
+i wasn't able to find lsblk alternative to match things (label, uuid,
+partition, whatever) - maybe i just don't carefully read manual page
+for it ? Of course it is possible to use grep in pipe after lsblk, but
+anyway.
 
-Forward your details to me for further discussion (e.g)  Your name, Teleph=
-one number and Occupation.
-
-Thank you
-Oliver Simon
-
---B55DC02_9CEF--
-
+Thanks.
