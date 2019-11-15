@@ -2,90 +2,86 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id EBC1FF8B2D
-	for <lists+util-linux@lfdr.de>; Tue, 12 Nov 2019 09:58:38 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id D8413FE26C
+	for <lists+util-linux@lfdr.de>; Fri, 15 Nov 2019 17:13:20 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727001AbfKLI6i (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Tue, 12 Nov 2019 03:58:38 -0500
-Received: from us-smtp-2.mimecast.com ([207.211.31.81]:30855 "EHLO
-        us-smtp-delivery-1.mimecast.com" rhost-flags-OK-OK-OK-FAIL)
-        by vger.kernel.org with ESMTP id S1725954AbfKLI6i (ORCPT
-        <rfc822;util-linux@vger.kernel.org>);
-        Tue, 12 Nov 2019 03:58:38 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-        s=mimecast20190719; t=1573549117;
-        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-         content-transfer-encoding:content-transfer-encoding:
-         in-reply-to:in-reply-to:references:references;
-        bh=WHR7ditSBtm9d/0uwm7yItEUWm2fno3nmpPBQXTLY+M=;
-        b=dt2ixLJJbUr1PQcuILmvVXV5mqLfJCuqlyEK8t8dD90J17Ps+K6W5y0qJyraOVKpvW2XBk
-        /pEshP0yYHn9exjjP4AOC6pQexKvwcS+p578MYTn4k6CFwNflWJIdhd4juLfplfHGdN+tx
-        vQDTsvpXNyWfvHyhrTKYPh4RPiNt4Ls=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-277-2mMxhZ8APF29GQ78bBgbfg-1; Tue, 12 Nov 2019 03:58:34 -0500
-Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com [10.5.11.12])
-        (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
-        (No client certificate requested)
-        by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 137998C699F;
-        Tue, 12 Nov 2019 08:58:33 +0000 (UTC)
-Received: from 10.255.255.10 (unknown [10.40.205.89])
-        by smtp.corp.redhat.com (Postfix) with ESMTPS id 252D89F5C;
-        Tue, 12 Nov 2019 08:58:31 +0000 (UTC)
-Date:   Tue, 12 Nov 2019 09:58:29 +0100
-From:   Karel Zak <kzak@redhat.com>
-To:     Anatoly Pugachev <matorola@gmail.com>
-Cc:     Michal =?utf-8?B?U3VjaMOhbmVr?= <msuchanek@suse.de>,
-        util-linux <util-linux@vger.kernel.org>
-Subject: Re: [PATCH] blkid: open device in nonblock mode.
-Message-ID: <20191112085829.jsgr3guy2tc7sudo@10.255.255.10>
-References: <20191104202315.4879-1-msuchanek@suse.de>
- <20191105114122.o3cjzfnoy3hp2rbm@10.255.255.10>
- <20191105171357.GV1384@kitsune.suse.cz>
- <20191106080256.GA19254@kitsune.suse.cz>
- <20191106084833.nx3agnj36brw7i42@10.255.255.10>
- <CADxRZqxToUUgwR4DqEnS84TBQ7y8hy+s0fBoZYn3_Q-Zit1Ktg@mail.gmail.com>
+        id S1727564AbfKOQNT (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Fri, 15 Nov 2019 11:13:19 -0500
+Received: from mail-ed1-f66.google.com ([209.85.208.66]:38915 "EHLO
+        mail-ed1-f66.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1727540AbfKOQNT (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Fri, 15 Nov 2019 11:13:19 -0500
+Received: by mail-ed1-f66.google.com with SMTP id l25so7753154edt.6
+        for <util-linux@vger.kernel.org>; Fri, 15 Nov 2019 08:13:18 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=mime-version:reply-to:from:date:message-id:subject:to;
+        bh=y2ARf6pJxGhgpmPLlFvjzE8ZMjA3hEhatIYkvEw5wII=;
+        b=TwW1RxY1PoKFswQpQRSaItjhjq4No/FOpQvwuYxjrjXqT/OZgyYB9RPP0TE9QGrlV7
+         D1+Lwx7Ioj0YWsa7fJ18LbesV/g4DJdCsFLW78tPBTRmWYZYhcADi7IVqctX/p4ExKoz
+         zOSmIrwWAatOlJBqOc21o1c+IgUi+kpjto/6OqBm/aIO9gl3qhL2XeqwC4Ni2H2sa1Nk
+         I5aOsw9zPa9HE0jC9KOrtXS5mctJ+Hy9+13kAumIyCIVrgm+5w9kMyWm1BJVJz3rbVM3
+         vMY5Ui5aHmOO6iVTWLb/7D0VlvJrfR5DKNdlXeAJL18YOD2xzt+cwVtA1BUWdFSSuRVj
+         kvfQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
+         :subject:to;
+        bh=y2ARf6pJxGhgpmPLlFvjzE8ZMjA3hEhatIYkvEw5wII=;
+        b=Q107NSMURY/fPY/KIT5nqqOhevobbeNVTMniAQ43+fB/mZsriNWJy4IqIbkt0hJGZW
+         RjpHS0W+fv0DCVgLRejidGeCYFFjROnbyNwCmxJ1mk1E9mxvG4kyypG/QqSbXvB3rdFu
+         mxDa7UvBxFaGzIfyucD8foFSuD/nR2ey1mMhPitKpK8dsw2zAAQw/Uqy3LhZozTIyT1n
+         B4chhyHg+AGUvc2j85FaMj/PtvIdRufYYf3lprkTNcwZpQnTyYm+r74WH51f4wrK8n7B
+         aGTTUKc29t8Qe03IjhsOOv04MEpN5cN3ZKJxdtEAJD491Uk9Ix8fitHI++gHINXVRyow
+         w0fg==
+X-Gm-Message-State: APjAAAV7sUosV/ViaknGxPgRI/EtJUB4JbYIhPAs+V0y30xzhEfuXL3m
+        q5E1c/QiTV29cQM8GixcNGfrUwy8110kvYI+YhM=
+X-Google-Smtp-Source: APXvYqwts6hz1M2+Mn3bxnV/9jR32Y7GJoHkbUbtg/U6NZD4j3cQVdNEuYlxJANyle6eJ1kZyNb5xXNce5BjpWYuX3w=
+X-Received: by 2002:a17:906:c801:: with SMTP id cx1mr1975666ejb.266.1573834397455;
+ Fri, 15 Nov 2019 08:13:17 -0800 (PST)
 MIME-Version: 1.0
-In-Reply-To: <CADxRZqxToUUgwR4DqEnS84TBQ7y8hy+s0fBoZYn3_Q-Zit1Ktg@mail.gmail.com>
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.12
-X-MC-Unique: 2mMxhZ8APF29GQ78bBgbfg-1
-X-Mimecast-Spam-Score: 0
-Content-Type: text/plain; charset=WINDOWS-1252
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
+Received: by 2002:a17:906:b84f:0:0:0:0 with HTTP; Fri, 15 Nov 2019 08:13:16
+ -0800 (PST)
+Reply-To: moneygram.1820@outlook.fr
+From:   "Ms.Mary Coster" <currency1000000@gmail.com>
+Date:   Fri, 15 Nov 2019 17:13:16 +0100
+Message-ID: <CAPqfnSE8GyNaM0qc0HjDwQ=LydEr8gaPbaMju09J9XS_dQTnoQ@mail.gmail.com>
+Subject: Contact Mr. John Dave Director, Money Gram to pick up your first
+ Money Gram payment $5000.00 today.
+To:     undisclosed-recipients:;
+Content-Type: text/plain; charset="UTF-8"
 Sender: util-linux-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-On Tue, Nov 12, 2019 at 11:27:28AM +0300, Anatoly Pugachev wrote:
-> On Wed, Nov 6, 2019 at 11:52 AM Karel Zak <kzak@redhat.com> wrote:
-> >> On Wed, Nov 06, 2019 at 09:02:56AM +0100, Michal Such=E1nek wrote:
-> > > > First off you need to explain it to all authors of all random scrip=
-ts
-> > > > out there.
-> >
-> > That's what I'm doing for years :)
->=20
-> considering lsblk / findmnt , how they are supposed to replace blkid
-> in the following example (taken from os-prober):
->=20
->                 output=3D"$(blkid -o device -t LABEL=3D"$1")" || return 1
->=20
-> i wasn't able to find lsblk alternative to match things (label, uuid,
-> partition, whatever) - maybe i just don't carefully read manual page
-> for it ? Of course it is possible to use grep in pipe after lsblk, but
-> anyway.
+Attn, Dear
+Goodnews, I have sent you $5000.00 this morning by Money Gram out of
+your payment funds total amount US$4.8million Dollars.
+Contact Mr. John Dave Director, Money Gram International
+Remittance-Benin to give you the pick up information for your first
+payment transfer $5000.00 today.
+Contact Person; Mr. John Dave Director, Money Gram
+Email; moneygram.1820@outlook.fr
+Telephone; +229 62619517
 
-Yes, it's UN*X :-) ... grep or so
+Please re-confirm your address to him once again such as listed below.
+Your Full Name____________
+Address___________
+Country____________
+Sex____________
+Occupation_____________
+Copy of your ID_____________
 
-    lsblk -rpo LABEL,NAME | awk '/'$1'/ { print $2 }'
+This is to avoid sending your funds to wrong person.
+He is waiting to hear from you urgent today.
+Let me know once you pick up your transfer $5000.00 today.
+Finally, Note I have paid for the service fees, but only money will
+send to him is $90.00 transfer fee before you can pick up the transfer
+today.
+Ask, Mr. John Dave Director, Money Gram to give you direction where to
+send the fee to Him Immediately today.
 
-
- Karel
-
---=20
- Karel Zak  <kzak@redhat.com>
- http://karelzak.blogspot.com
-
+Thanks for undrstanding.
+Mary Coster
+m.coster@aol.com
