@@ -2,56 +2,89 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 8321510CD4C
-	for <lists+util-linux@lfdr.de>; Thu, 28 Nov 2019 17:54:15 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 3545910E325
+	for <lists+util-linux@lfdr.de>; Sun,  1 Dec 2019 19:31:55 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726556AbfK1QyO (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Thu, 28 Nov 2019 11:54:14 -0500
-Received: from mail-lf1-f68.google.com ([209.85.167.68]:37212 "EHLO
-        mail-lf1-f68.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726510AbfK1QyO (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Thu, 28 Nov 2019 11:54:14 -0500
-Received: by mail-lf1-f68.google.com with SMTP id b20so20522991lfp.4
-        for <util-linux@vger.kernel.org>; Thu, 28 Nov 2019 08:54:12 -0800 (PST)
+        id S1727231AbfLASby (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Sun, 1 Dec 2019 13:31:54 -0500
+Received: from mtax.cdmx.gob.mx ([187.141.35.197]:8986 "EHLO mtax.cdmx.gob.mx"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S1726965AbfLASby (ORCPT <rfc822;util-linux@vger.kernel.org>);
+        Sun, 1 Dec 2019 13:31:54 -0500
+X-Greylist: delayed 7143 seconds by postgrey-1.27 at vger.kernel.org; Sun, 01 Dec 2019 13:31:53 EST
+X-NAI-Header: Modified by McAfee Email Gateway (4500)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:reply-to:from:date:message-id:subject:to;
-        bh=gRnXbNwtLGZ9opPxG/Uunfl3jLH4FvSqldToWfRkwIE=;
-        b=Vk2ImE3uvBG5pDGtwmi1P8xDWQwKmDyZ+3CzbgxACdKHGtWTGoV0ncdKObkSUyyZgG
-         WpYK1HDw4O8cwM5+/ruQqbEzkWYG1Z576xmvzWmdZjIzytfQ5488thyvlOMZ6rJ+gslj
-         DLeb8+Mx92S1qvmhbWVfdleL06WD6RM495FlZGv7Rrbv1crbBxx3Jg4ryEWS1EyncmPi
-         wP9tEL+mpFXT98AM9g7qp/x/T34n13+0AeGXDlCypy/kXvxmQtk21Y9CGWF/P9vGShbm
-         695QBdAMOW9F1aZfIoxprP1zXBnkVRQY5f7X5jcOBWejpwNycVnOUIgVu4ucmQsB2jZQ
-         kAZw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
-         :subject:to;
-        bh=gRnXbNwtLGZ9opPxG/Uunfl3jLH4FvSqldToWfRkwIE=;
-        b=dt5/hLl4bzmi4Fz365sRFPRfn4yyhXi1cKN9kSAbpL+I97Jmc1xgG/VhGbULXgNQXA
-         Cw3idujlwUlnHINSDsH7XmHDGNOWeR3zjCi7jRsjJfJnMeUcxBp5CFF7JQPxfLRuDtaN
-         3Nwuossbq30T//PiAD7w39C7gMhBIrXaVVOnLboN8QfsyAvhroBrF4Posc7QS7DYcEmd
-         TKT/vaG8nFasWW0zyOl/wIHG/BlgfbNEELAheT9U0Vvn5+Yq3D/iF9P3I9BojWkjR/MG
-         DydStcTjZckwPVAN8preKmFVzk8nJiuvB0uH9guZ0EqHNBInIwqO1whGLGPp38uafUoW
-         87Fg==
-X-Gm-Message-State: APjAAAUd7u8joxtSG2v0jEPYBXtFO9pHbaAqS+Iio6EofpulaMI/5pgO
-        ILuwnoC7Dnf5WUXOUCG689ZBkdS7zSqYWhoHumM=
-X-Google-Smtp-Source: APXvYqyMoBN2F0GjHIZMxLHuI4rAjpsWHi7eeOjB+OfAA0eZFsh/5Rq4IPrNttpHoyBBy8KmrApHUA4XN3PgSixReDk=
-X-Received: by 2002:ac2:4945:: with SMTP id o5mr32065557lfi.93.1574960052007;
- Thu, 28 Nov 2019 08:54:12 -0800 (PST)
+        d=cdmx.gob.mx; s=72359050-3965-11E6-920A-0192F7A2F08E;
+        t=1575217659; h=DKIM-Filter:X-Virus-Scanned:
+         Content-Type:MIME-Version:Content-Transfer-Encoding:
+         Content-Description:Subject:To:From:Date:Message-Id:
+         X-AnalysisOut:X-AnalysisOut:X-AnalysisOut:
+         X-AnalysisOut:X-AnalysisOut:X-SAAS-TrackingID:
+         X-NAI-Spam-Flag:X-NAI-Spam-Threshold:X-NAI-Spam-Score:
+         X-NAI-Spam-Rules:X-NAI-Spam-Version; bh=M
+        8rWdUYQ57RAYAgTWJQ4Rsch0kO0UXllaAVDzocOs4
+        8=; b=kV2b/YEs1GYsVsdosPoJFgeA5UrNL8hCh9akH/CC1YCY
+        efNnjexar9W85RMBIygvrNyGLlTYUXSa0bLXHT1iDn45f2hHCf
+        OEddV+4zmG5zH7O+AqjfUoJdnLZSKlEsS3ed/5pP4LTc6QrDF1
+        1vrHpbxpH2FVBUnUevyxCRe5rv4=
+Received: from cdmx.gob.mx (correo.cdmx.gob.mx [10.250.108.150]) by mtax.cdmx.gob.mx with smtp
+        (TLS: TLSv1/SSLv3,256bits,ECDHE-RSA-AES256-GCM-SHA384)
+         id 217f_659f_04d9777f_a56a_482f_9336_b07b047773e0;
+        Sun, 01 Dec 2019 10:27:38 -0600
+Received: from localhost (localhost [127.0.0.1])
+        by cdmx.gob.mx (Postfix) with ESMTP id 470871E2F68;
+        Sun,  1 Dec 2019 10:18:53 -0600 (CST)
+Received: from cdmx.gob.mx ([127.0.0.1])
+        by localhost (cdmx.gob.mx [127.0.0.1]) (amavisd-new, port 10032)
+        with ESMTP id kr9YZydShjoJ; Sun,  1 Dec 2019 10:18:53 -0600 (CST)
+Received: from localhost (localhost [127.0.0.1])
+        by cdmx.gob.mx (Postfix) with ESMTP id 7EC3F1E3048;
+        Sun,  1 Dec 2019 10:14:22 -0600 (CST)
+DKIM-Filter: OpenDKIM Filter v2.9.2 cdmx.gob.mx 7EC3F1E3048
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cdmx.gob.mx;
+        s=72359050-3965-11E6-920A-0192F7A2F08E; t=1575216862;
+        bh=M8rWdUYQ57RAYAgTWJQ4Rsch0kO0UXllaAVDzocOs48=;
+        h=Content-Type:MIME-Version:Content-Transfer-Encoding:Subject:To:
+         From:Date:Message-Id;
+        b=ucesHEewUIhm17PS1bpjfGCUEFsARP8Di7xlmV/e7DDFnsIaKaJbrCi1lREH3/QFa
+         1FvMakIOcBRRy6hwba2XZSSK7sGc3ELBtnwJziIfrYD3cbEePXoT9i1QIIooZLf8Nh
+         3hfPS3bBEtUk7NJcSDybcSBmHSAla81K2XU8n3Ts=
+X-Virus-Scanned: amavisd-new at cdmx.gob.mx
+Received: from cdmx.gob.mx ([127.0.0.1])
+        by localhost (cdmx.gob.mx [127.0.0.1]) (amavisd-new, port 10026)
+        with ESMTP id 8ofEaMGmZyio; Sun,  1 Dec 2019 10:14:22 -0600 (CST)
+Received: from [192.168.0.104] (unknown [188.125.168.160])
+        by cdmx.gob.mx (Postfix) with ESMTPSA id 55ACA1E32B1;
+        Sun,  1 Dec 2019 10:05:50 -0600 (CST)
+Content-Type: text/plain; charset="iso-8859-1"
 MIME-Version: 1.0
-Received: by 2002:ab3:1606:0:0:0:0:0 with HTTP; Thu, 28 Nov 2019 08:54:11
- -0800 (PST)
-Reply-To: sgt.hester33@gmail.com
-From:   Ann Hester <onyekachi612@gmail.com>
-Date:   Thu, 28 Nov 2019 16:54:11 +0000
-Message-ID: <CAL9XvenpacFrG7tf2dUMe3PpRRiAZrPK=8=MR48LRVdT=GmTzA@mail.gmail.com>
-Subject: Hi
-To:     undisclosed-recipients:;
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Content-Description: Mail message body
+Subject: Congratulations
+To:     Recipients <aac-styfe@cdmx.gob.mx>
+From:   "Bishop Johnr" <aac-styfe@cdmx.gob.mx>
+Date:   Sun, 01 Dec 2019 17:05:42 +0100
+Message-Id: <20191201160551.55ACA1E32B1@cdmx.gob.mx>
+X-AnalysisOut: [v=2.2 cv=a6RAzQaF c=1 sm=1 tr=0 p=6K-Ig8iNAUou4E5wYCEA:9 p]
+X-AnalysisOut: [=zRI05YRXt28A:10 a=T6zFoIZ12MK39YzkfxrL7A==:117 a=9152RP8M]
+X-AnalysisOut: [6GQqDhC/mI/QXQ==:17 a=8nJEP1OIZ-IA:10 a=pxVhFHJ0LMsA:10 a=]
+X-AnalysisOut: [pGLkceISAAAA:8 a=wPNLvfGTeEIA:10 a=M8O0W8wq6qAA:10 a=Ygvjr]
+X-AnalysisOut: [iKHvHXA2FhpO6d-:22]
+X-SAAS-TrackingID: 9f9e3ed5.0.105166409.00-2374.176789967.s12p02m014.mxlogic.net
+X-NAI-Spam-Flag: NO
+X-NAI-Spam-Threshold: 3
+X-NAI-Spam-Score: -5000
+X-NAI-Spam-Rules: 1 Rules triggered
+        WHITELISTED=-5000
+X-NAI-Spam-Version: 2.3.0.9418 : core <6686> : inlines <7165> : streams
+ <1840193> : uri <2949750>
 Sender: util-linux-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-How are you? did you receive my mail? please reply me.
+Money was donated to you by Mr and Mrs Allen and Violet Large, just contact=
+ them with this email for more information =
+
+
+EMail: allenandvioletlargeaward@gmail.com
