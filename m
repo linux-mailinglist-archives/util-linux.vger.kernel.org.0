@@ -2,89 +2,65 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 3545910E325
-	for <lists+util-linux@lfdr.de>; Sun,  1 Dec 2019 19:31:55 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 5331A110084
+	for <lists+util-linux@lfdr.de>; Tue,  3 Dec 2019 15:43:44 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727231AbfLASby (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Sun, 1 Dec 2019 13:31:54 -0500
-Received: from mtax.cdmx.gob.mx ([187.141.35.197]:8986 "EHLO mtax.cdmx.gob.mx"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1726965AbfLASby (ORCPT <rfc822;util-linux@vger.kernel.org>);
-        Sun, 1 Dec 2019 13:31:54 -0500
-X-Greylist: delayed 7143 seconds by postgrey-1.27 at vger.kernel.org; Sun, 01 Dec 2019 13:31:53 EST
-X-NAI-Header: Modified by McAfee Email Gateway (4500)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cdmx.gob.mx; s=72359050-3965-11E6-920A-0192F7A2F08E;
-        t=1575217659; h=DKIM-Filter:X-Virus-Scanned:
-         Content-Type:MIME-Version:Content-Transfer-Encoding:
-         Content-Description:Subject:To:From:Date:Message-Id:
-         X-AnalysisOut:X-AnalysisOut:X-AnalysisOut:
-         X-AnalysisOut:X-AnalysisOut:X-SAAS-TrackingID:
-         X-NAI-Spam-Flag:X-NAI-Spam-Threshold:X-NAI-Spam-Score:
-         X-NAI-Spam-Rules:X-NAI-Spam-Version; bh=M
-        8rWdUYQ57RAYAgTWJQ4Rsch0kO0UXllaAVDzocOs4
-        8=; b=kV2b/YEs1GYsVsdosPoJFgeA5UrNL8hCh9akH/CC1YCY
-        efNnjexar9W85RMBIygvrNyGLlTYUXSa0bLXHT1iDn45f2hHCf
-        OEddV+4zmG5zH7O+AqjfUoJdnLZSKlEsS3ed/5pP4LTc6QrDF1
-        1vrHpbxpH2FVBUnUevyxCRe5rv4=
-Received: from cdmx.gob.mx (correo.cdmx.gob.mx [10.250.108.150]) by mtax.cdmx.gob.mx with smtp
-        (TLS: TLSv1/SSLv3,256bits,ECDHE-RSA-AES256-GCM-SHA384)
-         id 217f_659f_04d9777f_a56a_482f_9336_b07b047773e0;
-        Sun, 01 Dec 2019 10:27:38 -0600
-Received: from localhost (localhost [127.0.0.1])
-        by cdmx.gob.mx (Postfix) with ESMTP id 470871E2F68;
-        Sun,  1 Dec 2019 10:18:53 -0600 (CST)
-Received: from cdmx.gob.mx ([127.0.0.1])
-        by localhost (cdmx.gob.mx [127.0.0.1]) (amavisd-new, port 10032)
-        with ESMTP id kr9YZydShjoJ; Sun,  1 Dec 2019 10:18:53 -0600 (CST)
-Received: from localhost (localhost [127.0.0.1])
-        by cdmx.gob.mx (Postfix) with ESMTP id 7EC3F1E3048;
-        Sun,  1 Dec 2019 10:14:22 -0600 (CST)
-DKIM-Filter: OpenDKIM Filter v2.9.2 cdmx.gob.mx 7EC3F1E3048
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cdmx.gob.mx;
-        s=72359050-3965-11E6-920A-0192F7A2F08E; t=1575216862;
-        bh=M8rWdUYQ57RAYAgTWJQ4Rsch0kO0UXllaAVDzocOs48=;
-        h=Content-Type:MIME-Version:Content-Transfer-Encoding:Subject:To:
-         From:Date:Message-Id;
-        b=ucesHEewUIhm17PS1bpjfGCUEFsARP8Di7xlmV/e7DDFnsIaKaJbrCi1lREH3/QFa
-         1FvMakIOcBRRy6hwba2XZSSK7sGc3ELBtnwJziIfrYD3cbEePXoT9i1QIIooZLf8Nh
-         3hfPS3bBEtUk7NJcSDybcSBmHSAla81K2XU8n3Ts=
-X-Virus-Scanned: amavisd-new at cdmx.gob.mx
-Received: from cdmx.gob.mx ([127.0.0.1])
-        by localhost (cdmx.gob.mx [127.0.0.1]) (amavisd-new, port 10026)
-        with ESMTP id 8ofEaMGmZyio; Sun,  1 Dec 2019 10:14:22 -0600 (CST)
-Received: from [192.168.0.104] (unknown [188.125.168.160])
-        by cdmx.gob.mx (Postfix) with ESMTPSA id 55ACA1E32B1;
-        Sun,  1 Dec 2019 10:05:50 -0600 (CST)
-Content-Type: text/plain; charset="iso-8859-1"
+        id S1725957AbfLCOnn (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Tue, 3 Dec 2019 09:43:43 -0500
+Received: from us-smtp-1.mimecast.com ([207.211.31.81]:49131 "EHLO
+        us-smtp-delivery-1.mimecast.com" rhost-flags-OK-OK-OK-FAIL)
+        by vger.kernel.org with ESMTP id S1725848AbfLCOnn (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Tue, 3 Dec 2019 09:43:43 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+        s=mimecast20190719; t=1575384222;
+        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+         to:to:cc:mime-version:mime-version:content-type:content-type:
+         content-transfer-encoding:content-transfer-encoding:
+         in-reply-to:in-reply-to:references:references;
+        bh=7baFx2I6V55uRM1PNfta1rV4JUUSL0lQIGkLC2HlePM=;
+        b=KvEoTmStmYOQs2vWYCUvcYwlyHdAlVnA219KUvPnGs8O/4Xp0wLceHsy3C+sk6N34J41u4
+        OQLStkQTQQs7sbmpISZZNWSxThtbVZlcXEIdjRCMK5aMZiVwNLtsMXp6WdI4BvuNnVWls0
+        zhXQgpd0YKSAsxXTllwk/htc94fLU2c=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-55-QjhVdht_NnyN9y9IYB5iPQ-1; Tue, 03 Dec 2019 09:43:40 -0500
+Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.phx2.redhat.com [10.5.11.13])
+        (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+        (No client certificate requested)
+        by mimecast-mx01.redhat.com (Postfix) with ESMTPS id F2B4118C35AC
+        for <util-linux@vger.kernel.org>; Tue,  3 Dec 2019 14:43:39 +0000 (UTC)
+Received: from 10.255.255.10 (ovpn-205-135.brq.redhat.com [10.40.205.135])
+        by smtp.corp.redhat.com (Postfix) with ESMTPS id 69EEA67E5D
+        for <util-linux@vger.kernel.org>; Tue,  3 Dec 2019 14:43:39 +0000 (UTC)
+Date:   Tue, 3 Dec 2019 15:43:36 +0100
+From:   Karel Zak <kzak@redhat.com>
+To:     util-linux@vger.kernel.org
+Subject: Re: [HEADS-UP]: mount(8) non-root user mount changes
+Message-ID: <20191203144336.mwbg5e77epv5buen@10.255.255.10>
+References: <20191119143408.b6pcbhtsiubxdcob@10.255.255.10>
 MIME-Version: 1.0
+In-Reply-To: <20191119143408.b6pcbhtsiubxdcob@10.255.255.10>
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.13
+X-MC-Unique: QjhVdht_NnyN9y9IYB5iPQ-1
+X-Mimecast-Spam-Score: 0
+Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: quoted-printable
-Content-Description: Mail message body
-Subject: Congratulations
-To:     Recipients <aac-styfe@cdmx.gob.mx>
-From:   "Bishop Johnr" <aac-styfe@cdmx.gob.mx>
-Date:   Sun, 01 Dec 2019 17:05:42 +0100
-Message-Id: <20191201160551.55ACA1E32B1@cdmx.gob.mx>
-X-AnalysisOut: [v=2.2 cv=a6RAzQaF c=1 sm=1 tr=0 p=6K-Ig8iNAUou4E5wYCEA:9 p]
-X-AnalysisOut: [=zRI05YRXt28A:10 a=T6zFoIZ12MK39YzkfxrL7A==:117 a=9152RP8M]
-X-AnalysisOut: [6GQqDhC/mI/QXQ==:17 a=8nJEP1OIZ-IA:10 a=pxVhFHJ0LMsA:10 a=]
-X-AnalysisOut: [pGLkceISAAAA:8 a=wPNLvfGTeEIA:10 a=M8O0W8wq6qAA:10 a=Ygvjr]
-X-AnalysisOut: [iKHvHXA2FhpO6d-:22]
-X-SAAS-TrackingID: 9f9e3ed5.0.105166409.00-2374.176789967.s12p02m014.mxlogic.net
-X-NAI-Spam-Flag: NO
-X-NAI-Spam-Threshold: 3
-X-NAI-Spam-Score: -5000
-X-NAI-Spam-Rules: 1 Rules triggered
-        WHITELISTED=-5000
-X-NAI-Spam-Version: 2.3.0.9418 : core <6686> : inlines <7165> : streams
- <1840193> : uri <2949750>
+Content-Disposition: inline
 Sender: util-linux-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-Money was donated to you by Mr and Mrs Allen and Violet Large, just contact=
- them with this email for more information =
+On Tue, Nov 19, 2019 at 03:34:11PM +0100, Karel Zak wrote:
+>  for years users are unhappy with too strict mount/umount rules for
+>  non-root users.  The rules makes mount(8) useless for use-cases where
+>  root permissions are unnecessary. This patch changes the game.
 
+Merged, we will see... ;-) BTW, I'd like to make -rc1 next week.
 
-EMail: allenandvioletlargeaward@gmail.com
+    Karel
+
+--=20
+ Karel Zak  <kzak@redhat.com>
+ http://karelzak.blogspot.com
+
