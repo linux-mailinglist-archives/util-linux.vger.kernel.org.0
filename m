@@ -2,64 +2,59 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 5626A11500D
-	for <lists+util-linux@lfdr.de>; Fri,  6 Dec 2019 12:52:53 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id C776D118AE3
+	for <lists+util-linux@lfdr.de>; Tue, 10 Dec 2019 15:32:01 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726134AbfLFLww (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Fri, 6 Dec 2019 06:52:52 -0500
-Received: from us-smtp-2.mimecast.com ([207.211.31.81]:49085 "EHLO
-        us-smtp-delivery-1.mimecast.com" rhost-flags-OK-OK-OK-FAIL)
-        by vger.kernel.org with ESMTP id S1726116AbfLFLww (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Fri, 6 Dec 2019 06:52:52 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-        s=mimecast20190719; t=1575633171;
-        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-         content-transfer-encoding:content-transfer-encoding:
-         in-reply-to:in-reply-to:references:references;
-        bh=hNTpqlCBM/QiI+8hGiGegT+eh1OEPJE+LzeaNKwAQvs=;
-        b=IXLegDA4my12kXZhIjugRHOhb8QsYgc9tg1G7BvsQc0KWdNgng+UOQrAfw7fMs19BFPMcP
-        WWiI/Vjjb6tpe3q0nBLHxFleefS4aTqFjkwYMoOlZJohcOv/D+5fxv9rWn3mNRmfkocdi6
-        suJQ85eB9PbkGmuooY0XBW51g4+goic=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-153-FeI4rhNJM36rF5kpccdXtw-1; Fri, 06 Dec 2019 06:52:48 -0500
-Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.phx2.redhat.com [10.5.11.15])
-        (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
-        (No client certificate requested)
-        by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 611342F60;
-        Fri,  6 Dec 2019 11:52:47 +0000 (UTC)
-Received: from 10.255.255.10 (ovpn-205-135.brq.redhat.com [10.40.205.135])
-        by smtp.corp.redhat.com (Postfix) with ESMTPS id 9EDBB5D6A3;
-        Fri,  6 Dec 2019 11:52:46 +0000 (UTC)
-Date:   Fri, 6 Dec 2019 12:52:43 +0100
-From:   Karel Zak <kzak@redhat.com>
-To:     pierre@irsamc.ups-tlse.fr
-Cc:     util-linux@vger.kernel.org
-Subject: Re: Subject: [PATCH] Fix adjtime documentation
-Message-ID: <20191206115243.u5wfoprmefxqcpvw@10.255.255.10>
-References: <8c9af50033cf8d287a8df373d4cade93@irsamc.ups-tlse.fr>
+        id S1727320AbfLJOcA (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Tue, 10 Dec 2019 09:32:00 -0500
+Received: from mail-qk1-f196.google.com ([209.85.222.196]:35438 "EHLO
+        mail-qk1-f196.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1727272AbfLJOcA (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Tue, 10 Dec 2019 09:32:00 -0500
+Received: by mail-qk1-f196.google.com with SMTP id v23so16613075qkg.2
+        for <util-linux@vger.kernel.org>; Tue, 10 Dec 2019 06:31:59 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=mime-version:reply-to:from:date:message-id:subject:to
+         :content-transfer-encoding;
+        bh=vHaIjFXg+wfCbI03yo6xk8cd4kIlyh3Gds+Kob3pdHY=;
+        b=JDXWoS6+eE+Sf21gyQQ49kZp4ZoMSf6qHNXw8kqKLd/iy3QlwwGyDNuymaZ7KwKcxM
+         +SDTzTKO7vMab4cJkM+SiBRQ1ht5OFFTj8kAR+v4KzMywADCXvq8krZZFj6QR/hhj48j
+         oCBhAPwDLLjJFYzMpgDAZCggB4GPDGsiwbP7OGhp8sq/XV4q+ILZ70wiLUeGPb/ZA1z8
+         RKJuBEX8UKjF16KQY/HsHFUi/R0g6xTrV8TPbuPtDWIH6lRoHvn2zPEjBA8Yu+lPtOAR
+         UXkfkW1HsXpcUmtrdFAgJirYj8UYj4TiTLhMaLq1LBq+4a4GzuQp71RV86Efut6SJL2v
+         JKIQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
+         :subject:to:content-transfer-encoding;
+        bh=vHaIjFXg+wfCbI03yo6xk8cd4kIlyh3Gds+Kob3pdHY=;
+        b=D2rshEBi+dFaNSx6nyecS52Frny2Ui4vwJkP7IdijtCjUlvfe4gQ+qkkOxB/z8JOLc
+         9fekXjwUtxIWVEUD8eq2HS3K4WSq2J+8y7nzk3Qs6eRItVRvtXD/2aeyLAaoAF8RY398
+         dtmaYAu2OpcuHwmzf+dlIa1HVSjn/bbi6ws5d4hD0/qBzgLGF8q36Td3iDrOp/YcaJ9E
+         lW7+Z0MjeXksv2aTden5twdmN/Ilx3CTFjNsdcAiWlF1pwFCQ45xiFP9CPa7HHCxzIQd
+         GsKqCmm/rdf0BcbeJiYEM3SSsuRA0K6C4qYLI1QioyD2nBN98jYHrMTC/OnJ0llA/3Oo
+         6ADw==
+X-Gm-Message-State: APjAAAVWjnFIeqxMw8+fMnMdqW1otglLIUwtooOPpUQFZncKFipuEC+4
+        sXflEdyQ/aB2nplv4eq52QrBB4aA9allTA5gZ9k=
+X-Google-Smtp-Source: APXvYqyhA/qrCtkcjRX3vopL4ERtPHbukzFpQq6JGugdBXZ5A4Hy1GzTJQ4xKrtqPoFIA3P2ya+nbLms4bM4epCKll0=
+X-Received: by 2002:a37:48c4:: with SMTP id v187mr32682589qka.198.1575988319302;
+ Tue, 10 Dec 2019 06:31:59 -0800 (PST)
 MIME-Version: 1.0
-In-Reply-To: <8c9af50033cf8d287a8df373d4cade93@irsamc.ups-tlse.fr>
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.15
-X-MC-Unique: FeI4rhNJM36rF5kpccdXtw-1
-X-Mimecast-Spam-Score: 0
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
+Received: by 2002:aed:248f:0:0:0:0:0 with HTTP; Tue, 10 Dec 2019 06:31:58
+ -0800 (PST)
+Reply-To: monicawood2033@gmail.com
+From:   Monica Woods <chantalstark.2033@gmail.com>
+Date:   Tue, 10 Dec 2019 14:31:58 +0000
+Message-ID: <CAHvJddf-Tt3iuo0StRbe28c612hH7QA4JiFwr0AirVcB95t2qw@mail.gmail.com>
+Subject: =?UTF-8?B?ZMOtaw==?=
+To:     undisclosed-recipients:;
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: base64
 Sender: util-linux-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-On Wed, Dec 04, 2019 at 03:37:06PM +0100, pierre@irsamc.ups-tlse.fr wrote:
->  sys-utils/adjtime_config.5 | 2 +-
->  sys-utils/hwclock.8.in     | 2 +-
->  2 files changed, 2 insertions(+), 2 deletions(-)
-
-Applied, thanks.
-
---=20
- Karel Zak  <kzak@redhat.com>
- http://karelzak.blogspot.com
-
+TcOhbSBuxJtjbyB2ZWxtaSBkxa9sZcW+aXTDqWhvIGEgbmFsw6loYXbDqWhvLCBhYnljaCB2w6Ft
+IG9kcG92xJtkxJtsIHpwxJt0DQo=
