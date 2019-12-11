@@ -2,99 +2,47 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 70BF211AC51
-	for <lists+util-linux@lfdr.de>; Wed, 11 Dec 2019 14:44:23 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 7BF1A11B737
+	for <lists+util-linux@lfdr.de>; Wed, 11 Dec 2019 17:06:28 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1728128AbfLKNoX (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Wed, 11 Dec 2019 08:44:23 -0500
-Received: from wout4-smtp.messagingengine.com ([64.147.123.20]:51605 "EHLO
-        wout4-smtp.messagingengine.com" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S1727554AbfLKNoW (ORCPT
-        <rfc822;util-linux@vger.kernel.org>);
-        Wed, 11 Dec 2019 08:44:22 -0500
-Received: from compute1.internal (compute1.nyi.internal [10.202.2.41])
-        by mailout.west.internal (Postfix) with ESMTP id BF81FAF0;
-        Wed, 11 Dec 2019 08:44:21 -0500 (EST)
-Received: from mailfrontend1 ([10.202.2.162])
-  by compute1.internal (MEProxy); Wed, 11 Dec 2019 08:44:21 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=pks.im; h=from
-        :to:cc:subject:date:message-id:mime-version
-        :content-transfer-encoding; s=fm2; bh=5JRx8abO5A3+fUk790PeNKQb09
-        7vi4OqMT7Nh6vj8Bg=; b=0YaXrt3yc04G6XfPT8CGZjKMk8SmUvo2Bi03E97RI6
-        aJz+OYVxrmByhWvOfSVIwzO1KJplQpnpRIAgSmzSOEF0dkMGy5zD0y/F/inmn/DG
-        Rcic/zl54BqKO3ccq+pPxlQNgHTJboYEymmabcuei7DkUdXdHOCcelyybL7P4zhE
-        U2b7zTo5b+tDDGovcqL2RQvSQGfngrP41r/8xQqzj67SfYMoHJ88B9Ra74VuKV/B
-        JrArzBx0LKJi7IKo+frQrOeyvib+teb+uIMk6an0U/PoVfwdDBxaPajX4shZAHHr
-        ojC6jqM9XZRpE3EAxQxnaH9zMmI+oruIEqNccZWvwyAg==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-        messagingengine.com; h=cc:content-transfer-encoding:date:from
-        :message-id:mime-version:subject:to:x-me-proxy:x-me-proxy
-        :x-me-sender:x-me-sender:x-sasl-enc; s=fm1; bh=5JRx8abO5A3+fUk79
-        0PeNKQb097vi4OqMT7Nh6vj8Bg=; b=BivqsxCOUDqqJR7GSNnofYLeCTCirVS71
-        eUVojwkCohkmYoLf6ykH5bveGkQD1E1gmomRp9ooO8mkK2eOUrKp0jQl+q/cpZA4
-        /3KEJDikFzC2MBlDFP2TIE1SnLlENrPMT8Q61iTWnRQHTc5z6Vrlp/Akz+SXh1KY
-        Zqwcy5RIP5Tqt4wO58dHYVMwt90j9brRwnVynTsjIGDz5GQPw6T5Vq6D9XN/QpyV
-        dnM0+g89NntLkPqSf6//ZVXbCXmKY6Lh74PIRiowptmK6n7FGuQJTZDwxeqQ+Tgy
-        I8dSE0AogAOPbo8Og2Ietn6+vF9pNNNCunHCMaxz4Veok0Hmj4WbQ==
-X-ME-Sender: <xms:tPLwXXcLPQjf7i6YhMBjX3mGA4gX68lb4RQXqFLFsa--0aQ_XfR7eA>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedufedrudelhedgheduucetufdoteggodetrfdotf
-    fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
-    uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
-    cujfgurhephffvufffkffoggfgsedtkeertdertddtnecuhfhrohhmpefrrghtrhhitghk
-    ucfuthgvihhnhhgrrhguthcuoehpshesphhkshdrihhmqeenucfkphepjeejrddukeefrd
-    dujeejrdduudeinecurfgrrhgrmhepmhgrihhlfhhrohhmpehpshesphhkshdrihhmnecu
-    vehluhhsthgvrhfuihiivgeptd
-X-ME-Proxy: <xmx:tPLwXWNlD4uktpFhFqmkcqrnp1h4OyCEmbRA5N1rB6-CaC4DJl-VSQ>
-    <xmx:tPLwXdZVWWT8nZigH9hwAGN1ECB_6_KzzCMhZhTyp4_8oHHhzGAg9A>
-    <xmx:tPLwXb2pww7TxalwFPrdWB48_ZEg47SND7cYtsyWdqw5o4JyjeNkCw>
-    <xmx:tfLwXekE5scvCEolfNBvtDJ7keccXnv09dE7cIbfHh1BbH_7PyQ7Wg>
-Received: from vm-mail (x4db7b174.dyn.telefonica.de [77.183.177.116])
-        by mail.messagingengine.com (Postfix) with ESMTPA id 201618005B;
-        Wed, 11 Dec 2019 08:44:20 -0500 (EST)
-Received: from localhost (<unknown> [10.192.0.11])
-        by vm-mail (OpenSMTPD) with ESMTPSA id a2515b24 (TLSv1.3:TLS_AES_256_GCM_SHA384:256:NO);
-        Wed, 11 Dec 2019 13:44:17 +0000 (UTC)
-From:   Patrick Steinhardt <ps@pks.im>
-To:     util-linux@vger.kernel.org
-Cc:     Patrick Steinhardt <ps@pks.im>, Karel Zak <kzak@redhat.com>
-Subject: [PATCH] agetty: return proper value if compiled without ISSUEDIR support
-Date:   Wed, 11 Dec 2019 14:44:22 +0100
-Message-Id: <bc1cb34e4f685a1e3eddcfbde6d1f4a0fc30453d.1576071846.git.ps@pks.im>
-X-Mailer: git-send-email 2.24.1
+        id S2388906AbfLKQGQ convert rfc822-to-8bit (ORCPT
+        <rfc822;lists+util-linux@lfdr.de>); Wed, 11 Dec 2019 11:06:16 -0500
+Received: from mailout03.3bbmail.com ([110.164.252.196]:53947 "EHLO
+        mailout03.3bb.co.th" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1731223AbfLKQGP (ORCPT
+        <rfc822;util-linux-ng@vger.kernel.org>);
+        Wed, 11 Dec 2019 11:06:15 -0500
+X-Greylist: delayed 2796 seconds by postgrey-1.27 at vger.kernel.org; Wed, 11 Dec 2019 11:06:13 EST
+Authentication-Results: 3bb.co.th;
+        spf=fail smtp.mailfrom=infoccfoundation@amazon.com
+Received: from appserv (mx-ll-110.164.149-9.static.3bb.co.th [110.164.149.9] (may be forged))
+        by mailout03.3bb.co.th (8.16.0.27/8.16.0.27) with ESMTP id xBBFFNHR021659;
+        Wed, 11 Dec 2019 22:15:23 +0700
+Message-ID: <41454-2201912311151533105@appserv>
+To:     "a" <skyteamsbiz@gmail.com>
+Reply-To: "CCULVERT FOUNDATION" <skyteamsbiz@gmail.com>
+From:   "CCULVERT FOUNDATION" <infoccfoundation@amazon.com>
+Subject: Mein letzter Wunsch.
+Date:   Wed, 11 Dec 2019 22:15:33 +0700
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-type: text/plain; charset=windows-874
+Content-Transfer-Encoding: 8BIT
+X-Proofpoint-SPF-Result: fail
+X-Proofpoint-SPF-Record: v=spf1 include:spf1.amazon.com include:spf2.amazon.com
+ include:amazonses.com -all
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:,, definitions=2019-11-25_06:,,
+ signatures=0
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=48 suspectscore=1 malwarescore=0
+ phishscore=0 bulkscore=0 spamscore=8 mlxscore=8 mlxlogscore=105
+ adultscore=0 classifier=spam adjust=40 reason=mlx scancount=1
+ engine=8.0.1-1911140001 definitions=main-1911260048
 Sender: util-linux-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-If agetty is compiled without support for ISSUEDIR, then it implements
-a stub for `issuedir_read` that simply does nothing. In fact it does
-too little, as it doesn't have a proper return statement even though the
-function returns an integer.
-
-Fix the issue by always returning `1` from `issuedir_read`. This
-is the same error code that the real implementation of that function
-returns in case it cannot open the directory and is thus a sensible
-default to pretend that the directory doesn't exist.
-
-Signed-off-by: Patrick Steinhardt <ps@pks.im>
----
- term-utils/agetty.c | 1 +
- 1 file changed, 1 insertion(+)
-
-diff --git a/term-utils/agetty.c b/term-utils/agetty.c
-index a0d0876c3..3c20acc98 100644
---- a/term-utils/agetty.c
-+++ b/term-utils/agetty.c
-@@ -1783,6 +1783,7 @@ static int issuedir_read(struct issue *ie __attribute__((__unused__)),
- 			struct options *op __attribute__((__unused__)),
- 			struct termios *tp __attribute__((__unused__)))
- {
-+	return 1;
- }
- #endif /* ISSUEDIR_SUPPORT */
- 
--- 
-2.24.1
+Wenn Sie sich für die Finanzierung der STIFTUNG interessieren, schreiben Sie bitte heute über meinen Anwalt zurück
+Grüße,
+Mrs. Cindy Culvert.
+skyteamsbiz@gmail.com
 
