@@ -2,47 +2,63 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 7BF1A11B737
-	for <lists+util-linux@lfdr.de>; Wed, 11 Dec 2019 17:06:28 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 8110C11CC22
+	for <lists+util-linux@lfdr.de>; Thu, 12 Dec 2019 12:23:13 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S2388906AbfLKQGQ convert rfc822-to-8bit (ORCPT
-        <rfc822;lists+util-linux@lfdr.de>); Wed, 11 Dec 2019 11:06:16 -0500
-Received: from mailout03.3bbmail.com ([110.164.252.196]:53947 "EHLO
-        mailout03.3bb.co.th" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1731223AbfLKQGP (ORCPT
-        <rfc822;util-linux-ng@vger.kernel.org>);
-        Wed, 11 Dec 2019 11:06:15 -0500
-X-Greylist: delayed 2796 seconds by postgrey-1.27 at vger.kernel.org; Wed, 11 Dec 2019 11:06:13 EST
-Authentication-Results: 3bb.co.th;
-        spf=fail smtp.mailfrom=infoccfoundation@amazon.com
-Received: from appserv (mx-ll-110.164.149-9.static.3bb.co.th [110.164.149.9] (may be forged))
-        by mailout03.3bb.co.th (8.16.0.27/8.16.0.27) with ESMTP id xBBFFNHR021659;
-        Wed, 11 Dec 2019 22:15:23 +0700
-Message-ID: <41454-2201912311151533105@appserv>
-To:     "a" <skyteamsbiz@gmail.com>
-Reply-To: "CCULVERT FOUNDATION" <skyteamsbiz@gmail.com>
-From:   "CCULVERT FOUNDATION" <infoccfoundation@amazon.com>
-Subject: Mein letzter Wunsch.
-Date:   Wed, 11 Dec 2019 22:15:33 +0700
+        id S1728847AbfLLLXM (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Thu, 12 Dec 2019 06:23:12 -0500
+Received: from us-smtp-delivery-1.mimecast.com ([205.139.110.120]:30378 "EHLO
+        us-smtp-1.mimecast.com" rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org
+        with ESMTP id S1728725AbfLLLXM (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Thu, 12 Dec 2019 06:23:12 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+        s=mimecast20190719; t=1576149791;
+        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+         in-reply-to:in-reply-to:references:references;
+        bh=P8VeSwUMDEx8lrdmwi3TDgreg2dhme+e2MKc+N1vfZw=;
+        b=OTRUzqrZDGmOUi12L8mMcEuoEv2OsQ16H5waBifEYAVpflu0HLn4bwgy7UL+2Uw5C15R5d
+        3LRlx7o8sh4NffYimVcsp1AcujF63oiQNAbMvUFl1fu5cMbKDhuLeLSt6mjm4zy2KZC12G
+        Vn083/K4/L1dk6eUmPRLxZtJrsG3VRM=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-176-DyohIXDxOO-LDkXfHaYkYg-1; Thu, 12 Dec 2019 06:23:09 -0500
+X-MC-Unique: DyohIXDxOO-LDkXfHaYkYg-1
+Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.phx2.redhat.com [10.5.11.22])
+        (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+        (No client certificate requested)
+        by mimecast-mx01.redhat.com (Postfix) with ESMTPS id DD83F1005510;
+        Thu, 12 Dec 2019 11:23:08 +0000 (UTC)
+Received: from 10.255.255.10 (ovpn-205-135.brq.redhat.com [10.40.205.135])
+        by smtp.corp.redhat.com (Postfix) with ESMTPS id 2031910013A1;
+        Thu, 12 Dec 2019 11:23:07 +0000 (UTC)
+Date:   Thu, 12 Dec 2019 12:23:05 +0100
+From:   Karel Zak <kzak@redhat.com>
+To:     Patrick Steinhardt <ps@pks.im>
+Cc:     util-linux@vger.kernel.org
+Subject: Re: [PATCH] agetty: return proper value if compiled without ISSUEDIR
+ support
+Message-ID: <20191212112305.nlfd3gghp4jeq4nv@10.255.255.10>
+References: <bc1cb34e4f685a1e3eddcfbde6d1f4a0fc30453d.1576071846.git.ps@pks.im>
 MIME-Version: 1.0
-Content-type: text/plain; charset=windows-874
-Content-Transfer-Encoding: 8BIT
-X-Proofpoint-SPF-Result: fail
-X-Proofpoint-SPF-Record: v=spf1 include:spf1.amazon.com include:spf2.amazon.com
- include:amazonses.com -all
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:,, definitions=2019-11-25_06:,,
- signatures=0
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=48 suspectscore=1 malwarescore=0
- phishscore=0 bulkscore=0 spamscore=8 mlxscore=8 mlxlogscore=105
- adultscore=0 classifier=spam adjust=40 reason=mlx scancount=1
- engine=8.0.1-1911140001 definitions=main-1911260048
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <bc1cb34e4f685a1e3eddcfbde6d1f4a0fc30453d.1576071846.git.ps@pks.im>
+X-Scanned-By: MIMEDefang 2.84 on 10.5.11.22
 Sender: util-linux-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-Wenn Sie sich für die Finanzierung der STIFTUNG interessieren, schreiben Sie bitte heute über meinen Anwalt zurück
-Grüße,
-Mrs. Cindy Culvert.
-skyteamsbiz@gmail.com
+On Wed, Dec 11, 2019 at 02:44:22PM +0100, Patrick Steinhardt wrote:
+>  term-utils/agetty.c | 1 +
+>  1 file changed, 1 insertion(+)
+
+Applied, thanks!
+
+    Karel
+
+-- 
+ Karel Zak  <kzak@redhat.com>
+ http://karelzak.blogspot.com
 
