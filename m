@@ -2,63 +2,91 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 8110C11CC22
-	for <lists+util-linux@lfdr.de>; Thu, 12 Dec 2019 12:23:13 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id C9C0111EF15
+	for <lists+util-linux@lfdr.de>; Sat, 14 Dec 2019 01:21:03 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1728847AbfLLLXM (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Thu, 12 Dec 2019 06:23:12 -0500
-Received: from us-smtp-delivery-1.mimecast.com ([205.139.110.120]:30378 "EHLO
-        us-smtp-1.mimecast.com" rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org
-        with ESMTP id S1728725AbfLLLXM (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Thu, 12 Dec 2019 06:23:12 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-        s=mimecast20190719; t=1576149791;
-        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-         in-reply-to:in-reply-to:references:references;
-        bh=P8VeSwUMDEx8lrdmwi3TDgreg2dhme+e2MKc+N1vfZw=;
-        b=OTRUzqrZDGmOUi12L8mMcEuoEv2OsQ16H5waBifEYAVpflu0HLn4bwgy7UL+2Uw5C15R5d
-        3LRlx7o8sh4NffYimVcsp1AcujF63oiQNAbMvUFl1fu5cMbKDhuLeLSt6mjm4zy2KZC12G
-        Vn083/K4/L1dk6eUmPRLxZtJrsG3VRM=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-176-DyohIXDxOO-LDkXfHaYkYg-1; Thu, 12 Dec 2019 06:23:09 -0500
-X-MC-Unique: DyohIXDxOO-LDkXfHaYkYg-1
-Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.phx2.redhat.com [10.5.11.22])
-        (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
-        (No client certificate requested)
-        by mimecast-mx01.redhat.com (Postfix) with ESMTPS id DD83F1005510;
-        Thu, 12 Dec 2019 11:23:08 +0000 (UTC)
-Received: from 10.255.255.10 (ovpn-205-135.brq.redhat.com [10.40.205.135])
-        by smtp.corp.redhat.com (Postfix) with ESMTPS id 2031910013A1;
-        Thu, 12 Dec 2019 11:23:07 +0000 (UTC)
-Date:   Thu, 12 Dec 2019 12:23:05 +0100
-From:   Karel Zak <kzak@redhat.com>
-To:     Patrick Steinhardt <ps@pks.im>
-Cc:     util-linux@vger.kernel.org
-Subject: Re: [PATCH] agetty: return proper value if compiled without ISSUEDIR
- support
-Message-ID: <20191212112305.nlfd3gghp4jeq4nv@10.255.255.10>
-References: <bc1cb34e4f685a1e3eddcfbde6d1f4a0fc30453d.1576071846.git.ps@pks.im>
+        id S1726744AbfLNAVC (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Fri, 13 Dec 2019 19:21:02 -0500
+Received: from outpost.hi.is ([130.208.165.166]:38532 "EHLO outpost.hi.is"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S1726736AbfLNAVC (ORCPT <rfc822;util-linux@vger.kernel.org>);
+        Fri, 13 Dec 2019 19:21:02 -0500
+Received: from inpost.hi.is (inpost.hi.is [IPv6:2a00:c88:4000:1650::165:62])
+        by outpost.hi.is (8.14.7/8.14.7) with ESMTP id xBE0CXsj014781
+        (version=TLSv1/SSLv3 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK)
+        for <util-linux@vger.kernel.org>; Sat, 14 Dec 2019 00:12:34 GMT
+DKIM-Filter: OpenDKIM Filter v2.11.0 outpost.hi.is xBE0CXsj014781
+Received: from hekla.rhi.hi.is (hekla.rhi.hi.is [IPv6:2a00:c88:4000:1650::165:2])
+        by inpost.hi.is (8.14.7/8.14.7) with ESMTP id xBE0CVt2005028
+        (version=TLSv1/SSLv3 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO)
+        for <util-linux@vger.kernel.org>; Sat, 14 Dec 2019 00:12:31 GMT
+DKIM-Filter: OpenDKIM Filter v2.11.0 inpost.hi.is xBE0CVt2005028
+Received: from hekla.rhi.hi.is (localhost [127.0.0.1])
+        by hekla.rhi.hi.is (8.14.4/8.14.4) with ESMTP id xBE0CUeZ030964
+        for <util-linux@vger.kernel.org>; Sat, 14 Dec 2019 00:12:30 GMT
+Received: (from bjarniig@localhost)
+        by hekla.rhi.hi.is (8.14.4/8.14.4/Submit) id xBE0CUGB030963
+        for util-linux@vger.kernel.org; Sat, 14 Dec 2019 00:12:30 GMT
+Date:   Sat, 14 Dec 2019 00:12:30 +0000
+From:   Bjarni Ingi Gislason <bjarniig@rhi.hi.is>
+To:     util-linux@vger.kernel.org
+Subject: [PATCH] man pages: Make the number of .RS/.RE equal
+Message-ID: <20191214001230.GA30935@rhi.hi.is>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <bc1cb34e4f685a1e3eddcfbde6d1f4a0fc30453d.1576071846.git.ps@pks.im>
-X-Scanned-By: MIMEDefang 2.84 on 10.5.11.22
+User-Agent: Mutt/1.5.20 (2009-12-10)
 Sender: util-linux-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-On Wed, Dec 11, 2019 at 02:44:22PM +0100, Patrick Steinhardt wrote:
->  term-utils/agetty.c | 1 +
->  1 file changed, 1 insertion(+)
+  Add or remove one of the pairs .RS/.RE to make their number equal.
 
-Applied, thanks!
+  The output from "nroff" and "groff" is unchanged.
 
-    Karel
+Signed-off-by: Bjarni Ingi Gislason <bjarniig@rhi.hi.is>
+---
+ sys-utils/mount.8    | 1 -
+ text-utils/hexdump.1 | 1 +
+ text-utils/more.1    | 1 +
+ 3 files changed, 2 insertions(+), 1 deletion(-)
 
+diff --git a/sys-utils/mount.8 b/sys-utils/mount.8
+index 110198126..0b914b03e 100644
+--- a/sys-utils/mount.8
++++ b/sys-utils/mount.8
+@@ -2413,7 +2413,6 @@ If the FEC device is embedded in the source volume,
+ .TP
+ \fBverity.fecroots=\fP\,\fIvalue\fP
+ Parity bytes for FEC (default: 2). Optional.
+-.RE
+ .PP
+ Supported since util-linux v2.35.
+ .PP
+diff --git a/text-utils/hexdump.1 b/text-utils/hexdump.1
+index 5651a6f41..1ff33256b 100644
+--- a/text-utils/hexdump.1
++++ b/text-utils/hexdump.1
+@@ -250,6 +250,7 @@ l l l l l l.
+ 018 can|019 em|01A sub|01B esc|01C fs|01D gs
+ 01E rs|01F us|0FF del
+ .TE
++.RE
+ .SS Colors
+ When put at the end of a format specifier, hexdump highlights the
+ respective string with the color specified.  Conditions, if present, are
+diff --git a/text-utils/more.1 b/text-utils/more.1
+index c4420e09a..8b2407ec6 100644
+--- a/text-utils/more.1
++++ b/text-utils/more.1
+@@ -197,6 +197,7 @@ Display current file name and line number.
+ .TP
+ .B \&.
+ Repeat previous command.
++.RE
+ .SH ENVIRONMENT
+ The
+ .B more
 -- 
- Karel Zak  <kzak@redhat.com>
- http://karelzak.blogspot.com
-
+2.24.0
