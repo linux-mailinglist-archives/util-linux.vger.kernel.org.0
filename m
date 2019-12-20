@@ -2,251 +2,85 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 822911237F5
-	for <lists+util-linux@lfdr.de>; Tue, 17 Dec 2019 21:44:06 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id AB03A12797E
+	for <lists+util-linux@lfdr.de>; Fri, 20 Dec 2019 11:41:15 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1728340AbfLQUoC (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Tue, 17 Dec 2019 15:44:02 -0500
-Received: from mout.gmx.net ([212.227.17.21]:44769 "EHLO mout.gmx.net"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1728178AbfLQUoB (ORCPT <rfc822;util-linux@vger.kernel.org>);
-        Tue, 17 Dec 2019 15:44:01 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.net;
-        s=badeba3b8450; t=1576615435;
-        bh=drt6moM9wiUdsw5LNu6gLhIokHXeDxzhgUhIU1nCt2E=;
-        h=X-UI-Sender-Class:Date:From:To:cc:Subject:In-Reply-To:References;
-        b=lO7px9BFX0zYzWmTbd51RwozkmlrfWeZVMlSiFRA0TjaRfpsKeDOIol65grWXjLdn
-         plsNnbZtt7w+axgdoim6xfSGMTN2hIr6oZINqamCSTZtq2Kfr25iSQCDomwKmNCw3Q
-         e6IUH2A/uG3B0Q71fXN5E8SFkGqmbsDGux6U/5mc=
-X-UI-Sender-Class: 01bb95c1-4bf8-414a-932a-4f6e2808ef9c
-Received: from mua.gmx.com ([68.56.186.98]) by mail.gmx.com (mrgmx105
- [212.227.17.174]) with ESMTPSA (Nemesis) id 1MFbVu-1iTV8G1xYU-00H8sZ; Tue, 17
- Dec 2019 21:43:54 +0100
-Date:   Tue, 17 Dec 2019 15:43:15 -0500 (EST)
-From:   J William Piggott <elseifthen@gmx.com>
-To:     Bjarni Ingi Gislason <bjarniig@rhi.hi.is>
-cc:     util-linux@vger.kernel.org
-Subject: Re: [PATCH] doc: howto-man-page.txt: Use font macros instead of font
- escapes
-In-Reply-To: <20191216222032.GA25430@rhi.hi.is>
-Message-ID: <nycvar.YAK.7.76.1912171449170.1929@zhn.tzk.pbz>
-References: <20191216222032.GA25430@rhi.hi.is>
+        id S1727177AbfLTKlO (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Fri, 20 Dec 2019 05:41:14 -0500
+Received: from mail-ed1-f66.google.com ([209.85.208.66]:40480 "EHLO
+        mail-ed1-f66.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726210AbfLTKlO (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Fri, 20 Dec 2019 05:41:14 -0500
+Received: by mail-ed1-f66.google.com with SMTP id b8so7781086edx.7
+        for <util-linux@vger.kernel.org>; Fri, 20 Dec 2019 02:41:13 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=mime-version:reply-to:from:date:message-id:subject:to;
+        bh=WBlubTwTUmY9RQcPWLviT2E+OPWMRD9wqwQ3umBSbAc=;
+        b=gAWcFRTbzmnooMI10U3u3kgEc04AUXfSrg/JZj1zhazKhrFwGrexhS5HI6iJWK1/0D
+         0gIzXKt+nKiYAQ3imMInhN1bbBQxtbKrO4jv2X7G/gaJUjMOmfBH7wAyK1h1CebOw5pm
+         JwykgkYJiFSJ5gjsUgEBSyPJSiEAd4bg24oamtmvsYDeGI2T5+vOzwJXHYzNCeavDpHx
+         6EeOI226dtGHaFZP2iG7a00cm+NbIhLvVM3OZdfr8akYr2J2T1XN4hsltI+6EAp2P6RZ
+         eWfC2bFNUWZOrCEwltzDkq3AmvpHa7iy3oz2X4Oi2Mg8Qyne/UdW/qw49zdwNAz9j+Dp
+         xofw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
+         :subject:to;
+        bh=WBlubTwTUmY9RQcPWLviT2E+OPWMRD9wqwQ3umBSbAc=;
+        b=IDqaUCzsBNLLM/77O9vL1wZ9lOB9TK4BlR7ENPdto+r1pdRPzfhQhmRnHOKIv9/psU
+         POPnouHDfVHBzEwwDGFbob+JndvlUBRRgoad0B7pNufNT8OEjYC9OBi6hfqB8PZLANf4
+         6TdwFXoW54mHSx1KqbXozmcdYv01YwUxCWm4/DZZiRAQaExVGFplEk5aVckr0GmfU2g+
+         pwoaCYOQ725huPqLCKwBOiQHnCeAiOJG7rFpcn5+fjTUh2iHfR3+Y3BxW+0tQcjF8veO
+         zMkBCCFoqq8+RVu+lgVCJ/RSzG/qT8C2v7uYwY8yLkkAGN2MmCDMOVROo7qs9z713daH
+         +P/Q==
+X-Gm-Message-State: APjAAAX2I6HX/D22j/3eeEcaXNHdo+s1NPKxTahL0v4l1N/IlIPUnnuv
+        b86Wr3wu0PNW1qIVaVZ5W02pwZ//FlO0BB48Hh0=
+X-Google-Smtp-Source: APXvYqy/KN3YgRCZWUDl8PVk/EYADJunn3AxNhhA5uJhp9QVyAxRhy155+S7oGXVC+O8yo0Uuc6D9dTszvnR2ak8hxU=
+X-Received: by 2002:a05:6402:1d08:: with SMTP id dg8mr14597779edb.117.1576838472575;
+ Fri, 20 Dec 2019 02:41:12 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII; format=flowed
-X-Provags-ID: V03:K1:lvQeuAbV+HYtH4xLib3eRq9YTW3xEDUCpGaVmaBBn4qxNQxYheD
- /nVxY5StFu6QXFhcHyURDHqLSqRRUaWgYjKQoBqZnFF3hB0M5OjZty8HIquXkJVoJU2bw8z
- pVyNfg96MIlUHxhRqBC840fOTrc/qB7uqqakWZNccPmVXV3wqqNbXUG875wnzQZw1D+UaQI
- 3NUrL8/5irTciHU+cLuKw==
-X-Spam-Flag: NO
-X-UI-Out-Filterresults: notjunk:1;V03:K0:G0wc1NHL/Qk=:NBJuWRRPEt+qin9C7C0WUP
- CXDLho10JSERrbjVBRXSF8DOW9V7MQ/h2VCn7P92lPeK4hso+s1XApRMpqvMUW2f2Px1FWu9Y
- 8TQ9oR3rIm9oXdvpo8rPwyCeNkPm1wg8WFeZrWu+i4HRulMSKH/raw6wD9qmPRScL3pci71Io
- y3NqyT3/S9bNOEjO5Gbkvs7SzUkMgQkhFGB+0wQtEWsMQA5wbCRIB38NMizWxFZgOQoDfhz60
- D/MFj/FA162I9kNZfRJ2uCVFQFB7C8zYZYcezlLUa7YqqTVYHrttpIxmRvzITycSAcX2UH0co
- eM/SDPqf9hXzK5ssfceULOX0vAYtdwpQ/nm35Yy7yEdFA9k1BwYMen7DilDBYpL7tpdYKqUiN
- AUHcIPzEs97v6ZfIvB75FLfukf1S86cRe625FQ7JfxDZZxj6QDFfyZq7Xl0HGRtetRjMeOgdj
- N6tS/o0ANfrVrjT6fL1IDYVy3NSmnpec/NTOQaYOIJbmndIqGJz1LgoFI6ec4gOg+iNhB7mhK
- vw7Qukf7Z5DA52yc0BX5sKH88szZf3Pe/Po5J6q9EHPBNTBLbqfTJZd7FGUoiSPwJB4f43fmh
- UCTk1tV9Con6I4rvdSfM94fK9RU7wDS4Uu5oJ/fqQpF+6hFczuxPEmVKV/LV2fxNFDYKAFtcw
- vt6Eq9wbSgvYJcZLMB9UmEEgabnsBXVcILGL9Dw3nSKS8JGj7vA1XT9nN3uelRw0mOWieb42U
- lLVj3iITgsAsdmqrYE6WVSA/ncnDKj5vnT6UurIz3Me+HygArDnwcvBYQD53nNJ/6KNlxgh2p
- sDRealaL6L3w0eHLBtSOHSFXBDRV1iLdPGbaQ6y+x/LJT6PsE6PMOoKICKsY5lnceoBg5K7zq
- SI1ETYgFhCapByiiH3SHm4hr4AJo2lHOCyIMm8HjXMIg+0Us4A13+LTNAQ3i4ncqaRzb+/mXi
- 8MSXZcTY/uBQrZutkQw/L3lfEMnv3JUw5YeIGk1DJrjLqZip9a8ESudazfY0T0I3C2XImbXhd
- TGqrUgEkp5Kqxlkw136Jg3WYr4oj/RotYVd+H8AeudIWRqbR6cxLb+Y0LsUeIYRHSZccrlcWi
- nTdpe1qmIVarna0EV06UK95N+TM/C74pkz9bd4VvEf7vZu7PUtkTmC238aIKwL09jyrn11SQH
- P+/4RMQw63D+PuI1NjaEiEVIsf00sDIQqe/8sn7m5QsjUZK3Q8yjz/7V3PFSgQeDVDH8L9SMR
- wNGUY32vUAV+JnO45xPxHBtFm+pJH7hhYWJE0js8RhNyqHDm5ySFVBFl/NE0=
-Content-Transfer-Encoding: quoted-printable
+Received: by 2002:a05:6402:22dc:0:0:0:0 with HTTP; Fri, 20 Dec 2019 02:41:12
+ -0800 (PST)
+Reply-To: western.u1@outlook.fr
+From:   "JEAN CLOUD IMF OFFICIAL DIRECTOR-NEW YORK USA." 
+        <eco.bank1204@gmail.com>
+Date:   Fri, 20 Dec 2019 11:41:12 +0100
+Message-ID: <CAOE+jACEOgLJ8EhFSNJL2dzH2r+G6R3euY2kfDdCSZ=refS3vw@mail.gmail.com>
+Subject: GOODNEWS, WE ALREADY SENT YOU FIRST PAYMENT $US$5000.00 DOLLARS THIS MORNING
+To:     undisclosed-recipients:;
+Content-Type: text/plain; charset="UTF-8"
 Sender: util-linux-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
+ATTN DEAR.
+GOODNEWS, WE ALREADY SENT YOU FIRST PAYMENT $US$5000.00 DOLLARS THIS
+MORNING,OUT OF YOUR OVER DUE PAYMENT FUNDS $6.500.000 US DOLLARS
+HAVE CONCLUDED TO EFFECT YOUR PAYMENT THROUGH WESTERN UNION, CONTACT
+THIS WESTERN UNIOON OFFICE NY USA TO RECEIVE YOUR FUNDS NOW, YOU WILL
+BE RECEIVING $US5000.00 TWO TIME DAY, TOTAL OF YOUR DAILY PAYMENT
+US$10,000000 AS WE AGREED WITH THE WESTERN UNION DIRECTOR. MR. DON
+JAMES.
 
+CONTACT PERSON; DIRECTOR. MR. DON JAMES.
 
-On Mon, 16 Dec 2019, Bjarni Ingi Gislason wrote:
+EMAIL; western.u1@outlook.fr
 
->  Use font macros instead of font escapes (\f[BIPR]).
->
->  The escape '\c' ("connect to next input text")
-> is used to join the output of two macros without a space character.
-> This is similar to the '\' escape at the end of a line.
->
->  Font escapes make the text more difficult to read.
+COUNTRY; USA
 
-All inline escapes make the *source* difficult to read, maintain, are erro=
-r
-prone, and hostile for text-to-speech. That was a big problem in html sour=
-ce
-decades ago and part of the reason that css was invented.
+ADDRESS; Western Union headquarters in Manhattan, New York City
 
-I wish you luck. I tried to convince this project that inline escapes shou=
-ld be
-avoided, but everyone here seems to be in love with them. I had them all
-stripped out of hwclock(8), but another contributor kept insisting on putt=
-ing
-them back. I finally gave up and started using them too.
+TELEPHONE; (408) 650-6103
 
->
-> ###
->  Changes based on:
->
->  Use a macro to change to the italic font,
-> instead of \fI [1], if possible.
->  The macros have the italic corrections,
-> but "\c" removes the "\/" part.
->
->  Or
->
-> add the italic corrections.
-> [1] man-pages(7) [Debian package "manpages"]
+NOTE, RE-CONFIRM YOUR ADDRESS BELOW TO THE OFFICE TO AVOID MISTAKE.
 
-That must be Debian hack, but Michael should adopt a no inline-escape poli=
-cy
-for the man page project, IMO. Although it shouldn't limited to italic.
+YOUR FULL NAME----------
+ADDRESS--------------
+TELEPHONE NUMBER------------------
+COPY OF YOUR DI-------------------
 
->
-> ###
->
-> Change a HYPHEN-MINUS (code 0x55, 2D) to a minus (\-), if in front of a
->
-> 1) name for an option
->
-> 2) negative number to be printed.
->
-> ###
->
-> Wrong distance between sentences or protect the indicator.
->
-> a) Separate the sentences and subordinate clauses;
-> each begins on a new line.
-> See man-pages(7) [package "manpages"] and "info groff".
-
-This is Michael's policy, and a good one I think. It would be a big task t=
-o do
-this for the whole project.
-
->
-> Or
->
-> b) Adjust space between sentences (two spaces),
-This is what the project currently does (is supposed to do).
-
->
-> c) or protect the indicator by adding "\&" after it.
->
-> The "indicator" is an "end-of-sentence character" (.!?).
-
-This is called line termination, all three of which are not always;
-hence the reason to make the distinction in roff.
-
->
->  The amount of space between sentences in the output can then be
-> controlled with the ".ss" request.
-
-If you can convince Karl to adopt any of these rules then you should inclu=
-de
-the chosen ones in the project documentation.
-
->
-> Signed-off-by: Bjarni Ingi Gislason <bjarniig@rhi.hi.is>
-> ---
-> Documentation/howto-man-page.txt | 28 ++++++++++++++++++----------
-> 1 file changed, 18 insertions(+), 10 deletions(-)
->
-> diff --git a/Documentation/howto-man-page.txt b/Documentation/howto-man-=
-page.txt
-> index 55734af91..f2b352dac 100644
-> --- a/Documentation/howto-man-page.txt
-> +++ b/Documentation/howto-man-page.txt
-> @@ -30,10 +30,13 @@ Each manual page needs some sort of description of t=
-he command.
-> Write such here.
-> .SH OPTIONS
-> .TP
-> -\fB\-n\fR, \fB\-\-no\-argument\fR
-> +.BR \-n ,\  \-\-no\-argument
-> +.\" \fB\-n\fR, \fB\-\-no\-argument\fR
-
-Remove the old, don't comment it.
-Same for below.
-
-> This option does not use an argument.
-> .TP
-> -\fB\-\-optional\fR[\fI=3Dargument\fR]
-> +.BR \-\-optional [ =3D\c
-> +.IR argument ]
-> +.\" \fB\-\-optional\fR[\fI=3Dargument\fR]
-> Tell in this description that the
-> .I argument
-> is optional, and what happens when it is or is not given.  Notice that t=
-he word
-> @@ -59,18 +62,22 @@ to be the same, but in fact the former is two separa=
-te options while the
-> later will use
-> .B n
-> as option argument of
-> -.BR -o .
-> +.BR \-o .
-> So it is best to avoid short forms of optional options altogether.
-> .TP
-> -\fB\-r\fR, \fB\-\-required\fR \fIargument\fR
-> +.BR \-r ,\  \-\-required\ \c
-> +.I argument
-> +.\"\fB\-r\fR, \fB\-\-required\fR \fIargument\fR
-> Tell in this description that the
-> .I argument
-> is required.
-> .TP
-> -\fB\-V\fR, \fB\-\-version\fR
-> +.BR \-V ", " \-\-version
-> +.\"\fB\-V\fR, \fB\-\-version\fR
-> Display version information and exit.
-> .TP
-> -\fB\-h\fR, \fB\-\-help\fR
-> +.BR \-h ,\  \-\-help
-> +.\"\fB\-h\fR, \fB\-\-help\fR
-> Display help text and exit.
-> .SH NOTES
-> Tell details that users might need to know.  For example, kernel feature=
- or
-> @@ -105,7 +112,8 @@ one.
-> .\"
-> .PP
-> When in the source a new sentence begins somewhere midline, it should us=
-e a
-> -double space before its initial letter.  This is done because \fBgroff\=
-fR
-> +double space before its initial letter.  This is done because
-> +.B groff
-> uses a double space after a sentence when this sentence ends at the end =
-of
-> an input line and the next sentence begins on the next line.
-> Unless a double space is used before other sentence starts as well, the
-> @@ -139,10 +147,10 @@ Another file.
-> Write typical and/or clever use examples here.  The below examples are s=
-tupid,
-> and you should never write them in a real man page.
-> .TP
-> -.B example -h
-> +.B example \-h
-> Output help screen.
-> .TP
-> -.B example -V
-> +.B example \-V
-> Output version information.
-> .SH "EXIT STATUS"
-> This section can be left out if the command has only two return values,
-> @@ -171,7 +179,7 @@ etc
-> .RE
-> .SH AUTHORS
-> .MT rjh@\:example.org
-> -Random J. Hacker
-> +Random J.\& Hacker
-> .ME
-> .br
-> .MT fred@\:example.com
-> --
-> 2.24.0
->
+I WAIT FOR YOUR URGENT RESPONSE UPON CONTACTING THE OFFICE.
+JEAN CLOUD
+IMF OFFICIAL DIRECTOR-NEW YORK USA.
