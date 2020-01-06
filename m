@@ -2,113 +2,80 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 49E9F130257
-	for <lists+util-linux@lfdr.de>; Sat,  4 Jan 2020 13:23:22 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 5BC1C130CAE
+	for <lists+util-linux@lfdr.de>; Mon,  6 Jan 2020 05:09:05 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1725827AbgADMXV (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Sat, 4 Jan 2020 07:23:21 -0500
-Received: from mail-il1-f177.google.com ([209.85.166.177]:44442 "EHLO
-        mail-il1-f177.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1725802AbgADMXU (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Sat, 4 Jan 2020 07:23:20 -0500
-Received: by mail-il1-f177.google.com with SMTP id z12so2292751iln.11;
-        Sat, 04 Jan 2020 04:23:20 -0800 (PST)
+        id S1727446AbgAFEJB (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Sun, 5 Jan 2020 23:09:01 -0500
+Received: from mail-vs1-f66.google.com ([209.85.217.66]:35944 "EHLO
+        mail-vs1-f66.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1727432AbgAFEJB (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Sun, 5 Jan 2020 23:09:01 -0500
+Received: by mail-vs1-f66.google.com with SMTP id u14so30864047vsu.3
+        for <util-linux@vger.kernel.org>; Sun, 05 Jan 2020 20:09:00 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=LKQLDuUQyKEp3PqqNw3i4af+LyZvLM7Wyx7d36N1/7g=;
-        b=vAB0O4s6yBazbpmIEiJWWx9AHn68/D7fHgaqYwW8qVN6GEYn3Jd5FTODWftDaqvoWb
-         o0aR4RUJuL8WgEYjmE59nhe1op+jIQ0w3FEU8F2Bi0d9e604m0gXTi4CX4zqkFy5ESIE
-         a2/qY0xyBIhm3xiuremTqrk83EOHEEEnchWuG7ptss2XGcjOjGay+2Sv+5wQLTbIx8yS
-         R2G7Z3Iwgsi2X50VkDj0E/nti4kMIRlzm1pGnx63us7gEwBE21oQhbjm0TqZ0z+erHs5
-         GLPxLYuLwVAzytAc5/aPAGggMgctbiurMUgkkfO2ZZmympTiR4XIrAf0sYhiPEX9gH79
-         usLw==
+        h=mime-version:reply-to:from:date:message-id:subject:to
+         :content-transfer-encoding;
+        bh=kJdkZJDobFOwm1dtAc5RNCAwRKlXUVT2emEh0bdU6VU=;
+        b=DIVZJanwJHFeE5n9saas4vndqsTPplVgshlfz5/IyGWY0tHvYLi9Ut4DrdUgV516r7
+         n6k2zFdc7ZXE3j0mrpzRUCCQ21vo1Ackh/QVSc23OoJIF0SNb8liqDy5xknxVxfSMWdu
+         52x5GbegK5jiBxCUMrz6j+r0OC/pwEi7nIx4OXAt5qmDNJnaCoGVAokCdjBbbHSaXBgW
+         QHr7DItnydmcQiiNB0ps+kHxzyx7NR8W+9j65s4/TksOFxYAC+vQkwg9UpMBJWf9mY4T
+         q95nUwRWarFF+SW4CVeQSBX6q4LYEJKvyGgK57Lq90BclvSH3WKxdok6dWk42XH8vqss
+         YHUw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=LKQLDuUQyKEp3PqqNw3i4af+LyZvLM7Wyx7d36N1/7g=;
-        b=B240iv7WmWACD5yryV5Zfdep0qAXt7CEZrqq/hN8zAIr2UD9YoKMwlnilsOilS2GDX
-         c2eByEyrIBuHZDVXDF2xtTIWPGTHT1rrsKalZKOfhKH4XCrUJmnbWLraDztComNXLrbu
-         uKX8CZONYj7PoQ5TMxJvJLnpiD33aLsiTWQyVCDPDiQz5IkNxPP28dt+P5sfUXjDj7Ho
-         anabQkZlLtiL7j4jcIZptaeaqWAm5nI9DPjk6Ar1AmgbthxaQjV6bVEfgq+8i97uwGcd
-         ukP0gj2eU8xjzNkjnK+VMZmkh7xtHbdSVs/D92Wg/WTih4YlsMyeAxj32jkiaNPHGVsh
-         pALA==
-X-Gm-Message-State: APjAAAV57W51veMPDzYYaISUebeXMP+QtJ2tayzUM8TaK618bGftDqHI
-        cElf1++QeGuWfHm3KMqX0NGsdbdXuLrhwdmbLzRVLH0/5g8aRP0w
-X-Google-Smtp-Source: APXvYqxRGib/GBLbSGJvISDQygameAmB0qxfxm7Vznd0dHfFks8EvS8cx3KiThhlephAoOkZaLJzrXSeJ044Qstyhy0=
-X-Received: by 2002:a92:cc42:: with SMTP id t2mr79004310ilq.111.1578140599825;
- Sat, 04 Jan 2020 04:23:19 -0800 (PST)
+        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
+         :subject:to:content-transfer-encoding;
+        bh=kJdkZJDobFOwm1dtAc5RNCAwRKlXUVT2emEh0bdU6VU=;
+        b=tlQZHZa0natur+n+qxH46IeRD4oYHsXPgbmO1iT5Ar2+8QZsdmLCP7zdV4fST73emL
+         /y7va7qdDlkb6VWVCQgI8RZ4hy9eo+VMUb6sQsSKRWy9BLPyqLEQ3kncrXbOvuTNfjK/
+         Mc9NP2+rxkPlRvAD0A68xvTruNntrKgYcYpAa6kgnsOyvWPJasRvfkQ2qXaVHwfmx6rN
+         ao68BexG++RkaAKUBpqbvHsATJdV4nRSfh4dGPkW4YTl25Ebhl+pYCvN3I4RnJXczuI0
+         q4+DFvhwSok73y7tSmFyLn/ty2krzuYuI6WkayFJYt6RxZp5HaR4UrIWsroyB1EvG6ej
+         LUwQ==
+X-Gm-Message-State: APjAAAWBF01iRAKOBpspIHkm23PmWiaBxvi0xZG6kcqCtnDkNp0hdDhD
+        ZD/9XnIAhr7DZ3LIkmB/Pdi2lmk0IPunvbaCbNU=
+X-Google-Smtp-Source: APXvYqyEBOWaGwoMv7PTIK54RcgexbWDYJflUZ8ms9KKPFrBUwcMiKxYT801d3fPd0O8CuSq2jFxf8JHyXpg6hsMlIs=
+X-Received: by 2002:a67:fd11:: with SMTP id f17mr37634189vsr.63.1578283740190;
+ Sun, 05 Jan 2020 20:09:00 -0800 (PST)
 MIME-Version: 1.0
-References: <CABXGCsOv26W6aqB5WPMe-mEynmwy55DTfTeL5Dg9vRq6+Y6WvA@mail.gmail.com>
- <CABXGCsNkzPrjqMRaWpssorxzhMLWBvLeSw9BpKYr_DW4LJQECQ@mail.gmail.com>
- <20200102110817.ahqaqidw3ztw3kax@10.255.255.10> <CABXGCsNkm3VuzO60WBCi4VJmDnO=DmprQ1P=dd0FcW2-+dGc0w@mail.gmail.com>
- <20200102131434.tky2hquki23laqqo@10.255.255.10> <CABXGCsMV1GRiqrXCQGHqvpBiendU3mG36h0YoG=4nw6spZHq=w@mail.gmail.com>
- <nycvar.YAK.7.76.2001021153220.1385@zhn.tzk.pbz> <CABXGCsMLfarquWnzV=e3Ta_HPac+DALfKEOaD3rp5n9MPqgyFw@mail.gmail.com>
- <20200103100232.GH3040@piout.net> <CABXGCsNv7G94TxaaKX8KXL5DEJiFgNcSu4+WShE_kQjVSa7zZA@mail.gmail.com>
- <20200103101935.GI3040@piout.net> <CABXGCsMLob0DC25JS8wwAYydnDoHBSoMh2_YLPfqm3TTvDE-Zw@mail.gmail.com>
- <7c015680-01b7-9c3e-c4c7-5d0b6e964781@hygon.cn> <CABXGCsNpS+nCMZ9C89UQVEu_u+hJVtdxCvdnj2QNqQf-j7+DrA@mail.gmail.com>
- <6ac1d65c-33ac-e3a4-799f-24279b677f90@hygon.cn>
-In-Reply-To: <6ac1d65c-33ac-e3a4-799f-24279b677f90@hygon.cn>
-From:   Mikhail Gavrilov <mikhail.v.gavrilov@gmail.com>
-Date:   Sat, 4 Jan 2020 17:23:09 +0500
-Message-ID: <CABXGCsO25iq2tZMis3E-DF2ADz2Je45YfL11cgjFhmr+bz-6jg@mail.gmail.com>
-Subject: Re: [bugreport] "hwclock -w" reset time instead of setting the right time
-To:     Jinke Fan <fanjinke@hygon.cn>
-Cc:     Alexandre Belloni <alexandre.belloni@bootlin.com>,
-        J William Piggott <elseifthen@gmx.com>,
-        Karel Zak <kzak@redhat.com>,
-        "util-linux@vger.kernel.org" <util-linux@vger.kernel.org>,
-        Linux List Kernel Mailing <linux-kernel@vger.kernel.org>,
-        "linux-rtc@vger.kernel.org" <linux-rtc@vger.kernel.org>
+Received: by 2002:ab0:26c2:0:0:0:0:0 with HTTP; Sun, 5 Jan 2020 20:08:59 -0800 (PST)
+Reply-To: klaus.peterschuster07@gmail.com
+From:   klaus peter schuster <ericmonvi@gmail.com>
+Date:   Mon, 6 Jan 2020 05:08:59 +0100
+Message-ID: <CAAtLeY-8ahiE+YnxPnd16_W0yyAo2fwe09W=nHQqPoJn6vyyUw@mail.gmail.com>
+Subject: Darlehensgeld an Einzelpersonen und Fachleute in weniger als 72 Stunden
+To:     undisclosed-recipients:;
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 Sender: util-linux-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-On Sat, 4 Jan 2020 at 16:37, Jinke Fan <fanjinke@hygon.cn> wrote:
->
-> Hi Mike:
-> Yes, We do check the time in BIOS Menu after first reboot.
->
-> We do some further tests in our X570 platform:
-> * "AMD Ryzen 7 3700X" with mainboard "ASUS ROG STRIX X570-E GAMING".
-> * OS is Fedora rawhide, with default Kernel version which is shown as
-> follows:
-> $uname -a
-> Linux bogon 5.5.0-0.rc4.git0.1.fc32.x86_64 #1 SMP Mon Dec 30 06:32:36
-> UTC 2019 x86_64 x86_64 x86_64 GNU/Linux
->
-> And we upgrade/downgrade BIOS version from 1005/1201/1404/1405, and we
-> found out that :
-> * OLD BIOS version 1005/1201 does not reset the rtc time and keep the
-> setup rtc time after reboot.
-> * NEW BIOS version 1404/1405 DO reset the rtc time to 2019/01/01 after
-> reboot.
->
-> Detailed pictures of the BIOS time after reboot is shown in [2],
->
-> We suspect the BIOS 1201->1404 upgrade might cause this issue.
->  From x570 BIOS changelog, we found that the big difference between
-> 1201/1404 is the AMD AM4 PI upgrade from AGESA 1.0.0.3ABBA to AM4 combo
-> PI 1.0.0.4 patch B,
+Hallo,
 
-The changelog for my BIOS are the same [1]. Unfortunately, I will not
-able downgrade to BIOS of 0404 ver for checking assumption because
-changelog description of ver 1404 contains warning "* You will not be
-able to downgrade your BIOS after updating to this BIOS version"
+Sind Sie in einer schwierigen Situation, f=C3=BCr die Sie einen Kredit
+suchen? Ben=C3=B6tigen Sie eine Finanzierung, um eine Schuld zu begleichen
+oder eine Aktivit=C3=A4t zu finanzieren? Brauchen Sie einen
+Verbraucherkredit, einen Wohnungsbaukredit, einen Privatkredit, einen
+Hypothekarkredit, einen Investitionskredit, eine Kredittilgung oder
+andere?
 
-> If possible, please tell us about the BIOS version and your hardware
-> platform, which can be get from BIOS UI or using "dmidecode"
-> in Linux env.
+Ich bin ein privater Investor. Ich stelle Ihnen kurz-, mittel- und
+langfristig Kredite zur Verf=C3=BCgung. Meine Finanzierungsbedingungen sind
+sehr einfach und mein Zinssatz betr=C3=A4gt 3% pro Jahr.
 
-The version of my BIOS is the latest. It is 1405 for my motherboard.
-Here is "dmidecode" paste: https://pastebin.com/akBPAvZJ
+F=C3=BCr alle Anfragen stehe ich Ihnen weiterhin zur Verf=C3=BCgung.
 
-[1] https://www.asus.com/Motherboards/ROG-Strix-X570-I-Gaming/HelpDesk_BIOS/
+Danke, dass Sie mich per Mail kontaktieren : klaus.peterschuster07@gmail.co=
+m
 
---
-Best Regards,
-Mike Gavrilov.
+Mit freundlichen Gr=C3=BC=C3=9Fen.
+
+
+klaus Peter Schuster
+Emprunt24
+https://emprunt24.com/de/
