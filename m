@@ -2,131 +2,72 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 1120F13640C
-	for <lists+util-linux@lfdr.de>; Fri, 10 Jan 2020 00:52:50 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 5A82B138B9E
+	for <lists+util-linux@lfdr.de>; Mon, 13 Jan 2020 07:06:39 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1729452AbgAIXws (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Thu, 9 Jan 2020 18:52:48 -0500
-Received: from mail-io1-f68.google.com ([209.85.166.68]:39718 "EHLO
-        mail-io1-f68.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1729201AbgAIXws (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Thu, 9 Jan 2020 18:52:48 -0500
-Received: by mail-io1-f68.google.com with SMTP id c16so79969ioh.6
-        for <util-linux@vger.kernel.org>; Thu, 09 Jan 2020 15:52:46 -0800 (PST)
+        id S1729293AbgAMGGi (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Mon, 13 Jan 2020 01:06:38 -0500
+Received: from mail-oi1-f196.google.com ([209.85.167.196]:47030 "EHLO
+        mail-oi1-f196.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1725909AbgAMGGh (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Mon, 13 Jan 2020 01:06:37 -0500
+Received: by mail-oi1-f196.google.com with SMTP id 13so7185914oij.13
+        for <util-linux@vger.kernel.org>; Sun, 12 Jan 2020 22:06:37 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=tycho-ws.20150623.gappssmtp.com; s=20150623;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=7tzo8AsFSbwAy6evH5W3HWw7LXJOsvnf1e9CdRxBSjg=;
-        b=nxsj5bhPNgwjt/bB+dPqY5w4r96C27n41JMbXzwtZOeK6IqywySTYdP1cPPNpkrxfs
-         xlg1lvQR2PVaAr7v6WquOMG+nYu4gYM7DbEX+43DtlYhxtdOa8jFYq6mcVon6FkWmeT+
-         cm1F1J4dbZ1RYg1k3A16o7LD7tmYeDBudc4kUU5BDbAH7ialRGVBX8hypTk6C8laO2ng
-         rV7Ya4Q5KsuUq39nMGME+wSlCGJ9Diof0da7HbV6xk4mwMvulEyKNlTBe1VWmQ4irqRF
-         8sRIDNhHyC02ybrYkfM09AwYkrXXDEh1UQxnNCKnMdoLrQ9TeH47z9M53a+Qdneth8u0
-         rAqA==
+        d=gmail.com; s=20161025;
+        h=mime-version:reply-to:from:date:message-id:subject:to;
+        bh=Rjbe3pVeMfYVPdmVklZ4b2stSqI32LIYp+bn/8NyJvk=;
+        b=TUaS3sXE8jPggVEURnJOHEUQ4jtFsZLtyEQ3wXlKRK2Q7tU5YP2+veh9IlwYxup9vL
+         57wsaYskHeAmjVb+EHy2kK7gHrigIO0xluq4+jz4yPUm0zB+JuwEwLiCAP7hvrwM5SYB
+         pIZUCNojAuW1eOsAoTkZS+pl/DDuIDEA9kgrjgJPI6KqbYP2nbrNu7bgX482Dch+aQqC
+         VrnQ6a3KnVgxYm0BRviSdlHZDp/hC0DadAYTw1xSZkm67sYl9VM9sFjYE8LUfSTZllYc
+         fRG9FMXWmv2D+qvAx9qNvBDo/M6spkhFCCqVncgOHXyuIsqtJ11dNA8BtTAm+nbshDb6
+         NXAQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=7tzo8AsFSbwAy6evH5W3HWw7LXJOsvnf1e9CdRxBSjg=;
-        b=C2NhJWiYl2i06b2moOFSd+OAoUr/Ar2YxJMUj9SQ5xFgAK9bd1FCAO0WlneNkwaHtm
-         KVWuAy4laPTJwWYk+dKdsuGWT+5UjYT7grZra8zBdtOSW5QCPulY92CajtyTMZzQ3xso
-         SDD9e6LKZAK/wlbnplGPpiTxxnN3wcB0lp9v2Ifk6kswu2ucr9vZ/RC9AUqZBN0pdziq
-         o3KY2ugpuAkLgY+GTatH3bdZfPss65z6gwH4sqquakZx2+G8nLRtJeaLC+jIzXLn7ARt
-         lTkxXVpO5LO5h4DWKc1WQIO6rfveb+mh+gchF+tWGusDo2JluHNaoIehT/+0kUFGLsct
-         8OXA==
-X-Gm-Message-State: APjAAAXBUHpCdovGrxmimCZURUBWX5eYr68BFvb/1XDlhyMc42Z3QnwT
-        sfY/nF71zvUeOkSzZI8uW17NNbDlDBY=
-X-Google-Smtp-Source: APXvYqyf8k5G6LQh4GW5MJ/7MNFTiHNZoJ7pxM0XYWtDlxIzIel7ofT0JS6ql6KoDQi0TV+6VIV3pA==
-X-Received: by 2002:a5d:9e4a:: with SMTP id i10mr67573ioi.177.1578613965885;
-        Thu, 09 Jan 2020 15:52:45 -0800 (PST)
-Received: from cisco.hsd1.co.comcast.net ([2601:282:902:b340:8cce:f495:841a:bcdb])
-        by smtp.gmail.com with ESMTPSA id a82sm123705ill.38.2020.01.09.15.52.44
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 09 Jan 2020 15:52:45 -0800 (PST)
-From:   Tycho Andersen <tycho@tycho.ws>
-To:     util-linux@vger.kernel.org
-Cc:     Tycho Andersen <tycho@tycho.ws>
-Subject: [PATCH] libmount: do not unnecessarily chmod utab.lock
-Date:   Thu,  9 Jan 2020 16:52:41 -0700
-Message-Id: <20200109235241.31865-1-tycho@tycho.ws>
-X-Mailer: git-send-email 2.20.1
+        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
+         :subject:to;
+        bh=Rjbe3pVeMfYVPdmVklZ4b2stSqI32LIYp+bn/8NyJvk=;
+        b=ouAXMWJFtJMHJcvh5XqOTVGuGqTiqsSAcaPyZIDvrQ8e4TzAhBbWJh2yYQtUTC1Ib/
+         57Z/u+O3T8l+k6W+uug/ZlmLPYfz1+RtaYjcSzVKoT6MObsz6w3mYLfyuHIrXnUPGm4v
+         PTVMzLn5yIBUAchIE2LDhF1vk4zYVDCcwTDfWDP97BUzhqx33sCsuWnHQFNcohWm2fyJ
+         nEjcFlGky1B4MEgnn7S4FAFrl9lkEYvzkpsVIQNqGWHowSjAcgicjdUYiArCA9hMbfjL
+         hMVq+fvFCK2adUhBk1/S+MAIYjes4TKQV8FFvYfF/Q2CrtThMKKnupBe0szwjKlX1Pn8
+         q+LQ==
+X-Gm-Message-State: APjAAAXP36aNBYjZsg5eC6LBghZlRO8/QVA5Gg4SkRnsdlDw0cLcR35v
+        gk467zNcyupAVM7lk/eSOjIbR1B2JBymocAiMOk=
+X-Google-Smtp-Source: APXvYqwNtcMmiV+5jBj333w8g2IE7Z6tbCruQvfJFY39Wyf/N+4B/Dm+b8W5nF+VOdMV4pDRiJD/r9c70Od1RVDUXmw=
+X-Received: by 2002:aca:c5ca:: with SMTP id v193mr11630976oif.77.1578895597114;
+ Sun, 12 Jan 2020 22:06:37 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Received: by 2002:a9d:6f93:0:0:0:0:0 with HTTP; Sun, 12 Jan 2020 22:06:36
+ -0800 (PST)
+Reply-To: rickschaech@gmail.com
+From:   Rick Schaech <msjulianaalfred@gmail.com>
+Date:   Mon, 13 Jan 2020 02:06:36 -0400
+Message-ID: <CADBcy2KXMH66D_gg_+CsYTZX4iXeFpseQcKBX-_vV0EMeO8aew@mail.gmail.com>
+Subject: I wait for your swift response,
+To:     undisclosed-recipients:;
+Content-Type: text/plain; charset="UTF-8"
 Sender: util-linux-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-Before ecfeae90a294 ("libmount: Ensure utab.lock mode 644"), you could do
-something like:
+Dear, I'm Mr Rick Schaech, I am the General Account Auditor, Though i
+know we have not meet each other before but sometimes in life God have
+a reason of bringing two people from two different countries together
+as business partners or life partners.
 
-irc:/tmp umount --version
-umount from util-linux 2.27.1 (libmount 2.27.0: selinux, assert, debug)
-irc:/tmp mkdir foo bar
-irc:/tmp unshare -Urm
-irc:/tmp mount --bind foo bar
-irc:/tmp umount bar
-irc:/tmp echo $?
-0
+My dear friend, I have the sum of 15.7 Million USD i wish to put in
+your name due to the death of my late client who died several years
+ago as his next of kin column still remain blank. Though the internet
+medium is highly abuse these days but am assuring you that this
+transaction is legitimate and I am contacting you that we may have a
+deal, note for your cooperation and collaboration 40% of the sum will
+be for you while the other 60% will be for me as well. I wait for your
+swift response for more details. please forward your response to my
+personal E-mail: rickschaech@gmail.com
 
-However, afterwards, you get:
-
-/tmp unshare -Urm
-/tmp mount --bind foo bar
-/tmp umount bar
-umount: /tmp/bar: filesystem was unmounted, but failed to update userspace mount table.
-
-Because of the chmod failing:
-
-fchmod(3, 0644)                         = -1 EPERM (Operation not permitted)
-
-Let's figure out whether the chmod is necessary before doing it, and only
-do it if it is necessary. This won't fix cases where the system is already
-broken, but at least on healthy systems umount will behave as before.
-
-Signed-off-by: Tycho Andersen <tycho@tycho.ws>
----
- libmount/src/lock.c | 13 ++++++++++++-
- 1 file changed, 12 insertions(+), 1 deletion(-)
-
-diff --git a/libmount/src/lock.c b/libmount/src/lock.c
-index e6eefa13a..74b272f9d 100644
---- a/libmount/src/lock.c
-+++ b/libmount/src/lock.c
-@@ -204,6 +204,8 @@ static int lock_simplelock(struct libmnt_lock *ml)
- {
- 	const char *lfile;
- 	int rc;
-+	struct stat sb;
-+	const mode_t lock_mask = S_IRUSR|S_IWUSR|S_IRGRP|S_IROTH;
- 
- 	assert(ml);
- 	assert(ml->simplelock);
-@@ -225,12 +227,21 @@ static int lock_simplelock(struct libmnt_lock *ml)
- 		rc = -errno;
- 		goto err;
- 	}
--	rc = fchmod(ml->lockfile_fd, S_IRUSR|S_IWUSR|S_IRGRP|S_IROTH);
-+
-+	rc = fstat(ml->lockfile_fd, &sb);
- 	if (rc < 0) {
- 		rc = -errno;
- 		goto err;
- 	}
- 
-+	if ((sb.st_mode & lock_mask) != lock_mask) {
-+		rc = fchmod(ml->lockfile_fd, lock_mask);
-+		if (rc < 0) {
-+			rc = -errno;
-+			goto err;
-+		}
-+	}
-+
- 	while (flock(ml->lockfile_fd, LOCK_EX) < 0) {
- 		int errsv;
- 		if ((errno == EAGAIN) || (errno == EINTR))
--- 
-2.20.1
-
+Yours sincerely,
+Rick Schaech.
