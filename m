@@ -2,104 +2,88 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id D9FAD153C8C
-	for <lists+util-linux@lfdr.de>; Thu,  6 Feb 2020 02:23:15 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 6A242153F5B
+	for <lists+util-linux@lfdr.de>; Thu,  6 Feb 2020 08:47:42 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727415AbgBFBXO (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Wed, 5 Feb 2020 20:23:14 -0500
-Received: from mail-pl1-f193.google.com ([209.85.214.193]:42844 "EHLO
-        mail-pl1-f193.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1727170AbgBFBXO (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Wed, 5 Feb 2020 20:23:14 -0500
-Received: by mail-pl1-f193.google.com with SMTP id e8so1612607plt.9
-        for <util-linux@vger.kernel.org>; Wed, 05 Feb 2020 17:23:12 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=bytedance-com.20150623.gappssmtp.com; s=20150623;
-        h=subject:to:cc:references:from:message-id:date:user-agent
-         :mime-version:in-reply-to:content-language:content-transfer-encoding;
-        bh=ly7QMrJD1wFpzo1mwRrQopyY7s3GQDqh4mhC1DED/Eg=;
-        b=TIh15srcO0BqciG+GcXhW40QmOZmQtMCXkxdH5QM9U1I26kFIC4uH8Txl6EcIQyDgh
-         I4rSyPyPcbHr/DrwqjzdImc/LmM6/nVFQM56fJAILFxLNtka8fqk13RwpTkhSjKZwk1g
-         U2+GZLVsvuPc7QQSdSVh1iW3vFlJ6IOU3Vei7bUCqSTYtrPXYRlx0GaU7osmcnSxgmIN
-         q24HZjQVuvrFj9qvMclZYxvmXpbYlq5FNlJ8ypgX9StCbAKFCmFAYhLC2mvqPPifirS8
-         lGj6EgSwCoAOVLuAfV82lTXY9vCgeHjZOXpvInS0nNxd5JgbrI+Jawe5GfyTAidzxSyJ
-         OWHg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:subject:to:cc:references:from:message-id:date
-         :user-agent:mime-version:in-reply-to:content-language
-         :content-transfer-encoding;
-        bh=ly7QMrJD1wFpzo1mwRrQopyY7s3GQDqh4mhC1DED/Eg=;
-        b=oW96OlbnIrpYkPi1pXl/DeCX1n4qXXZGhlHSaqjWLHhERLS29fYgu4uOb7+CyCKGjX
-         Z2mvHi64P7SEJBXd8DLgJsuEkWmjd8jHZt61ZdjDdqE8cbC4FBGLmtgMW9uZl4Cui9iA
-         dORy80eXRtEWHE8KGcZhMtRKfF5gFweLiHgYxF64as54da7ZfEP/rexPgCNJsGNwwosz
-         tzlJWnDsY2V5ht8rOObTnvUgHKRq3nYYNYpYXV6oV0lbnWXqzF7/j1IBvBQiooifR7EX
-         jfPVrfnzo5waEpKIuIGB0Dt7oRcDtZftodJt23vzNfl6OWLfW2igclV91l4/t9tdT5H0
-         555w==
-X-Gm-Message-State: APjAAAWMhTHTGiwGWw8hTQlB5HaiZpF3IaNnPAS65rmyJC021fCmidDH
-        Ch6IohLj8yGguyTYMnbWM18XdIgAJ3Q=
-X-Google-Smtp-Source: APXvYqyTb/votVOJkCJD/XsM3+UHJ07iLEehKYaxEg7ykn0jmSBBsnrc3EFX3noQKw1xoDNfO6WekQ==
-X-Received: by 2002:a17:90b:11cd:: with SMTP id gv13mr1208556pjb.94.1580952191308;
-        Wed, 05 Feb 2020 17:23:11 -0800 (PST)
-Received: from [10.200.194.201] ([103.136.220.69])
-        by smtp.gmail.com with ESMTPSA id y64sm985149pgb.25.2020.02.05.17.23.08
-        (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-        Wed, 05 Feb 2020 17:23:10 -0800 (PST)
-Subject: Re: [Phishing Risk] [External] irqtop todo note
-To:     Karel Zak <kzak@redhat.com>, kerolasa@gmail.com
-Cc:     util-linux <util-linux@vger.kernel.org>
-References: <CAG27Bk0x4LZJSb-0PXKR8VLTmoPiZdKBPtfB4N2HPnPjxbrSKQ@mail.gmail.com>
- <3e1bf9df-b530-738b-fc7f-00e4cf144420@bytedance.com>
- <20200106105256.3phh5bdgs4qgqzpp@10.255.255.10>
-From:   zhenwei pi <pizhenwei@bytedance.com>
-Message-ID: <69b8ca4c-aa39-0c8f-1c48-e9ef514f55d8@bytedance.com>
-Date:   Thu, 6 Feb 2020 09:20:53 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
- Thunderbird/60.6.1
+        id S1727917AbgBFHrl (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Thu, 6 Feb 2020 02:47:41 -0500
+Received: from smtp3.tjgo.jus.br ([45.71.214.101]:37764 "EHLO mx2.tjgo.jus.br"
+        rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org with ESMTP
+        id S1727987AbgBFHrl (ORCPT <rfc822;util-linux-ng@vger.kernel.org>);
+        Thu, 6 Feb 2020 02:47:41 -0500
+X-Greylist: delayed 672 seconds by postgrey-1.27 at vger.kernel.org; Thu, 06 Feb 2020 02:47:39 EST
+Received: from sv-email-p02.tjgo.jus.br (sv-email-p02.tjgo.jus.br [45.71.214.97])
+        by mx2.tjgo.jus.br (Postfix) with ESMTPS id 0819216853D;
+        Thu,  6 Feb 2020 04:36:15 -0300 (-03)
+Received: from localhost (localhost [127.0.0.1])
+        by sv-email-p02.tjgo.ldc (Postfix) with ESMTP id 7F6BE63EE6;
+        Thu,  6 Feb 2020 04:36:13 -0300 (-03)
+Received: from sv-email-p02.tjgo.jus.br ([127.0.0.1])
+        by localhost (sv-email-p02.tjgo.ldc [127.0.0.1]) (amavisd-new, port 10032)
+        with ESMTP id FOskmj8WW-fA; Thu,  6 Feb 2020 04:36:13 -0300 (-03)
+Received: from localhost (localhost [127.0.0.1])
+        by sv-email-p02.tjgo.ldc (Postfix) with ESMTP id 2B092638C2;
+        Thu,  6 Feb 2020 04:36:10 -0300 (-03)
+DKIM-Filter: OpenDKIM Filter v2.10.3 sv-email-p02.tjgo.ldc 2B092638C2
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=tjgo.jus.br;
+        s=DB6EB6C0-19CB-11E9-B608-74AECE7D716B; t=1580974570;
+        bh=rAAC+89dQJN94OO5dgai3uz7CZ6whHR4SSA5qlsIk4c=;
+        h=Date:From:Message-ID:MIME-Version;
+        b=CDQE6q5fUceIgIJfesbYW4lYejUJ8b4JfwxbPyMxJz1ghtgDA175ug3RPkDoe0ifC
+         5Ilw/jUzF5Pw3Y9uerJ5g9S9/xOwIss2nOLQ9zDHjBHDXWJkKwOTC6TZ4YQOZxrYkO
+         1HQAOVQvkGxKAcvLS29KksfjfEt9gu1vUj3CIohIkJqgj8qhBt8BSJwsunju5RNUQq
+         Hx1FZojnTrUFlCPsn5+c507wtcsKUvBz0zztqkioDZDEdMoABWjF/p+hEBdZ1DitUk
+         bUf+VneSKvz7Aan63QjNJhXW73yOLXNYY178+gXo8Xgncv9PXplj4pPk3m2b88SZ+w
+         yWqf+cxtU3aUA==
+X-Virus-Scanned: amavisd-new at sv-email-p02.tjgo.ldc
+Received: from sv-email-p02.tjgo.jus.br ([127.0.0.1])
+        by localhost (sv-email-p02.tjgo.ldc [127.0.0.1]) (amavisd-new, port 10026)
+        with ESMTP id wI-rv4fEftRM; Thu,  6 Feb 2020 04:36:10 -0300 (-03)
+Received: from sv-email-p00.tjgo.ldc (sv-email-p00.tjgo.ldc [45.71.214.95])
+        by sv-email-p02.tjgo.ldc (Postfix) with ESMTP id E3CA162397;
+        Thu,  6 Feb 2020 04:36:01 -0300 (-03)
+Date:   Thu, 6 Feb 2020 04:36:01 -0300 (BRT)
+From:   Viviane Jose Pereira <vjpereira@tjgo.jus.br>
+Reply-To: Guo Ningning <guoninh2@gmail.com>
+Message-ID: <57354115.1019140.1580974561846.JavaMail.zimbra@tjgo.jus.br>
+Subject: Re:
 MIME-Version: 1.0
-In-Reply-To: <20200106105256.3phh5bdgs4qgqzpp@10.255.255.10>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+X-Originating-IP: [199.249.230.119]
+X-Mailer: Zimbra 8.8.15_GA_3829 (zclient/8.8.15_GA_3829)
+Thread-Index: tECuYWIYHefUNGkWwnsgNIL4bkx6Pg==
+Thread-Topic: 
+X-HSC-Mail_Inspector-From: vjpereira@tjgo.jus.br
+X-HSC-Mail_Inspector-IP: 45.71.214.97
+X-HSC-Mail_Inspector-Point: 1
+X-HSC-Mail_Inspector-ID: 0819216853D.ADB03
+X-HSC-Brasil-HSC_MailInspector: Mensagem OK
+X-HSC-Brasil-HSC_MailInspector-SpamCheck: Nao e SPAM,
+        HSC MailInspector (cached, Pontuacao=0.267, requerido 6,
+        BAYES_00 -3.00, DKIM_VALID_AU -0.10, HELO_NO_DOMAIN 0.00,
+        MISSING_HEADERS 1.02, RDNS_NONE 0.79, REPLYTO_WITHOUT_TO_CC 1.55)
+X-HSC-Brasil-HSC_MailInspector-From: vjpereira@tjgo.jus.br
+X-Spam-Status: No
+To:     unlisted-recipients:; (no To-header on input)
 Sender: util-linux-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-On 1/6/20 6:52 PM, Karel Zak wrote:
-> On Sun, Jan 05, 2020 at 11:36:26AM +0800, zhenwei pi wrote:
->> On 1/4/20 6:20 PM, Sami Kerola wrote:
->>
->>> Hello,
->>>
->>> I notice irqtop to todo file, so I decided to look into that. Changes
->>> in my branch are nowhere near ready to be considered to upstream
->>> ready, so no pull request yet maybe sometime later January or early
->>> February. Meanwhile if someone else is working with the same I'm sure
->>> efforts can be combined.
->>>
->>> https://github.com/kerolasa/util-linux/commits/irqtop
->>>
->>> Things to fix with my work.
->>>
->>> * Save git history from https://github.com/pacepi/irqtop
->>> * Write proper commit messages
->>> * Use smartcolums
->>> * Change output header to include hostname and iso timestamp
->>> * Use signalfd to catch signals
->>> * Use timerfd  for periodic execution
->>> * Make main() shorter / simpler by moving bits and bobs to functions
->>> * And the things I don't know yet, but without doubt there will be some
->>>
->> Thanks for these works. Maybe it's ready to be merged into upstream.
->> Hey, Karel, how do you think about this?
-> 
-> Later, for v2.35 is too late ;-)
-> 
->      Karel
-> 
 
-Hey, I notice that v2.35 has been released. How about continuing this work?
 
--- 
-zhenwei pi
+--=20
+Hallo,=20
+
+ich entschuldige mich f=C3=BCr die St=C3=B6rung Ihrer Privatsph=C3=A4re, bi=
+tte lassen Sie mich damit beginnen, mich vorzustellen, ich bin Miss Guo Nin=
+gning, Executive Vice President Banking Division.Agricultural Bank of China=
+, Beijing, China. Ich nehme Kontakt mit Ihnen aufbez=C3=BCglich einer =C3=
+=A4u=C3=9Ferst dringenden und vertraulichen Angelegenheit.
+
+Wenn Sie mir die Gelegenheit dazu geben w=C3=BCrden, werde ich Ihnen bei Ih=
+rer Antwort Einzelheiten mitteilen.F=C3=BCr weitere Informationen wenden Si=
+e sich bitte an: guoninh2@gmail.com
+
+Mit freundlichen Gr=C3=BC=C3=9Fen,Guo Ningning
