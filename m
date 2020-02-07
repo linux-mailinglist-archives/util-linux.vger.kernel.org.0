@@ -2,18 +2,17 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 2EC4D156062
+	by mail.lfdr.de (Postfix) with ESMTP id A44A3156063
 	for <lists+util-linux@lfdr.de>; Fri,  7 Feb 2020 22:00:46 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727071AbgBGVAo (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        id S1727075AbgBGVAo (ORCPT <rfc822;lists+util-linux@lfdr.de>);
         Fri, 7 Feb 2020 16:00:44 -0500
-Received: from mail-qv1-f66.google.com ([209.85.219.66]:42330 "EHLO
-        mail-qv1-f66.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1727065AbgBGVAo (ORCPT
-        <rfc822;util-linux-ng@vger.kernel.org>);
-        Fri, 7 Feb 2020 16:00:44 -0500
-Received: by mail-qv1-f66.google.com with SMTP id dc14so266661qvb.9
-        for <util-linux-ng@vger.kernel.org>; Fri, 07 Feb 2020 13:00:43 -0800 (PST)
+Received: from mail-qv1-f67.google.com ([209.85.219.67]:41855 "EHLO
+        mail-qv1-f67.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1727071AbgBGVAo (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Fri, 7 Feb 2020 16:00:44 -0500
+Received: by mail-qv1-f67.google.com with SMTP id s7so270817qvn.8
+        for <util-linux@vger.kernel.org>; Fri, 07 Feb 2020 13:00:43 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=mime-version:reply-to:from:date:message-id:subject:to;
@@ -29,14 +28,14 @@ X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         h=x-gm-message-state:mime-version:reply-to:from:date:message-id
          :subject:to;
         bh=8cDRXBFOpE9J1p6S5H+HXSQg9q3m7pUJ3iUuQ5MPcDc=;
-        b=pWT2705W4Pduoe7+6Jpf/2qP6hedhiyATBOqAHOdzBKgVm9z1axKTCkoMn11fAbwHM
-         tWDO7KdU0Kl6ZMoHjTmVN5+ElQFusbHrUCBCQEbYYy+zHchAT1lu6BT519V4muzk5jyT
-         uPk4lFKY62OgFW+CQ5sZVgtXQ2QFkdMLZyIX8giaX1QJ7rINbQeyKYc8dRAFGTMyQgpf
-         4puTRHgWUJtUahahQHnllLS9k21Jgci/6u+4rrTUj/7GskMdYCpkFp66ooS2HhGAEtPt
-         8gXsDrlePboTKHu0CqVRE62GYxD6NnhpoOrRTPv/qs7S+gzAcOAvn1KvHro6IOHzLIKo
-         dDfQ==
-X-Gm-Message-State: APjAAAWNg4kqavu0RlMcPk/G1Ku5Y3LkTDCokbZRmTz+LzkSOUIOGRV2
-        5IEILkjAYSiwD0Oa01Wcoe5WVCujhljoT9RBdos=
+        b=lGdhyQgC7Kf/2kpPdemWr1mGpb3DMBYNbdqSI1FfrahvbVwOK52yDPXNxYaj35pe/2
+         aEnR0xANno9Tj1i2behv1O0BLwKI6JiNUArProU7jvBzalGuNnPkY0+qvxgFQcanoLMR
+         k+x8QHMScpv0CPdICUhY3ArlH+siVcPWwOWdf9EavjmJx1QW2dF0T7kWRiRuq65J0j6O
+         CelQ/fWrnHJoSVyVhE0bs++q4f8XSChndDjDyPvsjtYxn777I7HyCMMroEsGyjORiuQ4
+         H9uCA2jIoRgLqDdhyWU3DCfsOOtZA5flYwGWkDYWAXEI2i5G8me0lfdW3gD7k5daIbyW
+         bPHw==
+X-Gm-Message-State: APjAAAWxEnZtRaQaV4yTYkkFOMBDyzZwFZxnDCIxOTkB3Lu9D8uNBko2
+        ap+pNpg66O/gF7zl9ulH6NAlzzVEO7h0onOGqtE=
 X-Google-Smtp-Source: APXvYqxm3n9p6vv3/QqiG0IqyAmFFhelYlC/WsRgft1WHs2KLCkzVckmfrOwKOnDPoISvNw0J6SDtxbT9tOsC4jYTw8=
 X-Received: by 2002:a0c:fa43:: with SMTP id k3mr240617qvo.229.1581109243361;
  Fri, 07 Feb 2020 13:00:43 -0800 (PST)
