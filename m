@@ -2,91 +2,113 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 05602173E22
-	for <lists+util-linux@lfdr.de>; Fri, 28 Feb 2020 18:15:34 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 4CB94174D18
+	for <lists+util-linux@lfdr.de>; Sun,  1 Mar 2020 13:08:12 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726738AbgB1RPU (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Fri, 28 Feb 2020 12:15:20 -0500
-Received: from zeniv.linux.org.uk ([195.92.253.2]:34502 "EHLO
-        ZenIV.linux.org.uk" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726562AbgB1RPT (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Fri, 28 Feb 2020 12:15:19 -0500
-Received: from viro by ZenIV.linux.org.uk with local (Exim 4.92.3 #3 (Red Hat Linux))
-        id 1j7jE8-002VQ3-Fz; Fri, 28 Feb 2020 17:15:04 +0000
-Date:   Fri, 28 Feb 2020 17:15:04 +0000
-From:   Al Viro <viro@zeniv.linux.org.uk>
-To:     Miklos Szeredi <miklos@szeredi.hu>
-Cc:     Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        Ian Kent <raven@themaw.net>, Karel Zak <kzak@redhat.com>,
-        Miklos Szeredi <mszeredi@redhat.com>,
-        James Bottomley <James.Bottomley@hansenpartnership.com>,
-        Steven Whitehouse <swhiteho@redhat.com>,
-        David Howells <dhowells@redhat.com>,
-        Christian Brauner <christian@brauner.io>,
-        Jann Horn <jannh@google.com>,
-        "Darrick J. Wong" <darrick.wong@oracle.com>,
-        Linux API <linux-api@vger.kernel.org>,
-        linux-fsdevel <linux-fsdevel@vger.kernel.org>,
-        lkml <linux-kernel@vger.kernel.org>,
-        Lennart Poettering <lennart@poettering.net>,
-        Zbigniew =?utf-8?Q?J=C4=99drzejewski-Szmek?= <zbyszek@in.waw.pl>,
-        util-linux@vger.kernel.org
-Subject: Re: [PATCH 00/17] VFS: Filesystem information and notifications [ver
- #17]
-Message-ID: <20200228171504.GK23230@ZenIV.linux.org.uk>
-References: <CAOssrKfaxnHswrKejedFzmYTbYivJ++cPes4c91+BJDfgH4xJA@mail.gmail.com>
- <1c8db4e2b707f958316941d8edd2073ee7e7b22c.camel@themaw.net>
- <CAJfpegtRoXnPm5_sMYPL2L6FCZU52Tn8wk7NcW-dm4_2x=dD3Q@mail.gmail.com>
- <3e656465c427487e4ea14151b77d391d52cd6bad.camel@themaw.net>
- <CAJfpegu5xLcR=QbAOnUrL49QTem6X6ok7nPU+kLFnNHdPXSh1A@mail.gmail.com>
- <20200227151421.3u74ijhqt6ekbiss@ws.net.home>
- <ba2b44cc1382c62be3ac896a5476c8e1dc7c0230.camel@themaw.net>
- <CAJfpeguXPmw+PfZJFOscGLm0oe7dUQY4CYXazx9=x020Fbe86A@mail.gmail.com>
- <20200228122712.GA3013026@kroah.com>
- <CAJfpegsGgjnyZiB+ionfnnk+_e+5oaC-5nmGq+mLxWs1RcwsPw@mail.gmail.com>
+        id S1726751AbgCAMIK (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Sun, 1 Mar 2020 07:08:10 -0500
+Received: from mx.cream-club.co.uk ([162.13.98.146]:63817 "EHLO
+        cream-club.co.uk" rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org
+        with ESMTP id S1725877AbgCAMIK (ORCPT
+        <rfc822;util-linux-ng@vger.kernel.org>);
+        Sun, 1 Mar 2020 07:08:10 -0500
+X-Greylist: delayed 7513 seconds by postgrey-1.27 at vger.kernel.org; Sun, 01 Mar 2020 07:08:10 EST
+Received: from cream-group.co.uk (UnknownHost [120.132.126.118]) by cream-club.co.uk with SMTP;
+   Wed, 12 Feb 2020 20:39:11 +0000
+Date:   Thu, 13 Feb 2020 4:39:04 +0800
+From:   "=?utf-8?Q?=D0=9C=D1=81=D1=82=D0=B8=D1=81=D0=BB=D0=B0=D0=B2_=D0=A0=D0=BE=D0=BC=D0=B0=D0=BD=D0=BE=D0=B2?=" 
+        <brian.cantle@cream-group.co.uk>
+Organization: ivdfigle
+X-Priority: 3 (Normal)
+Message-ID: <4543754945.20200213043904@cream-group.co.uk>
+To:     util-linux-ng@vger.kernel.org
+Subject: =?utf-8?Q?=D0=90=D0=BA=D1=82=D0=B8=D0=B2=D1=8B_=D0=B1=D0=B0=D0=BD=D0=BA=D1=80=D0=BE=D1=82=D1=81=D1=82=D0=B2=D0=B0_=D0=B2_=D0=BE=D1=82=D0=B4=D0=B5=D0=BB_=D0=9E=D0=9C=D0=A2=D0=A1?=
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <CAJfpegsGgjnyZiB+ionfnnk+_e+5oaC-5nmGq+mLxWs1RcwsPw@mail.gmail.com>
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 8bit
 Sender: util-linux-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-On Fri, Feb 28, 2020 at 05:24:23PM +0100, Miklos Szeredi wrote:
-> On Fri, Feb 28, 2020 at 1:27 PM Greg Kroah-Hartman
-> <gregkh@linuxfoundation.org> wrote:
-> 
-> > > Superblocks and mounts could get enumerated by a unique identifier.
-> > > mnt_id seems to be good for mounts, s_dev may or may not be good for
-> > > superblock, but  s_id (as introduced in this patchset) could be used
-> > > instead.
-> >
-> > So what would the sysfs tree look like with this?
-> 
-> For a start something like this:
-> 
-> mounts/$MOUNT_ID/
->   parent -> ../$PARENT_ID
->   super -> ../../supers/$SUPER_ID
->   root: path from mount root to fs root (could be optional as usually
-> they are the same)
->   mountpoint -> $MOUNTPOINT
->   flags: mount flags
->   propagation: mount propagation
->   children/$CHILD_ID -> ../../$CHILD_ID
-> 
->  supers/$SUPER_ID/
->    type: fstype
->    source: mount source (devname)
->    options: csv of mount options
+КП. Оборудование.
 
-Oh, wonderful.  So let me see if I got it right - any namespace operation
-can create/destroy/move around an arbitrary amount of sysfs objects.
-Better yet, we suddenly have to express the lifetime rules for struct mount
-and struct superblock in terms of struct device garbage.
+Поворотный стол 7400-0227.Стоимость 300000р.
+Вертикально сверлильный 2с132.Год 1991.Стоимость 150000р.
+Вaльцы 5х2000мм.Год 1989.Стоимость 320000р.
+Горизонтально фрезерный 6р82.Год 1988.Стоимость 200000р.
+Гильотина Pels 6.3x3150 Механическая.Год 1990.Стоимость 420000р.
+Вертикально сверлильный 2н135.Год 1989.Стоимость 130000р.
+Фрезерный консольный широкоуниверсальный 6т80ш.Год 1990.Стоимость 250000р.
+Токарно-винторезный 16в20.Год 1991.Стоимость 250000р.
+Пресс К2326.Год 1986.Стоимость 250000р.
+Токарно-винторезный 16К40Ф101.Год 1997.Стоимость 3500000р.
+Долбежный 7м430.Год 1987.Стоимость 600000р.
+Стaнок сверлильный Стоимость 40000р.
+Токарно карусельный 1510.Стоимость 1200000р.
+Вертикально фрезерный F2-250.Год 1980.Стоимость 280000р.
+Продольно строгальный 7110.Год 1975.Стоимость 1200000р.
+Настольный сверлильный 2м112.Год 1992.Стоимость 25000р.
+Вертикально фрезерный ВМ127М.Год 1985.Стоимость 420000р.
+Токарно-винторезный 1м63бф101.Год 1992.Стоимость 1750000р.
+Токарно-винторезный CU500рМЦ 1500.Год 1992.Стоимость 500000р.
+Координатно-расточной станок 2Е440А.Год 1990.Стоимость 600000р.
+Оптико-шлифовальный станок GlS 80А.Год 1985.Стоимость 550000р.
+Токарно-винторезный КУСОН.Год 1990.Стоимость 250000р.
+Листогиб ERFURT PKXA 100X4000.Год 1990.Стоимость 470000р.
+Вертикально сверлильный 2н150.Год 1992.Стоимость 200000р.
+Радиально сверлильный ОС3000.Год 1991.Стоимость 120000р.
+Токарно-винторезный 1м63 РМЦ 1500.Год 1993.Стоимость 400000р.
+Пресс гидравлический 60т.Год 1990.Стоимость 160000р.
+Гильотина НД3318Г.Год 1991.Стоимость 300000р.
+Плоскошлифовальный 3д711вф11.Год 1990.Стоимость 450000р.
+Вертикально фрезерный 6Т12-29.Год 2006.Стоимость 750000р.
+Рaдиaльнo cвepлильный 2л53у.Год 1991.Стоимость 270000р.
+Вальцы 8х1700мм.Год 1990.Стоимость 270000р.
+Вaльцы 4х1500мм.Год 1982.Стоимость 120000р.
+Токарно-винторезный ТС-75.Год 1997.Стоимость 450000р.
+Молот пневматический М-415a.Год 1990.Стоимость 250000р.
+Высечные ножницы НК4516.Год 2012.Стоимость 300000р.
+Компpeccоp c pecивepом гapaжный.Год 1990.Стоимость 40000р.
+Свapочный полуaвтомaт вду-506c и пдго-510.Год 2015.Стоимость 90000р.
+Вертикально сверлильный 2н125.Год 1990.Стоимость 110000р.
+Токарно-винторезный УТ16ПМ.Год 1997.Стоимость 250000р.
+Механическая пила 872м.Год 1990.Стоимость 70000р.
+Гaзopeзкa Стоимость 30000р.
+Плоскошлифовальный 3Г71.Год 1990.Стоимость 250000р.
+Гильотина НД3316Г.Год 1992.Стоимость 260000р.
+Листогиб И2114.Год 1990.Стоимость 250000р.
+Вaльцы ИБ2424А.Год 1984.
+Листогиб BA150.Год 1988.Стоимость 1200000р.
+Станок поперечно строгальный 736.Год 1990.Стоимость 150000р.
+оснастка,инструмент,поворотные столы.
+Прессножницы НВ5222.Год 2009.Стоимость 250000р.
+Прессножницы Н-5222.Год 2009.Стоимость 250000р.
+Сварочный полуавтомат пдг 302.Год 2007.Стоимость 50000р.
+Токарно-винторезный 1к62д.Год 1995.Стоимость 250000р.
+Строгальный 7Б35.Год 1980.Стоимость 120000р.
+Пресс П6326.Год 1986.Стоимость 250000р.
+Радиально сверлильный 2532Л.Год 1991.Стоимость 300000р.
+Вaльцы ИБ2426.Год 1986.
+Тельфер 5т.Стоимость 100000р.
+Пpeccножницы c-229a.Год 1991.Стоимость 80000р.
+Листогиб ИБ1430А.Год 1991.Стоимость 1200000р.
+Рaдиaльнo cвepлильный 255.Год 1990.Стоимость 270000р.
+Токарно-винторезный 16к20.Год 1991.Стоимость 300000р.
+Пpeccножницы НВ5222.Год 1991.Стоимость 250000р.
+Две линии гальванического покрытия Итальянские.Год 2005.Стоимость 3500000р.
+Станок горизонтально-расточной 2А636-01.Год 1981.
+Гильотина Н3121.Год 1992.Стоимость 450000р.Механическая.
+Отрезной.Год 1992.Стоимость 50000р.
+Компрессорная станция НВ10Э.Год 1990.Стоимость 400000р.
+Плазменная резка с рельсами и ЧПУ.Год 2018.Стоимость 3000000р.
+Наждак диаметр 400мм.Год 1990.Стоимость 70000р.
+Фaльцeпpoкaтный cтд-14.Год 1990.Стоимость 80000р.
+Пресс КД2126Е.Год 1986.Стоимость 250000р.
+Пресс К2130 100т.Год 1986.Стоимость 500000р.
+Сборочная плита 1800х5500.Стоимость 380000р.
+Вepтикaльнo pacтoчнoй 2А78Н.Год 1988.Стоимость 150000р.
 
-I'm less than thrilled by the entire fsinfo circus, but this really takes
-the cake.
 
-In case it needs to be spelled out: NAK.
+79131971540
+
