@@ -2,15 +2,15 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id B69A5169185
-	for <lists+util-linux@lfdr.de>; Sat, 22 Feb 2020 20:29:30 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id B6E0A169186
+	for <lists+util-linux@lfdr.de>; Sat, 22 Feb 2020 20:29:33 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726730AbgBVT33 (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Sat, 22 Feb 2020 14:29:29 -0500
+        id S1726758AbgBVT3c (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Sat, 22 Feb 2020 14:29:32 -0500
 Received: from [167.172.150.84] ([167.172.150.84]:36634 "EHLO
         centos-s-1vcpu-2gb-nyc1-01.localdomain" rhost-flags-FAIL-FAIL-OK-FAIL)
         by vger.kernel.org with ESMTP id S1726550AbgBVT33 (ORCPT
-        <rfc822;util-linux@vger.kernel.org>);
+        <rfc822;util-linux-ng@vger.kernel.org>);
         Sat, 22 Feb 2020 14:29:29 -0500
 Received: from localhost (centos-s-1vcpu-2gb-nyc1-01 [127.0.0.1])
         by centos-s-1vcpu-2gb-nyc1-01.localdomain (Postfix) with SMTP id A00B317846;
