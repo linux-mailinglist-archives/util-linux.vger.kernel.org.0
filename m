@@ -2,37 +2,62 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id B6E0A169186
-	for <lists+util-linux@lfdr.de>; Sat, 22 Feb 2020 20:29:33 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 3100A16AA74
+	for <lists+util-linux@lfdr.de>; Mon, 24 Feb 2020 16:48:20 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726758AbgBVT3c (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Sat, 22 Feb 2020 14:29:32 -0500
-Received: from [167.172.150.84] ([167.172.150.84]:36634 "EHLO
-        centos-s-1vcpu-2gb-nyc1-01.localdomain" rhost-flags-FAIL-FAIL-OK-FAIL)
-        by vger.kernel.org with ESMTP id S1726550AbgBVT33 (ORCPT
-        <rfc822;util-linux-ng@vger.kernel.org>);
-        Sat, 22 Feb 2020 14:29:29 -0500
-Received: from localhost (centos-s-1vcpu-2gb-nyc1-01 [127.0.0.1])
-        by centos-s-1vcpu-2gb-nyc1-01.localdomain (Postfix) with SMTP id A00B317846;
-        Fri, 21 Feb 2020 16:52:13 +0000 (UTC)
-Received: from [202.214.172.245] by localhost; Fri, 21 Feb 2020 11:45:04 -0500
-Message-ID: <6g97-f9g$u-61@ojdiag>
-From:   "RECEIVE AND SECURE THIS MONEY FOR ME" <fta447447@gmail.com>
-Reply-To: "RECEIVE AND SECURE THIS MONEY FOR ME" <fta447447@gmail.com>
-To:     usman_albashir@37.com
-Subject: RECEIVE MONEY IN BANK ACCOUNT REPLY TO fta447447@gmail.com
-Date:   Fri, 21 Feb 20 11:45:04 GMT
-X-Mailer: Microsoft Outlook Express 5.00.2615.200
+        id S1727840AbgBXPsP (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Mon, 24 Feb 2020 10:48:15 -0500
+Received: from us-smtp-delivery-1.mimecast.com ([205.139.110.120]:50925 "EHLO
+        us-smtp-1.mimecast.com" rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org
+        with ESMTP id S1727299AbgBXPsO (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Mon, 24 Feb 2020 10:48:14 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+        s=mimecast20190719; t=1582559294;
+        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+         in-reply-to:in-reply-to:references:references;
+        bh=MocXDB8F8aioH5+jau+w9jbt3YBiZunDQwEfyEGW4Ms=;
+        b=NccovxpRrMrcSmeDRTpEznLHqWu4gq7zaEj3V7xZajJ+rOToewGm9NrDQKT8M7MJleRKvt
+        39AbGhF7DOK9zN0m24AIsQ89UvylmOsEi71UOkIgZy/yPI/Cvog+OymeBwJVZrTvdT7buP
+        CB0/MHNSLABPH3ffB7cWptwwrNEK3ZE=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-180-QCPFlqF7PEyF2rbPjnkN4A-1; Mon, 24 Feb 2020 10:48:06 -0500
+X-MC-Unique: QCPFlqF7PEyF2rbPjnkN4A-1
+Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.phx2.redhat.com [10.5.11.13])
+        (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+        (No client certificate requested)
+        by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 4DAC718C8C04;
+        Mon, 24 Feb 2020 15:48:05 +0000 (UTC)
+Received: from ws.net.home (ovpn-204-202.brq.redhat.com [10.40.204.202])
+        by smtp.corp.redhat.com (Postfix) with ESMTPS id 72CF5909F0;
+        Mon, 24 Feb 2020 15:48:04 +0000 (UTC)
+Date:   Mon, 24 Feb 2020 16:48:01 +0100
+From:   Karel Zak <kzak@redhat.com>
+To:     J William Piggott <elseifthen@gmx.com>
+Cc:     util-linux@vger.kernel.org
+Subject: Re: [v2 PATCH] hwclock: make glibc 2.31 compatible
+Message-ID: <20200224154801.ujnl7cahzr6crzcr@ws.net.home>
+References: <20200222010347.2743-1-elseifthen@gmx.com>
 MIME-Version: 1.0
-Content-Type: multipart/alternative;
-        boundary="A..C8.._3321CEA_"
-X-Priority: 3
-X-MSMail-Priority: Normal
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20200222010347.2743-1-elseifthen@gmx.com>
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.13
 Sender: util-linux-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
+On Fri, Feb 21, 2020 at 08:03:47PM -0500, J William Piggott wrote:
+>  sys-utils/hwclock.c | 71 +++++++++++++++++++++++----------------------
+>  1 file changed, 37 insertions(+), 34 deletions(-)
 
---A..C8.._3321CEA_--
+ Applied, thanks!
+
+    Karel
+
+-- 
+ Karel Zak  <kzak@redhat.com>
+ http://karelzak.blogspot.com
 
