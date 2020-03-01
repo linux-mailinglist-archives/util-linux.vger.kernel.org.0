@@ -2,113 +2,61 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 4CB94174D18
-	for <lists+util-linux@lfdr.de>; Sun,  1 Mar 2020 13:08:12 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 45A1C175381
+	for <lists+util-linux@lfdr.de>; Mon,  2 Mar 2020 07:00:55 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726751AbgCAMIK (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Sun, 1 Mar 2020 07:08:10 -0500
-Received: from mx.cream-club.co.uk ([162.13.98.146]:63817 "EHLO
-        cream-club.co.uk" rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org
-        with ESMTP id S1725877AbgCAMIK (ORCPT
-        <rfc822;util-linux-ng@vger.kernel.org>);
-        Sun, 1 Mar 2020 07:08:10 -0500
-X-Greylist: delayed 7513 seconds by postgrey-1.27 at vger.kernel.org; Sun, 01 Mar 2020 07:08:10 EST
-Received: from cream-group.co.uk (UnknownHost [120.132.126.118]) by cream-club.co.uk with SMTP;
-   Wed, 12 Feb 2020 20:39:11 +0000
-Date:   Thu, 13 Feb 2020 4:39:04 +0800
-From:   "=?utf-8?Q?=D0=9C=D1=81=D1=82=D0=B8=D1=81=D0=BB=D0=B0=D0=B2_=D0=A0=D0=BE=D0=BC=D0=B0=D0=BD=D0=BE=D0=B2?=" 
-        <brian.cantle@cream-group.co.uk>
-Organization: ivdfigle
-X-Priority: 3 (Normal)
-Message-ID: <4543754945.20200213043904@cream-group.co.uk>
-To:     util-linux-ng@vger.kernel.org
-Subject: =?utf-8?Q?=D0=90=D0=BA=D1=82=D0=B8=D0=B2=D1=8B_=D0=B1=D0=B0=D0=BD=D0=BA=D1=80=D0=BE=D1=82=D1=81=D1=82=D0=B2=D0=B0_=D0=B2_=D0=BE=D1=82=D0=B4=D0=B5=D0=BB_=D0=9E=D0=9C=D0=A2=D0=A1?=
+        id S1726654AbgCBGAy (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Mon, 2 Mar 2020 01:00:54 -0500
+Received: from mail.dsns.gov.ua ([194.0.148.101]:43052 "EHLO mail.dsns.gov.ua"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S1726030AbgCBGAy (ORCPT <rfc822;util-linux-ng@vger.kernel.org>);
+        Mon, 2 Mar 2020 01:00:54 -0500
+X-Greylist: delayed 15578 seconds by postgrey-1.27 at vger.kernel.org; Mon, 02 Mar 2020 01:00:53 EST
+Received: from localhost (localhost [127.0.0.1])
+        by mail.dsns.gov.ua (Postfix) with ESMTP id B0A9C1FE486A;
+        Sun,  1 Mar 2020 23:45:14 +0200 (EET)
+Received: from mail.dsns.gov.ua ([127.0.0.1])
+        by localhost (mail.dsns.gov.ua [127.0.0.1]) (amavisd-new, port 10032)
+        with ESMTP id RJuldkn77O1t; Sun,  1 Mar 2020 23:45:14 +0200 (EET)
+Received: from localhost (localhost [127.0.0.1])
+        by mail.dsns.gov.ua (Postfix) with ESMTP id 291741E851C5;
+        Sun,  1 Mar 2020 23:06:24 +0200 (EET)
+DKIM-Filter: OpenDKIM Filter v2.10.3 mail.dsns.gov.ua 291741E851C5
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dsns.gov.ua;
+        s=1E60DAC0-2607-11E9-81E6-7A77C2B36653; t=1583096784;
+        bh=njlCkWFc0hcw8eBX6ul4CN7Q0eDgIqGtksJn7ge99kc=;
+        h=Date:From:Message-ID:MIME-Version;
+        b=a6NZD46RhTx0aUex8mQyZ0JnoIi/W18fz6zXrCgswBIOGdugQWL4l0l9Clm5u/eaH
+         ytmrtkwwADuIpa6OkaOQbUvViEgD78fyn9ZrIHr3NCqdfDP2Wa9ovpjFIklhuVJLMz
+         6rlXytX2NTvETiCHdwKUWffQnm0KZmWhkRi/bfD+937aKR15INQjcyvJ6ckD4UIGOL
+         33ws8CHoa32V4vLWhffVilR0R+5OhuhZb/MPyilBMUZTSsDE9/oD/zrCjZr1JpwM22
+         O8d34MiIgTJTJtsjDwB9NMhX8IXHcDVAyJUk28DrVEyG4/AIEo8w1wcJb1Cnuhz5Tp
+         ZRUPNMrypiNFw==
+X-Virus-Scanned: amavisd-new at dsns.gov.ua
+Received: from mail.dsns.gov.ua ([127.0.0.1])
+        by localhost (mail.dsns.gov.ua [127.0.0.1]) (amavisd-new, port 10026)
+        with ESMTP id hwMPTOn9ra1b; Sun,  1 Mar 2020 23:06:24 +0200 (EET)
+Received: from mail.dsns.gov.ua (localhost [127.0.0.1])
+        by mail.dsns.gov.ua (Postfix) with ESMTP id 1186D1FA3250;
+        Sun,  1 Mar 2020 22:25:28 +0200 (EET)
+Date:   Sun, 1 Mar 2020 22:25:28 +0200 (EET)
+From:   Peter Wong <sport08@dsns.gov.ua>
+Reply-To: petrwong@hotmail.com
+Message-ID: <1458706204.3706812.1583094328013.JavaMail.zimbra@dsns.gov.ua>
+Subject: Hello
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
+X-Originating-IP: [5.154.174.49, 172.68.102.151]
+X-Mailer: Zimbra 8.8.15_GA_3899 (zclient/8.8.15_GA_3899)
+Thread-Index: 1ImuZUY29zf+ZKDu7If9pIQNleTlgQ==
+Thread-Topic: Hello
+To:     unlisted-recipients:; (no To-header on input)
 Sender: util-linux-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-КП. Оборудование.
-
-Поворотный стол 7400-0227.Стоимость 300000р.
-Вертикально сверлильный 2с132.Год 1991.Стоимость 150000р.
-Вaльцы 5х2000мм.Год 1989.Стоимость 320000р.
-Горизонтально фрезерный 6р82.Год 1988.Стоимость 200000р.
-Гильотина Pels 6.3x3150 Механическая.Год 1990.Стоимость 420000р.
-Вертикально сверлильный 2н135.Год 1989.Стоимость 130000р.
-Фрезерный консольный широкоуниверсальный 6т80ш.Год 1990.Стоимость 250000р.
-Токарно-винторезный 16в20.Год 1991.Стоимость 250000р.
-Пресс К2326.Год 1986.Стоимость 250000р.
-Токарно-винторезный 16К40Ф101.Год 1997.Стоимость 3500000р.
-Долбежный 7м430.Год 1987.Стоимость 600000р.
-Стaнок сверлильный Стоимость 40000р.
-Токарно карусельный 1510.Стоимость 1200000р.
-Вертикально фрезерный F2-250.Год 1980.Стоимость 280000р.
-Продольно строгальный 7110.Год 1975.Стоимость 1200000р.
-Настольный сверлильный 2м112.Год 1992.Стоимость 25000р.
-Вертикально фрезерный ВМ127М.Год 1985.Стоимость 420000р.
-Токарно-винторезный 1м63бф101.Год 1992.Стоимость 1750000р.
-Токарно-винторезный CU500рМЦ 1500.Год 1992.Стоимость 500000р.
-Координатно-расточной станок 2Е440А.Год 1990.Стоимость 600000р.
-Оптико-шлифовальный станок GlS 80А.Год 1985.Стоимость 550000р.
-Токарно-винторезный КУСОН.Год 1990.Стоимость 250000р.
-Листогиб ERFURT PKXA 100X4000.Год 1990.Стоимость 470000р.
-Вертикально сверлильный 2н150.Год 1992.Стоимость 200000р.
-Радиально сверлильный ОС3000.Год 1991.Стоимость 120000р.
-Токарно-винторезный 1м63 РМЦ 1500.Год 1993.Стоимость 400000р.
-Пресс гидравлический 60т.Год 1990.Стоимость 160000р.
-Гильотина НД3318Г.Год 1991.Стоимость 300000р.
-Плоскошлифовальный 3д711вф11.Год 1990.Стоимость 450000р.
-Вертикально фрезерный 6Т12-29.Год 2006.Стоимость 750000р.
-Рaдиaльнo cвepлильный 2л53у.Год 1991.Стоимость 270000р.
-Вальцы 8х1700мм.Год 1990.Стоимость 270000р.
-Вaльцы 4х1500мм.Год 1982.Стоимость 120000р.
-Токарно-винторезный ТС-75.Год 1997.Стоимость 450000р.
-Молот пневматический М-415a.Год 1990.Стоимость 250000р.
-Высечные ножницы НК4516.Год 2012.Стоимость 300000р.
-Компpeccоp c pecивepом гapaжный.Год 1990.Стоимость 40000р.
-Свapочный полуaвтомaт вду-506c и пдго-510.Год 2015.Стоимость 90000р.
-Вертикально сверлильный 2н125.Год 1990.Стоимость 110000р.
-Токарно-винторезный УТ16ПМ.Год 1997.Стоимость 250000р.
-Механическая пила 872м.Год 1990.Стоимость 70000р.
-Гaзopeзкa Стоимость 30000р.
-Плоскошлифовальный 3Г71.Год 1990.Стоимость 250000р.
-Гильотина НД3316Г.Год 1992.Стоимость 260000р.
-Листогиб И2114.Год 1990.Стоимость 250000р.
-Вaльцы ИБ2424А.Год 1984.
-Листогиб BA150.Год 1988.Стоимость 1200000р.
-Станок поперечно строгальный 736.Год 1990.Стоимость 150000р.
-оснастка,инструмент,поворотные столы.
-Прессножницы НВ5222.Год 2009.Стоимость 250000р.
-Прессножницы Н-5222.Год 2009.Стоимость 250000р.
-Сварочный полуавтомат пдг 302.Год 2007.Стоимость 50000р.
-Токарно-винторезный 1к62д.Год 1995.Стоимость 250000р.
-Строгальный 7Б35.Год 1980.Стоимость 120000р.
-Пресс П6326.Год 1986.Стоимость 250000р.
-Радиально сверлильный 2532Л.Год 1991.Стоимость 300000р.
-Вaльцы ИБ2426.Год 1986.
-Тельфер 5т.Стоимость 100000р.
-Пpeccножницы c-229a.Год 1991.Стоимость 80000р.
-Листогиб ИБ1430А.Год 1991.Стоимость 1200000р.
-Рaдиaльнo cвepлильный 255.Год 1990.Стоимость 270000р.
-Токарно-винторезный 16к20.Год 1991.Стоимость 300000р.
-Пpeccножницы НВ5222.Год 1991.Стоимость 250000р.
-Две линии гальванического покрытия Итальянские.Год 2005.Стоимость 3500000р.
-Станок горизонтально-расточной 2А636-01.Год 1981.
-Гильотина Н3121.Год 1992.Стоимость 450000р.Механическая.
-Отрезной.Год 1992.Стоимость 50000р.
-Компрессорная станция НВ10Э.Год 1990.Стоимость 400000р.
-Плазменная резка с рельсами и ЧПУ.Год 2018.Стоимость 3000000р.
-Наждак диаметр 400мм.Год 1990.Стоимость 70000р.
-Фaльцeпpoкaтный cтд-14.Год 1990.Стоимость 80000р.
-Пресс КД2126Е.Год 1986.Стоимость 250000р.
-Пресс К2130 100т.Год 1986.Стоимость 500000р.
-Сборочная плита 1800х5500.Стоимость 380000р.
-Вepтикaльнo pacтoчнoй 2А78Н.Год 1988.Стоимость 150000р.
 
 
-79131971540
-
+Can we talk now?
