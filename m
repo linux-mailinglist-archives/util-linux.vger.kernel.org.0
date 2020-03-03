@@ -2,115 +2,67 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 6986C175872
-	for <lists+util-linux@lfdr.de>; Mon,  2 Mar 2020 11:34:19 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id BE84C178223
+	for <lists+util-linux@lfdr.de>; Tue,  3 Mar 2020 20:03:14 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727450AbgCBKeP (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Mon, 2 Mar 2020 05:34:15 -0500
-Received: from us-smtp-1.mimecast.com ([207.211.31.81]:55388 "EHLO
-        us-smtp-delivery-1.mimecast.com" rhost-flags-OK-OK-OK-FAIL)
-        by vger.kernel.org with ESMTP id S1727198AbgCBKeO (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Mon, 2 Mar 2020 05:34:14 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-        s=mimecast20190719; t=1583145254;
-        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-         in-reply-to:in-reply-to:references:references;
-        bh=TnovkU9TRaPZCsU6BNaYIoozjytGGGEjCSLnwzS1uVA=;
-        b=NsjoU95o9fnVJW/Vdm9ZpAZWjpmX8yKiDmKP5MG8qHxOeL4Jx0/MYE0dMyVm2T3fa8LIeS
-        iaUhghid6qV7YH/iwKiUvp3qmjkGJMf1KOiyJGG0/rFgnE/Lx6TcZIRfdhhJf6vhsWYf7c
-        xRxIj3eczxSD+x/fwz9oDkkTiWmLCq0=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-65-tECFLaW-PiulY-HJ6apnyg-1; Mon, 02 Mar 2020 05:34:10 -0500
-X-MC-Unique: tECFLaW-PiulY-HJ6apnyg-1
-Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.phx2.redhat.com [10.5.11.14])
-        (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
-        (No client certificate requested)
-        by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 81C8410824EE;
-        Mon,  2 Mar 2020 10:34:07 +0000 (UTC)
-Received: from ws.net.home (ovpn-204-202.brq.redhat.com [10.40.204.202])
-        by smtp.corp.redhat.com (Postfix) with ESMTPS id 97F465DA2C;
-        Mon,  2 Mar 2020 10:34:03 +0000 (UTC)
-Date:   Mon, 2 Mar 2020 11:34:00 +0100
-From:   Karel Zak <kzak@redhat.com>
-To:     Miklos Szeredi <miklos@szeredi.hu>
-Cc:     Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        Ian Kent <raven@themaw.net>,
-        Miklos Szeredi <mszeredi@redhat.com>,
-        James Bottomley <James.Bottomley@hansenpartnership.com>,
-        Steven Whitehouse <swhiteho@redhat.com>,
-        David Howells <dhowells@redhat.com>,
-        viro <viro@zeniv.linux.org.uk>,
-        Christian Brauner <christian@brauner.io>,
-        Jann Horn <jannh@google.com>,
-        "Darrick J. Wong" <darrick.wong@oracle.com>,
-        Linux API <linux-api@vger.kernel.org>,
-        linux-fsdevel <linux-fsdevel@vger.kernel.org>,
-        lkml <linux-kernel@vger.kernel.org>,
-        Lennart Poettering <lennart@poettering.net>,
-        Zbigniew =?utf-8?Q?J=C4=99drzejewski-Szmek?= <zbyszek@in.waw.pl>,
-        util-linux@vger.kernel.org
-Subject: Re: [PATCH 00/17] VFS: Filesystem information and notifications [ver
- #17]
-Message-ID: <20200302103400.vk3cki7agfq2zhpv@ws.net.home>
-References: <CAOssrKfaxnHswrKejedFzmYTbYivJ++cPes4c91+BJDfgH4xJA@mail.gmail.com>
- <1c8db4e2b707f958316941d8edd2073ee7e7b22c.camel@themaw.net>
- <CAJfpegtRoXnPm5_sMYPL2L6FCZU52Tn8wk7NcW-dm4_2x=dD3Q@mail.gmail.com>
- <3e656465c427487e4ea14151b77d391d52cd6bad.camel@themaw.net>
- <CAJfpegu5xLcR=QbAOnUrL49QTem6X6ok7nPU+kLFnNHdPXSh1A@mail.gmail.com>
- <20200227151421.3u74ijhqt6ekbiss@ws.net.home>
- <ba2b44cc1382c62be3ac896a5476c8e1dc7c0230.camel@themaw.net>
- <CAJfpeguXPmw+PfZJFOscGLm0oe7dUQY4CYXazx9=x020Fbe86A@mail.gmail.com>
- <20200228122712.GA3013026@kroah.com>
- <CAJfpegsGgjnyZiB+ionfnnk+_e+5oaC-5nmGq+mLxWs1RcwsPw@mail.gmail.com>
+        id S1733206AbgCCSJC (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Tue, 3 Mar 2020 13:09:02 -0500
+Received: from mail-il1-f193.google.com ([209.85.166.193]:42836 "EHLO
+        mail-il1-f193.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1733082AbgCCSJB (ORCPT
+        <rfc822;util-linux-ng@vger.kernel.org>);
+        Tue, 3 Mar 2020 13:09:01 -0500
+Received: by mail-il1-f193.google.com with SMTP id x2so3579069ila.9
+        for <util-linux-ng@vger.kernel.org>; Tue, 03 Mar 2020 10:09:01 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=mime-version:reply-to:from:date:message-id:subject:to;
+        bh=42VRx4KA+cD1ZZnhz/34yl/kjJSKnU+ahvHX6e7S6BM=;
+        b=q7YmcB4c3xNivUiRnGbEmHi9ciBYsBTGJ3kBqOzI/c6CTS7TSPqRgaWNk025FpfiIk
+         UIHk/34W6/novGmD0W9ZSoJZbAR9qiyBwIbPfw8htytv3Pu+5ladp6JGliaatdTqYqkf
+         Fk69LG5Nm8YzADex4Vi+pf/rIeGNqNr78qVqopOdKzY11PtfTXtKZPzyTZFXbL/EduMu
+         vrTog13bOuCpMRI3PU9oQb0Q48DD/QD7nIIPWvI5CtHad4tT7V7uSdaJEhJ+oaISbJID
+         ga65o7/Vvvpc0yIEqzcmaI77Jw6/EO5F/+EQPV/TUhotVu/KSLDlNqX9UAupuiIWaWiJ
+         N+sw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
+         :subject:to;
+        bh=42VRx4KA+cD1ZZnhz/34yl/kjJSKnU+ahvHX6e7S6BM=;
+        b=Bf++IxX+rtW2zBSCfCJMl0buBdjVuEkb+bpTB3Woi04x+Ud3flkRe7F+h2MdLihfvQ
+         k8mU12BCLQeN+b5upRgt2+GwJZeFVYALO72dPXIIqG96wpnSkQvnpSNijFU/vPkR1wnN
+         YmxyhxtnUGVV21RAmafhOTGGFJA3hefHJ7os1DT08FBV2nJPTtM8IgvH5L58h5qpdFdu
+         MgJ+vVgDqdYJk3ru2JNoZ6J7LotkAeS2bIc5yZWVkVyaqmVLoTevRp3PiQo+UYQGPtzU
+         QH3jDCkzGnFWPyXz4qxL6tu+oMy/i5vAig8LI9EgRSYvbB854Z9mZPV99/oIYF8gTIFl
+         wUkA==
+X-Gm-Message-State: ANhLgQ2LhSJ7G+hIO7QncjBzPg3GSNVWLrWSaEY7WxGH/PxDTYq8QeXC
+        glTrSirj0WwpGkuHvz7g8IROY8/qCsGV2mocDeI=
+X-Google-Smtp-Source: ADFU+vv6E+wsnvPeg+ajcohjNvpKFAWgFSPumeVI6/s74fKhIZXkTb+ytEUQRfjMVtoUc1OrqPZutNFrjMHjyYaW0Q4=
+X-Received: by 2002:a92:244f:: with SMTP id k76mr6178413ilk.290.1583258940852;
+ Tue, 03 Mar 2020 10:09:00 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <CAJfpegsGgjnyZiB+ionfnnk+_e+5oaC-5nmGq+mLxWs1RcwsPw@mail.gmail.com>
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.14
+Received: by 2002:a02:9f04:0:0:0:0:0 with HTTP; Tue, 3 Mar 2020 10:09:00 -0800 (PST)
+Reply-To: dr.challynoah@gmail.com
+From:   DR CHALLY NOAH <mayorabrahamedge404@gmail.com>
+Date:   Tue, 3 Mar 2020 19:09:00 +0100
+Message-ID: <CALqVJWdFx_aWTT4kkN0eD5b+-M5aPDZmP2kebmH9eN3yv-cVBg@mail.gmail.com>
+Subject: Hello Dear
+To:     undisclosed-recipients:;
+Content-Type: text/plain; charset="UTF-8"
 Sender: util-linux-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-On Fri, Feb 28, 2020 at 05:24:23PM +0100, Miklos Szeredi wrote:
-> ned-By: MIMEDefang 2.78 on 10.11.54.4
-> 
-> On Fri, Feb 28, 2020 at 1:27 PM Greg Kroah-Hartman
-> <gregkh@linuxfoundation.org> wrote:
-> 
-> > > Superblocks and mounts could get enumerated by a unique identifier.
-> > > mnt_id seems to be good for mounts, s_dev may or may not be good for
-> > > superblock, but  s_id (as introduced in this patchset) could be used
-> > > instead.
-> >
-> > So what would the sysfs tree look like with this?
-> 
-> For a start something like this:
-> 
-> mounts/$MOUNT_ID/
->   parent -> ../$PARENT_ID
->   super -> ../../supers/$SUPER_ID
->   root: path from mount root to fs root (could be optional as usually
-> they are the same)
->   mountpoint -> $MOUNTPOINT
->   flags: mount flags
->   propagation: mount propagation
->   children/$CHILD_ID -> ../../$CHILD_ID
-> 
->  supers/$SUPER_ID/
->    type: fstype
->    source: mount source (devname)
->    options:
-
-What about use-cases where I have no ID, but I have mountpoint path
-(e.g. "umount /foo")?  In this case I have to go to open() + fsinfo()
-and then sysfs does not make sense for me, right?
-
-    Karel
-
--- 
- Karel Zak  <kzak@redhat.com>
- http://karelzak.blogspot.com
-
+Hello Dear,
+What Have Kept You Waiting To Claim Your $600,000.00 USD Compensation Award?
+This said fund was issued out by the UNITED NATIONS To compensate
+you.Please If You Have Not Claim Your Fund (Award),Kindly contact me
+at   DR.CHALLYNOAH@GMAIL.COM   for further details on how to proceed your
+fund (award)release to you or better still reply back Immediately You
+Receive This Information For An Urgent Confirmation And Release Of Your
+Fund To You Without Delays, as your email was listed among those to be
+compensated this year.Congratulations..
+Best Regards,
+Dr Chally Noah.
+Minister Of Finance On Foreign Remittance:
