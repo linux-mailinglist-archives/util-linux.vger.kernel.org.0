@@ -2,211 +2,78 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id B60AB18C6AD
-	for <lists+util-linux@lfdr.de>; Fri, 20 Mar 2020 05:55:47 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 1F20F18CCCB
+	for <lists+util-linux@lfdr.de>; Fri, 20 Mar 2020 12:22:46 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1725883AbgCTEzp (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Fri, 20 Mar 2020 00:55:45 -0400
-Received: from esa6.hgst.iphmx.com ([216.71.154.45]:56475 "EHLO
-        esa6.hgst.iphmx.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1725446AbgCTEzp (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Fri, 20 Mar 2020 00:55:45 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
-  t=1584680145; x=1616216145;
-  h=from:to:subject:date:message-id:mime-version:
-   content-transfer-encoding;
-  bh=jL52R3J3J3wJKEMiiFSaUfJ5IxrBaXEZyk4JKd+eWKU=;
-  b=kiuYRIqBlNPixb/utM1Cns3jneGAFl+u7jCqj9iPh77szm0DV5Gp0Cvz
-   6DmxcjMa82yXyIzRI5EFQ18oTpowWGBaF4LNDc+R/ZwJY7SzUbQ1zLCPv
-   Vr+KM+PqNgGk97R7JrOhnVcs21cw6kiHjy4Nbu2T2sNNKzmDueuQ4/oga
-   zejRRg8SMiWvrHoe3GvpgY0fWd9Zip8tb/gPoklXjiz5j+M/+7Ar5K9sn
-   IZg9yCDKsVWn2HtxaC0m2D9qExNjn5GL6HiSkahJYnnIfgga9RrBB6ETC
-   mFCLGSj0XO5lLFyOj214etYRYqmWEOaJ0xj4Mh74tAHRwvz7+OPr+Wx3G
-   Q==;
-IronPort-SDR: Jy3UIHFuXco3RcDB8XiM+QdR25PUEOvtYovAFZYYJ6MyigxM+PcrAnoJeUQUVhWT0daGh/BMvQ
- tOscpVKmyc7v9LuYKaMj6RORch+a/buFdE4LR2/oGzu0tNoU31G91nhJ3mZoMiq0mK7zl+DZL6
- r5Yqr314RP5r2yINi6/jlmirSquXl7P4bC5TIHugH8ka4KCeWAq5PiErQWOd9x9GziG+2Jwb6K
- YUDS24ByEExVz+Ro+4R828nKeNPoKJKQFovRnnoG9uZrSEXBxDGF10G6WObkC2wsnb3/LeRTts
- BY8=
-X-IronPort-AV: E=Sophos;i="5.72,283,1580745600"; 
-   d="scan'208";a="134483993"
-Received: from uls-op-cesaip01.wdc.com (HELO uls-op-cesaep01.wdc.com) ([199.255.45.14])
-  by ob1.hgst.iphmx.com with ESMTP; 20 Mar 2020 12:55:45 +0800
-IronPort-SDR: ENFY6iudY213TyRWg5HkjagHfdX+d0EfmvEDZJfmYsRlSUUYZiQQRU84gFaS7644d3AY9XFj5/
- 4uXzKZhamk9gUZToiiftPqp3BPYVeXJiDItWI0gpwh4UBXbxxKZUtHzYbnfZD4bQgqIJax7my1
- 0kLOpIyI5my7snadVL969Pk/ronElc1MCrhiLpKNzBMy6U7OmmX3V+rABg6Qnll3BzeZeIJ/Rv
- qq/0omz27M1g0oBnQc9rN6QuoGBbpWlgLqfvaIz3KAb4xlBH0FAeweBOGX9QEJYa2fO6Z9io2e
- wU6uV9E32d5mBBEfkiXGC/Qw
-Received: from uls-op-cesaip02.wdc.com ([10.248.3.37])
-  by uls-op-cesaep01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 19 Mar 2020 21:47:32 -0700
-IronPort-SDR: v8dMTIYHMA3NCYczDD9QDR4sEBtA6Dm8mR0FSrdGmGu6INJHuw66eug/xH/Mx8DxNXyCXP9cdS
- OOMIb3P7eh//pmz89ZWu9L5LXtoCJdoTs2UTnUap3+WeQ8l04Xr2W0oq+iWFMFafvq1VfgH7gm
- buP45jlj9+xJ5Qbju5vuEZz/U7YgPp9RhqpwE/H0ri5Gz+aISRlKCn28bHYXZIVmWg9O3FGaDh
- +CzJ5RLEx3gbb0goF4vzhq5bq6oU8/S6iZqS4evSwRRk34Ur5WwaOYydm2rCTUxSo6ONasNooC
- qXU=
-WDCIronportException: Internal
-Received: from washi.fujisawa.hgst.com ([10.149.53.254])
-  by uls-op-cesaip02.wdc.com with ESMTP; 19 Mar 2020 21:55:44 -0700
-From:   Damien Le Moal <damien.lemoal@wdc.com>
-To:     util-linux@vger.kernel.org, Karel Zak <kzak@redhat.com>,
-        Benno Schulenberg <bensberg@justemail.net>
-Subject: [PATCH] libblkid: Add support for zonefs
-Date:   Fri, 20 Mar 2020 13:55:43 +0900
-Message-Id: <20200320045543.2053382-1-damien.lemoal@wdc.com>
-X-Mailer: git-send-email 2.25.1
+        id S1726986AbgCTLWp (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Fri, 20 Mar 2020 07:22:45 -0400
+Received: from mail-ot1-f67.google.com ([209.85.210.67]:35749 "EHLO
+        mail-ot1-f67.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1727014AbgCTLWp (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Fri, 20 Mar 2020 07:22:45 -0400
+Received: by mail-ot1-f67.google.com with SMTP id k26so5617700otr.2
+        for <util-linux@vger.kernel.org>; Fri, 20 Mar 2020 04:22:44 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=mime-version:from:date:message-id:subject:to;
+        bh=6w+aFSJ+2vZ3lBtg9xVXLOFVqSNoMPd625E7FNYobb8=;
+        b=XJkgpyFK4lIsWMfChDnvJ/ALUrWHAmuYirzarEXgkQQ3wW9NKzIMfKMCIXFwyG7+Ut
+         OPwjRPjO1Y3m6JpcnZQNjW4TSYMpYxm5YTJ9LsqasUPVUE2mioEuqyWZE5W4V9m70yw0
+         7NZOAvhPs5z6MYef2xvevH6W2PifGCQ7zShmlswdjonSWUmV4/f2g5YOlghWUTz+XRcS
+         piWUxv5G7vBidbcKUV3uQQWE5PXqiDDjraiRcnyEZHb1zu/UdVcuDH9G4ebEVvxRZuFb
+         E4Hx4h0EGhKzNkV6sjyXd27YYI89xOnFh2HyhS3m7SD2nSluDoT3t1WfBDxJX44nVZOj
+         LjPg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+        bh=6w+aFSJ+2vZ3lBtg9xVXLOFVqSNoMPd625E7FNYobb8=;
+        b=VYkrgGh13kbd00qQuMMd00pXTPz5eqWA4aqai24G+IqLvQodf2NgDz+AOW8L2R1i4S
+         XsIwVMZzFwyVaVsbpYHxD1apJkhE8EB0CIHQJgLa/0FPCC9ckeCWeGcF8TuynM/qEwhk
+         +1LMqlraeXdbQ1BlhKFyiocQwNEsFua6GH6xyedjEvHmxlamkNsfY7zpM9vcEpsSs01n
+         ZGI7rElLKgLY50VD1qToWwqYcWIw5IgrLt2Zh1kh9SkbWsEBX9N8qQU553TNBLpsLuOM
+         a3Jj/TqhnlT6xnvCdCX8FJbQ11Vn8SmLh7j3wIXDz9gtmaXisKhDK9bt4KRwCHlyE3Fp
+         2mvA==
+X-Gm-Message-State: ANhLgQ3xpLmAOn6/GvfK/TBof8baTJQ1/N9XVTTB9fKy162rFOe5QlOV
+        y0QglEx/QwhX6LimjgtBAVx6CTwk0aqmABQx5jo=
+X-Google-Smtp-Source: ADFU+vv1NQTigFV1njTIlVMNqYnxeZ/ZO4wgI3D4PpTzR8g0VVq8z61Bj7zoKwFi5urPyVnf/VqvCqlY/+6aEpXrqr4=
+X-Received: by 2002:a9d:12b4:: with SMTP id g49mr6537886otg.50.1584703364175;
+ Fri, 20 Mar 2020 04:22:44 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Received: by 2002:a05:6838:40c6:0:0:0:0 with HTTP; Fri, 20 Mar 2020 04:22:42
+ -0700 (PDT)
+From:   ECOWAS COMMITEE <ecowasmonitoringcommitteeabj@gmail.com>
+Date:   Fri, 20 Mar 2020 11:22:42 +0000
+Message-ID: <CAHHubrZir2VPDquyV-mt0NSoHY=BnELkLL79r7L36=3NbcKYnQ@mail.gmail.com>
+Subject: HAPPY SURVIVAL OF CORONAVIRUS
+To:     undisclosed-recipients:;
+Content-Type: text/plain; charset="UTF-8"
 Sender: util-linux-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-The zonefs filesystem was added to upstream linux kernel 5.6. This
-patch add support for probing zonefs formatted zoned block devices so
-that other file system formatting tool can detect its presence on a
-device.
+Dear Sir/Madam
 
-Signed-off-by: Damien Le Moal <damien.lemoal@wdc.com>
----
- libblkid/src/Makemodule.am             |  1 +
- libblkid/src/superblocks/superblocks.c |  3 +-
- libblkid/src/superblocks/superblocks.h |  1 +
- libblkid/src/superblocks/zonefs.c      | 87 ++++++++++++++++++++++++++
- 4 files changed, 91 insertions(+), 1 deletion(-)
- create mode 100644 libblkid/src/superblocks/zonefs.c
+HAPPY SURVIVAL OF CORONAVIRUS
 
-diff --git a/libblkid/src/Makemodule.am b/libblkid/src/Makemodule.am
-index c5d9426b1..394c2ed43 100644
---- a/libblkid/src/Makemodule.am
-+++ b/libblkid/src/Makemodule.am
-@@ -101,6 +101,7 @@ libblkid_la_SOURCES = \
- 	libblkid/src/superblocks/vxfs.c \
- 	libblkid/src/superblocks/xfs.c \
- 	libblkid/src/superblocks/zfs.c \
-+	libblkid/src/superblocks/zonefs.c \
- 	\
- 	libblkid/src/topology/topology.c \
- 	libblkid/src/topology/topology.h
-diff --git a/libblkid/src/superblocks/superblocks.c b/libblkid/src/superblocks/superblocks.c
-index baf35e51b..67172d0a0 100644
---- a/libblkid/src/superblocks/superblocks.c
-+++ b/libblkid/src/superblocks/superblocks.c
-@@ -167,7 +167,8 @@ static const struct blkid_idinfo *idinfos[] =
- 	&exfat_idinfo,
- 	&f2fs_idinfo,
- 	&mpool_idinfo,
--	&apfs_idinfo
-+	&apfs_idinfo,
-+	&zonefs_idinfo
- };
- 
- /*
-diff --git a/libblkid/src/superblocks/superblocks.h b/libblkid/src/superblocks/superblocks.h
-index 0cd0caccf..5ebe6bc43 100644
---- a/libblkid/src/superblocks/superblocks.h
-+++ b/libblkid/src/superblocks/superblocks.h
-@@ -84,6 +84,7 @@ extern const struct blkid_idinfo vdo_idinfo;
- extern const struct blkid_idinfo stratis_idinfo;
- extern const struct blkid_idinfo bitlocker_idinfo;
- extern const struct blkid_idinfo apfs_idinfo;
-+extern const struct blkid_idinfo zonefs_idinfo;
- 
- /*
-  * superblock functions
-diff --git a/libblkid/src/superblocks/zonefs.c b/libblkid/src/superblocks/zonefs.c
-new file mode 100644
-index 000000000..aa5d2e1bd
---- /dev/null
-+++ b/libblkid/src/superblocks/zonefs.c
-@@ -0,0 +1,87 @@
-+/*
-+ * Copyright (C) 2020 Western Digital Corporation or its affiliates.
-+ *
-+ * This file may be redistributed under the terms of the
-+ * GNU Lesser General Public License
-+ */
-+#include <stddef.h>
-+#include <string.h>
-+#include <uuid/uuid.h>
-+
-+#include "superblocks.h"
-+
-+#define ZONEFS_MAGIC		"SFOZ" /* 0x5a4f4653 'Z' 'O' 'F' 'S' */
-+#define ZONEFS_MAGIC_SIZE	4
-+#define ZONEFS_MAGIC_OFST	0
-+#define ZONEFS_UUID_SIZE	16
-+#define ZONEFS_LABEL_SIZE	32
-+#define ZONEFS_SB_OFST		0
-+
-+#define ZONEFS_BLOCK_SIZE	4096U
-+
-+struct zonefs_super {
-+
-+	/* Magic number */
-+	__le32		s_magic;
-+
-+	/* Checksum */
-+	__le32		s_crc;
-+
-+	/* Volume label */
-+	char		s_label[ZONEFS_LABEL_SIZE];
-+
-+	/* 128-bit uuid */
-+	__u8		s_uuid[ZONEFS_UUID_SIZE];
-+
-+	/* Features */
-+	__le64		s_features;
-+
-+	/* UID/GID to use for files */
-+	__le32		s_uid;
-+	__le32		s_gid;
-+
-+	/* File permissions */
-+	__le32		s_perm;
-+
-+	/* Padding to 4096 bytes */
-+	/* __u8		s_reserved[4020]; */
-+
-+} __attribute__ ((packed));
-+
-+static int probe_zonefs(blkid_probe pr,
-+		const struct blkid_idmag *mag  __attribute__((__unused__)))
-+{
-+	struct zonefs_super *sb;
-+
-+	sb = (struct zonefs_super *)
-+		blkid_probe_get_buffer(pr, ZONEFS_SB_OFST,
-+				       sizeof(struct zonefs_super));
-+	if (!sb)
-+		return errno ? -errno : 1;
-+
-+	if (sb->s_label[0])
-+		blkid_probe_set_label(pr, (unsigned char *) sb->s_label,
-+				      sizeof(sb->s_label));
-+
-+	blkid_probe_set_uuid(pr, sb->s_uuid);
-+	blkid_probe_set_block_size(pr, ZONEFS_BLOCK_SIZE);
-+
-+	return 0;
-+}
-+
-+const struct blkid_idinfo zonefs_idinfo =
-+{
-+	.name           = "zonefs",
-+	.usage          = BLKID_USAGE_FILESYSTEM,
-+	.probefunc      = probe_zonefs,
-+	.magics         =
-+        {
-+		{
-+			.magic = (char *)ZONEFS_MAGIC,
-+			.len = ZONEFS_MAGIC_SIZE,
-+			.kboff = ZONEFS_SB_OFST,
-+			.sboff = ZONEFS_MAGIC_OFST,
-+		},
-+		{ NULL }
-+	}
-+};
--- 
-2.25.1
+We the West African Monitoring Committee of the West African Economic
+Community(ECOWAS)are contacting you for a business transaction which
+we feel will be of great interest to you.
 
+Our duty is to see to the coming in and out of funds into this sub
+region.There is a fund which we confiscated worth of $12.5 million
+dollars.We will like you to receive this fund on your name in your
+account and as well helping us in the investment.
+
+You are advised to contact us as soon as you get this message for
+details of the transaction if you find it interesting.
+
+Best Regards,
+
+Mr John Aka
+
+Chairman
+ECOWAS
+West African Monitoring Committee
+Tel 00225 6716 6756
+Abidjan Cote D'Ivoire
