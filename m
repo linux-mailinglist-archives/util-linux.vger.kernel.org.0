@@ -2,78 +2,79 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 1F20F18CCCB
-	for <lists+util-linux@lfdr.de>; Fri, 20 Mar 2020 12:22:46 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 04B0418F2E1
+	for <lists+util-linux@lfdr.de>; Mon, 23 Mar 2020 11:33:23 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726986AbgCTLWp (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Fri, 20 Mar 2020 07:22:45 -0400
-Received: from mail-ot1-f67.google.com ([209.85.210.67]:35749 "EHLO
-        mail-ot1-f67.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1727014AbgCTLWp (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Fri, 20 Mar 2020 07:22:45 -0400
-Received: by mail-ot1-f67.google.com with SMTP id k26so5617700otr.2
-        for <util-linux@vger.kernel.org>; Fri, 20 Mar 2020 04:22:44 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:from:date:message-id:subject:to;
-        bh=6w+aFSJ+2vZ3lBtg9xVXLOFVqSNoMPd625E7FNYobb8=;
-        b=XJkgpyFK4lIsWMfChDnvJ/ALUrWHAmuYirzarEXgkQQ3wW9NKzIMfKMCIXFwyG7+Ut
-         OPwjRPjO1Y3m6JpcnZQNjW4TSYMpYxm5YTJ9LsqasUPVUE2mioEuqyWZE5W4V9m70yw0
-         7NZOAvhPs5z6MYef2xvevH6W2PifGCQ7zShmlswdjonSWUmV4/f2g5YOlghWUTz+XRcS
-         piWUxv5G7vBidbcKUV3uQQWE5PXqiDDjraiRcnyEZHb1zu/UdVcuDH9G4ebEVvxRZuFb
-         E4Hx4h0EGhKzNkV6sjyXd27YYI89xOnFh2HyhS3m7SD2nSluDoT3t1WfBDxJX44nVZOj
-         LjPg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
-        bh=6w+aFSJ+2vZ3lBtg9xVXLOFVqSNoMPd625E7FNYobb8=;
-        b=VYkrgGh13kbd00qQuMMd00pXTPz5eqWA4aqai24G+IqLvQodf2NgDz+AOW8L2R1i4S
-         XsIwVMZzFwyVaVsbpYHxD1apJkhE8EB0CIHQJgLa/0FPCC9ckeCWeGcF8TuynM/qEwhk
-         +1LMqlraeXdbQ1BlhKFyiocQwNEsFua6GH6xyedjEvHmxlamkNsfY7zpM9vcEpsSs01n
-         ZGI7rElLKgLY50VD1qToWwqYcWIw5IgrLt2Zh1kh9SkbWsEBX9N8qQU553TNBLpsLuOM
-         a3Jj/TqhnlT6xnvCdCX8FJbQ11Vn8SmLh7j3wIXDz9gtmaXisKhDK9bt4KRwCHlyE3Fp
-         2mvA==
-X-Gm-Message-State: ANhLgQ3xpLmAOn6/GvfK/TBof8baTJQ1/N9XVTTB9fKy162rFOe5QlOV
-        y0QglEx/QwhX6LimjgtBAVx6CTwk0aqmABQx5jo=
-X-Google-Smtp-Source: ADFU+vv1NQTigFV1njTIlVMNqYnxeZ/ZO4wgI3D4PpTzR8g0VVq8z61Bj7zoKwFi5urPyVnf/VqvCqlY/+6aEpXrqr4=
-X-Received: by 2002:a9d:12b4:: with SMTP id g49mr6537886otg.50.1584703364175;
- Fri, 20 Mar 2020 04:22:44 -0700 (PDT)
+        id S1727829AbgCWKdV (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Mon, 23 Mar 2020 06:33:21 -0400
+Received: from us-smtp-delivery-74.mimecast.com ([63.128.21.74]:32568 "EHLO
+        us-smtp-delivery-74.mimecast.com" rhost-flags-OK-OK-OK-OK)
+        by vger.kernel.org with ESMTP id S1727810AbgCWKdV (ORCPT
+        <rfc822;util-linux@vger.kernel.org>);
+        Mon, 23 Mar 2020 06:33:21 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+        s=mimecast20190719; t=1584959600;
+        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+         in-reply-to:in-reply-to:references:references;
+        bh=JuOvdjNn9GBFfy6lm1WEBvMxWt6sKnolAGlQPmsuZTQ=;
+        b=MwPhsu81s+BuIO6osdfVS51HfysQ+bAYFVnwdZj+UV7Ep7KsTfbMG4Zskjzr2HHj4H8zHS
+        Y+IwTuqq1FHQWRd5fyTb1aSuF9+89iYvC9bGBrPds1LtoJAqx6oVE2hBRTqtfUd/in2tE2
+        vGi6RZh8k007huXh6GXC+fTUyGF67Ic=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-472-NWQv_XPiM9KmWHvsswfuFg-1; Mon, 23 Mar 2020 06:33:15 -0400
+X-MC-Unique: NWQv_XPiM9KmWHvsswfuFg-1
+Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com [10.5.11.12])
+        (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+        (No client certificate requested)
+        by mimecast-mx01.redhat.com (Postfix) with ESMTPS id C85698024D5;
+        Mon, 23 Mar 2020 10:33:10 +0000 (UTC)
+Received: from ws.net.home (unknown [10.40.194.51])
+        by smtp.corp.redhat.com (Postfix) with ESMTPS id BABD260BE0;
+        Mon, 23 Mar 2020 10:33:09 +0000 (UTC)
+Date:   Mon, 23 Mar 2020 11:33:05 +0100
+From:   Karel Zak <kzak@redhat.com>
+To:     Damien Le Moal <damien.lemoal@wdc.com>
+Cc:     util-linux@vger.kernel.org,
+        Benno Schulenberg <bensberg@justemail.net>
+Subject: Re: [PATCH] libblkid: Add support for zonefs
+Message-ID: <20200323103305.uhlc3d7i4famwq5p@ws.net.home>
+References: <20200320045543.2053382-1-damien.lemoal@wdc.com>
 MIME-Version: 1.0
-Received: by 2002:a05:6838:40c6:0:0:0:0 with HTTP; Fri, 20 Mar 2020 04:22:42
- -0700 (PDT)
-From:   ECOWAS COMMITEE <ecowasmonitoringcommitteeabj@gmail.com>
-Date:   Fri, 20 Mar 2020 11:22:42 +0000
-Message-ID: <CAHHubrZir2VPDquyV-mt0NSoHY=BnELkLL79r7L36=3NbcKYnQ@mail.gmail.com>
-Subject: HAPPY SURVIVAL OF CORONAVIRUS
-To:     undisclosed-recipients:;
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20200320045543.2053382-1-damien.lemoal@wdc.com>
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.12
 Sender: util-linux-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-Dear Sir/Madam
+On Fri, Mar 20, 2020 at 01:55:43PM +0900, Damien Le Moal wrote:
+>  libblkid/src/Makemodule.am             |  1 +
+>  libblkid/src/superblocks/superblocks.c |  3 +-
+>  libblkid/src/superblocks/superblocks.h |  1 +
+>  libblkid/src/superblocks/zonefs.c      | 87 ++++++++++++++++++++++++++
+>  4 files changed, 91 insertions(+), 1 deletion(-)
+>  create mode 100644 libblkid/src/superblocks/zonefs.c
 
-HAPPY SURVIVAL OF CORONAVIRUS
+Applied (with a small change), thanks.
 
-We the West African Monitoring Committee of the West African Economic
-Community(ECOWAS)are contacting you for a business transaction which
-we feel will be of great interest to you.
+> +struct zonefs_super {
+> +
+> +	/* Magic number */
+> +	__le32		s_magic;
 
-Our duty is to see to the coming in and out of funds into this sub
-region.There is a fund which we confiscated worth of $12.5 million
-dollars.We will like you to receive this fund on your name in your
-account and as well helping us in the investment.
+We use standard integer types rather than this kernel-ism ;-) Fixed.
 
-You are advised to contact us as soon as you get this message for
-details of the transaction if you find it interesting.
+It would be nice to have a test image for zonefs, something small what
+we can add to tests/ts/blkid/images-fs/ ;-)
 
-Best Regards,
 
-Mr John Aka
+    Karel
 
-Chairman
-ECOWAS
-West African Monitoring Committee
-Tel 00225 6716 6756
-Abidjan Cote D'Ivoire
+-- 
+ Karel Zak  <kzak@redhat.com>
+ http://karelzak.blogspot.com
+
