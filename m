@@ -2,16 +2,15 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 80395197AAF
-	for <lists+util-linux@lfdr.de>; Mon, 30 Mar 2020 13:29:53 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id EE889197AAE
+	for <lists+util-linux@lfdr.de>; Mon, 30 Mar 2020 13:29:49 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1729681AbgC3L3x (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Mon, 30 Mar 2020 07:29:53 -0400
+        id S1729650AbgC3L3t (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Mon, 30 Mar 2020 07:29:49 -0400
 Received: from mail.11d01.mspz7.gob.ec ([190.152.145.91]:58616 "EHLO
         mail.11d01.mspz7.gob.ec" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
         with ESMTP id S1729237AbgC3L3s (ORCPT
-        <rfc822;util-linux-ng@vger.kernel.org>);
-        Mon, 30 Mar 2020 07:29:48 -0400
+        <rfc822;util-linux@vger.kernel.org>); Mon, 30 Mar 2020 07:29:48 -0400
 Received: from localhost (localhost [127.0.0.1])
         by mail.11d01.mspz7.gob.ec (Postfix) with ESMTP id A0D5F2F70B88;
         Mon, 30 Mar 2020 04:35:29 -0500 (-05)
