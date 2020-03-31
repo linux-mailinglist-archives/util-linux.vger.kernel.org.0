@@ -2,67 +2,63 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id E50C519922E
-	for <lists+util-linux@lfdr.de>; Tue, 31 Mar 2020 11:24:40 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 9811F199773
+	for <lists+util-linux@lfdr.de>; Tue, 31 Mar 2020 15:30:58 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1730420AbgCaJYj (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Tue, 31 Mar 2020 05:24:39 -0400
-Received: from mail-ot1-f67.google.com ([209.85.210.67]:45203 "EHLO
-        mail-ot1-f67.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1730458AbgCaJYj (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Tue, 31 Mar 2020 05:24:39 -0400
-Received: by mail-ot1-f67.google.com with SMTP id c9so21286887otl.12
-        for <util-linux@vger.kernel.org>; Tue, 31 Mar 2020 02:24:38 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:reply-to:from:date:message-id:subject:to;
-        bh=82B0OONv9gwbZlPp43NzThDz2fRV+KRFwafOQ16joDw=;
-        b=tr7958ll1HMsM3Hkt4RgDmZHn2v3PQ15vGKjCJgBJArPjuxF2G77vOasAFpzTtM+81
-         OpdGWigwIWyc33JubVr1EbxDnGixrDGv8+AI9vWe38aDZqvVauCO7Rg6PV4qFK1melRa
-         AOGEXkVIhJE1lzj8SwXqdIHTQVcc1D3JT3LNnsSniYX+3emz3CnxVvtgmVBLZLiaZ0XC
-         esV87xeNX0hFzn1izKfHK4sHZiU/Dv0k1yDb9U0sT/gGSpik/Fv26IhkwSt+4AccfU1F
-         +9JjstBB3AZbLSwvP50Gal6Qm1cwvWyPkG19jVzvF5pxYawrXN120goT1zxfu+3XTeKs
-         5Uqg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
-         :subject:to;
-        bh=82B0OONv9gwbZlPp43NzThDz2fRV+KRFwafOQ16joDw=;
-        b=IZGfkLEV3uijtj9aTCFR7iBhSbTUOjVz7ZJVRHk7NTrNQOPu8pW9jyyy5htzuZoJHy
-         V9GVThnmpK1JlE4rMkdDfjRwf7LlCdYZeZ2gLrMrdHZQq0eahxGFZeK+1wgV2N1gXjUl
-         uacL8owXI+va65S7kv9Z1wrZdv9aTT7rOxkvmAvx6HF7oz0LpnpVKggFSWY+mwZFTRcY
-         OgO60DMrwVlC8Ao7KxbO7rghS+f+Umv5fArWYtvGa5wGL7gKXFftzP4R/7Jd/+vKJ70Z
-         Noo6Nu3KDpbPrRSUEpfd3v5ee9RoRbruMq2GNHCdjKtwxHdHZm5ad44xSfA8TM8pnRTC
-         TSxQ==
-X-Gm-Message-State: ANhLgQ3INbbkpOXdBATP8hDO7nFJLpLq1nFOM81DCZe0ywLs5yRs9onY
-        oeLRsGmyeJInJImi+efN8zD6n1LE3cBk0Y6EP5o=
-X-Google-Smtp-Source: ADFU+vsXi7bRF+d06qzrgJs29jEj8fmtX74VvBuQZ/lJR8BsR52tYcEbZVPmGJ1GgSX1og0m97PrxM9EUq3Nb3l/oUE=
-X-Received: by 2002:a9d:5888:: with SMTP id x8mr11775078otg.361.1585646677926;
- Tue, 31 Mar 2020 02:24:37 -0700 (PDT)
+        id S1730745AbgCaNa5 (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Tue, 31 Mar 2020 09:30:57 -0400
+Received: from us-smtp-1.mimecast.com ([207.211.31.81]:41485 "EHLO
+        us-smtp-delivery-1.mimecast.com" rhost-flags-OK-OK-OK-FAIL)
+        by vger.kernel.org with ESMTP id S1730216AbgCaNa5 (ORCPT
+        <rfc822;util-linux@vger.kernel.org>);
+        Tue, 31 Mar 2020 09:30:57 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+        s=mimecast20190719; t=1585661456;
+        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+         in-reply-to:in-reply-to:references:references;
+        bh=/ZiBC4lb2UkIJ8kAWK7HrqySlDck8Nhf2ziG7LSPn1U=;
+        b=Nkb3D9ANpiLSVXwT9iD7DTz3l1X9FEI45/DzIHarCtqPvCnytWjUpZMM7xPpiZOaECvVek
+        uSeRFuPkKEo/NYhq04wG/hzU0ybd2LoYJaDXySutnGLTG5or+kmGC12FosHYhYIdT5+z5f
+        94eQgnn2wD7XM7FiLw5SteTVIXwRt80=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-467-_pLlRiCJNwCAnsYdNgw50A-1; Tue, 31 Mar 2020 09:30:54 -0400
+X-MC-Unique: _pLlRiCJNwCAnsYdNgw50A-1
+Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.phx2.redhat.com [10.5.11.22])
+        (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+        (No client certificate requested)
+        by mimecast-mx01.redhat.com (Postfix) with ESMTPS id E175D149C8;
+        Tue, 31 Mar 2020 13:30:52 +0000 (UTC)
+Received: from ws.net.home (unknown [10.40.194.51])
+        by smtp.corp.redhat.com (Postfix) with ESMTPS id 219691001B28;
+        Tue, 31 Mar 2020 13:30:51 +0000 (UTC)
+Date:   Tue, 31 Mar 2020 15:30:49 +0200
+From:   Karel Zak <kzak@redhat.com>
+To:     Aurelien LAJOIE <orel@melix.net>
+Cc:     util-linux@vger.kernel.org
+Subject: Re: [PATCH v2] libuuid: improve uuid_unparse() performance
+Message-ID: <20200331133049.5sfx5mouifgjlhpj@ws.net.home>
+References: <20200326143827.25879-1-orel@melix.net>
 MIME-Version: 1.0
-Received: by 2002:ac9:7992:0:0:0:0:0 with HTTP; Tue, 31 Mar 2020 02:24:37
- -0700 (PDT)
-Reply-To: maryalice00.12@postribe.com
-From:   Maryalice Williams <peterugwunnaokorie@gmail.com>
-Date:   Tue, 31 Mar 2020 07:24:37 -0200
-Message-ID: <CAH9tiDdOfBQR=niOJ6Wvx2SmFPo0ifz3=AvdT_utQ1-abueiDw@mail.gmail.com>
-Subject: Reply For More Details.
-To:     undisclosed-recipients:;
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20200326143827.25879-1-orel@melix.net>
+X-Scanned-By: MIMEDefang 2.84 on 10.5.11.22
 Sender: util-linux-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
+On Thu, Mar 26, 2020 at 03:38:27PM +0100, Aurelien LAJOIE wrote:
+>  libuuid/src/unparse.c | 45 ++++++++++++++++++++-----------------------
+>  1 file changed, 21 insertions(+), 24 deletions(-)
+
+Applied, thanks.
+
+    Karel
+
 -- 
-My dear,
+ Karel Zak  <kzak@redhat.com>
+ http://karelzak.blogspot.com
 
-I am Mrs Maryalice Williams, I want to send you donation of two
-million seven hundred thousand Dollars ($2.7M) for volunteer projects
-in your country due to my ill health that could not permit me. Kindly
-reply for more details, and also send me the following details, as per
-below, your full Name ..........,  Address...........,
-Age...............,  Occupation ...............
-
-Remain blessed,
-Mrs. Maryalice Williams.
