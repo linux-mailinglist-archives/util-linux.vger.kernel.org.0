@@ -2,77 +2,97 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id D680519A8B9
-	for <lists+util-linux@lfdr.de>; Wed,  1 Apr 2020 11:34:19 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 7F0C819A90B
+	for <lists+util-linux@lfdr.de>; Wed,  1 Apr 2020 12:00:16 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1732131AbgDAJeS (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Wed, 1 Apr 2020 05:34:18 -0400
-Received: from mail-vk1-f195.google.com ([209.85.221.195]:40309 "EHLO
-        mail-vk1-f195.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726205AbgDAJeS (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Wed, 1 Apr 2020 05:34:18 -0400
-Received: by mail-vk1-f195.google.com with SMTP id k63so6524637vka.7
-        for <util-linux@vger.kernel.org>; Wed, 01 Apr 2020 02:34:17 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=pG/STzWZlpta9KzVwHMx0QqVFCfNV+GPIGnQs85+mtQ=;
-        b=nS8KztaYTFHlHrI2ecdEtNd5QO37hn7T3Krtv5w2nWDzMr5iZPDgwcyVP06PYXoTX7
-         1i+LnLlwNcdmZfR+8pl78f0a44zi/vg5k6Aun1sCfgTBwjiH7yOeEOJUC/AhTQs7byb7
-         2dbsVuvsrzqoGJpeAidq9PN6QbTlWfGK1Fg9mOAxCVLDn4LVe38z6CxDRadCub3Vu7Id
-         BJe2wgqZyBC8fmpAtLhotnRxTPC75RRfxIkc02oOGNWteVkNzoDRoxtCna0N7lTpmr3+
-         BXe+x0i9vHgqhFC8yTlpzg0+/8rbFWOsqwLFaHAOdycAHNkClo/cP5FIwpKTJuKKcgDC
-         N2DQ==
-X-Gm-Message-State: AGi0Pubz9pDkpBIz8KGywa36wINvsWn5E19bO0lrUm9rRgrgaaqV4QK9
-        Vqr0QZBRjkh5hpm7oPtQfgMrrPTfZUIP8q1GARw=
-X-Google-Smtp-Source: APiQypL+zXcn5+bnadj0sQOc96g+8lGYY92dsN7de4DG90/GrK+He0smyOL8a42Jeypx0r32tm+CBQjCEUmLv4nkm6E=
-X-Received: by 2002:a1f:9e17:: with SMTP id h23mr14232693vke.99.1585733657478;
- Wed, 01 Apr 2020 02:34:17 -0700 (PDT)
-MIME-Version: 1.0
-References: <20200326143827.25879-1-orel@melix.net> <20200401083103.ipberscb6yzvpu4r@ws.net.home>
-In-Reply-To: <20200401083103.ipberscb6yzvpu4r@ws.net.home>
-From:   Peter Cordes <peter@cordes.ca>
-Date:   Wed, 1 Apr 2020 06:34:06 -0300
-Message-ID: <CA+bjHUSbRp7G=4C-_m9WR+OCLFZAyN0p85UH4R5m13w5YXWYgg@mail.gmail.com>
-Subject: Re: [PATCH v2] libuuid: improve uuid_unparse() performance
-To:     Karel Zak <kzak@redhat.com>
+        id S1726785AbgDAKAP (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Wed, 1 Apr 2020 06:00:15 -0400
+Received: from us-smtp-delivery-1.mimecast.com ([207.211.31.120]:20698 "EHLO
+        us-smtp-1.mimecast.com" rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org
+        with ESMTP id S1726335AbgDAKAP (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Wed, 1 Apr 2020 06:00:15 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+        s=mimecast20190719; t=1585735214;
+        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+         in-reply-to:in-reply-to:references:references;
+        bh=1h/FlxD30Bu83CXjlaeK70sIboYmtQAZikvXAVdH9hg=;
+        b=e2p8ogCAYMaPXTd8oUeI4Zrnw3IetnPjID9tHqfc12R3WjYO0mguRde5BToWtwd072T+xg
+        POYxK2FZMEerhQlPTlyUfQeBlRRBZ9cIAjqRG7Hx7PD07pY0laEfHqxJYxjY1BhCgMgVFd
+        dHiTLRWixlLanOqCAafIEB26HAQ6ZUs=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-337-ioqDkGB-NX-daNpU6kWxqw-1; Wed, 01 Apr 2020 06:00:10 -0400
+X-MC-Unique: ioqDkGB-NX-daNpU6kWxqw-1
+Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com [10.5.11.12])
+        (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+        (No client certificate requested)
+        by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 6BADB1137843;
+        Wed,  1 Apr 2020 10:00:09 +0000 (UTC)
+Received: from ws.net.home (unknown [10.40.194.51])
+        by smtp.corp.redhat.com (Postfix) with ESMTPS id 3D9B660BEC;
+        Wed,  1 Apr 2020 10:00:08 +0000 (UTC)
+Date:   Wed, 1 Apr 2020 12:00:05 +0200
+From:   Karel Zak <kzak@redhat.com>
+To:     Peter Cordes <peter@cordes.ca>
 Cc:     Aurelien LAJOIE <orel@melix.net>, util-linux@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
+Subject: Re: [PATCH v2] libuuid: improve uuid_unparse() performance
+Message-ID: <20200401100005.tuamlrlrujfzr7yd@ws.net.home>
+References: <20200326143827.25879-1-orel@melix.net>
+ <20200401083103.ipberscb6yzvpu4r@ws.net.home>
+ <CA+bjHUSbRp7G=4C-_m9WR+OCLFZAyN0p85UH4R5m13w5YXWYgg@mail.gmail.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <CA+bjHUSbRp7G=4C-_m9WR+OCLFZAyN0p85UH4R5m13w5YXWYgg@mail.gmail.com>
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.12
 Sender: util-linux-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-On Wed, Apr 1, 2020 at 5:31 AM Karel Zak <kzak@redhat.com> wrote:
->
-> On Thu, Mar 26, 2020 at 03:38:27PM +0100, Aurelien LAJOIE wrote:
-> > +     __attribute__((alias("uuid_unparse_upper")));
-> > +#else
-> > +void uuid_unparse(const uuid_t uu, char *out)
-> > +     __attribute__((alias("uuid_unparse_lower")));
-> > +#endif
->
-> The alias attribute is not portable to clang on Darwin.
->
->  https://travis-ci.org/github/karelzak/util-linux/jobs/669244356?utm_medium=notification&utm_source=email
->
-> I have replaced the aliases with function calls.
->
->  https://github.com/karelzak/util-linux/commit/bee464006776203a8cb545a35c86234181c7a55a
+On Wed, Apr 01, 2020 at 06:34:06AM -0300, Peter Cordes wrote:
+> On Wed, Apr 1, 2020 at 5:31 AM Karel Zak <kzak@redhat.com> wrote:
+> >
+> > On Thu, Mar 26, 2020 at 03:38:27PM +0100, Aurelien LAJOIE wrote:
+> > > +     __attribute__((alias("uuid_unparse_upper")));
+> > > +#else
+> > > +void uuid_unparse(const uuid_t uu, char *out)
+> > > +     __attribute__((alias("uuid_unparse_lower")));
+> > > +#endif
+> >
+> > The alias attribute is not portable to clang on Darwin.
+> >
+> >  https://travis-ci.org/github/karelzak/util-linux/jobs/669244356?utm_medium=notification&utm_source=email
+> >
+> > I have replaced the aliases with function calls.
+> >
+> >  https://github.com/karelzak/util-linux/commit/bee464006776203a8cb545a35c86234181c7a55a
+> 
+> Since Darwin does support weak_alias, can we just use that?  Is it
+> "strong enough"?  I'm assuming nothing will override the alias so it
+> can still have the same efficient end result, having both symbols
+> resolve to the same address with no extra per-call overhead.  (And
+> without bloating the library from a compiler deciding to inline the
+> static helper function into all 3 instead of 2 callers.  Although most
+> programs probably only ever call one, so only one has to stay hot in
+> I-cache, with the others only bloating the file size and space in that
+> iTLB memory page.)
+> 
+> Or can we put the wrapper function in a .h so it can inline away?
+> That would bake the choice into applications that use libuuid, so you
+> couldn't change it just by rebuilding libuuid.  That's perhaps not
+> desirable; if applications wanted to have that choice baked in they
+> could have called the explicit upper or lower versions.
+ 
+ Frankly, what we're trying to fix by the alias? It sounds like
+ premature optimization. The current solution works, maybe foo(bar())
+ is also optimized by compiler. I have doubts that use inline function 
+ in header or so makes a real sense.
 
-Since Darwin does support weak_alias, can we just use that?  Is it
-"strong enough"?  I'm assuming nothing will override the alias so it
-can still have the same efficient end result, having both symbols
-resolve to the same address with no extra per-call overhead.  (And
-without bloating the library from a compiler deciding to inline the
-static helper function into all 3 instead of 2 callers.  Although most
-programs probably only ever call one, so only one has to stay hot in
-I-cache, with the others only bloating the file size and space in that
-iTLB memory page.)
+    Karel
 
-Or can we put the wrapper function in a .h so it can inline away?
-That would bake the choice into applications that use libuuid, so you
-couldn't change it just by rebuilding libuuid.  That's perhaps not
-desirable; if applications wanted to have that choice baked in they
-could have called the explicit upper or lower versions.
+-- 
+ Karel Zak  <kzak@redhat.com>
+ http://karelzak.blogspot.com
+
