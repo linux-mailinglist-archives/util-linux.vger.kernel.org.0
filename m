@@ -2,78 +2,60 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 267C419E984
-	for <lists+util-linux@lfdr.de>; Sun,  5 Apr 2020 07:56:26 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id F1AF019F323
+	for <lists+util-linux@lfdr.de>; Mon,  6 Apr 2020 12:00:25 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726329AbgDEF4Y (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Sun, 5 Apr 2020 01:56:24 -0400
-Received: from mail-wr1-f74.google.com ([209.85.221.74]:56187 "EHLO
-        mail-wr1-f74.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726227AbgDEF4Y (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Sun, 5 Apr 2020 01:56:24 -0400
-Received: by mail-wr1-f74.google.com with SMTP id r15so5913237wrm.22
-        for <util-linux@vger.kernel.org>; Sat, 04 Apr 2020 22:56:23 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20161025;
-        h=date:message-id:mime-version:subject:from:to;
-        bh=lohjFHOV+qanZgj4hYxv/bMNg1IIrke2JyPLg1DbHUg=;
-        b=GdYy57sOmfu9ArA8SnFwsQyoWzNr7knTfnOFIh98YOSgcJF5i4w0BmzJoQhKrtf2By
-         5l+SOCjCOYXJpun2w75vCBDX7kY+VEr+5C4a9ytRzPuB/cOp758s+HGKSWHNQtClqeLr
-         QKPv+vMSxYnoio0VAfxMfukUqM5oJMbZo+Mtb9oNO4f0tLzMR+pBx7GfdnnfYdz42bAD
-         5W7EYoO8YW2DQAaRMTj4yxplGYL2ZEFJzMLUahIBFzLCA8p3H0di3s08Cx+PxbFZUb2M
-         c009mdghPwhx6QgXtfsR9E++BnooWOb5nFukZZxc03gOJz7ZM9NCXuwoIHEtMMfoQ9mE
-         A6GA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:date:message-id:mime-version:subject:from:to;
-        bh=lohjFHOV+qanZgj4hYxv/bMNg1IIrke2JyPLg1DbHUg=;
-        b=LkMLbws+iNcpUu331G/yGmZL7CkV9kNxC7RlVleUMYDYPvVTa6einypfs/xxoVEk/r
-         klrtE06Gub86MSnhDGn5VVtlSw1Miyzhc8eQls4+67YRNZqkCIRtUpkGNDpIIzpVcS6d
-         FSnGFHfzZGvm7khDDS/GU1iHKk9vF4fqnAk9EJMVsLhCsFa7gjA0d4J2AYeEBvGvz7kI
-         T7jm8+lONwvT3Y8wE1Wjx5lXwK+TN0yKFxHfC1qFwQrf2UU1A3QIdRxEC8Ucn0XqIRG5
-         46ILFI2Xpdo97JBfFheNd66i8Qg1NocINCmwTmy3RLzeQrwYgPaSt0cSQeTpjy+p6pwm
-         By1g==
-X-Gm-Message-State: AGi0PubfRzfj7KnMmV9uPGPdpBTxwyljnxMoB3jI09wagFiPIwR0IKGc
-        eP+kuvE9qjiSzoYJQ9yVHdEc/Esh5QeIhB2nJ1paPjhakbWhFBlqy1iM7dKS/5IsZXK6sXP2x9G
-        Pchz7LkSNQI5JKNrX2IlfbEVNyqLKxm0T7PB1IoaT93sxX7bos5Yd9JZ/MK0IgFuD
-X-Google-Smtp-Source: APiQypLbf41OusAn6lXCg9Q79IoPqGRfx1SqcWQ/hP8Pij2hKZnxrtE8sv9u7rC9e8oFBuEwM8640981uQ==
-X-Received: by 2002:a5d:4683:: with SMTP id u3mr17075391wrq.248.1586066182564;
- Sat, 04 Apr 2020 22:56:22 -0700 (PDT)
-Date:   Sun,  5 Apr 2020 07:55:14 +0200
-Message-Id: <20200405055514.227225-1-jannh@google.com>
-Mime-Version: 1.0
-X-Mailer: git-send-email 2.26.0.292.g33ef6b2f38-goog
-Subject: [PATCH] docs: renice(1): Add chrt(1) to SEE ALSO
-From:   Jann Horn <jannh@google.com>
-To:     util-linux@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
+        id S1726885AbgDFKAY (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Mon, 6 Apr 2020 06:00:24 -0400
+Received: from us-smtp-delivery-1.mimecast.com ([207.211.31.120]:23729 "EHLO
+        us-smtp-1.mimecast.com" rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org
+        with ESMTP id S1726883AbgDFKAY (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Mon, 6 Apr 2020 06:00:24 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+        s=mimecast20190719; t=1586167223;
+        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+         in-reply-to:in-reply-to:references:references;
+        bh=9q1cA/lEV8ondfww669ITocmYidX6Xvk7ghfm0MrPXg=;
+        b=M6DL4GFqdmhJV+wljCDAEb+S+kTLyGU3Gi+9gxChQ89PS+2QpKKhQ/aAyRwK4fjmyWNYa/
+        g1FMhsTVub5DYl6kkhiuCKIPkjwBCs0/OhEcIbV6rjDtKbUKDJZGrxElwCrFTTFGg0PySC
+        N73+UU4d2p4dRcqtHlMg2E4mvjJ56sU=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-231-UZjywgWpM1WuJDCJT8NGpA-1; Mon, 06 Apr 2020 06:00:19 -0400
+X-MC-Unique: UZjywgWpM1WuJDCJT8NGpA-1
+Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.phx2.redhat.com [10.5.11.13])
+        (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+        (No client certificate requested)
+        by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 04C611005509;
+        Mon,  6 Apr 2020 10:00:18 +0000 (UTC)
+Received: from ws.net.home (unknown [10.40.194.51])
+        by smtp.corp.redhat.com (Postfix) with ESMTPS id 349C59D36E;
+        Mon,  6 Apr 2020 10:00:16 +0000 (UTC)
+Date:   Mon, 6 Apr 2020 12:00:14 +0200
+From:   Karel Zak <kzak@redhat.com>
+To:     Jann Horn <jannh@google.com>
+Cc:     util-linux@vger.kernel.org
+Subject: Re: [PATCH] docs: renice(1): Add chrt(1) to SEE ALSO
+Message-ID: <20200406100014.mlcmv3xkuscc2tgj@ws.net.home>
+References: <20200405055514.227225-1-jannh@google.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20200405055514.227225-1-jannh@google.com>
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.13
 Sender: util-linux-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-A user who wants to change the niceness of a process is likely to also be
-interested in changing the scheduler class and/or RT priority.
+On Sun, Apr 05, 2020 at 07:55:14AM +0200, Jann Horn wrote:
+>  sys-utils/renice.1 | 1 +
+>  1 file changed, 1 insertion(+)
 
-Signed-off-by: Jann Horn <jannh@google.com>
----
- sys-utils/renice.1 | 1 +
- 1 file changed, 1 insertion(+)
+Applied, thanks.
 
-diff --git a/sys-utils/renice.1 b/sys-utils/renice.1
-index 44af9e065..3ef3512f4 100644
---- a/sys-utils/renice.1
-+++ b/sys-utils/renice.1
-@@ -104,6 +104,7 @@ negative (to make things go very fast).
- to map user names to user IDs
- .SH SEE ALSO
- .BR nice (1),
-+.BR chrt (1),
- .BR getpriority (2),
- .BR setpriority (2),
- .BR credentials (7),
-
-base-commit: bee464006776203a8cb545a35c86234181c7a55a
 -- 
-2.26.0.292.g33ef6b2f38-goog
+ Karel Zak  <kzak@redhat.com>
+ http://karelzak.blogspot.com
 
