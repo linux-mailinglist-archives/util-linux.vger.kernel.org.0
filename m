@@ -2,110 +2,61 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 48B331A65DE
-	for <lists+util-linux@lfdr.de>; Mon, 13 Apr 2020 13:50:11 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id BD4691A6D70
+	for <lists+util-linux@lfdr.de>; Mon, 13 Apr 2020 22:41:52 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1729198AbgDMLuI (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Mon, 13 Apr 2020 07:50:08 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:43786 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1729218AbgDMLuF (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Mon, 13 Apr 2020 07:50:05 -0400
-X-Greylist: delayed 500 seconds by postgrey-1.27 at vger.kernel.org; Mon, 13 Apr 2020 07:49:50 EDT
-Received: from mail-io1-xd30.google.com (mail-io1-xd30.google.com [IPv6:2607:f8b0:4864:20::d30])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id F2A82C03BC8E
-        for <util-linux@vger.kernel.org>; Mon, 13 Apr 2020 04:43:29 -0700 (PDT)
-Received: by mail-io1-xd30.google.com with SMTP id o127so9051443iof.0
-        for <util-linux@vger.kernel.org>; Mon, 13 Apr 2020 04:43:29 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:reply-to:from:date:message-id:subject:to
-         :content-transfer-encoding;
-        bh=1ds36DMGg+XEGIlwBFe9RgCHJxWIGiKsCVNzaGEJ22Y=;
-        b=gWoRs6amKNiq0mXbGR1d2sWmvYjrawWeRDe8T9ymjgaI6vhetQPFd7m91cXsc2IInt
-         DD25yEbvMpblZGmTyG6RhLmb83psqCu5ICqONsbQIPXQbReUU6jihHUtl5QiNpYzxQzX
-         q/4tSZT3qtGtMkiTsEXEOcEjXU1KK1GB+uZl76jHImPAF4jBwDWa4/7rTLNNRtXkDjwb
-         JFtXw5whxx2dRh/Dv1KpWbO41XTsWgZnF1mib6UyT132PRa7eq/LeNNFVpyP3XDnt4BG
-         3zgbE+3I9vZTjpa5LWbXozLM7JpQu2xoxzf6l6ykFCLliSrqCqIKsYkVb+5EFo/O5Zud
-         TPOw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
-         :subject:to:content-transfer-encoding;
-        bh=1ds36DMGg+XEGIlwBFe9RgCHJxWIGiKsCVNzaGEJ22Y=;
-        b=IwuTytobfF7djreEnm8siGAQiruAdtReG6b1BykySyGDBIuY4aRfYp2XiggUv7Wkkw
-         PdKwAK7X8DLF4dUW2vLkeOCNDMff07KNtX/AKoorxaqiEf3asGjt+fQtNPxfAjnFBxku
-         tbqpT3q3wO5h/Ce719ihKOugi14Xx3aDc3095tCbvF+V47NrnsqCnS4iu5dhsUb7NdDw
-         8zQ7O40sAQS68kTFzUb25ZxHAy/Sq7HJexlo9KmP00kT+Xfr48XJvJtvQ7OOV3nbFHjs
-         kfSTnZFQXEfUR2j9sZYxujU4QuDzO7QX1jr4BeuSrZUlBBIGV36GYicbFuDrOxQ3hQr9
-         tQ+w==
-X-Gm-Message-State: AGi0PuaG+V9/tUSUVtKObXRfXtd2rkn25ZcLdrOXb30VHaaG6mAn+2KD
-        L2oz6cHlw3ipnwAcgY/Bo4f9C5F6iaLPDFdStg==
-X-Google-Smtp-Source: APiQypKSQeTPj3lgenseMd+aSYS71+dJhCNyLOTa+zWUA7lJqrflnhIRpnmUjps3M8M0mPmhWbaz8RtDO1I6zVEsEkM=
-X-Received: by 2002:a02:6c4a:: with SMTP id w71mr8110288jab.2.1586778209258;
- Mon, 13 Apr 2020 04:43:29 -0700 (PDT)
+        id S2388483AbgDMUlv convert rfc822-to-8bit (ORCPT
+        <rfc822;lists+util-linux@lfdr.de>); Mon, 13 Apr 2020 16:41:51 -0400
+Received: from mx1.polytechnique.org ([129.104.30.34]:53347 "EHLO
+        mx1.polytechnique.org" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S2388457AbgDMUlu (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Mon, 13 Apr 2020 16:41:50 -0400
+Received: from mail-pl1-f179.google.com (mail-pl1-f179.google.com [209.85.214.179])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+        (No client certificate requested)
+        by ssl.polytechnique.org (Postfix) with ESMTPSA id 9A4C15605E5
+        for <util-linux@vger.kernel.org>; Mon, 13 Apr 2020 22:41:46 +0200 (CEST)
+Received: by mail-pl1-f179.google.com with SMTP id y12so3524069pll.2
+        for <util-linux@vger.kernel.org>; Mon, 13 Apr 2020 13:41:46 -0700 (PDT)
+X-Gm-Message-State: AGi0PuZYDJ2a0ELyFJ9VNsk+tj0DHMmUHnq9QSgqiVjlIMJV0C/wcmXW
+        AG5gRfLKh7rIGtezBqHK+BQYjbRSBjQ3CvfxJyA=
+X-Google-Smtp-Source: APiQypLiuzgyX2ty3UKjDc2ICXiGVie2JIEjKw3vg70IMYaVIBYfB1w7IjBJaL8fIIa0EabwdKpHZ6fPDn05bIET47o=
+X-Received: by 2002:a17:902:ba89:: with SMTP id k9mr18787182pls.199.1586810505000;
+ Mon, 13 Apr 2020 13:41:45 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 2002:a02:5e49:0:0:0:0:0 with HTTP; Mon, 13 Apr 2020 04:43:28
- -0700 (PDT)
-Reply-To: mgbenin903@gmail.com
-From:   Barrister Robert Richter UN-Attorney at Law Court-Benin 
-        <info.zennitbankplcnigerian@gmail.com>
-Date:   Mon, 13 Apr 2020 13:43:28 +0200
-Message-ID: <CABHzvrkwD2fUnnJ0oQrWEyM9uH6JjG-H4j2cY7u_pKX6haqt-g@mail.gmail.com>
-Subject: I have already sent you first payment US$5000.00 this morning through
- MONEY Gram service.it is available to pick up in address now.
-To:     undisclosed-recipients:;
+From:   =?UTF-8?Q?Aur=C3=A9lien_Lajoie?= <orel@melix.net>
+Date:   Mon, 13 Apr 2020 22:41:34 +0200
+X-Gmail-Original-Message-ID: <CAA0A08U=eWWB5eyxg4vrD_yBdVohqVT0NQfm+DG+wjbZ8HmiZg@mail.gmail.com>
+Message-ID: <CAA0A08U=eWWB5eyxg4vrD_yBdVohqVT0NQfm+DG+wjbZ8HmiZg@mail.gmail.com>
+Subject: cal: column mode
+To:     util-linux@vger.kernel.org
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8BIT
+X-AV-Checked: ClamAV using ClamSMTP at svoboda.polytechnique.org (Mon Apr 13 22:41:47 2020 +0200 (CEST))
+X-Spam-Flag: No, tests=bogofilter, spamicity=0.023306, queueID=2BD955605E9
+X-Org-Mail: aurelien.lajoie.2000@polytechnique.org
 Sender: util-linux-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-ATTN DEAR BENEFICIARY.
+Hi,
 
-GOOD NEWS.
+As I have announced few days ago, I have started to work on ncal like for cal.
+I have push a first working version on my github:
+https://github.com/utix/util-linux/commits/cal_column
 
-I have already sent you first payment US$5000.00 this morning through
-MONEY Gram service.
+I will now add some tests, and improve my code.
+Does anyone know which locale can have some width issue ?
 
-So we advise you to Contact This Money Gram office to pick up your
-transfer $US5000.00 today.
-it is available to pick up in address now.
+I have tried to keep the same structure of the code between the column
+mode and the row mode.
+It is impossible to keep line width lower than 80.
+I can try to split the big function `cal_output_months` this will make
+it more readable, but will introduce a lot of change for no feature.
+Any advice on this ?
 
-Note that your compensation payment funds is total amount $US2.800,000
-Million Dollars.We have instructed the Money Gram Agent,Mr. James
-Gadner to keep sending the transfer to you daily, but the maximum
-amount you will be receiving everyday is US$5000.00. Contact Agent now
-to pick up your first payment $US5000.00 immediately.
 
-Contact Person, Mr. James Gadner, Dir. Money Gram Benin.
-Email: mgbenin903@gmail.com
-Telephone Numbers: +229 62819378/ +229 98477762
+Thanks
+Ôrel
 
-HERE IS YOUR PAYMENT DETAILS FOR THE FIRST =C2=A3US5000.00 SENT TODAY.
-
-Track View Website link:
-https://secure.moneygram.com/track
-Sender=E2=80=99s First name: David
-Sender=E2=80=99s Last Name: Joiner
-Money Transfer Control Number (MTCN) (REFERENCE)# 26046856
-
-Contact the Mmoney Gram Urgent and reconfirm your address to the
-office before, they will allow you to pick up the transfer today.
-
-HERE IS WHAT REQUIRED OF YOU.
-
-YOUR FULL NAME---------
-ADDRESS--------------
-COUNTRY-----------------------------
-TELEPHONE NUMBERS-----------------
-
-Note, I paid the transfer fee for you, but only you are required to
-send to the office is $75.00 only,Been Your Payment File activation
-fee, Send once you contact the office,before you can able to pick up
-your transfer today.
-
-Let me know once you pick up first payment today.
-
-Barrister Robert Richter UN-Attorney at Law Court-Benin
