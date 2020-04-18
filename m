@@ -2,58 +2,85 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 4FFF81AD38A
-	for <lists+util-linux@lfdr.de>; Fri, 17 Apr 2020 02:14:36 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id BE0F11AF5D0
+	for <lists+util-linux@lfdr.de>; Sun, 19 Apr 2020 01:05:44 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726507AbgDQAOf (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Thu, 16 Apr 2020 20:14:35 -0400
-Received: from mail.dsns.gov.ua ([194.0.148.99]:49742 "EHLO mail.dsns.gov.ua"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1725941AbgDQAOe (ORCPT <rfc822;util-linux-ng@vger.kernel.org>);
-        Thu, 16 Apr 2020 20:14:34 -0400
-X-Greylist: delayed 4710 seconds by postgrey-1.27 at vger.kernel.org; Thu, 16 Apr 2020 20:14:34 EDT
-Received: from localhost (localhost [127.0.0.1])
-        by mail.dsns.gov.ua (Postfix) with ESMTP id 5B0041F6654C;
-        Fri, 17 Apr 2020 00:07:22 +0300 (EEST)
-Received: from mail.dsns.gov.ua ([127.0.0.1])
-        by localhost (mail.dsns.gov.ua [127.0.0.1]) (amavisd-new, port 10032)
-        with ESMTP id CwUP-Vw3zpaz; Fri, 17 Apr 2020 00:07:22 +0300 (EEST)
-Received: from localhost (localhost [127.0.0.1])
-        by mail.dsns.gov.ua (Postfix) with ESMTP id B10B21F66166;
-        Fri, 17 Apr 2020 00:07:20 +0300 (EEST)
-DKIM-Filter: OpenDKIM Filter v2.10.3 mail.dsns.gov.ua B10B21F66166
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dsns.gov.ua;
-        s=1E60DAC0-2607-11E9-81E6-7A77C2B36653; t=1587071240;
-        bh=47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=;
-        h=Date:From:Message-ID:MIME-Version;
-        b=gc2mwfmRN+oaoq4KLZwKqMPTmQXkIvGXoh/OqKGxQ2K5LFQcbxMyT2bOklCBk8bqY
-         MCgOfNo5rbygUMx3P+fKnNOla58WlzXxoIsIc1eSMhYzo7eH1/wD3zWB1X4KKbLCY0
-         0EAnzTBNrrUd77afg2Q1k4XVRAS+BBQSy8YIU9Gb7uesoOvGWoIN7a/FZX1LKwYGsc
-         THtj5SK80sLmNjBync4yHWZIRxcZP6oCajK6L9sg9pNCj64P4u5GecJtHdY//nDBtt
-         WGipQCq9lG7QCREF5UX9ieJZ/rqgdICOPcCrh9vS+osV8PhB6htU+XDKG0fxQ5P+/k
-         dguqPX3zkG3bw==
-X-Virus-Scanned: amavisd-new at dsns.gov.ua
-Received: from mail.dsns.gov.ua ([127.0.0.1])
-        by localhost (mail.dsns.gov.ua [127.0.0.1]) (amavisd-new, port 10026)
-        with ESMTP id 20MxJLNwbEVI; Fri, 17 Apr 2020 00:07:20 +0300 (EEST)
-Received: from mail.dsns.gov.ua (localhost [127.0.0.1])
-        by mail.dsns.gov.ua (Postfix) with ESMTP id 83BF01F664B7;
-        Fri, 17 Apr 2020 00:07:17 +0300 (EEST)
-Date:   Fri, 17 Apr 2020 00:07:17 +0300 (EEST)
-From:   Saleem Netanyahu <duchenko@dsns.gov.ua>
-Reply-To: Saleem Netanyahu <saleemnetu@gmail.com>
-Message-ID: <1015515045.727933.1587071237489.JavaMail.zimbra@dsns.gov.ua>
-Subject: Hey, how are u, can we talk?
+        id S1725879AbgDRXFn (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Sat, 18 Apr 2020 19:05:43 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:53624 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1725804AbgDRXFn (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Sat, 18 Apr 2020 19:05:43 -0400
+Received: from mo6-p00-ob.smtp.rzone.de (mo6-p00-ob.smtp.rzone.de [IPv6:2a01:238:20a:202:5300::4])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 8831DC061A0C
+        for <util-linux@vger.kernel.org>; Sat, 18 Apr 2020 16:05:42 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1587251139;
+        s=strato-dkim-0002; d=fami-braun.de;
+        h=Message-ID:References:In-Reply-To:Subject:Cc:To:From:Date:
+        X-RZG-CLASS-ID:X-RZG-AUTH:From:Subject:Sender;
+        bh=WGc/rCBDl4vbwsLbk4bF8buZ+BykP3l57aF0lIaNYNU=;
+        b=GRcgZjStlLPjY9Yhh+ILTbxii6x52/IWDq7/10fBNz9fm7/T7IDndB0Qt+SU/GhxLI
+        iuVWDSmlVqcR7MykDF+2gBZ81Cya9YVZkB+0Vtbrn1VVHh/ywSQbKwCqOKOdl+luPUa+
+        7/9/gEyTVwKvDWN//JN13WF/KIO15eKEQeXEkk0cnaVVtwojODf0ShtbDu1UlJRYyUO/
+        bcCW4bMdCX1lzNrSpmUqyD2FqTsJ1yacvaBeARjGEm5vOf+/AuEPaGdQiNqypeuuxWFt
+        NL7fqS20q/pn9lTaljk20Sk6GcJXwF/b3mEd18sSbjuNtATGACli4o2ltx/VOckjVIqC
+        lS9g==
+X-RZG-AUTH: ":P20JeEWkefDI1ODZs1HHtgV3eF0OpFsRaGIBEm4ljegySSvO7VhbcRIBGrxpcA5nVfJ6oTd1q4jnuxtWZDcOZOKSTOmtb3W8gvPNSUb37NN0EQ=="
+X-RZG-CLASS-ID: mo00
+Received: from dynamic.fami-braun.de
+        by smtp.strato.de (RZmta 46.5.0 AUTH)
+        with ESMTPSA id Y04052w3IN5I6ql
+        (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256 bits))
+        (Client did not present a certificate);
+        Sun, 19 Apr 2020 01:05:18 +0200 (CEST)
+Received: from dynamic.fami-braun.de (localhost [127.0.0.1])
+        by dynamic.fami-braun.de (fami-braun.de) with ESMTP id 3B8D4154026;
+        Sun, 19 Apr 2020 01:05:16 +0200 (CEST)
+Received: from MUwn1KzOsXkPj4GHgQEy3QvFhWx/jaeh8kYQFBIT9Qa03xGehiWzwA==
+ (6a/hpoGAnTbL0/tmkuZ+MsYXg80CMCsV)
+ by webmail.fami-braun.de
+ with HTTP (HTTP/1.1 POST); Sun, 19 Apr 2020 01:05:05 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
+Content-Type: text/plain; charset=US-ASCII;
+ format=flowed
 Content-Transfer-Encoding: 7bit
-X-Originating-IP: [45.82.223.36, 172.69.54.54]
-X-Mailer: Zimbra 8.8.15_GA_3918 (zclient/8.8.15_GA_3918)
-Thread-Index: /Z3v+KCtheLS96O1jJry7xrh28HNsg==
-Thread-Topic: Hey, how are u, can we talk?
-To:     unlisted-recipients:; (no To-header on input)
+Date:   Sun, 19 Apr 2020 01:05:05 +0200
+From:   michael-dev <michael-dev@fami-braun.de>
+To:     ebiederm@xmission.com
+Cc:     util-linux@vger.kernel.org
+Subject: Re: [PATCH] Fix PID namespace persistence
+In-Reply-To: <87o8rrdulx.fsf@x220.int.ebiederm.org>
+References: <20200415211653.5455-1-michael-dev@fami-braun.de>
+ <87o8rrdulx.fsf@x220.int.ebiederm.org>
+User-Agent: Roundcube Webmail/1.4.2
+Message-ID: <9379f1f3b13b33e3a80b7cb4a58de8b8@fami-braun.de>
+X-Sender: michael-dev@fami-braun.de
+X-Virus-Scanned: clamav-milter 0.102.2 at gate
+X-Virus-Status: Clean
+X-Spam-Status: No, score=0.0 required=5.0 tests=UNPARSEABLE_RELAY
+        autolearn=ham autolearn_force=no version=3.4.2
+X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on gate.zuhause.all
 Sender: util-linux-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
+Am 16.04.2020 22:49, schrieb ebiederm@xmission.com:
+> Why all of the extra code motion and change?
+> 
+> Your description sounds like only the first hunk is necessary.  Did
+> something else get mixed into this change?  Or are all of the hunks
+> necessary?
+
+Because after unsharing, pid_for_children is a dangling symlink.
+So if (forkit) needs to be before /* wait for bind_ns_files_from_child() 
+*/.
+Moving this results in an overlapping use of the pid variable, so that 
+gets renamed.
+Additionally, we cannot wait for the forkit child (bash) to exit before 
+triggering and waiting for the bind-mounting child to bind-mount the 
+persistent namespace. So forking and waiting for the forkit child (bash) 
+needs to become splitted.
+
+Regards,
+Michael
