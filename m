@@ -2,87 +2,93 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 98E0E1CC3E9
-	for <lists+util-linux@lfdr.de>; Sat,  9 May 2020 21:06:04 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 475061CD4E0
+	for <lists+util-linux@lfdr.de>; Mon, 11 May 2020 11:27:47 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1728162AbgEITGD (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Sat, 9 May 2020 15:06:03 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:60560 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-FAIL-OK-FAIL)
-        by vger.kernel.org with ESMTP id S1727938AbgEITGD (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Sat, 9 May 2020 15:06:03 -0400
-Received: from mail-ed1-x541.google.com (mail-ed1-x541.google.com [IPv6:2a00:1450:4864:20::541])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 3F023C061A0C
-        for <util-linux@vger.kernel.org>; Sat,  9 May 2020 12:06:03 -0700 (PDT)
-Received: by mail-ed1-x541.google.com with SMTP id r7so4200529edo.11
-        for <util-linux@vger.kernel.org>; Sat, 09 May 2020 12:06:03 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=gPduKrc19dtmM+HV3UjupWDTHwmz1XBcgCsmEZlP9q0=;
-        b=icQJbKTKSFBDTcIZR6QweVm+KSH5qZbYqc6tgdUEB5sBCqQQ5xtEO0bqSK92tOp5le
-         JySmzrnI3VSUShkcPC+L0ALOfszX372mPd2K5CynSC2qiNM+g6IBAKmdqCULIM32AETy
-         TbOw3VWofhC0cECNW4aRdGuPoHFy9p14Azb+awbfMmyHQXMY7NiBpePp+pUoVl5P7M+Q
-         mH4d559w+W2cw4j9L0GN7YtPskQxcBx30Q3+MvhBfTxXjks+BdUwEIxkihsOBHMUENwQ
-         r//SS/zYXDQWrr6but6ytK7HNO7vOBPywWgzOQPB/YksAHQWyOUBAnWVPXLQBOnPl7I/
-         06aQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=gPduKrc19dtmM+HV3UjupWDTHwmz1XBcgCsmEZlP9q0=;
-        b=te1AwcOxelxYHGk+bGk78/e8zYLxCPtzqVGJ7hb+UDnuYmqK0WDDfWY6U5YYqdZzuy
-         auGVhwc2upSGM6WHU8B8sjJ+o3dLaqUSK4/L4K22FDOs48sW/wx8+qvAjYE0j224Kals
-         xlEdFguG0q9qIENXI3P14NX367USXfHOv4agf4O9dMAcVgRd7SoXLFM2tlJj551l0Y59
-         kZnNlUwe6vVvdSAEAQdC1Vmz5XRS1wMJe5dIYvTDRgfpAoyWxfLaVpqDSL6S+nsk11qt
-         olPa6s6Me7LPIdATp8JiBEit40HzfQ4+r+LiCuiSSeiimvZPy8fYxo1meWLRM/o5dy99
-         Ljsg==
-X-Gm-Message-State: AGi0PuZ570MzRDWmNov89v4ySnF6Pt5Vzcqca+onA0dsmi6c5UeuUhWe
-        5q5kVKMsLXMbkSpqKivfIZvyJgwDP4jWfDxC5eY=
-X-Google-Smtp-Source: APiQypJhm9o6vM/yOUQNeB0WcUknY4GFMJekov+NBmottiP43ijBFe+MhRq/JQslih6LaoihWRP0Pgg0Uj9qi0+1fuQ=
-X-Received: by 2002:aa7:c2ce:: with SMTP id m14mr7620753edp.305.1589051162008;
- Sat, 09 May 2020 12:06:02 -0700 (PDT)
-MIME-Version: 1.0
-References: <20200503191335.GB27970@Debian-50-lenny-64-minimal>
- <CALxWeYrDdow1y2oA1VkcCyiQH1Vm9jNN79o541FPRaHYom=pAg@mail.gmail.com> <20200509190020.GA28852@Debian-50-lenny-64-minimal>
-In-Reply-To: <20200509190020.GA28852@Debian-50-lenny-64-minimal>
-From:   Michael Kerrisk <mtk.manpages@gmail.com>
-Date:   Sat, 9 May 2020 21:05:50 +0200
-Message-ID: <CALxWeYpxvs+fcXzbExJ0n5ebeFtBdzm53ucPndW475CKe2KR0Q@mail.gmail.com>
+        id S1728574AbgEKJ1q (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Mon, 11 May 2020 05:27:46 -0400
+Received: from us-smtp-delivery-1.mimecast.com ([205.139.110.120]:59187 "EHLO
+        us-smtp-1.mimecast.com" rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org
+        with ESMTP id S1728260AbgEKJ1p (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Mon, 11 May 2020 05:27:45 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+        s=mimecast20190719; t=1589189264;
+        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+         in-reply-to:in-reply-to:references:references;
+        bh=YA8Pn6SnIlGKIFC2h9xV0YgGtxQj8YO7qogkZJOy9YM=;
+        b=SOj46XIcSdb/3+t3HEIr6lv0GMF9R2rjERVmHtF+MhhoVN+fNQwsxs86DEgR2QIgH6eL/z
+        8/GJQ7n63m51/n5or1DaPowGRBiLo0d08Ki6Hdoh6mNUy98Pv93eiUEgK8BWrxU0+/MSF6
+        nyhRbJdGsh6711rlA3CGKZeENlI+p9g=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-450-xaYt2OQ9NyuCUFvWw5oTsA-1; Mon, 11 May 2020 05:27:39 -0400
+X-MC-Unique: xaYt2OQ9NyuCUFvWw5oTsA-1
+Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.phx2.redhat.com [10.5.11.11])
+        (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+        (No client certificate requested)
+        by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 46DE3107ACCA;
+        Mon, 11 May 2020 09:27:38 +0000 (UTC)
+Received: from ws.net.home (unknown [10.40.193.21])
+        by smtp.corp.redhat.com (Postfix) with ESMTPS id D538C7526B;
+        Mon, 11 May 2020 09:27:36 +0000 (UTC)
+Date:   Mon, 11 May 2020 11:27:34 +0200
+From:   Karel Zak <kzak@redhat.com>
+To:     Michael Kerrisk <mtk.manpages@gmail.com>
+Cc:     Helge Kreutzmann <debian@helgefjell.de>,
+        util-linux@vger.kernel.org,
+        Mario =?utf-8?Q?Bl=C3=A4ttermann?= <mario.blaettermann@gmail.com>
 Subject: Re: Errors in man pages of util-linux
-To:     Helge Kreutzmann <debian@helgefjell.de>
-Cc:     util-linux@vger.kernel.org,
-        =?UTF-8?Q?Mario_Bl=C3=A4ttermann?= <mario.blaettermann@gmail.com>,
-        Karel Zak <kzak@redhat.com>,
-        Michael Kerrisk-manpages <mtk.manpages@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
+Message-ID: <20200511092734.6izjgahtz37iya6v@ws.net.home>
+References: <20200503191335.GB27970@Debian-50-lenny-64-minimal>
+ <CALxWeYrDdow1y2oA1VkcCyiQH1Vm9jNN79o541FPRaHYom=pAg@mail.gmail.com>
+ <20200509190020.GA28852@Debian-50-lenny-64-minimal>
+ <CALxWeYpxvs+fcXzbExJ0n5ebeFtBdzm53ucPndW475CKe2KR0Q@mail.gmail.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <CALxWeYpxvs+fcXzbExJ0n5ebeFtBdzm53ucPndW475CKe2KR0Q@mail.gmail.com>
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.11
 Sender: util-linux-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-On Sat, May 9, 2020 at 9:00 PM Helge Kreutzmann <debian@helgefjell.de> wrote:
->
-> Hello Michael,
-> On Sat, May 09, 2020 at 08:53:31PM +0200, Michael Kerrisk wrote:
-> > Hello Helge ;-),
+On Sat, May 09, 2020 at 09:05:50PM +0200, Michael Kerrisk wrote:
+> On Sat, May 9, 2020 at 9:00 PM Helge Kreutzmann <debian@helgefjell.de> wrote:
 > >
-> > I think no maintainer wants to deal with a 1000-line mail listing 100+
-> > minor bugs. May I suggest making the maintainer's life a little easier
-> > by breaking things up into pieces. For example, one mail per manual
-> > page (which would be 43 mails by my count).  But maybe Karel has
-> > another suggestion on how you could make his life easier.
->
-> Sure, I can do this, it did not see this mentioned for reporting bugs
-> in util-linux, hence I did not do so.
->
-> Will do so soon, probably tomorrow.
+> > Hello Michael,
+> > On Sat, May 09, 2020 at 08:53:31PM +0200, Michael Kerrisk wrote:
+> > > Hello Helge ;-),
 
-Maybe hold off for a day or three before investing effort on this.
-Karel may have a better idea than mine re his preferred method of
-reporting.
+Thanks for your report Helge.
 
-Thanks,
+> > > I think no maintainer wants to deal with a 1000-line mail listing 100+
+> > > minor bugs. May I suggest making the maintainer's life a little easier
+> > > by breaking things up into pieces. For example, one mail per manual
+> > > page (which would be 43 mails by my count).  But maybe Karel has
+> > > another suggestion on how you could make his life easier.
 
-Michael
+Well, that's simple, send patches ;-)))
+
+> > Sure, I can do this, it did not see this mentioned for reporting bugs
+> > in util-linux, hence I did not do so.
+> >
+> > Will do so soon, probably tomorrow.
+
+I think Michael is right. If we will split it then more volunteers can 
+work on it and it will be more easy to maintain all the task.
+
+> Maybe hold off for a day or three before investing effort on this.
+> Karel may have a better idea than mine re his preferred method of
+> reporting.
+
+I have no another idea (maybe github issue(s), but it will be invisible
+for many contributors).
+ 
+  Karel
+
+-- 
+ Karel Zak  <kzak@redhat.com>
+ http://karelzak.blogspot.com
+
