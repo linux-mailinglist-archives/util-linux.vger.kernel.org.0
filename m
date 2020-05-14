@@ -2,26 +2,26 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 04EA91D39A0
-	for <lists+util-linux@lfdr.de>; Thu, 14 May 2020 20:51:55 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 8B3421D399F
+	for <lists+util-linux@lfdr.de>; Thu, 14 May 2020 20:51:54 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727911AbgENSvo (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Thu, 14 May 2020 14:51:44 -0400
-Received: from luckmann.name ([213.239.213.133]:49935 "EHLO
+        id S1727899AbgENSvn (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Thu, 14 May 2020 14:51:43 -0400
+Received: from luckmann.name ([213.239.213.133]:59621 "EHLO
         static.213-239-213-133.clients.your-server.de" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S1727910AbgENSvm (ORCPT
+        by vger.kernel.org with ESMTP id S1727927AbgENSvn (ORCPT
         <rfc822;util-linux@vger.kernel.org>);
-        Thu, 14 May 2020 14:51:42 -0400
+        Thu, 14 May 2020 14:51:43 -0400
 Received: from localhost (localhost [127.0.0.1])
   (uid 502)
   by static.213-239-213-133.clients.your-server.de with local
-  id 0000000000E56160.000000005EBD9339.0000693A; Thu, 14 May 2020 20:51:37 +0200
-Date:   Thu, 14 May 2020 20:51:37 +0200
+  id 0000000000E56162.000000005EBD933A.0000696E; Thu, 14 May 2020 20:51:38 +0200
+Date:   Thu, 14 May 2020 20:51:38 +0200
 From:   Helge Kreutzmann <debian@helgefjell.de>
 To:     util-linux@vger.kernel.org
 Cc:     mario.blaettermann@gmail.com
-Subject: Errors in util-linux man pages, here: lslogins.1: Typo
-Message-ID: <20200514185137.GA26921@Debian-50-lenny-64-minimal>
+Subject: Errors in util-linux man pages, here: lsmem.1: Wording
+Message-ID: <20200514185138.GA26971@Debian-50-lenny-64-minimal>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
@@ -70,12 +70,14 @@ use another channel, please let me know.
 
 **
 
-Man page: lslogins.1
-Issue: IDS → IDs
+Man page: lsmem.1
+Issue: output compatible → output is compatible
 
-"Only show data of users with a login specified in I<logins> (user names or "
-"user IDS).  More than one login may be specified; the list has to be comma-"
-"separated.  The unknown login names are ignored."
+"The default output compatible with original implementation from s390-tools, "
+"but it's strongly recommended to avoid using default outputs in your "
+"scripts.  Always explicitly define expected columns by using the B<--output> "
+"option together with a columns list in environments where a stable output is "
+"required."
 
 Greetings
 
