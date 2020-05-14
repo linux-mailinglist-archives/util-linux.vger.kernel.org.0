@@ -2,26 +2,26 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 7E1A01D3C3E
-	for <lists+util-linux@lfdr.de>; Thu, 14 May 2020 21:15:45 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 8CF9E1D3C3C
+	for <lists+util-linux@lfdr.de>; Thu, 14 May 2020 21:15:44 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1728244AbgENSwQ (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Thu, 14 May 2020 14:52:16 -0400
-Received: from luckmann.name ([213.239.213.133]:59621 "EHLO
+        id S1728237AbgENSwP (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Thu, 14 May 2020 14:52:15 -0400
+Received: from luckmann.name ([213.239.213.133]:41493 "EHLO
         static.213-239-213-133.clients.your-server.de" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S1728213AbgENSwO (ORCPT
+        by vger.kernel.org with ESMTP id S1728209AbgENSwN (ORCPT
         <rfc822;util-linux@vger.kernel.org>);
-        Thu, 14 May 2020 14:52:14 -0400
+        Thu, 14 May 2020 14:52:13 -0400
 Received: from localhost (localhost [127.0.0.1])
   (uid 502)
   by static.213-239-213-133.clients.your-server.de with local
-  id 0000000000E56161.000000005EBD9354.00006DF9; Thu, 14 May 2020 20:52:04 +0200
+  id 0000000000E5615E.000000005EBD9354.00006DE2; Thu, 14 May 2020 20:52:04 +0200
 Date:   Thu, 14 May 2020 20:52:04 +0200
 From:   Helge Kreutzmann <debian@helgefjell.de>
 To:     util-linux@vger.kernel.org
 Cc:     mario.blaettermann@gmail.com
-Subject: Errors in util-linux man pages, here: wdctl.8: Typo
-Message-ID: <20200514185204.GA28138@Debian-50-lenny-64-minimal>
+Subject: Errors in util-linux man pages, here: unshare.1: English
+Message-ID: <20200514185203.GA28115@Debian-50-lenny-64-minimal>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
@@ -70,12 +70,13 @@ use another channel, please let me know.
 
 **
 
-Man page: wdctl.8
-Issue: than → then
+Man page: unshare.1
+Issue: can not → cannot
 
-"If the device is already used or user has no permissions to read from the "
-"device than B<wdctl> reads data from sysfs.  In this case information about "
-"supported features (flags) might be missing."
+"The proc and sysfs filesystems mounting as root in a user namespace have to "
+"be restricted so that a less privileged user can not get more access to "
+"sensitive files that a more privileged user made unavailable. In short the "
+"rule for proc and sysfs is as close to a bind mount as possible."
 
 Greetings
 
