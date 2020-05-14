@@ -2,26 +2,26 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 6028B1D396F
+	by mail.lfdr.de (Postfix) with ESMTP id CBA801D3970
 	for <lists+util-linux@lfdr.de>; Thu, 14 May 2020 20:51:22 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727798AbgENSvV (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        id S1727803AbgENSvV (ORCPT <rfc822;lists+util-linux@lfdr.de>);
         Thu, 14 May 2020 14:51:21 -0400
-Received: from luckmann.name ([213.239.213.133]:59621 "EHLO
+Received: from luckmann.name ([213.239.213.133]:41493 "EHLO
         static.213-239-213-133.clients.your-server.de" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S1726073AbgENSvV (ORCPT
+        by vger.kernel.org with ESMTP id S1727111AbgENSvV (ORCPT
         <rfc822;util-linux@vger.kernel.org>);
         Thu, 14 May 2020 14:51:21 -0400
 Received: from localhost (localhost [127.0.0.1])
   (uid 502)
   by static.213-239-213-133.clients.your-server.de with local
-  id 0000000000E5613E.000000005EBD9327.000064D0; Thu, 14 May 2020 20:51:19 +0200
+  id 0000000000E56142.000000005EBD9327.000064E8; Thu, 14 May 2020 20:51:19 +0200
 Date:   Thu, 14 May 2020 20:51:19 +0200
 From:   Helge Kreutzmann <debian@helgefjell.de>
 To:     util-linux@vger.kernel.org
 Cc:     mario.blaettermann@gmail.com
-Subject: Errors in util-linux man pages, here: blkid.8: Missing markup
-Message-ID: <20200514185118.GA25793@Debian-50-lenny-64-minimal>
+Subject: Errors in util-linux man pages, here: blkzone.8: Double full stop
+Message-ID: <20200514185119.GA25817@Debian-50-lenny-64-minimal>
 Mime-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
@@ -70,13 +70,11 @@ use another channel, please let me know.
 
 **
 
-Man page: blkid.8
-Issue: Missing markup from "mount"
+Man page: blkzone.8
+Issue: Double full stop
 
-"This option forces B<blkid> to use udev when used for LABEL or UUID tokens "
-"in B<--match-token>. The goal is to provide output consistent with another "
-"utils (like mount, etc.)  on systems where the same tag is used for multiple "
-"devices."
+"Display the number of zones returned in the report or the range of sectors "
+"reset.."
 
 Greetings
 
