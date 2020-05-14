@@ -2,27 +2,26 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 4E2FB1D397F
-	for <lists+util-linux@lfdr.de>; Thu, 14 May 2020 20:51:40 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 9E3B91D3982
+	for <lists+util-linux@lfdr.de>; Thu, 14 May 2020 20:51:41 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727837AbgENSv2 (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Thu, 14 May 2020 14:51:28 -0400
-Received: from luckmann.name ([213.239.213.133]:43279 "EHLO
+        id S1727830AbgENSva (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Thu, 14 May 2020 14:51:30 -0400
+Received: from luckmann.name ([213.239.213.133]:59621 "EHLO
         static.213-239-213-133.clients.your-server.de" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S1727835AbgENSv1 (ORCPT
+        by vger.kernel.org with ESMTP id S1727844AbgENSv3 (ORCPT
         <rfc822;util-linux@vger.kernel.org>);
-        Thu, 14 May 2020 14:51:27 -0400
+        Thu, 14 May 2020 14:51:29 -0400
 Received: from localhost (localhost [127.0.0.1])
   (uid 502)
   by static.213-239-213-133.clients.your-server.de with local
-  id 0000000000E56163.000000005EBD932C.00006636; Thu, 14 May 2020 20:51:24 +0200
-Date:   Thu, 14 May 2020 20:51:24 +0200
+  id 0000000000E56153.000000005EBD932D.00006692; Thu, 14 May 2020 20:51:25 +0200
+Date:   Thu, 14 May 2020 20:51:25 +0200
 From:   Helge Kreutzmann <debian@helgefjell.de>
 To:     util-linux@vger.kernel.org
 Cc:     mario.blaettermann@gmail.com
-Subject: Errors in util-linux man pages, here: fsck.minix.8: Improved
- formatting
-Message-ID: <20200514185124.GA26151@Debian-50-lenny-64-minimal>
+Subject: Errors in util-linux man pages, here: hardlink.1: Missing markup
+Message-ID: <20200514185125.GA26243@Debian-50-lenny-64-minimal>
 Mime-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
@@ -71,16 +70,19 @@ use another channel, please let me know.
 
 **
 
-Man page: fsck.minix.8
-Issue: Replace \(en with Unicode U+2013 '-
+Man page: hardlink.1
+Issue: Markup up of "hardlink" missing
 
-msgid "/dev/hda[1\\(en63]"
+"B<hardlink> assumes that the trees it operates on do not change during "
+"operation. If a tree does change, the result is undefined and potentially "
+"dangerous. For example, if a regular file is replaced by a device, hardlink "
+"may start reading from the device. If a component of a path is replaced by a "
+"symbolic link or file permissions change, security may be compromised. Do "
+"not run hardlink on a changing tree or on a tree controlled by another user."
 
-msgid "/dev/hdb[1\\(en63]"
-
-msgid "/dev/sda[1\\(en15]"
-
-msgid "/dev/sdb[1\\(en15]"
+"The program hardlink and this manpage have been written by Julian Andres "
+"Klode, and are licensed under the MIT license. See the code of hardlink for "
+"further information."
 
 Greetings
 
