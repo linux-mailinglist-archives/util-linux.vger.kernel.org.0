@@ -2,26 +2,26 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 502C01D3D12
-	for <lists+util-linux@lfdr.de>; Thu, 14 May 2020 21:17:21 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 67BAB1D3D10
+	for <lists+util-linux@lfdr.de>; Thu, 14 May 2020 21:17:20 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1729316AbgENTLs (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Thu, 14 May 2020 15:11:48 -0400
-Received: from luckmann.name ([213.239.213.133]:49935 "EHLO
+        id S1728612AbgENTLr (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Thu, 14 May 2020 15:11:47 -0400
+Received: from luckmann.name ([213.239.213.133]:43279 "EHLO
         static.213-239-213-133.clients.your-server.de" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S1728190AbgENSwL (ORCPT
+        by vger.kernel.org with ESMTP id S1728188AbgENSwM (ORCPT
         <rfc822;util-linux@vger.kernel.org>);
-        Thu, 14 May 2020 14:52:11 -0400
+        Thu, 14 May 2020 14:52:12 -0400
 Received: from localhost (localhost [127.0.0.1])
   (uid 502)
   by static.213-239-213-133.clients.your-server.de with local
-  id 0000000000E56153.000000005EBD9353.00006DCB; Thu, 14 May 2020 20:52:03 +0200
+  id 0000000000E56151.000000005EBD9353.00006DB4; Thu, 14 May 2020 20:52:03 +0200
 Date:   Thu, 14 May 2020 20:52:03 +0200
 From:   Helge Kreutzmann <debian@helgefjell.de>
 To:     util-linux@vger.kernel.org
 Cc:     mario.blaettermann@gmail.com
-Subject: Errors in util-linux man pages, here: unshare.1: Markup?
-Message-ID: <20200514185203.GA28092@Debian-50-lenny-64-minimal>
+Subject: Errors in util-linux man pages, here: umount.8: Markup
+Message-ID: <20200514185202.GA28069@Debian-50-lenny-64-minimal>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
@@ -70,10 +70,14 @@ use another channel, please let me know.
 
 **
 
-Man page: unshare.1
-Issue: = → B<=>?
+Man page: umount.8
+Issue: libmount → B<libmount>
 
-msgid "B<-C>,B< --cgroup>[=I<file>]"
+"Since version 2.35 B<umount> command does not exit when user permissions are "
+"inadequate by internal libmount security rules.  It drops suid permissions "
+"and continue as regular non-root user. It allows to support use-cases where "
+"root permissions are not necessary (e.g., fuse filesystems, user namespaces, "
+"etc)."
 
 Greetings
 
