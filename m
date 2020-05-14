@@ -2,26 +2,26 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id ECA401D39AB
-	for <lists+util-linux@lfdr.de>; Thu, 14 May 2020 20:51:59 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id D34671D39AD
+	for <lists+util-linux@lfdr.de>; Thu, 14 May 2020 20:52:00 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727929AbgENSvt (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Thu, 14 May 2020 14:51:49 -0400
-Received: from luckmann.name ([213.239.213.133]:41493 "EHLO
+        id S1727935AbgENSvu (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Thu, 14 May 2020 14:51:50 -0400
+Received: from luckmann.name ([213.239.213.133]:43279 "EHLO
         static.213-239-213-133.clients.your-server.de" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S1727884AbgENSvt (ORCPT
+        by vger.kernel.org with ESMTP id S1727928AbgENSvt (ORCPT
         <rfc822;util-linux@vger.kernel.org>);
         Thu, 14 May 2020 14:51:49 -0400
 Received: from localhost (localhost [127.0.0.1])
   (uid 502)
   by static.213-239-213-133.clients.your-server.de with local
-  id 0000000000E56159.000000005EBD933F.00006A6A; Thu, 14 May 2020 20:51:43 +0200
-Date:   Thu, 14 May 2020 20:51:43 +0200
+  id 0000000000E56148.000000005EBD9340.00006AB4; Thu, 14 May 2020 20:51:44 +0200
+Date:   Thu, 14 May 2020 20:51:44 +0200
 From:   Helge Kreutzmann <debian@helgefjell.de>
 To:     util-linux@vger.kernel.org
 Cc:     mario.blaettermann@gmail.com
-Subject: Errors in util-linux man pages, here: mount.8: Broken URL
-Message-ID: <20200514185143.GA27227@Debian-50-lenny-64-minimal>
+Subject: Errors in util-linux man pages, here: nologin.8: Missing markup
+Message-ID: <20200514185144.GA27301@Debian-50-lenny-64-minimal>
 Mime-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
@@ -70,19 +70,15 @@ use another channel, please let me know.
 
 **
 
-Man page: mount.8
-Issue: URL does not allow login (2019-01-29)
+Man page: nologin.8
+Issue: Missing markup for command name
 
-"A remount option which permits online expansion of reiserfs partitions.  "
-"Instructs reiserfs to assume that the device has I<number> blocks.  This "
-"option is designed for use with devices which are under logical volume "
-"management (LVM).  There is a special I<resizer> utility which can be "
-"obtained from I<ftp://ftp.namesys.com/pub/reiserfsprogs>."
+"If the file /etc/nologin.txt exists, nologin displays its contents to the "
+"user instead of the default message."
 
-Suggested change:
-> The following address is reachable (and is used as the source for the 
-> archlinux package):
-> https://mirrors.edge.kernel.org/pub/linux/kernel/people/jeffm/reiserfsprogs/
+"The nologin command is part of the util-linux package and is available from "
+"E<.UR https://\\:www.kernel.org\\:/pub\\:/linux\\:/utils\\:/util-linux/> "
+"Linux Kernel Archive E<.UE .>"
 
 Greetings
 
