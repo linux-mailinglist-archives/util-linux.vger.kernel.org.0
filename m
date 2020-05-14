@@ -2,26 +2,26 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 6E3D11D3979
-	for <lists+util-linux@lfdr.de>; Thu, 14 May 2020 20:51:37 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 5BDC71D397B
+	for <lists+util-linux@lfdr.de>; Thu, 14 May 2020 20:51:38 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727834AbgENSv0 (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        id S1727823AbgENSv0 (ORCPT <rfc822;lists+util-linux@lfdr.de>);
         Thu, 14 May 2020 14:51:26 -0400
-Received: from luckmann.name ([213.239.213.133]:43279 "EHLO
+Received: from luckmann.name ([213.239.213.133]:59621 "EHLO
         static.213-239-213-133.clients.your-server.de" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S1727823AbgENSv0 (ORCPT
+        by vger.kernel.org with ESMTP id S1727111AbgENSv0 (ORCPT
         <rfc822;util-linux@vger.kernel.org>);
         Thu, 14 May 2020 14:51:26 -0400
 Received: from localhost (localhost [127.0.0.1])
   (uid 502)
   by static.213-239-213-133.clients.your-server.de with local
-  id 0000000000E56154.000000005EBD932A.000065D6; Thu, 14 May 2020 20:51:22 +0200
-Date:   Thu, 14 May 2020 20:51:22 +0200
+  id 0000000000E56158.000000005EBD932B.00006607; Thu, 14 May 2020 20:51:23 +0200
+Date:   Thu, 14 May 2020 20:51:23 +0200
 From:   Helge Kreutzmann <debian@helgefjell.de>
 To:     util-linux@vger.kernel.org
 Cc:     mario.blaettermann@gmail.com
-Subject: Errors in util-linux man pages, here: fdisk.8: Wording
-Message-ID: <20200514185122.GA26054@Debian-50-lenny-64-minimal>
+Subject: Errors in util-linux man pages, here: fdisk.8: Content
+Message-ID: <20200514185123.GA26103@Debian-50-lenny-64-minimal>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
@@ -71,10 +71,18 @@ use another channel, please let me know.
 **
 
 Man page: fdisk.8
-Issue: "when create" → "when creating"
+Issue: Content: Do need to mark partitions with »volume« and »volume
+                header«
 
-"Don't erase the begin of the first disk sector when create a new disk "
-"label.  This feature is supported for GPT and MBR."
+"An IRIX/SGI disklabel can describe 16 partitions, the eleventh of which "
+"should be an entire `volume' partition, while the ninth should be labeled "
+"`volume header'.  The volume header will also cover the partition table, i."
+"e., it starts at block zero and extends by default over five cylinders.  The "
+"remaining space in the volume header may be used by header directory "
+"entries.  No partitions may overlap with the volume header.  Also do not "
+"change its type or make some filesystem on it, since you will lose the "
+"partition table.  Use this type of label only when working with Linux on "
+"IRIX/SGI machines or IRIX/SGI disks under Linux."
 
 Greetings
 
