@@ -2,26 +2,26 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 15A721D398C
+	by mail.lfdr.de (Postfix) with ESMTP id 81B3C1D398D
 	for <lists+util-linux@lfdr.de>; Thu, 14 May 2020 20:51:46 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727856AbgENSvd (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Thu, 14 May 2020 14:51:33 -0400
-Received: from luckmann.name ([213.239.213.133]:43279 "EHLO
+        id S1727840AbgENSve (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Thu, 14 May 2020 14:51:34 -0400
+Received: from luckmann.name ([213.239.213.133]:59621 "EHLO
         static.213-239-213-133.clients.your-server.de" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S1727854AbgENSvd (ORCPT
+        by vger.kernel.org with ESMTP id S1727882AbgENSvd (ORCPT
         <rfc822;util-linux@vger.kernel.org>);
         Thu, 14 May 2020 14:51:33 -0400
 Received: from localhost (localhost [127.0.0.1])
   (uid 502)
   by static.213-239-213-133.clients.your-server.de with local
-  id 0000000000E56148.000000005EBD9331.00006763; Thu, 14 May 2020 20:51:29 +0200
-Date:   Thu, 14 May 2020 20:51:29 +0200
+  id 0000000000E56153.000000005EBD9332.0000677B; Thu, 14 May 2020 20:51:30 +0200
+Date:   Thu, 14 May 2020 20:51:30 +0200
 From:   Helge Kreutzmann <debian@helgefjell.de>
 To:     util-linux@vger.kernel.org
 Cc:     mario.blaettermann@gmail.com
-Subject: Errors in util-linux man pages, here: hwclock.8: Comprehension
-Message-ID: <20200514185129.GA26452@Debian-50-lenny-64-minimal>
+Subject: Errors in util-linux man pages, here: hwclock.8: Punctuation
+Message-ID: <20200514185130.GA26476@Debian-50-lenny-64-minimal>
 Mime-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
@@ -71,10 +71,10 @@ use another channel, please let me know.
 **
 
 Man page: hwclock.8
-Issue: Paragraph hard to read
+Issue: Replace comma by full stop
 
-"Significantly increased system shutdown times (as of v2.31 when not using B<"
-"\\%--update-drift> the RTC is not read)."
+"Update the Hardware Clock's drift factor in I</etc/adjtime>.  It can only be "
+"used with B<--set> or B<\\%--systohc>,"
 
 Greetings
 
