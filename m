@@ -2,26 +2,26 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id C34601D399B
+	by mail.lfdr.de (Postfix) with ESMTP id 553B11D399A
 	for <lists+util-linux@lfdr.de>; Thu, 14 May 2020 20:51:52 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727909AbgENSvl (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Thu, 14 May 2020 14:51:41 -0400
-Received: from luckmann.name ([213.239.213.133]:49935 "EHLO
+        id S1727898AbgENSvk (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Thu, 14 May 2020 14:51:40 -0400
+Received: from luckmann.name ([213.239.213.133]:43279 "EHLO
         static.213-239-213-133.clients.your-server.de" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S1727869AbgENSvk (ORCPT
+        by vger.kernel.org with ESMTP id S1727860AbgENSvk (ORCPT
         <rfc822;util-linux@vger.kernel.org>);
         Thu, 14 May 2020 14:51:40 -0400
 Received: from localhost (localhost [127.0.0.1])
   (uid 502)
   by static.213-239-213-133.clients.your-server.de with local
-  id 0000000000E5615F.000000005EBD9337.000068D9; Thu, 14 May 2020 20:51:35 +0200
+  id 0000000000E5615C.000000005EBD9337.000068C2; Thu, 14 May 2020 20:51:35 +0200
 Date:   Thu, 14 May 2020 20:51:35 +0200
 From:   Helge Kreutzmann <debian@helgefjell.de>
 To:     util-linux@vger.kernel.org
 Cc:     mario.blaettermann@gmail.com
 Subject: Errors in util-linux man pages, here: login.1: Missing markup
-Message-ID: <20200514185135.GA26826@Debian-50-lenny-64-minimal>
+Message-ID: <20200514185135.GA26803@Debian-50-lenny-64-minimal>
 Mime-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
@@ -71,15 +71,13 @@ use another channel, please let me know.
 **
 
 Man page: login.1
-Issue: Missing markup for command name
+Issue: Missing markup for lastlog
 
-"A recursive login, as used to be possible in the good old days, no longer "
-"works; for most purposes B<su>(1)  is a satisfactory substitute.  Indeed, "
-"for security reasons, login does a vhangup() system call to remove any "
-"possible listening processes on the tty.  This is to avoid password "
-"sniffing.  If one uses the command B<login>, then the surrounding shell gets "
-"killed by vhangup() because it's no longer the true owner of the tty.  This "
-"can be avoided by using B<exec login> in a top-level shell or xterm."
+"Highest user ID number for which the lastlog entries should be updated.  As "
+"higher user IDs are usually tracked by remote user identity and "
+"authentication services there is no need to create a huge sparse lastlog "
+"file for them.  No LASTLOG_UID_MAX option present in the configuration means "
+"that there is no user ID limit for writing lastlog entries."
 
 Greetings
 
