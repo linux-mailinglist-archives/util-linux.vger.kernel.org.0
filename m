@@ -2,26 +2,26 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 977701D3C2A
-	for <lists+util-linux@lfdr.de>; Thu, 14 May 2020 21:15:35 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 127021D39B4
+	for <lists+util-linux@lfdr.de>; Thu, 14 May 2020 20:52:04 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727969AbgENSvx (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Thu, 14 May 2020 14:51:53 -0400
-Received: from luckmann.name ([213.239.213.133]:41493 "EHLO
+        id S1727890AbgENSvz (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Thu, 14 May 2020 14:51:55 -0400
+Received: from luckmann.name ([213.239.213.133]:59621 "EHLO
         static.213-239-213-133.clients.your-server.de" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S1727861AbgENSvx (ORCPT
+        by vger.kernel.org with ESMTP id S1727912AbgENSvy (ORCPT
         <rfc822;util-linux@vger.kernel.org>);
-        Thu, 14 May 2020 14:51:53 -0400
+        Thu, 14 May 2020 14:51:54 -0400
 Received: from localhost (localhost [127.0.0.1])
   (uid 502)
   by static.213-239-213-133.clients.your-server.de with local
-  id 0000000000E56153.000000005EBD9343.00006B31; Thu, 14 May 2020 20:51:47 +0200
-Date:   Thu, 14 May 2020 20:51:47 +0200
+  id 0000000000E5615F.000000005EBD9344.00006B61; Thu, 14 May 2020 20:51:48 +0200
+Date:   Thu, 14 May 2020 20:51:48 +0200
 From:   Helge Kreutzmann <debian@helgefjell.de>
 To:     util-linux@vger.kernel.org
 Cc:     mario.blaettermann@gmail.com
-Subject: Errors in util-linux man pages, here: runuser.1: Markup/Wording
-Message-ID: <20200514185147.GA27426@Debian-50-lenny-64-minimal>
+Subject: Errors in util-linux man pages, here: script.1: Wording
+Message-ID: <20200514185148.GA27474@Debian-50-lenny-64-minimal>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
@@ -70,16 +70,14 @@ use another channel, please let me know.
 
 **
 
-Man page: runuser.1
-Issue: Markup missing and copy → sync?
- 
-"Create pseudo-terminal for the session. The independent terminal provides "
-"better security as user does not share terminal with the original session.  "
-"This allow to avoid TIOCSTI ioctl terminal injection and another security "
-"attacks against terminal file descriptors. The all session is also possible "
-"to move to background (e.g., \"runuser --pty -u username -- command &\").  "
-"If the pseudo-terminal is enabled then runuser command works as a proxy "
-"between the sessions (copy stdin and stdout)."
+Man page: script.1
+Issue 1: or all the on → or all in the one
+Issue 2: supports new timing → supports a new timing
+
+"Since version 2.35 B<script> supports multiple streams and allows to log "
+"input and output to separate files or all the one file.  This version also "
+"supports new timing file which records additional information.  The command "
+"B<scriptreplay --summary> then provides all the information."
 
 Greetings
 
