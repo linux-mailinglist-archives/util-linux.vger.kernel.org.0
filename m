@@ -2,26 +2,26 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 848BE1D3D2F
-	for <lists+util-linux@lfdr.de>; Thu, 14 May 2020 21:17:34 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 2E15A1D3D2C
+	for <lists+util-linux@lfdr.de>; Thu, 14 May 2020 21:17:33 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1728037AbgENTMl (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Thu, 14 May 2020 15:12:41 -0400
-Received: from luckmann.name ([213.239.213.133]:49935 "EHLO
+        id S1728043AbgENTMj (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Thu, 14 May 2020 15:12:39 -0400
+Received: from luckmann.name ([213.239.213.133]:41493 "EHLO
         static.213-239-213-133.clients.your-server.de" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S1727978AbgENSv5 (ORCPT
+        by vger.kernel.org with ESMTP id S1728026AbgENSwC (ORCPT
         <rfc822;util-linux@vger.kernel.org>);
-        Thu, 14 May 2020 14:51:57 -0400
+        Thu, 14 May 2020 14:52:02 -0400
 Received: from localhost (localhost [127.0.0.1])
   (uid 502)
   by static.213-239-213-133.clients.your-server.de with local
-  id 0000000000E56162.000000005EBD9348.00006BEE; Thu, 14 May 2020 20:51:52 +0200
-Date:   Thu, 14 May 2020 20:51:52 +0200
+  id 0000000000E56151.000000005EBD9349.00006C1F; Thu, 14 May 2020 20:51:53 +0200
+Date:   Thu, 14 May 2020 20:51:53 +0200
 From:   Helge Kreutzmann <debian@helgefjell.de>
 To:     util-linux@vger.kernel.org
 Cc:     mario.blaettermann@gmail.com
-Subject: Errors in util-linux man pages, here: scriptlive.1: Markup
-Message-ID: <20200514185152.GA27614@Debian-50-lenny-64-minimal>
+Subject: Errors in util-linux man pages, here: scriptreplay.1: Typo/Markup
+Message-ID: <20200514185153.GA27663@Debian-50-lenny-64-minimal>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
@@ -70,12 +70,12 @@ use another channel, please let me know.
 
 **
 
-Man page: scriptlive.1
-Issue: scriptlive → B<scriptlive>
+Man page: scriptreplay.1
+Issue 1: aliast → alias
+Issue 2: B<script (1)> → B<script>(1)
 
-"The scriptlive command is part of the util-linux package and is available "
-"from E<.UR https://\\:www.kernel.org\\:/pub\\:/linux\\:/utils\\:/util-linux/"
-"> Linux Kernel Archive E<.UE .>"
+"aliast to B<-t>, maintained for compatibility with B<script (1)> command "
+"line options."
 
 Greetings
 
