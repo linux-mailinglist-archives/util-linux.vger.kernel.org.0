@@ -2,30 +2,30 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 8CBF31D3996
+	by mail.lfdr.de (Postfix) with ESMTP id 1F7291D3995
 	for <lists+util-linux@lfdr.de>; Thu, 14 May 2020 20:51:50 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727845AbgENSvi (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        id S1727810AbgENSvi (ORCPT <rfc822;lists+util-linux@lfdr.de>);
         Thu, 14 May 2020 14:51:38 -0400
-Received: from luckmann.name ([213.239.213.133]:59621 "EHLO
+Received: from luckmann.name ([213.239.213.133]:43279 "EHLO
         static.213-239-213-133.clients.your-server.de" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S1727854AbgENSvh (ORCPT
+        by vger.kernel.org with ESMTP id S1727869AbgENSvi (ORCPT
         <rfc822;util-linux@vger.kernel.org>);
-        Thu, 14 May 2020 14:51:37 -0400
+        Thu, 14 May 2020 14:51:38 -0400
 Received: from localhost (localhost [127.0.0.1])
   (uid 502)
   by static.213-239-213-133.clients.your-server.de with local
-  id 0000000000E56164.000000005EBD9335.0000684E; Thu, 14 May 2020 20:51:33 +0200
-Date:   Thu, 14 May 2020 20:51:33 +0200
+  id 0000000000E56148.000000005EBD9336.0000687C; Thu, 14 May 2020 20:51:34 +0200
+Date:   Thu, 14 May 2020 20:51:34 +0200
 From:   Helge Kreutzmann <debian@helgefjell.de>
 To:     util-linux@vger.kernel.org
 Cc:     mario.blaettermann@gmail.com
-Subject: Errors in util-linux man pages, here: logger.1: Missing markup
-Message-ID: <20200514185133.GA26687@Debian-50-lenny-64-minimal>
-Mime-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: 7bit
+Subject: Errors in util-linux man pages, here: logger.1: Wrong markup
+Message-ID: <20200514185133.GA26733@Debian-50-lenny-64-minimal>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
 X-Public-Key-URL: http://www.helgefjell.de/data/debian_neu.asc
 X-homepage: http://www.helgefjell.de/debian
 User-Agent: Mutt/1.10.1 (2018-07-13)
@@ -71,13 +71,9 @@ use another channel, please let me know.
 **
 
 Man page: logger.1
-Issue: Missing markup of parameters
+Issue: The »to« marks a range inside a list. Shouldn't be bold.
 
-"B<logger> currently generates the B<timeQuality> standardized element only.  "
-"RFC 5424 also describes the elements B<origin> (with parameters ip, "
-"enterpriseId, software and swVersion) and B<meta> (with parameters "
-"sequenceId, sysUpTime and language).  These element IDs may be specified "
-"without the B<@>I<digits> suffix."
+msgid "B<  to>"
 
 Greetings
 
