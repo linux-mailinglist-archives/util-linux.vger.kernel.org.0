@@ -2,30 +2,30 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 7AFDD1D396D
-	for <lists+util-linux@lfdr.de>; Thu, 14 May 2020 20:51:21 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 6028B1D396F
+	for <lists+util-linux@lfdr.de>; Thu, 14 May 2020 20:51:22 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727785AbgENSvU (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Thu, 14 May 2020 14:51:20 -0400
-Received: from luckmann.name ([213.239.213.133]:49935 "EHLO
+        id S1727798AbgENSvV (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Thu, 14 May 2020 14:51:21 -0400
+Received: from luckmann.name ([213.239.213.133]:59621 "EHLO
         static.213-239-213-133.clients.your-server.de" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S1727095AbgENSvU (ORCPT
+        by vger.kernel.org with ESMTP id S1726073AbgENSvV (ORCPT
         <rfc822;util-linux@vger.kernel.org>);
-        Thu, 14 May 2020 14:51:20 -0400
+        Thu, 14 May 2020 14:51:21 -0400
 Received: from localhost (localhost [127.0.0.1])
   (uid 502)
   by static.213-239-213-133.clients.your-server.de with local
-  id 0000000000E56150.000000005EBD9326.000064A2; Thu, 14 May 2020 20:51:18 +0200
-Date:   Thu, 14 May 2020 20:51:18 +0200
+  id 0000000000E5613E.000000005EBD9327.000064D0; Thu, 14 May 2020 20:51:19 +0200
+Date:   Thu, 14 May 2020 20:51:19 +0200
 From:   Helge Kreutzmann <debian@helgefjell.de>
 To:     util-linux@vger.kernel.org
 Cc:     mario.blaettermann@gmail.com
-Subject: Errors in util-linux man pages, here: agetty.8: Missing markup
-Message-ID: <20200514185118.GA25747@Debian-50-lenny-64-minimal>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
+Subject: Errors in util-linux man pages, here: blkid.8: Missing markup
+Message-ID: <20200514185118.GA25793@Debian-50-lenny-64-minimal>
+Mime-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
 X-Public-Key-URL: http://www.helgefjell.de/data/debian_neu.asc
 X-homepage: http://www.helgefjell.de/debian
 User-Agent: Mutt/1.10.1 (2018-07-13)
@@ -70,15 +70,13 @@ use another channel, please let me know.
 
 **
 
-Man page: agetty.8
-Issue: agetty → B<agetty>
+Man page: blkid.8
+Issue: Missing markup from "mount"
 
-"Since version 2.35 additional locations for issue file and directory are "
-"supported. If the default I</etc/issue> does not exist than agetty checks "
-"for I</run/issue> and I</run/issue.d>, thereafter for I</usr/lib/issue> and "
-"I</usr/lib/issue.d>.  The directory /etc is expected for host specific "
-"configuration, /run is expected for generated stuff and /usr/lib for static "
-"distribution maintained configuration."
+"This option forces B<blkid> to use udev when used for LABEL or UUID tokens "
+"in B<--match-token>. The goal is to provide output consistent with another "
+"utils (like mount, etc.)  on systems where the same tag is used for multiple "
+"devices."
 
 Greetings
 
