@@ -2,30 +2,30 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 15F501D3983
+	by mail.lfdr.de (Postfix) with ESMTP id EDB781D3985
 	for <lists+util-linux@lfdr.de>; Thu, 14 May 2020 20:51:42 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727844AbgENSva (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Thu, 14 May 2020 14:51:30 -0400
-Received: from luckmann.name ([213.239.213.133]:43279 "EHLO
+        id S1727867AbgENSvb (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Thu, 14 May 2020 14:51:31 -0400
+Received: from luckmann.name ([213.239.213.133]:49935 "EHLO
         static.213-239-213-133.clients.your-server.de" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S1727827AbgENSv3 (ORCPT
+        by vger.kernel.org with ESMTP id S1727850AbgENSvb (ORCPT
         <rfc822;util-linux@vger.kernel.org>);
-        Thu, 14 May 2020 14:51:29 -0400
+        Thu, 14 May 2020 14:51:31 -0400
 Received: from localhost (localhost [127.0.0.1])
   (uid 502)
   by static.213-239-213-133.clients.your-server.de with local
-  id 0000000000E56165.000000005EBD932E.000066A9; Thu, 14 May 2020 20:51:26 +0200
-Date:   Thu, 14 May 2020 20:51:26 +0200
+  id 0000000000E56156.000000005EBD932F.000066D8; Thu, 14 May 2020 20:51:27 +0200
+Date:   Thu, 14 May 2020 20:51:27 +0200
 From:   Helge Kreutzmann <debian@helgefjell.de>
 To:     util-linux@vger.kernel.org
 Cc:     mario.blaettermann@gmail.com
-Subject: Errors in util-linux man pages, here: hexdump.1: Quoting
-Message-ID: <20200514185126.GA26266@Debian-50-lenny-64-minimal>
-Mime-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: 7bit
+Subject: Errors in util-linux man pages, here: hexdump.1: Wording
+Message-ID: <20200514185127.GA26313@Debian-50-lenny-64-minimal>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
 X-Public-Key-URL: http://www.helgefjell.de/data/debian_neu.asc
 X-homepage: http://www.helgefjell.de/debian
 User-Agent: Mutt/1.10.1 (2018-07-13)
@@ -71,14 +71,10 @@ use another channel, please let me know.
 **
 
 Man page: hexdump.1
-Issue: When markup is used (B<>), no extra quoting is necessary
+Issue: identical → almost identical
 
-"I<Canonical hex+ASCII display>.  Display the input offset in hexadecimal, "
-"followed by sixteen space-separated, two-column, hexadecimal bytes, followed "
-"by the same sixteen bytes in B<%_p> format enclosed in 'B<|>' characters."
-
-"Output characters in the default character set.  Non-printing characters are "
-"displayed as a single 'B<\\&.>'."
+"Identical to the B<\\&_a> conversion string except that it is only performed "
+"once, when all of the input data has been processed."
 
 Greetings
 
