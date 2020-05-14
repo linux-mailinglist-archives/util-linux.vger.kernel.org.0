@@ -2,26 +2,26 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 723B81D3978
+	by mail.lfdr.de (Postfix) with ESMTP id 067A31D3977
 	for <lists+util-linux@lfdr.de>; Thu, 14 May 2020 20:51:26 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727825AbgENSvZ (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Thu, 14 May 2020 14:51:25 -0400
-Received: from luckmann.name ([213.239.213.133]:59621 "EHLO
+        id S1727822AbgENSvY (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Thu, 14 May 2020 14:51:24 -0400
+Received: from luckmann.name ([213.239.213.133]:41493 "EHLO
         static.213-239-213-133.clients.your-server.de" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S1727111AbgENSvY (ORCPT
+        by vger.kernel.org with ESMTP id S1727815AbgENSvY (ORCPT
         <rfc822;util-linux@vger.kernel.org>);
         Thu, 14 May 2020 14:51:24 -0400
 Received: from localhost (localhost [127.0.0.1])
   (uid 502)
   by static.213-239-213-133.clients.your-server.de with local
-  id 0000000000E56148.000000005EBD9329.0000658C; Thu, 14 May 2020 20:51:21 +0200
-Date:   Thu, 14 May 2020 20:51:21 +0200
+  id 0000000000E56153.000000005EBD932A.000065A5; Thu, 14 May 2020 20:51:22 +0200
+Date:   Thu, 14 May 2020 20:51:22 +0200
 From:   Helge Kreutzmann <debian@helgefjell.de>
 To:     util-linux@vger.kernel.org
 Cc:     mario.blaettermann@gmail.com
 Subject: Errors in util-linux man pages, here: column.1: Missing markup
-Message-ID: <20200514185121.GA25980@Debian-50-lenny-64-minimal>
+Message-ID: <20200514185122.GA26006@Debian-50-lenny-64-minimal>
 Mime-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
@@ -73,8 +73,9 @@ use another channel, please let me know.
 Man page: column.1
 Issue: Missing markup for command name
 
-"The column command is part of the util-linux package and is available from "
-"https://www.kernel.org/pub/linux/utils/util-linux/."
+"By default, the column command will merge multiple adjacent delimiters into "
+"a single delimiter when using the E<.Fl t> option; this option disables that "
+"behavior. This option is a Debian GNU/Linux extension."
 
 Greetings
 
