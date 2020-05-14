@@ -2,30 +2,30 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id C5C2B1D39A4
-	for <lists+util-linux@lfdr.de>; Thu, 14 May 2020 20:51:56 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 3DC651D39A5
+	for <lists+util-linux@lfdr.de>; Thu, 14 May 2020 20:51:57 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727869AbgENSvp (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        id S1727857AbgENSvp (ORCPT <rfc822;lists+util-linux@lfdr.de>);
         Thu, 14 May 2020 14:51:45 -0400
-Received: from luckmann.name ([213.239.213.133]:59621 "EHLO
+Received: from luckmann.name ([213.239.213.133]:49935 "EHLO
         static.213-239-213-133.clients.your-server.de" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S1727912AbgENSvp (ORCPT
+        by vger.kernel.org with ESMTP id S1727902AbgENSvp (ORCPT
         <rfc822;util-linux@vger.kernel.org>);
         Thu, 14 May 2020 14:51:45 -0400
 Received: from localhost (localhost [127.0.0.1])
   (uid 502)
   by static.213-239-213-133.clients.your-server.de with local
-  id 0000000000E5615E.000000005EBD933C.000069CF; Thu, 14 May 2020 20:51:40 +0200
+  id 0000000000E5615B.000000005EBD933C.000069B8; Thu, 14 May 2020 20:51:40 +0200
 Date:   Thu, 14 May 2020 20:51:40 +0200
 From:   Helge Kreutzmann <debian@helgefjell.de>
 To:     util-linux@vger.kernel.org
 Cc:     mario.blaettermann@gmail.com
-Subject: Errors in util-linux man pages, here: mount.8: Missing space
-Message-ID: <20200514185140.GA27072@Debian-50-lenny-64-minimal>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
+Subject: Errors in util-linux man pages, here: mkswap.8: Broken reference
+Message-ID: <20200514185139.GA27049@Debian-50-lenny-64-minimal>
+Mime-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
 X-Public-Key-URL: http://www.helgefjell.de/data/debian_neu.asc
 X-homepage: http://www.helgefjell.de/debian
 User-Agent: Mutt/1.10.1 (2018-07-13)
@@ -70,16 +70,11 @@ use another channel, please let me know.
 
 **
 
-Man page: mount.8
-Issue: bythe → by the
+Man page: mkswap.8
+Issue: No such section in swapon.8
 
-"The same filesystem may be mounted more than once, and in some cases (e.g., "
-"network filesystems) the same filesystem may be mounted on the same "
-"mountpoint more times. The mount command does not implement any policy to "
-"control this behavior. All behavior is controlled by the kernel and it is "
-"usually specific to the filesystem driver. The exception is B<--all>, in "
-"this case already mounted filesystems are ignored (see B<--all> below for "
-"more details)."
+"Please read notes from B<swapon>(8)  about B<the swap file use restrictions> "
+"(holes, preallocation and copy-on-write issues)."
 
 Greetings
 
