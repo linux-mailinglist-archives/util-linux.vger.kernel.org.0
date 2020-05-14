@@ -2,30 +2,30 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id DA0491D397A
+	by mail.lfdr.de (Postfix) with ESMTP id 6E3D11D3979
 	for <lists+util-linux@lfdr.de>; Thu, 14 May 2020 20:51:37 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727833AbgENSv0 (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        id S1727834AbgENSv0 (ORCPT <rfc822;lists+util-linux@lfdr.de>);
         Thu, 14 May 2020 14:51:26 -0400
-Received: from luckmann.name ([213.239.213.133]:49935 "EHLO
+Received: from luckmann.name ([213.239.213.133]:43279 "EHLO
         static.213-239-213-133.clients.your-server.de" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S1727810AbgENSvZ (ORCPT
+        by vger.kernel.org with ESMTP id S1727823AbgENSv0 (ORCPT
         <rfc822;util-linux@vger.kernel.org>);
-        Thu, 14 May 2020 14:51:25 -0400
+        Thu, 14 May 2020 14:51:26 -0400
 Received: from localhost (localhost [127.0.0.1])
   (uid 502)
   by static.213-239-213-133.clients.your-server.de with local
-  id 0000000000E5615F.000000005EBD932A.000065BD; Thu, 14 May 2020 20:51:22 +0200
+  id 0000000000E56154.000000005EBD932A.000065D6; Thu, 14 May 2020 20:51:22 +0200
 Date:   Thu, 14 May 2020 20:51:22 +0200
 From:   Helge Kreutzmann <debian@helgefjell.de>
 To:     util-linux@vger.kernel.org
 Cc:     mario.blaettermann@gmail.com
-Subject: Errors in util-linux man pages, here: fdisk.8: Strange markup
-Message-ID: <20200514185122.GA26029@Debian-50-lenny-64-minimal>
-Mime-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: 7bit
+Subject: Errors in util-linux man pages, here: fdisk.8: Wording
+Message-ID: <20200514185122.GA26054@Debian-50-lenny-64-minimal>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
 X-Public-Key-URL: http://www.helgefjell.de/data/debian_neu.asc
 X-homepage: http://www.helgefjell.de/debian
 User-Agent: Mutt/1.10.1 (2018-07-13)
@@ -71,13 +71,11 @@ use another channel, please let me know.
 **
 
 Man page: fdisk.8
-Issue: Why is the full stop at the end in bold?
+Issue: "when create" → "when creating"
 
-"Specify the sector size of the disk.  Valid values are 512, 1024, 2048, and "
-"4096.  (Recent kernels know the sector size.  Use this option only on old "
-"kernels or to override the kernel's ideas.)  Since util-linux-2.17, B<fdisk> "
-"differentiates between logical and physical sector size.  This option "
-"changes both sector sizes to I<sectorsize>B<.>"
+"Don't erase the begin of the first disk sector when create a new disk "
+"label.  This feature is supported for GPT and MBR."
+
 Greetings
 
            Helge
