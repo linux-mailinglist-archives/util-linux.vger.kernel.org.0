@@ -2,30 +2,30 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 9BA601D3994
+	by mail.lfdr.de (Postfix) with ESMTP id 2FB7D1D3993
 	for <lists+util-linux@lfdr.de>; Thu, 14 May 2020 20:51:49 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727889AbgENSvh (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        id S1727885AbgENSvh (ORCPT <rfc822;lists+util-linux@lfdr.de>);
         Thu, 14 May 2020 14:51:37 -0400
-Received: from luckmann.name ([213.239.213.133]:41493 "EHLO
+Received: from luckmann.name ([213.239.213.133]:49935 "EHLO
         static.213-239-213-133.clients.your-server.de" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S1727853AbgENSvh (ORCPT
+        by vger.kernel.org with ESMTP id S1727869AbgENSvg (ORCPT
         <rfc822;util-linux@vger.kernel.org>);
-        Thu, 14 May 2020 14:51:37 -0400
+        Thu, 14 May 2020 14:51:36 -0400
 Received: from localhost (localhost [127.0.0.1])
   (uid 502)
   by static.213-239-213-133.clients.your-server.de with local
-  id 0000000000E56152.000000005EBD9334.00006820; Thu, 14 May 2020 20:51:32 +0200
+  id 0000000000E56160.000000005EBD9334.00006837; Thu, 14 May 2020 20:51:32 +0200
 Date:   Thu, 14 May 2020 20:51:32 +0200
 From:   Helge Kreutzmann <debian@helgefjell.de>
 To:     util-linux@vger.kernel.org
 Cc:     mario.blaettermann@gmail.com
-Subject: Errors in util-linux man pages, here: logger.1: Missing markup
-Message-ID: <20200514185132.GA26640@Debian-50-lenny-64-minimal>
-Mime-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: 7bit
+Subject: Errors in util-linux man pages, here: logger.1: Wording
+Message-ID: <20200514185132.GA26664@Debian-50-lenny-64-minimal>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
 X-Public-Key-URL: http://www.helgefjell.de/data/debian_neu.asc
 X-homepage: http://www.helgefjell.de/debian
 User-Agent: Mutt/1.10.1 (2018-07-13)
@@ -71,25 +71,11 @@ use another channel, please let me know.
 **
 
 Man page: logger.1
-Issue: Missing markup of command name
+Issue: or the journal → to the journal?
 
-"Log the PID of the logger process with each line.  When the optional "
-"argument I<id> is specified, then it is used instead of the logger command's "
-"PID.  The use of B<--id=$$> (PPID) is recommended in scripts that send "
-"several messages."
-
-"Write a systemd journal entry.  The entry is read from the given I<file>, "
-"when specified, otherwise from standard input.  Each line must begin with a "
-"field that is accepted by journald; see B<systemd.journal-fields>(7)  for "
-"details.  The use of a MESSAGE_ID field is generally a good idea, as it "
-"makes finding entries easy.  Examples:"
-
-"Use the specified I<port>.  When this option is not specified, the port "
-"defaults to syslog for udp and to syslog-conn for tcp connections."
-
-"Most receivers accept messages larger than 1KiB over any type of syslog "
-"protocol.  As such, the B<--size> option affects logger in all cases (not "
-"only when B<--rfc5424> was used)."
+"Causes everything to be done except for writing the log message to the "
+"system log, and removing the connection or the journal.  This option can be "
+"used together with B<--stderr> for testing purposes."
 
 Greetings
 
