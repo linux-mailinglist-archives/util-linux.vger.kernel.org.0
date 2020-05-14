@@ -2,26 +2,26 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 227A01D39D2
-	for <lists+util-linux@lfdr.de>; Thu, 14 May 2020 20:53:07 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 502C01D3D12
+	for <lists+util-linux@lfdr.de>; Thu, 14 May 2020 21:17:21 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1728215AbgENSwN (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Thu, 14 May 2020 14:52:13 -0400
-Received: from luckmann.name ([213.239.213.133]:59621 "EHLO
+        id S1729316AbgENTLs (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Thu, 14 May 2020 15:11:48 -0400
+Received: from luckmann.name ([213.239.213.133]:49935 "EHLO
         static.213-239-213-133.clients.your-server.de" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S1728187AbgENSwL (ORCPT
+        by vger.kernel.org with ESMTP id S1728190AbgENSwL (ORCPT
         <rfc822;util-linux@vger.kernel.org>);
         Thu, 14 May 2020 14:52:11 -0400
 Received: from localhost (localhost [127.0.0.1])
   (uid 502)
   by static.213-239-213-133.clients.your-server.de with local
-  id 0000000000E5615B.000000005EBD9352.00006D9D; Thu, 14 May 2020 20:52:02 +0200
-Date:   Thu, 14 May 2020 20:52:02 +0200
+  id 0000000000E56153.000000005EBD9353.00006DCB; Thu, 14 May 2020 20:52:03 +0200
+Date:   Thu, 14 May 2020 20:52:03 +0200
 From:   Helge Kreutzmann <debian@helgefjell.de>
 To:     util-linux@vger.kernel.org
 Cc:     mario.blaettermann@gmail.com
-Subject: Errors in util-linux man pages, here: swapon.8: Wording
-Message-ID: <20200514185202.GA28046@Debian-50-lenny-64-minimal>
+Subject: Errors in util-linux man pages, here: unshare.1: Markup?
+Message-ID: <20200514185203.GA28092@Debian-50-lenny-64-minimal>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
@@ -70,14 +70,10 @@ use another channel, please let me know.
 
 **
 
-Man page: swapon.8
-Issue: not be static → be dynamic
+Man page: unshare.1
+Issue: = → B<=>?
 
-"B<swapon> may not work correctly when using a swap file with some versions "
-"of B<btrfs>.  This is due to btrfs being a copy-on-write filesystem: the "
-"file location may not be static and corruption can result.  Btrfs actively "
-"disallows the use of swap files on its filesystems by refusing to map the "
-"file."
+msgid "B<-C>,B< --cgroup>[=I<file>]"
 
 Greetings
 
