@@ -2,30 +2,30 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 7A1761D3D1B
-	for <lists+util-linux@lfdr.de>; Thu, 14 May 2020 21:17:25 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 1A3451D3C3B
+	for <lists+util-linux@lfdr.de>; Thu, 14 May 2020 21:15:44 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1729327AbgENTMK (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Thu, 14 May 2020 15:12:10 -0400
-Received: from luckmann.name ([213.239.213.133]:43279 "EHLO
+        id S1728182AbgENSwK (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Thu, 14 May 2020 14:52:10 -0400
+Received: from luckmann.name ([213.239.213.133]:59621 "EHLO
         static.213-239-213-133.clients.your-server.de" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S1728088AbgENSwG (ORCPT
+        by vger.kernel.org with ESMTP id S1728162AbgENSwJ (ORCPT
         <rfc822;util-linux@vger.kernel.org>);
-        Thu, 14 May 2020 14:52:06 -0400
+        Thu, 14 May 2020 14:52:09 -0400
 Received: from localhost (localhost [127.0.0.1])
   (uid 502)
   by static.213-239-213-133.clients.your-server.de with local
-  id 0000000000E56173.000000005EBD934F.00006D11; Thu, 14 May 2020 20:51:59 +0200
+  id 0000000000E56174.000000005EBD934F.00006D28; Thu, 14 May 2020 20:51:59 +0200
 Date:   Thu, 14 May 2020 20:51:59 +0200
 From:   Helge Kreutzmann <debian@helgefjell.de>
 To:     util-linux@vger.kernel.org
 Cc:     mario.blaettermann@gmail.com
 Subject: Errors in util-linux man pages, here: sfdisk.8: Wording
-Message-ID: <20200514185159.GA27906@Debian-50-lenny-64-minimal>
-Mime-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: 7bit
+Message-ID: <20200514185159.GA27929@Debian-50-lenny-64-minimal>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
 X-Public-Key-URL: http://www.helgefjell.de/data/debian_neu.asc
 X-homepage: http://www.helgefjell.de/debian
 User-Agent: Mutt/1.10.1 (2018-07-13)
@@ -71,13 +71,12 @@ use another channel, please let me know.
 **
 
 Man page: sfdisk.8
-Issue: Last sentence: If the ... then the
+Issue: Last sentence: The offset … then → If the offset … then
 
-"The default value of I<start> is the first non-assigned sector aligned "
-"according to device I/O limits.  The default start offset for the first "
-"partition is 1 MiB.  The offset may be followed by the multiplicative "
-"suffixes (KiB, MiB, GiB, TiB, PiB, EiB, ZiB and YiB) then the number is "
-"interpreted as offset in bytes."
+"The first non-assigned sector aligned according to device I/O limits.  The "
+"default start offset for the first partition is 1 MiB. The offset may be "
+"followed by the multiplicative suffixes (KiB, MiB, GiB, TiB, PiB, EiB, ZiB "
+"and YiB) then the number is interpreted as offset in bytes."
 
 Greetings
 
