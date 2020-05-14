@@ -2,26 +2,26 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id DD4741D3999
-	for <lists+util-linux@lfdr.de>; Thu, 14 May 2020 20:51:51 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id C34601D399B
+	for <lists+util-linux@lfdr.de>; Thu, 14 May 2020 20:51:52 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727853AbgENSvk (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Thu, 14 May 2020 14:51:40 -0400
-Received: from luckmann.name ([213.239.213.133]:59621 "EHLO
+        id S1727909AbgENSvl (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Thu, 14 May 2020 14:51:41 -0400
+Received: from luckmann.name ([213.239.213.133]:49935 "EHLO
         static.213-239-213-133.clients.your-server.de" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S1727857AbgENSvj (ORCPT
+        by vger.kernel.org with ESMTP id S1727869AbgENSvk (ORCPT
         <rfc822;util-linux@vger.kernel.org>);
-        Thu, 14 May 2020 14:51:39 -0400
+        Thu, 14 May 2020 14:51:40 -0400
 Received: from localhost (localhost [127.0.0.1])
   (uid 502)
   by static.213-239-213-133.clients.your-server.de with local
-  id 0000000000E56153.000000005EBD9336.000068AA; Thu, 14 May 2020 20:51:34 +0200
-Date:   Thu, 14 May 2020 20:51:34 +0200
+  id 0000000000E5615F.000000005EBD9337.000068D9; Thu, 14 May 2020 20:51:35 +0200
+Date:   Thu, 14 May 2020 20:51:35 +0200
 From:   Helge Kreutzmann <debian@helgefjell.de>
 To:     util-linux@vger.kernel.org
 Cc:     mario.blaettermann@gmail.com
-Subject: Errors in util-linux man pages, here: login.1: Punctuation
-Message-ID: <20200514185134.GA26779@Debian-50-lenny-64-minimal>
+Subject: Errors in util-linux man pages, here: login.1: Missing markup
+Message-ID: <20200514185135.GA26826@Debian-50-lenny-64-minimal>
 Mime-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
@@ -71,14 +71,15 @@ use another channel, please let me know.
 **
 
 Man page: login.1
-Issue: Missing full stop
+Issue: Missing markup for command name
 
-"The default is to check I</etc\\:/hushlogins> and if it does not exist then "
-"I<~/.hushlogin>"
-
-"If set, it will be used to define the PATH environment variable when a "
-"regular user logs in.  The default value is I</usr\\:/local\\:/bin:\\:/bin:"
-"\\:/usr\\:/bin>"
+"A recursive login, as used to be possible in the good old days, no longer "
+"works; for most purposes B<su>(1)  is a satisfactory substitute.  Indeed, "
+"for security reasons, login does a vhangup() system call to remove any "
+"possible listening processes on the tty.  This is to avoid password "
+"sniffing.  If one uses the command B<login>, then the surrounding shell gets "
+"killed by vhangup() because it's no longer the true owner of the tty.  This "
+"can be avoided by using B<exec login> in a top-level shell or xterm."
 
 Greetings
 
