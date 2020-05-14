@@ -2,30 +2,30 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 4B70C1D39AE
-	for <lists+util-linux@lfdr.de>; Thu, 14 May 2020 20:52:01 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 372011D39B0
+	for <lists+util-linux@lfdr.de>; Thu, 14 May 2020 20:52:02 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727893AbgENSvu (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Thu, 14 May 2020 14:51:50 -0400
-Received: from luckmann.name ([213.239.213.133]:59621 "EHLO
+        id S1727942AbgENSvv (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Thu, 14 May 2020 14:51:51 -0400
+Received: from luckmann.name ([213.239.213.133]:41493 "EHLO
         static.213-239-213-133.clients.your-server.de" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S1727912AbgENSvt (ORCPT
+        by vger.kernel.org with ESMTP id S1727933AbgENSvv (ORCPT
         <rfc822;util-linux@vger.kernel.org>);
-        Thu, 14 May 2020 14:51:49 -0400
+        Thu, 14 May 2020 14:51:51 -0400
 Received: from localhost (localhost [127.0.0.1])
   (uid 502)
   by static.213-239-213-133.clients.your-server.de with local
-  id 0000000000E56157.000000005EBD9340.00006A9D; Thu, 14 May 2020 20:51:44 +0200
-Date:   Thu, 14 May 2020 20:51:44 +0200
+  id 0000000000E56162.000000005EBD9341.00006ACB; Thu, 14 May 2020 20:51:45 +0200
+Date:   Thu, 14 May 2020 20:51:45 +0200
 From:   Helge Kreutzmann <debian@helgefjell.de>
 To:     util-linux@vger.kernel.org
 Cc:     mario.blaettermann@gmail.com
-Subject: Errors in util-linux man pages, here: mount.8: Spelling update
-Message-ID: <20200514185144.GA27277@Debian-50-lenny-64-minimal>
-Mime-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: 7bit
+Subject: Errors in util-linux man pages, here: nsenter.1: Missing words?
+Message-ID: <20200514185144.GA27324@Debian-50-lenny-64-minimal>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
 X-Public-Key-URL: http://www.helgefjell.de/data/debian_neu.asc
 X-homepage: http://www.helgefjell.de/debian
 User-Agent: Mutt/1.10.1 (2018-07-13)
@@ -70,11 +70,15 @@ use another channel, please let me know.
 
 **
 
-Man page: mount.8
-Issue: Nowadays it is only called macOS
+Man page: nsenter.1
+Issue: The second sentence is missing a »in B<clone>(2).«?
 
-"For filesystems created by OpenStep (currently read only).  The same "
-"filesystem type is also used by Mac OS X."
+"Children will have a set of PID to process mappings separate from the "
+"B<nsenter> process For further details, see B<pid_namespaces>(7)  and the "
+"discussion of the B<CLONE_NEWPID> flag in B<nsenter> will fork by default if "
+"changing the PID namespace, so that the new program and its children share "
+"the same PID namespace and are visible to each other.  If B<--no-fork> is "
+"used, the new program will be exec'ed without forking."
 
 Greetings
 
