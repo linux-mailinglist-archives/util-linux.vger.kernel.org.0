@@ -2,26 +2,26 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id D2CE21D397C
-	for <lists+util-linux@lfdr.de>; Thu, 14 May 2020 20:51:38 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id BA26D1D3980
+	for <lists+util-linux@lfdr.de>; Thu, 14 May 2020 20:51:40 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727111AbgENSv1 (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Thu, 14 May 2020 14:51:27 -0400
+        id S1727831AbgENSv2 (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Thu, 14 May 2020 14:51:28 -0400
 Received: from luckmann.name ([213.239.213.133]:41493 "EHLO
         static.213-239-213-133.clients.your-server.de" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S1727815AbgENSv0 (ORCPT
+        by vger.kernel.org with ESMTP id S1727836AbgENSv2 (ORCPT
         <rfc822;util-linux@vger.kernel.org>);
-        Thu, 14 May 2020 14:51:26 -0400
+        Thu, 14 May 2020 14:51:28 -0400
 Received: from localhost (localhost [127.0.0.1])
   (uid 502)
   by static.213-239-213-133.clients.your-server.de with local
-  id 0000000000E56157.000000005EBD932B.000065ED; Thu, 14 May 2020 20:51:23 +0200
-Date:   Thu, 14 May 2020 20:51:23 +0200
+  id 0000000000E56151.000000005EBD932C.0000664D; Thu, 14 May 2020 20:51:24 +0200
+Date:   Thu, 14 May 2020 20:51:24 +0200
 From:   Helge Kreutzmann <debian@helgefjell.de>
 To:     util-linux@vger.kernel.org
 Cc:     mario.blaettermann@gmail.com
-Subject: Errors in util-linux man pages, here: fdisk.8: Missing markup
-Message-ID: <20200514185123.GA26078@Debian-50-lenny-64-minimal>
+Subject: Errors in util-linux man pages, here: fstrim.8: Markup
+Message-ID: <20200514185124.GA26174@Debian-50-lenny-64-minimal>
 Mime-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
@@ -70,14 +70,17 @@ use another channel, please let me know.
 
 **
 
-Man page: fdisk.8
-Issue: Missing markup of file (names)
+Man page: fstrim.8
+Issue: Markup of fstrim
 
-"The I<device> is usually /dev/sda, /dev/sdb or so.  A device name refers to "
-"the entire disk.  Old systems without libata (a library used inside the "
-"Linux kernel to support ATA host controllers and devices) make a difference "
-"between IDE and SCSI disks.  In such cases the device name will be /dev/hd* "
-"(IDE) or /dev/sd* (SCSI)."
+"Minimum contiguous free range to discard, in bytes. (This value is "
+"internally rounded up to a multiple of the filesystem block size.)  Free "
+"ranges smaller than this will be ignored and fstrim will adjust the minimum "
+"if it's smaller than the device's minimum, and report that (fstrim_range."
+"minlen) back to userspace.  By increasing this value, the fstrim operation "
+"will complete more quickly for filesystems with badly fragmented freespace, "
+"although not all blocks will be discarded.  The default value is zero, "
+"discarding every free block."
 
 Greetings
 
