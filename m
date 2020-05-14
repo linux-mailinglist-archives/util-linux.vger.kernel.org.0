@@ -2,30 +2,30 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id A764C1D399D
-	for <lists+util-linux@lfdr.de>; Thu, 14 May 2020 20:51:53 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 1F37F1D399E
+	for <lists+util-linux@lfdr.de>; Thu, 14 May 2020 20:51:54 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727896AbgENSvm (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        id S1727900AbgENSvm (ORCPT <rfc822;lists+util-linux@lfdr.de>);
         Thu, 14 May 2020 14:51:42 -0400
-Received: from luckmann.name ([213.239.213.133]:59621 "EHLO
+Received: from luckmann.name ([213.239.213.133]:43279 "EHLO
         static.213-239-213-133.clients.your-server.de" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S1727900AbgENSvl (ORCPT
+        by vger.kernel.org with ESMTP id S1727860AbgENSvm (ORCPT
         <rfc822;util-linux@vger.kernel.org>);
-        Thu, 14 May 2020 14:51:41 -0400
+        Thu, 14 May 2020 14:51:42 -0400
 Received: from localhost (localhost [127.0.0.1])
   (uid 502)
   by static.213-239-213-133.clients.your-server.de with local
-  id 0000000000E56158.000000005EBD9338.00006907; Thu, 14 May 2020 20:51:36 +0200
+  id 0000000000E56156.000000005EBD9338.00006921; Thu, 14 May 2020 20:51:36 +0200
 Date:   Thu, 14 May 2020 20:51:36 +0200
 From:   Helge Kreutzmann <debian@helgefjell.de>
 To:     util-linux@vger.kernel.org
 Cc:     mario.blaettermann@gmail.com
-Subject: Errors in util-linux man pages, here: lscpu.1: Quoting
-Message-ID: <20200514185136.GA26872@Debian-50-lenny-64-minimal>
-Mime-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: 7bit
+Subject: Errors in util-linux man pages, here: lslogins.1: Wording
+Message-ID: <20200514185136.GA26896@Debian-50-lenny-64-minimal>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
 X-Public-Key-URL: http://www.helgefjell.de/data/debian_neu.asc
 X-homepage: http://www.helgefjell.de/debian
 User-Agent: Mutt/1.10.1 (2018-07-13)
@@ -70,12 +70,13 @@ use another channel, please let me know.
 
 **
 
-Man page: lscpu.1
-Issue: superfluous quoting around B<>
+Man page: lslogins.1
+Issue: specify → specified, than → then
 
-"When specifying the I<list> argument, the string of option, equal sign (=), "
-"and I<list> must not contain any blanks or other whitespace.  Examples: 'B<-"
-"C=NAME,ONE-SIZE>' or 'B<--caches=NAME,ONE-SIZE>'."
+"Note that relation between user and group may be invisible for primary group "
+"if the user is not explicitly specify as group member (e.g., in /etc/group). "
+"If the command lslogins scans for groups than it uses groups database only, "
+"and user database with primary GID is not used at all."
 
 Greetings
 
