@@ -2,26 +2,26 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 04B461D3997
-	for <lists+util-linux@lfdr.de>; Thu, 14 May 2020 20:51:51 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 8CBF31D3996
+	for <lists+util-linux@lfdr.de>; Thu, 14 May 2020 20:51:50 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727854AbgENSvi (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        id S1727845AbgENSvi (ORCPT <rfc822;lists+util-linux@lfdr.de>);
         Thu, 14 May 2020 14:51:38 -0400
-Received: from luckmann.name ([213.239.213.133]:49935 "EHLO
+Received: from luckmann.name ([213.239.213.133]:59621 "EHLO
         static.213-239-213-133.clients.your-server.de" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S1727860AbgENSvi (ORCPT
+        by vger.kernel.org with ESMTP id S1727854AbgENSvh (ORCPT
         <rfc822;util-linux@vger.kernel.org>);
-        Thu, 14 May 2020 14:51:38 -0400
+        Thu, 14 May 2020 14:51:37 -0400
 Received: from localhost (localhost [127.0.0.1])
   (uid 502)
   by static.213-239-213-133.clients.your-server.de with local
-  id 0000000000E5616A.000000005EBD9335.00006865; Thu, 14 May 2020 20:51:33 +0200
+  id 0000000000E56164.000000005EBD9335.0000684E; Thu, 14 May 2020 20:51:33 +0200
 Date:   Thu, 14 May 2020 20:51:33 +0200
 From:   Helge Kreutzmann <debian@helgefjell.de>
 To:     util-linux@vger.kernel.org
 Cc:     mario.blaettermann@gmail.com
-Subject: Errors in util-linux man pages, here: logger.1: Missing markup etc.
-Message-ID: <20200514185133.GA26710@Debian-50-lenny-64-minimal>
+Subject: Errors in util-linux man pages, here: logger.1: Missing markup
+Message-ID: <20200514185133.GA26687@Debian-50-lenny-64-minimal>
 Mime-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
@@ -71,15 +71,13 @@ use another channel, please let me know.
 **
 
 Man page: logger.1
-Issue: Missing markup file names, command names etc.
+Issue: Missing markup of parameters
 
-"Print errors about Unix socket connections.  The I<mode> can be a value of "
-"B<off>, B<on>, or B<auto>.  When the mode is auto logger will detect if the "
-"init process is systemd, and if so assumption is made /dev/log can be used "
-"early at boot.  Other init systems lack of /dev/log will not cause errors "
-"that is identical with messaging using B<openlog>(3)  system call.  The "
-"B<logger>(1)  before version 2.26 used openlog, and hence was unable to "
-"detected loss of messages sent to Unix sockets."
+"B<logger> currently generates the B<timeQuality> standardized element only.  "
+"RFC 5424 also describes the elements B<origin> (with parameters ip, "
+"enterpriseId, software and swVersion) and B<meta> (with parameters "
+"sequenceId, sysUpTime and language).  These element IDs may be specified "
+"without the B<@>I<digits> suffix."
 
 Greetings
 
