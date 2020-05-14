@@ -2,26 +2,26 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 14D2E1D39A9
+	by mail.lfdr.de (Postfix) with ESMTP id 80B9D1D39AA
 	for <lists+util-linux@lfdr.de>; Thu, 14 May 2020 20:51:59 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727860AbgENSvs (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        id S1727926AbgENSvs (ORCPT <rfc822;lists+util-linux@lfdr.de>);
         Thu, 14 May 2020 14:51:48 -0400
-Received: from luckmann.name ([213.239.213.133]:59621 "EHLO
+Received: from luckmann.name ([213.239.213.133]:43279 "EHLO
         static.213-239-213-133.clients.your-server.de" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S1727926AbgENSvr (ORCPT
+        by vger.kernel.org with ESMTP id S1727933AbgENSvs (ORCPT
         <rfc822;util-linux@vger.kernel.org>);
-        Thu, 14 May 2020 14:51:47 -0400
+        Thu, 14 May 2020 14:51:48 -0400
 Received: from localhost (localhost [127.0.0.1])
   (uid 502)
   by static.213-239-213-133.clients.your-server.de with local
-  id 0000000000E56168.000000005EBD933E.00006A3C; Thu, 14 May 2020 20:51:42 +0200
+  id 0000000000E56156.000000005EBD933E.00006A53; Thu, 14 May 2020 20:51:42 +0200
 Date:   Thu, 14 May 2020 20:51:42 +0200
 From:   Helge Kreutzmann <debian@helgefjell.de>
 To:     util-linux@vger.kernel.org
 Cc:     mario.blaettermann@gmail.com
-Subject: Errors in util-linux man pages, here: mount.8: Wording
-Message-ID: <20200514185142.GA27180@Debian-50-lenny-64-minimal>
+Subject: Errors in util-linux man pages, here: mount.8: Markup
+Message-ID: <20200514185142.GA27204@Debian-50-lenny-64-minimal>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
@@ -71,14 +71,14 @@ use another channel, please let me know.
 **
 
 Man page: mount.8
-Issue: maintain → maintaining
+Issue: mount → B<mount>
 
-"The same as B<X-*> options, but stored permanently in the user space. It "
-"means the options are also available for umount or another operations.  Note "
-"that maintain mount options in user space is tricky, because it's necessary "
-"use libmount based tools and there is no guarantee that the options will be "
-"always available (for example after a move mount operation or in unshared "
-"namespace)."
+"Allow to make a target directory (mountpoint) if it does not exit yet.  The "
+"optional argument I<mode> specifies the filesystem access mode used for "
+"B<mkdir>(2)  in octal notation.  The default mode is 0755.  This "
+"functionality is supported only for root users or when mount executed "
+"without suid permissions.  The option is also supported as x-mount.mkdir, "
+"this notation is deprecated since v2.30."
 
 Greetings
 
