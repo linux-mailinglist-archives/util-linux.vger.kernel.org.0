@@ -2,26 +2,26 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 26A641D39A7
+	by mail.lfdr.de (Postfix) with ESMTP id 9C4681D39A8
 	for <lists+util-linux@lfdr.de>; Thu, 14 May 2020 20:51:58 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727891AbgENSvr (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        id S1727777AbgENSvr (ORCPT <rfc822;lists+util-linux@lfdr.de>);
         Thu, 14 May 2020 14:51:47 -0400
-Received: from luckmann.name ([213.239.213.133]:41493 "EHLO
+Received: from luckmann.name ([213.239.213.133]:49935 "EHLO
         static.213-239-213-133.clients.your-server.de" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S1727884AbgENSvr (ORCPT
+        by vger.kernel.org with ESMTP id S1727912AbgENSvr (ORCPT
         <rfc822;util-linux@vger.kernel.org>);
         Thu, 14 May 2020 14:51:47 -0400
 Received: from localhost (localhost [127.0.0.1])
   (uid 502)
   by static.213-239-213-133.clients.your-server.de with local
-  id 0000000000E56154.000000005EBD933D.00006A09; Thu, 14 May 2020 20:51:41 +0200
+  id 0000000000E5615F.000000005EBD933D.00006A23; Thu, 14 May 2020 20:51:41 +0200
 Date:   Thu, 14 May 2020 20:51:41 +0200
 From:   Helge Kreutzmann <debian@helgefjell.de>
 To:     util-linux@vger.kernel.org
 Cc:     mario.blaettermann@gmail.com
-Subject: Errors in util-linux man pages, here: mount.8: Improvement
-Message-ID: <20200514185141.GA27128@Debian-50-lenny-64-minimal>
+Subject: Errors in util-linux man pages, here: mount.8: Content
+Message-ID: <20200514185141.GA27154@Debian-50-lenny-64-minimal>
 Mime-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
@@ -71,18 +71,14 @@ use another channel, please let me know.
 **
 
 Man page: mount.8
-Issue: The wording is rather unusual english, improve?
+Issue: Does this include other executable like scripts?
 
-"Note that specify B<-w> on command line forces B<mount> command to never try "
-"read-only mount on write-protected devices. The default is try read-only if "
-"the previous mount syscall with read-write flags failed."
-Greetings
+"Permit execution of binaries."
 
 Suggested change:
-> "Note that specifying B<-w> on command line forces the B<mount> command to never try "
-> "to mount read-only on write-protected devices. The default is to try read-only if "
-> "the previous B<mount>(2) syscall with read-write flags failed."
+Permit execution of binaries and executable scripts.
 
+Greetings
 
            Helge
 
