@@ -2,30 +2,30 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id D10241D3967
-	for <lists+util-linux@lfdr.de>; Thu, 14 May 2020 20:51:18 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 486151D3968
+	for <lists+util-linux@lfdr.de>; Thu, 14 May 2020 20:51:19 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726948AbgENSvS (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        id S1727033AbgENSvS (ORCPT <rfc822;lists+util-linux@lfdr.de>);
         Thu, 14 May 2020 14:51:18 -0400
-Received: from luckmann.name ([213.239.213.133]:59621 "EHLO
+Received: from luckmann.name ([213.239.213.133]:41493 "EHLO
         static.213-239-213-133.clients.your-server.de" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S1727033AbgENSvS (ORCPT
+        by vger.kernel.org with ESMTP id S1726073AbgENSvS (ORCPT
         <rfc822;util-linux@vger.kernel.org>);
         Thu, 14 May 2020 14:51:18 -0400
 Received: from localhost (localhost [127.0.0.1])
   (uid 502)
   by static.213-239-213-133.clients.your-server.de with local
-  id 0000000000E56144.000000005EBD9324.0000643F; Thu, 14 May 2020 20:51:16 +0200
+  id 0000000000E56050.000000005EBD9324.0000640B; Thu, 14 May 2020 20:51:16 +0200
 Date:   Thu, 14 May 2020 20:51:16 +0200
 From:   Helge Kreutzmann <debian@helgefjell.de>
 To:     util-linux@vger.kernel.org
 Cc:     mario.blaettermann@gmail.com
-Subject: Errors in util-linux man pages, here: agetty.8: Markup
-Message-ID: <20200514185116.GA25646@Debian-50-lenny-64-minimal>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
+Subject: Errors in util-linux man pages, here: adjtime_config.5: Wording
+Message-ID: <20200514185116.GA25596@Debian-50-lenny-64-minimal>
+Mime-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
 X-Public-Key-URL: http://www.helgefjell.de/data/debian_neu.asc
 X-homepage: http://www.helgefjell.de/debian
 User-Agent: Mutt/1.10.1 (2018-07-13)
@@ -70,13 +70,10 @@ use another channel, please let me know.
 
 **
 
-Man page: agetty.8
-Issue: agetty → B<agetty>
+Man page: adjtime_config.5
+Issue: Superfluous comma after "is"
 
-"Display the current issue file (or other) on the current terminal and exit.  "
-"Use this option to review the current setting, it is not designed for any "
-"other purpose.  Note that output may use some default or incomplete "
-"information as proper output depends on terminal and agetty command line."
+"The format of the adjtime file is, in ASCII."
 
 Greetings
 
