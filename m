@@ -2,26 +2,26 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id A70DA1D3D22
-	for <lists+util-linux@lfdr.de>; Thu, 14 May 2020 21:17:28 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id BEC5A1D3D20
+	for <lists+util-linux@lfdr.de>; Thu, 14 May 2020 21:17:27 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727992AbgENTMV (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Thu, 14 May 2020 15:12:21 -0400
-Received: from luckmann.name ([213.239.213.133]:59621 "EHLO
+        id S1728114AbgENTMS (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Thu, 14 May 2020 15:12:18 -0400
+Received: from luckmann.name ([213.239.213.133]:41493 "EHLO
         static.213-239-213-133.clients.your-server.de" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S1728056AbgENSwF (ORCPT
+        by vger.kernel.org with ESMTP id S1728111AbgENSwG (ORCPT
         <rfc822;util-linux@vger.kernel.org>);
-        Thu, 14 May 2020 14:52:05 -0400
+        Thu, 14 May 2020 14:52:06 -0400
 Received: from localhost (localhost [127.0.0.1])
   (uid 502)
   by static.213-239-213-133.clients.your-server.de with local
-  id 0000000000E5616A.000000005EBD934D.00006CC5; Thu, 14 May 2020 20:51:57 +0200
-Date:   Thu, 14 May 2020 20:51:57 +0200
+  id 0000000000E5616E.000000005EBD934E.00006CE0; Thu, 14 May 2020 20:51:58 +0200
+Date:   Thu, 14 May 2020 20:51:58 +0200
 From:   Helge Kreutzmann <debian@helgefjell.de>
 To:     util-linux@vger.kernel.org
 Cc:     mario.blaettermann@gmail.com
-Subject: Errors in util-linux man pages, here: sfdisk.8: Markup
-Message-ID: <20200514185157.GA27830@Debian-50-lenny-64-minimal>
+Subject: Errors in util-linux man pages, here: sfdisk.8: Typo/Markup
+Message-ID: <20200514185158.GA27855@Debian-50-lenny-64-minimal>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
@@ -71,16 +71,11 @@ use another channel, please let me know.
 **
 
 Man page: sfdisk.8
-Issue: sfdisk → B<sfdisk>
+Issue 1: fsync → B<fsync>(2)
+Issue 2: dara → data
 
-"The optional I<path> specifies log file name. The log file contains "
-"information about all read/write operations on the partition data. The word "
-"\"@default\" as a I<path> forces sfdisk to use ~/sfdisk-E<lt>devnameE<gt>."
-"move for the log.  The log is optional since v2.35."
-
-"Specify sector size. This header is informative only and it is not used when "
-"sfdisk creates a new partition table, in this case the real device specific "
-"value is always used and sector size from the dump is ignored."
+"Use fsync system call after each write when move dara to a new location by "
+"B<--move-data>."
 
 Greetings
 
