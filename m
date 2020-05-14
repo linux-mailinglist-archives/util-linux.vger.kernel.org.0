@@ -2,26 +2,26 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id BEC5A1D3D20
-	for <lists+util-linux@lfdr.de>; Thu, 14 May 2020 21:17:27 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 3811E1D3D21
+	for <lists+util-linux@lfdr.de>; Thu, 14 May 2020 21:17:28 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1728114AbgENTMS (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Thu, 14 May 2020 15:12:18 -0400
-Received: from luckmann.name ([213.239.213.133]:41493 "EHLO
+        id S1728111AbgENTMT (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Thu, 14 May 2020 15:12:19 -0400
+Received: from luckmann.name ([213.239.213.133]:49935 "EHLO
         static.213-239-213-133.clients.your-server.de" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S1728111AbgENSwG (ORCPT
+        by vger.kernel.org with ESMTP id S1727992AbgENSwG (ORCPT
         <rfc822;util-linux@vger.kernel.org>);
         Thu, 14 May 2020 14:52:06 -0400
 Received: from localhost (localhost [127.0.0.1])
   (uid 502)
   by static.213-239-213-133.clients.your-server.de with local
-  id 0000000000E5616E.000000005EBD934E.00006CE0; Thu, 14 May 2020 20:51:58 +0200
+  id 0000000000E56171.000000005EBD934E.00006CF9; Thu, 14 May 2020 20:51:58 +0200
 Date:   Thu, 14 May 2020 20:51:58 +0200
 From:   Helge Kreutzmann <debian@helgefjell.de>
 To:     util-linux@vger.kernel.org
 Cc:     mario.blaettermann@gmail.com
-Subject: Errors in util-linux man pages, here: sfdisk.8: Typo/Markup
-Message-ID: <20200514185158.GA27855@Debian-50-lenny-64-minimal>
+Subject: Errors in util-linux man pages, here: sfdisk.8: Typo
+Message-ID: <20200514185158.GA27880@Debian-50-lenny-64-minimal>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
@@ -71,11 +71,15 @@ use another channel, please let me know.
 **
 
 Man page: sfdisk.8
-Issue 1: fsync → B<fsync>(2)
-Issue 2: dara → data
+Issue: partitions → partition
 
-"Use fsync system call after each write when move dara to a new location by "
-"B<--move-data>."
+"Wipe filesystem, RAID and partition-table signatures from a newly created "
+"partitions, in order to avoid possible collisions.  The argument I<when> can "
+"be B<auto>, B<never> or B<always>.  When this option is not given, the "
+"default is B<auto>, in which case signatures are wiped only when in "
+"interactive mode and after confirmation by user.  In all cases detected "
+"signatures are reported by warning messages after a new partition is "
+"created.  See also B<wipefs>(8)  command."
 
 Greetings
 
