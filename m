@@ -2,30 +2,30 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 486151D3968
+	by mail.lfdr.de (Postfix) with ESMTP id B3F061D3969
 	for <lists+util-linux@lfdr.de>; Thu, 14 May 2020 20:51:19 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727033AbgENSvS (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        id S1727779AbgENSvS (ORCPT <rfc822;lists+util-linux@lfdr.de>);
         Thu, 14 May 2020 14:51:18 -0400
-Received: from luckmann.name ([213.239.213.133]:41493 "EHLO
+Received: from luckmann.name ([213.239.213.133]:49935 "EHLO
         static.213-239-213-133.clients.your-server.de" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S1726073AbgENSvS (ORCPT
+        by vger.kernel.org with ESMTP id S1726797AbgENSvS (ORCPT
         <rfc822;util-linux@vger.kernel.org>);
         Thu, 14 May 2020 14:51:18 -0400
 Received: from localhost (localhost [127.0.0.1])
   (uid 502)
   by static.213-239-213-133.clients.your-server.de with local
-  id 0000000000E56050.000000005EBD9324.0000640B; Thu, 14 May 2020 20:51:16 +0200
+  id 0000000000E56141.000000005EBD9324.00006426; Thu, 14 May 2020 20:51:16 +0200
 Date:   Thu, 14 May 2020 20:51:16 +0200
 From:   Helge Kreutzmann <debian@helgefjell.de>
 To:     util-linux@vger.kernel.org
 Cc:     mario.blaettermann@gmail.com
-Subject: Errors in util-linux man pages, here: adjtime_config.5: Wording
-Message-ID: <20200514185116.GA25596@Debian-50-lenny-64-minimal>
-Mime-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: 7bit
+Subject: Errors in util-linux man pages, here: adjtime_config.5: Typo
+Message-ID: <20200514185116.GA25619@Debian-50-lenny-64-minimal>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
 X-Public-Key-URL: http://www.helgefjell.de/data/debian_neu.asc
 X-homepage: http://www.helgefjell.de/debian
 User-Agent: Mutt/1.10.1 (2018-07-13)
@@ -71,9 +71,14 @@ use another channel, please let me know.
 **
 
 Man page: adjtime_config.5
-Issue: Superfluous comma after "is"
+Issue: hwckock → hwclock
 
-"The format of the adjtime file is, in ASCII."
+"The Hardware Clock is usually not very accurate.  However, much of its "
+"inaccuracy is completely predictable - it gains or loses the same amount of "
+"time every day.  This is called systematic drift.  The util hwclock keeps "
+"the file /etc/adjtime, that keeps some historical information.  For more "
+"details see \"B<The Adjust Function>\" and \"B<The Adjtime File>\" sections "
+"from B<hwckock>(8)  man page."
 
 Greetings
 
