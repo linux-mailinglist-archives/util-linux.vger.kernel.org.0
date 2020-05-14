@@ -2,26 +2,26 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id BA26D1D3980
-	for <lists+util-linux@lfdr.de>; Thu, 14 May 2020 20:51:40 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 55F951D397D
+	for <lists+util-linux@lfdr.de>; Thu, 14 May 2020 20:51:39 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727831AbgENSv2 (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Thu, 14 May 2020 14:51:28 -0400
-Received: from luckmann.name ([213.239.213.133]:41493 "EHLO
+        id S1727815AbgENSv1 (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Thu, 14 May 2020 14:51:27 -0400
+Received: from luckmann.name ([213.239.213.133]:49935 "EHLO
         static.213-239-213-133.clients.your-server.de" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S1727836AbgENSv2 (ORCPT
+        by vger.kernel.org with ESMTP id S1727810AbgENSv1 (ORCPT
         <rfc822;util-linux@vger.kernel.org>);
-        Thu, 14 May 2020 14:51:28 -0400
+        Thu, 14 May 2020 14:51:27 -0400
 Received: from localhost (localhost [127.0.0.1])
   (uid 502)
   by static.213-239-213-133.clients.your-server.de with local
-  id 0000000000E56151.000000005EBD932C.0000664D; Thu, 14 May 2020 20:51:24 +0200
+  id 0000000000E56160.000000005EBD932C.0000661E; Thu, 14 May 2020 20:51:24 +0200
 Date:   Thu, 14 May 2020 20:51:24 +0200
 From:   Helge Kreutzmann <debian@helgefjell.de>
 To:     util-linux@vger.kernel.org
 Cc:     mario.blaettermann@gmail.com
-Subject: Errors in util-linux man pages, here: fstrim.8: Markup
-Message-ID: <20200514185124.GA26174@Debian-50-lenny-64-minimal>
+Subject: Errors in util-linux man pages, here: fdisk.8: Missing markup
+Message-ID: <20200514185123.GA26127@Debian-50-lenny-64-minimal>
 Mime-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
@@ -70,17 +70,15 @@ use another channel, please let me know.
 
 **
 
-Man page: fstrim.8
-Issue: Markup of fstrim
+Man page: fdisk.8
+Issue: Missing markup of fdisk
 
-"Minimum contiguous free range to discard, in bytes. (This value is "
-"internally rounded up to a multiple of the filesystem block size.)  Free "
-"ranges smaller than this will be ignored and fstrim will adjust the minimum "
-"if it's smaller than the device's minimum, and report that (fstrim_range."
-"minlen) back to userspace.  By increasing this value, the fstrim operation "
-"will complete more quickly for filesystems with badly fragmented freespace, "
-"although not all blocks will be discarded.  The default value is zero, "
-"discarding every free block."
+"Usually all goes well by default, and there are no problems if Linux is the "
+"only system on the disk.  However, if the disk has to be shared with other "
+"operating systems, it is often a good idea to let an fdisk from another "
+"operating system make at least one partition.  When Linux boots it looks at "
+"the partition table, and tries to deduce what (fake) geometry is required "
+"for good cooperation with other systems."
 
 Greetings
 
