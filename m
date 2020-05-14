@@ -2,30 +2,30 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 58F2E1D39A3
-	for <lists+util-linux@lfdr.de>; Thu, 14 May 2020 20:51:56 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 04EA91D39A0
+	for <lists+util-linux@lfdr.de>; Thu, 14 May 2020 20:51:55 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727927AbgENSvo (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        id S1727911AbgENSvo (ORCPT <rfc822;lists+util-linux@lfdr.de>);
         Thu, 14 May 2020 14:51:44 -0400
-Received: from luckmann.name ([213.239.213.133]:41493 "EHLO
+Received: from luckmann.name ([213.239.213.133]:49935 "EHLO
         static.213-239-213-133.clients.your-server.de" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S1727084AbgENSvm (ORCPT
+        by vger.kernel.org with ESMTP id S1727910AbgENSvm (ORCPT
         <rfc822;util-linux@vger.kernel.org>);
         Thu, 14 May 2020 14:51:42 -0400
 Received: from localhost (localhost [127.0.0.1])
   (uid 502)
   by static.213-239-213-133.clients.your-server.de with local
-  id 0000000000E56152.000000005EBD9339.00006952; Thu, 14 May 2020 20:51:37 +0200
+  id 0000000000E56160.000000005EBD9339.0000693A; Thu, 14 May 2020 20:51:37 +0200
 Date:   Thu, 14 May 2020 20:51:37 +0200
 From:   Helge Kreutzmann <debian@helgefjell.de>
 To:     util-linux@vger.kernel.org
 Cc:     mario.blaettermann@gmail.com
-Subject: Errors in util-linux man pages, here: lslogins.1: Markup/Brackets
-Message-ID: <20200514185137.GA26946@Debian-50-lenny-64-minimal>
-Mime-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: 7bit
+Subject: Errors in util-linux man pages, here: lslogins.1: Typo
+Message-ID: <20200514185137.GA26921@Debian-50-lenny-64-minimal>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
 X-Public-Key-URL: http://www.helgefjell.de/data/debian_neu.asc
 X-homepage: http://www.helgefjell.de/debian
 User-Agent: Mutt/1.10.1 (2018-07-13)
@@ -71,9 +71,11 @@ use another channel, please let me know.
 **
 
 Man page: lslogins.1
-Issue: Markup and closing bracket are wrongly interleaved
+Issue: IDS → IDs
 
-msgid "Display information related to login by password (see also B<-afL).>"
+"Only show data of users with a login specified in I<logins> (user names or "
+"user IDS).  More than one login may be specified; the list has to be comma-"
+"separated.  The unknown login names are ignored."
 
 Greetings
 
