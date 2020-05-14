@@ -2,26 +2,26 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id B78221D3992
+	by mail.lfdr.de (Postfix) with ESMTP id 4AC461D3991
 	for <lists+util-linux@lfdr.de>; Thu, 14 May 2020 20:51:48 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727836AbgENSvh (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Thu, 14 May 2020 14:51:37 -0400
-Received: from luckmann.name ([213.239.213.133]:43279 "EHLO
-        static.213-239-213-133.clients.your-server.de" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S1727838AbgENSvg (ORCPT
-        <rfc822;util-linux@vger.kernel.org>);
+        id S1727882AbgENSvg (ORCPT <rfc822;lists+util-linux@lfdr.de>);
         Thu, 14 May 2020 14:51:36 -0400
+Received: from luckmann.name ([213.239.213.133]:59621 "EHLO
+        static.213-239-213-133.clients.your-server.de" rhost-flags-OK-OK-OK-OK)
+        by vger.kernel.org with ESMTP id S1727854AbgENSvf (ORCPT
+        <rfc822;util-linux@vger.kernel.org>);
+        Thu, 14 May 2020 14:51:35 -0400
 Received: from localhost (localhost [127.0.0.1])
   (uid 502)
   by static.213-239-213-133.clients.your-server.de with local
-  id 0000000000E56157.000000005EBD9334.00006807; Thu, 14 May 2020 20:51:32 +0200
+  id 0000000000E56156.000000005EBD9334.000067F0; Thu, 14 May 2020 20:51:32 +0200
 Date:   Thu, 14 May 2020 20:51:32 +0200
 From:   Helge Kreutzmann <debian@helgefjell.de>
 To:     util-linux@vger.kernel.org
 Cc:     mario.blaettermann@gmail.com
-Subject: Errors in util-linux man pages, here: logger.1: Spacing
-Message-ID: <20200514185132.GA26616@Debian-50-lenny-64-minimal>
+Subject: Errors in util-linux man pages, here: libblkid.3: Missing markup
+Message-ID: <20200514185131.GA26593@Debian-50-lenny-64-minimal>
 Mime-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
@@ -70,11 +70,11 @@ use another channel, please let me know.
 
 **
 
-Man page: logger.1
-Issue: Superfluous space before full stop
+Man page: libblkid.3
+Issue: Missing markup for command name
 
-"Use datagrams (UDP) only.  By default the connection is tried to the syslog "
-"port defined in /etc/services, which is often 514 ."
+"libblkid is part of the util-linux package since version 2.15 and is "
+"available from https://www.kernel.org/pub/linux/utils/util-linux/."
 
 Greetings
 
