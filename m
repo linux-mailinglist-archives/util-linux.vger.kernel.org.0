@@ -2,88 +2,100 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 52F111D5FA0
-	for <lists+util-linux@lfdr.de>; Sat, 16 May 2020 10:26:20 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 9571D1D6362
+	for <lists+util-linux@lfdr.de>; Sat, 16 May 2020 20:00:22 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726202AbgEPIZK (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Sat, 16 May 2020 04:25:10 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:34768 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1725934AbgEPIZK (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Sat, 16 May 2020 04:25:10 -0400
-Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com [IPv6:2a00:1450:4864:20::332])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id D7D98C061A0C
-        for <util-linux@vger.kernel.org>; Sat, 16 May 2020 01:25:09 -0700 (PDT)
-Received: by mail-wm1-x332.google.com with SMTP id w64so4921417wmg.4
-        for <util-linux@vger.kernel.org>; Sat, 16 May 2020 01:25:09 -0700 (PDT)
+        id S1726312AbgEPSAV (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Sat, 16 May 2020 14:00:21 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:39140 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-FAIL-OK-FAIL)
+        by vger.kernel.org with ESMTP id S1726298AbgEPSAV (ORCPT
+        <rfc822;util-linux@vger.kernel.org>);
+        Sat, 16 May 2020 14:00:21 -0400
+Received: from mail-ot1-x343.google.com (mail-ot1-x343.google.com [IPv6:2607:f8b0:4864:20::343])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id D8EBFC05BD0A
+        for <util-linux@vger.kernel.org>; Sat, 16 May 2020 11:00:20 -0700 (PDT)
+Received: by mail-ot1-x343.google.com with SMTP id x22so1039412otq.4
+        for <util-linux@vger.kernel.org>; Sat, 16 May 2020 11:00:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:subject:to:cc:message-id:date:user-agent:mime-version
-         :content-language:content-transfer-encoding;
-        bh=ew74A9A6aFNCtoZPKpvBT0txp0ez/WVJUjIPl6a2QnM=;
-        b=mysEqPNERqkYiNxLsoLtJDgpTa2GKd/P6vtwEjrwAm4TDkM9pU2SOmFfdI30j+Ttwl
-         iUfNNSQHw7gILu34iyEmBbR16GI4vAizudMgQ0pyTPsYkxTwWEpA9XsEwuLoxpVP1WVf
-         imZti08aqCYgTP7k9N2YbLwtUX1vuStj7qdDNpFMWSnZWETsNziFwg3u47fc7PN4Agnr
-         XsCscz2NStGxlQ0mVqyzFeyvdTiqRo+Yz8DTW1+1b0XhF9St558oAQfnq6gtqpGH9cOM
-         HG1l9zCuV4+nIp8VGO0IJs61zr+LTmNlDOYfRNKiLcXO10AHlpiIRdAdDHRxZWtgHLtR
-         IF6Q==
+        h=mime-version:reply-to:from:date:message-id:subject:to;
+        bh=PM7h0o5+tqE9ZrLd8+q3bJz68SKdYlGdGtXKk3ISW+k=;
+        b=K04I8IqOczZH1AaZWdpXMNHXUBXe/G0xWTINRAoRcubI34/BsiF2Eo9Ye3ZdrdSkzU
+         hNmgIVQ4FxMYuKEtFUuCQeNk/Myn1GOMYyZ+ahXs06MvyIxhZ9gYYSlEFIwzaERHeimB
+         L27mxfsB6RWRdL2FSa8r+ZjAPJUmTXmkCgHxPLQ+Xomh12OCcrXelB0VLwcdDew2e3Qs
+         5TaJKuteA/ImN3akphYAwhVqqPF2MH5XWCzqPg7nrI4+gsiq0lXzPTMaYUKS8aQq7V/0
+         xCAfzkqhbgsO/5Cbu9q5UeLziv9H5bmejo4c1UHtRzKE2zqAujjHMC/SDOHS7Xdn55bI
+         Ci3w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:subject:to:cc:message-id:date:user-agent
-         :mime-version:content-language:content-transfer-encoding;
-        bh=ew74A9A6aFNCtoZPKpvBT0txp0ez/WVJUjIPl6a2QnM=;
-        b=su7k7VjxmccLV8NI64cgaSe+GK8+QVpMKD7/BMUN5jYG92SMNDlIKLSzCjw3/x3Cw6
-         0Gh0PuRV8uHPswdYgzNk1MlpROeGVYJKzn5VGrPtxS3RXTrpqXPa9Nxbz/sn/zMHqepN
-         oyBbPNnTxAVgeqwqwBghoS/jO8NH81Eej5ZdvOtZw9qed/CYZ0EqcDBplyMUzHVOC1+y
-         wMZ5WdHS2X3Qd27ofTV3vSMzGMngVbmeBGAgddn+CrFDrKAtTE4bsWyzpWwOyBNo0LQT
-         9vwCXtcwgrr6NZgo0NWl3zMzpOsDXhMyF+NETXpAsQtK/LXJRgnD7cqkHmcmMOf+oXBD
-         N7Vg==
-X-Gm-Message-State: AOAM5329OXrtBpMvmnMS6btbD/tYTi3DrUKTKTvkMkXhN0xGKqkHCt5D
-        XGl+BFPgLBBzxR0wUE6wPL0=
-X-Google-Smtp-Source: ABdhPJw6Cs9CsUGnEi2p14l0azeC/Gqkm6wRTXVPro6n6HQz7RzwS/TZRofM+uInGBidTuPPy43Blw==
-X-Received: by 2002:a7b:c846:: with SMTP id c6mr7984800wml.62.1589617508362;
-        Sat, 16 May 2020 01:25:08 -0700 (PDT)
-Received: from ?IPv6:2001:a61:2482:101:a081:4793:30bf:f3d5? ([2001:a61:2482:101:a081:4793:30bf:f3d5])
-        by smtp.gmail.com with ESMTPSA id t4sm8006882wri.54.2020.05.16.01.25.07
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Sat, 16 May 2020 01:25:07 -0700 (PDT)
-From:   "Michael Kerrisk (man-pages)" <mtk.manpages@gmail.com>
-Subject: Consistency fixes in util-linux man pages
-To:     Karel Zak <kzak@redhat.com>
-Cc:     mtk.manpages@gmail.com, util-linux@vger.kernel.org,
-        Helge Kreutzmann <debian@helgefjell.de>
-Message-ID: <4cb60e3f-0226-e7f0-0052-08a48ea9f425@gmail.com>
-Date:   Sat, 16 May 2020 10:24:59 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.7.0
+        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
+         :subject:to;
+        bh=PM7h0o5+tqE9ZrLd8+q3bJz68SKdYlGdGtXKk3ISW+k=;
+        b=AmBGZ+mDCo/ZzsSokKQokBZwR2k8cNFlDkByXxmdIIPt1K6ndcgInM8SvrA4YgnlTt
+         TXD2/DVmXfVXCVx0mzGmT4LBAEDNXbO9FqU0I9ZNZ4bOTBCxHI8HZyeK21dVWugwnDTH
+         f47cayisTdMmIlYN+GrPgbVW70mle/kaJmR/4SaeEpru01dswYJT7Mta+vUIpvPcZqhs
+         oO9WWvze7dlsGqSfSEi1JkTVphGOwvqWKw17+47STu3kU0tRZdUsK4x4bU3wpyc7StSD
+         7Q/Sv1GsQOSpUGMdkc+/h7dSmViiR4ekLCMbkxVk+IpArkAqmPI+0AA7gkw8ZKA0nAqw
+         g2tg==
+X-Gm-Message-State: AOAM5321knwRD3iCoC7rbN1FHYwuTJj2H2d4pmtgx4vGJOqWMDlx1FKu
+        OwyQFHtFm9rREUiUEXUoA0wyApseSI/gCb4lHho=
+X-Google-Smtp-Source: ABdhPJw+hoTwRAKTAYN9O8urzlDc9gDPl5bOk5AvPhyeqkwGkPxrGN+vxvWPh9irDTlAv27ES/3D9OVVZVWmNfnb6zU=
+X-Received: by 2002:a9d:53c7:: with SMTP id i7mr6446687oth.307.1589652020150;
+ Sat, 16 May 2020 11:00:20 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+Received: by 2002:ac9:e23:0:0:0:0:0 with HTTP; Sat, 16 May 2020 11:00:19 -0700 (PDT)
+Reply-To: mrssophia.robin.75@inbox.ru
+From:   "Mrs. Sophia Robin" <agencydirectorwu@gmail.com>
+Date:   Sat, 16 May 2020 11:00:19 -0700
+Message-ID: <CAMTsjJcTrHsQOmK3T1YBuY2xHOtHcUk=w+XpNE3PViyBfGLDUw@mail.gmail.com>
+Subject: Hello My Dearest
+To:     undisclosed-recipients:;
+Content-Type: text/plain; charset="UTF-8"
 Sender: util-linux-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-Hello Karel,
+Hello My Dearest
 
-Perhaps a little inspired by Helge's recent reports, I wonder about 
-submitting some wide-ranging patches to improve consistency across
-the util-linux manual pages.
+Please I appeal to you to exercise a little patience and read through
+my mail carefully, I am contacting you personally for investment
+assistance and a long term business relationship in your Country.
 
-As an example, there's quite a bit of variation in the order of 
-.SH sections in the manual pages (e.g., in the placement of the SEE 
-ALSO section). The pages would be more readable if the ordering was
-more consistent.
+I am Mrs. Sophia Robin  a citizen of the united state of America ,  I
+work in HSBC Bank in Milan Italy  as a Telex Manager charge of wire
+transfer department.
 
-Would you entertain patches that made wide-ranging changes
-that fixed that sort of thing (without changing page content?
+I am contacting you for an important and  urgent business transaction,
+I  want the bank to transfer the money left by Dr. Cheng Chao,  A
+Chinese   Politicians who  died, March 17th 2020 without any trace of
+his family member,  he used our bank to launder money overseas through
+the help of their Political advisers. And most of the funds which they
+transferred out of the shores of China  were gold and oil money that
+was supposed to have been used to develop the continent.
 
-Thanks,
+Can you invest this money and also help the poor ? The amount value at
+($10.5million Dollars), left in his account still unclaimed, if you
+know that you are capable to invest this fund into any   profitable
+business in your country kindly send me your details information as
+listed below to enable me draft you an application form of claim along
+with the deposit certificate which you are going to fill with your
+bank account detail necessary and contact the HSBC Bank in Italy  for
+immediate transfer of the Amounted sum into your bank account direct.
+	
+Percentage share will be 60,for me/ 40, for you.
 
-Michael
+(1) Your full name..................................................
+(2) Your address....................................................
+(3) Your Nationality.................................................
+(4) Your Age / Sex.....................................................
+(5) Your  Occupation............................................
+(6) Your marital status......................................
+(7) Your direct telephone number..................
+(8) Your photo.......................................
 
--- 
-Michael Kerrisk
-Linux man-pages maintainer; http://www.kernel.org/doc/man-pages/
-Linux/UNIX System Programming Training: http://man7.org/training/
+Thanks with my best regards.
+Mrs. Sophia Robin
+Telex Manager
+Milan Italy  (H.S.B.C)
