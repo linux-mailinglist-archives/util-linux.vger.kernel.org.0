@@ -2,106 +2,50 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 11AE21D7C3A
-	for <lists+util-linux@lfdr.de>; Mon, 18 May 2020 17:03:18 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 12B5E1D8A0E
+	for <lists+util-linux@lfdr.de>; Mon, 18 May 2020 23:32:33 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726958AbgERPDQ (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Mon, 18 May 2020 11:03:16 -0400
-Received: from luckmann.name ([213.239.213.133]:48939 "EHLO
-        static.213-239-213-133.clients.your-server.de" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S1728018AbgERPDP (ORCPT
+        id S1726831AbgERVcJ (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Mon, 18 May 2020 17:32:09 -0400
+Received: from sonic306-22.consmr.mail.ne1.yahoo.com ([66.163.189.84]:44380
+        "EHLO sonic306-22.consmr.mail.ne1.yahoo.com" rhost-flags-OK-OK-OK-OK)
+        by vger.kernel.org with ESMTP id S1726250AbgERVcJ (ORCPT
         <rfc822;util-linux@vger.kernel.org>);
-        Mon, 18 May 2020 11:03:15 -0400
-Received: from localhost (localhost [127.0.0.1])
-  (uid 502)
-  by static.213-239-213-133.clients.your-server.de with local
-  id 0000000000E56013.000000005EC2A3B1.000057BD; Mon, 18 May 2020 17:03:13 +0200
-Date:   Mon, 18 May 2020 17:03:13 +0200
-From:   Helge Kreutzmann <debian@helgefjell.de>
-To:     "Michael Kerrisk (man-pages)" <mtk.manpages@gmail.com>
-Cc:     Karel Zak <kzak@redhat.com>, util-linux@vger.kernel.org
-Subject: Re: Consistency fixes in util-linux man pages
-Message-ID: <20200518150312.GA22063@Debian-50-lenny-64-minimal>
-References: <4cb60e3f-0226-e7f0-0052-08a48ea9f425@gmail.com>
- <20200518082814.pq22ph732eiebacz@ws.net.home>
- <CAKgNAkihsF1tGurfHbnFPYZ4qJV9-2f=Sbj5qdLxmuuuAJ+GGA@mail.gmail.com>
-Mime-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha256; protocol="application/pgp-signature"; boundary="=_luckmann.name-22461-1589814193-0001-2"
-Content-Disposition: inline
-In-Reply-To: <CAKgNAkihsF1tGurfHbnFPYZ4qJV9-2f=Sbj5qdLxmuuuAJ+GGA@mail.gmail.com>
-X-Public-Key-URL: http://www.helgefjell.de/data/debian_neu.asc
-X-homepage: http://www.helgefjell.de/debian
-User-Agent: Mutt/1.10.1 (2018-07-13)
+        Mon, 18 May 2020 17:32:09 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048; t=1589837529; bh=5gCyJ+OqEpp5mbAlNtNv58P62XCklDNCTlGARRHXZQA=; h=Date:From:Reply-To:Subject:References:From:Subject; b=AMDdHaDDMYJgXwi3c88LJV4bp/pNswno480Vzjen/rxp/uk15Z4U4e02MrTsAPiiQIrxd10lZ3QgBI/DBY+YHnCYyt7gs3808oVrZ6kTP1BcAvieucjY5v99dFyLhx0UAOf5KmIAB20Z+a5cHH+uIZnlbPcycIFfHiBbAUDluuqWkpLTUY7Rcip/h7tZhYKYV5KLTSzHRwCKvTKSYoxI//VJTWuwNc7QeXj6bdwluefLYBpuXYGHSXqtlLK+rjIFPQ9qndn0nUhvJnbjHC0HRj9w+XfPZFGAxZbaWmObJQG8ul95ZqsTgA19hI78wv+hCxbXOZMiNNu2yzB1MHhtKw==
+X-YMail-OSG: 6ig7c1AVM1ksIVURSjxEITMWDFNQXnW1Eoxj9.bvMLfA_c9ISFsw2RSmM7_Cb.C
+ oGbYAfqbdT9B1A3W1oc_1YvaliME0BNWEqST9p_QoOoxwS4O.kI8QPKBtRn26XjNPZ9SRdHAdyYa
+ 0N74b9cs_62sWac.2wj.ATQGwXNiXVlVvxye03fdPc4TCPQcjAKekEk_uYy_Hs9psxFgEXT5lDq5
+ 7gvdxiWEw2Tn56pFYk10uDeDkOW4qiW3vNXoHpRjvj43OKQAmE3c5Go7MnvfMN5pr3_uA.9i84JZ
+ KYr7nOrx8.LjYXupOKHDNIMPnFvykF1mfhtkm5IV6Ur2zLollo6k1l5JgSWET4IEUSp99f.rmfR9
+ q2CJMm9NaAr3H6LTgbvl3yQJm._w1WYtRhBGtzuZOWt_4bfwuxF7fp99kVmnwkUts_B2bRNcovVE
+ 4x1s7dLCKLUejPwsB3Zo79gXEb59pYStzrpKGweGeqvEHTUnOYQ8ZAOwYoSof8jlRzNAmr15cLB4
+ hF2cFb5IAoLCRfxMHKYwEfcA01Gt_FEzA9lju7dI52LWKiayAtrQK5BgaNwlUn3DrG.IQFkxXRlZ
+ RBFtkQULWcXq0QtudnEne4mX9r.jg83QiFW01V5xGf9XtxZlODLaeovMLxxRAyPundViHLVOhdlW
+ I50ZmeLCZ0YSMlLhTyShBGtSnccE32HgCAlmnbkNQG9bRAIk8hH.8Uog_4nBv.1BEksSZq7Y61uc
+ UuY2Y4MxR_.c59ctnWkeaF5jcXYg9.TtHZQAX10vnoMKwvXJYoGj6FuwHrhjV.4ijwULgwtES5B5
+ ETw_Y7uqlbku0c5SaLHhGC0N1vOcpC1xeN40CEnqDLUZem03zyqNvmik4iC7ROt7hAT6EpYS7ZS5
+ 2u6h79JsNDrPbX7yMJKMgma2K_0K8pnEgM.102NZHlgJpKyidhm8D.VtDWChIwLE3POAtwpb27GX
+ UeE86fhwG6TcBp8EZ_yJC2a9pg1jcTHHhHNbmjjp28p0w70iJtno3_GXx.fNBWcpcwSO6DBFrQUd
+ GRQ7u1UEcWfnFg4m4XRoQhP.i_i27loqALu8TeRPsDZxqkHZCeeWwqM4hZ_IKCXDe9_MRZASrUNZ
+ IS758OsZ57iegC1GKt9C_idV2vDQfmPw0HAX9dnGZ8MLD8y1dNra40LrvOdTZlIT9HpdHu41ljPV
+ eMfUPpiuikZDa9NsZJb5vDACx0BF6aVEl0WN6Pf9JCN3F61cZJa1aNQSbGRGrUdutY2Q5thLZ3K4
+ 75BhCpuAhCKIq6_KfY9D4vkHy5XRwBrFCqvGSO9KCeGln0gPiKiqhTA2fMIR.jEoUm_Fx
+Received: from sonic.gate.mail.ne1.yahoo.com by sonic306.consmr.mail.ne1.yahoo.com with HTTP; Mon, 18 May 2020 21:32:09 +0000
+Date:   Mon, 18 May 2020 21:32:05 +0000 (UTC)
+From:   Rose Gordon <rosegordonor@gmail.com>
+Reply-To: rosegordonor@gmail.com
+Message-ID: <1807427743.1117653.1589837525931@mail.yahoo.com>
+Subject: Hi there
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+References: <1807427743.1117653.1589837525931.ref@mail.yahoo.com>
+X-Mailer: WebService/1.1.15960 YMailNodin Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:72.0) Gecko/20100101 Firefox/72.0
+To:     unlisted-recipients:; (no To-header on input)
 Sender: util-linux-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-This is a MIME-formatted message.  If you see this text it means that your
-E-mail software does not support MIME-formatted messages.
-
---=_luckmann.name-22461-1589814193-0001-2
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-Hello Michael and Karel,
-On Mon, May 18, 2020 at 12:36:01PM +0200, Michael Kerrisk (man-pages) wrote:
-> On Mon, 18 May 2020 at 10:28, Karel Zak <kzak@redhat.com> wrote:
-> > BTW, I'm not sure about man pages as ideal format to maintain
-> > documentation (because it's mostly about formatting than about
-> > content). I think about AsciiDoc or so in future. What do you think
-> > about this idea?
->=20
-> I'm not too knowledgeable in AsciiDc, but my impression is that it's
-> too limited in terms of its formatting opinions.
->=20
-> If I did move man-pages, the most likely candidate would probably be
-> Sphinx, as is nowadays used in the kernel docs. But, that would
-> require converting a thousand pages or so, and  I have not so far had
-> the stomach for that. Of course, you have a rather smaller set of
-> pages to deal with, so a conversion step sould be more easily
-> entertained.
-
-Even though man pages are limitted in formatting, they are universally
-available and, from our POV, getting more attention from the
-translators side. We just welcomed our seventh language. Probably not=20
-relevant for kenel side docs, but for programs by non programmers (and=20
-presumably non native speakers) man pages are good option.
-
-(Of course, translation tools for other formats exists and e.g. po4a
-supports many formats, it also need a dedicated community of
-translators).
-
-Greetings
-
-           Helge
-
---=20
-      Dr. Helge Kreutzmann                     debian@helgefjell.de
-           Dipl.-Phys.                   http://www.helgefjell.de/debian.php
-        64bit GNU powered                     gpg signed mail preferred
-           Help keep free software "libre": http://www.ffii.de/
-
---=_luckmann.name-22461-1589814193-0001-2
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Transfer-Encoding: 7bit
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCAAdFiEEbZZfteMW0gNUynuwQbqlJmgq5nAFAl7Co6sACgkQQbqlJmgq
-5nCjORAAjBN3gfAZkt0i4rmi3mySQvYmBlHlEpB1YLnvYV0mfxtmY0A1+JdbQVyY
-MN0OfhQq86HFm8GymuSaISTNqIC/RbiDi52+cXZ9CrGyW/o0xrTg4hlJpRShIjP/
-VCWR687jDPe1O31Aw+Iu5CSqIKDfti6go38Hsa0AT6g2Y6B1a0Zh5osD4L+X0Bhb
-5G7tWXrGvD5dmH8k8+gCZVtv/vVPzgM6FHLnm3R2KyZr8fpUTeyaxYfH7hUuIOZ4
-vmdmnaUHbkAMB6hVf1vC+iI+dabOU+za9Ihhy/tWTdmJ7JzX0Yz+2V8NxuoHdGfE
-DBxDJBwwTCFMXcaYg9K3k+b7UJJKldFFs7Yp8aCR+5B4KJlyaHv90GeTa20YGdB3
-IB2iRtAISmMTMKni1ZNUHI/nU1uRY0xuyIDW8SKjrXTHEPFcj7rILEj52XRcvRqI
-Q/c2gvljSHa3Ttnvz/8A9DYdzVYnE/i3TaCAvPLMjRWRc/TbG3NQtqkrXA3XA+wc
-BLLzAxNdrpG8W+OEeUqosew2WjocKg8ZycD8ulfd2pgGoEWQS5ru2uwLAX2gUGr3
-KxSI2yebGjDpJ5noWj56XvvHLmGFhR2uCLddukxaQLzVCcOu1i3kVLv+YfUSx8jB
-j42qF4DS7dfNulZpt0fJUUKsi1g5Wv4sCtmZ7ke72xYZ0NLWxnY=
-=f5g3
------END PGP SIGNATURE-----
-
---=_luckmann.name-22461-1589814193-0001-2--
+Hi Best of the day to you I'm Rose by name 32years old single lady, Can we be friends? born and raised in London in United Kingdom Take care Rose.
