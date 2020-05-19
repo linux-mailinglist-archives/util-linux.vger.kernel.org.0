@@ -2,83 +2,129 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 6BCD11D9BE9
-	for <lists+util-linux@lfdr.de>; Tue, 19 May 2020 18:02:50 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 7A29D1D9DD5
+	for <lists+util-linux@lfdr.de>; Tue, 19 May 2020 19:23:41 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1729089AbgESQCt (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Tue, 19 May 2020 12:02:49 -0400
-Received: from a2nlsmtp01-04.prod.iad2.secureserver.net ([198.71.225.38]:59994
-        "EHLO a2nlsmtp01-04.prod.iad2.secureserver.net" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S1729055AbgESQCt (ORCPT
-        <rfc822;util-linux-ng@vger.kernel.org>);
-        Tue, 19 May 2020 12:02:49 -0400
-Received: from a2plcpnl0939.prod.iad2.secureserver.net ([107.180.121.59])
-        by : HOSTING RELAY : with ESMTP
-        id b4gejBevPTt83b4gejEisS; Tue, 19 May 2020 09:01:48 -0700
-X-CMAE-Analysis: v=2.3 cv=QIQWuTDL c=1 sm=1 tr=0
- a=c08frefAWprxgowNyFQgew==:117 a=mtZIHiYjXTrRk4gUNJDcvQ==:17
- a=9+rZDBEiDlHhcck0kWbJtElFXBc=:19 a=dLZJa+xiwSxG16/P+YVxDGlgEgI=:19
- a=IkcTkHD0fZMA:10 a=sTwFKg_x9MkA:10 a=5KLPUuaC_9wA:10 a=pdMr5jDdAAAA:8
- a=UBeCzY44_sIaQoVJiioA:9 a=qHrmGDM8DLCaAeSoI+1a19K74XU=:19 a=QEXdDO2ut3YA:10
- a=fLhw-cr2TwcA:10 a=VUBTW42vsekA:10 a=I7C6fPJKyq6QQ73iwysc:22
- a=pHzHmUro8NiASowvMSCR:22 a=xoEH_sTeL_Rfw54TyV31:22
-X-SECURESERVER-ACCT: connie@racvel.com
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=racvel.com;
-         s=default; h=Content-Transfer-Encoding:Content-Type:MIME-Version:Date:
-        Message-ID:Subject:From:To:Sender:Reply-To:Cc:Content-ID:Content-Description:
-        Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
-        In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
-        List-Post:List-Owner:List-Archive;
-        bh=YlQ5OX/1vUW3Em6Zarjjryjbl/cDUOjZlL2EnOpXRtk=; b=Pu0m2UReWRbvHEEVfW18pOkwdk
-        HaG1pSwIWnfoX5uFHDLGhIRAl1egYB6ws77nMPhSvQWvlkEAs7RU9ARl3N7l2FkfoabfLFlDVSbzk
-        y6XAzBjprNMHeh2tYnYVvz+eGBIjsxM7iYt8S+hzaUweT5bYx7T9QXJKTWzSrSBjXFbMhY/uTm3td
-        jq9hNcBVHi+UzAoI7OOtqQsgP+PT6c+0SHYhzyHX+PhR58cVsVZVGN/pWKUfFvfINu2Bo5h9NRvXD
-        1IlpkOK5UcmmnWUND+7WyZdubA8kAnAbPiyAnHfZ6mSK3/8dCOFHK8gecRgbKXzQvxPWBt97bmJuO
-        C2cOp4PA==;
-Received: from b-internet.87.103.250.132.snt.ru ([87.103.250.132]:58890 helo=racvel.com)
-        by a2plcpnl0939.prod.iad2.secureserver.net with esmtpa (Exim 4.92)
-        (envelope-from <connie@racvel.com>)
-        id 1jb4gd-003ogt-33; Tue, 19 May 2020 09:01:48 -0700
-To:     "felix bloginput" <felix-bloginput@fefe.de>,
-        "QuietUrl Contact Form" <contact-form@quieturl.com>,
-        "jhall" <jhall@freedos.org>, "faqtrack" <faqtrack@freedos.org>,
-        "util linux ng" <util-linux-ng@vger.kernel.org>,
-        "tor ops" <tor-ops@torproject.org>, "dannys" <dannys@mail.com>,
-        "mail" <mail@senioren-shop24.de>,
-        "renate kuenast" <renate.kuenast@bundestag.de>,
-        "trellis at Hr Peter Swoboda" <ps@trellis.at>,
-        "arnim rupp" <arnim@rupp.de>,
-        "FFII Holger Blasum" <feedback@ffii.org>, "Oz" <Oz@3rdWish.de>
-From:   sqelch-lebensmittel <connie@racvel.com>
-Subject: =?UTF-8?Q?=F0=9F=94=A5_Irgendwie_hatte_ich_?= =?UTF-8?Q?Sehnsucht._Wie_geht=E2=80=98s=3F?=
-Message-ID: <3642b57d-37d5-47e7-bf09-b9869eb1dc31@racvel.com>
-Date:   Tue, 19 May 2020 06:54:35 -0900
-User-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64; rv:60.0) Gecko/20100101
- Thunderbird/60.8.0
-MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Content-Language: en-US
-X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
-X-AntiAbuse: Primary Hostname - a2plcpnl0939.prod.iad2.secureserver.net
-X-AntiAbuse: Original Domain - vger.kernel.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - racvel.com
-X-Get-Message-Sender-Via: a2plcpnl0939.prod.iad2.secureserver.net: authenticated_id: connie@racvel.com
-X-Authenticated-Sender: a2plcpnl0939.prod.iad2.secureserver.net: connie@racvel.com
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
-X-CMAE-Envelope: MS4wfIyUa913Ka1hJlEwV5bgJAoi7TOwc8+D3jcUO0EbgGSyzDGrMzW0PsWh5JXy/9e0UeRbreTUz5ee7kadzUZ0xoYbR8+/XecSxpvDRZQi7sK1fAh+cs0X
- 8TuyNbAajQuHeFPofMxyQbWFm2p2h6QUNZ9dDEKq2LVUUzQYgsSJ4l1UBZKyltGknsQIItRS3oGASAtzoADlpRo118EjyUAiPYL6MOwCz4M17jCvvITZYeik
+        id S1729185AbgESRXk (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Tue, 19 May 2020 13:23:40 -0400
+Received: from luckmann.name ([213.239.213.133]:53157 "EHLO
+        static.213-239-213-133.clients.your-server.de" rhost-flags-OK-OK-OK-OK)
+        by vger.kernel.org with ESMTP id S1729001AbgESRXk (ORCPT
+        <rfc822;util-linux@vger.kernel.org>);
+        Tue, 19 May 2020 13:23:40 -0400
+Received: from localhost (localhost [127.0.0.1])
+  (uid 502)
+  by static.213-239-213-133.clients.your-server.de with local
+  id 0000000000E56011.000000005EC41619.00005BE7; Tue, 19 May 2020 19:23:37 +0200
+Date:   Tue, 19 May 2020 19:23:37 +0200
+From:   Helge Kreutzmann <debian@helgefjell.de>
+To:     Karel Zak <kzak@redhat.com>
+Cc:     "Michael Kerrisk (man-pages)" <mtk.manpages@gmail.com>,
+        util-linux@vger.kernel.org
+Subject: Re: Consistency fixes in util-linux man pages
+Message-ID: <20200519172337.GA23268@Debian-50-lenny-64-minimal>
+References: <4cb60e3f-0226-e7f0-0052-08a48ea9f425@gmail.com>
+ <20200518082814.pq22ph732eiebacz@ws.net.home>
+ <CAKgNAkihsF1tGurfHbnFPYZ4qJV9-2f=Sbj5qdLxmuuuAJ+GGA@mail.gmail.com>
+ <20200518150312.GA22063@Debian-50-lenny-64-minimal>
+ <20200519103832.7kmxmta2dl67ujpj@ws.net.home>
+Mime-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha256; protocol="application/pgp-signature"; boundary="=_luckmann.name-23527-1589909017-0001-2"
+Content-Disposition: inline
+In-Reply-To: <20200519103832.7kmxmta2dl67ujpj@ws.net.home>
+X-Public-Key-URL: http://www.helgefjell.de/data/debian_neu.asc
+X-homepage: http://www.helgefjell.de/debian
+User-Agent: Mutt/1.10.1 (2018-07-13)
 Sender: util-linux-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-Ich finde es interessant. - https://rayhelprumbpo1922.blogspot.tw/
+This is a MIME-formatted message.  If you see this text it means that your
+E-mail software does not support MIME-formatted messages.
 
+--=_luckmann.name-23527-1589909017-0001-2
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
+Hello Karel,
+On Tue, May 19, 2020 at 12:38:32PM +0200, Karel Zak wrote:
+> On Mon, May 18, 2020 at 05:03:13PM +0200, Helge Kreutzmann wrote:
+> > On Mon, May 18, 2020 at 12:36:01PM +0200, Michael Kerrisk (man-pages) w=
+rote:
+> > > I'm not too knowledgeable in AsciiDc, but my impression is that it's
+> > > too limited in terms of its formatting opinions.
+>=20
+> Yes, I'm not sure about AsciiDoc limitations. For example systemd guys us=
+es
+> DocBook which is probably ultimate solution.
 
-Freu mich auf deine Nachricht
-sqelch-lebensmittel@yahoo.de
+I'm currently translating them. Also I've used DocBook myself to write
+manges (a long time ago).
+
+> > > If I did move man-pages, the most likely candidate would probably be
+> > > Sphinx, as is nowadays used in the kernel docs. But, that would
+> > > require converting a thousand pages or so, and  I have not so far had
+> > > the stomach for that. Of course, you have a rather smaller set of
+> > > pages to deal with, so a conversion step sould be more easily
+> > > entertained.
+> >=20
+> > Even though man pages are limitted in formatting, they are universally
+> > available and, from our POV, getting more attention from the
+> > translators side. We just welcomed our seventh language. Probably not=
+=20
+> > relevant for kenel side docs, but for programs by non programmers (and=
+=20
+> > presumably non native speakers) man pages are good option.
+>=20
+> The idea is maintain documentation (in git tree) in some content
+> oriented language and then generate man pages from this content. It
+> means in the official release tarball will be man pages and end-users
+> will not see any difference.
+
+Ok, then this is fine.
+
+> The issue I have with man pages is that contributor very often send
+> patches to change formatting details and keep it consistent, avoid
+> color-of-bike-shed discussions is very difficult. It would be better
+> care about content and keep all the formatting details in some
+> conversion template.
+
+I strongly agree. Keep content and presentation separate. This also
+helps us translators, even though we don't see the original markup, we
+do quickly understand the results, because it is consistent, i.e. what
+to translate and what to leave untranslated (e.g. command names vs.
+variable names)
+
+Greetings
+
+            Helge
+--=20
+      Dr. Helge Kreutzmann                     debian@helgefjell.de
+           Dipl.-Phys.                   http://www.helgefjell.de/debian.php
+        64bit GNU powered                     gpg signed mail preferred
+           Help keep free software "libre": http://www.ffii.de/
+
+--=_luckmann.name-23527-1589909017-0001-2
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Transfer-Encoding: 7bit
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCAAdFiEEbZZfteMW0gNUynuwQbqlJmgq5nAFAl7EFhQACgkQQbqlJmgq
+5nDzYg//SLCZMQndXEsIj+O8+kqpRxnPlHITPM3simClv0xIXvWglyiGBxcf3QUO
+3rwoCEGtNQOD7U5+f0dfgrJt+3z9eub/6Em3lvX0bUOWJcD+N0x0p5RDI39bD4ng
+XJ5kHk2UWKpBzIyxqti4Q6J80QI5lwWZFDThK0mvEQki4SmIibpvwEX9+AAEYRsR
+g4y1AcpytkvoY2j1XKk8CGMCUNIZnmqYWeNufJL6hA+tGM6lqS2ejFBiI8ReTMXV
+/mVj8Y+bhvWKQ+vB4AmMyKFFOk4C92EstdIid82ccA4BGHS+NZRxJexC5pmfoXTA
+vrrr0+46OCmwUr+uSyfSf2BrruK+KHyE3yop8itntnFEeM2JtrbJBjjBcd1V0hT7
+WidtVMNMBmszvJk9gkxmJ5t1QhtTDeS+hXb5HOyFzv1yqEOkV+G15vqZ5aRlldAr
+YLt4eTq0rAYJShXK+6As3LmybE9FP7lRdCSQcDr4Z3b9743y44rHlaWV7Yo9/Vm8
+lqMwyDGxihvCsd+MYek+NqGvNqYqKa5ssn9/rKOWRKXUifAHqBIxA/YkBbQmZg//
+AP+S6ycL/Uf4nKWkGlqscZjFBQuWIaxT/uGbKvy83Rtm7nrU/HiFqJVOBvG8j7Wh
+0TR9Xoojmk5ZZJ0tj+7gkqOmSFMYvWY77ATQ93tf4qkb61S8LmA=
+=naJS
+-----END PGP SIGNATURE-----
+
+--=_luckmann.name-23527-1589909017-0001-2--
