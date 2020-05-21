@@ -2,147 +2,62 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id CFB051DB71E
-	for <lists+util-linux@lfdr.de>; Wed, 20 May 2020 16:33:25 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 358461DC669
+	for <lists+util-linux@lfdr.de>; Thu, 21 May 2020 06:55:05 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726938AbgETOdS (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Wed, 20 May 2020 10:33:18 -0400
-Received: from us-smtp-delivery-1.mimecast.com ([205.139.110.120]:42621 "EHLO
-        us-smtp-1.mimecast.com" rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org
-        with ESMTP id S1726691AbgETOdR (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Wed, 20 May 2020 10:33:17 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-        s=mimecast20190719; t=1589985196;
-        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-         to:to:cc:mime-version:mime-version:content-type:content-type:
-         content-transfer-encoding:content-transfer-encoding;
-        bh=iZRAuwcPJ6bPQYLnUJ9mjxQKZxaF5A67YUR0o6fULPg=;
-        b=ErFyOTw5nP6SMOWHEZ3nM+qd+aaBwWCJSdZkJbrQ+GLPehOqumtaZFWDWYhqClhCmkbCCo
-        RYeL408E05p0zpuutSCJxj9lX2OdVWRD7JK6pnUAqIysR27CkqBvP/eIiZdOkl22Aja/eE
-        uFnrGdDNPRI9ogIWKPNYYucUH2ZVNvE=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-386-Jab3UwLJO9-n46HvmuAwxg-1; Wed, 20 May 2020 10:33:11 -0400
-X-MC-Unique: Jab3UwLJO9-n46HvmuAwxg-1
-Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.phx2.redhat.com [10.5.11.14])
-        (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
-        (No client certificate requested)
-        by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 83DB01B18BC3;
-        Wed, 20 May 2020 14:33:10 +0000 (UTC)
-Received: from ws.net.home (unknown [10.40.193.102])
-        by smtp.corp.redhat.com (Postfix) with ESMTPS id 984F75D9E4;
-        Wed, 20 May 2020 14:33:09 +0000 (UTC)
-Date:   Wed, 20 May 2020 16:33:07 +0200
-From:   Karel Zak <kzak@redhat.com>
-To:     linux-kernel@vger.kernel.org, linux-fsdevel@vger.kernel.org,
-        util-linux@vger.kernel.org
-Subject: [ANNOUNCE] util-linux v2.35.2
-Message-ID: <20200520143307.m46d5u3vdmtrkhd6@ws.net.home>
+        id S1726804AbgEUEzE (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Thu, 21 May 2020 00:55:04 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:50380 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726790AbgEUEzE (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Thu, 21 May 2020 00:55:04 -0400
+X-Greylist: delayed 1270 seconds by postgrey-1.37 at lindbergh.monkeyblade.net; Wed, 20 May 2020 21:55:03 PDT
+Received: from fbk22.megaegg.ne.jp (fbk22.megaegg.ne.jp [IPv6:2402:bc00:0:a216::19:132])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTP id CAEC1C061A0E
+        for <util-linux@vger.kernel.org>; Wed, 20 May 2020 21:55:03 -0700 (PDT)
+Received: from zmta22.megaegg.ne.jp (zmta22-snat.megaegg.ne.jp.internal [10.62.19.122])
+        by fbk22.megaegg.ne.jp (Postfix) with ESMTP id CDD166825EC
+        for <util-linux@vger.kernel.org>; Thu, 21 May 2020 13:33:53 +0900 (JST)
+Received: from vss26.megaegg.ne.jp.internal (vss26-snat.megaegg.ne.jp.internal [10.62.19.96])
+        by zmta22.megaegg.ne.jp.internal (Postfix) with ESMTP id 089CFE0392;
+        Thu, 21 May 2020 13:33:49 +0900 (JST)
+Received: from smtp22.megaegg.ne.jp (smtp22-snat.megaegg.ne.jp.internal [10.62.19.102])
+        by vss26.megaegg.ne.jp.internal (Postfix) with ESMTP id CE5DFDF947;
+        Thu, 21 May 2020 13:33:48 +0900 (JST)
+Received: from zmbs22.megaegg.ne.jp.internal (zmbs22-snat.megaegg.ne.jp.internal [10.62.19.152])
+        by smtp22.megaegg.ne.jp (Postfix) with ESMTP id 5C3B4C0055;
+        Thu, 21 May 2020 13:33:48 +0900 (JST)
+Date:   Thu, 21 May 2020 13:33:48 +0900 (JST)
+From:   Bill Lawrence <primrose@pink.megaegg.ne.jp>
+Reply-To: Bill Lawrence <bill.lawrence0747@gmail.com>
+Message-ID: <1709666366.65826904.1590035628143.JavaMail.zimbra@pink.megaegg.ne.jp>
+Subject: Re: $2MILLION DONATION TO YOU.
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.14
+Content-Transfer-Encoding: 7bit
+X-Originating-IP: [::ffff:41.90.79.79]
+X-Mailer: Zimbra 8.0.4_GA_5740 (ZimbraWebClient - GC50 (Win)/8.0.4_GA_5737)
+Thread-Topic: $2MILLION DONATION TO YOU.
+Thread-Index: TMg57A5YmRxThNAlKSvY8Mp3dppNqQ==
+To:     unlisted-recipients:; (no To-header on input)
 Sender: util-linux-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
 
-The util-linux stable release v2.35.2 is available at
-                   
-  http://www.kernel.org/pub/linux/utils/util-linux/v2.35/
-                   
-Feedback and bug reports, as always, are welcomed.
-                   
-  Karel            
 
+Dear Sir/Madam
 
-util-linux 2.35.2 Release Notes
-===============================
+I won the Powerball lottery of $150Million on November 2, 2019 and I have voluntarily decided to donate the sum of $10Million to charity, I try to reach people randomly from different sources and modes so as to touch lives from different angles, Hence you are getting a message here.
 
-bash-completion:
-   - umount explicitly needs gawk  [Wolfram Sang]
-blkdiscard:
-   - (man) offset and length must be sector aligned  [Lukas Czerner]
-blkzone:
-   - deny destructive ioctls on busy blockdev  [Johannes Thumshirn]
-chsh:
-   - (man) fix default behavior description  [Karel Zak]
-ctrlaltdel:
-   - display error message indicated by errno  [Sami Kerola]
-docs:
-   - Correct ChangeLog URL to history log.  [Anatoly Pugachev]
-   - Fix dead references to kernel documentation  [Yannick Le Pennec]
-   - add swap to 1st fstab field  [Karel Zak]
-   - kill.1 add note about shell-internal kill implementations  [Sami Kerola]
-   - update AUTHORS file  [Karel Zak]
-eject:
-   - fix compiler warning [-Wformat-overflow]  [Karel Zak]
-exfat:
-   - Fix parsing exfat label  [Pali Rohár]
-fstrim:
-   - do not use Protect setting in systemd service  [Karel Zak]
-hwclock:
-   - fix audit exit status  [Karel Zak]
-   - make glibc 2.31 compatible  [J William Piggott, Karel Zak]
-ipcs:
-   - ipcs.1 ipcs no longer needs read permission on IPC resources  [Michael Kerrisk]
-kill:
-   - include sys/types.h before checking SYS_pidfd_send_signal  [Sami Kerola]
-lib/mangle:
-   - check for the NULL string argument  [Gaël PORTAY]
-lib/strutils:
-   - remove redundant include  [Karel Zak]
-libblkid:
-   - Fix UTF-16 support in function blkid_encode_to_utf8()  [Pali Rohár]
-   - fix compiler warning [-Wsign-compare]  [Karel Zak]
-   - fix fstatat() use in blkid__scan_dir()  [Karel Zak]
-libfdisk:
-   - (script) accept sector-size, ignore unknown headers  [Karel Zak]
-   - (script) fix memory leak  [Karel Zak]
-   - (script) fix partno_from_devname()  [Karel Zak]
-   - (script) fix segmentation fault  [Gaël PORTAY]
-   - fix partition calculation for BLKPG_* ioctls  [Karel Zak]
-   - remove unwanted assert()  [Karel Zak]
-libmount:
-   - do not unnecessarily chmod utab.lock  [Tycho Andersen]
-   - fix mount -a EBUSY for cifs  [Roberto Bergantinos Corpas]
-   - improve smb{2,3} support  [Karel Zak]
-   - smb2 is unsupported alias  [Karel Zak]
-lsblk:
-   - Fall back to ID_SERIAL  [Sven Wiltink]
-   - Ignore hidden devices  [Ritika Srivastava]
-   - fix -P regression from v2.34  [Karel Zak]
-lscpu:
-   - Adapt MIPS cpuinfo  [Jiaxun Yang]
-   - fix SIGSEGV on archs without drawers & books  [Karel Zak]
-   - use official name for HiSilicon tsv110  [Karel Zak]
-po:
-   - merge changes  [Karel Zak]
-   - update hr.po (from translationproject.org)  [Božidar Putanec]
-   - update zh_CN.po (from translationproject.org)  [Boyuan Yang]
-pylibmount:
-   - cleanup and sync UL_RaiseExc  [Karel Zak]
-scriptlive:
-   - fix man page formatting  [Jakub Wilk]
-   - fix typo  [Jakub Wilk]
-sfdisk:
-   - (man) fix typo  [Gaël PORTAY]
-   - fix ref-counting for the script  [Karel Zak]
-   - only report I/O errors on --move-data  [Karel Zak]
-su, runuser:
-   - (man) add more info about PATH and PAM  [Karel Zak]
-tests:
-   - Fix for misc/fallocate test build failure.  [Mark Hindley]
-umount:
-   - don't try it as non-suid if not found mountinfo entry  [Karel Zak]
-wipefs:
-   - fix man page --no-headings short option  [Karel Zak]
-write:
-   - fix potential string overflow  [Sami Kerola]
+You have been listed as one of the lucky recipients to receive $2M This donation is made out to you so to enable you strengthen your personal issues and mostly to generously help us extend hands of giving to the less privileged, orphans and charity organizations within your locality
 
--- 
- Karel Zak  <kzak@redhat.com>
- http://karelzak.blogspot.com
+To verify
+https://www.powerball.com/winner-story/150-million-powerball-ticket-claimed
+
+Get back to me on how to receive the donation
+
+Thanks
+Bill Lawrence
 
