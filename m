@@ -2,57 +2,57 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 4FBC11DF53B
-	for <lists+util-linux@lfdr.de>; Sat, 23 May 2020 08:43:38 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 3FEB31DF53D
+	for <lists+util-linux@lfdr.de>; Sat, 23 May 2020 08:43:40 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S2387605AbgEWGng (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Sat, 23 May 2020 02:43:36 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:35376 "EHLO
+        id S2387629AbgEWGni (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Sat, 23 May 2020 02:43:38 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:35380 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S2387612AbgEWGng (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Sat, 23 May 2020 02:43:36 -0400
-Received: from mail-ej1-x643.google.com (mail-ej1-x643.google.com [IPv6:2a00:1450:4864:20::643])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id DDD7FC061A0E
-        for <util-linux@vger.kernel.org>; Fri, 22 May 2020 23:43:35 -0700 (PDT)
-Received: by mail-ej1-x643.google.com with SMTP id s21so15485613ejd.2
-        for <util-linux@vger.kernel.org>; Fri, 22 May 2020 23:43:35 -0700 (PDT)
+        with ESMTP id S2387622AbgEWGni (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Sat, 23 May 2020 02:43:38 -0400
+Received: from mail-ed1-x542.google.com (mail-ed1-x542.google.com [IPv6:2a00:1450:4864:20::542])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id B3C25C061A0E
+        for <util-linux@vger.kernel.org>; Fri, 22 May 2020 23:43:36 -0700 (PDT)
+Received: by mail-ed1-x542.google.com with SMTP id b91so10970556edf.3
+        for <util-linux@vger.kernel.org>; Fri, 22 May 2020 23:43:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=Q8qo7pIVVsKSRQER4Y6h+x6rDJy9M779FF/daMop78U=;
-        b=m/1ml1Rl84mw+WOyPEKt2dlS2KteruvsvEzuvkLeEjRiM+WFXJ+a0HwHUfdRsREyXI
-         7mv5KzVSrVl2jp5hVRPW79rdLaP6nsnhQS0pA5GQBpuxnyYCty8OgwKCm3V6CTUd9uhd
-         3KpFiUm7DBXBx56mYGLLpIHul6ambXMP8uypFxVMmrdegbpHkvAP4v6AQU7DGPemMqwI
-         Z2gClhhDQ/hEaHnJaUbDubiwEcWaAAp4Ih3plOr3Vp2qljjfzHgVkr0MIHKUD/D4BPam
-         BKhmoKEoP3XiBF0jZaIxfy8W1oVSKFvr7poX4QsI/9R97edRYzxzPgcYAEqneyRT6pYV
-         1ljw==
+        bh=ksmBWzGSBLI9S+ryY4LsL+6OvSiCsT4MrwndbLNcssI=;
+        b=JZHiPKpmFIOmQvdkROLI2kQvu7VJzdwO+wGHjmRydzXnMM8x6sa3G08xr1KvOfUS13
+         iJvE5dusydS3bdOTRRHP1VtXsYMVz+9yl5/v6A1N8G9spYq+LEXp3qfSNLBpIHga9aMe
+         +nJ8R5TOFxt1/W45bb7rVRlKHPVcEFeUHHzDGCT4RBzOOez7MOg0iSuSHG68Puc0cY5Z
+         x64tCNJqOY7tuhpjPJry7xf0qjew3ayTnqG9uK+gwN6vxocRq98G4idmLmBeg9GGhYKZ
+         X19JNlWAIEJNAHz6yWMyt+1tiemNYJPo5R8117bsNKYaUR0+QzFchlvkxXkeke7I0RT/
+         wHuA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=Q8qo7pIVVsKSRQER4Y6h+x6rDJy9M779FF/daMop78U=;
-        b=PwSiavVKgUdz1erZYRQqwbNUJ6meYiqGjLqGx+2au1mJzFU701x3xmyOGabi2n07Hp
-         tNrT8JHosOdSeDYDOHDXkH+e73LZ1F0vafQkSC7ccOjhF0fapBw9goGvUR5Jea2UBApG
-         /SK0im+97Udwxz9CdYkc2uDTcPO12WDDtGxcEzcHJD3GVDop4QmEI+M7mCYglq9yr/u5
-         d3nSfskHtVoGtMhFBTKlCPNm7xWbNHGSHiodQf6h0+FX9EZEpO188bACgCdf7ceheeZg
-         xCQ42Ie91+pvhlCiszkS7D2sL7ilYfqMS28D2dsvHlRh7c47zpY8l72IonrXo4xQAI6O
-         EcEg==
-X-Gm-Message-State: AOAM533V1FwvwB2Q+HQoaBCnnJt7HxDAVxL1GoNgK7Y+0fwX/MXAIcit
-        5prfqmQB5A1YzgY9MVbWZEA=
-X-Google-Smtp-Source: ABdhPJyC+Y/8Woewjwj/fH9FtcCAF5JmIl8WCQUMm0WZ8Bn0MCr5haEfuS81SCEcFUJnX5/Ywsu3MQ==
-X-Received: by 2002:a17:906:8402:: with SMTP id n2mr10768467ejx.26.1590216214553;
-        Fri, 22 May 2020 23:43:34 -0700 (PDT)
+        bh=ksmBWzGSBLI9S+ryY4LsL+6OvSiCsT4MrwndbLNcssI=;
+        b=QuPhheZrcWkjDUmDek6w0Gji6LcTql1hmyqpC60OB+aMQ5RSybAqro1cM3M1ffTp9r
+         TyxRG2pqX9KD+9g6DX5J1FW75O+HLxwihvld1Jl4TGS1DRvVyNHGYQb+zj2Z0oKDkJKB
+         jkMcWC3B70YylEXIe00UOhlWDo+p9Esfx4JzChhx2Da/OHWN3ZPWPp9XZ05lhYecRvPI
+         03trBkfz3a2Z7u5MUdznx2/357cfToDGzebYMg472d/CzNsKVOUNeAZGFVMShSkvFBTe
+         cL7I3g8b4XDx9j5NfIksW4dj6DpQYDSrq7/VBgjt+Bt6ED9bbCqauxEaFDoxdL/YDcb0
+         Bi+Q==
+X-Gm-Message-State: AOAM533fJlBk6FLwD4nvyqczL9GKBTerk9bG4y/WAZnDwWMXHcxx9dLL
+        i2AM/CjeoJMfbJwuB3q0zHDC7ZPOk5Y=
+X-Google-Smtp-Source: ABdhPJw6Abooe6r5xME+sLD+M/dTXwsnoxqe4gA0dUs/k8N95tsHCkS+CsucAIaInyROqYZwlo3t7Q==
+X-Received: by 2002:a50:f017:: with SMTP id r23mr5798777edl.290.1590216215447;
+        Fri, 22 May 2020 23:43:35 -0700 (PDT)
 Received: from bienne.fritz.box ([2001:a61:2482:101:a081:4793:30bf:f3d5])
-        by smtp.gmail.com with ESMTPSA id q22sm3240523edg.97.2020.05.22.23.43.33
+        by smtp.gmail.com with ESMTPSA id q22sm3240523edg.97.2020.05.22.23.43.34
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
         Fri, 22 May 2020 23:43:34 -0700 (PDT)
 From:   Michael Kerrisk <mtk.manpages@gmail.com>
 To:     mtk.manpages@gmail.com, Karel Zak <kzak@redhat.com>
 Cc:     util-linux@vger.kernel.org
-Subject: [PATCH 5/9] Manual pages: nsenter.1: clarify the intro discussion
-Date:   Sat, 23 May 2020 08:43:21 +0200
-Message-Id: <20200523064325.78491-5-mtk.manpages@gmail.com>
+Subject: [PATCH 6/9] Manual pages: nsenter.1: note that 'file' can be a bind mount
+Date:   Sat, 23 May 2020 08:43:22 +0200
+Message-Id: <20200523064325.78491-6-mtk.manpages@gmail.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20200523064325.78491-1-mtk.manpages@gmail.com>
 References: <20200523064325.78491-1-mtk.manpages@gmail.com>
@@ -63,44 +63,25 @@ Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-The intro paragraph talks about entering the namespace of other
-processes. That's not quite accurate, since nsenter can be used (via
-a bind mount) to enter a namespace that has no member processes.  So
-rework NAME and the intro paragraph in DESCRIPTION to remove mention
-of "processes".
-
 Signed-off-by: Michael Kerrisk <mtk.manpages@gmail.com>
 ---
- sys-utils/nsenter.1 | 11 ++++++++---
- 1 file changed, 8 insertions(+), 3 deletions(-)
+ sys-utils/nsenter.1 | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
 diff --git a/sys-utils/nsenter.1 b/sys-utils/nsenter.1
-index ea924f909..147137bd8 100644
+index 147137bd8..5674f8d61 100644
 --- a/sys-utils/nsenter.1
 +++ b/sys-utils/nsenter.1
-@@ -1,14 +1,19 @@
- .TH NSENTER 1 "June 2013" "util-linux" "User Commands"
- .SH NAME
--nsenter \- run program with namespaces of other processes
-+nsenter \- run program in different namespaces
- .SH SYNOPSIS
- .B nsenter
- [options]
- .RI [ program
- .RI [ arguments ]]
- .SH DESCRIPTION
--Enters the namespaces of one or more other processes and then executes the specified
--\fIprogram\fP. If \fIprogram\fP is not given, then ``${SHELL}'' is run (default: /bin\:/sh).
-+The
-+.B nsenter
-+command executes
-+.I program
-+in the namespace(s) that are specified in the command-line options
-+(described below).
-+If \fIprogram\fP is not given, then ``${SHELL}'' is run (default: /bin\:/sh).
- .PP
- Enterable namespaces are:
+@@ -88,7 +88,8 @@ argument.
+ This should be one of the
+ .I /proc/[pid]/ns/*
+ files described in
+-.BR namespaces (7).
++.BR namespaces (7),
++or the pathname of a bind mount that was created on one of those files.
  .TP
+ \fB\-a\fR, \fB\-\-all\fR
+ Enter all namespaces of the target process by the default
 -- 
 2.26.2
 
