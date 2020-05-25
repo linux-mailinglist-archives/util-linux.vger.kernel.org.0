@@ -2,57 +2,57 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 3698C1E0EDE
-	for <lists+util-linux@lfdr.de>; Mon, 25 May 2020 14:59:27 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id A48741E0EE0
+	for <lists+util-linux@lfdr.de>; Mon, 25 May 2020 14:59:30 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S2388763AbgEYM70 (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Mon, 25 May 2020 08:59:26 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:60476 "EHLO
+        id S2390571AbgEYM72 (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Mon, 25 May 2020 08:59:28 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:60480 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S2388738AbgEYM70 (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Mon, 25 May 2020 08:59:26 -0400
-Received: from mail-ed1-x542.google.com (mail-ed1-x542.google.com [IPv6:2a00:1450:4864:20::542])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id EFC56C061A0E
-        for <util-linux@vger.kernel.org>; Mon, 25 May 2020 05:59:25 -0700 (PDT)
-Received: by mail-ed1-x542.google.com with SMTP id f13so14327723edr.13
-        for <util-linux@vger.kernel.org>; Mon, 25 May 2020 05:59:25 -0700 (PDT)
+        with ESMTP id S2388738AbgEYM71 (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Mon, 25 May 2020 08:59:27 -0400
+Received: from mail-ed1-x541.google.com (mail-ed1-x541.google.com [IPv6:2a00:1450:4864:20::541])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id B017DC061A0E
+        for <util-linux@vger.kernel.org>; Mon, 25 May 2020 05:59:26 -0700 (PDT)
+Received: by mail-ed1-x541.google.com with SMTP id i16so14957179edv.1
+        for <util-linux@vger.kernel.org>; Mon, 25 May 2020 05:59:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=MK6kWqyjKNHWCBax0HUvxrCUzDq+TqVouoiVhjBzS4o=;
-        b=Xqz532Iaw03/Gaqj4W4GehaIYsS5VFENJV2xXP0q5vFFyuXJlhiKAdw14Ou1QQzzwf
-         UwvKplG22Oa3Kw2WUoEhrBqO3uwaLN1MTZyYhIfr127Od6HUgS+rF4qULwVc7AZkaxWj
-         aJuT0NXKYv+zKJV6AuxIjzzIeWytT79WTJRTmC1RaW4kPeJQvK/WIF/o82vrlD+xknVK
-         Ksmlkl/JyK+8heTvCOvflQ8Tpx5qUyAqtEwwMRBUY8cHbtpVdRsQ3hHkOHkqpJLDJitd
-         Ctfd4O0RYwF1b29NL3BLsZ4mEX56CxDMackVQAhchsgT5sjj/MqjSgaHXywqw5AzUurC
-         L2Rw==
+        bh=wPidpFPCxJ1H/w1PyGyAJPyFteseUds9AR5gw3qskiM=;
+        b=tOREeciQGFRhDZUyPp7Q1Kj+wIQstfuvUgXv3i0JgpT73tXEIh7lbtkxTxjAmlFUTH
+         dej8k9pD/bmFV1RcIx63LnavOPXOJ15gzulG8grTUCEfDf/UygZtKGRj50fxVBWjFKrK
+         fSKbIXOZ3WUPvqh8SApHzX+2vSLV8e3utT79HUISI4pAQhq6wjV6mmL0MT+6NomFTtOJ
+         SpLdZk0iizvTfAN4ZTZi+iXsuWVNLwPnRwAufoEmO0rSsxS46feTV3mC23xtUzKDGqpq
+         8TnidauhOFtOeCo3b+RXwOliXpqZv6ZGX9JOaFN/SAKT4lbksqMb7sZSO47bLXdAI46K
+         OPmQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=MK6kWqyjKNHWCBax0HUvxrCUzDq+TqVouoiVhjBzS4o=;
-        b=DYLU3Vtuz/MoBokPsyPzz7hbYttVXt400GA4j1Nx0d7MDnuajVS8t+srzUyRrVXfEK
-         ux/sr3CWZxP09/upRRaiAzAtBRpTTZTydSRl/hnjQknHfbDoepXPpO+bMb4Nj2yU0fA/
-         OeH3NUNDF5mNJNnj27itaeOx0/XqtXhkyYW4Pr0SR8/L0UpPWbgQUpYfsHRs0QKf5AFo
-         qJaCYyL6lW+WcyOms/X+dPS6DTvx7IOrCxyZl1AKa5jtc2OoflCuEYm56WhlRW+0vSnc
-         D4i8R5cExG9iHXgyVzOI5/E9oILnpAShYIYkt5bXIfFPVyMgXzWYRZt0N2nnfq41Ikdh
-         HnRg==
-X-Gm-Message-State: AOAM530X3aoI6vDKbvE+4V54mHQLYHg38IzrDoX56CAlV+ztI+MOBIL4
-        nbZhmUP9fg64Aqm6PFrZq8F9puybV0Y=
-X-Google-Smtp-Source: ABdhPJwSeofIhy5YU2t48ZQVMJL4cz7qBjVI+vbDqbrGkW/2Efmi2vvhQkPQo1sQb/GRtGSKgq6Oog==
-X-Received: by 2002:a05:6402:1d2d:: with SMTP id dh13mr14463643edb.169.1590411564656;
-        Mon, 25 May 2020 05:59:24 -0700 (PDT)
+        bh=wPidpFPCxJ1H/w1PyGyAJPyFteseUds9AR5gw3qskiM=;
+        b=MmxiYSNpd27/pA5ns0ha2flcnWKtH8RfZ1X1qBqqn7HYUmxw+emMu1N3iS1JvvQNRY
+         JQ0CmtmZCcxTHaRbFDRgtx05i7f8EFGz3j4hukiS/+B3xrFhr2hHM7zycSrOvwdx7Hc2
+         W5ZWs5OjKyywIYrqMTFraQyuekxhKd58gkWbxBo0zSKsx4g/EVYfU20PFnexN239/N8/
+         5Pw86c4KDmwwdCdmBHH0lvR9iKO/SFj/zMwBIiswzOIm403EyDFd/jUucmMqK32WiFFp
+         ZyS7Daor17FkD5cXwymFYp9Bh1MTKv4rx6fYKpndhon29jnb5y/Z4TfmpXcqwN7i75U3
+         l7ew==
+X-Gm-Message-State: AOAM531Nuk81HCqv+jtDu/j4rCn5BQ/FzGSSRGVT0RrQqpry0loFVss8
+        QIMrFn2yRQzd1U6nwA8dgCo=
+X-Google-Smtp-Source: ABdhPJyc7EMzTycA96puCdZJe8jbx/pJYitRmZ+mq0qkwdH0qXCiWEKtHCUm4AK+LXKR4qQdVAXxAA==
+X-Received: by 2002:aa7:ca49:: with SMTP id j9mr15609138edt.186.1590411565491;
+        Mon, 25 May 2020 05:59:25 -0700 (PDT)
 Received: from bienne.fritz.box ([2001:a61:2482:101:a081:4793:30bf:f3d5])
         by smtp.gmail.com with ESMTPSA id b14sm15709719edx.93.2020.05.25.05.59.24
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 25 May 2020 05:59:24 -0700 (PDT)
+        Mon, 25 May 2020 05:59:25 -0700 (PDT)
 From:   "Michael Kerrisk (man-pages)" <mtk.manpages@gmail.com>
 To:     mtk.manpages@gmail.com, Karel Zak <kzak@redhat.com>
-Cc:     util-linux@vger.kernel.org, Sami Kerola <kerolasa@iki.fi>
-Subject: [PATCH 2/5] Manual pages: kill.1: improve the description of the --timout option
-Date:   Mon, 25 May 2020 14:59:09 +0200
-Message-Id: <20200525125912.43748-2-mtk.manpages@gmail.com>
+Cc:     util-linux@vger.kernel.org
+Subject: [PATCH 3/5] Manual pages: ipcmk.1, ipcrm.1, ipcs.1, lsipc.1: SEE ALSO: add sysvipc(7)
+Date:   Mon, 25 May 2020 14:59:10 +0200
+Message-Id: <20200525125912.43748-3-mtk.manpages@gmail.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20200525125912.43748-1-mtk.manpages@gmail.com>
 References: <20200525125912.43748-1-mtk.manpages@gmail.com>
@@ -63,83 +63,74 @@ Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-The text describing this option is a little hard to understand.
-Improve it.
+These commands all relate to System V IPC, so point the reader
+at the relevant Section 7 page provided by the Linux man-pages
+project.
 
-Cc: Sami Kerola <kerolasa@iki.fi>
 Signed-off-by: Michael Kerrisk (man-pages) <mtk.manpages@gmail.com>
 ---
- misc-utils/kill.1 | 48 ++++++++++++++++++++++++++++++++---------------
- 1 file changed, 33 insertions(+), 15 deletions(-)
+ sys-utils/ipcmk.1 | 3 ++-
+ sys-utils/ipcrm.1 | 3 ++-
+ sys-utils/ipcs.1  | 3 ++-
+ sys-utils/lsipc.1 | 3 ++-
+ 4 files changed, 8 insertions(+), 4 deletions(-)
 
-diff --git a/misc-utils/kill.1 b/misc-utils/kill.1
-index 1c12f8a14..6ca318a6a 100644
---- a/misc-utils/kill.1
-+++ b/misc-utils/kill.1
-@@ -127,30 +127,48 @@ field of the
- structure.
- .TP
- \fB\-\-timeout\fR \fImilliseconds signal\fR
--Send a signal defined the usual way to a process.
-+Send a signal defined in the usual way to a process,
-+followed by an additional signal after a specified delay.
-+The
- .B \-\-timeout
--will make
-+option causes
- .B kill
- to wait for a period defined in
- .I milliseconds
--before sending follow-up
-+before sending a follow-up
- .I signal
--to process.
--This feature is implemented by PID file-descriptor and guarantees that
--follow-up signals are sent to the same process or not sent if the process no
--more exist.  Note that the operating system may re-use PIDs and implement the
--same feature in a shell by kill and sleep commands sequence may introduce a
--race.  This option can be specified more than once than signals are sent
--sequentially in defined timeouts.  The
-+to the process.
-+This feature is implemented using the Linux kernel
-+PID file descriptor feature in order to guarantee that the follow-up signal
-+is sent to the same process or not sent if the process no longer exists.
-+.IP
-+Note that the operating system may re-use PIDs and implementing an
-+equivalent feature in a shell using
-+.B kill
-+and
-+.B sleep
-+would be subject to races whereby the follow-up signal might be sent
-+to a different process that used a recycled PID.
-+.IP
-+The
-+.B \-\-timeout
-+option can be specified multiple times: the signals are sent
-+sequentially with the specified timeouts.  The
- .B \-\-timeout
--option can be combined with
-+option can be combined with the
- .B \-\-queue
- option.
- .IP
--Example.  Send signals QUIT, TERM and KILL in sequence and wait for 1000
--milliseconds between the signals
--.br
--kill \-\-verbose \-\-timeout 1000 TERM \-\-timeout 1000 KILL \-\-signal QUIT 12345
-+As an example, the following command sends
-+the signals QUIT, TERM and KILL in sequence and waits for 1000
-+milliseconds between sending the signals:
-+.IP
-+.in +4n
-+.EE
-+kill \-\-verbose \-\-timeout 1000 TERM \-\-timeout 1000 KILL \e
-+        \-\-signal QUIT 12345
-+.EE
-+.in
- .SH EXIT STATUS
- .B kill
- has the following exit status values:
+diff --git a/sys-utils/ipcmk.1 b/sys-utils/ipcmk.1
+index 6102693ca..6de6d819d 100644
+--- a/sys-utils/ipcmk.1
++++ b/sys-utils/ipcmk.1
+@@ -46,7 +46,8 @@ Hayden A. James
+ .ME
+ .SH SEE ALSO
+ .BR ipcrm (1),
+-.BR ipcs (1)
++.BR ipcs (1),
++.BR sysvipc (7)
+ .SH AVAILABILITY
+ The ipcmk command is part of the util-linux package and is available from
+ .UR https://\:www.kernel.org\:/pub\:/linux\:/utils\:/util-linux/
+diff --git a/sys-utils/ipcrm.1 b/sys-utils/ipcrm.1
+index 6bb93f6bc..fc851352d 100644
+--- a/sys-utils/ipcrm.1
++++ b/sys-utils/ipcrm.1
+@@ -109,7 +109,8 @@ compatibility the previous syntax is still supported.
+ .BR shmctl (2),
+ .BR shmdt (2),
+ .BR shmget (2),
+-.BR ftok (3)
++.BR ftok (3),
++.BR sysvipc (7)
+ .SH AVAILABILITY
+ The ipcrm command is part of the util-linux package and is available from
+ .UR https://\:www.kernel.org\:/pub\:/linux\:/utils\:/util-linux/
+diff --git a/sys-utils/ipcs.1 b/sys-utils/ipcs.1
+index 8fd1a33ef..e0662302d 100644
+--- a/sys-utils/ipcs.1
++++ b/sys-utils/ipcs.1
+@@ -126,7 +126,8 @@ Krishna Balasubramanian
+ .BR semop (2),
+ .BR shmat (2),
+ .BR shmdt (2),
+-.BR shmget (2)
++.BR shmget (2),
++.BR sysvipc (7)
+ .SH AVAILABILITY
+ The ipcs command is part of the util-linux package and is available from
+ .UR https://\:www.kernel.org\:/pub\:/linux\:/utils\:/util-linux/
+diff --git a/sys-utils/lsipc.1 b/sys-utils/lsipc.1
+index 71cf0cf74..e5ae55bbd 100644
+--- a/sys-utils/lsipc.1
++++ b/sys-utils/lsipc.1
+@@ -131,7 +131,8 @@ Karel Zak
+ .BR semop (2),
+ .BR shmat (2),
+ .BR shmdt (2),
+-.BR shmget (2)
++.BR shmget (2),
++.BR sysvipc (7)
+ .SH AVAILABILITY
+ The lsipc command is part of the util-linux package and is available from
+ .UR https://\:www.kernel.org\:/pub\:/linux\:/utils\:/util-linux/
 -- 
 2.26.2
 
