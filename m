@@ -2,110 +2,55 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 93A9A1E426E
-	for <lists+util-linux@lfdr.de>; Wed, 27 May 2020 14:38:15 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 6EF2A1E430E
+	for <lists+util-linux@lfdr.de>; Wed, 27 May 2020 15:13:32 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1729984AbgE0MiO (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Wed, 27 May 2020 08:38:14 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:55270 "EHLO
+        id S2387701AbgE0NNb (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Wed, 27 May 2020 09:13:31 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:60736 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1728964AbgE0MiK (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Wed, 27 May 2020 08:38:10 -0400
-Received: from mail-ej1-x642.google.com (mail-ej1-x642.google.com [IPv6:2a00:1450:4864:20::642])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id AC806C08C5C1
-        for <util-linux@vger.kernel.org>; Wed, 27 May 2020 05:38:09 -0700 (PDT)
-Received: by mail-ej1-x642.google.com with SMTP id k11so2694553ejr.9
-        for <util-linux@vger.kernel.org>; Wed, 27 May 2020 05:38:09 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:reply-to:from:date:message-id
-         :subject:to:cc:content-transfer-encoding;
-        bh=S65dzra2BXdWLdW3Z0Y4fsmozl+naxP9oiYHpLm4g6Q=;
-        b=h2lgOwesh3xK8algg7h/aBAZomVIrkcz3y4UCsNxn+3HbaO/bW1uRmZcQTlXUCKb17
-         0/P6OG1iuP+3dKd+k1w90J4Aka++tvetcIdoOILLxCqUrsgW4M09yMwI8U9Plao3PtOe
-         tv0VryjMKmRtOiy+59U4Y5tvHY5Xsotpeb9bxW367OIdHHFVpwjVblXSaXRhesUQAUnd
-         KDTXicF6eqq/bto5MnCYr1JMUzl8I0w9wcdOMFMDh4Hxp9jhYYEnaXYctFrdpvFzAPer
-         IZW5QnPgE9NYegUsqWcec5uoQex986ujiZ2qS6ZqxO9vyCZdsgM2PfUYIB89Edn24ZMj
-         1+DQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:reply-to
-         :from:date:message-id:subject:to:cc:content-transfer-encoding;
-        bh=S65dzra2BXdWLdW3Z0Y4fsmozl+naxP9oiYHpLm4g6Q=;
-        b=kAG5zrU5WGqLkn4DytpUtaz8JPR1npZ6d/2PezlyV1Pk1BSixJjb2iiHjTApyAawSS
-         KA/vNC3y3EeJshIVGjgRwrU4jZAzbd37j3b1E6F38Lm7v03CwG/arnveijcuyGChGoaD
-         Bl8XaHcKdedPdDdIqPm+rfXhICWlASgVAvaEeTOqvVjjp+lGhtHpwWNOeyqAUKtO4JTb
-         O6scP3WF5HO748P4cV+iCouTwRBauDx/3l80g/l8Fmx1ew28nBz4JbYzjYE7s7J5cT1N
-         vE39dAY3nuefPkVhId56aoGfJzIIhsepu/T1MgddxudJAA/EVCI/0s3PL50r4RsH1e79
-         hPkA==
-X-Gm-Message-State: AOAM531FMNIgr53o4fMhzpMM1mHrT3WlSiiLtvBbid9Lmx75gSVtnE2Y
-        U/6rxcRcPIw/FQlvpTtyQWhMVpqMBJTlraC9sW4=
-X-Google-Smtp-Source: ABdhPJxaon2hABu7fK8rs+qIiyi3z68h0uqnED7smOY4IGSBxNPtfA99hgCJrEG7AnEpwFiHAl3FvL1aIqa8PRyvD4E=
-X-Received: by 2002:a17:906:c29a:: with SMTP id r26mr5792280ejz.286.1590583088278;
- Wed, 27 May 2020 05:38:08 -0700 (PDT)
+        with ESMTP id S2387581AbgE0NNa (ORCPT
+        <rfc822;util-linux-ng@vger.kernel.org>);
+        Wed, 27 May 2020 09:13:30 -0400
+X-Greylist: delayed 347 seconds by postgrey-1.37 at lindbergh.monkeyblade.net; Wed, 27 May 2020 06:13:30 PDT
+Received: from msa12.plala.or.jp (msa12.plala.or.jp [IPv6:2400:7800:0:502e::12])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTP id 03899C08C5C1;
+        Wed, 27 May 2020 06:13:29 -0700 (PDT)
+Received: from mwebp13 ([172.23.13.133]) by msa12.plala.or.jp with ESMTP
+          id <20200527130743.MHTA4246.msa12.plala.or.jp@mwebp13>;
+          Wed, 27 May 2020 22:07:43 +0900
+Date:   Wed, 27 May 2020 22:07:42 +0900
+From:   "Mrs.Judith Rice" <hamurafujimi@tmail.plala.or.jp>
+Reply-To: jonesevansje@gmail.com
+Message-ID: <20200527220743.YHFYN.789.root@mwebp13>
+Subject: Spende
 MIME-Version: 1.0
-References: <20200523064325.78491-1-mtk.manpages@gmail.com>
- <20200525121745.rmdn47zlchtf76fh@ws.net.home> <4d4bb487-4a9c-1fcb-71a6-059379597d15@gmail.com>
- <20200526085048.23ue2dcz7cvc5wx7@ws.net.home>
-In-Reply-To: <20200526085048.23ue2dcz7cvc5wx7@ws.net.home>
-Reply-To: mtk.manpages@gmail.com
-From:   "Michael Kerrisk (man-pages)" <mtk.manpages@gmail.com>
-Date:   Wed, 27 May 2020 14:37:57 +0200
-Message-ID: <CAKgNAkjsmUzGRrFqUCEX_VbKBN=OUyYY17TekqzEgx+WoppP5Q@mail.gmail.com>
-Subject: Re: [PATCH 1/9] Manual pages: nsenter.1, unshare.1: update references
- to *_namespaces(7) pages
-To:     Karel Zak <kzak@redhat.com>
-Cc:     util-linux@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=iso-2022-jp
+Content-Transfer-Encoding: 7bit
+X-Priority: 3 (Normal)
+Sensitivity: Normal
+X-VirusScan: Outbound; mvir-ac12; Wed, 27 May 2020 22:07:43 +0900
+To:     unlisted-recipients:; (no To-header on input)
 Sender: util-linux-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-On Tue, 26 May 2020 at 10:50, Karel Zak <kzak@redhat.com> wrote:
->
-> On Mon, May 25, 2020 at 03:13:18PM +0200, Michael Kerrisk (man-pages) wro=
-te:
-> > A follow-up question. There was one piece of the unshare(1) examples
-> > that I did not try to rework, because I simply don't understand it:
-> > v
-> >        Establish  a  persistent  mount  namespace  referenced by the bi=
-nd
-> >        mount /root/namespaces/mnt.  This example shows a  portable  sol=
-u=E2=80=90
-> >        tion,  because  it  makes sure that the bind mount is created on=
- a
-> >        shared filesystem.
-> >
-> >            # mount --bind /root/namespaces /root/namespaces
-> >            # mount --make-private /root/namespaces
-> >            # touch /root/namespaces/mnt
-> >            # unshare --mount=3D/root/namespaces/mnt
-> >
-> > I think you wrote this example. What does the sentence "This example sh=
-ows
-> > a portable solution, because it makes sure that the bind mount is creat=
-ed
-> > on a shared filesystem" mean? I think this needs clarification, and I'd=
- try
-> > to do so, but it's not clear to me what the sentence is trying to say.
->
-> Hmm... it should be "the /root/namespaces/mnt is on a private
-> filesystem". The important thing is --make-private in this case,
-> because for example on Fedora we use "shared" propagation flag for
-> root FS and without bind + make-private you will be unsuccessful. The
-> example makes it portable between distros.
+Attn:
 
-Okay -- I'll send a patch, once the curent queue of patches I have
-with you is cleared.
+Es tut uns leid, dass wir Sie aufgrund eines Mismanagent of Beneficaries-Fonds von unseren ernannten Zonal Managern versp&#228;tet kontaktiert haben. Bitte beachten Sie, dass Sie qualifiziert sind, die Zahlung von 900.000,00 USD an der ATM-Karte mit neunhunderttausend Dollar zu erhalten.
 
-Thanks,
+Als Entsch&#228;digung von WORLD BANK / IWF (Internationaler W&#228;hrungsfonds) f&#252;r die automatisch &#252;ber einen E-Mail-Wahlautomaten gezogenen, die in der Vergangenheit noch nicht abgeschlossene Transaktionen hatten.
 
-Michael
+F&#252;r weitere Informationen kontaktieren Sie bitte Rev.EVANS JONES ( jonesevansje@gmail.com )
 
+Bitte senden Sie ihm Ihre pers&#246;nlichen Daten wie:
 
---=20
-Michael Kerrisk
-Linux man-pages maintainer; http://www.kernel.org/doc/man-pages/
-Linux/UNIX System Programming Training: http://man7.org/training/
+Vollst&#228;ndiger Name:
+Wohnanschrift:
+Telefonnummer:
+Herkunftsland:
+
+Gr&#252;&#223;e,
+Mrs. Judith Rice
+
