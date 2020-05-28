@@ -2,57 +2,57 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 9EFA21E6502
-	for <lists+util-linux@lfdr.de>; Thu, 28 May 2020 16:58:58 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id E19A81E6509
+	for <lists+util-linux@lfdr.de>; Thu, 28 May 2020 16:59:01 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S2403853AbgE1O6l (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Thu, 28 May 2020 10:58:41 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:46628 "EHLO
+        id S2403820AbgE1O6p (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Thu, 28 May 2020 10:58:45 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:46634 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S2403950AbgE1O6c (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Thu, 28 May 2020 10:58:32 -0400
-Received: from mail-wr1-x441.google.com (mail-wr1-x441.google.com [IPv6:2a00:1450:4864:20::441])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 387F3C08C5C6
-        for <util-linux@vger.kernel.org>; Thu, 28 May 2020 07:58:32 -0700 (PDT)
-Received: by mail-wr1-x441.google.com with SMTP id t18so14186409wru.6
-        for <util-linux@vger.kernel.org>; Thu, 28 May 2020 07:58:32 -0700 (PDT)
+        with ESMTP id S2403770AbgE1O6d (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Thu, 28 May 2020 10:58:33 -0400
+Received: from mail-wr1-x444.google.com (mail-wr1-x444.google.com [IPv6:2a00:1450:4864:20::444])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 4BA91C08C5C8
+        for <util-linux@vger.kernel.org>; Thu, 28 May 2020 07:58:33 -0700 (PDT)
+Received: by mail-wr1-x444.google.com with SMTP id t18so14186495wru.6
+        for <util-linux@vger.kernel.org>; Thu, 28 May 2020 07:58:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=MobVfSa430Z3t9YpfI3UxgNx2gQmLtTEy7eZai8Re2s=;
-        b=gJSNoN/y/V8DvGJHr7BQuXmDBN81hp6IzZ7MR5SmrDcQq3gIF2Pj/oMVwzNSLnJAp/
-         OJeW1jmeSzHAn5vtbPAXM0cNI//jeDokmqM7/WqqSISV6iM/BXGS8GhNINiLcB2/GfK2
-         ZPBB7I8+rKPsnJfD6Ol1Y4I3JDfmlyuhoJkgnrl7XezRba71kqGxwHXkvdVg7BLqVndQ
-         6QeAv2XQGRIDhb9wy6uvbWM+lsNz6fgSPFUy/hwujgDT/zFDbk0+pBqiHePFXhMQvXUU
-         +c3LiaLAZJB7Y/7GITnQ7LmjTzJLfjw8Frf8Q5xjAUdtmopg07fHoHoeC8OD2E2fEmd5
-         rxbg==
+        bh=Lgn1r1Xmo9fvqMAXoO/h9hVSx0qFlwn0LLJzwtHEBsA=;
+        b=H3L4XmPODz6V44ww+3A7iOwJP+yFhD9sfupp1df4Yo8AB9UMQrZY/59AiTdO5jLHGn
+         FYLAGBGzhG0Xxt+JV3307k4pzHmRHnSVUK/1fvrQaoDDRiDQ5g8VzehbV/L2tNNsVscx
+         hKy5qdkJQGO3TZXMH0ZJasKqzG9iummXYwv46jP6LmRauqBIbaXc3lyFBE7CkhE4HTkI
+         Qgi14NYFBIlUxwHDioH8dnKzznzdy2ZsAfrRGaB4MuT4oIKch0/TaAiKfMwvrd+JhLA/
+         aLkvh/OpOADq/MDdiB8RXhLeuthZq1tP+JZnpQLUtobSfMpwdFYeUV8vllDeliEVEgp5
+         c5lA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=MobVfSa430Z3t9YpfI3UxgNx2gQmLtTEy7eZai8Re2s=;
-        b=WOyVmCtRWdQbSp4xlUeQ6rmyPRKJHzHsTcQtpz7nM/9w0p7L47lvFBlZqJpnFxQElx
-         XM8x8LyEbMH9jl/080IpJl7bo6+TDpFHqJb3udRVaMR8l/qiTmUVFL3PYrcJYd+Y1hqD
-         /ujsIiEe+laVPWhDlE1PpsCzj/+5ifexG6To34vWh7fnc8L9s+DTiNESeDazofX4d8Fi
-         Ok/wJjh/2y1HIUcFkYhGJ7Uo8Ry9q5wjL0rI2ijjPnNc7XGRgGhWVaGBnW/eVqudAjoT
-         WkJdqg67uYDn8dzjzCZidhIZhGzXt3pGip5wyMh/d9h8tJ8TmDlnmGK7vzRor7iwDSvn
-         5GhA==
-X-Gm-Message-State: AOAM533cT7lH566gM81B4XBz1WVPxaaOhBD387utjVlk5NK4LK7ISYHA
-        KfeyZsfAVzsbEnGYPTGiFl0=
-X-Google-Smtp-Source: ABdhPJx3Vfj4uzH1JrKVXAPgundVXOnrT3rrrmb6M32EWHDDpqntTBchhwsOJkGCVkTOo630E72uyA==
-X-Received: by 2002:a05:6000:11ca:: with SMTP id i10mr4037485wrx.10.1590677910891;
-        Thu, 28 May 2020 07:58:30 -0700 (PDT)
+        bh=Lgn1r1Xmo9fvqMAXoO/h9hVSx0qFlwn0LLJzwtHEBsA=;
+        b=bGsBQBqyGjcV3kZBqEbJq4nvp8hdkLULnIhJwnKs3fVtVhWAIjORKQ+OIOwh45ZIlH
+         l4/3G6D0Nt1RARTOIpzCR4NE5wJjl7axjNDETf4+2Hqw4jwchfLKfV69keU/XoBGOsmM
+         TXnZwccoOWyXHM8vPLKa7EQKRvV1TXYQgEJ60SNXljNOG2Q//56/Fy/0OOIwbjXHlc35
+         fxoYpWEKBqHS7oCNQco+CAzWSbop8FxjwY38bJoNUzkfzbejeILnYUzy0dpQeTVMqvjw
+         xDB3DdquLmTeeMYcgQ48pLCAVr2DWulm+Mk8lLbj/xM2aQZQzB/lIKA+rTTyl8IbqfnX
+         zBbw==
+X-Gm-Message-State: AOAM531TaghcDfA7DISJNa3Io+3sbJh2q9E2/vY6ljbGxYJISCab7Uzj
+        ouSP0pFmArR7tg9UvXVvkVE=
+X-Google-Smtp-Source: ABdhPJw4lc2Ja5KmoSwthUJjaHSdVscVaelCS30AP+6zqK90wHY8rUv9kdlN7MEEGeuEPAhxo066XQ==
+X-Received: by 2002:adf:a1d3:: with SMTP id v19mr3821504wrv.245.1590677911975;
+        Thu, 28 May 2020 07:58:31 -0700 (PDT)
 Received: from bienne.fritz.box ([2001:a61:2516:6501:a84b:ccd6:785a:2f0f])
         by smtp.gmail.com with ESMTPSA id v7sm6482630wre.93.2020.05.28.07.58.30
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 28 May 2020 07:58:30 -0700 (PDT)
+        Thu, 28 May 2020 07:58:31 -0700 (PDT)
 From:   "Michael Kerrisk (man-pages)" <mtk.manpages@gmail.com>
 To:     mtk.manpages@gmail.com, Karel Zak <kzak@redhat.com>
 Cc:     util-linux@vger.kernel.org
-Subject: [PATCH 03/10] Manual pages: setpriv.1: Minor formatting and typo fixes
-Date:   Thu, 28 May 2020 16:58:17 +0200
-Message-Id: <20200528145823.978508-3-mtk.manpages@gmail.com>
+Subject: [PATCH 04/10] Manual pages: mount.8, umount.8: Clarify that "namespace" means "mount namespace"
+Date:   Thu, 28 May 2020 16:58:18 +0200
+Message-Id: <20200528145823.978508-4-mtk.manpages@gmail.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20200528145823.978508-1-mtk.manpages@gmail.com>
 References: <20200528145823.978508-1-mtk.manpages@gmail.com>
@@ -63,100 +63,100 @@ Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-These seem all "obviously correct", so I'm rolling them up
-into one patch.
+There are various references to "namespaces" when it would be
+clearer to say "mount namespaces". Also, add references to the
+mount_namespaces(7) manual page.
 
 Signed-off-by: Michael Kerrisk (man-pages) <mtk.manpages@gmail.com>
 ---
- sys-utils/setpriv.1 | 23 ++++++++++++++---------
- 1 file changed, 14 insertions(+), 9 deletions(-)
+ sys-utils/mount.8  | 11 +++++++----
+ sys-utils/umount.8 | 11 +++++++----
+ 2 files changed, 14 insertions(+), 8 deletions(-)
 
-diff --git a/sys-utils/setpriv.1 b/sys-utils/setpriv.1
-index d1bd5efda..dbf5772ed 100644
---- a/sys-utils/setpriv.1
-+++ b/sys-utils/setpriv.1
-@@ -14,7 +14,7 @@ In comparison to
- .BR su (1)
- and
- .BR runuser (1),
--.BR setpriv (1)
-+.BR setpriv
- neither uses PAM, nor does it prompt for a password.
- It is a simple, non-set-user-ID wrapper around
- .BR execve (2),
-@@ -32,7 +32,8 @@ or similar tools shipped by other service managers.
- Clear supplementary groups.
+diff --git a/sys-utils/mount.8 b/sys-utils/mount.8
+index 81bc225cb..fff060ad1 100644
+--- a/sys-utils/mount.8
++++ b/sys-utils/mount.8
+@@ -664,19 +664,21 @@ This is necessary for example when
+ is on a read-only filesystem.
  .TP
- .BR \-d , " \-\-dump"
--Dump current privilege state.  Can be specified more than once to show extra,
-+Dump the current privilege state.
-+Can be specified more than once to show extra,
- mostly useless, information.  Incompatible with all other options.
- .TP
- .B \-\-groups \fIgroup\fR...
-@@ -49,7 +50,7 @@ entries, which add or remove an entry respectively. \fIcap\fR can either be a
- human-readable name as seen in
- .BR capabilities (7)
- without the \fIcap_\fR prefix or of the format
--.BI cap_N ,
-+.BR cap_N ,
- where \fIN\fR is the internal capability index used by Linux.
- .B +all
- and
-@@ -97,11 +98,13 @@ and
- .I Documentation/\:prctl/\:no_\:new_\:privs.txt
- in the Linux kernel source.
+ .BR \-N , " \-\-namespace " \fIns
+-Perform mount in namespace specified by \fIns\fR.
++Perform mount in the mount namespace specified by \fIns\fR.
+ \fIns\fR is either PID of process running in that namespace
+ or special file representing that namespace.
  .sp
--The no_new_privs bit is supported since Linux 3.5.
-+The
-+.I no_new_privs
-+bit is supported since Linux 3.5.
- .TP
- .BI \-\-rgid " gid\fR, " \-\-egid " gid\fR, " \-\-regid " gid"
- Set the real, effective, or both GIDs.  The \fIgid\fR argument can be
--given as textual group name.
-+given as a textual group name.
+ .BR mount (8)
+-switches to the namespace when it reads /etc/fstab, writes /etc/mtab (or writes to /run/mount) and calls
++switches to the mount namespace when it reads /etc/fstab,
++writes /etc/mtab (or writes to /run/mount) and calls
+ .BR mount (2)
+-system call, otherwise it runs in the original namespace. It means that the target namespace does not have
++system call, otherwise it runs in the original mount namespace.
++It means that the target namespace does not have
+ to contain any libraries or another requirements necessary to execute
+ .BR mount (2)
+ command.
  .sp
- For safety, you must specify one of
- .BR \-\-clear\-groups ,
-@@ -113,7 +116,7 @@ if you set any primary
+-See \fBnamespaces\fR(7) for more information.
++See \fBmount_namespaces\fR(7) for more information.
  .TP
- .BI \-\-ruid " uid\fR, " \-\-euid " uid\fR, " \-\-reuid " uid"
- Set the real, effective, or both UIDs.  The \fIuid\fR argument can be
--given as textual login name.
-+given as a textual login name.
+ .BR \-O , " \-\-test\-opts " \fIopts
+ Limit the set of filesystems to which the
+@@ -2680,6 +2682,7 @@ Karel Zak <kzak@redhat.com>
+ .BR fstab (5),
+ .BR nfs (5),
+ .BR xfs (5),
++.BR mount_namespaces (7)
+ .BR e2label (8),
+ .BR findmnt (8),
+ .BR losetup (8),
+diff --git a/sys-utils/umount.8 b/sys-utils/umount.8
+index 43363b11c..edcb6cc1f 100644
+--- a/sys-utils/umount.8
++++ b/sys-utils/umount.8
+@@ -68,7 +68,8 @@ filesystems. This list of the filesystems may be replaced by \fB\-\-types\fR
+ umount option.
+ .TP
+ .BR \-A , " \-\-all\-targets"
+-Unmount all mountpoints in the current namespace for the specified filesystem.
++Unmount all mountpoints in the current mount namespace
++for the specified filesystem.
+ The filesystem can be specified by one of the mountpoints or the device name (or
+ UUID, etc.).  When this option is used together with \fB\-\-recursive\fR, then
+ all nested mounts within the filesystem are recursively unmounted.
+@@ -129,19 +130,20 @@ server or a network partition. Remounts of the share will not be possible.
+ 
+ .TP
+ .BR \-N , " \-\-namespace " \fIns
+-Perform umount in namespace specified by \fIns\fR.
++Perform umount in the mount namespace specified by \fIns\fR.
+ \fIns\fR is either PID of process running in that namespace
+ or special file representing that namespace.
  .sp
- Setting a
- .I uid
-@@ -148,7 +151,7 @@ credentials to remedy that situation.
- .BI \-\-selinux\-label " label"
- Request a particular SELinux transition (using a transition on exec, not
- dyntrans).  This will fail and cause
--.BR setpriv (1)
-+.BR setpriv
- to abort if SELinux is not in use, and the transition may be ignored or cause
- .BR execve (2)
- to fail at SELinux's whim.  (In particular, this is unlikely to work in
-@@ -160,7 +163,7 @@ This is similar to
- .BI \-\-apparmor\-profile " profile"
- Request a particular AppArmor profile (using a transition on exec).  This will
- fail and cause
--.BR setpriv (1)
-+.BR setpriv
- to abort if AppArmor is not in use, and the transition may be ignored or cause
- .BR execve (2)
- to fail at AppArmor's whim.
-@@ -187,7 +190,9 @@ will not be run and
- will return with exit status 127.
- .PP
- Be careful with this tool \-\- it may have unexpected security consequences.
--For example, setting no_new_privs and then execing a program that is
-+For example, setting
-+.I no_new_privs
-+and then execing a program that is
- SELinux\-confined (as this tool would do) may prevent the SELinux
- restrictions from taking effect.
- .SH EXAMPLES
+ .BR umount (8)
+ switches to the namespace when it reads /etc/fstab, writes /etc/mtab (or writes to /run/mount) and calls
+ .BR umount (2)
+-system call, otherwise it runs in the original namespace. It means that the target namespace does not have
++system call, otherwise it runs in the original namespace.
++It means that the target mount namespace does not have
+ to contain any libraries or another requirements necessary to execute
+ .BR umount (2)
+ command.
+ .sp
+-See \fBnamespaces\fR(7) for more information.
++See \fBmount_namespaces\fR(7) for more information.
+ .TP
+ .BR \-n , " \-\-no\-mtab"
+ Unmount without writing in
+@@ -278,6 +280,7 @@ command appeared in Version 6 AT&T UNIX.
+ .SH SEE ALSO
+ .BR umount (2),
+ .BR losetup (8),
++.BR mount_namespaces (7)
+ .BR mount (8)
+ .SH AVAILABILITY
+ The umount command is part of the util-linux package and is available from
 -- 
 2.26.2
 
