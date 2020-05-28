@@ -2,57 +2,57 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id DB4D91E6507
-	for <lists+util-linux@lfdr.de>; Thu, 28 May 2020 16:59:00 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id EDB861E6505
+	for <lists+util-linux@lfdr.de>; Thu, 28 May 2020 16:58:59 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S2403950AbgE1O6n (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        id S2403865AbgE1O6n (ORCPT <rfc822;lists+util-linux@lfdr.de>);
         Thu, 28 May 2020 10:58:43 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:46654 "EHLO
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:46658 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S2403955AbgE1O6i (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Thu, 28 May 2020 10:58:38 -0400
-Received: from mail-wm1-x344.google.com (mail-wm1-x344.google.com [IPv6:2a00:1450:4864:20::344])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id BB022C08C5CA
-        for <util-linux@vger.kernel.org>; Thu, 28 May 2020 07:58:37 -0700 (PDT)
-Received: by mail-wm1-x344.google.com with SMTP id r9so3488597wmh.2
-        for <util-linux@vger.kernel.org>; Thu, 28 May 2020 07:58:37 -0700 (PDT)
+        with ESMTP id S2403956AbgE1O6j (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Thu, 28 May 2020 10:58:39 -0400
+Received: from mail-wm1-x343.google.com (mail-wm1-x343.google.com [IPv6:2a00:1450:4864:20::343])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 07E89C08C5C8
+        for <util-linux@vger.kernel.org>; Thu, 28 May 2020 07:58:39 -0700 (PDT)
+Received: by mail-wm1-x343.google.com with SMTP id j198so4687784wmj.0
+        for <util-linux@vger.kernel.org>; Thu, 28 May 2020 07:58:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=DC9JyohFEvc97khLJGus7q+kYARY/h2mLjs6xhr8rX8=;
-        b=m+wFnlbkRs+IUIST8l/QvBeA0MwshEXZui4EvuhCTN6p9ym3rQaeYLuEGuBfoI/NKN
-         xcOM2AHlB+WMGUeshUmyJ+DmQROY2JP4Jx0m/HDGcGskKGCFrBSlc6h1qsq1XhWw7f6V
-         y4FJ0peMAk5x53pekyMyYcGCWyK/1SMGR1/YYrNeV+cQ4ZtNSAVmUW3WMuUoNA0/IwCc
-         tw3riYslDCgk1zXMhj7DzvEq6mni5G9QoXLWlVkseOIsGyCepuSW838rVJ8D8l8KL3Lo
-         tZN474qjGRZyiaWXuDpczMUJ1gTBdOXSwMAw3DL3WEU1aQPaifAuHeC0FteQoRgDeU0/
-         ZkxQ==
+        bh=v7aopqsNC+cLiRu2Gz/ZV7fsYxDdEbdkKRCXMqRjXzs=;
+        b=rfHLcGQOdx2QUKIB6E/c7t+7+fUcxnMZUAmIdRb3eIq1fyvU8R6fiRo+jfW2A11G/X
+         f9M49qCyx47uop9s50emMrEycYM6gpQtm8KixJQcjxi7tS93ZqwDupE3kf6Q7ia2pen7
+         b5H7c/Xa7TMgIu3yvfScHJdPU8QJxTfk7+GLgXxcXGaZHuLHoQEtJTqiwYAo+HWYw+9i
+         A2L5saZIEror42i7Qg4LFxDL3twxeDW+B7uqOTAZRLt5MnC56tjcAqx4NO0q6DgS1oU5
+         FmOy3ooVnt+HH0bNhZ9Wuw2cUlrEXzGn1ltXdoHin3moBZgBlPrP3uRkMo2WjTQoueE7
+         Sp3w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=DC9JyohFEvc97khLJGus7q+kYARY/h2mLjs6xhr8rX8=;
-        b=esfmQzfuhDIEbAuwsvEAYWubORRphUFO29SC38G/3pBHYXVII6fohHUjld5GtrTfR9
-         1AffQpnQkWLmE92cMJ+KHYggPF6FfHHjnlNZBs898hWwv3PFIM9TNjJELJZv0HQsxdop
-         XWt0O0Sy2qvYT4jhzlkXHaHVR9ZAbyV9vi7Zt20VAlZlsUDvAr1ZJ23maVFjNAM4liRl
-         /cGcC6IQbILuJY/UOKtYJef05b7Ge1nVT8Ez8xUD8r0ZkjXCzSYY5DtqnUXK/hgyAN0C
-         WjzUZb6Kj94au+Jge4J6hU843YGfDRw/MT+OpZ7UAKPcwWLNlmcIleTLr0EEhoeWW1sX
-         p10g==
-X-Gm-Message-State: AOAM5316WH8S9igqBc6SKYYDoKh1hL+kV5zjcxbjAU9ukpWLx+ZfuU7z
-        U6QDC1yDwJOYgFdfHOW+XXs=
-X-Google-Smtp-Source: ABdhPJyT5yCRx81CTfUKOlPM1cjqg0Tr9YMWPmYWkI1wNZ/eTpBDcTpqcHALvW9snbMKSUpgevDCyw==
-X-Received: by 2002:a1c:ba86:: with SMTP id k128mr3234317wmf.19.1590677916450;
-        Thu, 28 May 2020 07:58:36 -0700 (PDT)
+        bh=v7aopqsNC+cLiRu2Gz/ZV7fsYxDdEbdkKRCXMqRjXzs=;
+        b=KpGQ9mEnTlxU+SGeW4iu4+/wZCVGdRSNGywuBi8B2JueFVuwKnybK+Ibur4lx5fl3V
+         8mgU3uHwl6L6MaT/JIBwL3Ct8QRIYr2yDyebKFyZzxJ2NTy9sT8gf5VG9wcHK3xQ/gcu
+         2U6ncBB0FpI0A80rwfh3LAJ3JqZVQpPVL5M6HUJ2UtSuQaJEiMm6sZL1QK7cGd9ZrJ6t
+         Etd6v822qpJzQBn+ZRFOkwgsHogOGH49V1KBgNaT33wIKK3VPtv9Ev1NmrIKfFKVTsqN
+         6uZ6/Qe7ql3JlFM3T54UzCEvkD9U/iq4En3RpyQ6M6X9iMNgMrKbYNQPWudvAEIbhdcg
+         phZg==
+X-Gm-Message-State: AOAM532mPqxT1LAegGH0hvvJvxDtSdud0csrsLLN7JZZZIhXvjICxIu8
+        B40dcS1ongYt8KoQeQnPQkE=
+X-Google-Smtp-Source: ABdhPJwHGcw1wRiX6K5c5S6hGUZHDVtRvEp9Qgl08EXlB8QV28EZkCM5uwyHSW1sHI6iK5R5ixJo5A==
+X-Received: by 2002:a7b:c090:: with SMTP id r16mr4021269wmh.105.1590677917780;
+        Thu, 28 May 2020 07:58:37 -0700 (PDT)
 Received: from bienne.fritz.box ([2001:a61:2516:6501:a84b:ccd6:785a:2f0f])
-        by smtp.gmail.com with ESMTPSA id v7sm6482630wre.93.2020.05.28.07.58.35
+        by smtp.gmail.com with ESMTPSA id v7sm6482630wre.93.2020.05.28.07.58.36
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 28 May 2020 07:58:35 -0700 (PDT)
+        Thu, 28 May 2020 07:58:36 -0700 (PDT)
 From:   "Michael Kerrisk (man-pages)" <mtk.manpages@gmail.com>
 To:     mtk.manpages@gmail.com, Karel Zak <kzak@redhat.com>
 Cc:     util-linux@vger.kernel.org
-Subject: [PATCH 08/10] Manual pages: mount.8: Rewrite FILESYSTEM-SPECIFIC MOUNT OPTIONS intro
-Date:   Thu, 28 May 2020 16:58:22 +0200
-Message-Id: <20200528145823.978508-8-mtk.manpages@gmail.com>
+Subject: [PATCH 09/10] Manual pages: umount.8: use "filesystem" consistently
+Date:   Thu, 28 May 2020 16:58:23 +0200
+Message-Id: <20200528145823.978508-9-mtk.manpages@gmail.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20200528145823.978508-1-mtk.manpages@gmail.com>
 References: <20200528145823.978508-1-mtk.manpages@gmail.com>
@@ -63,69 +63,45 @@ Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-Add a table listing other manual pages that describe mount options
-of some widely used filesystems. Additionally, rewrite the remaining
-text to be a bit easier to read.
+Currently, this page has a mix of "filesystem" and file system",
+with the former being predominant.  Let's settle on one.
 
 Signed-off-by: Michael Kerrisk (man-pages) <mtk.manpages@gmail.com>
 ---
- sys-utils/mount.8 | 38 ++++++++++++++++++++++++++------------
- 1 file changed, 26 insertions(+), 12 deletions(-)
+ sys-utils/umount.8 | 10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)
 
-diff --git a/sys-utils/mount.8 b/sys-utils/mount.8
-index 7fa5733d4..94cb570a1 100644
---- a/sys-utils/mount.8
-+++ b/sys-utils/mount.8
-@@ -1396,23 +1396,37 @@ only for root users or when mount executed without suid permissions.  The option
- is also supported as x-mount.mkdir, this notation is deprecated since v2.30.
- 
- .SH FILESYSTEM-SPECIFIC MOUNT OPTIONS
--You should consult the respective man page for the filesystem first.
--If you want to know what options the ext4 filesystem supports, then check the
--.BR ext4 (5)
--man page.
--If that doesn't exist, you can also check the corresponding mount page like
--.BR mount.cifs (8).
--Note that you might have to install the respective userland tools.
--.sp
-+This section lists options that are specific to particular filesystems.
-+Where possible, you should first consult filesystem-specific manual pages
-+for details.
-+Some of those pages are listed in the following table.
-+.TS
-+lb lb
-+l l.
-+Filesystem(s)	Manual page
-+btrfs	\fBbtrfs\fP(5)
-+cifs	\fBmount.cifs\fP(8)
-+ext2, ext3, ext4	\fBext4\fP(5)
-+fuse	\fBfuse\fP(8)
-+nfs	\fBnfs\fP(5)
-+tmpfs	\fBtmpfs\fP(5)
-+xfs	\fBxfs\fP(5)
-+.TE
-+.PP
-+Note that some of the pages listed above might be available only
-+after you install the respective userland tools.
-+.PP
- The following options apply only to certain filesystems.
--We sort them by filesystem.  They all follow the
-+We sort them by filesystem.
-+All options follow the
- .B \-o
- flag.
--.sp
-+.PP
- What options are supported depends a bit on the running kernel.
--More info may be found in the kernel source subdirectory
-+Further information may be available in fileystem-specific
-+files in the kernel source subdirectory
- .IR Documentation/filesystems .
--
-+.\"
- .SS "Mount options for adfs"
- .TP
- \fBuid=\fP\,\fIvalue\fP and \fBgid=\fP\,\fIvalue\fP
+diff --git a/sys-utils/umount.8 b/sys-utils/umount.8
+index c56e51e18..f04746211 100644
+--- a/sys-utils/umount.8
++++ b/sys-utils/umount.8
+@@ -24,7 +24,7 @@
+ .\"
+ .TH UMOUNT 8 "July 2014" "util-linux" "System Administration"
+ .SH NAME
+-umount \- unmount file systems
++umount \- unmount filesystems
+ .SH SYNOPSIS
+ .B umount \-a
+ .RB [ \-dflnrv ]
+@@ -43,13 +43,13 @@ umount \- unmount file systems
+ .SH DESCRIPTION
+ The
+ .B umount
+-command detaches the mentioned file system(s) from the file hierarchy.  A
+-file system is specified by giving the directory where it has been
+-mounted.  Giving the special device on which the file system lives may
++command detaches the mentioned filesystem(s) from the file hierarchy.  A
++filesystem is specified by giving the directory where it has been
++mounted.  Giving the special device on which the filesystem lives may
+ also work, but is obsolete, mainly because it will fail in case this
+ device was mounted on more than one directory.
+ .PP
+-Note that a file system cannot be unmounted when it is 'busy' - for
++Note that a filesystem cannot be unmounted when it is 'busy' - for
+ example, when there are open files on it, or when some process has its
+ working directory there, or when a swap file on it is in use.  The
+ offending process could even be
 -- 
 2.26.2
 
