@@ -2,15 +2,16 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id F327B1E6E8E
-	for <lists+util-linux@lfdr.de>; Fri, 29 May 2020 00:21:29 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 6B4221E6E8F
+	for <lists+util-linux@lfdr.de>; Fri, 29 May 2020 00:21:30 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S2436899AbgE1WV2 convert rfc822-to-8bit (ORCPT
+        id S2436913AbgE1WV2 convert rfc822-to-8bit (ORCPT
         <rfc822;lists+util-linux@lfdr.de>); Thu, 28 May 2020 18:21:28 -0400
 Received: from mail.bnv.gob.ve ([201.249.200.115]:57700 "EHLO
         correo.bnv.gob.ve" rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org
         with ESMTP id S2436893AbgE1WV2 (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Thu, 28 May 2020 18:21:28 -0400
+        <rfc822;util-linux-ng@vger.kernel.org>);
+        Thu, 28 May 2020 18:21:28 -0400
 Received: from localhost (localhost.bnv.gob.ve [127.0.0.1])
         by correo.bnv.gob.ve (Postfix) with ESMTP id B1A0638E3BEB;
         Thu, 28 May 2020 13:38:14 -0400 (-04)
