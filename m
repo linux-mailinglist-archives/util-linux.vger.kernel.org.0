@@ -2,81 +2,91 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id DA4B01E9D61
-	for <lists+util-linux@lfdr.de>; Mon,  1 Jun 2020 07:40:50 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 112501E9F8D
+	for <lists+util-linux@lfdr.de>; Mon,  1 Jun 2020 09:53:39 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1725818AbgFAFkt (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Mon, 1 Jun 2020 01:40:49 -0400
-Received: from hs-162.6.buanalintas.co.id ([223.165.6.162]:48490 "EHLO
-        mx.bestprofit-futures.co.id" rhost-flags-OK-FAIL-OK-OK)
-        by vger.kernel.org with ESMTP id S1725283AbgFAFkt (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Mon, 1 Jun 2020 01:40:49 -0400
-X-Greylist: delayed 14319 seconds by postgrey-1.27 at vger.kernel.org; Mon, 01 Jun 2020 01:40:49 EDT
-Received: from localhost (localhost [127.0.0.1])
-        by mx.bestprofit-futures.co.id (Postfix) with ESMTP id E98FE523F0F;
-        Mon,  1 Jun 2020 07:48:41 +0700 (WIB)
-Received: from mx.bestprofit-futures.co.id ([127.0.0.1])
-        by localhost (mx.bestprofit-futures.co.id [127.0.0.1]) (amavisd-new, port 10032)
-        with ESMTP id UtgLkUW0_-J6; Mon,  1 Jun 2020 07:48:41 +0700 (WIB)
-Received: from localhost (localhost [127.0.0.1])
-        by mx.bestprofit-futures.co.id (Postfix) with ESMTP id 7EB95522C5A;
-        Mon,  1 Jun 2020 07:48:41 +0700 (WIB)
-DKIM-Filter: OpenDKIM Filter v2.10.3 mx.bestprofit-futures.co.id 7EB95522C5A
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=bestprofit-futures.co.id; s=4D3D1390-5211-11EA-8C0C-8C41A122B001;
-        t=1590972521; bh=zLTonXbKn6LYrnOZVETw9C2bepTvRzI70GQOlIiRCC0=;
-        h=MIME-Version:To:From:Date:Message-Id;
-        b=m3Sxc+dbdDJj+NtfaW+flwnHzBvYdFCKzpg82iMdbthETxpXFb29B4pwPKGKHYoBs
-         o8GVmtBXVB8iU4bBby4fHVM/jLzGCuESk/zlcrRP9DlIx7/iqIwYTMPjy+R+zgsmIf
-         8djg97eYS4U/e5ETuBy4UmqeimoWu5GFw5ucVoXblHzAXJWk4XsSNbL1kscvE7bXdt
-         DfUm4Gk96hxQIpZLX3sepSBxFBDNDhtMPA2FgTNEBWe+Otzd67U3m0vBxhqOmIz5cs
-         sw03+9nxSC3gQZHaemryybrwixCQ2zHaRsigSKsa10ftshY3rlEPfO+jn/vP5uhsZu
-         PEJy5hkday0WA==
-X-Virus-Scanned: amavisd-new at mx.bestprofit-futures.co.id
-Received: from mx.bestprofit-futures.co.id ([127.0.0.1])
-        by localhost (mx.bestprofit-futures.co.id [127.0.0.1]) (amavisd-new, port 10026)
-        with ESMTP id gD39qhMBzsPm; Mon,  1 Jun 2020 07:48:41 +0700 (WIB)
-Received: from [10.81.249.6] (unknown [105.8.6.41])
-        by mx.bestprofit-futures.co.id (Postfix) with ESMTPSA id D3E2E52397E;
-        Mon,  1 Jun 2020 07:48:33 +0700 (WIB)
-Content-Type: text/plain; charset="utf-8"
+        id S1726265AbgFAHxf (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Mon, 1 Jun 2020 03:53:35 -0400
+Received: from us-smtp-delivery-1.mimecast.com ([205.139.110.120]:25319 "EHLO
+        us-smtp-1.mimecast.com" rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org
+        with ESMTP id S1725999AbgFAHxe (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Mon, 1 Jun 2020 03:53:34 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+        s=mimecast20190719; t=1590998014;
+        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+         in-reply-to:in-reply-to:references:references;
+        bh=wPXNLpJ0sZZ7Z/P4nG8c8VAID1vS3tYXPAuC4j7yojI=;
+        b=LJxTn8X2wgYa+AceLSYYD7tyzkg3hT+kBSnWpjKIR5Kv69Gp3yRGvyKONUAwpIj9TnOWJJ
+        QFzqHdTSj0jMGZoNW7YX1ecWctX6riSEkodopFjfsjtILnCYYWpH6iuEsPDwRcb3Ttt6nZ
+        6wRwdykyQ4zsvbk6HAGkIgfvYhQIm7c=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-102-G-ivek-EOLyEryK5zmkRqw-1; Mon, 01 Jun 2020 03:53:30 -0400
+X-MC-Unique: G-ivek-EOLyEryK5zmkRqw-1
+Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.phx2.redhat.com [10.5.11.13])
+        (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+        (No client certificate requested)
+        by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 238CF107ACCA;
+        Mon,  1 Jun 2020 07:53:29 +0000 (UTC)
+Received: from ws.net.home (unknown [10.40.194.133])
+        by smtp.corp.redhat.com (Postfix) with ESMTPS id 259DDD01E1;
+        Mon,  1 Jun 2020 07:53:27 +0000 (UTC)
+Date:   Mon, 1 Jun 2020 09:53:25 +0200
+From:   Karel Zak <kzak@redhat.com>
+To:     Konstantin Khlebnikov <khlebnikov@yandex-team.ru>
+Cc:     kerolasa@gmail.com, util-linux <util-linux@vger.kernel.org>
+Subject: Re: [PATCH] dmesg: add --follow-new
+Message-ID: <20200601075325.ufmficzg5u57ocek@ws.net.home>
+References: <159084767331.127122.9117317049390963928.stgit@buzz>
+ <CAG27Bk3Tvybn0ToQdBNu9O-=Ap70+APKqLCCT-4cTxx-vFiFqw@mail.gmail.com>
+ <1d1e123b-d107-78c2-e76c-c5be3dcdf89e@yandex-team.ru>
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Description: Mail message body
-Subject: =?utf-8?q?Wohlt=C3=A4tigkeitsspende_von_2=2E000=2E000_Millionen_Euro?=
-To:     Recipients <yoshi@bestprofit-futures.co.id>
-From:   ''Tayeb Souami'' <yoshi@bestprofit-futures.co.id>
-Date:   Mon, 01 Jun 2020 02:48:25 +0200
-Reply-To: Tayebsouam.spende@gmail.com
-Message-Id: <20200601004833.D3E2E52397E@mx.bestprofit-futures.co.id>
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <1d1e123b-d107-78c2-e76c-c5be3dcdf89e@yandex-team.ru>
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.13
 Sender: util-linux-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-Lieber Freund,
+On Sun, May 31, 2020 at 03:18:47PM +0300, Konstantin Khlebnikov wrote:
+> On 31/05/2020 14.49, Sami Kerola wrote:
+> > On Sat, 30 May 2020 at 15:08, Konstantin Khlebnikov
+> > <khlebnikov@yandex-team.ru> wrote:
+> > > Option --follow-new (-W) works the same as --follow (-w) but initially
+> > > seeks to the end of kernel ring buffer, so it prints only new messages.
+> > > Useful for capturing kernel messages during actions without past log.
 
-Ich bin Herr Tayeb Souami, New Jersey, Vereinigte Staaten von Amerika, der =
-Mega-Gewinner von $ 315million In Mega Millions Jackpot, spende ich an 5 zu=
-f=C3=A4llige Personen, wenn Sie diese E-Mail erhalten, dann wurde Ihre E-Ma=
-il nach einem Spinball ausgew=C3=A4hlt.Ich habe den gr=C3=B6=C3=9Ften Teil =
-meines Verm=C3=B6gens auf eine Reihe von Wohlt=C3=A4tigkeitsorganisationen =
-und Organisationen verteilt.Ich habe mich freiwillig dazu entschieden, die =
-Summe von =E2=82=AC 2.000.000,00 an Sie als eine der ausgew=C3=A4hlten 5 zu=
- spenden, um meine Gewinne zu =C3=BCberpr=C3=BCfen, sehen Sie bitte meine Y=
-ou Tube Seite unten.
+IMHO good idea.
 
-UHR MICH HIER: https://www.youtube.com/watch?v=3DZ6ui8ZDQ6Ks
+> > I wonder if it would be more useful to add '-n, --lines=[+]NUM' that
+> > would be similar
+> > to tail(1) option and argument. The --follow-new with an option that
+> > lists NUM last
+> > messages would be --lines=0
+
+It does not seem use-friendly ;-) I guess type "-W" is pretty 
+straightforward.
+	
+> > That said should --since and --until options similar to journalctl(1)
+> > be considered
+> > as well?
+
+ --since '1 hour ago' would be nice, but I have doubts it's will so
+ easy to implement due to crazy timestamps in the log.
+
+> Implementation is also non-trivial - currently dmesg reads and prints
+> messages from /dev/kmsg in a loop. It doesn't know how many lines left.
+> /dev/kmsg doesn't support lseek with non-zero offset, only SET/DATA/END.
+
+ Yes.
+
+    Karel
 
 
-Das ist dein Spendencode: [TS530342018]
+-- 
+ Karel Zak  <kzak@redhat.com>
+ http://karelzak.blogspot.com
 
-
-Antworten Sie mit dem SPENDE-CODE an diese
-
- E-Mail:Tayebsouam.spende@gmail.com
-
-Ich hoffe, Sie und Ihre Familie gl=C3=BCcklich zu machen.
-
-Gr=C3=BC=C3=9Fe
-Herr Tayeb Souami
