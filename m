@@ -2,47 +2,47 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 670EA1F7731
+	by mail.lfdr.de (Postfix) with ESMTP id D6E981F7733
 	for <lists+util-linux@lfdr.de>; Fri, 12 Jun 2020 13:19:41 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726275AbgFLLTk (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        id S1726219AbgFLLTk (ORCPT <rfc822;lists+util-linux@lfdr.de>);
         Fri, 12 Jun 2020 07:19:40 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:54780 "EHLO
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:54782 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726219AbgFLLTj (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Fri, 12 Jun 2020 07:19:39 -0400
-Received: from mail-wm1-x343.google.com (mail-wm1-x343.google.com [IPv6:2a00:1450:4864:20::343])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id F1FBEC08C5C1
-        for <util-linux@vger.kernel.org>; Fri, 12 Jun 2020 04:19:38 -0700 (PDT)
-Received: by mail-wm1-x343.google.com with SMTP id d128so7944136wmc.1
-        for <util-linux@vger.kernel.org>; Fri, 12 Jun 2020 04:19:38 -0700 (PDT)
+        with ESMTP id S1726039AbgFLLTk (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Fri, 12 Jun 2020 07:19:40 -0400
+Received: from mail-wm1-x341.google.com (mail-wm1-x341.google.com [IPv6:2a00:1450:4864:20::341])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id C0BD9C03E96F
+        for <util-linux@vger.kernel.org>; Fri, 12 Jun 2020 04:19:39 -0700 (PDT)
+Received: by mail-wm1-x341.google.com with SMTP id r15so7941513wmh.5
+        for <util-linux@vger.kernel.org>; Fri, 12 Jun 2020 04:19:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=4AfxjcWYdbbytzg+gYIDaOzi7KaDO6Dea96Fh43Q4DI=;
-        b=AOF/eZh286W/Ra+UKNGDvDZkUe8HcIaF1ZrMitta0hY43R6sFEnMubELQ63+V16eSq
-         DjLuhN5n1V52Xb4GvdkqX8EmalitjEzDaeYfnNlJpn1X8b4XO0wjZHaeTsbUdyF+wLsp
-         c+33Khaz64j5vKjcM9IZSwpQ9msukantgGztJI6Hf5aneTGaBY9SLLN0PFCKxO0+9Iiq
-         M1/4I8vv5f5PCDv0wqYX4alMgg8kRI78mo/ivmXVlUGzK4mrpcmeOrsen4+VYvheChPF
-         ZvZ6t85XZTJ0Ig7Df1y207/7wIi/Eef2syyWs8I1e6k466zeKf9nFbMQLl5jIQmouTQL
-         LRTQ==
+        bh=K4W7TlAWQnwvxH55BmpBoWQgaaYRUKQMr4iu8MpaPE4=;
+        b=B3T0P/WT6saV+iBvJMqo0XbR2zT4jaWxRz4g1yArzZJonzD2qcExqksuH4CY00RPZq
+         9VNJT/f2TzJnTb5vqgYKMlj6VlZsUarL98/ourDsTEOZjPBCFVqM3CnaUloOeN1z8kV2
+         j6twav4QZZa1FHb3/WqlytoViJp5cGLlJh1RfBOQkjUUJJeqaHySnsa4FeB6dVGhfmxP
+         aceRg1p5QHOApU/bGNX8O8EznZckOcvgAgAhEkQr+5eJrR7GlO0AXiT69Qf5VO/ZrK0e
+         ocpo0zOKJ6SBP2A5M0bbD9WkH7m6KNfFvYHwXPAtpuCE/mIxYa0RPKX9+TrTO/NO6OqG
+         Zh0Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=4AfxjcWYdbbytzg+gYIDaOzi7KaDO6Dea96Fh43Q4DI=;
-        b=kfh5hcgPyTXcbn56wew2/MAbE7ClV/X6vPrpOkq0rub3qSz2f0hZNMDI2nqjyhK2WU
-         t24gNVWgbyupnkhnYVnNVZ4Ytjw9wt3Y/Pz0QiUunBemuVQTwkl4Q1KVMYTLrii5eRZ0
-         qIznBZ6sHdK/uS/1NCEAQUXWbxyLtYmhHQKXLFNRazf1POE21N5EwOAyCeKaItAWwRb4
-         PzDRlC1ZUnR4gmwHFoxMcfNQPkGL1IUO6w5EKUKYZlUl55jajECJERP/+n/od4XvMyxy
-         bfTsCot4bOIawhMK5Jg1MkCnU4ibruiI95rft+KxhXYqn5PufePs56upzWmWv5mUeyJV
-         rqDw==
-X-Gm-Message-State: AOAM530SrWmSxyCl6OBBUL9Lum0KmyAasOvsYN3yAhYW9UzsvMHXqYKw
-        YFxrtV+6EfygEJSCzYXdVhc=
-X-Google-Smtp-Source: ABdhPJwdZ2QX8oaCGzm1U3PagNRiUf9zqzfJu3QEAnsNd7TPkNP2QdQYAA5WHogMZGRoFJT5FC8i5g==
-X-Received: by 2002:a7b:c0c8:: with SMTP id s8mr13437125wmh.134.1591960777611;
-        Fri, 12 Jun 2020 04:19:37 -0700 (PDT)
+        bh=K4W7TlAWQnwvxH55BmpBoWQgaaYRUKQMr4iu8MpaPE4=;
+        b=JlH4GA+bZ7iRo9fuhFEV8u1tCZ6x/lgzUIYOhFoA4geX/Dtz0a3yS4vjeGokOIZZi1
+         MCbC+YDx7VzN9/P4nH1tn7odnA4dGuAa47288oHzJ1ji8V9DdY1AwYnkGF55VjfmS380
+         UBpF7CFyPJpffSA/v2wMrTvLIxnwBqzaf8fLBOjkTzczO0y2bxjH3ZQI7djnM9vU2j42
+         rBmdwKPqDLeh6rRI5gQDmw7eBJbpDod13jXtVNR/1ZL59gGtJfEipxQG76M9htpZi8Fz
+         dilgUTCC/M8fbeJseogigm4LSCZVr0WlLad4UcrgnOHM1auh3EuMoVISQZtszrW8E6B5
+         aBwQ==
+X-Gm-Message-State: AOAM533hfTbJSzBbngxKxRJP1JeJjvvBi9y5JOo9br5J+6akFhnoIQge
+        YgNQv+f3EkL8tWYEJM/hieo=
+X-Google-Smtp-Source: ABdhPJxbWhRvpwyUT5GqvOp8Y7egQ19cepfpRDomYFLwzOUJhMQWkdLGsvOpFVs/r6n3IjNTz3pFYA==
+X-Received: by 2002:a7b:c1ce:: with SMTP id a14mr13382838wmj.144.1591960778394;
+        Fri, 12 Jun 2020 04:19:38 -0700 (PDT)
 Received: from bienne.fritz.box ([2001:a61:253c:8201:b2fb:3ef8:ca:1604])
         by smtp.gmail.com with ESMTPSA id o6sm9511433wrp.3.2020.06.12.04.19.37
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
@@ -50,9 +50,9 @@ Received: from bienne.fritz.box ([2001:a61:253c:8201:b2fb:3ef8:ca:1604])
 From:   "Michael Kerrisk (man-pages)" <mtk.manpages@gmail.com>
 To:     mtk.manpages@gmail.com, Karel Zak <kzak@redhat.com>
 Cc:     util-linux@vger.kernel.org
-Subject: [PATCH 2/3] Manual pages: setpriv.1: Various minor wording and formatting fixes
-Date:   Fri, 12 Jun 2020 13:19:32 +0200
-Message-Id: <20200612111933.3043314-2-mtk.manpages@gmail.com>
+Subject: [PATCH 3/3] Manual pages: setpriv.1: warn users of restrictions on capability changes
+Date:   Fri, 12 Jun 2020 13:19:33 +0200
+Message-Id: <20200612111933.3043314-3-mtk.manpages@gmail.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20200612111933.3043314-1-mtk.manpages@gmail.com>
 References: <20200612111933.3043314-1-mtk.manpages@gmail.com>
@@ -63,64 +63,42 @@ Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
+The kernel imposes various restrictions on the changes that can be
+made to the inheritable, ambient, and bounding sets. Warn the user
+about that.
+
 Signed-off-by: Michael Kerrisk (man-pages) <mtk.manpages@gmail.com>
 ---
- sys-utils/setpriv.1 | 20 ++++++++++++++------
- 1 file changed, 14 insertions(+), 6 deletions(-)
+ sys-utils/setpriv.1 | 16 ++++++++++++++++
+ 1 file changed, 16 insertions(+)
 
 diff --git a/sys-utils/setpriv.1 b/sys-utils/setpriv.1
-index 939b69a3a..3794a917e 100644
+index 3794a917e..42d1a2fb9 100644
 --- a/sys-utils/setpriv.1
 +++ b/sys-utils/setpriv.1
-@@ -33,7 +33,7 @@ Clear supplementary groups.
- .TP
- .BR \-d , " \-\-dump"
- Dump the current privilege state.
--Can be specified more than once to show extra,
-+This option can be specified more than once to show extra,
- mostly useless, information.  Incompatible with all other options.
- .TP
- .B \-\-groups \fIgroup\fR...
-@@ -55,14 +55,17 @@ where \fIN\fR is the internal capability index used by Linux.
- .B +all
- and
- .B \-all
--can be used to add or remove all caps.  The set of capabilities starts out as
-+can be used to add or remove all caps.
-+.IP
-+The set of capabilities starts out as
- the current inheritable set for
- .BR \-\-inh\-caps ,
- the current ambient set for
- .B \-\-ambient\-caps
+@@ -65,6 +65,22 @@ the current ambient set for
  and the current bounding set for
  .BR \-\-bounding\-set .
--If you drop something from the bounding set without also dropping it from the
+ .IP
++Note the following restrictions (detailed in
++.BR capabilities (7))
++regarding modifications to these capability sets:
++.RS
++.IP * 2
++A capability can be added to the inheritable set only if it is
++currently present in the bounding set.
++.IP *
++A capability can be added to the ambient set only if it is currently
++present in both the permitted and inheritable sets.
++.IP *
++Notwithstanding the syntax offered by
++.BR setpriv ,
++the kernel does not permit capabilities to be added to the bounding set.
++.RE
 +.IP
-+If you drop a capability from the bounding set without also dropping it from the
+ If you drop a capability from the bounding set without also dropping it from the
  inheritable set, you are likely to become confused.  Do not do that.
  .TP
- .B \-\-keep\-groups
-@@ -170,11 +173,16 @@ to fail at AppArmor's whim.
- .TP
- .B \-\-reset\-env
- Clears all the environment variables except TERM; initializes the environment variables HOME, SHELL, USER, LOGNAME
--according to the user's passwd entry; sets PATH to \fI/usr/local/bin:/bin:/usr/bin\fR for a regual user and to
-+according to the user's passwd entry; sets PATH to \fI/usr/local/bin:/bin:/usr/bin\fR for a regular user and to
- \fI/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin\fR for root.
- .sp
--The environment variable PATH may be different on systems where /bin and /sbin
--are merged into /usr.  The environment variable SHELL defaults to \fI/bin/sh\fR if none is given in the user's
-+The environment variable PATH may be different on systems where
-+.I /bin
-+and
-+.I /sbin
-+are merged into
-+.IR /usr .
-+The environment variable SHELL defaults to \fI/bin/sh\fR if none is given in the user's
- passwd entry.
- .TP
- .BR \-V , " \-\-version"
 -- 
 2.26.2
 
