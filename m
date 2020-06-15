@@ -2,82 +2,67 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 251C01F85EF
-	for <lists+util-linux@lfdr.de>; Sun, 14 Jun 2020 01:44:23 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id B71A61F93A1
+	for <lists+util-linux@lfdr.de>; Mon, 15 Jun 2020 11:37:05 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726442AbgFMXoW (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Sat, 13 Jun 2020 19:44:22 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:49676 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726272AbgFMXoV (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Sat, 13 Jun 2020 19:44:21 -0400
-Received: from mail-wr1-x444.google.com (mail-wr1-x444.google.com [IPv6:2a00:1450:4864:20::444])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 6D4DDC03E96F
-        for <util-linux@vger.kernel.org>; Sat, 13 Jun 2020 16:44:21 -0700 (PDT)
-Received: by mail-wr1-x444.google.com with SMTP id c3so13502289wru.12
-        for <util-linux@vger.kernel.org>; Sat, 13 Jun 2020 16:44:21 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:reply-to:from:date:message-id:subject:to;
-        bh=Jfkt21qi51Oe1qrMFTj04izu3a2tcNqhS64qzySR/1Y=;
-        b=aEr7ZU7K8WpJLygSJJiSmQ0PrPX+jT47lrtSIq4V2iUxP3lOS2fcpF+3K8GaqYMdDo
-         Ms1z3JE3eYvvuIvtZRA2+GK+KgZ70Nel1YWvfgL4UubIZyQGeJf1MjduMo+b/ug6I65h
-         RzyjQBXYfOZgf19hYuVCJoore2+H+ZZsVwFkYFh2cbdiCiucqIw5I1THSxBEaRGNMWyL
-         +MWOKiyIiV3VjLzshd9kbZhNfFtph91EIVWWWIh/4ZvZ6YZgIT7J/bFLats/2krYf7AS
-         E6cq6YS0PTw4xYADcDS+DyqdKvz0SIDH4MHdp0uZXgTpob20qcN49liTI6LoHXjfWsyx
-         WTNg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
-         :subject:to;
-        bh=Jfkt21qi51Oe1qrMFTj04izu3a2tcNqhS64qzySR/1Y=;
-        b=r6BDWU8B7td/Y1ahBuArfcbQoVCV/wVq/DeOHDivef5ZA9+tr7GgEbS0nxEBeUK//2
-         cwXBAlF5c0rVS7LUgP/ZxpiK9BTvHZwEGUXzqZgIQ5IcuAMwc8++HALqBNIMXin9mb6i
-         Gs4obmfzccBXJ6cLhL1A73iw2RNUJT3C85G6nsA4Q7DU5Znq0zuCdGfmIb3R+ugkjZ33
-         fHLHqSJ+e4fkBS6bgTJy3Xyo4hOs8/uRHGaKTVzsbrj2OzMqqg/4hBGMy3k4xbmEMCXZ
-         7R1eQzndCCeisxUTjEJ945Zoy4vt6AJFG5hf6pmEJnyEZhWY3N27jKKizmOVuRTJ85Mu
-         GFOQ==
-X-Gm-Message-State: AOAM531HexeDIXJ4poH5bwkpF9GQqCVBBp9aRceIBuWRhEm6e/EdU5GE
-        YLE+eqDTh6Xt9fhJY2ZDgpOgacV4ingWf+YTi/U=
-X-Google-Smtp-Source: ABdhPJx+thQyNJCYN1svEQv/Bi0FQs6O+xhQvbBbM2QQ3cPfi9KDweN6KcKpZOHvzBCgjiOaRoICnWdWExDxQu4YR/A=
-X-Received: by 2002:a5d:6a89:: with SMTP id s9mr21513444wru.15.1592091860103;
- Sat, 13 Jun 2020 16:44:20 -0700 (PDT)
+        id S1729097AbgFOJgy (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Mon, 15 Jun 2020 05:36:54 -0400
+Received: from us-smtp-2.mimecast.com ([205.139.110.61]:48239 "EHLO
+        us-smtp-delivery-1.mimecast.com" rhost-flags-OK-OK-OK-FAIL)
+        by vger.kernel.org with ESMTP id S1728815AbgFOJgy (ORCPT
+        <rfc822;util-linux@vger.kernel.org>);
+        Mon, 15 Jun 2020 05:36:54 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+        s=mimecast20190719; t=1592213813;
+        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+         in-reply-to:in-reply-to:references:references;
+        bh=oCAXThaJjkktrGt4FF5BH2UY1zYHY/cHBPDCDvH5YHI=;
+        b=CeettLsoHzIbNIpDrKrcw38KE5TKA94Cv7oRkmqQ3F4IT9QO5xUNxN6W2loWLc7GpkOP7h
+        0MyF6ZkW1oAHpk4TcJTBZ1QX6VBhED9i8NkU9BnJ4JkgRRPZFIfn9JGx6Lol2BTdnbnYHb
+        CpEfBX1/moPAAlcv43m2e9t6s5moVeg=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-320-mnj-_B-kPuG_53t-CDakmw-1; Mon, 15 Jun 2020 05:36:46 -0400
+X-MC-Unique: mnj-_B-kPuG_53t-CDakmw-1
+Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com [10.5.11.12])
+        (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+        (No client certificate requested)
+        by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 66F3E18A2663;
+        Mon, 15 Jun 2020 09:36:44 +0000 (UTC)
+Received: from ws.net.home (unknown [10.40.194.133])
+        by smtp.corp.redhat.com (Postfix) with ESMTPS id A624F60C47;
+        Mon, 15 Jun 2020 09:36:43 +0000 (UTC)
+Date:   Mon, 15 Jun 2020 11:36:40 +0200
+From:   Karel Zak <kzak@redhat.com>
+To:     Bjarni Ingi Gislason <bjarniig@rhi.hi.is>
+Cc:     util-linux@vger.kernel.org
+Subject: Re: [PATCH] doc: disk-utils/*: Fix some warnings from "mandoc -T
+ lint"
+Message-ID: <20200615093640.gi43verr7oq6oph5@ws.net.home>
+References: <20200610214910.GA18305@rhi.hi.is>
 MIME-Version: 1.0
-Received: by 2002:a05:6000:4a:0:0:0:0 with HTTP; Sat, 13 Jun 2020 16:44:19
- -0700 (PDT)
-Reply-To: cfolimited1@gmail.com
-From:   CFO LIMITED <mckenziemicrofinancefirm12@gmail.com>
-Date:   Sat, 13 Jun 2020 16:44:19 -0700
-Message-ID: <CACRKTOZjvWZWUoLuqrk9p_i-1HEY+vbu3hNzLvODBFxyYCi-Ow@mail.gmail.com>
-Subject: MAIL FROM CFO LTD ( Apply For Affordable Loan at a Lower Interest
- Rate )
-To:     undisclosed-recipients:;
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20200610214910.GA18305@rhi.hi.is>
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.12
 Sender: util-linux-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
+On Wed, Jun 10, 2020 at 09:49:10PM +0000, Bjarni Ingi Gislason wrote:
+>  disk-utils/fsck.minix.8 | 1 -
+>  disk-utils/isosize.8    | 1 -
+>  disk-utils/sfdisk.8     | 2 +-
+>  disk-utils/swaplabel.8  | 1 -
+>  4 files changed, 1 insertion(+), 4 deletions(-)
+
+ Bjarni, all your 8 patches applied. Thanks!
+
+    Karel
+
 -- 
-Good Day
+ Karel Zak  <kzak@redhat.com>
+ http://karelzak.blogspot.com
 
-We are a registered Private Loan Investment Company in the United
-Kingdom, we also registered with the Turkish British Chamber of
-Commerce and Industry (TBCCI) we have operations in Europe and Asia.
-
-We are seeking for beneficiaries who source for fund to
-expand/relocating their business interest abroad. We are ready to fund
-projects outside Turkey and United Kingdom in the form of Soft Loan.
-We grant loans to both corporate and private entities at a low
-interest rate of 2% R.O.I per annul.
-
-We like to grant loan in the following sectors: oil/Gas, banking, real
-estate, stock speculation and mining, transportation, health sector
-and tobacco, Communication Services, Agriculture Forestry & Fishing,
-thus any sector. The terms are very flexible and interesting.
-
-Please contact us for more details;
-
-Kind regards,
-
-Paul McCann
