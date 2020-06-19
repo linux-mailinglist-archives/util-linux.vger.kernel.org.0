@@ -2,66 +2,117 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 6296D20034C
-	for <lists+util-linux@lfdr.de>; Fri, 19 Jun 2020 10:10:06 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id E6D99201E2C
+	for <lists+util-linux@lfdr.de>; Sat, 20 Jun 2020 00:45:49 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1730849AbgFSIJw (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Fri, 19 Jun 2020 04:09:52 -0400
-Received: from us-smtp-delivery-1.mimecast.com ([205.139.110.120]:39084 "EHLO
-        us-smtp-1.mimecast.com" rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org
-        with ESMTP id S1731014AbgFSIJZ (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Fri, 19 Jun 2020 04:09:25 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-        s=mimecast20190719; t=1592554164;
-        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-         in-reply-to:in-reply-to:references:references;
-        bh=8fJPOjjQ7u6epwlEbGw2V91zOQPQ5wE7KmszjFD8IQk=;
-        b=KPrqTWZlmDSZKYDGQ18jzc9FSbTMgqRf5yAX0Ta+gTBxXK71miqiWmUjS4W+4c/s25cIHA
-        nedqNZooQd+VejL+dZzKwk3re8Fv5K65PZR3f9UVSI3lvYwWVpJQGc/oOYjaSsK+iOWV14
-        lD1kbeJ1j+8KhMBLTwqh6aS/1eYHF0o=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-106-ZKtFIxAtMcqYb-oeWFD5Rw-1; Fri, 19 Jun 2020 04:09:22 -0400
-X-MC-Unique: ZKtFIxAtMcqYb-oeWFD5Rw-1
-Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.phx2.redhat.com [10.5.11.13])
-        (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
-        (No client certificate requested)
-        by mimecast-mx01.redhat.com (Postfix) with ESMTPS id BEBEB107ACF4
-        for <util-linux@vger.kernel.org>; Fri, 19 Jun 2020 08:09:21 +0000 (UTC)
-Received: from ws.net.home (unknown [10.40.194.133])
-        by smtp.corp.redhat.com (Postfix) with ESMTPS id 09DFB709D7;
-        Fri, 19 Jun 2020 08:09:20 +0000 (UTC)
-Date:   Fri, 19 Jun 2020 10:09:18 +0200
-From:   Karel Zak <kzak@redhat.com>
-To:     Lukas Czerner <lczerner@redhat.com>
-Cc:     util-linux@vger.kernel.org
-Subject: Re: [PATCH v2] blkdiscard: Refuse to proceed if signatures are found
-Message-ID: <20200619080918.v524hmhdhaxogc62@ws.net.home>
-References: <20200618105034.13498-1-lczerner@redhat.com>
+        id S1729539AbgFSWps (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Fri, 19 Jun 2020 18:45:48 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:42898 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726900AbgFSWpr (ORCPT
+        <rfc822;util-linux-ng@vger.kernel.org>);
+        Fri, 19 Jun 2020 18:45:47 -0400
+Received: from mail-ua1-x941.google.com (mail-ua1-x941.google.com [IPv6:2607:f8b0:4864:20::941])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 99FC8C0613EF
+        for <util-linux-ng@vger.kernel.org>; Fri, 19 Jun 2020 15:45:47 -0700 (PDT)
+Received: by mail-ua1-x941.google.com with SMTP id v25so3725535uau.4
+        for <util-linux-ng@vger.kernel.org>; Fri, 19 Jun 2020 15:45:47 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=mime-version:sender:from:date:message-id:subject:to;
+        bh=DPv5789sbARTcO5ZLUgaUjnVlkwAZj6Vxnwv3/Mo9OU=;
+        b=tlzhVC8VEByGKDomUxqjr6NdEGJTPKjlEyQeOg+M79eYYbHVGp/OoK2olGS9NMkrFx
+         HfdKMfMh5cHQaEnGJrc8KFQvSFFNju8K+vGoqd6uC6lCpmcf5zOzOODTOLM0/2/FwSGf
+         jRjDmtnmYQitQKi0rldvuwsEBRJPiKR+GFd9gCAJ2I8cwsVJISbr+y0GBBEC7bX/8Rlk
+         E9ZjCzHt6OKSNbIww/JgXOoZSOu4/aKqj2YXhziOavuTkAG0EvCLQHl2C2aGcu8B6AVa
+         VEcKI3RLz5ubwbviTF73iaCstrX9dqoINduqGddfMchZMK1imzeKFw5yeWnGaInpJ7CJ
+         DTLQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:sender:from:date:message-id:subject
+         :to;
+        bh=DPv5789sbARTcO5ZLUgaUjnVlkwAZj6Vxnwv3/Mo9OU=;
+        b=efilVAFEd9VVzbc7DKfBt5NBBmd+Y4yFUN4vF+CWnKgRX5U0EFFyUQg57yn4fQnedm
+         IJ/c78kWrVrx+uCZT2u3f2J2z3/iPo28UE4HXVfz4nqTkaaLZfY+m3vD1T6lAkxBJoRg
+         p4tn8iQYWSMwT4h4tiQU2VHYfvMxIdgcy8GgtQzQK9yf7nuiHDoeDb839f6yFiZ8e3wq
+         dbI6Hb6ruru3QJVHYWTUhLuv2EOime7vtflhJgDChwdukBYrmuXDj4ccKwNNMfOgR0gt
+         nf9s88ch0PuNyarBRjS+YXBExeUi1G8A+AXy6p2OZHhqBxph4eDE0S8MP+9WSj4K6TOP
+         4Vbw==
+X-Gm-Message-State: AOAM530kF6+nS696jeh6qcET9aI7GObHVbfI30EosOjcy6kfjnc152pP
+        +rH65b714DewHGHz0zpN4nQJynWtsq9tbHncaAw=
+X-Google-Smtp-Source: ABdhPJxAJdFth7mPx0t+FnLwqxN69ownbAAdUPk2Xtinid4c73arGCYSJzn89htlZlMEjUdHqwwfpUSV1w0TxQmdl8c=
+X-Received: by 2002:ab0:3055:: with SMTP id x21mr4520233ual.106.1592606746619;
+ Fri, 19 Jun 2020 15:45:46 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20200618105034.13498-1-lczerner@redhat.com>
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.13
+Received: by 2002:a9f:258c:0:0:0:0:0 with HTTP; Fri, 19 Jun 2020 15:45:46
+ -0700 (PDT)
+From:   Mrs Kim Hong Yeoh <mrs.kimhongyeoh055@gmail.com>
+Date:   Fri, 19 Jun 2020 22:45:46 +0000
+X-Google-Sender-Auth: 4HZoDAQjnoMVhFtcVTQhpXBNdMQ
+Message-ID: <CADmpa4EDt0+88rRSri_horWgpALQAjRocWwd3PFFa=qwT5pB-A@mail.gmail.com>
+Subject: MAY THE PEACE OF GOD BE UPON YOU.
+To:     undisclosed-recipients:;
+Content-Type: text/plain; charset="UTF-8"
 Sender: util-linux-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-On Thu, Jun 18, 2020 at 12:50:34PM +0200, Lukas Czerner wrote:
-> v2: Rename function to probe_device, use switch and free probe if no
->     signature was found
-> 
->  sys-utils/Makemodule.am |  2 +-
->  sys-utils/blkdiscard.c  | 59 ++++++++++++++++++++++++++++++++++++++++-
->  2 files changed, 59 insertions(+), 2 deletions(-)
+Greetings Beloved in Christ,
 
-Applied, thanks!
+I had previously sent you an email with no feedback from you.I suppose
+it went to your junk folder.I anticipate that you read this mail
+quickly and let me know your opinion or willingness on this classified
+information that I will release to you.  therefore I would not want to
+jeopardize this opportunity to Save lives of Less Privileged ones and
+also change our financial status and give Less Privileged a secured
+future.
 
-    Karel
+I am Ms. Hong Yeoh Kim, Working at MAYBANK (Malaysia) as the
+Non-Independent Non-Executive Director and Chairman of Maybank. During
+our last banking Audits we discovered an abandoned account belongs to
+one of our Foreign Deceased Customer, Late Mr. Wang Jian, The
+Co-founder and Co-chairman of HNA Group, a Chinese conglomerate with
+significant real estate ownerships across the U.S., died in an
+accident while on a business trip in France on Tuesday.
 
--- 
- Karel Zak  <kzak@redhat.com>
- http://karelzak.blogspot.com
+Please go through this link:
+https://observer.com/2018/07/wang-jian-hna-founder-dies-tragic-fall/
 
+I am writing to request your assistance in transferring the sum of
+$17.000.000.00 (Seventeen Million United States Dollars) into your
+account as the Late Mr. Wang Jian Foreign Business Partner, which I am
+planning to use the fund to invest for public benefit as follows;
+
+1. Establish An Orphanage Home To Help The Orphanages Children.
+2. Build A Hospital To Help The Poor.
+3. Build A Nursing Home For Elderly People Need Care & Meal.
+
+Meanwhile, before I contacted you I have done personal investigation
+in locating any of Late Mr. Wang Jian relatives who knows about the
+account, but I came out unsuccessful. However, I took this decision to
+use this fund in supporting the Orphanages Children, Less Privileged
+and Elderly People Need Care & Meal Support, because i don't want this
+fund to be transfer into our Government Treasury Account as unclaimed
+fund as the law of my country abiding.
+
+As an officer of the Bank I cannot be directly connected to this
+money, so this is why I have to contact you for us to work so that you
+can assist to claim/receive this money into your bank account for us
+start a charity project, Meanwhile you will have 40% of the total fund
+and 60% for charity project, Note there are practically no risk
+involved, it will be bank to bank transfer, all I need from you is to
+stand and claim $17. Million without any problem with the information
+am going to provide to you.
+
+
+Please for the sake of god accept this offer to work with me and let
+us save lives of those Orphanages Children, Less Privileged and
+Elderly People Need Care, I will appreciate it very much. As soon as I
+receive your kind response, I will give you details on how we can
+achieve it successfully i will explain more on how the fund will be
+transfer to you.
+
+Waiting for your urgent response now.
+best regards
+Ms. Hong Yeoh Kim .
