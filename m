@@ -2,60 +2,106 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 63534203C2A
-	for <lists+util-linux@lfdr.de>; Mon, 22 Jun 2020 18:07:24 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id C26FE2044C9
+	for <lists+util-linux@lfdr.de>; Tue, 23 Jun 2020 01:52:14 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1729484AbgFVQHX (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Mon, 22 Jun 2020 12:07:23 -0400
-Received: from sonic317-32.consmr.mail.ne1.yahoo.com ([66.163.184.43]:45772
-        "EHLO sonic317-32.consmr.mail.ne1.yahoo.com" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S1729260AbgFVQHW (ORCPT
+        id S1728702AbgFVXwN (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Mon, 22 Jun 2020 19:52:13 -0400
+Received: from vn01.namespace.at ([213.208.148.228]:34170 "EHLO
+        nlay-fle-service01.in.namespace.at" rhost-flags-OK-OK-OK-FAIL)
+        by vger.kernel.org with ESMTP id S1728636AbgFVXwN (ORCPT
         <rfc822;util-linux@vger.kernel.org>);
-        Mon, 22 Jun 2020 12:07:22 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048; t=1592842041; bh=cK2qy9Lv5SAgMg9nAvfVmkJPj46H3ss3vOVyjpHm6Nk=; h=Date:From:Reply-To:Subject:References:From:Subject; b=U1ntpi9qf2wVLCyIBjdiWrvfkD22Jfv4U0BINb7j2D7e2cKqBus0EIcrg6eOZ1SrxPzvJUO3vKIFHKu/q1r6gVq3Ff+mDDDt6o9nnbWEvAj+B8iUaKC/y51jQsfrGTq858pK++sUnfXRP/k2u+bPGCqDg/tdta3p1s4oBNk4eLX2VGg61dg2L/jV+4xVawPfaOisflC0Kx9kaCMYeIDuJGs6C31DyBD8/OLFam4pftsLzyhNm0b8Lh1kUIOVcJh4BJ81wg7Cv0ygCf5AuoTGNI8z1tnX56/az9MPSJCBRAAcsQ+dkjsa/Rn50teGI1Z4Pg6cgEtMjhk0kj2CpEGawQ==
-X-YMail-OSG: ohdBNQwVM1kkx9xgWfpnrsRJoDhRZ5o9BKPl7UiIik4Lh2TXpETWNqcOU7_qNaY
- DGgRBfVOQh8Q7GNUCmbFIZK1ApC_Mzm3DvhV86v1H6kIGLhCZSYkgkWAwKcKbreeCsjrPtcNXLbN
- 0gTAoZ9vH2fTTWtQOYP9RKvXLX8_m8MU7FJLKuQ5RJqmgEHTmaLzVC7nBqn4PjIllLH_ogJvtJB1
- qpNlizi5RO6Tlo27LWfxUmrA0Bg98FdxhvifUnlFdZAnwuyHvxHYjJC1fRuC0F2xiYsoqZ9hpmS2
- 6xWKb1easXzVK5Bi0Ns_4jBz_0Y6zFvmSsUQ9v5zVwbHDqYEYz7rq.8jmtc48n3yTFlnqpe3U2z5
- dJFdU_nF_8JlCX8U63R4uTFuampS3qPBxs6CaYRv81u0hBgB9BkH9XDfa2jASLO57ZYI..xzFxBP
- ivbEOkMLXJkb11siF6dA32xpDXiAQD1c05NOdR9.sZLr.bVmedRCU2cHZR1Ll1zRMPBlQGIMO1DR
- xmsQ6rJ.xZDKxAS1q5FT9_V8rDSxYu.uTCVyigC7EgmDEhJU4zIc1rvki_iSOTLkyhEuPdERbuAO
- rCSt.pqRIYbIfjqOvL9lja_AEJWtBrjiyBEtDzBM3Hgq52hdm3RE4vzqQBTJkN_FY0gnrOxsgM2J
- 61btwY3ZEHwvHGZYnfbiOORuCOHV_ByZFfH3nA0.JkZA_zR1yNU1NJU4QNYk8yjYZ47clAHFGYLq
- tPlYDQPGjrMzVFfq7T5Qm5wQt29LRa7DiX1qXMnQ3W0L9NMku96INecEXWcjsxuQcSDqC0xSlvBU
- JyB9gN5ne8g60ttuzOQiH1vi8jKeE4lYmXlWUlfDiFyoPHbDFo_WEEbrt6OgyagjiBEhG5Kw4_am
- XqZR5bFXaF5o5qS_wWNSaLWmu5LMVAw3mZ.dusxgdMSRRxGHMaoLMzHo_c3cRGC72RezHvv5IgmL
- YyZA25gcVocYhFuHEeTVf20wpIuEFGUuw65cNgukNyAE7e_3o5lhyIEpUmCuzVN.Q7rIBQ7kpIw_
- derZy6zzFjODWvhmyxnV3P72U5jd39723WMYlcC9Zn4Huw1jPvpv6LbRbww6_g.XTroAsXbqj2ve
- CBo.IdjcHmMVG.ZOgjUTVmOfz_N0sIaE3LozH.R9O4Fx9Z4KgkYpiPnz4yhIVluQASL8Utu_pAd6
- d3lifQljTIhU0A8t5h3QWiX62NvEJNFmbg77Qpu9QGjCQ.I7LwogB6Ldsc7ICx5jXyaMiEyNHdUZ
- JO6weAqQ6OF7yryMkm6f4lKTEyTqQaQKvITZlpC01g2FPR8EJZNxjYpNYzxVEXROGRfCZbkkiYQ-
- -
-Received: from sonic.gate.mail.ne1.yahoo.com by sonic317.consmr.mail.ne1.yahoo.com with HTTP; Mon, 22 Jun 2020 16:07:21 +0000
-Date:   Mon, 22 Jun 2020 16:07:18 +0000 (UTC)
-From:   Karim Zakari <kariim1960z@gmail.com>
-Reply-To: kzakari04@gmail.com
-Message-ID: <647018929.1868610.1592842038851@mail.yahoo.com>
-Subject: URGENT REPLY.
+        Mon, 22 Jun 2020 19:52:13 -0400
+Received: from [10.100.0.62] (helo=debbuild.in.namespace.at)
+        by nlay-fle-service01.in.namespace.at with esmtps (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
+        (Exim 4.92)
+        (envelope-from <zeha@debian.org>)
+        id 1jnWET-009gqi-LG; Tue, 23 Jun 2020 01:52:09 +0200
+Received: from ch by debbuild.in.namespace.at with local (Exim 4.94)
+        (envelope-from <zeha@debian.org>)
+        id 1jnWET-003QVe-CD; Mon, 22 Jun 2020 23:52:09 +0000
+From:   Chris Hofstaedtler <zeha@debian.org>
+To:     util-linux@vger.kernel.org
+Cc:     Mark Hindley <mark@hindley.org.uk>
+Subject: [PATCH] Fix mountpoint test failure in build chroots.
+Date:   Mon, 22 Jun 2020 23:52:09 +0000
+Message-Id: <20200622235209.816843-1-zeha@debian.org>
+X-Mailer: git-send-email 2.27.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-References: <647018929.1868610.1592842038851.ref@mail.yahoo.com>
-X-Mailer: WebService/1.1.16138 YMailNodin Mozilla/5.0 (Windows NT 6.1; ) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.106 Safari/537.36
-To:     unlisted-recipients:; (no To-header on input)
+Content-Transfer-Encoding: 8bit
 Sender: util-linux-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
+From: Mark Hindley <mark@hindley.org.uk>
 
+The test assumed that / was a mountpoint. This is not always the case, for
+example in pbuilder/cowbuilder chroots. So use / if findmnt verifies it is a
+mountpoint, otherwise use the first mountpoint found. Skip the test if no
+mountpoints are found.
 
-Good-Day Friend,
+Signed-off-by: Mark Hindley <mark@hindley.org.uk>
+---
+ tests/expected/misc/mountpoint-default  |  2 +-
+ tests/expected/misc/mountpoint-nofollow |  2 +-
+ tests/ts/misc/mountpoint                | 15 +++++++++++----
+ 3 files changed, 13 insertions(+), 6 deletions(-)
 
- Hope you are doing great Today. I have a proposed business deal worthy (US$16.5 Million Dollars) that will benefit both parties. This is legitimate' legal and your personality will not be compromised.
+diff --git a/tests/expected/misc/mountpoint-default b/tests/expected/misc/mountpoint-default
+index 9a7ac6ab3..ca7505538 100644
+--- a/tests/expected/misc/mountpoint-default
++++ b/tests/expected/misc/mountpoint-default
+@@ -1,2 +1,2 @@
+-./symlink-to-root is a mountpoint
++./symlink-to-mountpoint is a mountpoint
+ 0
+diff --git a/tests/expected/misc/mountpoint-nofollow b/tests/expected/misc/mountpoint-nofollow
+index 1ba174959..03d2b5da8 100644
+--- a/tests/expected/misc/mountpoint-nofollow
++++ b/tests/expected/misc/mountpoint-nofollow
+@@ -1,2 +1,2 @@
+-./symlink-to-root is not a mountpoint
++./symlink-to-mountpoint is not a mountpoint
+ 1
+diff --git a/tests/ts/misc/mountpoint b/tests/ts/misc/mountpoint
+index 1b391c3bf..e52ccb28f 100755
+--- a/tests/ts/misc/mountpoint
++++ b/tests/ts/misc/mountpoint
+@@ -7,16 +7,23 @@ TS_DESC="mountpoint"
+ ts_init "$*"
+ 
+ ts_check_test_command "$TS_CMD_MOUNTPOINT"
++ts_check_test_command "$TS_CMD_FINDMNT"
+ 
+-ln -s / ./symlink-to-root
++# / is not always a mountpoint (chroots etc.), so check if it is and otherwise
++# fallback to the first available mountpoint.
++FIRST_MOUNTPOINT=$($TS_CMD_FINDMNT -no TARGET / || $TS_CMD_FINDMNT -fno TARGET)
++
++[ -z "$FIRST_MOUNTPOINT" ] && ts_skip "no mountpoint found for symlink tests"
++
++ln -s $FIRST_MOUNTPOINT ./symlink-to-mountpoint
+ 
+ ts_init_subtest "default"
+-$TS_CMD_MOUNTPOINT ./symlink-to-root >> $TS_OUTPUT 2>> $TS_ERRLOG
++$TS_CMD_MOUNTPOINT ./symlink-to-mountpoint >> $TS_OUTPUT 2>> $TS_ERRLOG
+ echo $? >> $TS_OUTPUT 2>> $TS_ERRLOG
+ ts_finalize_subtest
+ 
+ ts_init_subtest "nofollow"
+-$TS_CMD_MOUNTPOINT --nofollow ./symlink-to-root >> $TS_OUTPUT 2>> $TS_ERRLOG
++$TS_CMD_MOUNTPOINT --nofollow ./symlink-to-mountpoint >> $TS_OUTPUT 2>> $TS_ERRLOG
+ echo $? >> $TS_OUTPUT 2>> $TS_ERRLOG
+ ts_finalize_subtest
+ 
+@@ -25,5 +32,5 @@ $TS_CMD_MOUNTPOINT --devno --nofollow / >> $TS_OUTPUT 2>> $TS_ERRLOG
+ echo $? >> $TS_OUTPUT 2>> $TS_ERRLOG
+ ts_finalize_subtest
+ 
+-rm -f ./symlink-to-root
++rm -f ./symlink-to-mountpoint
+ ts_finalize
+-- 
+2.27.0
 
-Waiting for your response for more details, As you are willing to execute this business opportunity with me.
-
-Sincerely Yours,
-Mr. Karim Zakari.
