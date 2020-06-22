@@ -2,68 +2,60 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 3DC36202D97
-	for <lists+util-linux@lfdr.de>; Mon, 22 Jun 2020 00:58:58 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 63534203C2A
+	for <lists+util-linux@lfdr.de>; Mon, 22 Jun 2020 18:07:24 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1730906AbgFUW6a (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Sun, 21 Jun 2020 18:58:30 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:54738 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726064AbgFUW6a (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Sun, 21 Jun 2020 18:58:30 -0400
-Received: from inpost.hi.is (inpost.hi.is [IPv6:2a00:c88:4000:1650::165:62])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id E345DC061794
-        for <util-linux@vger.kernel.org>; Sun, 21 Jun 2020 15:58:29 -0700 (PDT)
-Received: from hekla.rhi.hi.is (hekla.rhi.hi.is [IPv6:2a00:c88:4000:1650::165:2])
-        by inpost.hi.is (8.14.7/8.14.7) with ESMTP id 05LMwRGU031959
-        (version=TLSv1/SSLv3 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO)
-        for <util-linux@vger.kernel.org>; Sun, 21 Jun 2020 22:58:28 GMT
-DKIM-Filter: OpenDKIM Filter v2.11.0 inpost.hi.is 05LMwRGU031959
-Received: from hekla.rhi.hi.is (localhost [127.0.0.1])
-        by hekla.rhi.hi.is (8.14.4/8.14.4) with ESMTP id 05LMwR6e003646
-        for <util-linux@vger.kernel.org>; Sun, 21 Jun 2020 22:58:27 GMT
-Received: (from bjarniig@localhost)
-        by hekla.rhi.hi.is (8.14.4/8.14.4/Submit) id 05LMwRLe003645
-        for util-linux@vger.kernel.org; Sun, 21 Jun 2020 22:58:27 GMT
-Date:   Sun, 21 Jun 2020 22:58:27 +0000
-From:   Bjarni Ingi Gislason <bjarniig@rhi.hi.is>
-To:     util-linux@vger.kernel.org
-Subject: [PATCH] sys-utils: mount.8: split a long line into two
-Message-ID: <20200621225827.GA3587@rhi.hi.is>
+        id S1729484AbgFVQHX (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Mon, 22 Jun 2020 12:07:23 -0400
+Received: from sonic317-32.consmr.mail.ne1.yahoo.com ([66.163.184.43]:45772
+        "EHLO sonic317-32.consmr.mail.ne1.yahoo.com" rhost-flags-OK-OK-OK-OK)
+        by vger.kernel.org with ESMTP id S1729260AbgFVQHW (ORCPT
+        <rfc822;util-linux@vger.kernel.org>);
+        Mon, 22 Jun 2020 12:07:22 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048; t=1592842041; bh=cK2qy9Lv5SAgMg9nAvfVmkJPj46H3ss3vOVyjpHm6Nk=; h=Date:From:Reply-To:Subject:References:From:Subject; b=U1ntpi9qf2wVLCyIBjdiWrvfkD22Jfv4U0BINb7j2D7e2cKqBus0EIcrg6eOZ1SrxPzvJUO3vKIFHKu/q1r6gVq3Ff+mDDDt6o9nnbWEvAj+B8iUaKC/y51jQsfrGTq858pK++sUnfXRP/k2u+bPGCqDg/tdta3p1s4oBNk4eLX2VGg61dg2L/jV+4xVawPfaOisflC0Kx9kaCMYeIDuJGs6C31DyBD8/OLFam4pftsLzyhNm0b8Lh1kUIOVcJh4BJ81wg7Cv0ygCf5AuoTGNI8z1tnX56/az9MPSJCBRAAcsQ+dkjsa/Rn50teGI1Z4Pg6cgEtMjhk0kj2CpEGawQ==
+X-YMail-OSG: ohdBNQwVM1kkx9xgWfpnrsRJoDhRZ5o9BKPl7UiIik4Lh2TXpETWNqcOU7_qNaY
+ DGgRBfVOQh8Q7GNUCmbFIZK1ApC_Mzm3DvhV86v1H6kIGLhCZSYkgkWAwKcKbreeCsjrPtcNXLbN
+ 0gTAoZ9vH2fTTWtQOYP9RKvXLX8_m8MU7FJLKuQ5RJqmgEHTmaLzVC7nBqn4PjIllLH_ogJvtJB1
+ qpNlizi5RO6Tlo27LWfxUmrA0Bg98FdxhvifUnlFdZAnwuyHvxHYjJC1fRuC0F2xiYsoqZ9hpmS2
+ 6xWKb1easXzVK5Bi0Ns_4jBz_0Y6zFvmSsUQ9v5zVwbHDqYEYz7rq.8jmtc48n3yTFlnqpe3U2z5
+ dJFdU_nF_8JlCX8U63R4uTFuampS3qPBxs6CaYRv81u0hBgB9BkH9XDfa2jASLO57ZYI..xzFxBP
+ ivbEOkMLXJkb11siF6dA32xpDXiAQD1c05NOdR9.sZLr.bVmedRCU2cHZR1Ll1zRMPBlQGIMO1DR
+ xmsQ6rJ.xZDKxAS1q5FT9_V8rDSxYu.uTCVyigC7EgmDEhJU4zIc1rvki_iSOTLkyhEuPdERbuAO
+ rCSt.pqRIYbIfjqOvL9lja_AEJWtBrjiyBEtDzBM3Hgq52hdm3RE4vzqQBTJkN_FY0gnrOxsgM2J
+ 61btwY3ZEHwvHGZYnfbiOORuCOHV_ByZFfH3nA0.JkZA_zR1yNU1NJU4QNYk8yjYZ47clAHFGYLq
+ tPlYDQPGjrMzVFfq7T5Qm5wQt29LRa7DiX1qXMnQ3W0L9NMku96INecEXWcjsxuQcSDqC0xSlvBU
+ JyB9gN5ne8g60ttuzOQiH1vi8jKeE4lYmXlWUlfDiFyoPHbDFo_WEEbrt6OgyagjiBEhG5Kw4_am
+ XqZR5bFXaF5o5qS_wWNSaLWmu5LMVAw3mZ.dusxgdMSRRxGHMaoLMzHo_c3cRGC72RezHvv5IgmL
+ YyZA25gcVocYhFuHEeTVf20wpIuEFGUuw65cNgukNyAE7e_3o5lhyIEpUmCuzVN.Q7rIBQ7kpIw_
+ derZy6zzFjODWvhmyxnV3P72U5jd39723WMYlcC9Zn4Huw1jPvpv6LbRbww6_g.XTroAsXbqj2ve
+ CBo.IdjcHmMVG.ZOgjUTVmOfz_N0sIaE3LozH.R9O4Fx9Z4KgkYpiPnz4yhIVluQASL8Utu_pAd6
+ d3lifQljTIhU0A8t5h3QWiX62NvEJNFmbg77Qpu9QGjCQ.I7LwogB6Ldsc7ICx5jXyaMiEyNHdUZ
+ JO6weAqQ6OF7yryMkm6f4lKTEyTqQaQKvITZlpC01g2FPR8EJZNxjYpNYzxVEXROGRfCZbkkiYQ-
+ -
+Received: from sonic.gate.mail.ne1.yahoo.com by sonic317.consmr.mail.ne1.yahoo.com with HTTP; Mon, 22 Jun 2020 16:07:21 +0000
+Date:   Mon, 22 Jun 2020 16:07:18 +0000 (UTC)
+From:   Karim Zakari <kariim1960z@gmail.com>
+Reply-To: kzakari04@gmail.com
+Message-ID: <647018929.1868610.1592842038851@mail.yahoo.com>
+Subject: URGENT REPLY.
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-User-Agent: Mutt/1.5.20 (2009-12-10)
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+References: <647018929.1868610.1592842038851.ref@mail.yahoo.com>
+X-Mailer: WebService/1.1.16138 YMailNodin Mozilla/5.0 (Windows NT 6.1; ) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.106 Safari/537.36
+To:     unlisted-recipients:; (no To-header on input)
 Sender: util-linux-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-  Split two long lines, adding '\e' at the end of the first part,
-as otherwise the last part of them disappears at the right margin in
-the printed output (pdf).
 
-Signed-off-by: Bjarni Ingi Gislason <bjarniig@rhi.hi.is>
----
- sys-utils/mount.8 | 6 ++++--
- 1 file changed, 4 insertions(+), 2 deletions(-)
 
-diff --git a/sys-utils/mount.8 b/sys-utils/mount.8
-index e7215226c..4315fd6e5 100644
---- a/sys-utils/mount.8
-+++ b/sys-utils/mount.8
-@@ -2604,8 +2604,10 @@ For example commands:
- .B mksquashfs /etc /tmp/etc.squashfs
- .B dd if=/dev/zero of=/tmp/etc.hash bs=1M count=10
- .B veritysetup format /tmp/etc.squashfs /tmp/etc.hash
--.B openssl smime \-sign \-in <hash> \-nocerts \-inkey private.key \-signer private.crt \-noattr \-binary \-outform der \-out /tmp/etc.p7
--.B mount \-o verity.hashdevice=/tmp/etc.hash,verity.roothash=<hash>,verity.roothashsig=/tmp/etc.p7 /tmp/etc.squashfs /mnt
-+.B openssl smime \-sign \-in <hash> \-nocerts \-inkey private.key \e
-+.B \-signer private.crt \-noattr \-binary \-outform der \-out /tmp/etc.p7
-+.B mount \-o verity.hashdevice=/tmp/etc.hash,verity.roothash=<hash>,\e
-+.B verity.roothashsig=/tmp/etc.p7 /tmp/etc.squashfs /mnt
- .fi
- .RE
- .sp
--- 
-2.27.0
+Good-Day Friend,
+
+ Hope you are doing great Today. I have a proposed business deal worthy (US$16.5 Million Dollars) that will benefit both parties. This is legitimate' legal and your personality will not be compromised.
+
+Waiting for your response for more details, As you are willing to execute this business opportunity with me.
+
+Sincerely Yours,
+Mr. Karim Zakari.
