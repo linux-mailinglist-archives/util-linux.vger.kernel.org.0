@@ -2,78 +2,92 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id D7CFA20C0EB
-	for <lists+util-linux@lfdr.de>; Sat, 27 Jun 2020 13:06:15 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id C11A520C3AB
+	for <lists+util-linux@lfdr.de>; Sat, 27 Jun 2020 21:03:40 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726335AbgF0LGP (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Sat, 27 Jun 2020 07:06:15 -0400
-Received: from bosmailout01.eigbox.net ([66.96.187.1]:56009 "EHLO
-        bosmailout01.eigbox.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726175AbgF0LGP (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Sat, 27 Jun 2020 07:06:15 -0400
-X-Greylist: delayed 1881 seconds by postgrey-1.27 at vger.kernel.org; Sat, 27 Jun 2020 07:06:14 EDT
-Received: from bosmailscan15.eigbox.net ([10.20.15.15])
-        by bosmailout01.eigbox.net with esmtp (Exim)
-        id 1jp8Af-0002HM-A3
-        for util-linux@vger.kernel.org; Sat, 27 Jun 2020 06:34:53 -0400
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-        d=morganmorem.org; s=dkim; h=Sender:Content-Transfer-Encoding:Content-Type:
-        MIME-Version:Reply-To:From:Subject:Date:Message-ID:To:Cc:Content-ID:
-        Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
-        :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
-        List-Subscribe:List-Post:List-Owner:List-Archive;
-        bh=ksBO3Z0urLDycig1LWXKj1h6fRdeueg9X63DHIY9aMc=; b=E30gFnANDuWdVaYcmEQ4JIYSTE
-        JRxUgnceK0UBnN0x5vndeaKjlYYYcJqkc/DgUaoaeuxVqgQmYHXP2DfQNPl6nhz4f85t6xxn9B7Hp
-        pwKPaaorFu/MOG2ydlGvGGdn3ggQfjQwz5hDwwPFZVVqv5CV7yBZI9b+HyJDvq0DG+nqAbjroMvAb
-        YmRZqZWuwgNF72zLF590oQ1bWNOq8Q14Ywzynin5QClH9xoQ7XLORi01xI2bowGbmWIs04k2RMkJr
-        va6DeUv3xZYIE3A2fyEbzQEyuwM6mN72SLfIKZdWXa86y8WQiZ3ef5E96sSZtNjwft8yrFOgwGVLl
-        iLeDQ5+w==;
-Received: from [10.115.3.32] (helo=bosimpout12)
-        by bosmailscan15.eigbox.net with esmtp (Exim)
-        id 1jp8Ac-0007Hd-Ej; Sat, 27 Jun 2020 06:34:50 -0400
-Received: from boswebmail02.eigbox.net ([10.20.16.2])
-        by bosimpout12 with 
-        id wAad2200802gDNJ01AagYC; Sat, 27 Jun 2020 06:34:50 -0400
-X-EN-SP-DIR: OUT
-X-EN-SP-SQ: 1
-Received: from [127.0.0.1] (helo=email.ipage.com)
-        by boswebmail02.eigbox.net with esmtp (Exim)
-        id 1jp8AP-0003vR-7Y; Sat, 27 Jun 2020 06:34:37 -0400
-Received: from 197.210.71.163
-        (SquirrelMail authenticated user ukwa@morganmorem.org)
-        by email.ipage.com with HTTP;
-        Sat, 27 Jun 2020 06:34:37 -0400
-Message-ID: <036c92a45682db7681735ac42a5c3bc6.squirrel@email.ipage.com>
-Date:   Sat, 27 Jun 2020 06:34:37 -0400
-Subject: Re
-From:   "Mr Mohammed Kamal" <ukwa@morganmorem.org>
-Reply-To: kmma102@yahoo.com
-User-Agent: SquirrelMail/1.4.19
+        id S1725975AbgF0TDj (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Sat, 27 Jun 2020 15:03:39 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:51570 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1725828AbgF0TDj (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Sat, 27 Jun 2020 15:03:39 -0400
+X-Greylist: delayed 308 seconds by postgrey-1.37 at lindbergh.monkeyblade.net; Sat, 27 Jun 2020 12:03:38 PDT
+Received: from mail.incenp.org (mail.incenp.org [IPv6:2001:41d0:302:2000::43d4])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id F14E3C061794
+        for <util-linux@vger.kernel.org>; Sat, 27 Jun 2020 12:03:38 -0700 (PDT)
+Received: from localhost (dgouttegattat.plus.com [81.174.245.146])
+        (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+         key-exchange ECDHE (P-256) server-signature RSA-PSS (2048 bits) server-digest SHA256)
+        (No client certificate requested)
+        by mail.incenp.org (Postfix) with ESMTPSA id 94FEB20213
+        for <util-linux@vger.kernel.org>; Sat, 27 Jun 2020 20:58:27 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=incenp.org; s=201912;
+        t=1593284308; bh=h0UOIAPVgj/4mCw5+m04RrKd15FA/DDQCwkTJPeKqtY=;
+        h=From:To:Subject:Date;
+        b=R70x3vHztN0KBMndI16YuWIcwVfpBC8GLYgPg212Dmfw5e3lnzkTOA8eeW56Ux3rf
+         lRg2CwxkESeepE3iupSWXKyCsGall2uIrUfDQpOU2kvugvxoK1UmCnCSazAipI5s6b
+         S39ou8M+cwrhJslCitf8iCBzzkfSuDEoWQjSxIPI=
+From:   Damien Goutte-Gattat <dgouttegattat@incenp.org>
+To:     util-linux@vger.kernel.org
+Subject: [PATCH] chfn: Make readline prompt for each field on a separate line
+Date:   Sat, 27 Jun 2020 19:58:13 +0100
+Message-Id: <20200627185813.17837-1-dgouttegattat@incenp.org>
+X-Mailer: git-send-email 2.27.0
 MIME-Version: 1.0
-Content-Type: text/plain;charset=iso-8859-1
 Content-Transfer-Encoding: 8bit
-X-Priority: 3 (Normal)
-Importance: Normal
-X-EN-AuthUser: ukwa@morganmorem.org
-To:     unlisted-recipients:; (no To-header on input)
 Sender: util-linux-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
+When readline is called to get user input, it is called without
+a prompt argument. As a result, if the user does not enter anything
+for a given field, then the next field is displayed on the same
+line, yielding the following output:
 
-Sir,
-I am Mr Mohammed Kamal Head of Operations at Finance and Account
-Department of Qatar Petroleum. I have an Investment opportunity of $100M,
-for Investment in your Country. I need your assistance and co-operation to
-move it into your account as a Contract Payment  with the QP for onward
-investment in your country.Tell me if you can handle this,then Get back to
-me with this (kmma102@yahoo.com ) if you can't, don't let this to be known
-by any other person. Its between you and I.
-Kind regards,
-Mr Mohammed Kamal
-Finance and Account Department
-Qatar Petroleum
+  $ chfn
+  Changing finger information for user.
+  Password:
+  Name []: Office []: Office Phone []: Home Phone []:
 
+instead of the expected:
 
+  $ chfn
+  Changing finger information for user.
+  Password:
+  Full Name []:
+  Room Number []:
+  Work Phone []:
+  Home Phone []:
+
+This patch restores the expected behavior by feeding readline with
+a character to display as "prompt".
+
+Signed-off-by: Damien Goutte-Gattat <dgouttegattat@incenp.org>
+---
+ login-utils/chfn.c | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
+
+diff --git a/login-utils/chfn.c b/login-utils/chfn.c
+index 1b203a83e..b2aadb0d9 100644
+--- a/login-utils/chfn.c
++++ b/login-utils/chfn.c
+@@ -235,12 +235,13 @@ static char *ask_new_field(struct chfn_control *ctl, const char *question,
+ 	if (!def_val)
+ 		def_val = "";
+ 	while (true) {
+-		printf("%s [%s]: ", question, def_val);
++		printf("%s [%s]:", question, def_val);
+ 		__fpurge(stdin);
+ #ifdef HAVE_LIBREADLINE
+ 		rl_bind_key('\t', rl_insert);
+-		if ((buf = readline(NULL)) == NULL)
++		if ((buf = readline(" ")) == NULL)
+ #else
++		putchar('\n');
+ 		if (getline(&buf, &dummy, stdin) < 0)
+ #endif
+ 			errx(EXIT_FAILURE, _("Aborted."));
+-- 
+2.27.0
 
