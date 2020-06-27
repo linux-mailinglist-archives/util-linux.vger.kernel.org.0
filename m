@@ -2,92 +2,90 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id C11A520C3AB
-	for <lists+util-linux@lfdr.de>; Sat, 27 Jun 2020 21:03:40 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 92EC120C4A7
+	for <lists+util-linux@lfdr.de>; Sun, 28 Jun 2020 00:07:44 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1725975AbgF0TDj (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Sat, 27 Jun 2020 15:03:39 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:51570 "EHLO
+        id S1725917AbgF0WHo (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Sat, 27 Jun 2020 18:07:44 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:51520 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1725828AbgF0TDj (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Sat, 27 Jun 2020 15:03:39 -0400
-X-Greylist: delayed 308 seconds by postgrey-1.37 at lindbergh.monkeyblade.net; Sat, 27 Jun 2020 12:03:38 PDT
-Received: from mail.incenp.org (mail.incenp.org [IPv6:2001:41d0:302:2000::43d4])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id F14E3C061794
-        for <util-linux@vger.kernel.org>; Sat, 27 Jun 2020 12:03:38 -0700 (PDT)
-Received: from localhost (dgouttegattat.plus.com [81.174.245.146])
-        (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-         key-exchange ECDHE (P-256) server-signature RSA-PSS (2048 bits) server-digest SHA256)
-        (No client certificate requested)
-        by mail.incenp.org (Postfix) with ESMTPSA id 94FEB20213
-        for <util-linux@vger.kernel.org>; Sat, 27 Jun 2020 20:58:27 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=incenp.org; s=201912;
-        t=1593284308; bh=h0UOIAPVgj/4mCw5+m04RrKd15FA/DDQCwkTJPeKqtY=;
-        h=From:To:Subject:Date;
-        b=R70x3vHztN0KBMndI16YuWIcwVfpBC8GLYgPg212Dmfw5e3lnzkTOA8eeW56Ux3rf
-         lRg2CwxkESeepE3iupSWXKyCsGall2uIrUfDQpOU2kvugvxoK1UmCnCSazAipI5s6b
-         S39ou8M+cwrhJslCitf8iCBzzkfSuDEoWQjSxIPI=
-From:   Damien Goutte-Gattat <dgouttegattat@incenp.org>
-To:     util-linux@vger.kernel.org
-Subject: [PATCH] chfn: Make readline prompt for each field on a separate line
-Date:   Sat, 27 Jun 2020 19:58:13 +0100
-Message-Id: <20200627185813.17837-1-dgouttegattat@incenp.org>
-X-Mailer: git-send-email 2.27.0
+        with ESMTP id S1725916AbgF0WHo (ORCPT
+        <rfc822;util-linux-ng@vger.kernel.org>);
+        Sat, 27 Jun 2020 18:07:44 -0400
+Received: from mail-wm1-x342.google.com (mail-wm1-x342.google.com [IPv6:2a00:1450:4864:20::342])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id B4EB0C061794
+        for <util-linux-ng@vger.kernel.org>; Sat, 27 Jun 2020 15:07:43 -0700 (PDT)
+Received: by mail-wm1-x342.google.com with SMTP id 22so11853508wmg.1
+        for <util-linux-ng@vger.kernel.org>; Sat, 27 Jun 2020 15:07:43 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=mime-version:reply-to:from:date:message-id:subject:to
+         :content-transfer-encoding;
+        bh=hDm0J70xfMLbVvceQHwxPddZCp69UMTk2d0jtKg2a8s=;
+        b=f9F4OeCeRmjyCn/l5zWRCnvqn8abBSCJ0Y8qujQ0kmxWn834D2fXcj9rvsWpCDPIuS
+         J4EoerIfxQNxbL3GXEU7ldfNRYPjw9+UDx+oUErzer3ipQGx1bMVBJ4GKw5qxwtLFKgm
+         GIGKX0Yf3u59BQOeDfpIf5jZ+3vnA0ZzLii/fzh6lT1DnoxV12hExchyOgRH8ZWUzh6h
+         YfJSqrAXwDwYWOkanSpTn/205IELx8NOzYqaPLRhLaj+p8d8Tqco8ZlQgP7W4AOriRZo
+         /C1JWu9y1DjEpYGijceZGziK7m0b44a1VzD/YaM40U0hZVpq1t42ddRbOo9XgyjTsiIU
+         X8hQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
+         :subject:to:content-transfer-encoding;
+        bh=hDm0J70xfMLbVvceQHwxPddZCp69UMTk2d0jtKg2a8s=;
+        b=sbVvQj/oyI+7o1orRbGUAsd9a+eZ15yNszZn16ZYQdKlqoe3c3gMz5C5cPd/Zve8Ar
+         svXeU8E+ekJlA3yUTxhae88WpmJEx5j1+84rSDP2TcxXB9nt/arRU6GbzTmRYgPpIwU4
+         lrdIeBbRlJe4Nhr98mtpLT7MyOHFuK/U/M5x2yVVwvKvfsLaP2TXyttghKnwl5qUVK6h
+         gKoNQ40OfvT4JgZAA2XaHNrBBOh6UtzIPvuwVYuJgHGSjKiP/DQEOGeWK443qL3tpq7w
+         VcZ05AHw64xQFR3SBnEs0TSUf8i5h7Zx944o1B+xafavS7QcqnNaOD7K16k8ZarsK6Cs
+         miIQ==
+X-Gm-Message-State: AOAM531KjT1TlUcwWO/dN5TDA1vwWAqunw83PLevrJTD2EyfhJUaZpRs
+        WF0bk3wuZvfICZOT3DDNhCIfsh70CQcwXWXZECOwHi1BpgM=
+X-Google-Smtp-Source: ABdhPJzB2PS1uLzfXnv9RJ9+8ywF0BTYmMReQpmFB2cwHUGJdFU/VqT1TPNRIciUkUVNxK28Z0jWU0doicUzCH8V5Ek=
+X-Received: by 2002:a7b:c043:: with SMTP id u3mr10377547wmc.185.1593295180142;
+ Sat, 27 Jun 2020 14:59:40 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Received: by 2002:adf:f187:0:0:0:0:0 with HTTP; Sat, 27 Jun 2020 14:59:39
+ -0700 (PDT)
+Reply-To: un.org@i.ua
+From:   helen <upspostexpress@gmail.com>
+Date:   Sat, 27 Jun 2020 22:59:39 +0100
+Message-ID: <CA+HWcLeFxWA2HFg2eTDi9xRk8OKWn7oojHXSEX-EzsM7GcSGnA@mail.gmail.com>
+Subject: 
+To:     undisclosed-recipients:;
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 Sender: util-linux-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-When readline is called to get user input, it is called without
-a prompt argument. As a result, if the user does not enter anything
-for a given field, then the next field is displayed on the same
-line, yielding the following output:
+MONEY-GRAM TRANSFERRED PAYMENT INFO:
 
-  $ chfn
-  Changing finger information for user.
-  Password:
-  Name []: Office []: Office Phone []: Home Phone []:
+Below is the sender=E2=80=99s information
 
-instead of the expected:
 
-  $ chfn
-  Changing finger information for user.
-  Password:
-  Full Name []:
-  Room Number []:
-  Work Phone []:
-  Home Phone []:
 
-This patch restores the expected behavior by feeding readline with
-a character to display as "prompt".
+1. MG. REFERENCE NO#: 36360857
 
-Signed-off-by: Damien Goutte-Gattat <dgouttegattat@incenp.org>
----
- login-utils/chfn.c | 5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
+2. SENDER'S NAME: Johnson Williams
 
-diff --git a/login-utils/chfn.c b/login-utils/chfn.c
-index 1b203a83e..b2aadb0d9 100644
---- a/login-utils/chfn.c
-+++ b/login-utils/chfn.c
-@@ -235,12 +235,13 @@ static char *ask_new_field(struct chfn_control *ctl, const char *question,
- 	if (!def_val)
- 		def_val = "";
- 	while (true) {
--		printf("%s [%s]: ", question, def_val);
-+		printf("%s [%s]:", question, def_val);
- 		__fpurge(stdin);
- #ifdef HAVE_LIBREADLINE
- 		rl_bind_key('\t', rl_insert);
--		if ((buf = readline(NULL)) == NULL)
-+		if ((buf = readline(" ")) == NULL)
- #else
-+		putchar('\n');
- 		if (getline(&buf, &dummy, stdin) < 0)
- #endif
- 			errx(EXIT_FAILURE, _("Aborted."));
--- 
-2.27.0
+3. AMOUNT TO PICKUP: US$10,000
 
+
+
+Go to any Money Gram office near you and pick up the payment Track the
+
+Reference Number by visiting and click the link below
+
+(https://secure.moneygram.com/embed/track) and enter the Reference
+
+Number: 36360857 and the Last Name: Williams, you will find the payment
+
+available for pickup instantly.
+
+Yours Sincerely,
+
+Mrs. Helen Marvis
+United Nations Liaison Office
+Directorate for International Payments
