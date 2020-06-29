@@ -2,54 +2,50 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id CF2D020C991
-	for <lists+util-linux@lfdr.de>; Sun, 28 Jun 2020 20:27:22 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 482DD20CB45
+	for <lists+util-linux@lfdr.de>; Mon, 29 Jun 2020 02:47:18 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726593AbgF1S1V (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Sun, 28 Jun 2020 14:27:21 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:39500 "EHLO
+        id S1726399AbgF2ArQ (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Sun, 28 Jun 2020 20:47:16 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:42742 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726060AbgF1S1V (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Sun, 28 Jun 2020 14:27:21 -0400
-Received: from mail-lj1-x243.google.com (mail-lj1-x243.google.com [IPv6:2a00:1450:4864:20::243])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 4CDA8C03E979
-        for <util-linux@vger.kernel.org>; Sun, 28 Jun 2020 11:27:21 -0700 (PDT)
-Received: by mail-lj1-x243.google.com with SMTP id b25so12049832ljp.6
-        for <util-linux@vger.kernel.org>; Sun, 28 Jun 2020 11:27:21 -0700 (PDT)
+        with ESMTP id S1726395AbgF2ArP (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Sun, 28 Jun 2020 20:47:15 -0400
+Received: from mail-oi1-x244.google.com (mail-oi1-x244.google.com [IPv6:2607:f8b0:4864:20::244])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 7DBB4C03E979
+        for <util-linux@vger.kernel.org>; Sun, 28 Jun 2020 17:47:13 -0700 (PDT)
+Received: by mail-oi1-x244.google.com with SMTP id k4so13066320oik.2
+        for <util-linux@vger.kernel.org>; Sun, 28 Jun 2020 17:47:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=mime-version:reply-to:from:date:message-id:subject:to;
-        bh=/bJJuAbxLOI8ZB5kWrg6GnM3H9CKnk3zJ1in7nW69lY=;
-        b=ErG33w2rhFoqGrzIRAGVIEXCN7lewyJudfpIsrsCk9e7awzprhaDPhzGQjbJOvEfOc
-         v5qOqoJuLeWcDz4SGS4yCDRGha64ISApBYW74DDZyXOxo2G1+pcXW6KMPhrkK/WmkXTS
-         0ZEbvt5f6sUxsjM0b57E8g7RGzINwWb7s9PVY37NSVnH7jL8jyixV1/OeaTkb9ij03DL
-         QwhjlKx3leFaCijMFFxAFS57JLJsiiFTXN1Mata21g/6SqgVif7feSFDf2x3ixR7FKLi
-         5Zqb8pkdyGzBOjXwJYwDWd8sp5qPMXoHTI3jfpvnWZGBHMe5FML1vb67+je8flhxzRYa
-         n0xQ==
+        h=mime-version:from:date:message-id:subject:to;
+        bh=sfBF2eHGSAd4zNJZwJH3G8ky3utA2EBNbg/lPoOyF5A=;
+        b=kgR8eIlL4365QmEkUFmz00zaPynDZ8A+JkYG4vTZWkfTG00WYOEG2mReSwNveDH6oA
+         rD5o8dLS9rqBxJqnDT2objEifs26th8a9V0rCABuYZ7ua+DjYLtwigbdRzBq/nt4D3ay
+         +aQK1pXPNxZCdzdAhWnYmttrU9UiV2zlwUniRkkdL0s+ZumdHkz1Co0G2ERRBh95sRf+
+         b4jLKkuw5TBqhmM0GU/wURPSa1vSB36YLflvdMbh+vzmalDkOYbxmlPy72oXnqcBrSBK
+         7YQVAnu7IvcTDrWOL1bTDEcISLX+8qRxddweUnjpCrQIxpJCVvFH7v8RwzWZr/gEySsr
+         SVnw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
-         :subject:to;
-        bh=/bJJuAbxLOI8ZB5kWrg6GnM3H9CKnk3zJ1in7nW69lY=;
-        b=Ga5cpZf8RnyQg7YACj507sHtDx05hTht2PXxAIhPoZY4ptXo5nKU33cJ58gVq87kq6
-         yAmU7AUUwTJYYeUQY2SsKl1MDTG53opKb575jNlRys7hF7iC+SyaJ80JQ+Amo2s//JfN
-         sb2uieR4ck2XdM9bwDCO/ldgjjj6UXfS6KZxgT9GeUse2dUo7M7pqHPYwFPhrAwtNr/b
-         DZUPukA3rwGhEK13PLrvACNot8D0jc41OwYahgzHSSvNvcw2T2yUu9GqZv8SarkSzoJz
-         BA65Pau32WG5Rybn1ufegDhZJwTRzgfPaHqte5r9SeEqrGWrw3DY+SdKe6mKkChBbCu3
-         xRWA==
-X-Gm-Message-State: AOAM533GARja6WxOB6xDDWrHWhTH6sK3QRE7usI1fakX2yNV5eUEalzE
-        M7tb1aB87rKNe7DMbrzuxbfVYVFtDZ1UWQbCq/8=
-X-Google-Smtp-Source: ABdhPJxuREA9vaLObbn85XTphXoUg2oHHGHkQDl9GAnD0XwO1VKA2H9iQKNeo32oqF3EEHv9M77E5g/kMYRv6uyufRI=
-X-Received: by 2002:a05:651c:3cf:: with SMTP id f15mr3837139ljp.365.1593368839734;
- Sun, 28 Jun 2020 11:27:19 -0700 (PDT)
+        h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+        bh=sfBF2eHGSAd4zNJZwJH3G8ky3utA2EBNbg/lPoOyF5A=;
+        b=j3EADdC+MwFQGz1Nvz/r5DSwY0tKS66ziSPdTL9lGURUNxsNphBNVVQCL/M8n8sqiv
+         +MRT4NdycOALHI8JP+xgXV8NO38sx/Ze+iWB0PHxdt8GEekpRHMwo2JOes19CBdLYsim
+         4tNSdraIdm9KtSQHKZhSetsASwoxy3EL8ADBtYLofBGWBW0dLSHJ/asddisT4Ef7o/2E
+         fS8FHsB99fHAL8hBrZ8/hj3hFsIloMAQ/AxkXyVtj4laY9uP7UdiIxJTXzKFtaywek5I
+         ncvbyzLcM/lc2z2bmJxnmPE2Mz6If92fXFAuNRu0NZNMaFWfE4E+iGtF05XmRgYdmrC7
+         +g9g==
+X-Gm-Message-State: AOAM532leT1FmRR5sXXago2/dl6TiycDS7d+rV08kqspRyK3GOLa7Z20
+        QCaqjmVtBn8iguGIfNzj49kvskwPbwtesGQYTu8=
+X-Google-Smtp-Source: ABdhPJxLxkO0dnq2+esbR1V9ZbgjLMyuOw+TfSMeuANQ+FjcV4S7OR3OKJJITymRA3SlYU68WUv7vwOpWtWvelxijMY=
+X-Received: by 2002:aca:f05:: with SMTP id 5mr222021oip.93.1593391631777; Sun,
+ 28 Jun 2020 17:47:11 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 2002:ab3:5582:0:0:0:0:0 with HTTP; Sun, 28 Jun 2020 11:27:18
- -0700 (PDT)
-Reply-To: mrjohnscottyounger35@gmail.com
-From:   John Scott Younger <martinsugo35@gmail.com>
-Date:   Sun, 28 Jun 2020 19:27:18 +0100
-Message-ID: <CA+7V0-kNFXxQDrWFbF=ovUFDFtddW6MiROhZUQHMfGMLofxmyg@mail.gmail.com>
-Subject: Your attention to this news update.
+From:   Jezzbuffalo Ventures Pty Ltd <jbvptyltd1@gmail.com>
+Date:   Mon, 29 Jun 2020 02:46:56 +0200
+Message-ID: <CAM1WRHC4Wf5y4qBZNKNvmjkx8eqhaR-o6ntvYXacSQuuAwJ78Q@mail.gmail.com>
+Subject: Agent / Representative Request
 To:     undisclosed-recipients:;
 Content-Type: text/plain; charset="UTF-8"
 Sender: util-linux-owner@vger.kernel.org
@@ -57,35 +53,18 @@ Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
--- 
-Your attention to this news update.
+Jezzbuffalo Ventures (Pty) Ltd.
+Shop No.4 Statehouse. 273 Lilian Ngoyi Str Cnr Quartz str.
+Jhb South Africa. Cells: +27730640640 / +27780764712 Web: www.jezzbuffalo.co.za
 
-The report / analysis received from our correspondence shows that you
-have NOT received your PAYMENT, due to administrative injustice from
-unpatriotic and uncivil payment officials. Following the resolution of
-the U.S Department of State, you are mandated to kindly reinstate your
-fund acquisition details for accreditation.
+Dear Sir,
+Your firm has been introduced to us as manufacturer; We as a marketing
+agency in South Africa are interested in doing business with you as
+your agent/representative here in South Africa. Could you please send
+your agency terms: - Email:
+jbv.salesrep@gmail.com / salesrepocletusigwe@safrica.com
 
-Sequel to the joint /collaborative effort by United Nations and US
-Department of State, to review, nullify and release all STOP ORDER on
-beneficiary transferred sum and consignment HELD at custom port
-authorities. At this juncture, you are advised to forward information
-of agencies that has put a HOLD on your consignment or STOP ORDER on
-your transferred sum.
+Wishing a lasting business relationship with you!
 
-This office is commission to investigate/rectify ISSUES affecting
-beneficiaries whose payment is HELD/STOP unjustly with the intent of
-demanding un-official fees/levies. Be informed that all administrative
-injustice imposed on beneficiaries by some dubious person(s) has come
-to the knowledge of oversight committee of United Nations and US
-Department of State.
-
-Thus our objective is to resolve all challenges facing release of your
-payment. Therefore get back to my office with the required information
-for assessment.
-
-Our in service,
-
-John Scott Younger
-Human Right Activist
-Tel:- + 44 770 002 8251
+Yours Sincerely,
+Cletus.I.O (CEO)
