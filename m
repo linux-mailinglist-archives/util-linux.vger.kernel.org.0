@@ -2,65 +2,80 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 46EF1213698
-	for <lists+util-linux@lfdr.de>; Fri,  3 Jul 2020 10:40:50 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 91338214862
+	for <lists+util-linux@lfdr.de>; Sat,  4 Jul 2020 21:29:36 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726022AbgGCIkt (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Fri, 3 Jul 2020 04:40:49 -0400
-Received: from us-smtp-2.mimecast.com ([207.211.31.81]:44571 "EHLO
-        us-smtp-delivery-1.mimecast.com" rhost-flags-OK-OK-OK-FAIL)
-        by vger.kernel.org with ESMTP id S1725648AbgGCIkt (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Fri, 3 Jul 2020 04:40:49 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-        s=mimecast20190719; t=1593765648;
-        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-         in-reply-to:in-reply-to:references:references;
-        bh=vaSieKrqwjoTAgPbWHf5Cjxx9IRoiJrIJMpqMeAGtnw=;
-        b=V92XVjKCPhXZlFI8NuzwLeRAIhLqtlghErCKeqrbtFLBIw0dbWNXdNLvf0+cA9p4wutP83
-        FjPEcxz4kun5y4qRRt+XUP6oxPznXhqom6LJ5kOML3Z3zeti/Kcdr8jkES86K6cW4Ycaq3
-        LB+kHrD1KL+SClBDt5IFT5EF3F8PQmA=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-361-PU-S0H3KOPOmK7s_cXL-6A-1; Fri, 03 Jul 2020 04:40:38 -0400
-X-MC-Unique: PU-S0H3KOPOmK7s_cXL-6A-1
-Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.phx2.redhat.com [10.5.11.14])
-        (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
-        (No client certificate requested)
-        by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 72CF58015CB;
-        Fri,  3 Jul 2020 08:40:37 +0000 (UTC)
-Received: from ws.net.home (unknown [10.40.194.32])
-        by smtp.corp.redhat.com (Postfix) with ESMTPS id 4CBE45DD63;
-        Fri,  3 Jul 2020 08:40:36 +0000 (UTC)
-Date:   Fri, 3 Jul 2020 10:40:33 +0200
-From:   Karel Zak <kzak@redhat.com>
-To:     Shin'ichiro Kawasaki <shinichiro.kawasaki@wdc.com>
-Cc:     util-linux@vger.kernel.org, Hans Holmberg <hans.holmberg@wdc.com>,
-        Damien Le Moal <Damien.LeMoal@wdc.com>
-Subject: Re: [PATCH] blkzone: add capacity field to zone report
-Message-ID: <20200703084033.cl2yef6vsxjonce5@ws.net.home>
-References: <20200701113326.153550-1-shinichiro.kawasaki@wdc.com>
+        id S1726922AbgGDT3f (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Sat, 4 Jul 2020 15:29:35 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:56056 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726643AbgGDT3e (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Sat, 4 Jul 2020 15:29:34 -0400
+Received: from mail-qk1-x743.google.com (mail-qk1-x743.google.com [IPv6:2607:f8b0:4864:20::743])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id C6D4AC061794
+        for <util-linux@vger.kernel.org>; Sat,  4 Jul 2020 12:29:34 -0700 (PDT)
+Received: by mail-qk1-x743.google.com with SMTP id 80so31599344qko.7
+        for <util-linux@vger.kernel.org>; Sat, 04 Jul 2020 12:29:34 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=mime-version:reply-to:from:date:message-id:subject:to;
+        bh=tGw7y2+ozvfaI5O0ckPyJEES122wpdGaQULo47ym37A=;
+        b=uMpuJrJxkOKGiSD7aYbXQwfxV11czIwGv0zxFG7wvNoQFWRYxAwwl/u33tBB5mb2BO
+         9h9iTFeQZS4l/hv3KXWCmPR+1hO5RzX46Xmtd8JQa0Oo4kNu31bmDAv1SwNBSYwXoeyQ
+         wwBq9UixyvM1enr1byNpo+lrfC1YZ0Wlztr9WF0xK0Noy1AIq2LCKJCGu2WEIbHE8CIK
+         fDoDdXzkaYuRloFSXaiXqSjt78Oto74v1nto4zWfsjCeIlyhZpv+ciSoNowduZKz4b9c
+         a3RDqNpan2T+wKpvLqVxgKxFcxr9PQczakhhesm/cQ0SVlCT9AscMA8VtFacbbibej1b
+         WU2A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
+         :subject:to;
+        bh=tGw7y2+ozvfaI5O0ckPyJEES122wpdGaQULo47ym37A=;
+        b=pfzGCRaoL6PVrylfil1MKDhGzw+rPveiB833ZCp2QHMJrHcMH+AYiJBiD1PM7zqp2x
+         Ts0y9SKYjbDsfKPFRSxDR6cAyehN0Ktgiu+BQ/xH6JPj6utwpqyS6KXLf91nBRtdJPWb
+         9s9SABVUV1tzkfLIVjYuOEES7Tp6bo/ma1sD4AnFwUP70lFyKFhR1d2qGnw3SngfphoD
+         uY5dBW7V/qBaNZlw8Neko7BDVJLAuV3rKlzHphE4tSFdDJ7qxBGo2DytWz+L6lwBc4+V
+         QOh2ptS/sLF9FpvRfJO+qKjik1/bt2iuWD2Mvsdt3vgzh+i2AxAvsIxKU/BDYmhAA2BX
+         WzpA==
+X-Gm-Message-State: AOAM533uWO9UTpzLpNA57UTxtXxuYy1MctICP8RC5dCWo5L6GVRpnG0H
+        MLy1w7hf5FpM+7ep6+UjdOrlm/fr5s/MpMGEyuQ=
+X-Google-Smtp-Source: ABdhPJz6aeI7SIkzlqXPx/QSiyn/2ZtWCnevvs0hMKSrsL9ppD25bSFPZryepYmSCGpOhQ6KP4lgbf/L5FSnOXeOc14=
+X-Received: by 2002:a37:b206:: with SMTP id b6mr40638360qkf.22.1593890974098;
+ Sat, 04 Jul 2020 12:29:34 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20200701113326.153550-1-shinichiro.kawasaki@wdc.com>
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.14
+Received: by 2002:ac8:698b:0:0:0:0:0 with HTTP; Sat, 4 Jul 2020 12:29:33 -0700 (PDT)
+Reply-To: johndav37@aol.com
+From:   "Barrister Ms. Linda B. Bammann, UN-Attorney at Law Court-Benin" 
+        <westernunion.benin982@gmail.com>
+Date:   Sat, 4 Jul 2020 21:29:33 +0200
+Message-ID: <CAP=nHBKO1omuFCXSwJ+54KB0N1hE+79wV=rH1+nf4-+rNKEsbw@mail.gmail.com>
+Subject: Contact Diplomatic Agent, Mr. JOHN DAV to receive your ATM Card
+ AMOUNT $12,850.000Million USD today.
+To:     undisclosed-recipients:;
+Content-Type: text/plain; charset="UTF-8"
 Sender: util-linux-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-On Wed, Jul 01, 2020 at 08:33:26PM +0900, Shin'ichiro Kawasaki wrote:
->  configure.ac        |  4 ++++
->  sys-utils/blkzone.8 |  1 +
->  sys-utils/blkzone.c | 20 ++++++++++++++++++--
->  3 files changed, 23 insertions(+), 2 deletions(-)
-
-Applied to the "next" branch. Thanks.
-
-    Karel
-
--- 
- Karel Zak  <kzak@redhat.com>
- http://karelzak.blogspot.com
-
+Attn Dear,Atm Card Beneficiary.
+Contact Diplomatic Agent, Mr. JOHN DAV to receive your ATM Card AMOUNT
+$12,850.000Million USD today.
+His contact address:
+AGENT NAME: Mr. JOHN DAV
+Email: johndav37@aol.com
+We required you to re-confirm your mailing address to Him where the
+ATM Card will get posted to you, because the court has approved your
+delivery this morning.
+your mailing address is required as listed below.
+YOUR FULL-----------------------
+HOME ADDRESS--------------------------------
+COUNTRY------------------------------
+AGE-------------------------------
+SEX-------------------------
+OCCUPATION---------------------------
+COPY OF YOUR VAILID ID CARD---------------------
+Thanks for your full Understanding.
+Send your ATM Card delivery fee $15.00 only to Mr. JOHN DAV.
+Barrister Ms. Linda B. Bammann, UN-Attorney at Law Court-Benin
+Email ID lindabammann42@yahoo.com
