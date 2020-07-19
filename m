@@ -2,15 +2,15 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 17FC0227603
-	for <lists+util-linux@lfdr.de>; Tue, 21 Jul 2020 04:51:22 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 1ADC1227604
+	for <lists+util-linux@lfdr.de>; Tue, 21 Jul 2020 04:51:26 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726089AbgGUCvV (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Mon, 20 Jul 2020 22:51:21 -0400
+        id S1726675AbgGUCvY (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Mon, 20 Jul 2020 22:51:24 -0400
 Received: from [211.196.21.11] ([211.196.21.11]:33406 "EHLO
         iscure03.localdomain" rhost-flags-FAIL-FAIL-OK-FAIL)
         by vger.kernel.org with ESMTP id S1725857AbgGUCvV (ORCPT
-        <rfc822;util-linux-ng@vger.kernel.org>);
+        <rfc822;util-linux@vger.kernel.org>);
         Mon, 20 Jul 2020 22:51:21 -0400
 Received: from Shop01 (unknown [127.0.0.1])
         by iscure03.localdomain (Postfix) with SMTP id 6B8A72AE34F;
