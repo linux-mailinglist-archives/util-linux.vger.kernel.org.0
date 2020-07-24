@@ -2,15 +2,16 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 7FE4122CE54
-	for <lists+util-linux@lfdr.de>; Fri, 24 Jul 2020 21:06:19 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id E5BD422CE53
+	for <lists+util-linux@lfdr.de>; Fri, 24 Jul 2020 21:06:14 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726397AbgGXTGS (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Fri, 24 Jul 2020 15:06:18 -0400
+        id S1726416AbgGXTGO (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Fri, 24 Jul 2020 15:06:14 -0400
 Received: from [125.140.134.231] ([125.140.134.231]:61457 "EHLO
         WIN-DAONO245HJF" rhost-flags-FAIL-FAIL-OK-FAIL) by vger.kernel.org
         with ESMTP id S1726381AbgGXTGO (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Fri, 24 Jul 2020 15:06:14 -0400
+        <rfc822;util-linux-ng@vger.kernel.org>);
+        Fri, 24 Jul 2020 15:06:14 -0400
 Received: from User ([66.154.113.229]) by WIN-DAONO245HJF with Microsoft SMTPSVC(8.5.9600.16384);
          Sat, 25 Jul 2020 04:03:20 +0900
 Reply-To: <christopherwang36@gmail.com>
