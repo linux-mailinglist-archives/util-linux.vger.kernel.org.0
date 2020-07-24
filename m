@@ -2,57 +2,57 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id C508F22C2C0
-	for <lists+util-linux@lfdr.de>; Fri, 24 Jul 2020 12:06:36 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 3203822C2C1
+	for <lists+util-linux@lfdr.de>; Fri, 24 Jul 2020 12:06:42 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726768AbgGXKGg (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Fri, 24 Jul 2020 06:06:36 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:34154 "EHLO
+        id S1726800AbgGXKGl (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Fri, 24 Jul 2020 06:06:41 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:34170 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726114AbgGXKGg (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Fri, 24 Jul 2020 06:06:36 -0400
-Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com [IPv6:2a00:1450:4864:20::52d])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id CFBF8C0619D3
-        for <util-linux@vger.kernel.org>; Fri, 24 Jul 2020 03:06:35 -0700 (PDT)
-Received: by mail-ed1-x52d.google.com with SMTP id h28so6638939edz.0
-        for <util-linux@vger.kernel.org>; Fri, 24 Jul 2020 03:06:35 -0700 (PDT)
+        with ESMTP id S1726783AbgGXKGl (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Fri, 24 Jul 2020 06:06:41 -0400
+Received: from mail-ej1-x644.google.com (mail-ej1-x644.google.com [IPv6:2a00:1450:4864:20::644])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 399FFC0619D3
+        for <util-linux@vger.kernel.org>; Fri, 24 Jul 2020 03:06:41 -0700 (PDT)
+Received: by mail-ej1-x644.google.com with SMTP id w9so9382581ejc.8
+        for <util-linux@vger.kernel.org>; Fri, 24 Jul 2020 03:06:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=XIQhiAiUu9YL4hn9J9QlCGJZi+AGx9GkU4/RDw3UxaY=;
-        b=Y4WUb8vNXzHEco/bgrlZPvGpjTpmbUpMszFRXoLPCM0CMlipNMDSDbL/8MEqL4CdB9
-         THYnzvpU3EVYKn7/hmrenT8JDdtAfc7gKqY17THxpSqgt6KbZI5Feq7ZW1yZrm9avJ/W
-         Ux+p9SBlb7vXDZXpED+Vysvqohyk5vcYXMt4witV+/VrW0rB1bhc4o7dRVOoh5YartPP
-         FXoNKGVWPyiKO9Tdu2aPBJC9uZlhWHdhHidq0G12PJxFztqepulqaHsiVCnNKw2yhyc/
-         dLiKIw51g29wu5TrD9sf5m0iitKC0+Q/8z1rXfI+WhW7lRNVy3GZmZjuSP8St8QCO83y
-         cjcA==
+        bh=SZqvbXXTLEGzIwLE6Q7Pvmy0sL8qITV27V5UAUpWm9E=;
+        b=TZ4C4+UMENlfChAHQRP/Zazi4cayrFHDg5LJEXQbkhwrg7R8aSbfNX2EJrgc/hiDCj
+         5zv1tNGn0xFp/4hpc8Oim/kMXdIMv8zZ/Am+phxEaakBUz/WrSGCjz9Ow7LhLAofVo9t
+         Ce8GDnZOYaFIknMBKml4bp6FOzNukrB8Ncqc1HX8jtze/e8rZ+UHa+i78WObwjf9aFVT
+         riQjbfPnH5H4rTxczbw3VD0yl1rDU2rReej7VrHO+iXPzmCr1ZBVH1UuQtx9PgP0v98D
+         qdukLzBWomB2kwqJXsvYMw5E4xixsevZVqZLo02of/OKEgsup6ZYwN90Lx544L2Y4I5K
+         zAlw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=XIQhiAiUu9YL4hn9J9QlCGJZi+AGx9GkU4/RDw3UxaY=;
-        b=gidB/iC6I0p+7YF4UX/1iVivvdrTQ/4ANHb5ezKLYFQzjjhJ+gI6EdOJewQocSqQdu
-         sL/FzKDYnzwj/ntoxVC3fhObJYIUpf0VBO9T5jXY/Nma6K/YKCzvySwIujmqvVy5P5Xa
-         /B0m9beeNhTcqLh64f9UbPIXj6O/tkAovxfXq2IyiZEdvvPR4FDDLllxpZ5HyIKEL3l2
-         rK+DOmwfaAJIKCTHKmLHvQb9LxULjvuAJYFA3II6WrKFYh8hJfP9RWfDLFp9KSsYvpi0
-         fHfsAyZcg0SSS63G4l5CvPH1YgXmzXB+RDKt0j3sEuMWebZay3Hj7SvcC7P6ySSfN2BO
-         r5sw==
-X-Gm-Message-State: AOAM533GfuPz0I7RUqAXuefekZTeu7nvPWfi+cFEXdz1axirkhHoMqq3
-        1nAbVelPwMGlirEvubGr/eE=
-X-Google-Smtp-Source: ABdhPJyAGAVD9cRfuE1GQprPHK9/uQ/vmBW3L0Qd+0NG6pgVKKj+LFtHK1UUkDSxt4GQhfi2McKf9A==
-X-Received: by 2002:aa7:cd18:: with SMTP id b24mr8571328edw.3.1595585194523;
-        Fri, 24 Jul 2020 03:06:34 -0700 (PDT)
+        bh=SZqvbXXTLEGzIwLE6Q7Pvmy0sL8qITV27V5UAUpWm9E=;
+        b=p/yej/zq+zrcLAwDKDBKGpzgCw39UMzxLQOmbjFrFFicLe9pQShgyEIIpx3bm682Uc
+         SMDnVGFzALy7DWinEI9yQc2uXClZpzVzcktSII1jjoSQtISaRkM2eSCc7lCmCs1ktYIj
+         Wv2LHPDc2joytq4y1HgL7BzMgAxbYaKfStVoQv6sW4ogxmw71yiFYZdfktv0H15Wmuh+
+         e7evy8ZVqWW3FbizMKBUjSOwgbUVVKWEfyJP1pSi8ajqzl8VV80hUFfivv3ETUPGBV3D
+         6zcqseY91UJ05qh4i4qaAifaxmdYj9iweUwhZbLFHzyahwYlDlUizChvE8bsUaDB055D
+         RkPA==
+X-Gm-Message-State: AOAM533Yqsn3j6dXJANCEueRVsRvJYB0hCALIY3bep6l4MbyG8UQugj5
+        jHXVR2YkQRGbJHBVQ5iphsPGpbyf
+X-Google-Smtp-Source: ABdhPJweUV1iApFULSpMdDgt0w4vXYCz4ePOp6oMRs+dMFjEMFCynxvGmwbNGAqldwo+d5zORhOHdg==
+X-Received: by 2002:a17:907:4420:: with SMTP id om24mr8220068ejb.10.1595585199946;
+        Fri, 24 Jul 2020 03:06:39 -0700 (PDT)
 Received: from bienne.fritz.box ([2001:a61:3adb:8201:9649:88f:51f8:6a21])
-        by smtp.gmail.com with ESMTPSA id b3sm424708edm.53.2020.07.24.03.06.33
+        by smtp.gmail.com with ESMTPSA id i5sm339998ejc.114.2020.07.24.03.06.38
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 24 Jul 2020 03:06:34 -0700 (PDT)
+        Fri, 24 Jul 2020 03:06:39 -0700 (PDT)
 From:   "Michael Kerrisk (man-pages)" <mtk.manpages@gmail.com>
 To:     mtk.manpages@gmail.com, Karel Zak <kzak@redhat.com>
 Cc:     util-linux@vger.kernel.org
-Subject: [PATCH 03/12] Manual pages: raw.8: Minor formatting and wording fixes
-Date:   Fri, 24 Jul 2020 12:06:09 +0200
-Message-Id: <20200724100618.584918-3-mtk.manpages@gmail.com>
+Subject: [PATCH 04/12] Manual pages: sfdisk.8: Minor wording and formatting fixes
+Date:   Fri, 24 Jul 2020 12:06:10 +0200
+Message-Id: <20200724100618.584918-4-mtk.manpages@gmail.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20200724100618.584918-1-mtk.manpages@gmail.com>
 References: <20200724100618.584918-1-mtk.manpages@gmail.com>
@@ -65,64 +65,113 @@ X-Mailing-List: util-linux@vger.kernel.org
 
 Signed-off-by: Michael Kerrisk (man-pages) <mtk.manpages@gmail.com>
 ---
- disk-utils/raw.8 | 17 ++++++++++-------
- 1 file changed, 10 insertions(+), 7 deletions(-)
+ disk-utils/sfdisk.8 | 38 +++++++++++++++++++++++++++-----------
+ 1 file changed, 27 insertions(+), 11 deletions(-)
 
-diff --git a/disk-utils/raw.8 b/disk-utils/raw.8
-index ba9fd256a..d569507b8 100644
---- a/disk-utils/raw.8
-+++ b/disk-utils/raw.8
-@@ -34,10 +34,10 @@ device numbers, or as a path name
- to an existing block device file.
+diff --git a/disk-utils/sfdisk.8 b/disk-utils/sfdisk.8
+index 6c3f62edd..6c54a1699 100644
+--- a/disk-utils/sfdisk.8
++++ b/disk-utils/sfdisk.8
+@@ -26,7 +26,7 @@ sfdisk \- display or manipulate a disk partition table
+ .SH DESCRIPTION
+ .B sfdisk
+ is a script-oriented tool for partitioning any block device.  It
+-runs in interactive mode if executed on terminal (stdin refers to a terminal).
++runs in interactive mode if executed on a terminal (stdin refers to a terminal).
+ 
+ Since version 2.26
+ .B sfdisk
+@@ -45,11 +45,15 @@ to alignment if the start offset is specified exactly in sectors and partition
+ size relative or by multiplicative suffixes.
+ 
+ The recommended way is not to specify start offsets at all and specify
+-partition size in MiB, GiB (or so).  In this case sfdisk align all partitions
++partition size in MiB, GiB (or so).  In this case
++.B sfdisk
++aligns all partitions
+ to block-device I/O limits (or when I/O limits are too small then to megabyte
+ boundary to keep disk layout portable).  If this default behaviour is unwanted
+ (usually for very small partitions) then specify offsets and sizes in
+-sectors.  In this case sfdisk entirely follows specified numbers without any
++sectors.  In this case
++.B sfdisk
++entirely follows specified numbers without any
+ optimization.
+ .sp
+ .B sfdisk
+@@ -62,11 +66,15 @@ partitions.
+ .B sfdisk
+ uses BLKRRPART (reread partition table) ioctl to make sure that the device is
+ not used by system or other tools (see also \-\-no-reread).  It's possible that
+-this feature or another sfdisk activity races with \fBudevd\fR.  The recommended way
++this feature or another
++.B sfdisk
++activity races with \fBudevd\fR.  The recommended way
+ how to avoid possible collisions is to use \fB\-\-lock\fR option.
+ The exclusive lock will cause udevd to skip the event handling on the device.
  .PP
- The bindings already in existence can be queried with the
--.I \-q
-+.B \-q
- option, which is used either with a raw device filename to query that one
- device, or with the
--.I \-a
-+.B \-a
- option to query all bound raw devices.
- .PP
- Unbinding can be done by specifying major and minor 0.
-@@ -66,8 +66,8 @@ will query an existing binding instead of setting a new one.
+-The sfdisk prompt is only a hint for users and a displayed partition number does
++The
++.B sfdisk
++prompt is only a hint for users and a displayed partition number does
+ not mean that the same partition table entry will be created (if -N not
+ specified), especially for tables with gaps.
+ 
+@@ -96,8 +104,10 @@ bootable flag on all unspecified partitions. The special placeholder '\-'
+ may be used instead of the partition numbers to switch off the bootable flag
+ on all partitions.
+ 
+-The activation command is supported for MBR and PMBR only.  If GPT label is detected
+-than sfdisk prints warning and automatically enter PMBR.
++The activation command is supported for MBR and PMBR only.
++If a GPT label is detected, then
++.B sfdisk
++prints warning and automatically enters PMBR.
+ 
+ If no \fIpartition-number\fR is specified, then list the partitions with an
+ enabled flag.
+@@ -267,7 +277,9 @@ and the last command reorders partitions to match disk order
+ 
  .TP
- \fB\-a\fR, \fB\-\-all\fR
- With
--.B \-q
--, specify that all bound raw devices should be queried.
-+.BR \-q ,
-+specify that all bound raw devices should be queried.
+ .B \-\-move\-use\-fsync
+-Use fsync system call after each write when move data to a new location by
++Use the
++.BR fsync (2)
++system call after each write when moving data to a new location by
+ \fB\-\-move\-data\fR.
  .TP
- \fB\-h\fR, \fB\-\-help\fR
- Display help text and exit.
-@@ -78,20 +78,23 @@ Display version information and exit.
- .SH NOTES
- Rather than using raw devices applications should prefer
- .BR open (2)
--devices, such as /dev/sda1, with the O_DIRECT flag.
-+devices, such as
-+.IR /dev/sda1 ,
-+with the
-+.B O_DIRECT
-+flag.
- .SH BUGS
- The Linux
- .BR dd (1)
- command should be used without the \fBbs=\fR option, or the blocksize
- needs to be a multiple of the sector size of the device (512 bytes usually),
- otherwise it will fail with "Invalid Argument" messages (EINVAL).
--
- .PP
- Raw I/O devices do not maintain cache coherency with the Linux block
- device buffer cache.  If you use raw I/O to overwrite data already in
- the buffer cache, the buffer cache will no longer correspond to the
- contents of the actual storage device underneath.  This is deliberate,
--but is regarded either a bug or a feature depending on who you ask!
-+but is regarded as either a bug or a feature, depending on who you ask!
- .SH AUTHORS
- Stephen Tweedie (sct@redhat.com)
- .SH AVAILABILITY
+ .BR \-o , " \-\-output " \fIlist
+@@ -305,7 +317,7 @@ to avoid possible collisions.  The argument \fIwhen\fR can be \fBauto\fR,
+ except the old partition-table signatures which are always wiped before create
+ a new partition-table if the argument \fIwhen\fR is not \fBnever\fR. In all
+ cases detected signatures are reported by warning messages before a new
+-partition table is created.  See also
++partition table is created.  See also the
+ .BR wipefs (8)
+ command.
+ 
+@@ -418,7 +430,9 @@ The partition
+ is given in hex for MBR (DOS) where 0x prefix is optional; a GUID string for
+ GPT; a shortcut or an alias. It's recommended to use two letters for MBR hex codes to
+ avoid collision between deprecated shortcut 'E' and '0E' MBR hex code. For backward
+-compatibility sfdisk tries to interpret
++compatibility
++.B sfdisk
++tries to interpret
+ .I type
+ as a shortcut as a first possibility in partitioning scripts although on other places (e.g.
+ \fB\-\-part-type command)\fR it tries shortcuts as the last possibility.
+@@ -601,7 +615,9 @@ The welcome message.
+ 
+ .SH ENVIRONMENT
+ .IP SFDISK_DEBUG=all
+-enables sfdisk debug output.
++enablescw
++.B sfdisk
++debug output.
+ .IP LIBFDISK_DEBUG=all
+ enables libfdisk debug output.
+ .IP LIBBLKID_DEBUG=all
 -- 
 2.26.2
 
