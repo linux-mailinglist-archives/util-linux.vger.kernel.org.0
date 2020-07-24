@@ -2,62 +2,67 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id AAD7222BB0C
-	for <lists+util-linux@lfdr.de>; Fri, 24 Jul 2020 02:35:12 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 756F522BEB9
+	for <lists+util-linux@lfdr.de>; Fri, 24 Jul 2020 09:12:58 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727778AbgGXAfL (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Thu, 23 Jul 2020 20:35:11 -0400
-Received: from vn01.namespace.at ([213.208.148.228]:41266 "EHLO
-        nlay-fle-service01.in.namespace.at" rhost-flags-OK-OK-OK-FAIL)
-        by vger.kernel.org with ESMTP id S1726723AbgGXAfL (ORCPT
-        <rfc822;util-linux@vger.kernel.org>);
-        Thu, 23 Jul 2020 20:35:11 -0400
-Received: from [10.100.0.62] (helo=debbuild.in.namespace.at)
-        by nlay-fle-service01.in.namespace.at with esmtps (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
-        (Exim 4.92)
-        (envelope-from <zeha@debian.org>)
-        id 1jylg5-0067nt-I4
-        for util-linux@vger.kernel.org; Fri, 24 Jul 2020 02:35:09 +0200
-Received: from ch by debbuild.in.namespace.at with local (Exim 4.94)
-        (envelope-from <zeha@debian.org>)
-        id 1jylg5-0005CA-9H
-        for util-linux@vger.kernel.org; Fri, 24 Jul 2020 00:35:09 +0000
-From:   Chris Hofstaedtler <zeha@debian.org>
-To:     util-linux@vger.kernel.org
-Subject: [PATCH] fdisk: fix expected test output on alpha
-Date:   Fri, 24 Jul 2020 00:35:09 +0000
-Message-Id: <20200724003509.19927-1-zeha@debian.org>
-X-Mailer: git-send-email 2.28.0.rc1
+        id S1726567AbgGXHM6 (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Fri, 24 Jul 2020 03:12:58 -0400
+Received: from us-smtp-delivery-1.mimecast.com ([205.139.110.120]:23505 "EHLO
+        us-smtp-1.mimecast.com" rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org
+        with ESMTP id S1726554AbgGXHM5 (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Fri, 24 Jul 2020 03:12:57 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+        s=mimecast20190719; t=1595574777;
+        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+         in-reply-to:in-reply-to:references:references;
+        bh=uxzrBCphZX+k5Ks7OsPo7CA0kQt+LqmSXrQwMpHI6Bg=;
+        b=fAY8Yquc/n9M/u4JajQBsrcWKLe+rL8tWNpBR/zn3yx8H5ntMx73T/oGsVzu3Dwe5h+Mkv
+        9XAxxLj6Td4x1xoJeYMh+fcgWnEwX/MyD7xGSVsp0Sz5+KJLUBN7g16oN3PecHdCTPTdp6
+        xLx9A0ssn+KS1LmQuhE2+kgnz6oHMzQ=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-508-5mJ1JFuFPXylGmq79ycdUA-1; Fri, 24 Jul 2020 03:12:51 -0400
+X-MC-Unique: 5mJ1JFuFPXylGmq79ycdUA-1
+Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.phx2.redhat.com [10.5.11.14])
+        (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+        (No client certificate requested)
+        by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 92B181005504;
+        Fri, 24 Jul 2020 07:12:50 +0000 (UTC)
+Received: from ws.net.home (unknown [10.40.194.188])
+        by smtp.corp.redhat.com (Postfix) with ESMTPS id D23095D9F1;
+        Fri, 24 Jul 2020 07:12:49 +0000 (UTC)
+Date:   Fri, 24 Jul 2020 09:12:47 +0200
+From:   Karel Zak <kzak@redhat.com>
+To:     Chris Hofstaedtler <zeha@debian.org>
+Cc:     util-linux@vger.kernel.org
+Subject: Re: [PATCH] manpages: fix "The example command" in AVAILABILITY
+ section
+Message-ID: <20200724071247.ctrvpghhkiqdltnw@ws.net.home>
+References: <20200723223141.3718-1-zeha@debian.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20200723223141.3718-1-zeha@debian.org>
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.14
 Sender: util-linux-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-The last test output update inadvertedly replaced "ext2" with "MS-DOS"
-in the alpha-specific data.
+On Thu, Jul 23, 2020 at 10:31:41PM +0000, Chris Hofstaedtler wrote:
+>  disk-utils/fsck.cramfs.8 | 2 +-
+>  disk-utils/mkfs.cramfs.8 | 2 +-
+>  misc-utils/uuidparse.1   | 2 +-
+>  sys-utils/irqtop.1       | 2 +-
+>  sys-utils/lsirq.1        | 2 +-
+>  5 files changed, 5 insertions(+), 5 deletions(-)
 
-Fixes: 3c36438f0
-Broken build log: https://buildd.debian.org/status/fetch.php?pkg=util-linux&arch=alpha&ver=2.36-1&stamp=1595550493&raw=0
-Signed-off-by: Chris Hofstaedtler <zeha@debian.org>
----
- tests/expected/fdisk/bsd_0_64_alpha.LE | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Oh, good catch. Applied. Thanks!
 
-diff --git a/tests/expected/fdisk/bsd_0_64_alpha.LE b/tests/expected/fdisk/bsd_0_64_alpha.LE
-index 6d41d4a11..ae7dabda8 100644
---- a/tests/expected/fdisk/bsd_0_64_alpha.LE
-+++ b/tests/expected/fdisk/bsd_0_64_alpha.LE
-@@ -211,7 +211,7 @@ Command (m for help):
- 00 unused           05 4.1BSD           09 4.4LFS           0d boot           
- 01 swap             06 Eighth Edition   0a unknown          0e ADOS           
- 02 Version 6        07 4.2BSD           0b HPFS             0f HFS            
--03 Version 7        08 MS-DOS           0c ISO-9660         10 AdvFS          
-+03 Version 7        08 ext2             0c ISO-9660         10 AdvFS          
- 04 System V       
- 
- Command (m for help): 
+    Karel
+
 -- 
-2.28.0.rc1
+ Karel Zak  <kzak@redhat.com>
+ http://karelzak.blogspot.com
 
