@@ -2,57 +2,57 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 70D4F22C2C9
-	for <lists+util-linux@lfdr.de>; Fri, 24 Jul 2020 12:07:06 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id BA23E22C2CA
+	for <lists+util-linux@lfdr.de>; Fri, 24 Jul 2020 12:07:10 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727871AbgGXKHG (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Fri, 24 Jul 2020 06:07:06 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:34246 "EHLO
+        id S1727858AbgGXKHK (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Fri, 24 Jul 2020 06:07:10 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:34258 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726114AbgGXKHF (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Fri, 24 Jul 2020 06:07:05 -0400
-Received: from mail-ed1-x544.google.com (mail-ed1-x544.google.com [IPv6:2a00:1450:4864:20::544])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 7E86AC0619D3
-        for <util-linux@vger.kernel.org>; Fri, 24 Jul 2020 03:07:05 -0700 (PDT)
-Received: by mail-ed1-x544.google.com with SMTP id q4so3398828edv.13
-        for <util-linux@vger.kernel.org>; Fri, 24 Jul 2020 03:07:05 -0700 (PDT)
+        with ESMTP id S1726114AbgGXKHK (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Fri, 24 Jul 2020 06:07:10 -0400
+Received: from mail-ej1-x644.google.com (mail-ej1-x644.google.com [IPv6:2a00:1450:4864:20::644])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id CF89FC0619D3
+        for <util-linux@vger.kernel.org>; Fri, 24 Jul 2020 03:07:09 -0700 (PDT)
+Received: by mail-ej1-x644.google.com with SMTP id o18so9380738eje.7
+        for <util-linux@vger.kernel.org>; Fri, 24 Jul 2020 03:07:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=+8MCMj+l60383jZUY0w6m06ytuSvbswEnAprbVs1mqE=;
-        b=GeH0toEcaQANWIObE4yYslzxnaNHhNE5CkrqBdhn2Bbh2Lkz3lGzgWBXWPlk7uAd6B
-         rBUIbPHQsXfSY1Ro0acpaBvdkyvGTTY+pk9Kx/WXxWcPUNNg5AoCKCm73VVusg7bd1Ly
-         AjtPAVn2WfkSqlFnGmTHnxr7qs5WV45mm5XU3X0M0IFjqhKbj/LA8Q8YY4Ni3FYDRcMu
-         XCqIuKM+uYlSFiA3INgf9JcWjs4KxkroLI6jxtWS8VQWMUQG2xkLSa8fuyySLiseEw12
-         ORRkZ/jqh45RhISSbfW3zgjTMgXXrZUCWMNLoo3ACyg3nGFYAXLyfJHUDI/Z4gOz4DMG
-         kMPA==
+        bh=wezfqKGz1j+k8qPYA3MPYpPB/r9++XYnAnYgN9tMIis=;
+        b=OcuJdXdseOW2h05UEVY94/G48HGYTXiIeNpyoMwfhFLMyVSOumlYtxPtv9Y0KXmjIS
+         Gnok7eGJFknM4KGBbnCzgedHTzMObG5ZIHF1sSnRx1e49fDX7XWyi70he7C67tuicENK
+         BU2Zeom7Y5azvaanqV09gQc5pf0I63m7TLQPDPwdxUGq71DIxJ/X26AgNuaO0kq9hzCB
+         ZMLkMEWmG4lZDbaXTVunJdaAAxU3FAKRrYpmID2lYR6+rvLxmC2pkoIPfcFqyHs4HeBL
+         f8KoTt7r8sKQ4Yjn32okspC9F2SWs2BsDzjeEoW73CbyWBosooGtcqAEUESksuh97O1A
+         n5aA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=+8MCMj+l60383jZUY0w6m06ytuSvbswEnAprbVs1mqE=;
-        b=FQRceSMXA2Z/hDWM56xhI48l8V3O5dxNpukSbXz1mqZaV2uJx3F0oH63xxp6Zb1DEC
-         yyjicm36nzY2ceSPyZdVMBxoxDUEI/GheabI5J/J3pRX1mxpJ5OgGxh4Q5sprULZS4sR
-         q4TYWoUS75t/M8QWsAtMdz9gVdDULAeCtzaxVZ1apE+tqjRqqfnAi5iZ04zVgNkqIZg+
-         /D+0ZdWan1S9NpIYsFd5l1p90VLlyjjwBajSw1+niJKzjgxlDqVXK1vrIBRh9BF+b/Jz
-         maOdZdryZlxnBi3RSdbLJLTLFxa6cn12RSl1V/9wtJ/zGtna2VFySqcCrlV/YmU2Qvba
-         WGPw==
-X-Gm-Message-State: AOAM532hW5HRjFGGexxLSFZurxBZR65KMb0UwmilFYTx1KHG9QolrKo3
-        KzYeK2LmXhp5ZO3hJYQ2fC0=
-X-Google-Smtp-Source: ABdhPJyZVFEPj2e9BoK1StxGmleZOauSAOgYEZ+vrlrQ83oVZ/ujPKgXeDgVY1sI8i6wNgqRnZq9Ew==
-X-Received: by 2002:aa7:db06:: with SMTP id t6mr8261836eds.369.1595585224257;
-        Fri, 24 Jul 2020 03:07:04 -0700 (PDT)
+        bh=wezfqKGz1j+k8qPYA3MPYpPB/r9++XYnAnYgN9tMIis=;
+        b=Km6SHCv45MFJtCOVwJUR0y2eKidls77BE41rh/bSxujgu/b2ig/+HThIbB6WmExJpU
+         5NRZHq3/LpQ+Fqkvk2QAk7C4gcmzvGM/c0aSrumjIbDlChKCSqMmZztZUeuibvYbShGP
+         JE2nLY43e4lanB7E6Tc8UmSJeyU7j4X5KEu4LK35cJzw2dvXzIuJQqdTNJPwVf1jd23O
+         86BdwC/aYZ+3OyP9nXi04ayoymDwKC9x4/s61dOTVRm7UN8AqWZv6d5W39tVISWzr9wa
+         dm2wLij4Bcn0Y8NL+p7XO7c7H2y0OIlOuGTwDzFcoIZG0YK+SMyhWzZSjxj5T2IkF2JF
+         zUZg==
+X-Gm-Message-State: AOAM531WKTI1aRQVoMPS3EKjt0Yl/Hz0f07nupzhSRs6MXV7KARdXJxb
+        eOXUt3Sdo0GoZvZBvPgQ9sc=
+X-Google-Smtp-Source: ABdhPJxD9dl3ODcba4pjNpIqyEyNdL20RTDPRnCg12Jf7M9ZtrsDygU9yHWm7Kh2CZt2r5Kkj4ehFA==
+X-Received: by 2002:a17:906:fb81:: with SMTP id lr1mr8200423ejb.104.1595585228603;
+        Fri, 24 Jul 2020 03:07:08 -0700 (PDT)
 Received: from bienne.fritz.box ([2001:a61:3adb:8201:9649:88f:51f8:6a21])
-        by smtp.gmail.com with ESMTPSA id cm22sm398284edb.44.2020.07.24.03.07.03
+        by smtp.gmail.com with ESMTPSA id h8sm421823edq.15.2020.07.24.03.07.07
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 24 Jul 2020 03:07:03 -0700 (PDT)
+        Fri, 24 Jul 2020 03:07:08 -0700 (PDT)
 From:   "Michael Kerrisk (man-pages)" <mtk.manpages@gmail.com>
 To:     mtk.manpages@gmail.com, Karel Zak <kzak@redhat.com>
 Cc:     util-linux@vger.kernel.org
-Subject: [PATCH 09/12] Manual pages: lsblk.8: Minor formatting and typo fixes
-Date:   Fri, 24 Jul 2020 12:06:15 +0200
-Message-Id: <20200724100618.584918-9-mtk.manpages@gmail.com>
+Subject: [PATCH 10/12] Manual pages: wdctl.8: typo fix
+Date:   Fri, 24 Jul 2020 12:06:16 +0200
+Message-Id: <20200724100618.584918-10-mtk.manpages@gmail.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20200724100618.584918-1-mtk.manpages@gmail.com>
 References: <20200724100618.584918-1-mtk.manpages@gmail.com>
@@ -63,58 +63,23 @@ Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-Signed-off-by: Michael Kerrisk (man-pages) <mtk.manpages@gmail.com>
 ---
- misc-utils/lsblk.8 | 15 +++++++++++----
- 1 file changed, 11 insertions(+), 4 deletions(-)
+ sys-utils/wdctl.8 | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/misc-utils/lsblk.8 b/misc-utils/lsblk.8
-index 3da4e2e19..891b3f088 100644
---- a/misc-utils/lsblk.8
-+++ b/misc-utils/lsblk.8
-@@ -13,7 +13,9 @@ command reads the
- .B sysfs
- filesystem and
- .B udev db
--to gather information. If the udev db is not available or lsblk is compiled without udev support than it
-+to gather information. If the udev db is not available or
-+.B lsblk
-+is compiled without udev support, then it
- tries to read LABELs, UUIDs and filesystem types from the block device. In this case root permissions
- are necessary.
+diff --git a/sys-utils/wdctl.8 b/sys-utils/wdctl.8
+index efd8b5917..c2c1ef163 100644
+--- a/sys-utils/wdctl.8
++++ b/sys-utils/wdctl.8
+@@ -14,7 +14,7 @@ Show hardware watchdog status.  The default device is
+ If more than one device is specified then the output is separated by
+ one blank line.
  .PP
-@@ -41,7 +43,9 @@ might be executed in time when
- does not have all information about recently added or modified devices yet. In this
- case it is recommended to use
- .B "udevadm settle"
--before lsblk to synchronize with udev.
-+before
-+.B lsblk
-+to synchronize with udev.
- .SH OPTIONS
- .TP
- .BR \-a , " \-\-all"
-@@ -162,7 +166,8 @@ than the tree branches are sorted by the \fIcolumn\fP.
- Print the zone model for each device.
- .TP
- .BR " \-\-sysroot " \fIdirectory\fP
--Gather data for a Linux instance other than the instance from which the lsblk
-+Gather data for a Linux instance other than the instance from which the
-+.B lsblk
- command is issued.  The specified directory is the system root of the Linux
- instance to be inspected.  The real device nodes in the target directory can
- be replaced by text files with udev attributes.
-@@ -179,7 +184,9 @@ some specified devices found, some not found
- 
- .SH ENVIRONMENT
- .IP LSBLK_DEBUG=all
--enables lsblk debug output.
-+enables
-+.B lsblk
-+debug output.
- .IP LIBBLKID_DEBUG=all
- enables libblkid debug output.
- .IP LIBMOUNT_DEBUG=all
+-If the device is already used or user has no permissions to read from the device than
++If the device is already used or user has no permissions to read from the device, then
+ .B wdctl
+ reads data from sysfs.  In this case information about supported features (flags) might be missing.
+ .PP
 -- 
 2.26.2
 
