@@ -2,31 +2,31 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id F124222B987
-	for <lists+util-linux@lfdr.de>; Fri, 24 Jul 2020 00:31:45 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id AAD7222BB0C
+	for <lists+util-linux@lfdr.de>; Fri, 24 Jul 2020 02:35:12 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726546AbgGWWbp (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Thu, 23 Jul 2020 18:31:45 -0400
-Received: from vn01.namespace.at ([213.208.148.228]:41236 "EHLO
+        id S1727778AbgGXAfL (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Thu, 23 Jul 2020 20:35:11 -0400
+Received: from vn01.namespace.at ([213.208.148.228]:41266 "EHLO
         nlay-fle-service01.in.namespace.at" rhost-flags-OK-OK-OK-FAIL)
-        by vger.kernel.org with ESMTP id S1726501AbgGWWbo (ORCPT
+        by vger.kernel.org with ESMTP id S1726723AbgGXAfL (ORCPT
         <rfc822;util-linux@vger.kernel.org>);
-        Thu, 23 Jul 2020 18:31:44 -0400
+        Thu, 23 Jul 2020 20:35:11 -0400
 Received: from [10.100.0.62] (helo=debbuild.in.namespace.at)
         by nlay-fle-service01.in.namespace.at with esmtps (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
         (Exim 4.92)
         (envelope-from <zeha@debian.org>)
-        id 1jyjkc-0065Ox-7h
-        for util-linux@vger.kernel.org; Fri, 24 Jul 2020 00:31:42 +0200
+        id 1jylg5-0067nt-I4
+        for util-linux@vger.kernel.org; Fri, 24 Jul 2020 02:35:09 +0200
 Received: from ch by debbuild.in.namespace.at with local (Exim 4.94)
         (envelope-from <zeha@debian.org>)
-        id 1jyjkb-0000yr-Um
-        for util-linux@vger.kernel.org; Thu, 23 Jul 2020 22:31:41 +0000
+        id 1jylg5-0005CA-9H
+        for util-linux@vger.kernel.org; Fri, 24 Jul 2020 00:35:09 +0000
 From:   Chris Hofstaedtler <zeha@debian.org>
 To:     util-linux@vger.kernel.org
-Subject: [PATCH] manpages: fix "The example command" in AVAILABILITY section
-Date:   Thu, 23 Jul 2020 22:31:41 +0000
-Message-Id: <20200723223141.3718-1-zeha@debian.org>
+Subject: [PATCH] fdisk: fix expected test output on alpha
+Date:   Fri, 24 Jul 2020 00:35:09 +0000
+Message-Id: <20200724003509.19927-1-zeha@debian.org>
 X-Mailer: git-send-email 2.28.0.rc1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -35,80 +35,29 @@ Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
+The last test output update inadvertedly replaced "ext2" with "MS-DOS"
+in the alpha-specific data.
+
+Fixes: 3c36438f0
+Broken build log: https://buildd.debian.org/status/fetch.php?pkg=util-linux&arch=alpha&ver=2.36-1&stamp=1595550493&raw=0
 Signed-off-by: Chris Hofstaedtler <zeha@debian.org>
 ---
- disk-utils/fsck.cramfs.8 | 2 +-
- disk-utils/mkfs.cramfs.8 | 2 +-
- misc-utils/uuidparse.1   | 2 +-
- sys-utils/irqtop.1       | 2 +-
- sys-utils/lsirq.1        | 2 +-
- 5 files changed, 5 insertions(+), 5 deletions(-)
+ tests/expected/fdisk/bsd_0_64_alpha.LE | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/disk-utils/fsck.cramfs.8 b/disk-utils/fsck.cramfs.8
-index 1beabd81b..90d794205 100644
---- a/disk-utils/fsck.cramfs.8
-+++ b/disk-utils/fsck.cramfs.8
-@@ -55,7 +55,7 @@ usage information was printed
- .BR mount (8),
- .BR mkfs.cramfs (8)
- .SH AVAILABILITY
--The example command is part of the util-linux package and is available from
-+The fsck.cramfs command is part of the util-linux package and is available from
- .UR https://\:www.kernel.org\:/pub\:/linux\:/utils\:/util-linux/
- Linux Kernel Archive
- .UE .
-diff --git a/disk-utils/mkfs.cramfs.8 b/disk-utils/mkfs.cramfs.8
-index 63158dd34..f01229f82 100644
---- a/disk-utils/mkfs.cramfs.8
-+++ b/disk-utils/mkfs.cramfs.8
-@@ -84,7 +84,7 @@ operation error, such as unable to allocate memory
- .BR fsck.cramfs (8),
- .BR mount (8)
- .SH AVAILABILITY
--The example command is part of the util-linux package and is available from
-+The mkfs.cramfs command is part of the util-linux package and is available from
- .UR https://\:www.kernel.org\:/pub\:/linux\:/utils\:/util-linux/
- Linux Kernel Archive
- .UE .
-diff --git a/misc-utils/uuidparse.1 b/misc-utils/uuidparse.1
-index 9194ace60..ae735dcc5 100644
---- a/misc-utils/uuidparse.1
-+++ b/misc-utils/uuidparse.1
-@@ -72,7 +72,7 @@ Sami Kerola
- RFC 4122
- .UE
- .SH AVAILABILITY
--The example command is part of the util-linux package and is available from
-+The uuidparse command is part of the util-linux package and is available from
- .UR https://\:www.kernel.org\:/pub\:/linux\:/utils\:/util-linux/
- Linux Kernel Archive
- .UE .
-diff --git a/sys-utils/irqtop.1 b/sys-utils/irqtop.1
-index 4cf941b2a..bd5d641c4 100644
---- a/sys-utils/irqtop.1
-+++ b/sys-utils/irqtop.1
-@@ -72,7 +72,7 @@ Sami Kerola
- Karel Zak
- .ME
- .SH AVAILABILITY
--The example command is part of the util-linux package and is available from
-+The irqtop command is part of the util-linux package and is available from
- .UR https://\:www.kernel.org\:/pub\:/linux\:/utils\:/util-linux/
- Linux Kernel Archive
- .UE .
-diff --git a/sys-utils/lsirq.1 b/sys-utils/lsirq.1
-index df0133ee5..f19aa1447 100644
---- a/sys-utils/lsirq.1
-+++ b/sys-utils/lsirq.1
-@@ -56,7 +56,7 @@ Sami Kerola
- Karel Zak
- .ME
- .SH AVAILABILITY
--The example command is part of the util-linux package and is available from
-+The lsirq command is part of the util-linux package and is available from
- .UR https://\:www.kernel.org\:/pub\:/linux\:/utils\:/util-linux/
- Linux Kernel Archive
- .UE .
+diff --git a/tests/expected/fdisk/bsd_0_64_alpha.LE b/tests/expected/fdisk/bsd_0_64_alpha.LE
+index 6d41d4a11..ae7dabda8 100644
+--- a/tests/expected/fdisk/bsd_0_64_alpha.LE
++++ b/tests/expected/fdisk/bsd_0_64_alpha.LE
+@@ -211,7 +211,7 @@ Command (m for help):
+ 00 unused           05 4.1BSD           09 4.4LFS           0d boot           
+ 01 swap             06 Eighth Edition   0a unknown          0e ADOS           
+ 02 Version 6        07 4.2BSD           0b HPFS             0f HFS            
+-03 Version 7        08 MS-DOS           0c ISO-9660         10 AdvFS          
++03 Version 7        08 ext2             0c ISO-9660         10 AdvFS          
+ 04 System V       
+ 
+ Command (m for help): 
 -- 
 2.28.0.rc1
 
