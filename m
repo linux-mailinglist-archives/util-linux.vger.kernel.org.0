@@ -2,49 +2,69 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id E5BD422CE53
-	for <lists+util-linux@lfdr.de>; Fri, 24 Jul 2020 21:06:14 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 078AE22D8D1
+	for <lists+util-linux@lfdr.de>; Sat, 25 Jul 2020 19:02:23 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726416AbgGXTGO (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Fri, 24 Jul 2020 15:06:14 -0400
-Received: from [125.140.134.231] ([125.140.134.231]:61457 "EHLO
-        WIN-DAONO245HJF" rhost-flags-FAIL-FAIL-OK-FAIL) by vger.kernel.org
-        with ESMTP id S1726381AbgGXTGO (ORCPT
-        <rfc822;util-linux-ng@vger.kernel.org>);
-        Fri, 24 Jul 2020 15:06:14 -0400
-Received: from User ([66.154.113.229]) by WIN-DAONO245HJF with Microsoft SMTPSVC(8.5.9600.16384);
-         Sat, 25 Jul 2020 04:03:20 +0900
-Reply-To: <christopherwang36@gmail.com>
-From:   "CHRISTOPHER WANG" <christopherwang36@gmail.com>
-Subject: INVESTMENT
-Date:   Fri, 24 Jul 2020 12:03:38 -0700
+        id S1726995AbgGYRCO (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Sat, 25 Jul 2020 13:02:14 -0400
+Received: from jabberwock.ucw.cz ([46.255.230.98]:54064 "EHLO
+        jabberwock.ucw.cz" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726567AbgGYRCO (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Sat, 25 Jul 2020 13:02:14 -0400
+Received: by jabberwock.ucw.cz (Postfix, from userid 1017)
+        id AF60D1C0BDD; Sat, 25 Jul 2020 19:02:11 +0200 (CEST)
+Date:   Sat, 25 Jul 2020 19:02:11 +0200
+From:   Pavel Machek <pavel@ucw.cz>
+To:     Karel Zak <kzak@redhat.com>
+Cc:     linux-kernel@vger.kernel.org, linux-fsdevel@vger.kernel.org,
+        util-linux@vger.kernel.org
+Subject: Re: [ANNOUNCE] util-linux v2.36
+Message-ID: <20200725170211.GA2807@amd>
+References: <20200723100828.262ftx3qhie2sc32@ws.net.home>
 MIME-Version: 1.0
-Content-Type: text/plain;
-        charset="Windows-1251"
-Content-Transfer-Encoding: 7bit
-X-Priority: 3
-X-MSMail-Priority: Normal
-X-Mailer: Microsoft Outlook Express 6.00.2600.0000
-X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2600.0000
-Message-ID: <WIN-DAONO245HJF7Qlm008f46bf@WIN-DAONO245HJF>
-X-OriginalArrivalTime: 24 Jul 2020 19:03:20.0628 (UTC) FILETIME=[18DCDF40:01D661ED]
-To:     unlisted-recipients:; (no To-header on input)
+Content-Type: multipart/signed; micalg=pgp-sha1;
+        protocol="application/pgp-signature"; boundary="Dxnq1zWXvFF0Q93v"
+Content-Disposition: inline
+In-Reply-To: <20200723100828.262ftx3qhie2sc32@ws.net.home>
+User-Agent: Mutt/1.5.23 (2014-03-12)
 Sender: util-linux-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
 
+--Dxnq1zWXvFF0Q93v
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Good day,
+Hi!
 
-You were recommended by a mutual associate. I write you regarding an investment of bearer bonds I made on behalf of a client. 
+> The commands fdisk(8), sfdisk(8), cfdisk(8), mkswap(8) and wipefs(8) now
+> support block devices locking by flock(2) to better behave with udevd or =
+other
+> tools. Ffor more details see https://systemd.io/BLOCK_DEVICE_LOCKING/.  T=
+his
 
-       The investment was made in 2009 and has been under my management. The said investor is deceased. The window is now available to assign these bonds to any name or company of my choice. I have all the necessary information to achieve this within 10 banking days.
-      
-       The total value of the bond is 100million pounds sterling, in a million pound denominations.
-      
-        If you can handle this, do contact me at your earliest convenience via my email christopherwang36@gmail.com
-So we can discuss the final details Thank you.
- 
-Mr CHRISTOPHER WANG
+There's typo "ffor", but I guess it is too late to fix that?
+
+Best regards,
+									Pavel
+--=20
+(english) http://www.livejournal.com/~pavelmachek
+(cesky, pictures) http://atrey.karlin.mff.cuni.cz/~pavel/picture/horses/blo=
+g.html
+
+--Dxnq1zWXvFF0Q93v
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1
+
+iEYEARECAAYFAl8cZZMACgkQMOfwapXb+vL9XwCbBSLZEvCjGt5yMfUaG1pII7Rn
+AP0AnRQMyE9vGu1xvXbuGuUg3CODmyPW
+=qUWC
+-----END PGP SIGNATURE-----
+
+--Dxnq1zWXvFF0Q93v--
