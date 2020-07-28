@@ -2,69 +2,84 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 078AE22D8D1
-	for <lists+util-linux@lfdr.de>; Sat, 25 Jul 2020 19:02:23 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id B161F2308FE
+	for <lists+util-linux@lfdr.de>; Tue, 28 Jul 2020 13:38:37 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726995AbgGYRCO (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Sat, 25 Jul 2020 13:02:14 -0400
-Received: from jabberwock.ucw.cz ([46.255.230.98]:54064 "EHLO
-        jabberwock.ucw.cz" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726567AbgGYRCO (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Sat, 25 Jul 2020 13:02:14 -0400
-Received: by jabberwock.ucw.cz (Postfix, from userid 1017)
-        id AF60D1C0BDD; Sat, 25 Jul 2020 19:02:11 +0200 (CEST)
-Date:   Sat, 25 Jul 2020 19:02:11 +0200
-From:   Pavel Machek <pavel@ucw.cz>
-To:     Karel Zak <kzak@redhat.com>
-Cc:     linux-kernel@vger.kernel.org, linux-fsdevel@vger.kernel.org,
-        util-linux@vger.kernel.org
-Subject: Re: [ANNOUNCE] util-linux v2.36
-Message-ID: <20200725170211.GA2807@amd>
-References: <20200723100828.262ftx3qhie2sc32@ws.net.home>
+        id S1729155AbgG1Li3 (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Tue, 28 Jul 2020 07:38:29 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:37394 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1729136AbgG1LiQ (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Tue, 28 Jul 2020 07:38:16 -0400
+Received: from mail-wr1-x443.google.com (mail-wr1-x443.google.com [IPv6:2a00:1450:4864:20::443])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id E727DC0619D8
+        for <util-linux@vger.kernel.org>; Tue, 28 Jul 2020 04:38:15 -0700 (PDT)
+Received: by mail-wr1-x443.google.com with SMTP id b6so17952840wrs.11
+        for <util-linux@vger.kernel.org>; Tue, 28 Jul 2020 04:38:15 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=mime-version:from:date:message-id:subject:to;
+        bh=z88eUg589kIPbwfcJkBbHKFa4QR0wOZWGk2diK1jFPM=;
+        b=b8/14qSmtpua6DExDbiZQujm3FVCJQWOEnGYc8m39CT4QhCFHb7H/8m/Mr+GJhki5y
+         D26KeL8e5wwIhpqswED7Iyj8LNXjLx29RYfhZ1pPRjvkmM3zHNDeTF1tCFcQE9cmRh/R
+         raunFxUrBwUmVbHiIcNmDsAsXlg0feXUzfnq5cUO9m3PCR65DPFX0ENqSsff92XlzdML
+         2lZ1DHEdMBJRJ7G/JmLQNbN9a0xCfCCdIavasCRbfc1GMLbxrWB9YQiD4Jx827i+wgQH
+         uvPy2fXgy98qEeiaY5zYJY4YAm1gQLhdwyYSQS3qfKNnqXIVHUgDrgxJy+XFocnlCNnt
+         WweQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+        bh=z88eUg589kIPbwfcJkBbHKFa4QR0wOZWGk2diK1jFPM=;
+        b=IGhXWmflXzwsm+orVqVfsepiQwGwViG7ZoDFAdz0kyww806awavZ00/cB6HGrsKOjJ
+         Qtr3QBXqFsQuOhbMPCSdZFomRQWC/iK2YZS9H6AREAvIM835OBDWbwYV+FFS+zejt3+j
+         PbqE463QgAxUqF5HPuSJ3EjOnhetXQvpE086WW/BtK/gEmR0xnsWQd1Nrp0jgTn01fBR
+         vkBX1IrhGWyyACtzEFu3fT0TjeawRtxPZKX4OjIivReB/pCoEL5x5y0YYpSACEj1jRw2
+         /JOhxKR3EST0LCSKOtwHkWzFaTzzwvTxG1HxR0TxOpJzoO3F+9CrvN9Tvfu8Q6QITPFE
+         lcLQ==
+X-Gm-Message-State: AOAM532+wfnggnJ5ZMDE/6Wcq4N7MvjegVgOC05xM7nZFlPYSiV6NCds
+        MNhwDIgVCEkr6jgLWjItAe6Hp4JcCyCWMS1P4gU=
+X-Google-Smtp-Source: ABdhPJxf3Z6j28ZJZ91yE+38HygJgiTtZMyB/VSeYng0agg0J+nv4s0qzz48SwEN7D8BizofBLS128ELYqeZWTC2zc4=
+X-Received: by 2002:a5d:5746:: with SMTP id q6mr24649773wrw.59.1595936294234;
+ Tue, 28 Jul 2020 04:38:14 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha1;
-        protocol="application/pgp-signature"; boundary="Dxnq1zWXvFF0Q93v"
-Content-Disposition: inline
-In-Reply-To: <20200723100828.262ftx3qhie2sc32@ws.net.home>
-User-Agent: Mutt/1.5.23 (2014-03-12)
+Received: by 2002:a5d:65cb:0:0:0:0:0 with HTTP; Tue, 28 Jul 2020 04:38:13
+ -0700 (PDT)
+From:   Rashid Al-Wahaibi <pdlarsen550@gmail.com>
+Date:   Tue, 28 Jul 2020 12:38:13 +0100
+Message-ID: <CAE00X2F5SUiQf0qCZYq3Yx353S0Esu1hA3RH4THqOM0WZMKHFQ@mail.gmail.com>
+Subject: Your Partnership
+To:     undisclosed-recipients:;
+Content-Type: text/plain; charset="UTF-8"
 Sender: util-linux-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
+-- 
+Good day,
+My name is Rashid Al-Wahaibi, I am from Oman but base here in the UK
+and a Managing Partner of BP Partnership Ltd, a Financial Consultancy
+Firm with office in the United Kingdom. I am contacting you based on
+the request of Ms Rosmah Mansor Najib Razak, wife of Najib Razak, the
+immediate past Malaysian Prime Minister.
 
---Dxnq1zWXvFF0Q93v
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+I found your profile satisfying and decided to contact you based on Ms
+Rosmah Mansor Najib Razak desire to invest in any viable project in
+your region.
 
-Hi!
+I need you to guide me on the type of investment that will be of best
+interest and provide good return on investment in your country and
+also act as her investment manager. She is ready to invest $25m to
+$50m USD
 
-> The commands fdisk(8), sfdisk(8), cfdisk(8), mkswap(8) and wipefs(8) now
-> support block devices locking by flock(2) to better behave with udevd or =
-other
-> tools. Ffor more details see https://systemd.io/BLOCK_DEVICE_LOCKING/.  T=
-his
+I will explain further detail of this business proposal when you reply
+to this email indicating your interest.
 
-There's typo "ffor", but I guess it is too late to fix that?
 
-Best regards,
-									Pavel
---=20
-(english) http://www.livejournal.com/~pavelmachek
-(cesky, pictures) http://atrey.karlin.mff.cuni.cz/~pavel/picture/horses/blo=
-g.html
+Regards,
 
---Dxnq1zWXvFF0Q93v
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1
-
-iEYEARECAAYFAl8cZZMACgkQMOfwapXb+vL9XwCbBSLZEvCjGt5yMfUaG1pII7Rn
-AP0AnRQMyE9vGu1xvXbuGuUg3CODmyPW
-=qUWC
------END PGP SIGNATURE-----
-
---Dxnq1zWXvFF0Q93v--
+Rashid Al-Wahaibi,
+Bp Partnership Ltd
+60 Raglan Road
+Reigate, ENG RH2 0HN,
+United Kingdom
