@@ -2,20 +2,19 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id DA9B523EFAC
-	for <lists+util-linux@lfdr.de>; Fri,  7 Aug 2020 16:54:20 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 7A0CB23F0BC
+	for <lists+util-linux@lfdr.de>; Fri,  7 Aug 2020 18:11:13 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726123AbgHGOyM convert rfc822-to-8bit (ORCPT
-        <rfc822;lists+util-linux@lfdr.de>); Fri, 7 Aug 2020 10:54:12 -0400
-Received: from mail.furshetcrimea.ru ([193.27.243.220]:51882 "EHLO
+        id S1726015AbgHGQLL convert rfc822-to-8bit (ORCPT
+        <rfc822;lists+util-linux@lfdr.de>); Fri, 7 Aug 2020 12:11:11 -0400
+Received: from mail.furshetcrimea.ru ([193.27.243.220]:40572 "EHLO
         furshetcrimea.ru" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726817AbgHGOyH (ORCPT
+        with ESMTP id S1726797AbgHGQLL (ORCPT
         <rfc822;util-linux-ng@vger.kernel.org>);
-        Fri, 7 Aug 2020 10:54:07 -0400
-X-Greylist: delayed 5015 seconds by postgrey-1.27 at vger.kernel.org; Fri, 07 Aug 2020 10:51:24 EDT
+        Fri, 7 Aug 2020 12:11:11 -0400
 Received: from [154.118.61.214] (account info@furshetcrimea.ru HELO [192.168.8.100])
   by furshetcrimea.ru (CommuniGate Pro SMTP 6.1.10)
-  with ESMTPA id 11133015; Fri, 07 Aug 2020 17:58:17 +0300
+  with ESMTPA id 11168908; Fri, 07 Aug 2020 19:21:57 +0300
 Content-Type: text/plain; charset="iso-8859-1"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8BIT
@@ -23,11 +22,11 @@ Content-Description: Mail message body
 Subject: Bei Interesse antworten.
 To:     Recipients <info@furshetcrimea.ru>
 From:   info@furshetcrimea.ru
-Date:   Fri, 07 Aug 2020 15:45:41 +0100
+Date:   Fri, 07 Aug 2020 17:09:20 +0100
 Reply-To: mattiassjoborg751@gmail.com
 X-Antivirus: Avast (VPS 200807-2, 08/07/2020), Outbound message
 X-Antivirus-Status: Clean
-Message-ID: <auto-000011133015@furshetcrimea.ru>
+Message-ID: <auto-000011168908@furshetcrimea.ru>
 Sender: util-linux-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
