@@ -2,106 +2,70 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 69BAB24502A
-	for <lists+util-linux@lfdr.de>; Sat, 15 Aug 2020 01:34:40 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 14AA4245328
+	for <lists+util-linux@lfdr.de>; Sat, 15 Aug 2020 23:59:00 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726360AbgHNXei (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Fri, 14 Aug 2020 19:34:38 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:37342 "EHLO
+        id S1729102AbgHOV6v (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Sat, 15 Aug 2020 17:58:51 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:45646 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726213AbgHNXei (ORCPT
-        <rfc822;util-linux-ng@vger.kernel.org>);
-        Fri, 14 Aug 2020 19:34:38 -0400
-Received: from mail-lf1-x142.google.com (mail-lf1-x142.google.com [IPv6:2a00:1450:4864:20::142])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 28AD2C061385
-        for <util-linux-ng@vger.kernel.org>; Fri, 14 Aug 2020 16:34:38 -0700 (PDT)
-Received: by mail-lf1-x142.google.com with SMTP id d2so5646670lfj.1
-        for <util-linux-ng@vger.kernel.org>; Fri, 14 Aug 2020 16:34:38 -0700 (PDT)
+        with ESMTP id S1728938AbgHOVvy (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Sat, 15 Aug 2020 17:51:54 -0400
+Received: from mail-ed1-x543.google.com (mail-ed1-x543.google.com [IPv6:2a00:1450:4864:20::543])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 30DF5C06135F
+        for <util-linux@vger.kernel.org>; Fri, 14 Aug 2020 19:28:06 -0700 (PDT)
+Received: by mail-ed1-x543.google.com with SMTP id i26so8215204edv.4
+        for <util-linux@vger.kernel.org>; Fri, 14 Aug 2020 19:28:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=mime-version:reply-to:from:date:message-id:subject:to;
-        bh=lqyz283T/dIOw03L8mirawXjATrSpRlBUoTDYx+lgsQ=;
-        b=ab0ypOd9dzuDGeQ1XQBX1uHdFb6umpcqtpuinej3vvRraK21um82A+SWMZrgNIab5b
-         si6xvPfGoplQ+SyBHLrz+zdEvuAwOMlHiVHsXO/8sfeKzTjhdxgAOH7xHxvSf/FAMISL
-         bRXw2y7TiNzUFUl0Dm4VXBQNEIApKxsp53Y36dGh6H36qKIS9jwcAk7YeM/9BA+M0ntX
-         M4Twy9Uy8FrZnviXiV1EkTgErEDFBJccYojkzGgGQ9Rq4y5eXMep5I1uW5QylTK1yjz3
-         u2hkyRTwFxEmD/wuj0/W/l8JsHNdu3tpsSFWiR0RnSaYe8NZe245qTzudV3SPYbvALkX
-         1R+w==
+        h=message-id:mime-version:content-transfer-encoding
+         :content-description:subject:to:from:date:reply-to;
+        bh=KZxomOrCfGKcRdij0ymf/g952wNhDs42ReaqHNdRcCA=;
+        b=oqvXp7XCWtRlzGJv0ZGbRYZLm5H7FsPzO7k1Ehpbe74vrFag1nMY52GIlHSzajy09b
+         f+99gOBpWDRpLzywItZRZlAl/aSUxJjuzSZhMzojFA0xi41qelCN25uTq/DWu4ubceAx
+         2tQVwjJE346QKcjyiAzXilvzSVJulPnCa+jcsKbRj2Kg0QHjRWh/1lhA2488WNbuLKxo
+         35Bq549EROqtEmbXagZ9G2+8g73TGAEkryjJrrvN4TL12mrWvUPIElMlXxR1vWXLBMEn
+         BSK2fJFVhqgdtCpz5r5FAmh+plQGVzFYCUMPTzMK2eE7euh3I2f4k0BV1YqSSC+1XgNK
+         Rv2Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
-         :subject:to;
-        bh=lqyz283T/dIOw03L8mirawXjATrSpRlBUoTDYx+lgsQ=;
-        b=Wup3aXAaJ9SUqnxvGBbutpmXvi7K2zFi9+0NlFguAKO/CjY9Vx82SAVcZYvIqMfhg/
-         HilCDqJWyBS9J0ya+BBPJReowDcI2YYnkr58gw3c/lrgqRv8MrR3tjgQWd1FW8xnN6op
-         ZLSv3YIHPo3uPsO3AaEv0B9yeiEeemQHMfq9Y1U4IKw8aovLWJBDj4j2SFhOeobAxk5d
-         dBgalTms2DhvJzDE7CWGKYwUA0CmCSMA6TcGbyKFZoJjgoF1T56hyBUXqVttof2vbCl7
-         GbV2W/KdPdunTISresadLVmR7trMaPuZktI+mFg5SlQf+xMDDYnvl8hr+OXxMXN2la5E
-         LN2Q==
-X-Gm-Message-State: AOAM530nAXRn7kDoJSPHTEGLLXjoZOnfl9hzygIhFdL0BVeQTZ69cNLx
-        m/pOmF4Tb+/UKIwKjCEMiVM+rJcWXMbHSZqoGPs=
-X-Google-Smtp-Source: ABdhPJyT8Yt5afCnCf2Ivriomx1HJwgnTksymV30l9jlfrOZDX06ttj3/hAi5zDUaLXEyoOtU6NGzcxHia7wrEjAJxc=
-X-Received: by 2002:a05:6512:3610:: with SMTP id f16mr2234873lfs.8.1597448076117;
- Fri, 14 Aug 2020 16:34:36 -0700 (PDT)
+        h=x-gm-message-state:message-id:mime-version
+         :content-transfer-encoding:content-description:subject:to:from:date
+         :reply-to;
+        bh=KZxomOrCfGKcRdij0ymf/g952wNhDs42ReaqHNdRcCA=;
+        b=H1IIw5tP1dy3oTC1AQENFpGtN4N2N2CaxSodGsKQy50GnsyRErgBwUklzsT7WBdy2x
+         nj63lQNKVDAtBzjNSxotVoTwe4FenepdIORVUy8urXfgGcBHL1YJlp2Q2iyVIT+xnTY6
+         ZMA3/nuxl4yBhBvqa+tjbS9jCZWsExodop8oZaBs2YUw7G/uvxjbVFON7XKXluz8wI64
+         EUmK113EtM2JuyAkv6t4y4/l9IWjRY4XGM+6smBDcK6bkGVTRPUeWkQ1BWanW19ep99e
+         owzYNlAeMYMasg2lRMW4Vm593+hNwC+gvQQQZHHuttCHC8huBxyVX25zxhtJtiNoF6LK
+         0rRQ==
+X-Gm-Message-State: AOAM532xMwsp1TeE+JEuI7nqTmt6EJLh25Hhjp7NzJnUFOy4a6W4eHir
+        Be5olJgZE7UZpYZbIbJmcKQ=
+X-Google-Smtp-Source: ABdhPJz7OMF9iPaDrNEaGPwxt+U9zu59VDbGxnpDsNtdc8qZBlNE40KcN4GF29bbsQejswwvBCBHPA==
+X-Received: by 2002:aa7:cb45:: with SMTP id w5mr5076812edt.77.1597458485023;
+        Fri, 14 Aug 2020 19:28:05 -0700 (PDT)
+Received: from [192.168.0.107] ([196.171.49.39])
+        by smtp.gmail.com with ESMTPSA id v5sm7479335ede.13.2020.08.14.19.28.00
+        (version=TLS1 cipher=AES128-SHA bits=128/128);
+        Fri, 14 Aug 2020 19:28:04 -0700 (PDT)
+Message-ID: <5f374834.1c69fb81.1405.2222@mx.google.com>
+Content-Type: text/plain; charset="iso-8859-1"
 MIME-Version: 1.0
-Received: by 2002:a05:6504:5d6:0:0:0:0 with HTTP; Fri, 14 Aug 2020 16:34:35
- -0700 (PDT)
-Reply-To: info.usbanking1@gmail.com
-From:   "MR.ANDY CECERE" <cbnng109@gmail.com>
-Date:   Fri, 14 Aug 2020 16:34:35 -0700
-Message-ID: <CAHe04xjT1BjN=Bc4SqTM+FjMNj_YJWQxegWpdYmHG24YTmQ=bQ@mail.gmail.com>
-Subject: REF:- INSTRUCTION TO CREDIT YOUR ACCOUNT WITH THE SUM OF (US$5Million)
-To:     undisclosed-recipients:;
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Content-Description: Mail message body
+Subject: Hello
+To:     Recipients <adoyizoureya@gmail.com>
+From:   "Jennifer" <adoyizoureya@gmail.com>
+Date:   Sat, 15 Aug 2020 02:27:42 +0000
+Reply-To: jenniferalex026@gmail.com
 Sender: util-linux-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
--- 
-Us Bank.1025 Connecticut Ave.
-NW, Ste. 510. Washington, DC 20036.
-Tell: (213) 537-2170
-E-mail: info.usbanking1@gmail.com
+Hello
+My name is Jenifer Alex
+Please reply, so that we can know more better =
 
-REF:- INSTRUCTION TO CREDIT YOUR ACCOUNT WITH THE SUM OF (US$5Million)
-
-This is the second time we are notifying you about this said fund. After
-due vetting and evaluation of your file that was sent to us by the Nigerian
-Government in conjunction with the Ministry of Finance and Central Bank of
-the Federal Republic of Nigeria.
-
-This bank has an instruction to see to the immediate release of the sum of
-(US $5Million) of your claim that has been holding since is transferred
-into your bank Account from their Domiciliary Account with this bank.
-
-We were meant to understand from our findings that you have been going
-through hard ways by paying a lot of charges to see to the release of your
-fund (US$5Million), which has been the handwork of some miscreant elements
-from that Country.
-
-We advice that you stop further communication with any correspondence from
-any bank , or anywhere concerning your funds as you will receive your fund
-from this bank if you follow our instruction.
-
-We know your representatives in Nigeria or anywhere will advice you to
-still go ahead with them, which will be on your own risk. Your
-(US$5Million) will reflect in your designated bank account within five Bank
-working days.
-
-Do not go through anybody again but through this Bank if you really want
-your fund. Finally, you are advice to re-confirm these to us,
-
-Your Full Name,
-Contact address,
-Occupation
-Telephone and Fax Number for easy communication.
-
-We need your second email gmail or hotmail for security and private reasons.
-
-Yours sincerely,
-MR.ANDY CECERE,
-Tel:.(213) 537-2170
-Assistance Secretary,
-U.S Bank.
-Email address ( info.usbanking1@gmail.com )
+and share photos,
+Thank you.
