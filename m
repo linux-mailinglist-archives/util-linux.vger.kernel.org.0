@@ -2,70 +2,99 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 14AA4245328
-	for <lists+util-linux@lfdr.de>; Sat, 15 Aug 2020 23:59:00 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 6AD3D2548C7
+	for <lists+util-linux@lfdr.de>; Thu, 27 Aug 2020 17:13:04 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1729102AbgHOV6v (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Sat, 15 Aug 2020 17:58:51 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:45646 "EHLO
+        id S1726940AbgH0PNC (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Thu, 27 Aug 2020 11:13:02 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:36638 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1728938AbgHOVvy (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Sat, 15 Aug 2020 17:51:54 -0400
-Received: from mail-ed1-x543.google.com (mail-ed1-x543.google.com [IPv6:2a00:1450:4864:20::543])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 30DF5C06135F
-        for <util-linux@vger.kernel.org>; Fri, 14 Aug 2020 19:28:06 -0700 (PDT)
-Received: by mail-ed1-x543.google.com with SMTP id i26so8215204edv.4
-        for <util-linux@vger.kernel.org>; Fri, 14 Aug 2020 19:28:06 -0700 (PDT)
+        with ESMTP id S1728034AbgH0PMy (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Thu, 27 Aug 2020 11:12:54 -0400
+Received: from mail-ed1-x542.google.com (mail-ed1-x542.google.com [IPv6:2a00:1450:4864:20::542])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 68907C061264
+        for <util-linux@vger.kernel.org>; Thu, 27 Aug 2020 08:12:52 -0700 (PDT)
+Received: by mail-ed1-x542.google.com with SMTP id b2so5242909edw.5
+        for <util-linux@vger.kernel.org>; Thu, 27 Aug 2020 08:12:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=message-id:mime-version:content-transfer-encoding
-         :content-description:subject:to:from:date:reply-to;
-        bh=KZxomOrCfGKcRdij0ymf/g952wNhDs42ReaqHNdRcCA=;
-        b=oqvXp7XCWtRlzGJv0ZGbRYZLm5H7FsPzO7k1Ehpbe74vrFag1nMY52GIlHSzajy09b
-         f+99gOBpWDRpLzywItZRZlAl/aSUxJjuzSZhMzojFA0xi41qelCN25uTq/DWu4ubceAx
-         2tQVwjJE346QKcjyiAzXilvzSVJulPnCa+jcsKbRj2Kg0QHjRWh/1lhA2488WNbuLKxo
-         35Bq549EROqtEmbXagZ9G2+8g73TGAEkryjJrrvN4TL12mrWvUPIElMlXxR1vWXLBMEn
-         BSK2fJFVhqgdtCpz5r5FAmh+plQGVzFYCUMPTzMK2eE7euh3I2f4k0BV1YqSSC+1XgNK
-         Rv2Q==
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=wesletgCYH1cfROVy8wYyqI784H0kwPuIG9G2gHsb0w=;
+        b=hFYtDb9iRlDBBuLINQdvuFs4sauugeL4MfRDC4ehpbing3X1dwNNwOKC7R8TnSASSK
+         yJ4JA6dSC0zjmI+AU2sjNNElS0DS7pPFPFA0UlkJcFvwkKcE+iWXUxsUclSsOhiv1aiQ
+         rQz7e8UrlMpDV+RJUucrMnlA6okKEi95yYcWj+qxZjRooi4O0XzcOkYMDvRLgun3hlnS
+         pxv1yp8qw2c/CAUbaQorWrbIGmzfJDoMcH0KBno9uEOMWpwtkZiLWL+gVq0VQoXQlMay
+         8vWKKnSzDCWqEpV1qWTjab7SKRaNvF6DkRnfLkKP4cGxgY033tlcKn+4ctOmrLh+L0Ka
+         QwWA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:message-id:mime-version
-         :content-transfer-encoding:content-description:subject:to:from:date
-         :reply-to;
-        bh=KZxomOrCfGKcRdij0ymf/g952wNhDs42ReaqHNdRcCA=;
-        b=H1IIw5tP1dy3oTC1AQENFpGtN4N2N2CaxSodGsKQy50GnsyRErgBwUklzsT7WBdy2x
-         nj63lQNKVDAtBzjNSxotVoTwe4FenepdIORVUy8urXfgGcBHL1YJlp2Q2iyVIT+xnTY6
-         ZMA3/nuxl4yBhBvqa+tjbS9jCZWsExodop8oZaBs2YUw7G/uvxjbVFON7XKXluz8wI64
-         EUmK113EtM2JuyAkv6t4y4/l9IWjRY4XGM+6smBDcK6bkGVTRPUeWkQ1BWanW19ep99e
-         owzYNlAeMYMasg2lRMW4Vm593+hNwC+gvQQQZHHuttCHC8huBxyVX25zxhtJtiNoF6LK
-         0rRQ==
-X-Gm-Message-State: AOAM532xMwsp1TeE+JEuI7nqTmt6EJLh25Hhjp7NzJnUFOy4a6W4eHir
-        Be5olJgZE7UZpYZbIbJmcKQ=
-X-Google-Smtp-Source: ABdhPJz7OMF9iPaDrNEaGPwxt+U9zu59VDbGxnpDsNtdc8qZBlNE40KcN4GF29bbsQejswwvBCBHPA==
-X-Received: by 2002:aa7:cb45:: with SMTP id w5mr5076812edt.77.1597458485023;
-        Fri, 14 Aug 2020 19:28:05 -0700 (PDT)
-Received: from [192.168.0.107] ([196.171.49.39])
-        by smtp.gmail.com with ESMTPSA id v5sm7479335ede.13.2020.08.14.19.28.00
-        (version=TLS1 cipher=AES128-SHA bits=128/128);
-        Fri, 14 Aug 2020 19:28:04 -0700 (PDT)
-Message-ID: <5f374834.1c69fb81.1405.2222@mx.google.com>
-Content-Type: text/plain; charset="iso-8859-1"
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=wesletgCYH1cfROVy8wYyqI784H0kwPuIG9G2gHsb0w=;
+        b=PTSWXFMmR52RJsHP7WliUXaFxWY2w0/9xD8Y3kTXHOOhuqFEAlojWeqrdWtp3d6WOc
+         BZs8kUjMGZHCVUb8K3t0bpJlvXewGGviHhio90q5vTwmfl3C3cN6GLPSHXTQ0FW4AVxm
+         yQ1hIhEVAkF5xV3zrLdipnMusHcxysmbkvmrF/+kPiME2aY5Q7DOqD+zXpGwCHg8reQG
+         Nun8Bl03dDxAmwfMd0imC7B1uLGacdALSInipwdoBkg88bXr/QNb93TX9c23phg/DnNv
+         s4CVcIpRZVLyFSDpwR3UIJKQZjR6SQLs8TqGBCp/6lLUHiDGPlss3J4IpHZoMsQH9iK7
+         vJbA==
+X-Gm-Message-State: AOAM532f+BKaAaxM5v+jG0LGZDnhg4XCTj5miwJoKXaG/9M9funcv8iM
+        Wi3FpbczmeeWCfmYdriqytg=
+X-Google-Smtp-Source: ABdhPJyw6ypmU/QtG+zJT/90uyJ4yVI7u0c0XAt8yEsCg30tFNHK4HSwp24eG6Zr7L40BD7E4+0OHg==
+X-Received: by 2002:a50:c089:: with SMTP id k9mr19753941edf.110.1598541171046;
+        Thu, 27 Aug 2020 08:12:51 -0700 (PDT)
+Received: from bienne.fritz.box ([2001:a61:253c:4c01:2cf1:7133:9da2:66a9])
+        by smtp.gmail.com with ESMTPSA id do6sm2398440ejc.35.2020.08.27.08.12.50
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 27 Aug 2020 08:12:50 -0700 (PDT)
+From:   "Michael Kerrisk (man-pages)" <mtk.manpages@gmail.com>
+To:     mtk.manpages@gmail.com, Karel Zak <kzak@redhat.com>
+Cc:     util-linux@vger.kernel.org
+Subject: [PATCH] Manual pages: blockdev.8, sfdisk.8: typo fixes
+Date:   Thu, 27 Aug 2020 17:12:45 +0200
+Message-Id: <20200827151245.97613-1-mtk.manpages@gmail.com>
+X-Mailer: git-send-email 2.26.2
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Description: Mail message body
-Subject: Hello
-To:     Recipients <adoyizoureya@gmail.com>
-From:   "Jennifer" <adoyizoureya@gmail.com>
-Date:   Sat, 15 Aug 2020 02:27:42 +0000
-Reply-To: jenniferalex026@gmail.com
+Content-Transfer-Encoding: 8bit
 Sender: util-linux-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-Hello
-My name is Jenifer Alex
-Please reply, so that we can know more better =
+Fix a couple of typos that I introduced.
 
-and share photos,
-Thank you.
+Signed-off-by: Michael Kerrisk (man-pages) <mtk.manpages@gmail.com>
+---
+ disk-utils/blockdev.8 | 2 +-
+ disk-utils/sfdisk.8   | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/disk-utils/blockdev.8 b/disk-utils/blockdev.8
+index 44ed9e1e9..48d69ec51 100644
+--- a/disk-utils/blockdev.8
++++ b/disk-utils/blockdev.8
+@@ -48,7 +48,7 @@ Get alignment offset.
+ .IP "\fB\-\-getbsz\fP"
+ Print the blocksize in bytes.
+ This size does not describe device topology.  It's
+-the size used internally by ithe kernel and it may be modified (for example) by
++the size used internally by the kernel and it may be modified (for example) by
+ filesystem driver on mount.
+ .IP "\fB\-\-getdiscardzeroes\fP"
+ Get discard zeroes support status.
+diff --git a/disk-utils/sfdisk.8 b/disk-utils/sfdisk.8
+index 6415b0f1b..bd5a2b11d 100644
+--- a/disk-utils/sfdisk.8
++++ b/disk-utils/sfdisk.8
+@@ -600,7 +600,7 @@ The welcome message.
+ 
+ .SH ENVIRONMENT
+ .IP SFDISK_DEBUG=all
+-enablescw
++enables
+ .B sfdisk
+ debug output.
+ .IP LIBFDISK_DEBUG=all
+-- 
+2.26.2
+
