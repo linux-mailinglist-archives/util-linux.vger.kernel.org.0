@@ -2,64 +2,79 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id E8687265E4D
-	for <lists+util-linux@lfdr.de>; Fri, 11 Sep 2020 12:42:36 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id B0828265F2A
+	for <lists+util-linux@lfdr.de>; Fri, 11 Sep 2020 14:03:02 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1725872AbgIKKmf (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Fri, 11 Sep 2020 06:42:35 -0400
-Received: from us-smtp-delivery-1.mimecast.com ([207.211.31.120]:28838 "EHLO
-        us-smtp-1.mimecast.com" rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org
-        with ESMTP id S1725836AbgIKKmc (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Fri, 11 Sep 2020 06:42:32 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-        s=mimecast20190719; t=1599820951;
-        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-         in-reply-to:in-reply-to:references:references;
-        bh=ZCa8gZ9WW/EuJVTSC4vBeq10ZKPBGhaYrllm4rX4IfI=;
-        b=Tw/t/SxB+MEdrzez3+LxKS433422Ws5cZQa2jKFdnwxsjZtFYgIQkDDS049QdA+q9OoFPu
-        rNNq2eYwNnOsI30aXXEUcbZ4NWXfCJ4E6k71hdadO74HjLv3uzltDU2tl5mQnQT1zUleqh
-        upC/8rnDXRmLAMlp/eG9KLa04T8RP40=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-585-yAEuo5__PB-VMnzJwiLCaA-1; Fri, 11 Sep 2020 06:42:25 -0400
-X-MC-Unique: yAEuo5__PB-VMnzJwiLCaA-1
-Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.phx2.redhat.com [10.5.11.11])
-        (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
-        (No client certificate requested)
-        by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 655CC80365D;
-        Fri, 11 Sep 2020 10:42:24 +0000 (UTC)
-Received: from ws.net.home (unknown [10.40.193.69])
-        by smtp.corp.redhat.com (Postfix) with ESMTPS id 0ED399CBA;
-        Fri, 11 Sep 2020 10:42:22 +0000 (UTC)
-Date:   Fri, 11 Sep 2020 12:42:20 +0200
-From:   Karel Zak <kzak@redhat.com>
-To:     Hans Holmberg <hans.holmberg@wdc.com>
-Cc:     Damien Le Moal <damien.lemoal@wdc.com>,
-        Shinichiro Kawasaki <shinichiro.kawasaki@wdc.com>,
-        Matias Bjorling <matias.bjorling@wdc.com>,
-        util-linux@vger.kernel.org
-Subject: Re: [PATCH] blkzone: add report capacity command
-Message-ID: <20200911104220.uqsyxo2v446wfldq@ws.net.home>
-References: <20200911084723.14996-1-hans.holmberg@wdc.com>
+        id S1725844AbgIKMCy convert rfc822-to-8bit (ORCPT
+        <rfc822;lists+util-linux@lfdr.de>); Fri, 11 Sep 2020 08:02:54 -0400
+Received: from mail.flex.co.jp ([211.8.82.123]:60421 "EHLO www.flex.co.jp"
+        rhost-flags-OK-FAIL-OK-FAIL) by vger.kernel.org with ESMTP
+        id S1725831AbgIKMCr (ORCPT <rfc822;util-linux-ng@vger.kernel.org>);
+        Fri, 11 Sep 2020 08:02:47 -0400
+Received: from live.com.mx ([103.89.89.225])
+        (authenticated bits=0)
+        by www.flex.co.jp (MTA) with ESMTP id 089Adc00015366
+        for <util-linux-ng@vger.kernel.org>; Wed, 9 Sep 2020 19:39:58 +0900
+Reply-To: powerinthewords@yahoo.co.jp
+From:   piyin.crhe@live.com.mx
+To:     util-linux-ng@vger.kernel.org
+Subject: =?utf-8?Q?=5BSpam=5D?=
+ We are still waiting for your email...
+Date:   09 Sep 2020 03:39:56 -0700
+Message-ID: <20200909033956.44BD6C00911B81BE@live.com.mx>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20200911084723.14996-1-hans.holmberg@wdc.com>
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.11
+Content-Type: text/plain;
+        charset="utf-8"
+Content-Transfer-Encoding: 8BIT
+X-SpamInfo: FortiGuard-AntiSpam ip, connection black ip 103.89.89.225
 Sender: util-linux-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-On Fri, Sep 11, 2020 at 10:47:23AM +0200, Hans Holmberg wrote:
->  sys-utils/blkzone.8 |  7 +++++++
->  sys-utils/blkzone.c | 28 ++++++++++++++++++++--------
->  2 files changed, 27 insertions(+), 8 deletions(-)
+Dear Beneficiary,
 
-Applied, thanks.
+We wish to inform you that a power of attorney was forwarded to 
+our office  by two gentlemen regarding your unclaimed fund of $56 
+Million Dollar. One of them is an American citizen named Mr. 
+Robert Porter and the other is Mr. Wilhelm Berg a Swedish 
+citizen.We have be waiting for you to contact us since last year.
 
--- 
- Karel Zak  <kzak@redhat.com>
- http://karelzak.blogspot.com
+The document claims these gentlemen to be your authorized 
+representatives, and the power of attorney states that you are 
+already deceased.  It further states that your death was due to 
+lung cancer, with your date of death being January 27th, 2020.
 
+They have now submitted a new account to replace the receiving 
+account that was in the original claim of funds. These funds have 
+remained unclaimed for quite some time and the need for 
+resolution is pressing. Below is the new account they have 
+submitted.
+
+Account Name's :  Robert Porter /Wilhelm Berg
+Account: 5007-29 438 66
+IBAN-nr: SE4150000000050072943866
+Bic-kod: ESSESESS
+Skandinaviska Enskilda Banken. (SEB :)
+SWEDEN .
+
+In the event that you are in fact still alive, we ask that you 
+confirm your existence by responding to this email. You are to 
+view this as a matter requiring immediate attention and response. 
+We have 48 hr monitoring of all activities within Federal Reserve 
+Bank.On this regard,you will be directed to any of our office 
+center that you will go in person to sign the final papers,
+because we have our payment center in Europe,Asia,America and 
+Canada.You will go to any of the office that you will be directed 
+to with the copy of the documents of your fund.
+
+We have contacted the bank in the Sweden asking them to wait for 
+further directives from Federal Reserve Bank, prior to 
+authorizing any withdrawals in any form.  Our request is based 
+entirely on our attempt to verify that you are in fact deceased, 
+before money is wrongly disbursed.
+
+Your in Service,
+
+Robert Steven Kaplan
+2200 N Pearl St, Dallas, TX 75201, United States
