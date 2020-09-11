@@ -2,276 +2,148 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id D6E7426657C
-	for <lists+util-linux@lfdr.de>; Fri, 11 Sep 2020 19:04:29 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 282E326686C
+	for <lists+util-linux@lfdr.de>; Fri, 11 Sep 2020 20:53:10 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726203AbgIKRDQ (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Fri, 11 Sep 2020 13:03:16 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:58220 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1725921AbgIKPDu (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Fri, 11 Sep 2020 11:03:50 -0400
-Received: from mail-qv1-xf2d.google.com (mail-qv1-xf2d.google.com [IPv6:2607:f8b0:4864:20::f2d])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id E545BC0617AB
-        for <util-linux@vger.kernel.org>; Fri, 11 Sep 2020 06:53:57 -0700 (PDT)
-Received: by mail-qv1-xf2d.google.com with SMTP id cy2so5236110qvb.0
-        for <util-linux@vger.kernel.org>; Fri, 11 Sep 2020 06:53:57 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references;
-        bh=e6klTCdVdD91GXSyr1/x19Iiy6UsnPTyirF6NobTpms=;
-        b=OY9JDDoQ6YUsHyTmZUwL5sq+vVGGONdP835778PTEPcvp8cv65VxdnaJ5jlBY1kOfT
-         9Ruh9scPIMWdmGSP92avXpzqQcjwj/5h7j8PpmK26Je55GrDOfRvXwPrAST+vvvhS/Gl
-         3zU/eMrjhoF9uUdv/R0RHc93EmXPM99Fzje6q1fBhvfrExDn8uq5fh5VqlqCgWMJnrao
-         qdukB9JE3O1UmD47so89KVEQVJsVt2FSqvf7nJ9IiisDZFgmSzU2jP97VKbLIYRXRFJq
-         ymXaCK2Vfkm1qHyRqn7od5wi2ZN0/QmuxHsa0X3+aFtP7F1N6pw/apkVHZqq2/8SltPT
-         CsCw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references;
-        bh=e6klTCdVdD91GXSyr1/x19Iiy6UsnPTyirF6NobTpms=;
-        b=WtjAwL7Rzdy3KZuXvHbTg0pegY5OQUNjZT3HKPb+Bt/Jw66IbZnIdUQsG0LR06sU5r
-         wsYakeajxpTJf53hNqCo9sjHmHkTyKLYfnKVPvjo0iN60ueKQz7flas7Yr/L/krf3aH9
-         btKh2WiGl5g2oQLk5pNa1nW2uq03Tkj7/Ch7u7D6z+yoBgWgfk7pMxGeV4BEy14wZuD2
-         ZVOSmwvcwiRFaZgtixH96vmqEPqnbhkYjwIq3Tbb5KPhI+rX+p+TI7KljFZXyjr5J0Sc
-         MvdAqusbPRUjgSiR79djifoGsw1EiRyiEu2B8mjmfbLlbQ4RoFXAwx2EHIVrplfePCJU
-         D/kA==
-X-Gm-Message-State: AOAM533Y822DrhEWTmHw2bz/lulElX2Atdz3pWfiLK/ZIg8/CLufIMMF
-        LvNsTWOz6OD8TbtRe30OSF14eCZd+w==
-X-Google-Smtp-Source: ABdhPJxkeAznykeYcwidthPRwmPE/xuwJYB5RnEavO1NrhKhMrWGNaWefffmpUVqGg0t0FGEnzd6Mg==
-X-Received: by 2002:a0c:b308:: with SMTP id s8mr2081092qve.31.1599832436980;
-        Fri, 11 Sep 2020 06:53:56 -0700 (PDT)
-Received: from localhost (209-6-122-159.s2973.c3-0.arl-cbr1.sbo-arl.ma.cable.rcncustomer.com. [209.6.122.159])
-        by smtp.gmail.com with ESMTPSA id r24sm2566572qtm.70.2020.09.11.06.53.56
-        (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
-        Fri, 11 Sep 2020 06:53:56 -0700 (PDT)
-From:   Masayoshi Mizuma <msys.mizuma@gmail.com>
-To:     util-linux@vger.kernel.org
-Cc:     Masayoshi Mizuma <msys.mizuma@gmail.com>,
-        Masayoshi Mizuma <m.mizuma@jp.fujitsu.com>
-Subject: [PATCH 1/4] lscpu: use cluster on aarch64 machine which doesn't have ACPI PPTT
-Date:   Fri, 11 Sep 2020 09:53:25 -0400
-Message-Id: <20200911135328.1465-2-msys.mizuma@gmail.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20200911135328.1465-1-msys.mizuma@gmail.com>
-References: <20200911135328.1465-1-msys.mizuma@gmail.com>
+        id S1725730AbgIKSxJ (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Fri, 11 Sep 2020 14:53:09 -0400
+Received: from smtp4.xmail.net ([65.110.6.11]:62068 "EHLO smtp4.xmail.net"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S1725770AbgIKSxI (ORCPT <rfc822;util-linux-ng@vger.kernel.org>);
+        Fri, 11 Sep 2020 14:53:08 -0400
+X-Greylist: delayed 595 seconds by postgrey-1.27 at vger.kernel.org; Fri, 11 Sep 2020 14:53:08 EDT
+Received: from smtp.xmail.net (unknown [65.110.6.56])
+        (using TLSv1 with cipher ADH-AES256-SHA (256/256 bits))
+        (No client certificate requested)
+        by smtp4.xmail.net (MTA) with ESMTPS id 4AC462C2594D
+        for <util-linux-ng@vger.kernel.org>; Fri, 11 Sep 2020 11:35:53 -0700 (PDT)
+Received: from www.xmail.net (localhost [127.0.0.1])
+        by smtp.xmail.net (MTA) with ESMTP id AC072EE181
+        for <util-linux-ng@vger.kernel.org>; Fri, 11 Sep 2020 10:46:52 -0700 (PDT)
+X-Virus-Scanned: amavisd-new at smtp.xmail.net
+Received: from smtp.xmail.net ([127.0.0.1])
+        by www.xmail.net (www.xmail.net [127.0.0.1]) (amavisd-new, port 10024)
+        with ESMTP id C2yRX5rhxppG for <util-linux-ng@vger.kernel.org>;
+        Fri, 11 Sep 2020 10:46:52 -0700 (PDT)
+Received: from xmail.net (unknown [117.34.73.36])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+        (No client certificate requested)
+        (Authenticated sender: johnbrown18)
+        by smtp.xmail.net (MTA) with ESMTPSA id 83DEEDDB17
+        for <util-linux-ng@vger.kernel.org>; Fri, 11 Sep 2020 02:43:47 -0700 (PDT)
+Date:   Fri, 11 Sep 2020 17:43:26 +0800
+From:   =?utf-8?B?0JbQtNCw0L0g0JHQtdC70L7Qsg==?= <johnbrown18@xmail.net>
+Message-ID: <3224876593.20200911174326@xmail.net>
+To:     util-linux-ng@vger.kernel.org
+Subject: =?utf-8?B?0J3QvtCy0YvQtSDRgdC/0LjRgdC60Lgg0JzQtdGF0LDQvdC40LrRgw==?=
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Sender: util-linux-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-From: Masayoshi Mizuma <m.mizuma@jp.fujitsu.com>
-
-lscpu may show the wrong number of sockets if the machine is aarch64 and
-doesn't have ACPI PPTT.
-
-That's because lscpu show the number of sockets by using a sysfs entry
-(cpu/cpuX/topology/core_siblings). The sysfs entry is set by MPIDR_EL1
-register if the machine doesn't have ACPI PPTT. MPIDR_EL1 doesn't show
-the physical socket information directly. It shows the affinity level.
-
-According to linux/arch/arm64/kernel/topology.c:store_cpu_topology(),
-the top level of affinity is called as 'Cluster'.
-
-Use Cluster instead of Socket on the machine which doesn't have ACPI PPTT.
-
-Note, ARM SBBR v1.2 requires ACPI PPTT, so this patch is needed for the
-machine which is based on SBBR v1.0 and v1.1.
-
-Signed-off-by: Masayoshi Mizuma <m.mizuma@jp.fujitsu.com>
----
- sys-utils/lscpu.1 |  3 +++
- sys-utils/lscpu.c | 69 ++++++++++++++++++++++++++++++++++++++++++-----
- 2 files changed, 65 insertions(+), 7 deletions(-)
-
-diff --git a/sys-utils/lscpu.1 b/sys-utils/lscpu.1
-index 1ef6ce021..928d39dee 100644
---- a/sys-utils/lscpu.1
-+++ b/sys-utils/lscpu.1
-@@ -52,6 +52,9 @@ The logical core number.  A core can contain several CPUs.
- .B SOCKET
- The logical socket number.  A socket can contain several cores.
- .TP
-+.B CLUSTER
-+The logical cluster number.  A cluster can contain several cores.
-+.TP
- .B BOOK
- The logical book number.  A book can contain several sockets.
- .TP
-diff --git a/sys-utils/lscpu.c b/sys-utils/lscpu.c
-index ca085b665..8c823c170 100644
---- a/sys-utils/lscpu.c
-+++ b/sys-utils/lscpu.c
-@@ -68,6 +68,7 @@
- #define _PATH_SYS_HYP_FEATURES	"/sys/hypervisor/properties/features"
- #define _PATH_SYS_CPU		_PATH_SYS_SYSTEM "/cpu"
- #define _PATH_SYS_NODE		_PATH_SYS_SYSTEM "/node"
-+#define _PATH_ACPI_PPTT		"/sys/firmware/acpi/tables/PPTT"
- 
- /* Xen Domain feature flag used for /sys/hypervisor/properties/features */
- #define XENFEAT_supervisor_mode_kernel		3
-@@ -155,6 +156,7 @@ enum {
- 	COL_CPU_CPU,
- 	COL_CPU_CORE,
- 	COL_CPU_SOCKET,
-+	COL_CPU_CLUSTER,
- 	COL_CPU_NODE,
- 	COL_CPU_BOOK,
- 	COL_CPU_DRAWER,
-@@ -196,6 +198,7 @@ static struct lscpu_coldesc coldescs_cpu[] =
- {
- 	[COL_CPU_CPU]          = { "CPU", N_("logical CPU number"), SCOLS_FL_RIGHT, 1 },
- 	[COL_CPU_CORE]         = { "CORE", N_("logical core number"), SCOLS_FL_RIGHT },
-+	[COL_CPU_CLUSTER]      = { "CLUSTER", N_("logical cluster number"), SCOLS_FL_RIGHT },
- 	[COL_CPU_SOCKET]       = { "SOCKET", N_("logical socket number"), SCOLS_FL_RIGHT },
- 	[COL_CPU_NODE]         = { "NODE", N_("logical NUMA node number"), SCOLS_FL_RIGHT },
- 	[COL_CPU_BOOK]         = { "BOOK", N_("logical book number"), SCOLS_FL_RIGHT },
-@@ -224,6 +227,26 @@ static struct lscpu_coldesc coldescs_cache[] =
- 	[COL_CACHE_COHERENCYSIZE] = { "COHERENCY-SIZE", N_("minimum amount of data in bytes transferred from memory to cache"), SCOLS_FL_RIGHT }
- };
- 
-+static int is_fallback_to_cluster(struct lscpu_desc *desc)
-+{
-+	char *arch;
-+	struct stat st;
-+	struct utsname utsbuf;
-+
-+	if (desc)
-+		arch = desc->arch;
-+	else {
-+		if (uname(&utsbuf) == -1)
-+			err(EXIT_FAILURE, _("error: uname failed"));
-+		arch = utsbuf.machine;
-+	}
-+
-+	if (!(strcmp(arch, "aarch64")) && (stat(_PATH_ACPI_PPTT, &st) < 0))
-+		return 1;
-+	else
-+		return 0;
-+}
-+
- 
- static int get_cache_full_size(struct lscpu_desc *desc, struct cpu_cache *ca, uint64_t *res);
- 
-@@ -231,12 +254,21 @@ static int
- cpu_column_name_to_id(const char *name, size_t namesz)
- {
- 	size_t i;
-+	int is_cluster = is_fallback_to_cluster(NULL);
- 
- 	for (i = 0; i < ARRAY_SIZE(coldescs_cpu); i++) {
- 		const char *cn = coldescs_cpu[i].name;
- 
--		if (!strncasecmp(name, cn, namesz) && !*(cn + namesz))
-+		if (!strncasecmp(name, cn, namesz) && !*(cn + namesz)) {
-+			if ((!strncasecmp(cn, "cluster", namesz)) && (!is_cluster)) {
-+				warnx(_("%s doesn't work on this machine. Use socket."), name);
-+				return -1;
-+			} else if ((!strncasecmp(cn, "socket", namesz)) && (is_cluster)) {
-+				warnx(_("%s doesn't work on this machine. Use cluster."), name);
-+				return -1;
-+			}
- 			return i;
-+		}
- 	}
- 	warnx(_("unknown column: %s"), name);
- 	return -1;
-@@ -1506,6 +1538,7 @@ get_cell_data(struct lscpu_desc *desc, int idx, int col,
- 		}
- 		break;
- 	case COL_CPU_SOCKET:
-+	case COL_CPU_CLUSTER:
- 		if (mod->physical) {
- 			if (desc->socketids[idx] ==  -1)
- 				snprintf(buf, bufsz, "-");
-@@ -2100,6 +2133,7 @@ print_summary(struct lscpu_desc *desc, struct lscpu_modifier *mod)
- 		int threads_per_core, cores_per_socket, sockets_per_book;
- 		int books_per_drawer, drawers;
- 		FILE *fd;
-+		int is_cluster;
- 
- 		threads_per_core = cores_per_socket = sockets_per_book = 0;
- 		books_per_drawer = drawers = 0;
-@@ -2124,12 +2158,19 @@ print_summary(struct lscpu_desc *desc, struct lscpu_modifier *mod)
- 			if (fd)
- 				fclose(fd);
- 		}
-+
-+		is_cluster = is_fallback_to_cluster(desc);
-+
- 		if (desc->mtid)
- 			threads_per_core = atoi(desc->mtid) + 1;
- 		add_summary_n(tb, _("Thread(s) per core:"),
- 			threads_per_core ?: desc->nthreads / desc->ncores);
--		add_summary_n(tb, _("Core(s) per socket:"),
--			cores_per_socket ?: desc->ncores / desc->nsockets);
-+		if (is_cluster)
-+			add_summary_n(tb, _("Core(s) per cluster:"),
-+				cores_per_socket ?: desc->ncores / desc->nsockets);
-+		else
-+			add_summary_n(tb, _("Core(s) per socket:"),
-+				cores_per_socket ?: desc->ncores / desc->nsockets);
- 		if (desc->nbooks) {
- 			add_summary_n(tb, _("Socket(s) per book:"),
- 				sockets_per_book ?: desc->nsockets / desc->nbooks);
-@@ -2141,7 +2182,11 @@ print_summary(struct lscpu_desc *desc, struct lscpu_modifier *mod)
- 				add_summary_n(tb, _("Book(s):"), books_per_drawer ?: desc->nbooks);
- 			}
- 		} else {
--			add_summary_n(tb, _("Socket(s):"), sockets_per_book ?: desc->nsockets);
-+			if (is_cluster)
-+				add_summary_n(tb, _("Cluster(s):"), desc->nsockets);
-+			else
-+				add_summary_n(tb, _("Socket(s):"),
-+						sockets_per_book ?: desc->nsockets);
- 		}
- 	}
- 	if (desc->nnodes)
-@@ -2300,6 +2345,7 @@ int main(int argc, char *argv[])
- 	int columns[ARRAY_SIZE(coldescs_cpu)], ncolumns = 0;
- 	int cpu_modifier_specified = 0;
- 	size_t setsize;
-+	int is_cluster;
- 
- 	enum {
- 		OPT_OUTPUT_ALL = CHAR_MAX + 1,
-@@ -2479,6 +2525,8 @@ int main(int argc, char *argv[])
- 	read_hypervisor(desc, mod);
- 	arm_cpu_decode(desc);
- 
-+	is_cluster = is_fallback_to_cluster(desc);
-+
- 	switch(mod->mode) {
- 	case OUTPUT_SUMMARY:
- 		print_summary(desc, mod);
-@@ -2501,7 +2549,10 @@ int main(int argc, char *argv[])
- 		if (!ncolumns) {
- 			columns[ncolumns++] = COL_CPU_CPU;
- 			columns[ncolumns++] = COL_CPU_CORE;
--			columns[ncolumns++] = COL_CPU_SOCKET;
-+			if (is_cluster)
-+				columns[ncolumns++] = COL_CPU_CLUSTER;
-+			else
-+				columns[ncolumns++] = COL_CPU_SOCKET;
- 			columns[ncolumns++] = COL_CPU_NODE;
- 			columns[ncolumns++] = COL_CPU_CACHE;
- 			mod->compat = 1;
-@@ -2518,8 +2569,12 @@ int main(int argc, char *argv[])
- 				columns[ncolumns++] = COL_CPU_DRAWER;
- 			if (desc->bookmaps)
- 				columns[ncolumns++] = COL_CPU_BOOK;
--			if (desc->socketmaps)
--				columns[ncolumns++] = COL_CPU_SOCKET;
-+			if (desc->socketmaps) {
-+				if (is_cluster)
-+					columns[ncolumns++] = COL_CPU_CLUSTER;
-+				else
-+					columns[ncolumns++] = COL_CPU_SOCKET;
-+			}
- 			if (desc->coremaps)
- 				columns[ncolumns++] = COL_CPU_CORE;
- 			if (desc->caches)
--- 
-2.27.0
+0J/RgNC10LTQu9C+0LbQtdC90LjQtSDQlNC40YDQtdC60YLQvtGA0YMs0JPQu9Cw0LLQvdC+0LzR
+gyDQmNC90LbQtdC90LXRgNGDLNCc0LXRhdCw0L3QuNC60YMs0KLQtdGF0L3QvtC70L7Qs9GDLNCy
+INCe0JzQotChLgoK0KLQvtC6YdGA0L3Qvi3QstC40L3RgtC+0YBl0LfQvdGL0LkgMTbQsjIwLtCT
+0L7QtCAxOTkxLtCm0LXQvdCwIDI1MDAwMNGALgrQm9C40L3QuNGPINCzYdC70YzQsmHQvdC40Ydl
+Y9C60L7Qs9C+INC/0L7QutGA0YvRgtC40Y8g0JjRgmHQu9GM0Y/QvWPQumHRjy7Qk9C+0LQgMjAw
+NS7QptC10L3QsCAyMjAwMDAw0YAuCtCf0Lth0LfQvGXQvdC9YdGPINGAZdC30LphIGMg0YBl0LvR
+jGNh0LzQuCDQuCDQp9Cf0KMu0JPQvtC0IDIwMTgu0KbQtdC90LAgMzAwMDAwMNGALgrQkmHQs9C+
+0L0g0L9hY2Nh0LbQuNGAY9C60LjQuSDQutGD0L9l0LnQvdGL0LkgYyDRgGXQt2XRgNCyYS7Qk9C+
+0LQgMjAwMi7QptC10L3QsCAxNTAwMDAwMNGALgrQkmXRgNGC0LjQumHQu9GM0L3QviDRhNGAZdC3
+ZdGA0L3Ri9C5IDbRgDEzINGBINGH0L/Rgy7Qk9C+0LQgMTk5MC7QptC10L3QsCA2NTAwMDDRgC4K
+0K3Qu9C10LrRgtGA0L7QvNC10YXQsNC90LjRh9C10YHQutC40Lkg0LvQuNGB0YLQvtCz0LjQsSDR
+gSDRh9C/0YMgRmlubi1Qb3dlci7Qk9C+0LQgMjAwOC7QptC10L3QsCAxMDAwMDAwMNGALgrQkmHQ
+u9GM0YbRiyA2MHg0MDAwLtCT0L7QtCAxOTkxLgrQlNC+0LvQsWXQttC90YvQuSA30Lw0MzAu0JPQ
+vtC0IDE5ODcu0KbQtdC90LAgNjAwMDAw0YAuCtCf0YDQvtC00L7Qu9GM0L3QviBj0YLRgNC+0LNh
+0LvRjNC90YvQuSA3MTEwLtCT0L7QtCAxOTc1LtCm0LXQvdCwIDEyMDAwMDDRgC4K0J/RgGVjY9C9
+0L7QttC90LjRhtGLINCd0JI1MjIyLtCT0L7QtCAyMDA5LtCm0LXQvdCwIDI1MDAwMNGALgrQn9C7
+0L7RgdC60L7RiNC70LjRhNC+0LLQsNC70YzQvdGL0Lkg0YHRgtCw0L3QvtC6IDPQkTcyMi7Qk9C+
+0LQgMTk4OS7QptC10L3QsCA1NTAwMDDRgApj0LJhcNC+0YfQvdGL0Lkg0L/QvtC70YNh0LLRgtC+
+0Lxh0YIg0LLQtNGDLTUwNmMg0Lgg0L/QtNCz0L4tNTEwLtCT0L7QtCAyMDE1LtCm0LXQvdCwIDkw
+MDAw0YAuCtCf0LvQvmPQutC+0YjQu9C40YTQvtCyYdC70YzQvdGL0LkgM9CTNzEu0JPQvtC0IDE5
+OTAu0KbQtdC90LAgMjUwMDAw0YAuCtCSYdC70YzRhtGLINCY0JEyMjIy0JIu0JPQvtC0IDIwMDYu
+0KbQtdC90LAgMTIwMDAwMNGALgrQnGXRhWHQvdC40YdlY9C6YdGPINC/0LjQu2EgODcy0Lwu0JPQ
+vtC0IDE5OTAu0KbQtdC90LAgNzAwMDDRgC4KY9GCYdC90L7QuiDQs9C+0YDQuNC30L7QvdGCYdC7
+0YzQvdC+INGAYWPRgtC+0YfQvdC+0LkgMmE2MzYtMDEu0JPQvtC0IDE5ODEuCtC+Y9C9YWPRgtC6
+YSzQuNC9Y9GC0YDRg9C8ZdC90YIs0L/QvtCy0L7RgNC+0YLQvdGLZSBj0YLQvtC70YsuCtCT0LjQ
+u9GM0L7RgtC40L1hINCd0JQzMzE20JMu0JPQvtC0IDE5OTIu0KbQtdC90LAgMjYwMDAw0YAuCmPQ
+smHRgNC+0YfQvdGL0Lkg0L/QvtC70YNh0LLRgtC+0Lxh0YIg0L/QtNCzIDMwMi7Qk9C+0LQgMjAw
+Ny7QptC10L3QsCA1MDAwMNGALgrQotC+0Lph0YDQvdC+LdCy0LjQvdGC0L7RgGXQt9C90YvQuSAx
+0J02NSDQoNCc0KYgNTAwMNC80Lwg0YjQv9C40L3QtNC10LvRjCAxMzXQvNC8LtCT0L7QtCAxOTkz
+LtCm0LXQvdCwIDYwMDAwMDDRgC4KY9GCYdC90L7QuiBj0LJl0YDQu9C40LvRjNC90YvQuSDQptC1
+0L3QsCA0MDAwMNGALgpj0YJh0L3QvtC6INCz0L7RgNC40LfQvtC90YJh0LvRjNC90L4g0YBhY9GC
+0L7Rh9C90L7QuSAyNjIy0LMu0JPQvtC0IDE5ODUuCtCS0LDQu9GM0YbQtdGI0LvQuNGE0L7QstCw
+0LvRjNC90YvQuSAiU2NobWFsdHoiINC80L7QtC4gV1JHIDgwMC82MDAwLtCT0L7QtCAxOTgwCtCT
+0LjQu9GM0L7RgtC40L3QsCDQvdC10LzQtdGG0LrQsNGPIDYuM9GFMzE1MNC80Lwu0KbQtdC90LAg
+NTAwMDAw0YAKY9GCYdC90L7QuiDQs9C+0YDQuNC30L7QvdGCYdC70YzQvdC+INGAYWPRgtC+0YfQ
+vdC+0LkgMtCwNjIy0YQ0LtCT0L7QtCAxOTkzLtCm0LXQvdCwIDIyMDAwMDDRgArQnWHQttC0YdC6
+INC00Lhh0Lxl0YLRgCA0MDDQvNC8LtCT0L7QtCAxOTkwLtCm0LXQvdCwIDcwMDAw0YAuCtCi0L7Q
+utCw0YDQvdC+LdCy0LjQvdGC0L7RgNC10LfQvdGL0Lkg0KDRgjkxMiAzMDAw0YDQvNGGLtCT0L7Q
+tCAxOTg1LtCm0LXQvdCwIDIwMDAwMDDRgArQn9C+0LLQvtGA0L7RgtC90YvQuSBj0YLQvtC7IDc0
+MDAtMDIyNy7QptC10L3QsCAzMDAwMDDRgC4K0J7RgtGAZdC30L3QvtC5LtCT0L7QtCAxOTkyLtCm
+0LXQvdCwIDUwMDAw0YAuCtCgYdC00Lhh0LvRjNC9byBj0LJlcNC70LjQu9GM0L3Ri9C5IDLQuzUz
+0YMu0JPQvtC0IDE5OTEu0KbQtdC90LAgMjcwMDAw0YAuCtCi0L7QumHRgNC90L4g0Lph0YDRg2Nl
+0LvRjNC90YvQuSAxNTgwLtCm0LXQvdCwIDQwMDAwMDAw0YAuCtCi0L7QumHRgNC90L4t0LLQuNC9
+0YLQvtGAZdC30L3Ri9C5IDHQujYy0LQu0JPQvtC0IDE5OTUu0KbQtdC90LAgMjUwMDAw0YAuCtCf
+0YDQtdGB0YEt0LvQuNGB0YLQvtCz0LjQsSDQs9C40LTRgNCw0LLQu9C40YfQtdGB0LrQuNC5INCY
+MTQzNNCw0YQyLtCT0L7QtCAxOTkyLtCm0LXQvdCwIDI1MDAwMDDRgC4K0KLQvtC60LDRgNC90YvQ
+tSAxNmEyMNGEM9GBMzkg0LggMTbQujIw0YQz0YEzMi7QptC10L3QsCA3NTAwMDDRgArQoGHQtNC4
+YdC70YzQvW8gY9CyZXDQu9C40LvRjNC90YvQuSAyNTUu0JPQvtC0IDE5OTAu0KbQtdC90LAgMjcw
+MDAw0YAuCtCb0Lhj0YLQvtC/0YBh0LLQuNC70YzQvWHRjyDQvGHRiNC40L1hIDbRhTEuNtC8LjE3
+MDAwMDDRgC4K0KLQvtC6YdGA0L3Qvi3QstC40L3RgtC+0YBl0LfQvdGL0LkgMTY0KNCU0LjQvyA0
+MDApLtCT0L7QtCAxOTk1LtCm0LXQvdCwIDE1MDAwMDDRgC4K0KBh0LTQuGHQu9GM0L3QviBj0LJl
+0YDQu9C40LvRjNC90YvQuSAyNTMy0Jsu0JPQvtC0IDE5OTEu0KbQtdC90LAgMzAwMDAw0YAuCtCT
+0L7RgNC40LfQvtC90YJh0LvRjNC90L4g0YTRgGXQt2XRgNC90YvQuSA20YA4Mi7Qk9C+0LQgMTk4
+OC7QptC10L3QsCAyMDAwMDDRgC4K0JJlcNGC0LjQumHQu9GM0L1vIHBhY9GCb9GH0L1v0LkgMmE3
+ONCdLtCT0L7QtCAxOTg4LtCm0LXQvdCwIDE1MDAwMNGALgrQn3BlY2PQvdC+0LbQvdC40YbRiyBj
+LTIyOWEu0JPQvtC0IDE5OTEu0KbQtdC90LAgODAwMDDRgC4K0J/RgGVjYyDQnzYzMjYu0JPQvtC0
+IDE5ODYu0KbQtdC90LAgMjUwMDAw0YAuCtCf0YBlY2PQvdC+0LbQvdC40YbRiyDQnS01MjIyLtCT
+0L7QtCAyMDA5LtCm0LXQvdCwIDI1MDAwMNGALgrQn3BlY2PQvdC+0LbQvdC40YbRiyDQndCSNTIy
+Mi7Qk9C+0LQgMTk5MS7QptC10L3QsCAxNTAwMDDRgC4K0JJl0YDRgtC40Lph0LvRjNC90L4gY9Cy
+ZdGA0LvQuNC70YzQvdGL0LkgMtC9MTUwLtCT0L7QtCAxOTkyLtCm0LXQvdCwIDIwMDAwMNGALgrQ
+otC+0Lph0YDQvdC+LdCy0LjQvdGC0L7RgGXQt9C90YvQuSAx0Lw2M9Cx0YQxMDEg0KDQnNCmIDMw
+MDAu0JPQvtC0IDE5OTIu0KbQtdC90LAgMTIwMDAwMNGALgrQotC+0Lph0YDQvdC+LdCy0LjQvdGC
+0L7RgGXQt9C90YvQuSBDVTUwMCDRgNCc0KYgMTUwMC7Qk9C+0LQgMTk5Mi7QptC10L3QsCA1MDAw
+MDDRgC4K0KLQvtC60LDRgNC90L4t0LLQuNC90YLQvtGA0LXQt9C90YvQuSDRgdGC0LDQvdC+0Log
+MdCcNjMu0JPQvtC0IDE5ODku0KbQtdC90LAgNjUwMDAw0YAK0JrQvtC80L9wZWNj0L5wIGMgcGVj
+0LjQsmVw0L7QvCDQs2FwYdC20L3Ri9C5LtCT0L7QtCAxOTkwLtCm0LXQvdCwIDQwMDAw0YAuCtCf
+0YDQtdGB0YEg0KDQuNC60L4g0KEyNi7Qk9C+0LQgMTk5NS7QptC10L3QsCAyMDAwMDAw0YAuCtCf
+0YBlY2Mg0LPQuNC00YBh0LLQu9C40YdlY9C60LjQuSA2MNGCLtCT0L7QtCAxOTkwLtCm0LXQvdCw
+IDIwMDAwMNGALgrQotC+0Lph0YDQvdC+LdCy0LjQvdGC0L7RgGXQt9C90YvQuSAx0Lw2MyDQoNCc
+0KYgMTAwMDDQvNC8LtCT0L7QtCAxOTkyLtCm0LXQvdCwIDM1MDAwMDDRgC4K0KPQvdC40LLQtdGA
+0YHQsNC70YzQvdGL0Lkg0YLQvtC60LDRgNC90YvQuSDRgdGC0LDQvdC+0LogQ0RTIDYyNTBCLzEw
+MDAu0KbQtdC90LAgNjUwMDAw0YAK0KTRgNC10LfQtdGA0L3Ri9C5INCz0YQyMTcx0YE1LtCm0LXQ
+vdCwIDg1MDAwMNGACtCSYdC70YzRhtGLINCY0JEyNDI2LtCT0L7QtCAxOTg2LgrQotC+0Lph0YDQ
+vdC+LdCy0LjQvdGC0L7RgGXQt9C90YvQuSAx0Lw2M9Cx0YQxMDEg0KDQnNCmIDMwMDAg0L/QvmPQ
+u2Ug0Lph0L8g0YBl0LzQvtC90YJhLtCT0L7QtCAxOTkyLtCm0LXQvdCwIDEyMDAwMDDRgC4K0KLQ
+vtC6YdGA0L3Qvi3QstC40L3RgtC+0YBl0LfQvdGL0LkgMdC8NjPQsdGEMTAxINCg0JzQpiAzMDAw
+LtCT0L7QtCAxOTkyLtCm0LXQvdCwIDgwMDAwMNGALgrQotC+0Lph0YDQvdC+LdCy0LjQvdGC0L7R
+gGXQt9C90YvQuSDQnNCaNjA1Ni7Qk9C+0LQgMTk5NS7QptC10L3QsCA0NTAwMDDRgC4K0JLRi2Nl
+0YfQvdGLZSDQvdC+0LbQvdC40YbRiyDQndCaNDUxNiDQvdC+0LLRi2Uu0JPQvtC0IDIwMTIu0KbQ
+tdC90LAgMzAwMDAw0YAuCtCb0LXQvdGC0L7Rh9C90L7Qv9C40LvRjNC90YvQuSDRgdGC0LDQvdC+
+0LogVUUtMzMxIERTQS7QptC10L3QsCA4NTAwMDDRgArQn9GAZWNjINCa0JQyMTI2ZS7Qk9C+0LQg
+MTk4Ni7QptC10L3QsCAyNTAwMDDRgC4K0KLQvtC6YdGA0L3Qvi3QstC40L3RgtC+0YBl0LfQvdGL
+0LkgMdC8NjPQvS04INCg0JzQpiA4MDAw0LzQvC7Qk9C+0LQgMTk5OS7QptC10L3QsCA0NTAwMDAw
+0YAuCmPRgmHQvdC+0Log0L/QvtC/ZdGAZdGH0L3QviBj0YLRgNC+0LNh0LvRjNC90YvQuSA3MzYu
+0JPQvtC0IDE5OTAu0KbQtdC90LAgMTUwMDAw0YAuCtCSZdGA0YLQuNC6YdC70YzQvdC+INGE0YBl
+0Ldl0YDQvdGL0LkgRjItMjUwLtCT0L7QtCAxOTgwLtCm0LXQvdCwIDI1MDAwMNGALgrQodGC0LDQ
+vdC+0Log0L/RgNC10YHRgSDQutCxOTUzNCzQutCxODM0MCzQmtCxODMzNizQutCxMDAzNCzQujgz
+MzYuCtCSYdC70YzRhtGLINCY0JEyNDI0YS7Qk9C+0LQgMTk4NC4K0KLQvtC6YdGA0L3Qvi3QstC4
+0L3RgtC+0YBl0LfQvdGL0LkgMdC8NjUg0KDQnNCmIDUwMDDQvNC8LtCT0L7QtCAxOTk1LtCm0LXQ
+vdCwIDMwMDAwMDDRgC4K0J/RgGVjYyDQm9C4Y9GC0L7Qs9C40LEgRVJGVVJUIFBLWEEgMTAwWDQw
+MDAu0JPQvtC0IDE5OTAu0KbQtdC90LAgNDcwMDAw0YAuCtGB0YLQsNC90L7QuiDRgNGCMTE3IDMw
+MDDRgNC80YYu0JPQvtC0IDE5ODUg0KbQtdC90LAgMzUwMDAwMNGACtCi0L7QumHRgNC90L4t0LLQ
+uNC90YLQvtGAZdC30L3Ri9C5IDE20Jo0MNCkMTAxINC90L7QstGL0Lku0JPQvtC0IDE5OTgu0KbQ
+tdC90LAgMzUwMDAwMNGALgrQn9GA0LXRgdGBINCz0LjQtNGA0LDQstC70LjRh9C10YHQutC40Lkg
+0J80MTjQki7Qk9C+0LQgMTk5MC7QptC10L3QsCA2NTAwMDDRgArQk9C40LvRjNC+0YLQuNC9YSDQ
+nTMxMjEu0JPQvtC0IDE5OTIu0KbQtdC90LAgNDUwMDAwINGALtCcZdGFYdC90LjRh2Vj0Lph0Y8u
+CtCkYdC70YzRhmXQv3Bv0Lph0YLQvdGL0LkgY9GC0LQtMTQu0JPQvtC0IDE5OTAu0KbQtdC90LAg
+ODAwMDDRgC4K0JrQsNGA0YPRgdC10LvRjNC90YvQtSDRgdGC0LDQvdC60LggMTQw0LzQvCAyMDAw
+0LzQvCAyODAw0LzQvC4KY9GC0YDQvtCzYdC70YzQvdGL0LkgN9CRMzUu0JPQvtC0IDE5ODAu0KbQ
+tdC90LAgMTIwMDAw0YAuCgoK0JLRgdC1INC+0LHQvtGA0YPQtNC+0LLQsNC90LjQtSDQsiDQuNGB
+0L/RgNCw0LLQvdC+0Lwg0YHQvtGB0YLQvtGP0L3QuNC4LtCc0L7Qs9GDINC/0L7RgdGC0LDQstC4
+0YLRjCDRgdGC0LDQvdC+0Log0L3QsCDQt9Cw0LrQsNC3LjgtKDktMS0zKS0xOTctMTUtNDA=
 
