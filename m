@@ -2,123 +2,174 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id D45DF2662CB
-	for <lists+util-linux@lfdr.de>; Fri, 11 Sep 2020 18:01:19 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 52DCD266530
+	for <lists+util-linux@lfdr.de>; Fri, 11 Sep 2020 18:55:18 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726513AbgIKQBP (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Fri, 11 Sep 2020 12:01:15 -0400
-Received: from relay8-d.mail.gandi.net ([217.70.183.201]:46661 "EHLO
-        relay8-d.mail.gandi.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726214AbgIKQAm (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Fri, 11 Sep 2020 12:00:42 -0400
-X-Originating-IP: 80.110.88.233
-Received: from [192.168.0.2] (80-110-88-233.cgn.dynamic.surfer.at [80.110.88.233])
-        (Authenticated sender: emmanuel@libera.cc)
-        by relay8-d.mail.gandi.net (Postfix) with ESMTPSA id 001701BF203
-        for <util-linux@vger.kernel.org>; Fri, 11 Sep 2020 16:00:26 +0000 (UTC)
+        id S1725802AbgIKQzM (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Fri, 11 Sep 2020 12:55:12 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:58222 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726328AbgIKPFu (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Fri, 11 Sep 2020 11:05:50 -0400
+Received: from mail-qv1-xf41.google.com (mail-qv1-xf41.google.com [IPv6:2607:f8b0:4864:20::f41])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 2BFD6C0617B1
+        for <util-linux@vger.kernel.org>; Fri, 11 Sep 2020 06:53:59 -0700 (PDT)
+Received: by mail-qv1-xf41.google.com with SMTP id j10so5197580qvk.11
+        for <util-linux@vger.kernel.org>; Fri, 11 Sep 2020 06:53:59 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=from:to:cc:subject:date:message-id:in-reply-to:references;
+        bh=l1A3bpoVcJjvWL7Jjv3ATyXA4P37j4vj4fUJydxi+2g=;
+        b=Vbi1sHIgj4zQUeNmN4CHzmae97166Z108GeBxi+YxRRY6ocAlQYxYxDUo5GSH6KVaY
+         18Xa9HSg+o+D3mPWxWzf9LZQun/R98pGX3CWS5o6qidB/ZxB894eKxcpEITqsUAY7y6L
+         j3vWzudjrB5h7U+yFaTSBDllz7P55N2ar0rGqp6xyksksRdAk0VcxfIsbZ+miSzzgiQg
+         49pY1vpsbT/iq6MkAaKFQNtF9w5uvYeBGePlBPfOBwNRbOT9ygZ6QJZ5yAPLC9brHG0I
+         gFn1WUgECquL8KgNr71LPFMcGfXh28F18+Jmjo2FwOjSUth/RHyb78c1w2Wn18OwgGVY
+         sGQQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+         :references;
+        bh=l1A3bpoVcJjvWL7Jjv3ATyXA4P37j4vj4fUJydxi+2g=;
+        b=OdzfiyDleDIFtG0oDJnNjN8NryAPaALvOHBv+zOfVb/KLcOmhZFP24ZPSCtzL9Pdx5
+         9KmNY/YWIVY3SxGTPAMr6Lok8KyYS0ptJdjjgaeyuweeV0vsksCpzCAhMKQI0G2xXSLc
+         rch234GkwJI/fxFhuA3VGBYnsVfXYhwJ8ViNMPxh8MuQFvHTh6qQUjeWMQSY4zFAjIwA
+         nzvaBVeFzvM/jiiBO8FeAvPvE/ZWwDgJgE3fOwCdYTVqoiaxLEghVqljkh/g+iKr2FeI
+         H3jaulnTaoqO8cKhEPtGvAp89N3k/frfw6wqXrcOgeaj+Hzv650pPEXRnPCPtY8eOuOg
+         d5KA==
+X-Gm-Message-State: AOAM533B3eXbAOhLu0JdgUPzfDSHiWuty09rNQMVyVZylaOxgkOu+m4L
+        KpI4oluKbWCXleHj78oNAN9vMpLcDQ==
+X-Google-Smtp-Source: ABdhPJzYKfC1t6DrunLV8C98AcXPnPGIgG8X0Pzz97+8c+O61Jx3PlermYpLyja5vhfHmLMBz9DaDg==
+X-Received: by 2002:a05:6214:17ca:: with SMTP id cu10mr2053306qvb.6.1599832438240;
+        Fri, 11 Sep 2020 06:53:58 -0700 (PDT)
+Received: from localhost (209-6-122-159.s2973.c3-0.arl-cbr1.sbo-arl.ma.cable.rcncustomer.com. [209.6.122.159])
+        by smtp.gmail.com with ESMTPSA id f33sm2637350qtb.45.2020.09.11.06.53.57
+        (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+        Fri, 11 Sep 2020 06:53:57 -0700 (PDT)
+From:   Masayoshi Mizuma <msys.mizuma@gmail.com>
 To:     util-linux@vger.kernel.org
-From:   Emmanuel Kasper <manu@debian.org>
-Autocrypt: addr=manu@debian.org; prefer-encrypt=mutual; keydata=
- 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
- hytJdg==
-Subject: libblk / blkid not recognizing Atari FAT16 variation
-Message-ID: <c8bd78fd-85c8-4851-b2a6-e836d0d2a389@debian.org>
-Date:   Fri, 11 Sep 2020 18:00:25 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
-MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Language: fr
-Content-Transfer-Encoding: 7bit
+Cc:     Masayoshi Mizuma <msys.mizuma@gmail.com>,
+        Masayoshi Mizuma <m.mizuma@jp.fujitsu.com>
+Subject: [PATCH 2/4] lscpu-dmi: split to parse dmi table
+Date:   Fri, 11 Sep 2020 09:53:26 -0400
+Message-Id: <20200911135328.1465-3-msys.mizuma@gmail.com>
+X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20200911135328.1465-1-msys.mizuma@gmail.com>
+References: <20200911135328.1465-1-msys.mizuma@gmail.com>
 Sender: util-linux-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-Hi List
+From: Masayoshi Mizuma <m.mizuma@jp.fujitsu.com>
 
-As said in $subject,
+Split out a function to parse dmi table.
 
-  truncate --size 64M fs.img
-  mkfs.fat -A fs.img # -A for Atari variant
-  blkid fs.img # nothing
+Signed-off-by: Masayoshi Mizuma <m.mizuma@jp.fujitsu.com>
+---
+ sys-utils/lscpu-dmi.c | 60 ++++++++++++++++++++++++++++---------------
+ 1 file changed, 40 insertions(+), 20 deletions(-)
 
-(a real disk image with partitions can also be downloaded here
-https://subsole.org/st_mint )
-
-However fsck, and kernel can check and mount this partition.
-The kernel detects properly the fat when mounting a block device,
-without having to force the filesystem on the command line.
-
-From this doc about the Atari fat format,
-info-coach.fr/atari/documents/_mydoc/Atari_HD_File_Sytem_Reference_Guide.pdf
-
-I see on page 9
-that the main differences between MS DOS and Atari FAT, is about the fat
-logical sector size,
-which can goes over 512 bytes in the Atari FAT, whereas in MSDOS FAT it
-is always 512 bytes.
-
-fsck.vfat -v fs.img
-fsck.fat 4.1 (2017-01-24)
-Checking we can access the last sector of the filesystem
-Boot sector contents:
-System ID "kdosf"
-Media byte 0xf8 (hard disk)
-      2048 bytes per logical sector <---- more than 512 bytes
-
-
-However after a quick glance on the code in fat_valid_superblock()
-at
-https://github.com/karelzak/util-linux/blob/master/libblkid/src/superblocks/vfat.c#L218
-
-it seems to me that libblk should would work with sectors up to 4096
-bytes, so I am bit puzzled.
-Any pointers on what could be missing here ?
-
-Manu
-
-
+diff --git a/sys-utils/lscpu-dmi.c b/sys-utils/lscpu-dmi.c
+index edf0f31e0..64aac99f5 100644
+--- a/sys-utils/lscpu-dmi.c
++++ b/sys-utils/lscpu-dmi.c
+@@ -42,6 +42,12 @@ struct dmi_header
+ 	uint8_t *data;
+ };
+ 
++struct dmi_info {
++	char *vendor;
++	char *product;
++	char *manufacturer;
++};
++
+ static void *get_mem_chunk(size_t base, size_t len, const char *devmem)
+ {
+ 	void *p = NULL;
+@@ -95,20 +101,13 @@ static char *dmi_string(const struct dmi_header *dm, uint8_t s)
+ 	return bp;
+ }
+ 
+-static int hypervisor_from_dmi_table(uint32_t base, uint16_t len,
+-				uint16_t num, const char *devmem)
++static int parse_dmi_table(uint16_t len, uint16_t num,
++				uint8_t *data,
++				struct dmi_info *di)
+ {
+-	uint8_t *buf;
+-	uint8_t *data;
++	uint8_t *buf = data;
++	int rc = -1;
+ 	int i = 0;
+-	char *vendor = NULL;
+-	char *product = NULL;
+-	char *manufacturer = NULL;
+-	int rc = HYPER_NONE;
+-
+-	data = buf = get_mem_chunk(base, len, devmem);
+-	if (!buf)
+-		goto done;
+ 
+ 	 /* 4 is the length of an SMBIOS structure header */
+ 	while (i < num && data + 4 <= buf + len) {
+@@ -132,11 +131,11 @@ static int hypervisor_from_dmi_table(uint32_t base, uint16_t len,
+ 		next += 2;
+ 		switch (h.type) {
+ 			case 0:
+-				vendor = dmi_string(&h, data[0x04]);
++				di->vendor = dmi_string(&h, data[0x04]);
+ 				break;
+ 			case 1:
+-				manufacturer = dmi_string(&h, data[0x04]);
+-				product = dmi_string(&h, data[0x05]);
++				di->manufacturer = dmi_string(&h, data[0x04]);
++				di->product = dmi_string(&h, data[0x05]);
+ 				break;
+ 			default:
+ 				break;
+@@ -145,15 +144,36 @@ static int hypervisor_from_dmi_table(uint32_t base, uint16_t len,
+ 		data = next;
+ 		i++;
+ 	}
+-	if (manufacturer && !strcmp(manufacturer, "innotek GmbH"))
++	rc = 0;
++done:
++	return rc;
++}
++
++static int hypervisor_from_dmi_table(uint32_t base, uint16_t len,
++				uint16_t num, const char *devmem)
++{
++	uint8_t *data;
++	int rc = HYPER_NONE;
++	struct dmi_info di;
++
++	data = get_mem_chunk(base, len, devmem);
++	if (!data)
++		return rc;
++
++	memset(&di, 0, sizeof(struct dmi_info));
++	rc = parse_dmi_table(len, num, data, &di);
++	if (rc < 0)
++		goto done;
++
++	if (di.manufacturer && !strcmp(di.manufacturer, "innotek GmbH"))
+ 		rc = HYPER_INNOTEK;
+-	else if (manufacturer && strstr(manufacturer, "HITACHI") &&
+-					product && strstr(product, "LPAR"))
++	else if (di.manufacturer && strstr(di.manufacturer, "HITACHI") &&
++					di.product && strstr(di.product, "LPAR"))
+ 		rc = HYPER_HITACHI;
+-	else if (vendor && !strcmp(vendor, "Parallels"))
++	else if (di.vendor && !strcmp(di.vendor, "Parallels"))
+ 		rc = HYPER_PARALLELS;
+ done:
+-	free(buf);
++	free(data);
+ 	return rc;
+ }
+ 
 -- 
-You know an upstream is nice when they even accept m68k patches.
-  - John Paul Adrian Glaubitz, Debian OpenJDK maintainer
+2.27.0
+
