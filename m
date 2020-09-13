@@ -2,16 +2,15 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id A60AF2687CD
-	for <lists+util-linux@lfdr.de>; Mon, 14 Sep 2020 11:03:17 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 12F452687CE
+	for <lists+util-linux@lfdr.de>; Mon, 14 Sep 2020 11:03:26 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726199AbgINJDP convert rfc822-to-8bit (ORCPT
-        <rfc822;lists+util-linux@lfdr.de>); Mon, 14 Sep 2020 05:03:15 -0400
+        id S1726202AbgINJDX convert rfc822-to-8bit (ORCPT
+        <rfc822;lists+util-linux@lfdr.de>); Mon, 14 Sep 2020 05:03:23 -0400
 Received: from mail.bnv.gob.ve ([201.249.200.115]:36180 "EHLO
         correo.bnv.gob.ve" rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org
         with ESMTP id S1726123AbgINJDP (ORCPT
-        <rfc822;util-linux-ng@vger.kernel.org>);
-        Mon, 14 Sep 2020 05:03:15 -0400
+        <rfc822;util-linux@vger.kernel.org>); Mon, 14 Sep 2020 05:03:15 -0400
 X-Greylist: delayed 8911 seconds by postgrey-1.27 at vger.kernel.org; Mon, 14 Sep 2020 05:03:14 EDT
 Received: from localhost (localhost.bnv.gob.ve [127.0.0.1])
         by correo.bnv.gob.ve (Postfix) with ESMTP id 0648634C5A3C;
