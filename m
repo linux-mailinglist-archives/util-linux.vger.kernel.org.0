@@ -2,48 +2,70 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 12F452687CE
-	for <lists+util-linux@lfdr.de>; Mon, 14 Sep 2020 11:03:26 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 09CD52688F5
+	for <lists+util-linux@lfdr.de>; Mon, 14 Sep 2020 12:07:10 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726202AbgINJDX convert rfc822-to-8bit (ORCPT
-        <rfc822;lists+util-linux@lfdr.de>); Mon, 14 Sep 2020 05:03:23 -0400
-Received: from mail.bnv.gob.ve ([201.249.200.115]:36180 "EHLO
-        correo.bnv.gob.ve" rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org
-        with ESMTP id S1726123AbgINJDP (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Mon, 14 Sep 2020 05:03:15 -0400
-X-Greylist: delayed 8911 seconds by postgrey-1.27 at vger.kernel.org; Mon, 14 Sep 2020 05:03:14 EDT
-Received: from localhost (localhost.bnv.gob.ve [127.0.0.1])
-        by correo.bnv.gob.ve (Postfix) with ESMTP id 0648634C5A3C;
-        Sun, 13 Sep 2020 21:34:24 -0400 (-04)
-Received: from correo.bnv.gob.ve ([127.0.0.1])
-        by localhost (correo.bnv.gob.ve [127.0.0.1]) (amavisd-new, port 10032)
-        with ESMTP id 9zAszXmj-Sza; Sun, 13 Sep 2020 21:34:23 -0400 (-04)
-Received: from localhost (localhost.bnv.gob.ve [127.0.0.1])
-        by correo.bnv.gob.ve (Postfix) with ESMTP id 2FACE33828EC;
-        Sun, 13 Sep 2020 20:30:02 -0400 (-04)
-X-Virus-Scanned: amavisd-new at bnv.gob.ve
-Received: from correo.bnv.gob.ve ([127.0.0.1])
-        by localhost (correo.bnv.gob.ve [127.0.0.1]) (amavisd-new, port 10026)
-        with ESMTP id hzxYfrOqupcA; Sun, 13 Sep 2020 20:30:02 -0400 (-04)
-Received: from [192.168.8.101] (8ta-229-1-199.telkomadsl.co.za [197.229.1.199])
-        by correo.bnv.gob.ve (Postfix) with ESMTPSA id 6AD5934C4113;
-        Sun, 13 Sep 2020 19:29:09 -0400 (-04)
-Content-Type: text/plain; charset="iso-8859-1"
+        id S1726275AbgINKHH (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Mon, 14 Sep 2020 06:07:07 -0400
+Received: from us-smtp-1.mimecast.com ([207.211.31.81]:48652 "EHLO
+        us-smtp-delivery-1.mimecast.com" rhost-flags-OK-OK-OK-FAIL)
+        by vger.kernel.org with ESMTP id S1726239AbgINKHH (ORCPT
+        <rfc822;util-linux@vger.kernel.org>);
+        Mon, 14 Sep 2020 06:07:07 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+        s=mimecast20190719; t=1600078026;
+        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+         in-reply-to:in-reply-to:references:references;
+        bh=twAQaGgJGrJ/UwvCgPJEoqhbdgGM1yicybr5ML1Y3n8=;
+        b=OnWHtn7y76GvWBi8g5qzJQIVKEf4otYGxqSn+Cq+A/LImr64u95olgnFDTD7Z/Cogeat9q
+        VQpUA8tXdznZNAXHX4P55Up54WqETOC+9xpr5pSHonPZdFHSF4tZ/yWuuWD+IjGNhx1P2U
+        BISWpOzdgCSUrchBMaeavqWhGKsfwwQ=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-407-HR4I4YfOMqybWgwF9dVTiA-1; Mon, 14 Sep 2020 06:07:02 -0400
+X-MC-Unique: HR4I4YfOMqybWgwF9dVTiA-1
+Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.phx2.redhat.com [10.5.11.23])
+        (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+        (No client certificate requested)
+        by mimecast-mx01.redhat.com (Postfix) with ESMTPS id CBDE51853DA5;
+        Mon, 14 Sep 2020 10:07:00 +0000 (UTC)
+Received: from ws.net.home (unknown [10.40.193.69])
+        by smtp.corp.redhat.com (Postfix) with ESMTPS id 0E60F19C4F;
+        Mon, 14 Sep 2020 10:06:59 +0000 (UTC)
+Date:   Mon, 14 Sep 2020 12:06:56 +0200
+From:   Karel Zak <kzak@redhat.com>
+To:     Gero Treuner <gero@70t.de>
+Cc:     util-linux@vger.kernel.org
+Subject: Re: fallocate: fix for --dig-holes at end of files
+Message-ID: <20200914100656.37km3eqdj2jjqyej@ws.net.home>
+References: <X1qJiQa2MHpJ55IG@innocircle.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8BIT
-Content-Description: Mail message body
-Subject: Spende von 2.000.000,00 Euro.
-To:     Recipients <manuelfranco@info.com>
-From:   "manuel franco" <manuelfranco@info.com>
-Date:   Mon, 14 Sep 2020 01:28:57 +0200
-Reply-To: manuelfrancospende11@gmail.com
-Message-Id: <20200913232910.6AD5934C4113@correo.bnv.gob.ve>
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <X1qJiQa2MHpJ55IG@innocircle.com>
+X-Scanned-By: MIMEDefang 2.84 on 10.5.11.23
 Sender: util-linux-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
- Sie haben eine Spende von 2.000.000,00 Euro.
+On Thu, Sep 10, 2020 at 10:16:09PM +0200, Gero Treuner wrote:
+> I discovered that making a file sparse with "fallocate -d filename"
+> fails on the last block of a file, because - usually being partial - the
+> system call only zeroes that part instead of deallocating the block. See
+> man fallocate(2) - section "Deallocating file space".
+> 
+> The expected call is punching the whole block beyond eof, which doesn't
+> change the file length because of flag FALLOC_FL_KEEP_SIZE.
 
-Mein Name ist Manuel Franco aus den USA.
-Ich habe die America-Lotterie im Wert von 768 Millionen US-Dollar gewonnen und spende einen Teil davon an nur 5 glückliche Menschen und einige Waisenhäuser als Wohlwollen für die Menschheit.
+Good catch. Applied, thanks.
+
+(Please, use Signed-off-by: line in your commit message next time.)
+
+    Karel
+
+-- 
+ Karel Zak  <kzak@redhat.com>
+ http://karelzak.blogspot.com
+
