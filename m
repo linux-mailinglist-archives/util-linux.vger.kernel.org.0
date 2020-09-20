@@ -2,105 +2,145 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 640432711F2
-	for <lists+util-linux@lfdr.de>; Sun, 20 Sep 2020 05:56:13 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 6EC8327145B
+	for <lists+util-linux@lfdr.de>; Sun, 20 Sep 2020 15:07:27 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726843AbgITD4L (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Sat, 19 Sep 2020 23:56:11 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:34988 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726760AbgITD4L (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Sat, 19 Sep 2020 23:56:11 -0400
-Received: from mail-vs1-xe42.google.com (mail-vs1-xe42.google.com [IPv6:2607:f8b0:4864:20::e42])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 0E780C061755
-        for <util-linux@vger.kernel.org>; Sat, 19 Sep 2020 20:56:11 -0700 (PDT)
-Received: by mail-vs1-xe42.google.com with SMTP id q13so6078433vsj.13
-        for <util-linux@vger.kernel.org>; Sat, 19 Sep 2020 20:56:10 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:sender:from:date:message-id:subject:to
-         :content-transfer-encoding;
-        bh=uJFy+3A3C/ymk3cSUV9e3v1lv0Tpv8T9SnAJu61qQJs=;
-        b=AGm6lA+VCt9ZxUfzjLHAw6vKWdtXqQz8rOXvJlswf9IbTimshMvWBQaBQJfJJ+eatv
-         FF6dUVaF92xFqgLqIdU2oJuClQl/ODvcU6WsJv7JUjWWKFmjzlix7E+cSIjCVbICAq9x
-         Z8TRabmMHb+FsLPjZHELR6bXH94FIRRfFnSH/IgikE5WZ+wFC5G4WfW1x/a1h2Ck4taF
-         Nym5kZb/4+KZuDhZBF0ASFG8FhsTGIg/cHu8bkQiU7qbY4UvzmF8rjwU2mU4xP5EjQ1i
-         RuM8qlqjN2ZGqEwsJN6iFRVy88ygSNJhZkZdsRlf27poZsrFXjCI+W1mdLR6UHBJrEJN
-         ufLg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:sender:from:date:message-id:subject
-         :to:content-transfer-encoding;
-        bh=uJFy+3A3C/ymk3cSUV9e3v1lv0Tpv8T9SnAJu61qQJs=;
-        b=DjnaxOAPCw9qkxOWlwP8TB2w7amSGbnVFKWifau/NMA6QVngT6MFETGM1zLZpUuq39
-         sFd76yDDhIV3Y8OcDvQsCtR/iS3bvrXAGOtnmbrO3KZEPRJSVcuuW+kvulp5GvkLWR1O
-         x7NCfg+wJaQhjcWo+drK6RDCXbVLPirCbmzlcEkjpo7L8p9HIJzXNtJ7Di/89HYWYs40
-         FcQe+mZqUcLTDTwVEwvcnzCDRap7E4lhXNgcWmYo5dsf89EK3PiXUWNF5WnhU8TKPUob
-         2IEJGLM7J8kazYDnu1lV8/fiuV1XKEw716/l+FDral62D0UcXWLNn91JDjZO8ck8DF6C
-         fMqQ==
-X-Gm-Message-State: AOAM5315nZLy3vi0qedYhQzvJ+oA77GGzOriYumCn9s5JEsl0/3qxWMA
-        qOZLvv0/2K3w6Az9L80TZuvfTj2+AVt470HY6Y8=
-X-Google-Smtp-Source: ABdhPJwY9kgmPEi6PJ5dfU+ABhN0zbuzpnnZ9lCgIR8vm605B5TQiQ8KUoB82hDROIvnqAEVGwy2FJJ6Jzzp2O1GnUI=
-X-Received: by 2002:a67:fe07:: with SMTP id l7mr25165774vsr.21.1600574169990;
- Sat, 19 Sep 2020 20:56:09 -0700 (PDT)
+        id S1726306AbgITNHY (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Sun, 20 Sep 2020 09:07:24 -0400
+Received: from mout.web.de ([212.227.15.14]:48117 "EHLO mout.web.de"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S1726305AbgITNHY (ORCPT <rfc822;util-linux@vger.kernel.org>);
+        Sun, 20 Sep 2020 09:07:24 -0400
+X-Greylist: delayed 302 seconds by postgrey-1.27 at vger.kernel.org; Sun, 20 Sep 2020 09:07:23 EDT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=web.de;
+        s=dbaedf251592; t=1600607243;
+        bh=6DAgvS0F85AZf62nN2xF5vmT9gIAPt0XggNLJgX1B2M=;
+        h=X-UI-Sender-Class:From:To:Cc:Subject:Date;
+        b=m4JVYrsi2BMhmDreKdWS15brKi8HZl75RMr46T2OIwNUT2EY8argEuRZkJtP8T0Hb
+         I/raQox3qGPJHm4IazFrYRg/ds768GrLdUeWthxq6omTmxj21CN9tH+OOgDryt1SIi
+         wcRbWgNcOaReTxDY1Erj7pasolRy88mEAKfB0VVk=
+X-UI-Sender-Class: c548c8c5-30a9-4db5-a2e7-cb6cb037b8f9
+Received: from archbook.fritz.box ([92.252.29.128]) by smtp.web.de (mrweb002
+ [213.165.67.108]) with ESMTPSA (Nemesis) id 0MHGJ1-1kEm3b2A0R-00E7bU; Sun, 20
+ Sep 2020 15:02:20 +0200
+From:   Lennard Hofmann <lennard.hofmann@web.de>
+To:     util-linux@vger.kernel.org
+Cc:     Lennard Hofmann <lennard.hofmann@web.de>
+Subject: [PATCH 1/4] column: Optionally keep empty lines in cols/rows mode
+Date:   Sun, 20 Sep 2020 14:55:18 +0200
+Message-Id: <20200920125520.28204-1-lennard.hofmann@web.de>
+X-Mailer: git-send-email 2.28.0
 MIME-Version: 1.0
-Sender: fariqtamuh0011110@gmail.com
-Received: by 2002:a05:6102:31b8:0:0:0:0 with HTTP; Sat, 19 Sep 2020 20:56:09
- -0700 (PDT)
-From:   Juliette Morgan <juliettemorgan21@gmail.com>
-Date:   Sun, 20 Sep 2020 05:56:09 +0200
-X-Google-Sender-Auth: oBDdftPhtKbL1-5HuDjOVxaNAVY
-Message-ID: <CACgb0ousUFHgBEY0ZzHGByOMu1x344q7NKmJfu85+J_Xcj6LkQ@mail.gmail.com>
-Subject: READ AND REPLY URGENT
-To:     undisclosed-recipients:;
-Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:xQ7d7YRKkbYFFnqd1G9/jbPboWAFvASaT3MtkgE768L2KUDdcOZ
+ s+umAvMaVqbuWeGRfQydnt2AYX6xjFEZ0RsUV5w4x0Kcj1SdOA6VNq5Otc/jhCF3aFERvLM
+ QV1PEvY846U7/4QhY9UJo2Yp/EBqCZJFr61hA8cz/m1/rbyUzr0Vgp+As88vMhxitBsIK5r
+ g7YfRLfLEud0fNrAUs/eQ==
+X-Spam-Flag: NO
+X-UI-Out-Filterresults: notjunk:1;V03:K0:IwIQmG2tYJ4=:Yzz9Vtv3GVHcm+ohyeD63l
+ iQOCXwzUnt5vj0lhiKEETk5joLiRWqHMopCIp7EIkAzNReGKdxcP5plY02jXGuH3QCFHBxNTt
+ LFSwO64WRNXcOdINnp27f89YkR1decxQx2eb+V4PVhEyxoO1n9jYxBUqRq/AugQc0RuBupGTV
+ bAxikeXDi7TEFqEzKMydeV8cOz31YYnKV8mhmGyiUfNWBxqQjFBxp3ufMss0mT7elogelZIV7
+ 6nkRv0XvFrm67q/QeKXFOwbRY85rIbNVxQ20cYlzoPZGMNCYvC35BWbKlV+BqiwsvOswjHb/+
+ gsH3bkE5GHhr80kIu1p3bWHUpjvtcZkoXBxs5z2j6YWWMSe6GfmIw63bFW3GPyJNfmJgu6S/P
+ BwkA9JjW8j1WWkYFP9dCQYEhSLImqr/HlRZttdGrlFxX+ogdPIFz+TMfHslBTsvfba7ZzXAMY
+ f1X63EW8gYF56Pp2om15IsWr1VM23VQloAWexn99u/amFKtfNdkX/iA/fIF33PSRyHgVm1VvA
+ N2KpUXzP1VcZBzgLvmgNmwq1Fc2qEwR9Cn7umAifFspPv84CP5lxLpIVPIxGKs79IS28kEVr3
+ nR1GusPu3l7l25ao0SF1SZhlZfscEMFmI9ZZzjGQKX40hOSV8emnyshK2x7TxknOPre3CVIPi
+ /LWo0QosjAgQ8AipDy5gIyCmGPP+M0qwY6uVzpWgjsdSAIt2/8BtvjSdB8BhzDTw+guL7EQCN
+ tV+8DwOm7POp9yRxKuBn4ax4PYcqHNHlFZjHuddggqeSmou7IrOcikcjkZ9hxIo7rv3G6OPP0
+ eGJ6GF0CtpqKbhcPdMldKyLxSLPKG7uLq6uwGpMe8T2RB98XXh1U6y2SFhNaC+QWua8hDhuxu
+ mW23LpTKk0DNBK3ahbx2AhwaP45Z9166IgM1NA9qtg2SPeghQ4KnP+v9XLPNyezopAU+fi5r6
+ uxe5LU2wYJP5ixJHhFp1LDxi5JzSRdc5ztFwU5k5Zkk3BDZERwN6Hh3HDdHZsgzle5E1ibLBY
+ aQv6Gu2RJ4KalSMrbL0ywdZpB/4GVSniR5rTOH7WIAoT+yHhWkHbY89KQSspKV7xVLwyktOJK
+ G6Sc9BKDs4z7HhfgOcXCdxLkI2vtfDam3ps3MbsbRlXTzM4Inpax1myizHtdz4v5Bkd5wHJeP
+ bPOKGKlPDcSdRX5vxmy2y6FcFef9n7UISCrdU5fk1oeb9rYJTkpEWOhP68unBFGBlIvZija9o
+ t479Lxwo8LXBp5RIrtmydf16oHnswiXYGdwpRxg==
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-Hello Dear God,s Select Good Day,
+Signed-off-by: Lennard Hofmann <lennard.hofmann@web.de>
+=2D--
+It surprised me that the -L option only works in table mode because I like
+column(1) for columnating long terminal output on wide screens. I am not a=
+ware
+of a simple way to achieve this using other Unix utilities: pr(1) truncate=
+s
+columns and requires you to calculate the number of columns and the output
+width manually.
 
-I apologized, If this mail find's you disturbing, It might not be the
-best way to approach you as we have not met before, but due to the
-urgency of my present situation i decided  to communicate this way, so
-please pardon my manna, I am writing this mail to you with heavy tears
-In my eyes and great sorrow in my heart, My Name is Mrs.Juliette
-Morgan, and I am contacting you from my country Norway, I want to tell
-you this because I don't have any other option than to tell you as I
-was touched to open up to you,
+The following patches remove the unnecessary restriction of the -L option.=
+ The
+patch below simply moves the existing logic to a new function `add_entry()=
+` that
+gets called with an empty wcs if the -L option is present.
 
-I married to Mr.sami Morgan. Who worked with Norway embassy in Burkina
-Faso for nine years before he died in the year 2011.We were married
-for eleven years without a child He died after a brief illness that
-lasted for only five days. Since his death I decided not to remarry,
-When my late husband was alive he deposited the sum of =E2=82=AC 8.5 Millio=
-n
-Euro (Eight million, Five hundred thousand Euros) in a bank in
-Ouagadougou the capital city of Burkina Faso in west Africa Presently
-this money is still in bank. He made this money available for
-exportation of Gold from Burkina Faso mining.
+I am very new to C and mailing lists so I appreciate any feedback.
 
-Recently, My Doctor told me that I would not last for the period of
-seven months due to cancer problem. The one that disturbs me most is
-my stroke sickness.Having known my condition I decided to hand you
-over this money to take care of the less-privileged people, you will
-utilize this money the way I am going to instruct herein.
+text-utils/column.c
+| 30 ++++++++++++++++++++++--------
+ 1 file changed, 22 insertions(+), 8 deletions(-)
 
-I want you to take 30 Percent of the total money for your personal use
-While 70% of the money will go to charity, people in the street and
-helping the orphanage. I grew up as an Orphan and I don't have any
-body as my family member, just to endeavour that the house of God is
-maintained. Am doing this so that God will forgive my sins and accept
-my soul because these sicknesses have suffered me so much.
+diff --git a/text-utils/column.c b/text-utils/column.c
+index 238dbab41..bc7851472 100644
+=2D-- a/text-utils/column.c
++++ b/text-utils/column.c
+@@ -487,6 +487,21 @@ static int add_emptyline_to_table(struct column_contr=
+ol *ctl)
+ 	return 0;
+ }
 
-As soon as I receive your reply I shall give you the contact of the
-bank in Burkina Faso and I will also instruct the Bank Manager to
-issue you an authority letter that will prove you the present
-beneficiary of the money in the bank that is if you assure me that you
-will act accordingly as I Stated herein.
++static void add_entry(struct column_control *ctl, size_t *maxents, wchar_=
+t *wcs)
++{
++	if (ctl->nents <=3D *maxents) {
++		*maxents +=3D 1000;
++		ctl->ents =3D xrealloc(ctl->ents, *maxents * sizeof(wchar_t *));
++	}
++	ctl->ents[ctl->nents] =3D wcs;
++}
++
++static void add_empty_entry(struct column_control *ctl, size_t *maxents)
++{
++	add_entry(ctl, maxents, mbs_to_wcs(""));
++	ctl->nents++;
++}
++
+ static int read_input(struct column_control *ctl, FILE *fp)
+ {
+ 	char *buf =3D NULL;
+@@ -512,8 +527,12 @@ static int read_input(struct column_control *ctl, FIL=
+E *fp)
+ 				*p =3D '\0';
+ 		}
+ 		if (!str || !*str) {
+-			if (ctl->mode =3D=3D COLUMN_MODE_TABLE && ctl->tab_empty_lines)
+-				add_emptyline_to_table(ctl);
++			if (ctl->tab_empty_lines) {
++				if (ctl->mode =3D=3D COLUMN_MODE_TABLE)
++					add_emptyline_to_table(ctl);
++				else
++					add_empty_entry(ctl, &maxents);
++			}
+ 			continue;
+ 		}
 
-Always reply to my alternative for security purposes
+@@ -539,12 +558,7 @@ static int read_input(struct column_control *ctl, FIL=
+E *fp)
 
-Hoping to receive your reply:
-From Mrs.Juliette Morgan,
+ 		case COLUMN_MODE_FILLCOLS:
+ 		case COLUMN_MODE_FILLROWS:
+-			if (ctl->nents <=3D maxents) {
+-				maxents +=3D 1000;
+-				ctl->ents =3D xrealloc(ctl->ents,
+-						maxents * sizeof(wchar_t *));
+-			}
+-			ctl->ents[ctl->nents] =3D wcs;
++			add_entry(ctl, &maxents, wcs);
+ 			len =3D width(ctl->ents[ctl->nents]);
+ 			if (ctl->maxlength < len)
+ 				ctl->maxlength =3D len;
+=2D-
+2.28.0
+
