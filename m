@@ -2,106 +2,150 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id E4CE9271477
-	for <lists+util-linux@lfdr.de>; Sun, 20 Sep 2020 15:21:28 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id A896C27146A
+	for <lists+util-linux@lfdr.de>; Sun, 20 Sep 2020 15:15:21 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726315AbgITNV2 (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Sun, 20 Sep 2020 09:21:28 -0400
-Received: from mout.web.de ([212.227.17.12]:55763 "EHLO mout.web.de"
+        id S1726333AbgITNPV (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Sun, 20 Sep 2020 09:15:21 -0400
+Received: from mout.web.de ([212.227.17.12]:53697 "EHLO mout.web.de"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1726306AbgITNV2 (ORCPT <rfc822;util-linux@vger.kernel.org>);
-        Sun, 20 Sep 2020 09:21:28 -0400
+        id S1726321AbgITNPU (ORCPT <rfc822;util-linux@vger.kernel.org>);
+        Sun, 20 Sep 2020 09:15:20 -0400
+X-Greylist: delayed 385 seconds by postgrey-1.27 at vger.kernel.org; Sun, 20 Sep 2020 09:15:20 EDT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=web.de;
-        s=dbaedf251592; t=1600608087;
-        bh=Em6y7dB7PTS89H4CyGkXYUCmk2fsNdxvh5QMyt/JfYg=;
-        h=X-UI-Sender-Class:From:To:Cc:Subject:Date;
-        b=bgGrznnRlL8Zjkz4nDt5cBeoixFfiGIlt+Vtk3yz0SYNVQ1F46SEBKY6fiFShJY8l
-         IIjsgY6kzuudP1F/2ztgEawO7aL9rpiZt5nhhSFEVbV58hCXJdreRAabccyWg4GnoC
-         85xuEMTI671NwBQJ+c+YdMxYmS7R1B72PE0iY3w8=
+        s=dbaedf251592; t=1600607719;
+        bh=CEjOTPm+ry4w+B30GSNqWT1qjrVeJQlTTWp1vHfbix8=;
+        h=X-UI-Sender-Class:From:To:Cc:Subject:Date:In-Reply-To:References;
+        b=DyI+hJayeZZgiFjLaR4YH3Yfhl840rHQIQeO+Bi1hwNGbO/UKT7ckUhB6Z0nFuxau
+         lGVmVqhbCig6KJplOoiPhX+W8bVxdgkX1I3uZaG87zOWD38TqzduycnRe8SSvRifNk
+         3K9IZ12eYgvw8IKfWIEnfajtvfJ0cZP4oO/zfG30=
 X-UI-Sender-Class: c548c8c5-30a9-4db5-a2e7-cb6cb037b8f9
 Received: from archbook.fritz.box ([92.252.29.128]) by smtp.web.de (mrweb103
- [213.165.67.124]) with ESMTPSA (Nemesis) id 0LrK0u-1kTzVy0GJI-0132Tp; Sun, 20
- Sep 2020 15:08:54 +0200
+ [213.165.67.124]) with ESMTPSA (Nemesis) id 0Lp760-1kwb6r1xJM-00eyAb; Sun, 20
+ Sep 2020 15:10:17 +0200
 From:   Lennard Hofmann <lennard.hofmann@web.de>
 To:     util-linux@vger.kernel.org
 Cc:     Lennard Hofmann <lennard.hofmann@web.de>
-Subject: [PATCH 2/4] column: Call mbs_to_wcs("") only once
-Date:   Sun, 20 Sep 2020 15:08:16 +0200
-Message-Id: <20200920130818.29756-1-lennard.hofmann@web.de>
+Subject: [PATCH 3/4] column: Deprecate --table-empty-lines in favor of --keep-empty-lines
+Date:   Sun, 20 Sep 2020 15:08:18 +0200
+Message-Id: <20200920130818.29756-2-lennard.hofmann@web.de>
 X-Mailer: git-send-email 2.28.0
+In-Reply-To: <20200920130818.29756-1-lennard.hofmann@web.de>
+References: <20200920130818.29756-1-lennard.hofmann@web.de>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:83bVot9JGThsBRp5cYyxfeA59+5vpA7mrBrb2ouEF8VRIwFYmcn
- syCrLzeIHaNvdPNTJzpEycPl4eunVoYK31XzzuP7TwJl0vMV0ERSluxux+Ozb5d38l5nut1
- pwaLf53FlprSeLk1HDpqHwfaxvomSsYtrckVUzVhiv0+3pAZixYiMJCgnrTVcmmHBM6uCjt
- Qwew7ZQuMdyziKHD4EgIg==
+X-Provags-ID: V03:K1:BabPIBECU4nkjSAkUJhP0wS7XMpfRP5N/W3+NzUbEil1yuTKGIl
+ wVt1NwQqws62iG/EiiQ2IV3aj/rapnOX41XoNGpku7a5w6e+NsEmf5kD1sxelLE8M7wt/r9
+ FSF36PDUz8igRopU4dCs8pG1T/VjMUYZhPeWaAyL2V8iJxVNnOJSBP/eTUTQLd3XPF6KXQq
+ B0ALHI4MHeIW0vWbNt/oQ==
 X-Spam-Flag: NO
-X-UI-Out-Filterresults: notjunk:1;V03:K0:dxQgnFKjCXM=:i8YhNKYbp4n+o5OKETY6Gg
- EAt9K65wqGJ5ybhPqYo9/4rc9PPK8p2WOTh+KBQnTs7HLN56WXcVAj0HdEMSCjSDgYnXjStbs
- Ddiuw0pGyPCy+mhGoW9W9yH+PIf6/1nQIG3B6gKmFwBwR9luy0iyIa1j7DJRffFJtvg76PMRB
- obBt4F1jcQLPeBJLipXSeBxtJ+QPlpE2yG0RMeR7LDG6sE1aVbW0XY8TfKGzQAKBpIcdGu2ff
- P5wAWLZaELGDZtlvRzBcuZpM2q2lMcRsxmyJFktDYKZe3pzeH/bpoCkh47z4Io3Wc0pf1NfBR
- 43HP+WNY+WCSf89i+/YTdORgtTdUqkJNCSkhFt7UsF3qPDNF1sN3Ch0giYqftxpvQR0YWgoxo
- aOOUxinfEFoAkJtra6NV7VxbOD6hIN3ovbUnd1Rp8ceEG2bivXEjRykHtczG3lQxQ3BIa/lmd
- HvHx+iXx9ma7/8sKGNdYHfAtPoXHd1vxAoKpfNyWxqGqMyvX4a/0yrxZ72js+XUwdtGqwESZ4
- Lqsjnx7SjONgnZADCkZasdAR7lG0Ho7ZM1+FrP8bMwYjAo8GvOn38qJzEuG8fmP3+v/8pf9Lk
- hIxMKCPepK0ECDP+5dWpTUcPRbnaIbnUNfG/TfEzZCOh4G5/aquF473Wo/KzaZPxkRJKxrE9V
- Ftb5JvO4xB0Mj6yD9c1F9NruRMD86241EYGqb8xWV2BqcnhGc2IvlonrAaQ9IfQwVb2Bx0dot
- I1OE4CEJ5SBGrar7q+TjYThsPV/w9oi8Qbix3tQ/MhQ1FqcOxTPC9qABZtOyqVoS/un9jMokv
- FXNIggNvHQh6HkSAQkwVZq1111coawS+ouakLhzY2CBA1FZgTeVR5syJz4rdtUftxP6i0VbP0
- OnIL8doBbz/2enDYe7IF3NWn/31TwP9ks4tm3GjtoF/OhPs6xCk7UZq9HmWyOamfBAVuIQeBc
- OhOfpxRJgwNonggnUvLWset+bLStlZ87k/u8etSTGy8SwdtFwqLo6kbXUuTwCcX3GSnQV/WPy
- ro1fRgApKy65aOHiG24te2Gj8siela8uvIFCcS6Sm0Zi/hlfTlcNhWrQThNZ1AF/8Fn47qUrH
- yeIeXfg/IWsDZ+PIF4OQw2VpMB11KtIO9JVpEBgLKrZG7kEr3uaJKPdwyb04nVFdbtEowGCDP
- 9R1RXWdqrTXgyTYj9JV6C2pvSEQNViQMl2JsNna8mpHnu526Ynxd7ceGIaRfArUS340FKo4Wb
- Hsi0MRFGkbrb6XruSa9d4EJIykWE/c/RfBHzpHw==
+X-UI-Out-Filterresults: notjunk:1;V03:K0:e0wWP/UT0ro=:vuf1aociKO1scK5lXbYm/w
+ hrXDEjveio50kH37WSV5JylJtwrt3SpCfheONXZD2wwzf++5lWHJ2Cm0lTsb8Y+Y9wK8rnlZ/
+ R2UVYBRRWP5C8a1LypaOa5YZhWjQOWGBDlQWIOFVLgEXcomr+7uXuusgG96gugySQh/hl0RRF
+ EQatx0Zo8qzfbPWbBfuuPwTMwqWtjtqYX7Eb7KqOv8LRiEZSdNMTmBzHOvWVYJLtrqspSLUBb
+ TWCaUG+sFn3RZGRnZCy1v+cAjRqdxLgSLQGlAW/TdbaJ2CH/3vWyAJIoYF2Y50Zpn/efNaVR5
+ 9OnJj5H664snLnP6fV18ASHp/LeD00cHLeIga325JjcGBi9GdFbliyQOx/1sCkHDlK/9BmhGp
+ u1wJLuIqAnl1/piUkaN391CCBqeiWD8uI1IyF7QskQKlbioR1xtCQsV5B3/mMMOPSYP0bZPq4
+ bFLXC6mw5kx59kzmaqsE0uBRGWpYGq3Cdc0qokujiTP20VX3XDBoVaV2sYR99t+Qbiw1sPYNQ
+ 4+92JI3919m6u2X8OUI2gjBAOv5hunp+LEzrA80QIxvYc/o1kVXjeYyUkWiE92xyqcEytcegE
+ vvnKCKBYRZpBu8IPb5U4693Re436rFJCWD4wnTkzNqhnekB13CDhN8mOrzm7LD/tcvDDWEoij
+ S4nwYOTNVREu9dkBo14Qnpn57Eqyu2IqQonzKUWkKYioT0ApNzgTRtJh1nUYITbRxb+dQV1a6
+ bei3V7cYyIeID1L1TDDuMIFuYo/S3eFtqF3Xb3tT+xKdqDrQE7CyL8KlStmyLRiZUPxIK56NQ
+ OQsuZzR1o3/XURjLfX4vi4yYWWYOVHDs4EdkNZmM/Oy+PnnIUoHTVMbK6Oux4F8s8Fooc3EUq
+ hXs+1BIvZP3QNePnCutAYoeHvz18a+a2NgeoEcKQQBiPIoKUg7M62+K0HNjiOgX8EUwQiQYCa
+ kTLkp65DcEOe4hXE7qkcoV3RfZiwGwmCtbZhyMZbMeCebmcBUVhw/V9j1IeEvEdDoMgydnWLC
+ rwpExIrWdIWuX2fgE9MbiOnbuYjQnKPnsJJQ7OVOXmqHv7zJidShx8m0GFZ+6UKdjh8yIL/ah
+ CDZwVck8HgrDwvyGTVEFV/uPU+l/U57lNlrB+PeNdmokdGQAXVpNSxLxfhOsJGwUjrG6gv9Oa
+ z8KyRSIhU0ls3tQlwqJ4DPZLXXEfIWREmszgyA0leixZHOfIzmmaq90Qplde4NDn8gL8/4Mrp
+ 3Fqiyh169TTtSnNcLCiaBpSRXfLUDodXDSavpsw==
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
+`--table-empty-lines` gives the false impression that the option
+only applies to table mode.
+
 Signed-off-by: Lennard Hofmann <lennard.hofmann@web.de>
 =2D--
-This is an optional patch to improve performance slightly while only
-adding three lines of code.
- text-utils/column.c | 10 +++++++---
- 1 file changed, 7 insertions(+), 3 deletions(-)
+ text-utils/column.1 | 8 +++++---
+ text-utils/column.c | 9 +++++----
+ 2 files changed, 10 insertions(+), 7 deletions(-)
 
+diff --git a/text-utils/column.1 b/text-utils/column.1
+index 86886f3bf..d10fc7efb 100644
+=2D-- a/text-utils/column.1
++++ b/text-utils/column.1
+@@ -110,9 +110,11 @@ hide all unnamed columns (see \-\-table-columns).
+ Specify columns order on output.
+ .IP "\fB\-n, \-\-table-name\fP \fIname\fP"
+ Specify the table name used for JSON output. The default is "table".
+-.IP "\fB\-L, \-\-table\-empty\-lines\fP"
+-Insert empty line to the table for each empty line on input. The default
+-is ignore empty lines at all.
++.IP "\fB\-L, \-\-keep\-empty\-lines\fP"
++Preserve whitespace-only lines in the input. The default is ignore empty =
+lines
++at all. This option=E2=80=99s original name was \-\-table-empty-lines but=
+ is now
++deprecated because it gives the false impression that the option only app=
+lies
++to table mode.
+ .IP "\fB\-r, \-\-tree\fP \fIcolumn\fP"
+ Specify column to use tree-like output. Note that the circular dependenci=
+es and
+ other anomalies in child and parent relation are silently ignored.
 diff --git a/text-utils/column.c b/text-utils/column.c
-index bc7851472..d83d8d6d7 100644
+index d83d8d6d7..bc0c1fd11 100644
 =2D-- a/text-utils/column.c
 +++ b/text-utils/column.c
-@@ -496,14 +496,18 @@ static void add_entry(struct column_control *ctl, si=
-ze_t *maxents, wchar_t *wcs)
- 	ctl->ents[ctl->nents] =3D wcs;
- }
+@@ -96,7 +96,7 @@ struct column_control {
+ 	unsigned int greedy :1,
+ 		     json :1,
+ 		     header_repeat :1,
+-		     tab_empty_lines :1,	/* --table-empty-lines */
++		     keep_empty_lines :1,	/* --keep-empty-lines */
+ 		     tab_noheadings :1;
+ };
 
--static void add_empty_entry(struct column_control *ctl, size_t *maxents)
-+static void add_empty_entry(struct column_control *ctl, size_t *maxents,
-+                            wchar_t *empty)
- {
--	add_entry(ctl, maxents, mbs_to_wcs(""));
-+	if (empty =3D=3D NULL)
-+		empty =3D mbs_to_wcs("");
-+	add_entry(ctl, maxents, empty);
- 	ctl->nents++;
- }
-
- static int read_input(struct column_control *ctl, FILE *fp)
- {
-+	wchar_t *empty =3D NULL;
- 	char *buf =3D NULL;
- 	size_t bufsz =3D 0;
- 	size_t maxents =3D 0;
-@@ -531,7 +535,7 @@ static int read_input(struct column_control *ctl, FILE=
+@@ -531,7 +531,7 @@ static int read_input(struct column_control *ctl, FILE=
  *fp)
+ 				*p =3D '\0';
+ 		}
+ 		if (!str || !*str) {
+-			if (ctl->tab_empty_lines) {
++			if (ctl->keep_empty_lines) {
  				if (ctl->mode =3D=3D COLUMN_MODE_TABLE)
  					add_emptyline_to_table(ctl);
  				else
--					add_empty_entry(ctl, &maxents);
-+					add_empty_entry(ctl, &maxents, empty);
- 			}
- 			continue;
- 		}
+@@ -709,6 +709,7 @@ int main(int argc, char **argv)
+ 		{ "fillrows",            no_argument,       NULL, 'x' },
+ 		{ "help",                no_argument,       NULL, 'h' },
+ 		{ "json",                no_argument,       NULL, 'J' },
++		{ "keep-empty-lines",    no_argument,       NULL, 'L' },
+ 		{ "output-separator",    required_argument, NULL, 'o' },
+ 		{ "output-width",        required_argument, NULL, 'c' },
+ 		{ "separator",           required_argument, NULL, 's' },
+@@ -723,7 +724,7 @@ int main(int argc, char **argv)
+ 		{ "table-right",         required_argument, NULL, 'R' },
+ 		{ "table-truncate",      required_argument, NULL, 'T' },
+ 		{ "table-wrap",          required_argument, NULL, 'W' },
+-		{ "table-empty-lines",   no_argument,       NULL, 'L' },
++		{ "table-empty-lines",   no_argument,       NULL, 'L' }, /* deprecated =
+*/
+ 		{ "table-header-repeat", no_argument,       NULL, 'e' },
+ 		{ "tree",                required_argument, NULL, 'r' },
+ 		{ "tree-id",             required_argument, NULL, 'i' },
+@@ -774,7 +775,7 @@ int main(int argc, char **argv)
+ 			ctl.mode =3D COLUMN_MODE_TABLE;
+ 			break;
+ 		case 'L':
+-			ctl.tab_empty_lines =3D 1;
++			ctl.keep_empty_lines =3D 1;
+ 			break;
+ 		case 'l':
+ 			ctl.maxncols =3D strtou32_or_err(optarg, _("invalid columns limit argu=
+ment"));
 =2D-
 2.28.0
 
