@@ -2,160 +2,105 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id C4A3526C608
-	for <lists+util-linux@lfdr.de>; Wed, 16 Sep 2020 19:30:20 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 640432711F2
+	for <lists+util-linux@lfdr.de>; Sun, 20 Sep 2020 05:56:13 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727147AbgIPRaP (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Wed, 16 Sep 2020 13:30:15 -0400
-Received: from mslow2.mail.gandi.net ([217.70.178.242]:58928 "EHLO
-        mslow2.mail.gandi.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1727073AbgIPR3n (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Wed, 16 Sep 2020 13:29:43 -0400
-Received: from relay1-d.mail.gandi.net (unknown [217.70.183.193])
-        by mslow2.mail.gandi.net (Postfix) with ESMTP id 27E373AF084
-        for <util-linux@vger.kernel.org>; Wed, 16 Sep 2020 16:30:31 +0000 (UTC)
-X-Originating-IP: 80.110.88.233
-Received: from [192.168.0.2] (80-110-88-233.cgn.dynamic.surfer.at [80.110.88.233])
-        (Authenticated sender: emmanuel@libera.cc)
-        by relay1-d.mail.gandi.net (Postfix) with ESMTPSA id ECD1F240002;
-        Wed, 16 Sep 2020 16:29:08 +0000 (UTC)
-Subject: Re: libblk / blkid not recognizing Atari FAT16 variation
-To:     Karel Zak <kzak@redhat.com>
-Cc:     util-linux@vger.kernel.org
-References: <c8bd78fd-85c8-4851-b2a6-e836d0d2a389@debian.org>
- <20200914112631.2va62jdzgalywiyb@ws.net.home>
-From:   Emmanuel Kasper <manu@debian.org>
-Autocrypt: addr=manu@debian.org; prefer-encrypt=mutual; keydata=
- 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
- hytJdg==
-Message-ID: <19538f76-3870-5e8b-c26c-dd0ede2b904d@debian.org>
-Date:   Wed, 16 Sep 2020 18:29:07 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
+        id S1726843AbgITD4L (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Sat, 19 Sep 2020 23:56:11 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:34988 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726760AbgITD4L (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Sat, 19 Sep 2020 23:56:11 -0400
+Received: from mail-vs1-xe42.google.com (mail-vs1-xe42.google.com [IPv6:2607:f8b0:4864:20::e42])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 0E780C061755
+        for <util-linux@vger.kernel.org>; Sat, 19 Sep 2020 20:56:11 -0700 (PDT)
+Received: by mail-vs1-xe42.google.com with SMTP id q13so6078433vsj.13
+        for <util-linux@vger.kernel.org>; Sat, 19 Sep 2020 20:56:10 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=mime-version:sender:from:date:message-id:subject:to
+         :content-transfer-encoding;
+        bh=uJFy+3A3C/ymk3cSUV9e3v1lv0Tpv8T9SnAJu61qQJs=;
+        b=AGm6lA+VCt9ZxUfzjLHAw6vKWdtXqQz8rOXvJlswf9IbTimshMvWBQaBQJfJJ+eatv
+         FF6dUVaF92xFqgLqIdU2oJuClQl/ODvcU6WsJv7JUjWWKFmjzlix7E+cSIjCVbICAq9x
+         Z8TRabmMHb+FsLPjZHELR6bXH94FIRRfFnSH/IgikE5WZ+wFC5G4WfW1x/a1h2Ck4taF
+         Nym5kZb/4+KZuDhZBF0ASFG8FhsTGIg/cHu8bkQiU7qbY4UvzmF8rjwU2mU4xP5EjQ1i
+         RuM8qlqjN2ZGqEwsJN6iFRVy88ygSNJhZkZdsRlf27poZsrFXjCI+W1mdLR6UHBJrEJN
+         ufLg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:sender:from:date:message-id:subject
+         :to:content-transfer-encoding;
+        bh=uJFy+3A3C/ymk3cSUV9e3v1lv0Tpv8T9SnAJu61qQJs=;
+        b=DjnaxOAPCw9qkxOWlwP8TB2w7amSGbnVFKWifau/NMA6QVngT6MFETGM1zLZpUuq39
+         sFd76yDDhIV3Y8OcDvQsCtR/iS3bvrXAGOtnmbrO3KZEPRJSVcuuW+kvulp5GvkLWR1O
+         x7NCfg+wJaQhjcWo+drK6RDCXbVLPirCbmzlcEkjpo7L8p9HIJzXNtJ7Di/89HYWYs40
+         FcQe+mZqUcLTDTwVEwvcnzCDRap7E4lhXNgcWmYo5dsf89EK3PiXUWNF5WnhU8TKPUob
+         2IEJGLM7J8kazYDnu1lV8/fiuV1XKEw716/l+FDral62D0UcXWLNn91JDjZO8ck8DF6C
+         fMqQ==
+X-Gm-Message-State: AOAM5315nZLy3vi0qedYhQzvJ+oA77GGzOriYumCn9s5JEsl0/3qxWMA
+        qOZLvv0/2K3w6Az9L80TZuvfTj2+AVt470HY6Y8=
+X-Google-Smtp-Source: ABdhPJwY9kgmPEi6PJ5dfU+ABhN0zbuzpnnZ9lCgIR8vm605B5TQiQ8KUoB82hDROIvnqAEVGwy2FJJ6Jzzp2O1GnUI=
+X-Received: by 2002:a67:fe07:: with SMTP id l7mr25165774vsr.21.1600574169990;
+ Sat, 19 Sep 2020 20:56:09 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <20200914112631.2va62jdzgalywiyb@ws.net.home>
-Content-Type: text/plain; charset=utf-8
-Content-Language: fr
-Content-Transfer-Encoding: 8bit
-Sender: util-linux-owner@vger.kernel.org
+Sender: fariqtamuh0011110@gmail.com
+Received: by 2002:a05:6102:31b8:0:0:0:0 with HTTP; Sat, 19 Sep 2020 20:56:09
+ -0700 (PDT)
+From:   Juliette Morgan <juliettemorgan21@gmail.com>
+Date:   Sun, 20 Sep 2020 05:56:09 +0200
+X-Google-Sender-Auth: oBDdftPhtKbL1-5HuDjOVxaNAVY
+Message-ID: <CACgb0ousUFHgBEY0ZzHGByOMu1x344q7NKmJfu85+J_Xcj6LkQ@mail.gmail.com>
+Subject: READ AND REPLY URGENT
+To:     undisclosed-recipients:;
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-Le 14/09/2020 à 13:26, Karel Zak a écrit :
-> On Fri, Sep 11, 2020 at 06:00:25PM +0200, Emmanuel Kasper wrote:
->>   truncate --size 64M fs.img
->>   mkfs.fat -A fs.img # -A for Atari variant
->>   blkid fs.img # nothing
->>
->> (a real disk image with partitions can also be downloaded here
->> https://subsole.org/st_mint )
->>
->> However fsck, and kernel can check and mount this partition.
->> The kernel detects properly the fat when mounting a block device,
->> without having to force the filesystem on the command line.
->>
->> From this doc about the Atari fat format,
->> info-coach.fr/atari/documents/_mydoc/Atari_HD_File_Sytem_Reference_Guide.pdf
->>
->> I see on page 9
->> that the main differences between MS DOS and Atari FAT, is about the fat
->> logical sector size,
->> which can goes over 512 bytes in the Atari FAT, whereas in MSDOS FAT it
->> is always 512 bytes.
-> 
-> This is not the issue. 
-> 
-> The problem is that Atari FAT does not contain any magic string. There
-> is also missing MBR signature (0x55 0xAA) which is used for old FAT
-> floppies without magic strings. So, libblkid completely ignores stuff
-> on the device ...
-> 
-> If I add the first bytes from the device as magic string to libblkid
-> and disable MBR signature check than the rest of the verification
-> pass. 
-> 
-> Note that "`.mkdosf" from the begin of the device is mkfs
-> specific stuff it's probably bad idea use it as a regular magic string.
-> 
-> It's also pretty fragile to avoid magic strings at all in this case,
-> because something-like-FAT is pretty common used by many random media.
-> 
-> Frankly, it seems better to force Atari users to use "vfat" in the
-> fstab :-)
-> 
-> BTW, the old good file(1) returns nothing for the Atari FAT too.
+Hello Dear God,s Select Good Day,
 
-indeed but disktype, available in the Debian archive, recognizes an
-Atari bootable sector :)
+I apologized, If this mail find's you disturbing, It might not be the
+best way to approach you as we have not met before, but due to the
+urgency of my present situation i decided  to communicate this way, so
+please pardon my manna, I am writing this mail to you with heavy tears
+In my eyes and great sorrow in my heart, My Name is Mrs.Juliette
+Morgan, and I am contacting you from my country Norway, I want to tell
+you this because I don't have any other option than to tell you as I
+was touched to open up to you,
 
-$ curl  http://www.subsole.org/static/retrocomputing/st_mint-1.2.img.zip
-| funzip > ahdi.img
-$ dd if=ahdi.img of=boot.sector skip=1024 count=512 bs=1
+I married to Mr.sami Morgan. Who worked with Norway embassy in Burkina
+Faso for nine years before he died in the year 2011.We were married
+for eleven years without a child He died after a brief illness that
+lasted for only five days. Since his death I decided not to remarry,
+When my late husband was alive he deposited the sum of =E2=82=AC 8.5 Millio=
+n
+Euro (Eight million, Five hundred thousand Euros) in a bank in
+Ouagadougou the capital city of Burkina Faso in west Africa Presently
+this money is still in bank. He made this money available for
+exportation of Gold from Burkina Faso mining.
 
-$ disktype boot.sector
+Recently, My Doctor told me that I would not last for the period of
+seven months due to cancer problem. The one that disturbs me most is
+my stroke sickness.Having known my condition I decided to hand you
+over this money to take care of the less-privileged people, you will
+utilize this money the way I am going to instruct herein.
 
---- boot.sector
-Regular file, size 512 bytes
-FAT16 file system (hints score 3 of 5, ATARI ST bootable)
-  Unusual sector size 4096 bytes
-  Volume size 63.95 MiB (67051520 bytes, 8185 clusters of 8 KiB)
+I want you to take 30 Percent of the total money for your personal use
+While 70% of the money will go to charity, people in the street and
+helping the orphanage. I grew up as an Orphan and I don't have any
+body as my family member, just to endeavour that the house of God is
+maintained. Am doing this so that God will forgive my sins and accept
+my soul because these sicknesses have suffered me so much.
 
-I had a look at how disktype does this internally and disktype computes
-the Atari m68k specific checksum
-described in https://en.wikipedia.or/wiki/Design_of_the_FAT_file_system.
+As soon as I receive your reply I shall give you the contact of the
+bank in Burkina Faso and I will also instruct the Bank Manager to
+issue you an authority letter that will prove you the present
+beneficiary of the money in the bank that is if you assure me that you
+will act accordingly as I Stated herein.
 
-see
-https://sources.debian.org/src/disktype/9-10/dos.c/#L477
+Always reply to my alternative for security purposes
 
-Now for my use case I am not actually using an Atari Computer with
-Linux, but I am using removable media between an Atari and a PC.
-The lack of support for the Atari FAT prevents udisks and friends to
-mount the partition as an unpriviledged user via `udisksctl mount`
-Also people using emulators have to do loops around to access the
-content of a disk image
-(https://hatari.tuxfamily.org/doc/manual.html#Moving_files_to_from_hard_disk_images)
-
-Is that something we could consider ?
-
-Manu
+Hoping to receive your reply:
+From Mrs.Juliette Morgan,
