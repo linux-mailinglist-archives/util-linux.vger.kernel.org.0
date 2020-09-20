@@ -2,145 +2,106 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 6EC8327145B
-	for <lists+util-linux@lfdr.de>; Sun, 20 Sep 2020 15:07:27 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id E4CE9271477
+	for <lists+util-linux@lfdr.de>; Sun, 20 Sep 2020 15:21:28 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726306AbgITNHY (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Sun, 20 Sep 2020 09:07:24 -0400
-Received: from mout.web.de ([212.227.15.14]:48117 "EHLO mout.web.de"
+        id S1726315AbgITNV2 (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Sun, 20 Sep 2020 09:21:28 -0400
+Received: from mout.web.de ([212.227.17.12]:55763 "EHLO mout.web.de"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1726305AbgITNHY (ORCPT <rfc822;util-linux@vger.kernel.org>);
-        Sun, 20 Sep 2020 09:07:24 -0400
-X-Greylist: delayed 302 seconds by postgrey-1.27 at vger.kernel.org; Sun, 20 Sep 2020 09:07:23 EDT
+        id S1726306AbgITNV2 (ORCPT <rfc822;util-linux@vger.kernel.org>);
+        Sun, 20 Sep 2020 09:21:28 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=web.de;
-        s=dbaedf251592; t=1600607243;
-        bh=6DAgvS0F85AZf62nN2xF5vmT9gIAPt0XggNLJgX1B2M=;
+        s=dbaedf251592; t=1600608087;
+        bh=Em6y7dB7PTS89H4CyGkXYUCmk2fsNdxvh5QMyt/JfYg=;
         h=X-UI-Sender-Class:From:To:Cc:Subject:Date;
-        b=m4JVYrsi2BMhmDreKdWS15brKi8HZl75RMr46T2OIwNUT2EY8argEuRZkJtP8T0Hb
-         I/raQox3qGPJHm4IazFrYRg/ds768GrLdUeWthxq6omTmxj21CN9tH+OOgDryt1SIi
-         wcRbWgNcOaReTxDY1Erj7pasolRy88mEAKfB0VVk=
+        b=bgGrznnRlL8Zjkz4nDt5cBeoixFfiGIlt+Vtk3yz0SYNVQ1F46SEBKY6fiFShJY8l
+         IIjsgY6kzuudP1F/2ztgEawO7aL9rpiZt5nhhSFEVbV58hCXJdreRAabccyWg4GnoC
+         85xuEMTI671NwBQJ+c+YdMxYmS7R1B72PE0iY3w8=
 X-UI-Sender-Class: c548c8c5-30a9-4db5-a2e7-cb6cb037b8f9
-Received: from archbook.fritz.box ([92.252.29.128]) by smtp.web.de (mrweb002
- [213.165.67.108]) with ESMTPSA (Nemesis) id 0MHGJ1-1kEm3b2A0R-00E7bU; Sun, 20
- Sep 2020 15:02:20 +0200
+Received: from archbook.fritz.box ([92.252.29.128]) by smtp.web.de (mrweb103
+ [213.165.67.124]) with ESMTPSA (Nemesis) id 0LrK0u-1kTzVy0GJI-0132Tp; Sun, 20
+ Sep 2020 15:08:54 +0200
 From:   Lennard Hofmann <lennard.hofmann@web.de>
 To:     util-linux@vger.kernel.org
 Cc:     Lennard Hofmann <lennard.hofmann@web.de>
-Subject: [PATCH 1/4] column: Optionally keep empty lines in cols/rows mode
-Date:   Sun, 20 Sep 2020 14:55:18 +0200
-Message-Id: <20200920125520.28204-1-lennard.hofmann@web.de>
+Subject: [PATCH 2/4] column: Call mbs_to_wcs("") only once
+Date:   Sun, 20 Sep 2020 15:08:16 +0200
+Message-Id: <20200920130818.29756-1-lennard.hofmann@web.de>
 X-Mailer: git-send-email 2.28.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:xQ7d7YRKkbYFFnqd1G9/jbPboWAFvASaT3MtkgE768L2KUDdcOZ
- s+umAvMaVqbuWeGRfQydnt2AYX6xjFEZ0RsUV5w4x0Kcj1SdOA6VNq5Otc/jhCF3aFERvLM
- QV1PEvY846U7/4QhY9UJo2Yp/EBqCZJFr61hA8cz/m1/rbyUzr0Vgp+As88vMhxitBsIK5r
- g7YfRLfLEud0fNrAUs/eQ==
+X-Provags-ID: V03:K1:83bVot9JGThsBRp5cYyxfeA59+5vpA7mrBrb2ouEF8VRIwFYmcn
+ syCrLzeIHaNvdPNTJzpEycPl4eunVoYK31XzzuP7TwJl0vMV0ERSluxux+Ozb5d38l5nut1
+ pwaLf53FlprSeLk1HDpqHwfaxvomSsYtrckVUzVhiv0+3pAZixYiMJCgnrTVcmmHBM6uCjt
+ Qwew7ZQuMdyziKHD4EgIg==
 X-Spam-Flag: NO
-X-UI-Out-Filterresults: notjunk:1;V03:K0:IwIQmG2tYJ4=:Yzz9Vtv3GVHcm+ohyeD63l
- iQOCXwzUnt5vj0lhiKEETk5joLiRWqHMopCIp7EIkAzNReGKdxcP5plY02jXGuH3QCFHBxNTt
- LFSwO64WRNXcOdINnp27f89YkR1decxQx2eb+V4PVhEyxoO1n9jYxBUqRq/AugQc0RuBupGTV
- bAxikeXDi7TEFqEzKMydeV8cOz31YYnKV8mhmGyiUfNWBxqQjFBxp3ufMss0mT7elogelZIV7
- 6nkRv0XvFrm67q/QeKXFOwbRY85rIbNVxQ20cYlzoPZGMNCYvC35BWbKlV+BqiwsvOswjHb/+
- gsH3bkE5GHhr80kIu1p3bWHUpjvtcZkoXBxs5z2j6YWWMSe6GfmIw63bFW3GPyJNfmJgu6S/P
- BwkA9JjW8j1WWkYFP9dCQYEhSLImqr/HlRZttdGrlFxX+ogdPIFz+TMfHslBTsvfba7ZzXAMY
- f1X63EW8gYF56Pp2om15IsWr1VM23VQloAWexn99u/amFKtfNdkX/iA/fIF33PSRyHgVm1VvA
- N2KpUXzP1VcZBzgLvmgNmwq1Fc2qEwR9Cn7umAifFspPv84CP5lxLpIVPIxGKs79IS28kEVr3
- nR1GusPu3l7l25ao0SF1SZhlZfscEMFmI9ZZzjGQKX40hOSV8emnyshK2x7TxknOPre3CVIPi
- /LWo0QosjAgQ8AipDy5gIyCmGPP+M0qwY6uVzpWgjsdSAIt2/8BtvjSdB8BhzDTw+guL7EQCN
- tV+8DwOm7POp9yRxKuBn4ax4PYcqHNHlFZjHuddggqeSmou7IrOcikcjkZ9hxIo7rv3G6OPP0
- eGJ6GF0CtpqKbhcPdMldKyLxSLPKG7uLq6uwGpMe8T2RB98XXh1U6y2SFhNaC+QWua8hDhuxu
- mW23LpTKk0DNBK3ahbx2AhwaP45Z9166IgM1NA9qtg2SPeghQ4KnP+v9XLPNyezopAU+fi5r6
- uxe5LU2wYJP5ixJHhFp1LDxi5JzSRdc5ztFwU5k5Zkk3BDZERwN6Hh3HDdHZsgzle5E1ibLBY
- aQv6Gu2RJ4KalSMrbL0ywdZpB/4GVSniR5rTOH7WIAoT+yHhWkHbY89KQSspKV7xVLwyktOJK
- G6Sc9BKDs4z7HhfgOcXCdxLkI2vtfDam3ps3MbsbRlXTzM4Inpax1myizHtdz4v5Bkd5wHJeP
- bPOKGKlPDcSdRX5vxmy2y6FcFef9n7UISCrdU5fk1oeb9rYJTkpEWOhP68unBFGBlIvZija9o
- t479Lxwo8LXBp5RIrtmydf16oHnswiXYGdwpRxg==
+X-UI-Out-Filterresults: notjunk:1;V03:K0:dxQgnFKjCXM=:i8YhNKYbp4n+o5OKETY6Gg
+ EAt9K65wqGJ5ybhPqYo9/4rc9PPK8p2WOTh+KBQnTs7HLN56WXcVAj0HdEMSCjSDgYnXjStbs
+ Ddiuw0pGyPCy+mhGoW9W9yH+PIf6/1nQIG3B6gKmFwBwR9luy0iyIa1j7DJRffFJtvg76PMRB
+ obBt4F1jcQLPeBJLipXSeBxtJ+QPlpE2yG0RMeR7LDG6sE1aVbW0XY8TfKGzQAKBpIcdGu2ff
+ P5wAWLZaELGDZtlvRzBcuZpM2q2lMcRsxmyJFktDYKZe3pzeH/bpoCkh47z4Io3Wc0pf1NfBR
+ 43HP+WNY+WCSf89i+/YTdORgtTdUqkJNCSkhFt7UsF3qPDNF1sN3Ch0giYqftxpvQR0YWgoxo
+ aOOUxinfEFoAkJtra6NV7VxbOD6hIN3ovbUnd1Rp8ceEG2bivXEjRykHtczG3lQxQ3BIa/lmd
+ HvHx+iXx9ma7/8sKGNdYHfAtPoXHd1vxAoKpfNyWxqGqMyvX4a/0yrxZ72js+XUwdtGqwESZ4
+ Lqsjnx7SjONgnZADCkZasdAR7lG0Ho7ZM1+FrP8bMwYjAo8GvOn38qJzEuG8fmP3+v/8pf9Lk
+ hIxMKCPepK0ECDP+5dWpTUcPRbnaIbnUNfG/TfEzZCOh4G5/aquF473Wo/KzaZPxkRJKxrE9V
+ Ftb5JvO4xB0Mj6yD9c1F9NruRMD86241EYGqb8xWV2BqcnhGc2IvlonrAaQ9IfQwVb2Bx0dot
+ I1OE4CEJ5SBGrar7q+TjYThsPV/w9oi8Qbix3tQ/MhQ1FqcOxTPC9qABZtOyqVoS/un9jMokv
+ FXNIggNvHQh6HkSAQkwVZq1111coawS+ouakLhzY2CBA1FZgTeVR5syJz4rdtUftxP6i0VbP0
+ OnIL8doBbz/2enDYe7IF3NWn/31TwP9ks4tm3GjtoF/OhPs6xCk7UZq9HmWyOamfBAVuIQeBc
+ OhOfpxRJgwNonggnUvLWset+bLStlZ87k/u8etSTGy8SwdtFwqLo6kbXUuTwCcX3GSnQV/WPy
+ ro1fRgApKy65aOHiG24te2Gj8siela8uvIFCcS6Sm0Zi/hlfTlcNhWrQThNZ1AF/8Fn47qUrH
+ yeIeXfg/IWsDZ+PIF4OQw2VpMB11KtIO9JVpEBgLKrZG7kEr3uaJKPdwyb04nVFdbtEowGCDP
+ 9R1RXWdqrTXgyTYj9JV6C2pvSEQNViQMl2JsNna8mpHnu526Ynxd7ceGIaRfArUS340FKo4Wb
+ Hsi0MRFGkbrb6XruSa9d4EJIykWE/c/RfBHzpHw==
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
 Signed-off-by: Lennard Hofmann <lennard.hofmann@web.de>
 =2D--
-It surprised me that the -L option only works in table mode because I like
-column(1) for columnating long terminal output on wide screens. I am not a=
-ware
-of a simple way to achieve this using other Unix utilities: pr(1) truncate=
-s
-columns and requires you to calculate the number of columns and the output
-width manually.
-
-The following patches remove the unnecessary restriction of the -L option.=
- The
-patch below simply moves the existing logic to a new function `add_entry()=
-` that
-gets called with an empty wcs if the -L option is present.
-
-I am very new to C and mailing lists so I appreciate any feedback.
-
-text-utils/column.c
-| 30 ++++++++++++++++++++++--------
- 1 file changed, 22 insertions(+), 8 deletions(-)
+This is an optional patch to improve performance slightly while only
+adding three lines of code.
+ text-utils/column.c | 10 +++++++---
+ 1 file changed, 7 insertions(+), 3 deletions(-)
 
 diff --git a/text-utils/column.c b/text-utils/column.c
-index 238dbab41..bc7851472 100644
+index bc7851472..d83d8d6d7 100644
 =2D-- a/text-utils/column.c
 +++ b/text-utils/column.c
-@@ -487,6 +487,21 @@ static int add_emptyline_to_table(struct column_contr=
-ol *ctl)
- 	return 0;
+@@ -496,14 +496,18 @@ static void add_entry(struct column_control *ctl, si=
+ze_t *maxents, wchar_t *wcs)
+ 	ctl->ents[ctl->nents] =3D wcs;
  }
 
-+static void add_entry(struct column_control *ctl, size_t *maxents, wchar_=
-t *wcs)
-+{
-+	if (ctl->nents <=3D *maxents) {
-+		*maxents +=3D 1000;
-+		ctl->ents =3D xrealloc(ctl->ents, *maxents * sizeof(wchar_t *));
-+	}
-+	ctl->ents[ctl->nents] =3D wcs;
-+}
-+
-+static void add_empty_entry(struct column_control *ctl, size_t *maxents)
-+{
-+	add_entry(ctl, maxents, mbs_to_wcs(""));
-+	ctl->nents++;
-+}
-+
+-static void add_empty_entry(struct column_control *ctl, size_t *maxents)
++static void add_empty_entry(struct column_control *ctl, size_t *maxents,
++                            wchar_t *empty)
+ {
+-	add_entry(ctl, maxents, mbs_to_wcs(""));
++	if (empty =3D=3D NULL)
++		empty =3D mbs_to_wcs("");
++	add_entry(ctl, maxents, empty);
+ 	ctl->nents++;
+ }
+
  static int read_input(struct column_control *ctl, FILE *fp)
  {
++	wchar_t *empty =3D NULL;
  	char *buf =3D NULL;
-@@ -512,8 +527,12 @@ static int read_input(struct column_control *ctl, FIL=
-E *fp)
- 				*p =3D '\0';
- 		}
- 		if (!str || !*str) {
--			if (ctl->mode =3D=3D COLUMN_MODE_TABLE && ctl->tab_empty_lines)
--				add_emptyline_to_table(ctl);
-+			if (ctl->tab_empty_lines) {
-+				if (ctl->mode =3D=3D COLUMN_MODE_TABLE)
-+					add_emptyline_to_table(ctl);
-+				else
-+					add_empty_entry(ctl, &maxents);
-+			}
+ 	size_t bufsz =3D 0;
+ 	size_t maxents =3D 0;
+@@ -531,7 +535,7 @@ static int read_input(struct column_control *ctl, FILE=
+ *fp)
+ 				if (ctl->mode =3D=3D COLUMN_MODE_TABLE)
+ 					add_emptyline_to_table(ctl);
+ 				else
+-					add_empty_entry(ctl, &maxents);
++					add_empty_entry(ctl, &maxents, empty);
+ 			}
  			continue;
  		}
-
-@@ -539,12 +558,7 @@ static int read_input(struct column_control *ctl, FIL=
-E *fp)
-
- 		case COLUMN_MODE_FILLCOLS:
- 		case COLUMN_MODE_FILLROWS:
--			if (ctl->nents <=3D maxents) {
--				maxents +=3D 1000;
--				ctl->ents =3D xrealloc(ctl->ents,
--						maxents * sizeof(wchar_t *));
--			}
--			ctl->ents[ctl->nents] =3D wcs;
-+			add_entry(ctl, &maxents, wcs);
- 			len =3D width(ctl->ents[ctl->nents]);
- 			if (ctl->maxlength < len)
- 				ctl->maxlength =3D len;
 =2D-
 2.28.0
 
