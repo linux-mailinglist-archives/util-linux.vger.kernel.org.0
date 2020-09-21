@@ -2,126 +2,154 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 19BA6271471
-	for <lists+util-linux@lfdr.de>; Sun, 20 Sep 2020 15:16:54 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 0B082272496
+	for <lists+util-linux@lfdr.de>; Mon, 21 Sep 2020 15:07:21 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726306AbgITNQw (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Sun, 20 Sep 2020 09:16:52 -0400
-Received: from mout.web.de ([212.227.17.12]:51101 "EHLO mout.web.de"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1726305AbgITNQv (ORCPT <rfc822;util-linux@vger.kernel.org>);
-        Sun, 20 Sep 2020 09:16:51 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=web.de;
-        s=dbaedf251592; t=1600607810;
-        bh=EwLSluInDPXXzquUp9uhZUOHtbZacFOaIzOhkFAfdQU=;
-        h=X-UI-Sender-Class:From:To:Cc:Subject:Date:In-Reply-To:References;
-        b=QwwRdM6ejUqhn3FmsjiYHkWWQ526kCU0dt7mpDznj1G5DN0FI5ydlaRI9cmYhfLvq
-         F/Fad8jS1g/gAz+asCW34An+F1pDaI9OhOqsM44Nf/CF4Dx+BS2jnVgEPrN6sZ+aGS
-         MxYOPUs4o0ig6EKpuITkPdwMMauO6/5FQzE6nNKE=
-X-UI-Sender-Class: c548c8c5-30a9-4db5-a2e7-cb6cb037b8f9
-Received: from archbook.fritz.box ([92.252.29.128]) by smtp.web.de (mrweb103
- [213.165.67.124]) with ESMTPSA (Nemesis) id 0MgOCo-1k532Y1gZy-00NiEd; Sun, 20
- Sep 2020 15:11:48 +0200
-From:   Lennard Hofmann <lennard.hofmann@web.de>
-To:     util-linux@vger.kernel.org
-Cc:     Lennard Hofmann <lennard.hofmann@web.de>
-Subject: [PATCH 4/4] tests: column --keep-empty-lines in cols mode
-Date:   Sun, 20 Sep 2020 15:08:20 +0200
-Message-Id: <20200920130818.29756-3-lennard.hofmann@web.de>
-X-Mailer: git-send-email 2.28.0
-In-Reply-To: <20200920130818.29756-1-lennard.hofmann@web.de>
-References: <20200920130818.29756-1-lennard.hofmann@web.de>
+        id S1726501AbgIUNHU (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Mon, 21 Sep 2020 09:07:20 -0400
+Received: from us-smtp-1.mimecast.com ([205.139.110.61]:40014 "EHLO
+        us-smtp-delivery-1.mimecast.com" rhost-flags-OK-OK-OK-FAIL)
+        by vger.kernel.org with ESMTP id S1726496AbgIUNHT (ORCPT
+        <rfc822;util-linux@vger.kernel.org>);
+        Mon, 21 Sep 2020 09:07:19 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+        s=mimecast20190719; t=1600693638;
+        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+         in-reply-to:in-reply-to:references:references;
+        bh=Q9Qj3adJaKjdPEDo08Ln/NfxXh7jpI/YK5ChLreId6U=;
+        b=CLsHcbu6l4xNeuoXYkTLSHi+j6tzGa0y/Iu08yuccG92KO+SKh4Z2awjRG19rrHgqaunw+
+        EuDVjSWT4PmZ6/dqzy1UtuyfDSzJLD+zDCaEsRq0BEMX24QhVEt1VUVX8rFkWDxYznCokE
+        YsclI91qlX9G9UGl5LB5CSdcKkplIYg=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-218-U4RzRuFCPku07XC4XijeWw-1; Mon, 21 Sep 2020 09:07:14 -0400
+X-MC-Unique: U4RzRuFCPku07XC4XijeWw-1
+Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.phx2.redhat.com [10.5.11.22])
+        (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+        (No client certificate requested)
+        by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 663A957242;
+        Mon, 21 Sep 2020 13:07:13 +0000 (UTC)
+Received: from ws.net.home (unknown [10.40.194.172])
+        by smtp.corp.redhat.com (Postfix) with ESMTPS id 993E510021AA;
+        Mon, 21 Sep 2020 13:07:12 +0000 (UTC)
+Date:   Mon, 21 Sep 2020 15:07:09 +0200
+From:   Karel Zak <kzak@redhat.com>
+To:     Lennard Hofmann <lennard.hofmann@web.de>
+Cc:     util-linux@vger.kernel.org
+Subject: Re: [PATCH 1/4] column: Optionally keep empty lines in cols/rows mode
+Message-ID: <20200921130709.zvyf4siigxrdg77p@ws.net.home>
+References: <20200920125520.28204-1-lennard.hofmann@web.de>
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:bwf1ykXtdthjYno6Y2P+xOHr4Ta9NMQqciGrvnk7LiVQWYSfAzo
- AbZNhdfSaq/CEaiuCk/DrGeBR06/cYeX6kTOzhxWMRI3bu0FzrNHRf+2RyFksdjacBCEqt8
- Jo0ASy4ZRN2NQrI2K0t9rs1JZD2mxfGrD2nlBAiEQUrtss1arz0L26bbK0N0IuedFgpDxmZ
- LieSzaAhG30t0Zbbi03aA==
-X-Spam-Flag: NO
-X-UI-Out-Filterresults: notjunk:1;V03:K0:jkmObHVQVj4=:nLSABpq2/Q8Ls8vpuwfxAh
- Tft7P4c75txUO49WRpNjoX8H5DH71Ay3TrR3+zxoGWY/t6zGHtSCyyaSTCds9uhVx+J1u18AT
- ELfFVsy67jU7ClXWxqQcR1/aBsI1LKP9sovm6hhl8f0YlXHzqNaR1ikCrCxG+UqHMl4z9ecSu
- 9tiL5fqYt0DqQql57UW2sXM9ydPg4SvJRC/K00qVgrzc9AOJiVhV/QZ073d1hY34l7w17d9T3
- zZdPZraFN/pLdYvOxkVasBwh2w5Ce62I8mZFrneH3xYUkScRjb13bat6V1hO23QKhh66DuB6L
- EY0jycNcZQ2/Y5iZCGW5OJia5B8ue8/Ur096WdgQbb5L2d8+V3BNquypWsN1Efxilvj5BRZFd
- ahNM8PcD4LYBOFEXPO2ihSxVgyDCtQuIohcKcMAUJQ5O5xIXmOPWd9KI36xwhYcSowmbWYIqd
- P4jeaGFiqQIfWgV3e4Q34BCsYsZqO7OwsEb22wVfEccB91IMDq7rTSDOAbssDb0gd8Evt8cF4
- wLM8NeQuPalGcMCT3t7qqw7+fVvwOuoqPtf5nSzeaymRGSD0VxZLn45DkPUiBNC8kv8pvs/xD
- sbo3K3+aSX13H0cqKHemmtcJ4ekPObG7R0JszVw48tDEoE625QJHveyEsJC5RbIjXwDeIdSLR
- EKfi3EQpvDDqgmmdxULno7IIBWC0EgVN/DeIhO3msMpERWnhPtHhh6DVJeOLzgVF2vHgR2UBY
- aaPj8IlWimi67y+JnSOjQKAVGEZl8kLGbhjmPG0UUx0vNzv43L8IavVf8pAB03pMcyqKIKnMM
- ZO+qtTNXXVPDEypsokX+ubVvhx0oT7wiwi6PcTyvYStSilCUG5AWIXJhmS2kZNyiFWbqE3nYz
- JD4qM0PjsqLBSlUfLYp/+8XsEtACI/eXEvEWzmGbfTii8xytqBxEMLW/e8t2OT0E96wru92pP
- 4MeDC9LsAHoTPVilYWMTvEd73vfB9wtHCN8WyY0/iOMx6wWJD4MrJZmrc5Is1p9UYDC5q+O2M
- 90q6d+o8yFnmbjeCnoeCcjPOmIe3p8PIvYlgquSXNLq0aO9k3druiUkAkq58G7CFv64Qk86by
- Sk53YSITVlz5XMWSfzc4UnjncGuzlTQPWuBEIC1OeVaylJho0SCqT4XLyLgLrzz+TKA7YLh1J
- rohs4f1BIcchxz5UMo34xCqRhfNmUlFq0BzGY/23+MnuCgZRYEKLZ2/kihjJWsr6qliK9Q2c5
- fzBl6Kg57nr6RPF/kuro22tBZY0gI8ZbMkCWwnw==
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20200920125520.28204-1-lennard.hofmann@web.de>
+X-Scanned-By: MIMEDefang 2.84 on 10.5.11.22
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-Add intentional whitespace to the test file `onecolumn` to test that
-`column` ignores it. Add empty lines to the same test file to test that
-`column--keep-empty-lines` preserves them.
+On Sun, Sep 20, 2020 at 02:55:18PM +0200, Lennard Hofmann wrote:
+> The following patches remove the unnecessary restriction of the -L option.
 
-Signed-off-by: Lennard Hofmann <lennard.hofmann@web.de>
-=2D--
- tests/expected/column/columnate-fill-cols-keep-empty | 7 +++++++
- tests/ts/column/columnate                            | 4 ++++
- tests/ts/column/files/onecolumn                      | 5 +++++
- 3 files changed, 16 insertions(+)
- create mode 100644 tests/expected/column/columnate-fill-cols-keep-empty
+Good idea.
 
-diff --git a/tests/expected/column/columnate-fill-cols-keep-empty b/tests/=
-expected/column/columnate-fill-cols-keep-empty
-new file mode 100644
-index 000000000..8cc1fdf1f
-=2D-- /dev/null
-+++ b/tests/expected/column/columnate-fill-cols-keep-empty
-@@ -0,0 +1,7 @@
-+			FFFFFFFFFFFFFFFFFFF
-+AAAAAAAAAAAAAAAAAAAA
-+BBBBBBBBBBBBBBBBBBBBB
-+CCCCCCCCCCCCCCCC	XXXXXXX
-+			YYYYYYYYYYY
-+DDDDDDDDDDDDDDDDD	ZZZZZZZZZZZ
-+EEEEEEEEEEEEE
-diff --git a/tests/ts/column/columnate b/tests/ts/column/columnate
-index ebeb0c44f..e80f3b00d 100755
-=2D-- a/tests/ts/column/columnate
-+++ b/tests/ts/column/columnate
-@@ -49,4 +49,8 @@ ts_init_subtest "fill-rows-250"
- $TS_CMD_COLUMN --fillrows -c 250 $TS_SELF/files/onecolumn >> $TS_OUTPUT 2=
->> $TS_ERRLOG
- ts_finalize_subtest
+> patch below simply moves the existing logic to a new function `add_entry()` that
+> gets called with an empty wcs if the -L option is present.
+> 
+> I am very new to C and mailing lists so I appreciate any feedback.
 
-+ts_init_subtest "fill-cols-keep-empty"
-+$TS_CMD_COLUMN --keep-empty-lines -c 60 $TS_SELF/files/onecolumn >> $TS_O=
-UTPUT 2>> $TS_ERRLOG
-+ts_finalize_subtest
-+
- ts_finalize
-diff --git a/tests/ts/column/files/onecolumn b/tests/ts/column/files/oneco=
-lumn
-index 69ec82f5d..3e579e1d4 100644
-=2D-- a/tests/ts/column/files/onecolumn
-+++ b/tests/ts/column/files/onecolumn
-@@ -1,9 +1,14 @@
-+
- AAAAAAAAAAAAAAAAAAAA
- BBBBBBBBBBBBBBBBBBBBB
- CCCCCCCCCCCCCCCC
-+
- DDDDDDDDDDDDDDDDD
- EEEEEEEEEEEEE
- FFFFFFFFFFFFFFFFFFF
-+
-+
- XXXXXXX
- YYYYYYYYYYY
- ZZZZZZZZZZZ
-+
-=2D-
-2.28.0
+No problem :-)
+
+> 
+> text-utils/column.c
+> | 30 ++++++++++++++++++++++--------
+>  1 file changed, 22 insertions(+), 8 deletions(-)
+> 
+> diff --git a/text-utils/column.c b/text-utils/column.c
+> index 238dbab41..bc7851472 100644
+> --- a/text-utils/column.c
+> +++ b/text-utils/column.c
+> @@ -487,6 +487,21 @@ static int add_emptyline_to_table(struct column_control *ctl)
+>  	return 0;
+>  }
+> 
+> +static void add_entry(struct column_control *ctl, size_t *maxents, wchar_t *wcs)
+> +{
+> +	if (ctl->nents <= *maxents) {
+> +		*maxents += 1000;
+> +		ctl->ents = xrealloc(ctl->ents, *maxents * sizeof(wchar_t *));
+> +	}
+> +	ctl->ents[ctl->nents] = wcs;
+
+It would be more robust to add also
+
+    ctl->nents++;
+
+to this function.
+
+> +}
+> +
+> +static void add_empty_entry(struct column_control *ctl, size_t *maxents)
+> +{
+> +	add_entry(ctl, maxents, mbs_to_wcs(""));
+> +	ctl->nents++;
+> +}
+> +
+>  static int read_input(struct column_control *ctl, FILE *fp)
+>  {
+>  	char *buf = NULL;
+> @@ -512,8 +527,12 @@ static int read_input(struct column_control *ctl, FILE *fp)
+>  				*p = '\0';
+>  		}
+>  		if (!str || !*str) {
+> -			if (ctl->mode == COLUMN_MODE_TABLE && ctl->tab_empty_lines)
+> -				add_emptyline_to_table(ctl);
+> +			if (ctl->tab_empty_lines) {
+> +				if (ctl->mode == COLUMN_MODE_TABLE)
+> +					add_emptyline_to_table(ctl);
+> +				else
+> +					add_empty_entry(ctl, &maxents);
+
+It seems add_empty_entry() is unnecessary. All you need is:
+
+ else {
+    if (!entry)
+        empty = mbs_to_wcs("");
+    add_entry(ctl, maxents, empty);
+ }
+
+and you will also resolve the issue with duplicate mbs_to_wcs("") 
+(your patch 2/4).
+
+> +			}
+>  			continue;
+>  		}
+> 
+> @@ -539,12 +558,7 @@ static int read_input(struct column_control *ctl, FILE *fp)
+> 
+>  		case COLUMN_MODE_FILLCOLS:
+>  		case COLUMN_MODE_FILLROWS:
+> -			if (ctl->nents <= maxents) {
+> -				maxents += 1000;
+> -				ctl->ents = xrealloc(ctl->ents,
+> -						maxents * sizeof(wchar_t *));
+> -			}
+> -			ctl->ents[ctl->nents] = wcs;
+> +			add_entry(ctl, &maxents, wcs);
+>  			len = width(ctl->ents[ctl->nents]);
+
+   len = width(wcs);
+
+is necessary if ctl->nents will be incremented in add_entry().
+
+>  			if (ctl->maxlength < len)
+>  				ctl->maxlength = len;
+ 
+
+ Karel
+
+-- 
+ Karel Zak  <kzak@redhat.com>
+ http://karelzak.blogspot.com
 
