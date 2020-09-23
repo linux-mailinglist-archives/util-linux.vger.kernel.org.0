@@ -2,88 +2,108 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id DA09B273E48
-	for <lists+util-linux@lfdr.de>; Tue, 22 Sep 2020 11:14:20 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 658AF2756D5
+	for <lists+util-linux@lfdr.de>; Wed, 23 Sep 2020 13:06:05 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726428AbgIVJOU (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Tue, 22 Sep 2020 05:14:20 -0400
-Received: from mail.win4net.com ([211.115.213.199]:45066 "EHLO
-        ftpsvr.win4net.com" rhost-flags-OK-FAIL-OK-OK) by vger.kernel.org
-        with ESMTP id S1726341AbgIVJOU (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Tue, 22 Sep 2020 05:14:20 -0400
-X-Greylist: delayed 32851 seconds by postgrey-1.27 at vger.kernel.org; Tue, 22 Sep 2020 05:14:18 EDT
-Received: from Shop01 (localhost [127.0.0.1])
-        by ftpsvr.win4net.com (Postfix) with SMTP id 3E221E033CB;
-        Tue, 22 Sep 2020 02:27:58 +0900 (KST)
-Received: from [21.187.124.219]
-        by Shop01 id <8425122-72770>
-        for <evan.lebon@appdynamics.com>; Mon, 21 Sep 2020 12:22:58 -0600
-Message-ID: <4fd$6$-kx-kk-21g@4nn.r85y9.g.1c>
-From:   "United Nations." <info@undp.org>
-Reply-To: "United Nations." <info@undp.org>
-To:     evan.lebon@appdynamics.com
-Subject: SCAM VICTIMS.
-Date:   Mon, 21 Sep 20 12:22:58 GMT
-X-Mailer: Microsoft Outlook IMO, Build 9.0.2416 (9.0.2910.0)
+        id S1726472AbgIWLGE (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Wed, 23 Sep 2020 07:06:04 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([216.205.24.124]:55634 "EHLO
+        us-smtp-delivery-124.mimecast.com" rhost-flags-OK-OK-OK-OK)
+        by vger.kernel.org with ESMTP id S1726422AbgIWLGD (ORCPT
+        <rfc822;util-linux@vger.kernel.org>);
+        Wed, 23 Sep 2020 07:06:03 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+        s=mimecast20190719; t=1600859162;
+        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+         to:to:cc:cc:mime-version:mime-version:content-type:content-type;
+        bh=BtvwBdpuo0+TqmBEI8YetT7sc01zkOe4G4Wz0r0s48Q=;
+        b=EOsPMHbqXl9cwMeBh7LEuYI4mKlYqa69BFNfofT0HqfbV3idxg7aQotKLF8anFRVFfRcSU
+        etXc3YAwgAAPyeq+/VeXFGDPqhwSyiHUhNsM4BVuQj4M4fB5c+VUKpUqJo5UVBGOMpR7jk
+        WaszFDCRvh0upxFZiMCMNaPiCJbq2ko=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-259-bV1BZnTzNXayz9a3MXBniw-1; Wed, 23 Sep 2020 07:05:59 -0400
+X-MC-Unique: bV1BZnTzNXayz9a3MXBniw-1
+Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.phx2.redhat.com [10.5.11.13])
+        (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+        (No client certificate requested)
+        by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 3918A85C733;
+        Wed, 23 Sep 2020 11:05:58 +0000 (UTC)
+Received: from ws.net.home (unknown [10.40.194.172])
+        by smtp.corp.redhat.com (Postfix) with ESMTPS id 43CA873689;
+        Wed, 23 Sep 2020 11:05:57 +0000 (UTC)
+Date:   Wed, 23 Sep 2020 13:05:54 +0200
+From:   Karel Zak <kzak@redhat.com>
+To:     util-linux@vger.kernel.org
+Cc:     Ian Kent <raven@themaw.net>, Michal Sekletar <msekleta@redhat.com>
+Subject: mountbomber -- generate mount load
+Message-ID: <20200923110554.agy6xevx3ll6uqh7@ws.net.home>
 MIME-Version: 1.0
-Content-Type: multipart/alternative;
-        boundary=".AD.C420F40._525E2AD"
-X-Priority: 3
-X-MSMail-Priority: Normal
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.13
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
 
---.AD.C420F40._525E2AD
-Content-Type: text/plain;
-Content-Transfer-Encoding: quoted-printable
+ Hi,
 
-SCAMMED VICTIM REF CODE: 06654
+I have created an experimental testing tool to generate a large number of
+mount/umount operations on a large number of mount points. The important feature
+is that it does not use standard mount(8) command and it does not parse
+anything in /proc. 
 
-This is to bring to your notice that I am a delegate from the United
-Nations to The IMF (International Monetary Fund) United States Regional
-Payment Office to pay 20 scam victims $10,000,000.00 USD (Ten Million Unit=
-ed States
-Dollars only) each. You are listed and approved for this payment as one
-of the scammed victims to be paid this amount,respond to this mail as
-soon as possible for the immediate payments of your $10,000,000.00 USD
-compensations funds.
+The goal is to have a standard tool to easily reproduce mount load without
+writing a custom shell scripts.
 
-You are to send your:
+The number of features is pretty basic and it supports only tmpfs now. Maybe
+later it will support other filesystems, regular block devices (or loopdevs)
+and more operations (like remount, execute scripts, etc.). We will see ...
 
-FULL NAME:
-ADDRESS:
-TELEPHONE:
-DATE OF BIRTH:
-COUNTRY:
-SEX:
-OCCUPATION:
+The tool creates and cleanup all stuff, you do not have create mountpoints, etc.
 
-Contact the International Monetary Fund (IMF) Managing Director Christine =
-Lagarde for payment approval.
+It's maintained in separate branch in util-linux repository:
 
-                         Christine Madeleine Odette Lagarde 
-			E-mail: imf.imfmails@gmail.com
-
-You are hereby advised to stop communication with any person or Body
-that you are currently paying money which I refer as transaction charges o=
-r bank charges.
-Please let us know right now via email or
-telephone your present dealing online, so we can help you verify the
-authenticity of the transaction which you are presently involved in, so
-you don't get scammed. Please also send me proof of payment in any
-previous scam If you still have any (optional).I shall feed you with
-further modalities as soon as I hear from you.
-
-Regards,
-Ms.Helen Clark
-United Nation Representative.
-http://www.undp.org
+  git clone https://github.com/karelzak/util-linux.git --branch topic/mountbomber --single-branch
+  cd util-linux
+  ./autogen.sh
+  ./configure
+  make mountbomber
 
 
-NOTE : If You Receive This Message In Your Junk Or Spam Its Due To Your
-Internet Provider.
+Examples:
 
---.AD.C420F40._525E2AD--
+
+  # mountbomber --parallel 1 --verbose \
+                --oper "mount:all,@A,umount:rand,mount:last,->A(loops=2),umount:all"
+
+  - one process, 100 mountpoints (default), random umount and mount two times
+
+
+  # mountbomber --verbose --pool 10 \
+                --oper "mount:all,@A,umount:next,mount:last,delay(500000),->A(loops=200),umount:all"
+
+  - 200 times umount and mount in order
+
+
+  # mountbomber --pool 10000 \
+                --oper "mount:all,@A,umount:rand,mount:last,delay(1000),->A(seconds=60),umount:all"
+
+
+   - 10 processes (default) repeating random umount/mount for 1 minute on 10000 mountpoints
+   - your udisks will be pretty busy :-)
+
+For more details:
+
+  $ mountbomber --help 
+
+there is no man page yet.
+
+
+    Karel
+
+-- 
+ Karel Zak  <kzak@redhat.com>
+ http://karelzak.blogspot.com
 
