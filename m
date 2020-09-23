@@ -2,108 +2,71 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 658AF2756D5
-	for <lists+util-linux@lfdr.de>; Wed, 23 Sep 2020 13:06:05 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id CD17A2757B1
+	for <lists+util-linux@lfdr.de>; Wed, 23 Sep 2020 14:08:16 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726472AbgIWLGE (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Wed, 23 Sep 2020 07:06:04 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([216.205.24.124]:55634 "EHLO
-        us-smtp-delivery-124.mimecast.com" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S1726422AbgIWLGD (ORCPT
-        <rfc822;util-linux@vger.kernel.org>);
-        Wed, 23 Sep 2020 07:06:03 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-        s=mimecast20190719; t=1600859162;
-        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-         to:to:cc:cc:mime-version:mime-version:content-type:content-type;
-        bh=BtvwBdpuo0+TqmBEI8YetT7sc01zkOe4G4Wz0r0s48Q=;
-        b=EOsPMHbqXl9cwMeBh7LEuYI4mKlYqa69BFNfofT0HqfbV3idxg7aQotKLF8anFRVFfRcSU
-        etXc3YAwgAAPyeq+/VeXFGDPqhwSyiHUhNsM4BVuQj4M4fB5c+VUKpUqJo5UVBGOMpR7jk
-        WaszFDCRvh0upxFZiMCMNaPiCJbq2ko=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-259-bV1BZnTzNXayz9a3MXBniw-1; Wed, 23 Sep 2020 07:05:59 -0400
-X-MC-Unique: bV1BZnTzNXayz9a3MXBniw-1
-Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.phx2.redhat.com [10.5.11.13])
-        (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
-        (No client certificate requested)
-        by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 3918A85C733;
-        Wed, 23 Sep 2020 11:05:58 +0000 (UTC)
-Received: from ws.net.home (unknown [10.40.194.172])
-        by smtp.corp.redhat.com (Postfix) with ESMTPS id 43CA873689;
-        Wed, 23 Sep 2020 11:05:57 +0000 (UTC)
-Date:   Wed, 23 Sep 2020 13:05:54 +0200
-From:   Karel Zak <kzak@redhat.com>
-To:     util-linux@vger.kernel.org
-Cc:     Ian Kent <raven@themaw.net>, Michal Sekletar <msekleta@redhat.com>
-Subject: mountbomber -- generate mount load
-Message-ID: <20200923110554.agy6xevx3ll6uqh7@ws.net.home>
+        id S1726557AbgIWMIQ (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Wed, 23 Sep 2020 08:08:16 -0400
+Received: from hermes.cta.br ([161.24.235.5]:58986 "EHLO hermes.cta.br"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S1726552AbgIWMIP (ORCPT <rfc822;util-linux@vger.kernel.org>);
+        Wed, 23 Sep 2020 08:08:15 -0400
+Received: from localhost (localhost [127.0.0.1])
+        by hermes.cta.br (Postfix) with ESMTP id E29411709E6D;
+        Wed, 23 Sep 2020 04:51:18 -0300 (-03)
+Received: from hermes.cta.br ([127.0.0.1])
+        by localhost (hermes.cta.br [127.0.0.1]) (amavisd-new, port 10032)
+        with ESMTP id soA2OCol8oiO; Wed, 23 Sep 2020 04:51:18 -0300 (-03)
+Received: from localhost (localhost [127.0.0.1])
+        by hermes.cta.br (Postfix) with ESMTP id D156E17032E4;
+        Wed, 23 Sep 2020 02:32:37 -0300 (-03)
+DKIM-Filter: OpenDKIM Filter v2.10.3 hermes.cta.br D156E17032E4
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cta.br;
+        s=50824260-A46F-11E8-B5E3-16F5207DEC71; t=1600839159;
+        bh=PEgy+RpcsckcVXxslQn6d+tc//P81+6V7lvSU9dRFp0=;
+        h=MIME-Version:To:From:Date:Message-Id;
+        b=Z5eqUpiaRCHpohxDbrPTfnW9NTYNj9P88NlbPQhUZFidjJjeQmgMChgvOqP2XFWCq
+         QmWTlg3byvGPilck7truEYVcIy29iAcxZCICkZUrGxPu0eSt3+88tgmdVNjqdQ4Coq
+         tEVJQ0PU7lEK7p7PeYyLTrwphMbtP/Xgw8Xs9rTxaPBOOFwG/P43CTJlEo6tw5ao32
+         v3d8gvf0Rgs9E4XvwpJkga0pLffY9d9EWwPWABMnc5g3eZrC0Uwi2OcrJSMa1Purv0
+         T+vbUQE+Ttb5NZ2h4BmTm3EHiSJRBGMREIyoLbbdH+JPYKNuQlj0eJBj/yb+8wjmj5
+         RjjgtL20JWX0g==
+X-Virus-Scanned: amavisd-new at cta.br
+Received: from hermes.cta.br ([127.0.0.1])
+        by localhost (hermes.cta.br [127.0.0.1]) (amavisd-new, port 10026)
+        with ESMTP id nIjJZ92ByiYS; Wed, 23 Sep 2020 02:32:37 -0300 (-03)
+Received: from [10.120.212.214] (unknown [105.12.3.179])
+        by hermes.cta.br (Postfix) with ESMTPSA id 3CA3416290A4;
+        Wed, 23 Sep 2020 01:40:32 -0300 (-03)
+Content-Type: text/plain; charset="iso-8859-1"
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.13
+Content-Transfer-Encoding: quoted-printable
+Content-Description: Mail message body
+Subject: spende von 2,000,000 euro
+To:     Recipients <scco@cta.br>
+From:   ''Tayeb souami'' <scco@cta.br>
+Date:   Wed, 23 Sep 2020 06:42:52 +0200
+Reply-To: Tayebsouam.spende@gmail.com
+Message-Id: <20200923044033.3CA3416290A4@hermes.cta.br>
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-
- Hi,
-
-I have created an experimental testing tool to generate a large number of
-mount/umount operations on a large number of mount points. The important feature
-is that it does not use standard mount(8) command and it does not parse
-anything in /proc. 
-
-The goal is to have a standard tool to easily reproduce mount load without
-writing a custom shell scripts.
-
-The number of features is pretty basic and it supports only tmpfs now. Maybe
-later it will support other filesystems, regular block devices (or loopdevs)
-and more operations (like remount, execute scripts, etc.). We will see ...
-
-The tool creates and cleanup all stuff, you do not have create mountpoints, etc.
-
-It's maintained in separate branch in util-linux repository:
-
-  git clone https://github.com/karelzak/util-linux.git --branch topic/mountbomber --single-branch
-  cd util-linux
-  ./autogen.sh
-  ./configure
-  make mountbomber
+Hallo mein lieber Freund
+                                  Mein Name ist Tayeb Souami aus New Jersey=
+ in Amerika und ich habe den America Lottery Jackpot von 315 Millionen Euro=
+ gewonnen. Ich habe mich entschlossen, die Summe von 2.000.000 Euro an f=FC=
+nf gl=FCckliche Personen zu spenden, und Sie wurden als einer der Beg=FCnst=
+igten ausgew=E4hlt. Bitte klicken Sie auf diesen Link, um mehr =FCber meine=
+n Gewinn zu erfahren.
 
 
-Examples:
+UHR MICH HIER: https://www.youtube.com/watch?v=3DZ6ui8ZDQ6Ks
+
+Bitte kontaktieren Sie mich =FCber diese E-Mail: Tayebsouam.spende@gmail.com
 
 
-  # mountbomber --parallel 1 --verbose \
-                --oper "mount:all,@A,umount:rand,mount:last,->A(loops=2),umount:all"
+Ich hoffe, Sie und Ihre Familie gl=FCcklich zu machen.
 
-  - one process, 100 mountpoints (default), random umount and mount two times
-
-
-  # mountbomber --verbose --pool 10 \
-                --oper "mount:all,@A,umount:next,mount:last,delay(500000),->A(loops=200),umount:all"
-
-  - 200 times umount and mount in order
-
-
-  # mountbomber --pool 10000 \
-                --oper "mount:all,@A,umount:rand,mount:last,delay(1000),->A(seconds=60),umount:all"
-
-
-   - 10 processes (default) repeating random umount/mount for 1 minute on 10000 mountpoints
-   - your udisks will be pretty busy :-)
-
-For more details:
-
-  $ mountbomber --help 
-
-there is no man page yet.
-
-
-    Karel
-
--- 
- Karel Zak  <kzak@redhat.com>
- http://karelzak.blogspot.com
-
+Gr=FC=DFe
+Herr Tayeb Souami
