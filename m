@@ -2,71 +2,63 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 61FBE27AB61
-	for <lists+util-linux@lfdr.de>; Mon, 28 Sep 2020 11:59:04 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 90E0627C298
+	for <lists+util-linux@lfdr.de>; Tue, 29 Sep 2020 12:45:59 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726497AbgI1J7C (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Mon, 28 Sep 2020 05:59:02 -0400
-Received: from mgwkm03.jp.fujitsu.com ([202.219.69.170]:12657 "EHLO
-        mgwkm03.jp.fujitsu.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726477AbgI1J7C (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Mon, 28 Sep 2020 05:59:02 -0400
-X-Greylist: delayed 665 seconds by postgrey-1.27 at vger.kernel.org; Mon, 28 Sep 2020 05:59:01 EDT
-Received: from kw-mxauth.gw.nic.fujitsu.com (unknown [192.168.231.132]) by mgwkm03.jp.fujitsu.com with smtp
-         id 206f_4b57_f756d6dd_9053_41aa_a13a_44b509e6b9cd;
-        Mon, 28 Sep 2020 18:47:49 +0900
-Received: from pumpkin.openstacklocal (pumpkin.fct.css.fujitsu.com [10.130.70.189])
-        by kw-mxauth.gw.nic.fujitsu.com (Postfix) with ESMTP id CAE23AC00AC
-        for <util-linux@vger.kernel.org>; Mon, 28 Sep 2020 18:47:48 +0900 (JST)
-Received: by pumpkin.openstacklocal (Postfix, from userid 1012)
-        id DAAD7900C; Mon, 28 Sep 2020 18:46:39 +0900 (JST)
-From:   Shunsuke Nakamura <nakamura.shun@jp.fujitsu.com>
-To:     util-linux@vger.kernel.org
-Cc:     Shunsuke Nakamura <nakamura.shun@jp.fujitsu.com>,
-        Shunsuke Nakamura <nakamura.shun@fujitsu.com>
-Subject: [PATCH] lscpu: Add FUJITSU aarch64 A64FX cpupart
-Date:   Mon, 28 Sep 2020 18:46:14 +0900
-Message-Id: <20200928094614.3648619-1-nakamura.shun@jp.fujitsu.com>
-X-Mailer: git-send-email 2.25.1
+        id S1725306AbgI2Kp6 (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Tue, 29 Sep 2020 06:45:58 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([63.128.21.124]:52455 "EHLO
+        us-smtp-delivery-124.mimecast.com" rhost-flags-OK-OK-OK-OK)
+        by vger.kernel.org with ESMTP id S1725283AbgI2Kp6 (ORCPT
+        <rfc822;util-linux@vger.kernel.org>);
+        Tue, 29 Sep 2020 06:45:58 -0400
+Dkim-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+        s=mimecast20190719; t=1601376357;
+        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+         in-reply-to:in-reply-to:references:references;
+        bh=8r2PTuSXsI7JhqX7tupWe7xhiynbc22JeQAuBhTydzo=;
+        b=RIoWkezRfIZylZhThvZ0FSYb/dTYo8kSE1kUWw6x4cVouCmGGoU2n3Chkm2fuMMNuVGTVQ
+        K2pm+9MtOAlGmBzTnSlKqFy9UA5MkdlpybYQ3ZxKnmXPWmLWyu77RtZXT4I4AjkuJi+uLC
+        4nyaHWWy2Xxyq2TWW+KJlKebEbuu28A=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-280-qQy8IIAjO4qKqO9Kr5RISg-1; Tue, 29 Sep 2020 06:45:54 -0400
+X-MC-Unique: qQy8IIAjO4qKqO9Kr5RISg-1
+Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.phx2.redhat.com [10.5.11.22])
+        (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+        (No client certificate requested)
+        by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 55557801AB8;
+        Tue, 29 Sep 2020 10:45:53 +0000 (UTC)
+Received: from ws.net.home (unknown [10.40.194.172])
+        by smtp.corp.redhat.com (Postfix) with ESMTPS id 971AE10013D7;
+        Tue, 29 Sep 2020 10:45:52 +0000 (UTC)
+Date:   Tue, 29 Sep 2020 12:45:50 +0200
+From:   Karel Zak <kzak@redhat.com>
+To:     Lennard Hofmann <lennard.hofmann@web.de>
+Cc:     util-linux@vger.kernel.org
+Subject: Re: [PATCH v2 1/2] column: Optionally keep empty lines in cols/rows
+ mode
+Message-ID: <20200929104550.t62edvfzu4e4sr4a@ws.net.home>
+References: <20200921161621.19562-1-lennard.hofmann@web.de>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-TM-AS-GCONF: 00
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20200921161621.19562-1-lennard.hofmann@web.de>
+X-Scanned-By: MIMEDefang 2.84 on 10.5.11.22
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-Add an entry for FUJITSU aarch64 part A64FX.
-I tested it on the FX1000.
+On Mon, Sep 21, 2020 at 06:16:20PM +0200, Lennard Hofmann wrote:
+>  text-utils/column.c | 32 ++++++++++++++++++++++----------
+>  1 file changed, 22 insertions(+), 10 deletions(-)
 
-Signed-off-by: Shunsuke Nakamura <nakamura.shun@fujitsu.com>
----
- sys-utils/lscpu-arm.c | 6 ++++++
- 1 file changed, 6 insertions(+)
+ Applied (both patches), thanks!
 
-diff --git a/sys-utils/lscpu-arm.c b/sys-utils/lscpu-arm.c
-index 270866191..c9997d062 100644
---- a/sys-utils/lscpu-arm.c
-+++ b/sys-utils/lscpu-arm.c
-@@ -171,6 +171,11 @@ static const struct id_part intel_part[] = {
-     { -1, "unknown" },
- };
- 
-+static const struct id_part fujitsu_part[] = {
-+    { 0x001, "A64FX" },
-+    { -1, "unknown" },
-+};
-+
- static const struct id_part hisi_part[] = {
-     { 0xd01, "Kunpeng-920" },	/* aka tsv110 */
-     { -1, "unknown" },
-@@ -191,6 +196,7 @@ static const struct hw_impl hw_implementer[] = {
-     { 0x42, brcm_part,    "Broadcom" },
-     { 0x43, cavium_part,  "Cavium" },
-     { 0x44, dec_part,     "DEC" },
-+    { 0x46, fujitsu_part, "FUJITSU" },
-     { 0x48, hisi_part,    "HiSilicon" },
-     { 0x4e, nvidia_part,  "Nvidia" },
-     { 0x50, apm_part,     "APM" },
+    Karel
+
 -- 
-2.25.1
+ Karel Zak  <kzak@redhat.com>
+ http://karelzak.blogspot.com
 
