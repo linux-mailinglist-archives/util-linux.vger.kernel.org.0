@@ -2,67 +2,78 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 10781285D93
-	for <lists+util-linux@lfdr.de>; Wed,  7 Oct 2020 12:52:37 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id E2A1E2864AC
+	for <lists+util-linux@lfdr.de>; Wed,  7 Oct 2020 18:39:49 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1728289AbgJGKwg convert rfc822-to-8bit (ORCPT
-        <rfc822;lists+util-linux@lfdr.de>); Wed, 7 Oct 2020 06:52:36 -0400
-Received: from mx.metalurgs.lv ([81.198.125.103]:61424 "EHLO mx.metalurgs.lv"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1726597AbgJGKwf (ORCPT <rfc822;util-linux@vger.kernel.org>);
-        Wed, 7 Oct 2020 06:52:35 -0400
-Received: from mx.metalurgs.lv (localhost [127.0.0.1])
-        by mx.metalurgs.lv (Postfix) with ESMTP id 51A6D63526
-        for <util-linux@vger.kernel.org>; Wed,  7 Oct 2020 13:52:34 +0300 (EEST)
-Received: from kas30pipe.localhost (localhost [127.0.0.1])
-        by mx.metalurgs.lv (Postfix) with ESMTP id D1F2961CC0
-        for <util-linux@vger.kernel.org>; Wed,  7 Oct 2020 13:52:31 +0300 (EEST)
-Received: by mx.metalurgs.lv (Postfix, from userid 1005)
-        id 3035462242; Wed,  7 Oct 2020 13:52:28 +0300 (EEST)
-Received: from [100.64.1.74] (unknown [190.15.125.55])
-        (Authenticated sender: admin)
-        by mx.metalurgs.lv (Postfix) with ESMTPA id F33AC66C73;
-        Wed,  7 Oct 2020 13:52:20 +0300 (EEST)
+        id S1726408AbgJGQjt (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Wed, 7 Oct 2020 12:39:49 -0400
+Received: from sonic315-13.consmr.mail.bf2.yahoo.com ([74.6.134.123]:34931
+        "EHLO sonic315-13.consmr.mail.bf2.yahoo.com" rhost-flags-OK-OK-OK-OK)
+        by vger.kernel.org with ESMTP id S1726138AbgJGQjt (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Wed, 7 Oct 2020 12:39:49 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048; t=1602088788; bh=PxMwWzXvs+dqOoH0/FHvFmQpYH2JguaCUHYAVLLmaiw=; h=Date:From:Reply-To:Subject:References:From:Subject; b=qPSjoY5N1Hvvbt0jQPt7lmI1EQjcU4K5Yd27ViPGjSW5Q4TYeRBC8HwS+TQTsOV35gniVI04TZQSAW1Q83fC4kirX332eF09lkUPgB0g5FVz74iyL8AVyLVUY303oSVDxFGHbF/IfPGx4qw9uo6ajWbkmK2wZQsxL1sBGPFjaUtNYGZjmKnZ2Zm6J7ROO1yjzl4QxPUTQOBIAQvW40ZPCZdFvI0Ytps146GqpkpDhEAacvvGG87pRw9NivNuJXKYLat+EQbUpxl0OiAXBoJys+Ksvaz09eESzbRtLHhEuu3Sou3PqIJVi/l2e7gM+7ZMM//c6ghB9brpVT/Qg8HJ2A==
+X-YMail-OSG: DrpJ8.AVM1mZLP3LNUY.uGfzpl2NobXmFQyo0.sFc4ZXhf7nW8N6X_3vqd0IB5W
+ ngwLxPDkvXzuQaFik6BHbtTkUrj9upeKOQt4eCmy1PfjzT.CRo7m0H40NewDqHz.Vp9_I7VBwWG.
+ FBgFpMlkOBqG0YW_7a3WdF7lhVhya8hYJ5368fgpIes7jSn2z8IMh2PVLUoLaesB1C9ExPlE0QBi
+ BR4iR5s6R9Zpx3HgHTXhAgGESks_cwQ8pTmiwsAmrITsgC8Es0lf29edAcO2vy0_bcbdXKR2y.KB
+ 0xrHettW1EhhRf1y0rl1UUCf4UQdvboWowXg0yWCrr28lJ_Cwd0aGws8MCv.cF2W2OVf4gnXdotS
+ 3C5P8I6_SQGwkr7G9m7lRL.tF819srhktv3RL2pGbK7VHpoQmLvu2ynTicjqdIJHWBaRdUW12GAD
+ xYvqSwGcTotCesQBMJB24SFLa4yYyPTuy2wE.JkHagNzDOS4fUhP3HvvYgkHCvfBBfdz21vvEQ.C
+ zjnH7BOt2KgvWukNwf4NtEpHFEv6QuAuythR59M4ziIGLSSZW_SzXfCJojTdrJ7UnzD2ziqhct5W
+ 2XH6tlgKhVK.SvWuBfCCETmHQEtDjs_4c0kUjoD1dNbE5ntSIVKdJT1ohb3p6I9QrVd1_mvMaMgl
+ xAFDVlg2u2iUF8tJmQGehvYV8IXIZzDbDEyEAGb.iEELqVFHUNw9vGoeKhZES8QIc3opadiarbSl
+ 6R.VSnaQ2GWncup6KdZ1nm9bEFtsNzrIQ.92r97GiySyK9gDCGigUY67UdiOiaflnLGLaMbwX5q9
+ DgUw_XrMQHW9xzYXCfrPtb_4mrkWsbr8LirxA58rCcTCDGV9Wwxm3rG85ZmXg5KfNrz9FyOaGVWR
+ InnG0fG4HuPNb5Me3HlcVZbW45Kg1qV4M4ry_zsmKGbx9ZxTtLntlUA37HJtv3GaZTnsQIIB.j7p
+ 1O9ZPaE9Wd4p4CEj6qf9AayBHt1DIL0CGb2mJMBt_fr.pq8uW5n9O1txgAd5KV1QRXa3NDpD5ZDq
+ WhTYAbcEcUAg_EL0mJqUO9kbs0IRqLevB4bZWko3.5docWsdQABsHowQzvQH3QQ1wsAgEcK0Yur8
+ 2b6ejVYigdHuTOYn.01t5lFSRbIf4zc8xi9VsXOolsEDIZ12G.SBWhx6HONy3Z3pRf4.D7E_8wLZ
+ 6xetAITLNdZrzorEu0kHJ8tiyMG3OYLTsGxibraNnC0LrlL7XwOOTGuBgER4GrU22sAyaJalJW5A
+ tgpvxVzVWv23F6HAWYtgt6.YgEpGLnis332aMbp7Bf6TNVDKBq0wYhnN5erEilw7lBELT57HP739
+ 9K6Z0J59ha8l.SOElU0q5TdqbFvWhOUBHTDtkR0dTFdi837Z6AxS_OJAaMDfXPzM6kEncn4OShdP
+ zjwwz2ydJY3t8yKmgrh4tO6Ahg1ItK9dLR2tqyekA3GM-
+Received: from sonic.gate.mail.ne1.yahoo.com by sonic315.consmr.mail.bf2.yahoo.com with HTTP; Wed, 7 Oct 2020 16:39:48 +0000
+Date:   Wed, 7 Oct 2020 16:39:43 +0000 (UTC)
+From:   Mrs Marilyn Robert <fredodinga22@gmail.com>
+Reply-To: marilyobert@gmail.com
+Message-ID: <8950032.150816.1602088783402@mail.yahoo.com>
+Subject: =?UTF-8?B?0J3QsNGY0LzQuNC70LAg0LrQsNGYINCz0L7RgdC/0L7QtNCw0YDQvtGC?=
 MIME-Version: 1.0
-Content-Description: Mail message body
-To:     Recipients <financialcapability6@gmail.com>
-From:   "Mr. Hashim Bin" <financialcapability6@gmail.com>
-Date:   Wed, 07 Oct 2020 07:52:13 -0300
-Reply-To: hmurrah39@gmail.com
-X-SpamTest-Envelope-From: financialcapability6@gmail.com
-X-SpamTest-Group-ID: 00000000
-X-SpamTest-Info: Profiles 71303 [Jan 01 2015]
-X-SpamTest-Info: {TO: forged address, i.e. recipient, investors, public, etc.}
-X-SpamTest-Info: {DATE: unreal year}
-X-SpamTest-Method: none
-X-SpamTest-Rate: 55
-X-SpamTest-Status: Not detected
-X-SpamTest-Status-Extended: not_detected
-X-SpamTest-Version: SMTP-Filter Version 3.0.0 [0284], KAS30/Release
-Message-ID: <20201007105228.3035462242@mx.metalurgs.lv>
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: 8BIT
-Subject: Low Rate Loan./mmm,
-X-Anti-Virus: Kaspersky Anti-Virus for Linux Mail Server 5.6.39/RELEASE,
-         bases: 20140401 #7726142, check: 20201007 notchecked
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: base64
+References: <8950032.150816.1602088783402.ref@mail.yahoo.com>
+X-Mailer: WebService/1.1.16795 YMailNodin Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.125 Safari/537.36
+To:     unlisted-recipients:; (no To-header on input)
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-Hello Dear,
-
-
-We are Base Investment Company offering Corporate and Personal Loan at 3% Interest Rate for a duration of 10Years.
-
-
-We also pay 1% commission to brokers, who introduce project owners for finance or other opportunities.
-
-
-Please get back to me if you are interested for more
-
-details.
-
-
-Yours faithfully,
-
-Hashim Murrah
+DQoNCtCd0LDRmNC80LjQu9CwINC60LDRmCDQs9C+0YHQv9C+0LTQsNGA0L7Rgg0KDQrQiNCw0YEg
+0YHRg9C8IDY4LdCz0L7QtNC40YjQvdCwINC20LXQvdCwLCDQutC+0ZjQsCDRgdGC0YDQsNC00LAg
+0L7QtCDQv9GA0L7QtNC+0LvQttC10L0g0LrQsNGA0YbQuNC90L7QvCDQvdCwINC00L7RmNC60LAs
+INC+0LQg0YHQuNGC0LUg0LzQtdC00LjRhtC40L3RgdC60Lgg0LjQvdC00LjQutCw0YbQuNC4LCDQ
+vNC+0ZjQsNGC0LAg0YHQvtGB0YLQvtGY0LHQsCDQvdCw0LLQuNGB0YLQuNC90LAg0YHQtSDQstC7
+0L7RiNC4INC4INC+0YfQuNCz0LvQtdC00L3QviDQtSDQtNC10LrQsCDQvNC+0LbQtdCx0Lgg0L3Q
+tdC80LAg0LTQsCDQttC40LLQtdCw0Lwg0L/QvtCy0LXRnNC1INC+0LQg0YjQtdGB0YIg0LzQtdGB
+0LXRhtC4INC60LDQutC+INGA0LXQt9GD0LvRgtCw0YIg0L3QsCDQsdGA0LfQuNC+0YIg0YDQsNGB
+0YIg0Lgg0LHQvtC70LrQsNGC0LAg0YjRgtC+INGB0LUg0ZjQsNCy0YPQstCwINC60LDRmCDQvdC1
+0LAuINCc0L7RmNC+0YIg0YHQvtC/0YDRg9CzINC/0L7Rh9C40L3QsCDQvdC10LrQvtC70LrRgyDQ
+s9C+0LTQuNC90Lgg0L3QsNC90LDQt9Cw0LQg0Lgg0L3QsNGI0LjRgtC1INC00L7Qu9Cz0Lgg0LPQ
+vtC00LjQvdC4INCx0YDQsNC6INC90LUg0LHQtdCwINCx0LvQsNCz0L7RgdC70L7QstC10L3QuCDR
+gdC+INC90LjRgtGDINC10LTQvdC+INC00LXRgtC1LCDQv9C+INC90LXQs9C+0LLQsNGC0LAg0YHQ
+vNGA0YIg0LPQviDQvdCw0YHQu9C10LTQuNCyINGG0LXQu9C+0YLQviDQvdC10LPQvtCy0L4g0LHQ
+vtCz0LDRgtGB0YLQstC+Lg0KDQrQlNC+0LDRk9Cw0Lwg0LrQsNGYINCy0LDRgSDQvtGC0LrQsNC6
+0L4g0YHQtSDQv9C+0LzQvtC70LjQsiDQt9CwINGC0L7QsCwg0L/QvtC00LPQvtGC0LLQtdC9INGB
+0YPQvCDQtNCwINC00L7QvdC40YDQsNC8INGB0YPQvNCwINC+0LQgMiwgMzAwLCAwMDAg0LXQstGA
+0LAg0LfQsCDQv9C+0LzQvtGIINC90LAg0YHQuNGA0L7QvNCw0YjQvdC40YLQtSwg0YHQuNGA0L7Q
+vNCw0YjQvdC40YLQtSDQuCDQv9C+0LzQsNC70LrRgyDQv9GA0LjQstC40LvQtdCz0LjRgNCw0L3Q
+uNGC0LUg0LzQtdGT0YMg0LLQsNGI0LjRgtC1INGB0L7QsdGA0LDQvdC40ZjQsCAvINC+0L/RiNGC
+0LXRgdGC0LLQvi4g0JfQsNCx0LXQu9C10LbQtdGC0LUg0LTQtdC60LAg0L7QstC+0Zgg0YTQvtC9
+0LQg0LUg0LTQtdC/0L7QvdC40YDQsNC9INCy0L4g0LHQsNC90LrQsCDQutCw0LTQtSDRiNGC0L4g
+0YDQsNCx0L7RgtC10YjQtSDQvNC+0ZjQvtGCINGB0L7Qv9GA0YPQsy4gQXBwcmVjaWF0ZdC1INGG
+0LXQvdCw0Lwg0LDQutC+INC+0LHRgNC90LXRgtC1INCy0L3QuNC80LDQvdC40LUg0L3QsCDQvNC+
+0LXRgtC+INCx0LDRgNCw0ZrQtSDQt9CwINC/0YDQvtC/0LDQs9C40YDQsNGa0LUg0L3QsCDQvNCw
+0YHQsNC20LDRgtCwINC90LAg0LrRgNCw0LvRgdGC0LLQvtGC0L4sINGc0LUg0LLQuCDQtNCw0LTQ
+sNC8INC/0L7QstC10ZzQtSDQtNC10YLQsNC70Lgg0LfQsCDRgtC+0LAg0LrQsNC60L4g0LTQsCDQ
+v9C+0YHRgtCw0L/QuNGC0LUuDQoNCtCR0LvQsNCz0L7QtNCw0YDQsNC8DQrQky3Rk9CwINCc0LXR
+gNC40LvQuNC9INCg0L7QsdC10YDRgg==
