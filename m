@@ -2,52 +2,209 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 105A128F16B
-	for <lists+util-linux@lfdr.de>; Thu, 15 Oct 2020 13:36:26 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 9DC4F28F8F3
+	for <lists+util-linux@lfdr.de>; Thu, 15 Oct 2020 20:53:38 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726426AbgJOLgW (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Thu, 15 Oct 2020 07:36:22 -0400
-Received: from edge.kilargo.pl ([77.252.52.110]:36883 "EHLO edge.kilargo.pl"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1730167AbgJOLgF (ORCPT <rfc822;util-linux@vger.kernel.org>);
-        Thu, 15 Oct 2020 07:36:05 -0400
-X-Greylist: delayed 583 seconds by postgrey-1.27 at vger.kernel.org; Thu, 15 Oct 2020 07:36:02 EDT
-Received: from mail.kilargo.pl (77.252.52.107) by edge.kilargo.pl
- (77.252.52.109) with Microsoft SMTP Server (TLS) id 8.3.485.1; Thu, 15 Oct
- 2020 13:26:18 +0200
-Received: from User (185.248.12.71) by MAIL.kilargo.pl (172.22.0.36) with
- Microsoft SMTP Server (TLS) id 15.0.1497.2; Thu, 15 Oct 2020 13:25:40 +0200
-Reply-To: <kim.leang2011@yahoo.com>
-From:   Kim Leang <mechanik@kilargo.pl>
-Subject: Greeting! !!
-Date:   Thu, 15 Oct 2020 14:25:44 +0300
+        id S2391036AbgJOSxg (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Thu, 15 Oct 2020 14:53:36 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([63.128.21.124]:39818 "EHLO
+        us-smtp-delivery-124.mimecast.com" rhost-flags-OK-OK-OK-OK)
+        by vger.kernel.org with ESMTP id S2391065AbgJOSx3 (ORCPT
+        <rfc822;util-linux@vger.kernel.org>);
+        Thu, 15 Oct 2020 14:53:29 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+        s=mimecast20190719; t=1602788007;
+        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+         to:to:cc:mime-version:mime-version:content-type:content-type:
+         in-reply-to:in-reply-to:references:references;
+        bh=gLhEbZ/yRGThwldl2Fj+FIBd7FQphRIWcirVggjsrVE=;
+        b=aCWck3IUpA0JxPNvCbpmVcSRy3ZtSgyH3zMTVeLMUE07h98cRoZEV9qaZEY54K8ImTcTnw
+        y6mVni9E1io4cJtSbpGdE0Ih+yTpRkvFMaB8Gu1fSluHUeGy/8Zcu7WmyQa39E0Vx8g7Zm
+        ptMBv5lC+Yq5duJ5E/US+GRb6KDOf18=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-66-_EKyvN7IPwGLtQFzhNDSlw-1; Thu, 15 Oct 2020 14:53:25 -0400
+X-MC-Unique: _EKyvN7IPwGLtQFzhNDSlw-1
+Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com [10.5.11.12])
+        (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+        (No client certificate requested)
+        by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 33A7918C89C3
+        for <util-linux@vger.kernel.org>; Thu, 15 Oct 2020 18:53:24 +0000 (UTC)
+Received: from tarantula.users.ipa.redhat.com (ovpn-115-106.rdu2.redhat.com [10.10.115.106])
+        by smtp.corp.redhat.com (Postfix) with ESMTPS id C489A60C07
+        for <util-linux@vger.kernel.org>; Thu, 15 Oct 2020 18:53:23 +0000 (UTC)
+Date:   Thu, 15 Oct 2020 13:53:21 -0500
+From:   Jeffrey Bastian <jbastian@redhat.com>
+To:     "util-linux@vger.kernel.org" <util-linux@vger.kernel.org>
+Subject: Re: [PATCH] lscpu: Add FUJITSU aarch64 A64FX cpupart
+Message-ID: <20201015185321.i5ugnvlx5rq36yrl@tarantula.users.ipa.redhat.com>
+Mail-Followup-To: "util-linux@vger.kernel.org" <util-linux@vger.kernel.org>
+References: <20200928094614.3648619-1-nakamura.shun@jp.fujitsu.com>
+ <20200929104627.i4tivxi6kd4m24oh@ws.net.home>
+ <20200930144409.e5agryctsfijrrrb@tarantula.users.ipa.redhat.com>
+ <20200930174027.rohdyp2kubitbs24@ws.net.home>
+ <20200930184917.z7sx7xxazhdkumvy@gabell>
+ <20200930215334.k6vnsnpan32i43pj@tarantula.users.ipa.redhat.com>
+ <20201001030519.6d65sqhd54oxmlic@gabell>
+ <OSBPR01MB460011A4773B0250C55ED8E7F7310@OSBPR01MB4600.jpnprd01.prod.outlook.com>
+ <20201005133550.e5zvvtdfv44r64o2@tarantula.users.ipa.redhat.com>
+ <20201008121012.nfeemhwih5dxnwjh@gabell>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="Windows-1251"
-Content-Transfer-Encoding: 7bit
-X-Priority: 3
-X-MSMail-Priority: Normal
-X-Mailer: Microsoft Outlook Express 6.00.2600.0000
-X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2600.0000
-Message-ID: <0ea614beeed74156ad33118f7b3ca5b4@mail.kilargo.pl>
-To:     Undisclosed recipients:;
-X-Originating-IP: [185.248.12.71]
-X-ClientProxiedBy: mail.kilargo.pl (172.22.0.36) To MAIL.kilargo.pl
- (172.22.0.36)
-X-EsetResult: clean, is OK
-X-EsetId: 37303A295AAB9B6B64766B
+Content-Type: text/plain; charset=us-ascii; format=flowed
+Content-Disposition: inline
+In-Reply-To: <20201008121012.nfeemhwih5dxnwjh@gabell>
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.12
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-Greeting!
+On Thu, Oct 08, 2020 at 08:10:12AM -0400, Masayoshi Mizuma wrote:
+>Hi Jeffrey,
+>
+>Could you try the following patch?
 
-I am contacting you to receive and share with me an abandoned fund ( $21,537.000.00 ) left in our bank by a deceased customer. I was going through the Internet search when I found your email address. My name is Mr. Kim Leang.
+This patch works for X-Gene and eMAG, but unfortunately it broke the
+output on the Altra.  The Altra is based on the Neoverse N1 design from
+ARM and so it inherited the N1 values in the MIDR register (at least on
+the prototype I'm using).
 
-I want to utilize this opportunity and make use of this fund if I should present your name to the bank to stand as his business associate/ trustee for the fund to be released to you via Visa card for easy withdrawals in any VISA ATM machine anywhere in the World.
+Before your patch:
 
-The bank will also give you international online transfer options. With these you can transfer the funds without any risk.
+[root@ampere-altra ~]# ./lscpu | grep -e Vendor -e Model -e Stepping
+Vendor ID:                       Ampere(TM)
+Model:                           1
+Model name:                      Ampere(TM) Altra(TM) Processor
+Stepping:                        0x3
 
-Should you be interested in working with me in this project? Please reply back and let's benefit from this golden opportunity.You are my first contact. I shall wait a few days and if I do not hear from you, I shall look for another person.
+After your patch:
 
-Thanks and have a nice day,
-Mr. Kim Leang.
+[root@ampere-altra ~]# ./lscpu | grep -e Vendor -e Model -e Stepping
+Vendor ID:                       ARM
+Model:                           1
+Model name:                      Neoverse-N1
+Stepping:                        r3p1
+
+Raw cpuinfo values:
+
+[root@ampere-altra ~]# grep -m5 CPU /proc/cpuinfo
+CPU implementer	: 0x41
+CPU architecture: 8
+CPU variant	: 0x3
+CPU part	: 0xd0c
+CPU revision	: 1
+
+
+
+>====================================================================
+>From: Masayoshi Mizuma <m.mizuma@jp.fujitsu.com>
+>Subject: [PATCH] lscpu-arm: Set the order to search the model name
+>
+>After commit: 367c85c47 ("lscpu: use SMBIOS tables on ARM for lscpu"),
+>Model name for A64FX shows like as:
+>
+>   Model name:       461F0010
+>
+>That's because 367c85c47 changes to get the modelname from Processor
+>Version of SMBIOS.
+>
+>The SMBIOS info would be great if the system is based on SBBR v1.2E and
+>BBR v1.0 because the specs require the Processor Version of SMBIOS
+>as "This field must provide a human readable description of the processor
+>part number".
+>
+>However, it's not good for the systems aren't based on the specs,
+>like A64FX. Such systems need to have the model name to the hard
+>corded table.
+>
+>Let's set the order; first, search the hard corded table, then SMBIOS.
+>
+>Note, some systems, like APM X-Gene, may not match the information
+>between MIDR register (/proc/cpuinfo) and SMBIOS. To be consistency,
+>use Processor Manufacturer of SMBIOS when Processor Version is used
+>even if the hard corded table has the vendor id.
+>
+>Signed-off-by: Masayoshi Mizuma <m.mizuma@jp.fujitsu.com>
+>---
+> sys-utils/lscpu-arm.c | 30 ++++++++++++++++--------------
+> 1 file changed, 16 insertions(+), 14 deletions(-)
+>
+>diff --git a/sys-utils/lscpu-arm.c b/sys-utils/lscpu-arm.c
+>index 20c7291e5..4e48f6d65 100644
+>--- a/sys-utils/lscpu-arm.c
+>+++ b/sys-utils/lscpu-arm.c
+>@@ -110,7 +110,6 @@ static const struct id_part cavium_part[] = {
+> };
+>
+> static const struct id_part apm_part[] = {
+>-    { 0x000, "X-Gene" },
+>     { -1, "unknown" },
+> };
+>
+>@@ -288,6 +287,7 @@ static int __arm_cpu_smbios(struct lscpu_desc *desc)
+> 	struct lscpu_dmi_header h;
+> 	int fd;
+> 	ssize_t rs;
+>+	int use_smbios = 0;
+>
+> 	fd = open(_PATH_SYS_DMI_TYPE4, O_RDONLY);
+> 	if (fd < 0)
+>@@ -301,16 +301,21 @@ static int __arm_cpu_smbios(struct lscpu_desc *desc)
+>
+> 	to_dmi_header(&h, data);
+>
+>-	str = dmi_string(&h, data[PROC_MFR_OFFSET]);
+>-	if (str) {
+>-		xstrncpy(buf, str, 127);
+>-		desc->vendor = xstrdup(buf);
+>+	if (!desc->modelname) {
+>+		str = dmi_string(&h, data[PROC_VERSION_OFFSET]);
+>+		if (str) {
+>+			xstrncpy(buf, str, 127);
+>+			desc->modelname = xstrdup(buf);
+>+			use_smbios = 1;
+>+		}
+> 	}
+>
+>-	str = dmi_string(&h, data[PROC_VERSION_OFFSET]);
+>-	if (str) {
+>-		xstrncpy(buf, str, 127);
+>-		desc->modelname = xstrdup(buf);
+>+	if ((startswith(desc->vendor, "0x")) || use_smbios) {
+>+		str = dmi_string(&h, data[PROC_MFR_OFFSET]);
+>+		if (str) {
+>+			xstrncpy(buf, str, 127);
+>+			desc->vendor = xstrdup(buf);
+>+		}
+> 	}
+>
+> 	return 0;
+>@@ -318,14 +323,11 @@ static int __arm_cpu_smbios(struct lscpu_desc *desc)
+>
+> void arm_cpu_decode(struct lscpu_desc *desc, struct lscpu_modifier *mod)
+> {
+>-	int rc = -1;
+>+	__arm_cpu_decode(desc);
+>
+> 	/* use SMBIOS Type 4 data if available,
+> 	 * else fall back to manual decoding using the tables above */
+> 	if (mod->system == SYSTEM_LIVE &&
+> 	    access(_PATH_SYS_DMI_TYPE4, R_OK) == 0)
+>-		rc = __arm_cpu_smbios(desc);
+>-
+>-	if (rc)
+>-		__arm_cpu_decode(desc);
+>+		__arm_cpu_smbios(desc);
+> }
+>-- 
+>2.27.0
+>
+>
+>Thanks,
+>Masa
+>
+
+-- 
+Jeff Bastian
+Kernel QE - Hardware Enablement
+Red Hat
+
