@@ -2,95 +2,75 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id B080E290B4C
-	for <lists+util-linux@lfdr.de>; Fri, 16 Oct 2020 20:31:45 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 2E944290B7A
+	for <lists+util-linux@lfdr.de>; Fri, 16 Oct 2020 20:40:11 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1728600AbgJPSaq (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Fri, 16 Oct 2020 14:30:46 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:35222 "EHLO
+        id S2392495AbgJPSkK (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Fri, 16 Oct 2020 14:40:10 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:36766 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S2391614AbgJPSaP (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Fri, 16 Oct 2020 14:30:15 -0400
-Received: from mail-wr1-x435.google.com (mail-wr1-x435.google.com [IPv6:2a00:1450:4864:20::435])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 65BF0C061755
-        for <util-linux@vger.kernel.org>; Fri, 16 Oct 2020 11:30:15 -0700 (PDT)
-Received: by mail-wr1-x435.google.com with SMTP id e17so3991596wru.12
-        for <util-linux@vger.kernel.org>; Fri, 16 Oct 2020 11:30:15 -0700 (PDT)
+        with ESMTP id S2392261AbgJPSkK (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Fri, 16 Oct 2020 14:40:10 -0400
+Received: from mail-pf1-x442.google.com (mail-pf1-x442.google.com [IPv6:2607:f8b0:4864:20::442])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 9920DC061755
+        for <util-linux@vger.kernel.org>; Fri, 16 Oct 2020 11:40:10 -0700 (PDT)
+Received: by mail-pf1-x442.google.com with SMTP id e10so2002058pfj.1
+        for <util-linux@vger.kernel.org>; Fri, 16 Oct 2020 11:40:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=to:from:subject:message-id:date:user-agent:mime-version
-         :content-transfer-encoding:content-language;
-        bh=v1bFrzJ3vph3uBK7NFFRfoFbLHPd4Owo3d4raHwdPZs=;
-        b=WeeRd63pjqUmmtXoqE8eeXLPwIN8sSIoqtK3F7xiST7DZcgUPXT6jHkDAEarlstB9M
-         lRvVn/GyNo7mE+Ult++IXIQ6Fa6cc0JpMmSG6Lc1aJg27w2J7jA+wCwtG6IPqfUVdpkC
-         VMutM/80/mhsbttbOOshDW8DSaKktroxU0EsMp1S5lmBCigEnJL9NPMd6hJmWK14+/Fm
-         HsCY9syQlKkaXlorFwuWNB+EmLbHhoh/I0YT3p6P8eQHt0Ltb8RBBjNUBAb/E+LaXkuV
-         6usEoWT9KtuGVJkBIaqSrmkHvsbNt/m6zlMVWAYZkIafj6RxBqKh0Y6DT10Bh/TffC6b
-         9mBQ==
+        h=mime-version:reply-to:sender:from:date:message-id:subject:to;
+        bh=JWaKL5WM42WZgjD6lU04tt/DDwosfVnPKjWSJoldG98=;
+        b=OHawRR5gLVwatx9219Ewcvpj51oFlrxv/A/EDtEMbanskMuPtMG9lchb6r0C81tbSk
+         JWSW3i29d/Cei2C/iPPXvLvS3bMTeg1o1yAYc2mb7Z711OwOpBp5Uee6MtB7PwuZ+aK0
+         FDeGWcolb+90MhLaL49/JXR4Fe/tUamW2n+TxjFF5RVZj+SNiOURQMOCfRz0/pRVZuKn
+         brNmMiZ4DzrjFQxAz+5XhPSZFnZNC1xouEpWl32qNfWLzb4hqd864dF0HyMWSoTuAyjX
+         UUGa5yL/dFxGqrexyVmn37jaSHg1hbd+EuFH3HJqhFM3ux0z8m2uEiS8/CSHcjWzNPNb
+         jucA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:to:from:subject:message-id:date:user-agent
-         :mime-version:content-transfer-encoding:content-language;
-        bh=v1bFrzJ3vph3uBK7NFFRfoFbLHPd4Owo3d4raHwdPZs=;
-        b=tWfiL67OFVJc3dXw53UDD3pNMchKK5RMTRKmCepBqQkLebWGukJg3/sJl+whFCYB5/
-         oX8BfJ8omY7XmlQylnhnTRkoiM7m0yhft74dmO+nUxEkPbeQrHPtI7hjO5olSC7Xg/Wd
-         efmUVv1rOp2c5Cgj4vupVQGTJjUT79zgO15oUAVfnIMjOxMBCSZTCAnMEWOubl9Q2mbD
-         sM7hIv4qO02aNuYSNWI2ocH0eEBAQ+U9gqdTwLHbd02CONSVQzvlS6fE9Sakq2Y0zKKj
-         FNxURFD93wCFYCqtE8D/0M/2AdIwEAZyoq0rUduBFGmprhDpRFt3wdykoaGJRPt9bm1x
-         4hXA==
-X-Gm-Message-State: AOAM532A2GrxlafuJ9PpLheLEYRX4JE8QAUWYhpBzr+uimDsnFglJ5QO
-        ab7jQBeRYMOrAygEZX1LH/j9B0Rrtbhrdw==
-X-Google-Smtp-Source: ABdhPJzR9/KMqu2/N5EwQKDTYUOG+Ro9eHm0Xn2EFXzaGTRNwcu97rf2uCFwMdAs8Q/TmDfijlYtwg==
-X-Received: by 2002:adf:e801:: with SMTP id o1mr5492289wrm.359.1602873013601;
-        Fri, 16 Oct 2020 11:30:13 -0700 (PDT)
-Received: from ?IPv6:2601:196:181:38c0::2da2? ([2601:196:181:38c0::2da2])
-        by smtp.gmail.com with ESMTPSA id 88sm4927351wrl.76.2020.10.16.11.30.12
-        for <util-linux@vger.kernel.org>
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Fri, 16 Oct 2020 11:30:12 -0700 (PDT)
-To:     util-linux@vger.kernel.org
-From:   Thomas Stringer <trstringer@gmail.com>
-Subject: fallocate on ext4 creating holes
-Message-ID: <58f7cb75-1e2b-ec2b-221f-0af2c80b2728@gmail.com>
-Date:   Fri, 16 Oct 2020 14:30:10 -0400
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.3.1
+        h=x-gm-message-state:mime-version:reply-to:sender:from:date
+         :message-id:subject:to;
+        bh=JWaKL5WM42WZgjD6lU04tt/DDwosfVnPKjWSJoldG98=;
+        b=Du57WRkerOovLohZ1pdvIp6lkGeVff030xLcHfdmarI2paAeJLFQmP0rJCPcAjYrTF
+         16xjlicOL2OicbeW22Q1g/umFiE28Y2rm6GXhXpD5APkc5Nj6/hK6Of8YrEUwm8g9gnm
+         QMlav7UwBJtPS8OsTQM267fVIzuiHW6TrALXf1IwlHy/RwyxEkA1VQXJmhBfkG4A8RCb
+         B9jJJ5z9hxT5N2+GAz6AOpRDLy5ewgPh2kI+ucCry6VNrjHUGcfd6pZIyWiB+2chU/J2
+         KeUmF8pRInN+1vHjqG2CvT10iAxBQ8lVFPr/wkMYrjg39MyQHQwmt1ndMWos8vyJsxtm
+         kH9w==
+X-Gm-Message-State: AOAM533BdvK3COXHWiYYg3vy/oGIwJ75khLTg9NtXdXFL1fOc51DE4VG
+        S1Mgnz6SGlShnnzn4HOUazIQPN4/ANv016Wtr6I=
+X-Google-Smtp-Source: ABdhPJziYHXZSCipGM7ydRaqllrYZVUo3NuDZ3Q6mhBexzgR0LXSA5K+XD7bCOgmM2KS8WthaK8l5hCuaPW238Qm6fw=
+X-Received: by 2002:a63:1b44:: with SMTP id b4mr4185831pgm.175.1602873610023;
+ Fri, 16 Oct 2020 11:40:10 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Content-Language: en-US
+Reply-To: dennismattu01@gmail.com
+Sender: dosserpicard@gmail.com
+Received: by 2002:a05:6a10:3245:0:0:0:0 with HTTP; Fri, 16 Oct 2020 11:40:09
+ -0700 (PDT)
+From:   Dennis Mattu <dennismattu01@gmail.com>
+Date:   Fri, 16 Oct 2020 18:40:09 +0000
+X-Google-Sender-Auth: GkwAByAlkacAbJEqxJZXEMaQ_xk
+Message-ID: <CANGjjsBnUepS24eyfNKYYtrY5VJy6wKXu1cyMorxx8T1O+XfeQ@mail.gmail.com>
+Subject: Greetings
+To:     undisclosed-recipients:;
+Content-Type: text/plain; charset="UTF-8"
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-I've found that in recent kernel versions (5.7+) that fallocate creates 
-files on ext4 filesystem with holes. Here is a repo:
+I am Mr.Dennis ,i work as an accountant in a bank, i am contacting you
+in regards to a business transfer of a huge sum of money from a
+deceased account. I need your urgent assistance in transferring the
+sum of $11.6million dollars to your private bank  account,the fund
+belongs to one of our foreign customer who died along with his entire
+family since July 22, 2003.The money has been here in our Bank lying
+dormant for years now without anybody coming for the claim of it.
 
-$ sudo fallocate -l 512MiB /mnt/swapfile
-$ sudo filefrag -e /mnt/swapfile
-Filesystem type is: ef53
-File size of /mnt/swapfile is 536870912 (131072 blocks of 4096 bytes)
-  ext:     logical_offset:        physical_offset: length: expected: flags:
-    0:        0..   63487:      34816..     98303: 63488:             
-unwritten
-    1:    63488..  126975:     100352..    163839:  63488: 98304: unwritten
-    2:   126976..  131071:     165888..    169983:   4096: 163840: 
-last,unwritten,eof
-/mnt/swapfile: 3 extents found
-$ sudo chmod 0600 /mnt/swapfile
-$ sudo mkswap /mnt/swapfile
-$ sudo swapon /mnt/swapfile
-swapon: /mnt/swapfile: swapon failed: Invalid argument
-$ sudo journalctl | grep hole
-Oct 15 15:42:59 hostname kernel: swapon: swapfile has holes
-Oct 15 15:43:09 hostname kernel: swapon: swapfile has holes
-Oct 15 15:43:23 hostname kernel: swapon: swapfile has holes
-
-But in previous versions (4.19 verified) this operation succeeds and 
-swapon doesn't indicate holes in the file.
-
-Is the behavior of creating files with fallocate on ext4 filesystems 
-with holes expected and by-design?
-
-Thank you in advance for any insight!
-Thomas
+I now seek your permission to have you stand in as the deceased
+relative to enable the funds be released in your favor as the
+beneficiary and the next of kin to our deceased customer,the Banking
+laws here does not allow such money to stay more than 19years,because
+the money will be recalled to the Bank treasury account as unclaimed
+fund.I am ready to share with you 40% for you and 60% will be kept for
+me, by indicating your interest i will send you the full details on
+how the business will be executed.
