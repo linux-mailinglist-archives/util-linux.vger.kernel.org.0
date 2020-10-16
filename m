@@ -2,62 +2,86 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 7E9242901BA
-	for <lists+util-linux@lfdr.de>; Fri, 16 Oct 2020 11:19:07 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 44DA82903CF
+	for <lists+util-linux@lfdr.de>; Fri, 16 Oct 2020 13:10:09 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S2405957AbgJPJTC (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Fri, 16 Oct 2020 05:19:02 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([216.205.24.124]:28928 "EHLO
-        us-smtp-delivery-124.mimecast.com" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S2405772AbgJPJTB (ORCPT
-        <rfc822;util-linux@vger.kernel.org>);
-        Fri, 16 Oct 2020 05:19:01 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-        s=mimecast20190719; t=1602839941;
-        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-         in-reply-to:in-reply-to:references:references;
-        bh=famsv2CRVxiQS8HPhElbw6fk9272ex679jUB6useArE=;
-        b=BwiIfG0mXG9wFxb8Y0ejdHtums+ga9V/R7NQvw7YtV5c11FN1sKq7e27SZWo4WYPgNxAm3
-        PxI2qlu/HEeheOQcwmv4U5Wly7H6YerooIAlsJX1M1bGbS4zbGixfu8sKDa6wdiM++mOJf
-        qBxhjQov9yzmsg85j6S4W1/zpw4lsc0=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-519-bB8gY55yOH66LnsmitmwCw-1; Fri, 16 Oct 2020 05:18:57 -0400
-X-MC-Unique: bB8gY55yOH66LnsmitmwCw-1
-Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.phx2.redhat.com [10.5.11.11])
-        (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
-        (No client certificate requested)
-        by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 7CBAAAF9A0;
-        Fri, 16 Oct 2020 09:18:56 +0000 (UTC)
-Received: from ws.net.home (unknown [10.40.194.172])
-        by smtp.corp.redhat.com (Postfix) with ESMTPS id B159B76649;
-        Fri, 16 Oct 2020 09:18:55 +0000 (UTC)
-Date:   Fri, 16 Oct 2020 11:18:52 +0200
-From:   Karel Zak <kzak@redhat.com>
-To:     Sami Kerola <kerolasa@iki.fi>
-Cc:     util-linux@vger.kernel.org
-Subject: Re: [PATCH] col: fix --help short option in usage() output
-Message-ID: <20201016091852.spd4x7wbclxgcbzt@ws.net.home>
-References: <20201014202245.24452-1-kerolasa@iki.fi>
+        id S2394645AbgJPLKI (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Fri, 16 Oct 2020 07:10:08 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:51562 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S2394606AbgJPLKI (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Fri, 16 Oct 2020 07:10:08 -0400
+Received: from mail-lj1-x243.google.com (mail-lj1-x243.google.com [IPv6:2a00:1450:4864:20::243])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 2C3DAC061755
+        for <util-linux@vger.kernel.org>; Fri, 16 Oct 2020 04:10:08 -0700 (PDT)
+Received: by mail-lj1-x243.google.com with SMTP id a4so1935411lji.12
+        for <util-linux@vger.kernel.org>; Fri, 16 Oct 2020 04:10:08 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=mime-version:reply-to:from:date:message-id:subject:to
+         :content-transfer-encoding;
+        bh=cvCOy9gmWwEIGoAvKN1wTgWgmqeY7BJZiB7+75Zr3Co=;
+        b=tREW2YREP0gt7tdQBJN9XBMzdauRCOrzN1gr87cBYmWAeAMIm8sLiF3567w94liD7R
+         WRrQwsXnGu0WvDtiNMFKcjO2a/GVpX7is9tVnBm5S+ozCpOY5X1jBMbwF5oWxMq/d0n8
+         A5jlEA07/q58bxTiiJF7cLO0MzxpRxwYkHp80vqlrHw1BjJeKhfc3Imc9R+1KysbkATo
+         MlMA3UAReM+RVIkFrUOAvTjmghVyqmgyGMIW8b233HZ89UB4sFizct2zqwmksh8/j8Pj
+         LzVHZxJOyw5reoT2qzqwPaFijwPtCafqfmhd0i1y2u7190a9vQu+/CkCH/hArxjcSZCW
+         CLAQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
+         :subject:to:content-transfer-encoding;
+        bh=cvCOy9gmWwEIGoAvKN1wTgWgmqeY7BJZiB7+75Zr3Co=;
+        b=fvr3lKHSgYN8P5IFI9alUFGYti9IFST1ScerYdcje/NblO++65T5tOLwxXrriSZFlt
+         sSFDsPcVnuI4KyO2SZqYYlzaP6kJxQfeCbwtTQ9iLRFLrXKjEEVkLL9VE6Y0wNefYULH
+         e7wSOGcukStWScRk2kmC3oXxqDdP2Z8z+zjEdsshSIT2jR7IEMATt9DtrnLrM4t5s0R+
+         vxRTqlZ7i1DFQ2cCKEaXwRxLrMLIyCfZZyoJ4ecyXNL9IJFmk7wOVE55w4WhiP5EnFJq
+         /P4N0f5KrdONxXHRuLdHCoWd7/B0B3A4UX00wOY2GKsdxqHQv0iB/9p8K+KUEVikjamV
+         Tq+g==
+X-Gm-Message-State: AOAM5316LQojONgJeE0QvZE78LNuGHSQ4GPUy/j5e/nPcTHH7C8hmQOn
+        F3UPCo5CT7DYQTgFbCPRWsCt6AQ/XIGZr8bBWpk=
+X-Google-Smtp-Source: ABdhPJyYfYsghKwMvY1ilLtn6g8Vt3g2fPip7iyInAoJjcXWECzL9sq7uLY7EhblyV+8ku7HcxlS+SeBnbdeLzYpcGc=
+X-Received: by 2002:a2e:9cc5:: with SMTP id g5mr1206914ljj.86.1602846606698;
+ Fri, 16 Oct 2020 04:10:06 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20201014202245.24452-1-kerolasa@iki.fi>
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.11
+Received: by 2002:a2e:3c0b:0:0:0:0:0 with HTTP; Fri, 16 Oct 2020 04:10:06
+ -0700 (PDT)
+Reply-To: bukarmangora@hotmail.com
+From:   Bukar Mangora <infobukamangora@gmail.com>
+Date:   Fri, 16 Oct 2020 11:10:06 +0000
+Message-ID: <CALyPTWcifYWZephZVnbxstOvBPHRydEhE9uhh00JFujwNJMMRQ@mail.gmail.com>
+Subject: From Bukar Mangora, Hello Friend Please Treat Urgent
+To:     undisclosed-recipients:;
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-On Wed, Oct 14, 2020 at 09:22:45PM +0100, Sami Kerola wrote:
-> The col(1) is using unusual -H as --help short option.  The -h is used for
-> --tabs (horizontal tab?) in this implementation.
+Good day my good friend.
+How are you doing today? It has been long i hear from you, what is
+going on your side? Today i am very much happy to inform you about my
+success in getting those inheritance funds transferred under the
+co-operation of a new partner from India Asia. He is a Canadian but
+based in India, but presently I'm in India for investment projects
+with my own share of the total sum of Millions of dollars. meanwhile,
+i didn't forget your past efforts and attempts to assist me in
+transferring those inheritance funds despite that it failed us
+somehow, i want you to contact my Secretary in Lom=C3=A9 Togo, his name is
+Mr. Paul Agwa, this is his email address (paulagwad@aol.com ), ask him
+to contact Ecobank were i kept the sum of $350,000.00, for your
+compensation, this compensation fund is for all the past efforts and
+attempts to assist me in the past transaction. I appreciated your
+efforts at that time very much.  so, feel free and contact my
+secretary, and instruct him where Ecobank will transfer the total sum
+of $350,000.00.
 
-Good catch. Applied, thanks.
+Please do let me know immediately Ecobank transfer the fund
+$350.000.00 into your own bank account, in the moment, I am too busy
+here because of the investment projects which i am having with my new
+partner at hand, so get in touch with Mr. Paul Agwa on his email
+address, he will contact Ecobank on your behalf without any delay.
+Stay safe of Covid 19.
 
-    Karel
-
--- 
- Karel Zak  <kzak@redhat.com>
- http://karelzak.blogspot.com
-
+Best regards,
+Bukar Mangora.
