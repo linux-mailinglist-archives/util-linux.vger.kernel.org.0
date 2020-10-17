@@ -2,75 +2,85 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 2E944290B7A
-	for <lists+util-linux@lfdr.de>; Fri, 16 Oct 2020 20:40:11 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 273362911D8
+	for <lists+util-linux@lfdr.de>; Sat, 17 Oct 2020 14:28:23 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S2392495AbgJPSkK (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Fri, 16 Oct 2020 14:40:10 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:36766 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S2392261AbgJPSkK (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Fri, 16 Oct 2020 14:40:10 -0400
-Received: from mail-pf1-x442.google.com (mail-pf1-x442.google.com [IPv6:2607:f8b0:4864:20::442])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 9920DC061755
-        for <util-linux@vger.kernel.org>; Fri, 16 Oct 2020 11:40:10 -0700 (PDT)
-Received: by mail-pf1-x442.google.com with SMTP id e10so2002058pfj.1
-        for <util-linux@vger.kernel.org>; Fri, 16 Oct 2020 11:40:10 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:reply-to:sender:from:date:message-id:subject:to;
-        bh=JWaKL5WM42WZgjD6lU04tt/DDwosfVnPKjWSJoldG98=;
-        b=OHawRR5gLVwatx9219Ewcvpj51oFlrxv/A/EDtEMbanskMuPtMG9lchb6r0C81tbSk
-         JWSW3i29d/Cei2C/iPPXvLvS3bMTeg1o1yAYc2mb7Z711OwOpBp5Uee6MtB7PwuZ+aK0
-         FDeGWcolb+90MhLaL49/JXR4Fe/tUamW2n+TxjFF5RVZj+SNiOURQMOCfRz0/pRVZuKn
-         brNmMiZ4DzrjFQxAz+5XhPSZFnZNC1xouEpWl32qNfWLzb4hqd864dF0HyMWSoTuAyjX
-         UUGa5yL/dFxGqrexyVmn37jaSHg1hbd+EuFH3HJqhFM3ux0z8m2uEiS8/CSHcjWzNPNb
-         jucA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:reply-to:sender:from:date
-         :message-id:subject:to;
-        bh=JWaKL5WM42WZgjD6lU04tt/DDwosfVnPKjWSJoldG98=;
-        b=Du57WRkerOovLohZ1pdvIp6lkGeVff030xLcHfdmarI2paAeJLFQmP0rJCPcAjYrTF
-         16xjlicOL2OicbeW22Q1g/umFiE28Y2rm6GXhXpD5APkc5Nj6/hK6Of8YrEUwm8g9gnm
-         QMlav7UwBJtPS8OsTQM267fVIzuiHW6TrALXf1IwlHy/RwyxEkA1VQXJmhBfkG4A8RCb
-         B9jJJ5z9hxT5N2+GAz6AOpRDLy5ewgPh2kI+ucCry6VNrjHUGcfd6pZIyWiB+2chU/J2
-         KeUmF8pRInN+1vHjqG2CvT10iAxBQ8lVFPr/wkMYrjg39MyQHQwmt1ndMWos8vyJsxtm
-         kH9w==
-X-Gm-Message-State: AOAM533BdvK3COXHWiYYg3vy/oGIwJ75khLTg9NtXdXFL1fOc51DE4VG
-        S1Mgnz6SGlShnnzn4HOUazIQPN4/ANv016Wtr6I=
-X-Google-Smtp-Source: ABdhPJziYHXZSCipGM7ydRaqllrYZVUo3NuDZ3Q6mhBexzgR0LXSA5K+XD7bCOgmM2KS8WthaK8l5hCuaPW238Qm6fw=
-X-Received: by 2002:a63:1b44:: with SMTP id b4mr4185831pgm.175.1602873610023;
- Fri, 16 Oct 2020 11:40:10 -0700 (PDT)
+        id S2437938AbgJQM2V (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Sat, 17 Oct 2020 08:28:21 -0400
+Received: from mx.treblig.org ([46.43.15.161]:50798 "EHLO mx.treblig.org"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S2437937AbgJQM2V (ORCPT <rfc822;util-linux@vger.kernel.org>);
+        Sat, 17 Oct 2020 08:28:21 -0400
+X-Greylist: delayed 1362 seconds by postgrey-1.27 at vger.kernel.org; Sat, 17 Oct 2020 08:28:20 EDT
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=treblig.org
+        ; s=bytemarkmx; h=Content-Transfer-Encoding:Content-Type:MIME-Version:
+        Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-ID:
+        Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+        :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+        List-Subscribe:List-Post:List-Owner:List-Archive;
+        bh=BtO62Mzk41D5cC0PX0hXQtX3K9ZtSS8AUkQbNYrizM8=; b=J2g3GDs7iTcpSUSpF4vSa2uFk/
+        OHZ221A3HsIAIyEJGk+kW9yzNB6WmDq4Re21vwXDMK9trwcyMUHSEP8bMBSD4pWcz3fkYXYC3ZDd5
+        wS1gj74aHYDlYAC7y0oUC986r3PxcshwGpeQWxSSW2m0BcIpn/eRK3El2RADMLkC55pNVoMXLHgn6
+        4yjt0Qo9JTfF1zjrjQbsc0iRJkGVlOTzS5P5HgwjiWD2oWe42zgrIov+4VeNjlZq4bNmNcv5CX36E
+        0eWN5Pc4Agf8hDotCBXFnFqxF/PQlp3V10pLwmMb2T/Vvd+dEsGGSRuT+qBk+UoZoUXu2uNiGdPlm
+        W1GShIbA==;
+Received: from localhost ([127.0.0.1] helo=dalek.home.treblig.org)
+        by mx.treblig.org with esmtp (Exim 4.92)
+        (envelope-from <dave@treblig.org>)
+        id 1kTkxt-0002qw-Fs; Sat, 17 Oct 2020 13:05:37 +0100
+From:   "Dr. David Alan Gilbert" <dave@treblig.org>
+To:     util-linux@vger.kernel.org
+Cc:     "Dr. David Alan Gilbert" <dave@treblig.org>
+Subject: [PATCH] Fix 0x%u usage
+Date:   Sat, 17 Oct 2020 13:05:34 +0100
+Message-Id: <20201017120534.90573-1-dave@treblig.org>
+X-Mailer: git-send-email 2.28.0
 MIME-Version: 1.0
-Reply-To: dennismattu01@gmail.com
-Sender: dosserpicard@gmail.com
-Received: by 2002:a05:6a10:3245:0:0:0:0 with HTTP; Fri, 16 Oct 2020 11:40:09
- -0700 (PDT)
-From:   Dennis Mattu <dennismattu01@gmail.com>
-Date:   Fri, 16 Oct 2020 18:40:09 +0000
-X-Google-Sender-Auth: GkwAByAlkacAbJEqxJZXEMaQ_xk
-Message-ID: <CANGjjsBnUepS24eyfNKYYtrY5VJy6wKXu1cyMorxx8T1O+XfeQ@mail.gmail.com>
-Subject: Greetings
-To:     undisclosed-recipients:;
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-I am Mr.Dennis ,i work as an accountant in a bank, i am contacting you
-in regards to a business transfer of a huge sum of money from a
-deceased account. I need your urgent assistance in transferring the
-sum of $11.6million dollars to your private bank  account,the fund
-belongs to one of our foreign customer who died along with his entire
-family since July 22, 2003.The money has been here in our Bank lying
-dormant for years now without anybody coming for the claim of it.
+There's a couple of places which use varients on "0x%u" in
+format strings; that's almost always wrong - you either want
+0x%x or just %u.
+In libmount's case it's flags, so I'm assuming the intention
+really is hex.
+In the ja.po case it's %u in the original msgid.
 
-I now seek your permission to have you stand in as the deceased
-relative to enable the funds be released in your favor as the
-beneficiary and the next of kin to our deceased customer,the Banking
-laws here does not allow such money to stay more than 19years,because
-the money will be recalled to the Bank treasury account as unclaimed
-fund.I am ready to share with you 40% for you and 60% will be kept for
-me, by indicating your interest i will send you the full details on
-how the business will be executed.
+Signed-off-by: Dr. David Alan Gilbert <dave@treblig.org>
+---
+ libmount/src/optstr.c | 2 +-
+ po/ja.po              | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/libmount/src/optstr.c b/libmount/src/optstr.c
+index 9af594f52..68b7bc383 100644
+--- a/libmount/src/optstr.c
++++ b/libmount/src/optstr.c
+@@ -731,7 +731,7 @@ int mnt_optstr_apply_flags(char **optstr, unsigned long flags,
+ 	if (!optstr || !map)
+ 		return -EINVAL;
+ 
+-	DBG(CXT, ul_debug("applying 0x%08lu flags to '%s'", flags, *optstr));
++	DBG(CXT, ul_debug("applying 0x%08lx flags to '%s'", flags, *optstr));
+ 
+ 	maps[0] = map;
+ 	next = *optstr;
+diff --git a/po/ja.po b/po/ja.po
+index ec2c550ec..4974c0bcc 100644
+--- a/po/ja.po
++++ b/po/ja.po
+@@ -6820,7 +6820,7 @@ msgstr "間違った vtoc.sanity 値 [0x%08x] の sun ディスクラベルを
+ #: libfdisk/src/sun.c:163
+ #, c-format
+ msgid "Detected sun disklabel with wrong vtoc.nparts [%u]."
+-msgstr "間違った vtoc.nparts 値 [0x%u] の sun ディスクラベルを検出しました。"
++msgstr "間違った vtoc.nparts 値 [%u] の sun ディスクラベルを検出しました。"
+ 
+ #: libfdisk/src/sun.c:168
+ msgid "Warning: Wrong values need to be fixed up and will be corrected by w(rite)"
+-- 
+2.28.0
+
