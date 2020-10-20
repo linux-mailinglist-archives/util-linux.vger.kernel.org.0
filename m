@@ -2,167 +2,88 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 22B7B294165
-	for <lists+util-linux@lfdr.de>; Tue, 20 Oct 2020 19:25:26 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 0BDF2294489
+	for <lists+util-linux@lfdr.de>; Tue, 20 Oct 2020 23:29:50 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S2395369AbgJTRZZ (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Tue, 20 Oct 2020 13:25:25 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:39436 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S2395362AbgJTRZZ (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Tue, 20 Oct 2020 13:25:25 -0400
-Received: from mail-il1-x141.google.com (mail-il1-x141.google.com [IPv6:2607:f8b0:4864:20::141])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 0A36BC0613CE
-        for <util-linux@vger.kernel.org>; Tue, 20 Oct 2020 10:25:25 -0700 (PDT)
-Received: by mail-il1-x141.google.com with SMTP id y17so330132ilg.4
-        for <util-linux@vger.kernel.org>; Tue, 20 Oct 2020 10:25:25 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id;
-        bh=2Benu2Z9Iv5c4+hD5Yt1vpnhhmALFq3RBjeTAawo67g=;
-        b=PqFtnLEuSyjfOo38d59/N+JUd4IiFEmMbwjph/uVfcN+Bm2ksRB74rMGNGqH5d8wbt
-         XZDTUrKynbOCY2Awcre03VeGTZIIMtY4cW21KpYuPkCb/IJrOMNfr/zODgcMH0Zd+t9V
-         jrarq0wIBa2YBN2l6K3M99ifgwlL1VD1pKaI7LCptf/7DwdatAFiNyRFOzi46OCoj4dJ
-         wZCBw5+1RLTOOCzNtdNpw1UZrHR1/G55eslrnMBg0Egspx+oKwo8ltoAejFkcHV9pRXu
-         vVpzku56SsLuIXQxnsqombJx5MHN1o533j3+2ozJzJxQdqxnlM4lfMnk9cErLP3RuILQ
-         pCCg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id;
-        bh=2Benu2Z9Iv5c4+hD5Yt1vpnhhmALFq3RBjeTAawo67g=;
-        b=KA5zQwqaN3qRwG7rA5SV0mXfRkvH6ZdWUKc9nkvjX17dXjZXG3tyusldYCSGkex5eV
-         9mOxwOBtdHV2yR+Vk0rgzbddDHxAwSI7OFiryKE457/KWA7mCjDkBh778D39zCB9jPQs
-         X5Gzx10GW4FYMC/aF4mSwWoDjUrpQosJocbLGAPQWjDdW2T8ntB/Uq7Zuhf7bR3nyYV2
-         MrgzcPhmiQ3IdNNAEyy+QfrORwiiKlmqgiGbIwKk2W4rTkZ9XRG1enYcqXmjxXxv8IDS
-         6ttFXhfXU4EdJKEDh6kByeSxSJ8xewCj84fVlRRi2kiYfbOGnBYKy/cFM7GEEHJof2HX
-         WeWg==
-X-Gm-Message-State: AOAM5309oo/1szI8YJ1gjFGutcYGlBAFC+f9P0vwG3Xl0KZvPWdK5W2z
-        5Tmm2BEdLiuLu4KCfdpYxZ1ZXz8X/w==
-X-Google-Smtp-Source: ABdhPJw/WiGFiEiuWtFHExlz+xTVuABhiGkquK/aEkC1Dr0IDYdAANrMwSeqUL9dR42v3dYDTnJAAQ==
-X-Received: by 2002:a05:6e02:11a8:: with SMTP id 8mr2852712ilj.145.1603214724259;
-        Tue, 20 Oct 2020 10:25:24 -0700 (PDT)
-Received: from localhost (209-6-122-159.s2973.c3-0.arl-cbr1.sbo-arl.ma.cable.rcncustomer.com. [209.6.122.159])
-        by smtp.gmail.com with ESMTPSA id x13sm2055385iox.31.2020.10.20.10.25.23
-        (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
-        Tue, 20 Oct 2020 10:25:23 -0700 (PDT)
-From:   Masayoshi Mizuma <msys.mizuma@gmail.com>
-To:     util-linux@vger.kernel.org
-Cc:     Masayoshi Mizuma <msys.mizuma@gmail.com>,
-        Masayoshi Mizuma <m.mizuma@jp.fujitsu.com>
-Subject: [PATCH v2] lscpu-arm: Set the order to search the model name
-Date:   Tue, 20 Oct 2020 13:25:10 -0400
-Message-Id: <20201020172510.9714-1-msys.mizuma@gmail.com>
-X-Mailer: git-send-email 2.17.1
+        id S2409930AbgJTV3t (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Tue, 20 Oct 2020 17:29:49 -0400
+Received: from v02internet3.cabocom.cv ([94.46.170.121]:33926 "EHLO
+        v02internet3.cabocom.cv" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S2409891AbgJTV3s (ORCPT
+        <rfc822;util-linux-ng@vger.kernel.org>);
+        Tue, 20 Oct 2020 17:29:48 -0400
+X-Greylist: delayed 4009 seconds by postgrey-1.27 at vger.kernel.org; Tue, 20 Oct 2020 17:29:48 EDT
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+        d=casinoroyal.cv; s=default; h=Content-Transfer-Encoding:Content-Type:
+        Message-ID:Reply-To:Subject:To:From:Date:MIME-Version:Sender:Cc:Content-ID:
+        Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+        :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+        List-Subscribe:List-Post:List-Owner:List-Archive;
+        bh=LXLju+poDpnc85QdrtpU2nKjuoBGXaaG8MHTM7T5/RY=; b=iRlfG7iPUGFOjBwkyb9Q2HmEFf
+        rZPAP9XbNltUImm0xs/SVPDbvPP7S1ftZRN5/JBaYHBaOW0URnoKbwqfZ6fv5N5hntrphUyvl+9wW
+        VPZHXPG7+abuWjuTsKC+fwYZn+CdTLDqxQoogl//fbvLwJGW6An2Nf8psRP59GiaDZk33eCjRmsCK
+        haSMQYLF9znjfBAm5iAjXcY3eZrEQZYHWl/okbecnKoY0ZwJJofxk9sUlTMah3w27yvSouQhxRF4G
+        cQRDMxdiSI/gIi6cu3nmk7ic95pkSC1QCIwPFwKlsvBI21Ak0twbmIbz2m1rS89FDhUCE1mhK4Vq9
+        0K4//O3Q==;
+Received: from localhost ([127.0.0.1]:40372 helo=v02internet3.cabocom.cv)
+        by v02internet3.cabocom.cv with esmtpa (Exim 4.93)
+        (envelope-from <mariedzanis9@gmail.com>)
+        id 1kUy7w-0007pR-Mi; Tue, 20 Oct 2020 20:21:05 +0000
+MIME-Version: 1.0
+Date:   Tue, 20 Oct 2020 20:21:00 +0000
+From:   "Mrs. Marie Dzanis" <mariedzanis9@gmail.com>
+To:     undisclosed-recipients:;
+Subject: Urgent Reply Needed
+Reply-To: inquiryersection@gmail.com
+User-Agent: Roundcube Webmail/1.4.8
+Message-ID: <0de29f5622f49420d22c4c59770b4d5c@gmail.com>
+X-Sender: mariedzanis9@gmail.com
+Content-Type: text/plain; charset=UTF-8;
+ format=flowed
+Content-Transfer-Encoding: 8bit
+X-OutGoing-Spam-Status: No, score=6.1
+X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
+X-AntiAbuse: Primary Hostname - v02internet3.cabocom.cv
+X-AntiAbuse: Original Domain - vger.kernel.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - gmail.com
+X-Get-Message-Sender-Via: v02internet3.cabocom.cv: authenticated_id: djenane@casinoroyal.cv
+X-Authenticated-Sender: v02internet3.cabocom.cv: djenane@casinoroyal.cv
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-From: Masayoshi Mizuma <m.mizuma@jp.fujitsu.com>
+Greetings to you my name is Mrs. Marie Dzanis. I have an important 
+information to share with you. is in relation to your name that matches 
+the
 
-After commit: 367c85c47 ("lscpu: use SMBIOS tables on ARM for lscpu"),
-Model name for A64FX shows like as:
+name of a deceased customer of our bank (Northern Trust Bank) and his 
+unclaimed Money. For security reasons, I am Mrs. Marie Dzanis MA, BA
 
-   Model name:       461F0010
+(Hons) The head of EMEA for Northern Trust Asset Management and I 
+oversee the governance, operations, business development and talent of
 
-That's because 367c85c47 changes to get the modelname from Processor
-Version of SMBIOS.
+Northern Trust Asset Management. I received a notice last week from the 
+General Headquarter of my bank to provide the next of kin to my late
 
-The SMBIOS info would be great if the system is based on SBBR v1.2E and
-BBR v1.0 because the specs require the Processor Version of SMBIOS
-as "This field must provide a human readable description of the processor
-part number".
+client who shares the same with you, as his personal accountant. Failure 
+to provide a said next of kin to my client will risk a transfer of the
 
-However, it's not good for the systems aren't based on the specs,
-like A64FX. Such systems need to have the model name to the hard
-corded table.
+funds to the Government (Escheat) in 21 days time. I am contacting you 
+to assist me in repatriating the funds left behind by my late client as 
+you
 
-Let's set the order; first, search the hard corded table, then SMBIOS.
+share the same surname with him. This claim will be executed without 
+breaching any United Kingdom laws and success is guaranteed if we co-
 
-Note, some systems, like APM X-Gene and Altra, may not match the information
-between MIDR register (/proc/cpuinfo) and SMBIOS. To be consistency,
-use Processor Manufacturer of SMBIOS when Processor Version is used
-even if the hard corded table has the vendor id.
+operate on this. The bank will release the account to you because of my 
+recommendation of you as the next of kin to the deposit as a member of
 
-Signed-off-by: Masayoshi Mizuma <m.mizuma@jp.fujitsu.com>
----
- sys-utils/lscpu-arm.c | 31 ++++++++++++++++---------------
- 1 file changed, 16 insertions(+), 15 deletions(-)
+the family.
+(inquiryersection@gmail.com) I will wait for your answer. 
 
-diff --git a/sys-utils/lscpu-arm.c b/sys-utils/lscpu-arm.c
-index 20c7291e5..7812de96f 100644
---- a/sys-utils/lscpu-arm.c
-+++ b/sys-utils/lscpu-arm.c
-@@ -83,7 +83,6 @@ static const struct id_part arm_part[] = {
-     { 0xd13, "Cortex-R52" },
-     { 0xd20, "Cortex-M23" },
-     { 0xd21, "Cortex-M33" },
--    { 0xd4a, "Neoverse-E1" },
-     { -1, "unknown" },
- };
- 
-@@ -110,7 +109,6 @@ static const struct id_part cavium_part[] = {
- };
- 
- static const struct id_part apm_part[] = {
--    { 0x000, "X-Gene" },
-     { -1, "unknown" },
- };
- 
-@@ -288,6 +286,7 @@ static int __arm_cpu_smbios(struct lscpu_desc *desc)
- 	struct lscpu_dmi_header h;
- 	int fd;
- 	ssize_t rs;
-+	int use_smbios = 0;
- 
- 	fd = open(_PATH_SYS_DMI_TYPE4, O_RDONLY);
- 	if (fd < 0)
-@@ -301,16 +300,21 @@ static int __arm_cpu_smbios(struct lscpu_desc *desc)
- 
- 	to_dmi_header(&h, data);
- 
--	str = dmi_string(&h, data[PROC_MFR_OFFSET]);
--	if (str) {
--		xstrncpy(buf, str, 127);
--		desc->vendor = xstrdup(buf);
-+	if (!desc->modelname) {
-+		str = dmi_string(&h, data[PROC_VERSION_OFFSET]);
-+		if (str) {
-+			xstrncpy(buf, str, 127);
-+			desc->modelname = xstrdup(buf);
-+			use_smbios = 1;
-+		}
- 	}
- 
--	str = dmi_string(&h, data[PROC_VERSION_OFFSET]);
--	if (str) {
--		xstrncpy(buf, str, 127);
--		desc->modelname = xstrdup(buf);
-+	if ((startswith(desc->vendor, "0x")) || use_smbios) {
-+		str = dmi_string(&h, data[PROC_MFR_OFFSET]);
-+		if (str) {
-+			xstrncpy(buf, str, 127);
-+			desc->vendor = xstrdup(buf);
-+		}
- 	}
- 
- 	return 0;
-@@ -318,14 +322,11 @@ static int __arm_cpu_smbios(struct lscpu_desc *desc)
- 
- void arm_cpu_decode(struct lscpu_desc *desc, struct lscpu_modifier *mod)
- {
--	int rc = -1;
-+	__arm_cpu_decode(desc);
- 
- 	/* use SMBIOS Type 4 data if available,
- 	 * else fall back to manual decoding using the tables above */
- 	if (mod->system == SYSTEM_LIVE &&
- 	    access(_PATH_SYS_DMI_TYPE4, R_OK) == 0)
--		rc = __arm_cpu_smbios(desc);
--
--	if (rc)
--		__arm_cpu_decode(desc);
-+		__arm_cpu_smbios(desc);
- }
--- 
-2.27.0
-
+Thanks and best regards
+Marie Dzanis
