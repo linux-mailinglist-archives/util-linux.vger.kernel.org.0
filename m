@@ -2,15 +2,15 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 96C192A1316
-	for <lists+util-linux@lfdr.de>; Sat, 31 Oct 2020 03:46:41 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 12CC62A1317
+	for <lists+util-linux@lfdr.de>; Sat, 31 Oct 2020 03:46:42 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1725794AbgJaCqk (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Fri, 30 Oct 2020 22:46:40 -0400
+        id S1725822AbgJaCql (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Fri, 30 Oct 2020 22:46:41 -0400
 Received: from 93804.cloudwaysapps.com ([178.62.255.238]:33998 "EHLO
         93804.cloudwaysapps.com" rhost-flags-OK-FAIL-OK-FAIL)
         by vger.kernel.org with ESMTP id S1725536AbgJaCqk (ORCPT
-        <rfc822;util-linux-ng@vger.kernel.org>);
+        <rfc822;util-linux@vger.kernel.org>);
         Fri, 30 Oct 2020 22:46:40 -0400
 Received: from 127.0.0.1 (93804.cloudwaysapps.com [127.0.0.1])
         by 93804.cloudwaysapps.com (Postfix) with SMTP id 5F69125738;
