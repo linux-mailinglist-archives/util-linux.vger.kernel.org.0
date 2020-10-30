@@ -2,86 +2,82 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id C59762A0083
-	for <lists+util-linux@lfdr.de>; Fri, 30 Oct 2020 09:54:46 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id A69F32A0A6E
+	for <lists+util-linux@lfdr.de>; Fri, 30 Oct 2020 16:53:03 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1725801AbgJ3Iyq (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Fri, 30 Oct 2020 04:54:46 -0400
-Received: from server.msgroupspa.com ([185.149.113.111]:38696 "EHLO
-        server.msgroupspa.com" rhost-flags-OK-FAIL-OK-FAIL) by vger.kernel.org
-        with ESMTP id S1725784AbgJ3Iyq (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Fri, 30 Oct 2020 04:54:46 -0400
-X-Greylist: delayed 2454 seconds by postgrey-1.27 at vger.kernel.org; Fri, 30 Oct 2020 04:54:44 EDT
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-        d=msgroupspa.com; s=default; h=Content-Transfer-Encoding:Content-Type:
-        Message-ID:Reply-To:Subject:To:From:Date:MIME-Version:Sender:Cc:Content-ID:
-        Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
-        :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
-        List-Subscribe:List-Post:List-Owner:List-Archive;
-        bh=gOeEglh1DIJatPKqyvOsPs4e0Zw8Lzg9wwjnNfQdiM8=; b=awBxHdJJ9Z4+ic/YXpy4A3pkdM
-        0HfVVL2Ej5RsngX6hR9p+aqoErDlhLht+arl9ZIkTU6EsKIgj1kdEm6V6oxTtD49kYPaEM5gv+LiN
-        GJfdbKeeoqhX8ipMi69vBppNzASQfqC3UYQWSLgH2pJC2EfCFDHcRJ7d2B5BLZU7dSSco9Bal2Rd9
-        wXE1OACY7dk+zjcuf4JTcSfU6ac66Q/TEgBGHEON1mGpziZBxzYn16diH6SB7xzJa7PJP82MKPRrV
-        CwLeWY/sG/U9AYQ9sTeHR4OkehpKB242MiQG1mE0ZLwmhsBjCkOCAsGqWMt/Q7JK/V01VcqZ5PjHv
-        yn3igdfA==;
-Received: from [::1] (port=56748 helo=server.msgroupspa.com)
-        by server.msgroupspa.com with esmtpa (Exim 4.93)
-        (envelope-from <no-reply@msgroupspa.com>)
-        id 1kYPSv-0006O9-7M; Fri, 30 Oct 2020 16:08:53 +0800
+        id S1726939AbgJ3PxD (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Fri, 30 Oct 2020 11:53:03 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:47980 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726831AbgJ3PxD (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Fri, 30 Oct 2020 11:53:03 -0400
+Received: from mail-ej1-x642.google.com (mail-ej1-x642.google.com [IPv6:2a00:1450:4864:20::642])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id BC6E0C0613CF
+        for <util-linux@vger.kernel.org>; Fri, 30 Oct 2020 08:53:02 -0700 (PDT)
+Received: by mail-ej1-x642.google.com with SMTP id bn26so9266786ejb.6
+        for <util-linux@vger.kernel.org>; Fri, 30 Oct 2020 08:53:02 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=mime-version:reply-to:from:date:message-id:subject:to;
+        bh=9fkQXWnoPSypfyxvIrXWSyd1r4Ua0eeDJczOBpIf/BU=;
+        b=YxqMjrhPkUBRzJmn8wTOutPLST/u+11paRNlo0oJs+A2eLWWwq5Q43QgJaqiN/OVEg
+         DuYjvIDytvUoPeJ1FWBdG0Ba7FCLYhZz10RgxzYqJCzFGvLU+Vo2jtH990/LuLuU+6Z2
+         xwKZV5Sww9pFu2vCkeGjV1rFJIPxcwkUcuO9rLbYKimGuXSxfPdgDax4fhTf7Vpo1jFO
+         rImZa+c3lRG9MSqaz4Q3ugG+12BcZLd86E0kDluV9pYV5NTP80+xO8uICD0qdOun0HnY
+         3oFUTzdpOHDWdFWoD0RIC8xpOYveHs3EStGSZtojRpqYXYEwzZ6Wb/cITHEtgVALXLzF
+         VV2w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
+         :subject:to;
+        bh=9fkQXWnoPSypfyxvIrXWSyd1r4Ua0eeDJczOBpIf/BU=;
+        b=Mux/9VHbvUcBEyb+Fst6IvM+OuSv644UNSyLVfbNSP0jVH2b5U9gecluTvfmWzI1Fs
+         YUH+ucQCvH+LGrRGWVMyixvJU3wa8XAUpLDdHpOYnFecmUYt92yXuB8TTVeHsRZr+JCo
+         osYdNjJedhlH4L66zEUCg7nWO3VhJxje3vmtpjoY8LdnWbwFfBqREOb/1JJPYo/xTCDM
+         IeX/DKLg322/kDMfCNwYYIaGKUcf2vYhWeLRDMiVVLvnlGZ69/ciDEqdkDP/3bYnP6fr
+         Kg6TOXSbTCi3Lfagu3HsMleYDoPnwnJVZbrjBNRuHDjyJHgi2wn/AxNX00V4iWGMCjvi
+         Pqeg==
+X-Gm-Message-State: AOAM533GRvAgwXbGdvSrN84jASGGKKbVdU/Ct2ThifZoz14bzdL+MEgO
+        Xarn2FipRPakKREl0AtXxKgkeU6993wWlP4sCLY=
+X-Google-Smtp-Source: ABdhPJxE0qz4UrBf+UJqXTXEJJq465bTj0HXW3nqdOcXbKdPvsN5+q2iR80bhEwQLjjwPh1+TeczsPvWpo1stAd9aW4=
+X-Received: by 2002:a17:907:7244:: with SMTP id ds4mr3104609ejc.172.1604073181364;
+ Fri, 30 Oct 2020 08:53:01 -0700 (PDT)
 MIME-Version: 1.0
-Date:   Fri, 30 Oct 2020 16:08:52 +0800
-From:   "Mr. John Galvan" <no-reply@msgroupspa.com>
+Received: by 2002:a50:2941:0:0:0:0:0 with HTTP; Fri, 30 Oct 2020 08:53:00
+ -0700 (PDT)
+Reply-To: li.anable85@gmail.com
+From:   Liliane Abel <y.lhou01@gmail.com>
+Date:   Fri, 30 Oct 2020 16:53:00 +0100
+Message-ID: <CAC=R3A43FBXZzux3VmXNgbmXOdBmmddb8gsaEFCkwhFvYimrig@mail.gmail.com>
+Subject: 
 To:     undisclosed-recipients:;
-Subject: Hello/Hallo
-Reply-To: galvan.johnny@outlook.com
-User-Agent: Roundcube Webmail/1.4.8
-Message-ID: <df719407e550dd0b1fbb8ae2214fe131@msgroupspa.com>
-X-Sender: no-reply@msgroupspa.com
-Content-Type: text/plain; charset=UTF-8;
- format=flowed
-Content-Transfer-Encoding: 8bit
-X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
-X-AntiAbuse: Primary Hostname - server.msgroupspa.com
-X-AntiAbuse: Original Domain - vger.kernel.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - msgroupspa.com
-X-Get-Message-Sender-Via: server.msgroupspa.com: authenticated_id: no-reply@msgroupspa.com
-X-Authenticated-Sender: server.msgroupspa.com: no-reply@msgroupspa.com
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
+Content-Type: text/plain; charset="UTF-8"
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
+Dearest
 
+Greeting my dear, I am Liliane Abel by name, The only daughter of late
+Mr.Benson Abel. My father is one of the top Politician in our country
+and my mother is a farmers and cocoa merchant when they were both
+alive. After the death of my mother, long ago, my father was
+controlling their business until he was poisoned by his business
+associates which he suffered and died.
 
--- 
-Sir/Madam,
-
-I have access to very vital information that can be used to move a huge 
-amount of money. I have done my homework very well and I have the 
-machineries in place to get it done since I am still in active service. 
-If it was possible for me to do it alone I would not have bothered 
-contacting you. Ultimately I need an honest foreigner to play an 
-important role in the completion of this business transaction. Send 
-responds to this email: galvan.johnny@outlook.com
-
-Regards,
-John Galvan
-
----------------------------------------------------------------
-
-Sir / Madam,
-
-Ich habe Zugang zu sehr wichtigen Informationen, mit denen ich eine 
-große Menge Geld bewegen kann. Ich habe meine Hausaufgaben sehr gut 
-gemacht und ich habe die Maschinen, um sie zu erledigen, da ich immer 
-noch im aktiven Dienst bin. Wenn es mir möglich gewesen wäre, es alleine 
-zu tun, hätte ich mich nicht darum gekümmert, Sie zu kontaktieren. 
-Letztendlich brauche ich einen ehrlichen Ausländer, der eine wichtige 
-Rolle beim Abschluss dieses Geschäftsvorgangs spielt. Senden Sie 
-Antworten auf diese E-Mail: galvan.johnny@outlook.com
-
-Grüße,
-John Galvan
+Before the death of my father, He told me about (two million five
+hundred thousand united states dollars) which he deposited in the bank
+in Lome-Togo, It was the money he intended to transfer overseas for
+investment before he was poisoned. He also instructed me that I should
+seek for foreign partners in any country of my choice who will assist
+me transfer this money in overseas account where the money will be
+wisely invested.
+I am seeking for your kind assistance in the following ways:  (1) to
+provide a safe bank account into where the money will be transferred
+for investment. (2) To serve as a guardian of this fund since I am a
+girl of 19 years old. (3) To make arrangement for me to come over to
+your country to further my education. This is my reason for writing to
+you. Please if you are willing to assist me I will offer you 25% of
+the total money. Reply if  you are interested
+Best regards.
+Liliane Abel.
