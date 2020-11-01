@@ -2,47 +2,83 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 12CC62A1317
-	for <lists+util-linux@lfdr.de>; Sat, 31 Oct 2020 03:46:42 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 718662A1E80
+	for <lists+util-linux@lfdr.de>; Sun,  1 Nov 2020 15:16:13 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1725822AbgJaCql (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Fri, 30 Oct 2020 22:46:41 -0400
-Received: from 93804.cloudwaysapps.com ([178.62.255.238]:33998 "EHLO
-        93804.cloudwaysapps.com" rhost-flags-OK-FAIL-OK-FAIL)
-        by vger.kernel.org with ESMTP id S1725536AbgJaCqk (ORCPT
-        <rfc822;util-linux@vger.kernel.org>);
-        Fri, 30 Oct 2020 22:46:40 -0400
-Received: from 127.0.0.1 (93804.cloudwaysapps.com [127.0.0.1])
-        by 93804.cloudwaysapps.com (Postfix) with SMTP id 5F69125738;
-        Fri, 30 Oct 2020 19:48:43 +0000 (UTC)
-Received: from [140.242.234.34] by 127.0.0.1 with ESMTP id DCE36BD4FB6 for <usr16273@c1.edrana.lt>; Fri, 30 Oct 2020 19:43:59 -0100
-Message-ID: <05-51-899--n$v0$vp@9r28r.72cl>
-From:   "JOHN PHIL" <gerradfinancialplanning@gmail.com>
-Reply-To: "JOHN PHIL" <gerradfinancialplanning@gmail.com>
-To:     usr16273@c1.edrana.lt
-Subject: November Equity Investment 20-20 
-Date:   Fri, 30 Oct 20 19:43:59 GMT
-X-Mailer: Microsoft Outlook, Build 10.0.2616
-MIME-Version: 1.0
-Content-Type: multipart/alternative;
-        boundary="9FB.F_2_.10_FE_"
-X-Priority: 1
-X-MSMail-Priority: High
+        id S1726458AbgKAOQM (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Sun, 1 Nov 2020 09:16:12 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:51494 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726370AbgKAOQM (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Sun, 1 Nov 2020 09:16:12 -0500
+Received: from mail-wr1-x42f.google.com (mail-wr1-x42f.google.com [IPv6:2a00:1450:4864:20::42f])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id AD85CC0617A6
+        for <util-linux@vger.kernel.org>; Sun,  1 Nov 2020 06:16:11 -0800 (PST)
+Received: by mail-wr1-x42f.google.com with SMTP id w1so11584876wrm.4
+        for <util-linux@vger.kernel.org>; Sun, 01 Nov 2020 06:16:11 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=date:from:to:subject:message-id:mime-version
+         :content-transfer-encoding;
+        bh=lnpj2oVjg1wyK3/p88LvP52mIL2AwMRd5asaqtK1Wp4=;
+        b=hPQTy9jmWwvXlzUS/JYJXyrNL+6Q1PU+GCYHrPixP8cklK0+N8kywg9jo0I06uIjaM
+         QI9wEarrsBNkz4pcQh2RAbVyzLmA0OuP0wqptnXGCeO5KUBB6XgfbwpuxmuPNLo6JKIA
+         FkLqdKzfQJHqbgSB2dk3gAolYBJX6nTrpeXm5E7b7Yb0OyeH85zq0mT+nu941B1yXSi+
+         XtVqYfwMlhPiXCoNzGoVax6fyHUbJml6D9urVJOu1Y/+JugIUv0hcGs5WbZI56WHnF1B
+         bt8+sQog9rlMS0CQy08fy+O7jC1zC4U78LRMzMwB79ra55QLLYYzvmj8vwlLELXDyipN
+         drYA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:date:from:to:subject:message-id:mime-version
+         :content-transfer-encoding;
+        bh=lnpj2oVjg1wyK3/p88LvP52mIL2AwMRd5asaqtK1Wp4=;
+        b=jXvM4mkF4w3MQ0tBOHG6wcNuwkZdsO7+net5cNYjzX+woJoJ+dDbXr7QHKJjGmO95M
+         Q/PbP6eCWFk6OnKDNoSHXR/NhTOPfLYxnz3VLXItk6p8EFtpKCAglkn8+DLSZirRr854
+         Ue/xwF0H534TTZk727HlfBZieqC3fIS5G8S7S0epuzxLbMjtLBmccwGtBcobAcb+YYyo
+         1H/xwXJ+aSqYYQtXRwLy5S2hoClr5IINAZiFAYTbyEO/enkwGXvqgZtXJYs1xFgyQN4f
+         mNOFQ76uwh7ZzNKLHsBvfliScVZkgC71R7uXkIM1qghiLPqDWFfcQIwgWbUmgJ/T9QvG
+         0hsg==
+X-Gm-Message-State: AOAM532+ZwCr92xYV5FlW9QlFwM6C8VHXss4CTClX0whfQBCTml6ho39
+        k5Yk7MrjWBvRVYf4TnNjDL9RTyYrPZ39Zw==
+X-Google-Smtp-Source: ABdhPJyJpaWdge84uYLemx+okqfxiuYwsB4Op3pz3kRfKRdLsaQK/Xa++H2MG0oBaeG4cQv23TkHrg==
+X-Received: by 2002:adf:a551:: with SMTP id j17mr15616734wrb.217.1604240170074;
+        Sun, 01 Nov 2020 06:16:10 -0800 (PST)
+Received: from z600.home.lan ([213.31.227.225])
+        by smtp.gmail.com with ESMTPSA id b4sm10471758wro.57.2020.11.01.06.16.09
+        for <util-linux@vger.kernel.org>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sun, 01 Nov 2020 06:16:09 -0800 (PST)
+Date:   Sun, 1 Nov 2020 14:16:08 +0000
+From:   Sad Clouds <cryintothebluesky@gmail.com>
+To:     util-linux@vger.kernel.org
+Subject: Bug report - Solaris 11.3 conflicting types for 'random_get_bytes'
+Message-Id: <20201101141608.ba365cf67d92ee3973226de9@gmail.com>
+X-Mailer: Sylpheed 3.7.0 (GTK+ 2.24.32; x86_64-pc-linux-gnu)
+Mime-Version: 1.0
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
+mcookie fails to build on Solaris 11.3 since it already has
+random_get_bytes() function with a different signature. Please rename
+it to something different.
 
---9FB.F_2_.10_FE_
-Content-Type: text/plain;
-Content-Transfer-Encoding: quoted-printable
+===> Building for mcookie-2.32.1
+/opt/pkg/bin/bmake  all-recursive
+Making all in po
+  CC       lib/libcommon_la-randutils.lo
+In file included from lib/randutils.c:29:
+/usr/include/sys/random.h:71:12: error: conflicting types for 'random_get_bytes'
+   71 | extern int random_get_bytes(uint8_t *dbuf, size_t dlen);
+      |            ^~~~~~~~~~~~~~~~
+In file included from lib/randutils.c:19:
+./include/randutils.h:14:13: note: previous declaration of 'random_get_bytes' was here
+   14 | extern void random_get_bytes(void *buf, size_t nbytes);
+      |             ^~~~~~~~~~~~~~~~
+*** [lib/libcommon_la-randutils.lo] Error code 1
 
-How are you doing today I have a proposal which i think may interest you a=
-nd benefit you.I will like to give you full details of this via email:  ge=
-rradfinancialplanning@gmail.com
-Thanks.
+bmake[2]: stopped in /opt/pkgbuild/objects/x11/mcookie/work/util-linux-2.32.1
 
-John PHIL
-
---9FB.F_2_.10_FE_--
 
