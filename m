@@ -2,47 +2,81 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id B39612B77A2
-	for <lists+util-linux@lfdr.de>; Wed, 18 Nov 2020 09:00:00 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id D5EEA2B7A76
+	for <lists+util-linux@lfdr.de>; Wed, 18 Nov 2020 10:35:39 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727082AbgKRHxx convert rfc822-to-8bit (ORCPT
-        <rfc822;lists+util-linux@lfdr.de>); Wed, 18 Nov 2020 02:53:53 -0500
-Received: from sw73-70-41.adsl.seed.net.tw ([203.73.70.41]:45813 "EHLO
-        oa.trendtek.com.tw" rhost-flags-OK-FAIL-OK-OK) by vger.kernel.org
-        with ESMTP id S1725772AbgKRHxw (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Wed, 18 Nov 2020 02:53:52 -0500
-Received: from [156.96.44.214] ([156.96.44.214])
-        (authenticated bits=0)
-        by oa.trendtek.com.tw (8.13.8/8.13.1) with ESMTP id 0AI7rPpN023766
-        for <util-linux@vger.kernel.org>; Wed, 18 Nov 2020 15:53:49 +0800
-Message-Id: <202011180753.0AI7rPpN023766@oa.trendtek.com.tw>
-Content-Type: text/plain; charset="iso-8859-1"
+        id S1726690AbgKRJe4 (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Wed, 18 Nov 2020 04:34:56 -0500
+Received: from us-smtp-delivery-124.mimecast.com ([216.205.24.124]:39719 "EHLO
+        us-smtp-delivery-124.mimecast.com" rhost-flags-OK-OK-OK-OK)
+        by vger.kernel.org with ESMTP id S1726182AbgKRJe4 (ORCPT
+        <rfc822;util-linux@vger.kernel.org>);
+        Wed, 18 Nov 2020 04:34:56 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+        s=mimecast20190719; t=1605692095;
+        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+         to:to:cc:mime-version:mime-version:content-type:content-type:
+         in-reply-to:in-reply-to:references:references;
+        bh=PRSMbltyYmhy12hW3bUrp3wFeU/QpoGCAO9fPt1jycI=;
+        b=DlBwEq/M83vToAaL06cbny7stSPrG+n8WtEiCwj9LDtEv2KvZGnviavyHypqQzJ2ZKLk+K
+        aTK1Ti/5T91GgaJbG4kDpaQx1ynST4UMzdKcaZRHcdkkNoaQxtTC+97U2x0pO+9GDgylro
+        MblDvBYrYtrGC+nswCkQcHsbN7ONefE=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-115-0_wrdrDbNHqYkZ6YitAjJA-1; Wed, 18 Nov 2020 04:34:49 -0500
+X-MC-Unique: 0_wrdrDbNHqYkZ6YitAjJA-1
+Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.phx2.redhat.com [10.5.11.14])
+        (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+        (No client certificate requested)
+        by mimecast-mx01.redhat.com (Postfix) with ESMTPS id AB9921882FBC;
+        Wed, 18 Nov 2020 09:34:48 +0000 (UTC)
+Received: from ws.net.home (unknown [10.40.194.248])
+        by smtp.corp.redhat.com (Postfix) with ESMTPS id E61AF5D9F1;
+        Wed, 18 Nov 2020 09:34:47 +0000 (UTC)
+Date:   Wed, 18 Nov 2020 10:34:45 +0100
+From:   Karel Zak <kzak@redhat.com>
+To:     Samuel Thibault <samuel.thibault@ens-lyon.org>,
+        util-linux@vger.kernel.org
+Subject: Re: Fix building util-linux on non-linux
+Message-ID: <20201118093445.addb4cfshmx6wt3a@ws.net.home>
+References: <20201117202017.afatx2kpuxp5kf7u@function>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8BIT
-Content-Description: Mail message body
-Subject: Corporate and Personal Loan *
-To:     util-linux@vger.kernel.org
-From:   "Investment  Corporate" <financialcapability6@gmail.com>
-Date:   Tue, 17 Nov 2020 23:53:39 -0800
-Reply-To: hmurrah39@gmail.com
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20201117202017.afatx2kpuxp5kf7u@function>
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.14
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-Hello util-linux@vger.kernel.org
+On Tue, Nov 17, 2020 at 09:20:17PM +0100, Samuel Thibault wrote:
+> Hello,
+> 
+> The attached patch fixes building on non-linux
+> 
+> Samuel
 
+> diff --git a/login-utils/Makemodule.am b/login-utils/Makemodule.am
+> index 4f52cea3c..8bc3ee37e 100644
+> --- a/login-utils/Makemodule.am
+> +++ b/login-utils/Makemodule.am
+> @@ -31,8 +31,10 @@ dist_man_MANS += login-utils/sulogin.8
+>  sulogin_SOURCES = \
+>  	login-utils/sulogin.c \
+>  	login-utils/sulogin-consoles.c \
+> -	login-utils/sulogin-consoles.h \
+> -	lib/plymouth-ctrl.c
+> +	login-utils/sulogin-consoles.h
+> +if USE_PLYMOUTH_SUPPORT
+> +sulogin_SOURCES += lib/plymouth-ctrl.c
+> +endif
+>  sulogin_LDADD = $(LDADD) libcommon.la
 
-We are Base Investment Company offering Corporate and Personal Loan at 3% Interest Rate for a duration of 10Years.
+Yep, stupid bug. Fixed by https://github.com/karelzak/util-linux/pull/1190.
 
+    Karel
 
-We also pay 1% commission to brokers, who introduce project owners for finance or other opportunities.
+-- 
+ Karel Zak  <kzak@redhat.com>
+ http://karelzak.blogspot.com
 
-
-Please get back to me if you are interested for more
-
-details.
-
-
-Yours faithfully,
-
-Hashim Murrah
