@@ -2,110 +2,47 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 319692B7006
-	for <lists+util-linux@lfdr.de>; Tue, 17 Nov 2020 21:27:10 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id B39612B77A2
+	for <lists+util-linux@lfdr.de>; Wed, 18 Nov 2020 09:00:00 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726647AbgKQU0o (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Tue, 17 Nov 2020 15:26:44 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:40936 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1725774AbgKQU02 (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Tue, 17 Nov 2020 15:26:28 -0500
-X-Greylist: delayed 364 seconds by postgrey-1.37 at lindbergh.monkeyblade.net; Tue, 17 Nov 2020 12:26:28 PST
-Received: from hera.aquilenet.fr (hera.aquilenet.fr [IPv6:2a0c:e300::1])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 9A4D4C0613CF
-        for <util-linux@vger.kernel.org>; Tue, 17 Nov 2020 12:26:28 -0800 (PST)
-Received: from localhost (localhost [127.0.0.1])
-        by hera.aquilenet.fr (Postfix) with ESMTP id 7C8B0F60;
-        Tue, 17 Nov 2020 21:20:19 +0100 (CET)
-X-Virus-Scanned: Debian amavisd-new at aquilenet.fr
-Received: from hera.aquilenet.fr ([127.0.0.1])
-        by localhost (hera.aquilenet.fr [127.0.0.1]) (amavisd-new, port 10024)
-        with ESMTP id g7fJ_N3m-bbM; Tue, 17 Nov 2020 21:20:18 +0100 (CET)
-Received: from function.youpi.perso.aquilenet.fr (unknown [IPv6:2a01:cb19:956:1b00:9eb6:d0ff:fe88:c3c7])
-        by hera.aquilenet.fr (Postfix) with ESMTPSA id 6BAB8ED7;
-        Tue, 17 Nov 2020 21:20:18 +0100 (CET)
-Received: from samy by function.youpi.perso.aquilenet.fr with local (Exim 4.94)
-        (envelope-from <samuel.thibault@ens-lyon.org>)
-        id 1kf7Sb-000KbX-DS; Tue, 17 Nov 2020 21:20:17 +0100
-Date:   Tue, 17 Nov 2020 21:20:17 +0100
-From:   Samuel Thibault <samuel.thibault@ens-lyon.org>
-To:     Karel Zak <kzak@redhat.com>
-Cc:     util-linux@vger.kernel.org
-Subject: Fix building util-linux on non-linux
-Message-ID: <20201117202017.afatx2kpuxp5kf7u@function>
-Mail-Followup-To: Samuel Thibault <samuel.thibault@ens-lyon.org>,
-        Karel Zak <kzak@redhat.com>, util-linux@vger.kernel.org
+        id S1727082AbgKRHxx convert rfc822-to-8bit (ORCPT
+        <rfc822;lists+util-linux@lfdr.de>); Wed, 18 Nov 2020 02:53:53 -0500
+Received: from sw73-70-41.adsl.seed.net.tw ([203.73.70.41]:45813 "EHLO
+        oa.trendtek.com.tw" rhost-flags-OK-FAIL-OK-OK) by vger.kernel.org
+        with ESMTP id S1725772AbgKRHxw (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Wed, 18 Nov 2020 02:53:52 -0500
+Received: from [156.96.44.214] ([156.96.44.214])
+        (authenticated bits=0)
+        by oa.trendtek.com.tw (8.13.8/8.13.1) with ESMTP id 0AI7rPpN023766
+        for <util-linux@vger.kernel.org>; Wed, 18 Nov 2020 15:53:49 +0800
+Message-Id: <202011180753.0AI7rPpN023766@oa.trendtek.com.tw>
+Content-Type: text/plain; charset="iso-8859-1"
 MIME-Version: 1.0
-Content-Type: multipart/mixed; boundary="tv7riqct6hszn43v"
-Content-Disposition: inline
-Organization: I am not organized
-User-Agent: NeoMutt/20170609 (1.8.3)
+Content-Transfer-Encoding: 8BIT
+Content-Description: Mail message body
+Subject: Corporate and Personal Loan *
+To:     util-linux@vger.kernel.org
+From:   "Investment  Corporate" <financialcapability6@gmail.com>
+Date:   Tue, 17 Nov 2020 23:53:39 -0800
+Reply-To: hmurrah39@gmail.com
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
+Hello util-linux@vger.kernel.org
 
---tv7riqct6hszn43v
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
 
-Hello,
+We are Base Investment Company offering Corporate and Personal Loan at 3% Interest Rate for a duration of 10Years.
 
-The attached patch fixes building on non-linux
 
-Samuel
+We also pay 1% commission to brokers, who introduce project owners for finance or other opportunities.
 
---tv7riqct6hszn43v
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: attachment; filename=patch
 
-diff --git a/login-utils/Makemodule.am b/login-utils/Makemodule.am
-index 4f52cea3c..8bc3ee37e 100644
---- a/login-utils/Makemodule.am
-+++ b/login-utils/Makemodule.am
-@@ -31,8 +31,10 @@ dist_man_MANS += login-utils/sulogin.8
- sulogin_SOURCES = \
- 	login-utils/sulogin.c \
- 	login-utils/sulogin-consoles.c \
--	login-utils/sulogin-consoles.h \
--	lib/plymouth-ctrl.c
-+	login-utils/sulogin-consoles.h
-+if USE_PLYMOUTH_SUPPORT
-+sulogin_SOURCES += lib/plymouth-ctrl.c
-+endif
- sulogin_LDADD = $(LDADD) libcommon.la
- 
- if HAVE_LIBCRYPT
-diff --git a/sys-utils/hwclock.c b/sys-utils/hwclock.c
-index 1f7ef3317..db448687d 100644
---- a/sys-utils/hwclock.c
-+++ b/sys-utils/hwclock.c
-@@ -678,7 +678,7 @@ display_time(struct timeval hwctime)
- #ifndef SYS_settimeofday
- # ifdef __NR_settimeofday
- #  define SYS_settimeofday	__NR_settimeofday
--# else
-+# elif defined(__NR_settimeofday_time32)
- #  define SYS_settimeofday	__NR_settimeofday_time32
- # endif
- #endif
-diff --git a/term-utils/Makemodule.am b/term-utils/Makemodule.am
-index 92df7dbc8..c424dbdf8 100644
---- a/term-utils/Makemodule.am
-+++ b/term-utils/Makemodule.am
-@@ -42,8 +42,10 @@ endif # BUILD_SCRIPTLIVE
- if BUILD_AGETTY
- sbin_PROGRAMS += agetty
- dist_man_MANS += term-utils/agetty.8
--agetty_SOURCES = term-utils/agetty.c \
--		 lib/plymouth-ctrl.c
-+agetty_SOURCES = term-utils/agetty.c
-+if USE_PLYMOUTH_SUPPORT
-+agetty_SOURCES += lib/plymouth-ctrl.c
-+endif
- agetty_LDADD = $(LDADD) libcommon.la
- if BSD
- agetty_LDADD += -lutil
+Please get back to me if you are interested for more
 
---tv7riqct6hszn43v--
+details.
+
+
+Yours faithfully,
+
+Hashim Murrah
