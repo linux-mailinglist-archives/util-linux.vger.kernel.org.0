@@ -2,78 +2,68 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 2DE982BA57C
-	for <lists+util-linux@lfdr.de>; Fri, 20 Nov 2020 10:08:46 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 950172BFBC5
+	for <lists+util-linux@lfdr.de>; Sun, 22 Nov 2020 22:55:36 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726701AbgKTJHn (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Fri, 20 Nov 2020 04:07:43 -0500
-Received: from us-smtp-delivery-124.mimecast.com ([216.205.24.124]:46627 "EHLO
-        us-smtp-delivery-124.mimecast.com" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S1726614AbgKTJHn (ORCPT
-        <rfc822;util-linux@vger.kernel.org>);
-        Fri, 20 Nov 2020 04:07:43 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-        s=mimecast20190719; t=1605863262;
-        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-         in-reply-to:in-reply-to:references:references;
-        bh=tFeMpPjemkuTvF5Nl58HRRgv0iyjaEAqZWG2Sxs6Nig=;
-        b=XPr4DH/NfckN6gPD7lYeif01+WXre+6g7dEjdKuyyDrHS85Dy27J6jVj1FQJ3RHBf1Z9jN
-        IPm2eSRweJAUyNJfBUZ0CwJQv47icg+JRuh/eLJsKbbccQpH4Il80F6NeXenbMUAXBCO14
-        kNyzH3NdufwdJ58a3EruTbYQmw4nIyQ=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-209-t-3lfHKpOhaHBVNLLScXlQ-1; Fri, 20 Nov 2020 04:07:38 -0500
-X-MC-Unique: t-3lfHKpOhaHBVNLLScXlQ-1
-Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.phx2.redhat.com [10.5.11.11])
-        (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
-        (No client certificate requested)
-        by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 094E0612ED;
-        Fri, 20 Nov 2020 09:07:37 +0000 (UTC)
-Received: from ws.net.home (unknown [10.40.194.248])
-        by smtp.corp.redhat.com (Postfix) with ESMTPS id 3EE1A1349A;
-        Fri, 20 Nov 2020 09:07:35 +0000 (UTC)
-Date:   Fri, 20 Nov 2020 10:07:33 +0100
-From:   Karel Zak <kzak@redhat.com>
-To:     Masayoshi Mizuma <msys.mizuma@gmail.com>
-Cc:     util-linux@vger.kernel.org
-Subject: Re: [PATCH v3 0/5] lscpu: Fix socket information on aarch64 machine
-Message-ID: <20201120090733.3ah7zrgwdsqwpasb@ws.net.home>
-References: <20201120050609.17409-1-msys.mizuma@gmail.com>
+        id S1725797AbgKVVyR (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Sun, 22 Nov 2020 16:54:17 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:34434 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1725788AbgKVVyQ (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Sun, 22 Nov 2020 16:54:16 -0500
+Received: from mail-ej1-x642.google.com (mail-ej1-x642.google.com [IPv6:2a00:1450:4864:20::642])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 4D442C0613CF;
+        Sun, 22 Nov 2020 13:54:16 -0800 (PST)
+Received: by mail-ej1-x642.google.com with SMTP id 7so20637804ejm.0;
+        Sun, 22 Nov 2020 13:54:16 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=message-id:sender:from:mime-version:content-transfer-encoding
+         :content-description:subject:to:date:reply-to;
+        bh=holMzMixu6L4mPkY4KLX0AXrH3B7KLU6Q1+gVZ1hbDo=;
+        b=AbGV7ky2B1p3wTAiN3jxQiXfEHm/GovcrGZu4exw8NUgIAlF5PJPs/tem7/xr3oZuN
+         tlsyp/cnXsZm2anC7sqJIvF/3QJVYnORQVX1yZvc/ntpWaIOibAei8cx3HayODdaO4AT
+         efIWJ/bY5y5FjcTFVrMX/Gy5mtdT7QGrdgXNZAVm7xcmYD/Xk9ZSv5hu26TzfZh0jcbU
+         LF55uOBmTK1W3KN4wVzEDw4ysBaoNZbRDrGPtWP1U7JSVSwJxQnymGkMXoiedy84FJlk
+         3U5N+VpFN847KaoY5CF2TCi5aNnYDsoRbB3eewrSVfxb51Xgs4NP5V7WS4s3bj0+xpg+
+         oIwA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:message-id:sender:from:mime-version
+         :content-transfer-encoding:content-description:subject:to:date
+         :reply-to;
+        bh=holMzMixu6L4mPkY4KLX0AXrH3B7KLU6Q1+gVZ1hbDo=;
+        b=BZwjDo3SmKGELQb7P/RfebRu+zCpL+tqV+mPyax74Xtd3git0mBvYCyTpC25VSZrCi
+         P0WN6EtwUTeb735hqylpUKWI2zEJXcDz9aGwspbufAEQiGp7mCkRONSoN/U3xYog0IW7
+         l8oLxF9A1ug3COwDa9/cCL19o5ndCU5LdVGXdg7BR9pPZif+sj66dgxyHw9C8x2BZRc4
+         rBlvNdXNHFJNvSuH/7TIrIXNR3g0NgBA3sKesdEQZ0cGwo6mFHhP62vBd9/pVE3eIK8y
+         5Ggh7R5rD93ULgKUOyJZAHPya+aIj+PQCpYKlc5C2g6zJr6qpdKPWqo9ekuGVdV4mRDW
+         fzaA==
+X-Gm-Message-State: AOAM530oWlrogPicngbt7FG3nH+7FzQ1RqyVmf15jwESbHyjO/8meD0z
+        nLwfc3SDW6qhmGbP9ntIz9Q=
+X-Google-Smtp-Source: ABdhPJzv/JZ9bnKqAOpIZjx1FWrtRY/oYL6b1KmDuu8eOh0IVUHYwteSMVgRiVx9W74l607bXzDz0g==
+X-Received: by 2002:a17:906:b745:: with SMTP id fx5mr31877499ejb.103.1606082055134;
+        Sun, 22 Nov 2020 13:54:15 -0800 (PST)
+Received: from [192.168.43.48] ([197.210.35.67])
+        by smtp.gmail.com with ESMTPSA id i19sm3978482ejz.71.2020.11.22.13.54.08
+        (version=TLS1 cipher=AES128-SHA bits=128/128);
+        Sun, 22 Nov 2020 13:54:14 -0800 (PST)
+Message-ID: <5fbade06.1c69fb81.9b3f2.1054@mx.google.com>
+Sender: Lena Torres <ad482289@gmail.com>
+From:   Adelina Zeuki <anglicaramose@gmail.com>
+X-Google-Original-From: "Adelina Zeuki" <  adelinazeuki@gmail.comm >
+Content-Type: text/plain; charset="iso-8859-1"
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20201120050609.17409-1-msys.mizuma@gmail.com>
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.11
+Content-Transfer-Encoding: quoted-printable
+Content-Description: Mail message body
+Subject: Hello !!
+To:     Recipients <adelinazeuki@gmail.comm>
+Date:   Sun, 22 Nov 2020 21:54:02 +0000
+Reply-To: adelinazeuki@gmail.com
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-On Fri, Nov 20, 2020 at 12:06:04AM -0500, Masayoshi Mizuma wrote:
-> Masayoshi Mizuma (5):
->   lscpu: use cluster on aarch64 machine which doesn't have ACPI PPTT
->   lscpu-virt: split hypervisor_from_dmi_table()
->   lscpu-dmi: Move some functions related to DMI to lscpu-dmi
->   lscpu: add helper to get physical sockets
->   lscpu: show the number of physical socket on aarch64 machine without
->     ACPI PPTT
-> 
->  sys-utils/Makemodule.am |   1 +
->  sys-utils/lscpu-arm.c   |  15 ++++++
->  sys-utils/lscpu-dmi.c   | 108 ++++++++++++++++++++++++++++++++++++++++
->  sys-utils/lscpu-virt.c  |  62 ++++++-----------------
->  sys-utils/lscpu.1       |   3 ++
->  sys-utils/lscpu.c       |  39 ++++++++++++---
->  sys-utils/lscpu.h       |  38 ++++++--------
->  7 files changed, 190 insertions(+), 76 deletions(-)
->  create mode 100644 sys-utils/lscpu-dmi.c
+Hi dear,
 
-
-Applied, thanks!
-
-    Karel
-
--- 
- Karel Zak  <kzak@redhat.com>
- http://karelzak.blogspot.com
-
+Can i talk with you ?
