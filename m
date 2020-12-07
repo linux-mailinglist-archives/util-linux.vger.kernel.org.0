@@ -2,195 +2,53 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id A90152CFA54
-	for <lists+util-linux@lfdr.de>; Sat,  5 Dec 2020 08:47:25 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id A0CEE2D2050
+	for <lists+util-linux@lfdr.de>; Tue,  8 Dec 2020 02:52:39 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726090AbgLEHqL (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Sat, 5 Dec 2020 02:46:11 -0500
-Received: from us-smtp-delivery-124.mimecast.com ([63.128.21.124]:57617 "EHLO
-        us-smtp-delivery-124.mimecast.com" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S1726031AbgLEHqK (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Sat, 5 Dec 2020 02:46:10 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-        s=mimecast20190719; t=1607154283;
-        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-         to:to:cc:cc; bh=vCpcneTVpXPotDtJ4uB3+sBesXOArYmfRm3zlH/r+Ag=;
-        b=DlqUnPlYQMJB7ehh2LfJpfnW1ZhNklUTTyuysJx5VbuRf5Ex2EqLZPbhGRvmYAYjE+Qin9
-        SNS5XVPdypnrgA7p/p0i+GjfW6c4zH4vPaUx8nn6PcX2bDoH7408pgV766bjX5DYm4l9BV
-        jaSZGxOzRxX7nPXDfRDzZpwx4cP4zys=
-Received: from mail-pg1-f198.google.com (mail-pg1-f198.google.com
- [209.85.215.198]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-244-hkoW2zfBPPC12ohIDrJ0Cw-1; Sat, 05 Dec 2020 02:44:38 -0500
-X-MC-Unique: hkoW2zfBPPC12ohIDrJ0Cw-1
-Received: by mail-pg1-f198.google.com with SMTP id m15so4958010pgs.7
-        for <util-linux@vger.kernel.org>; Fri, 04 Dec 2020 23:44:38 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id;
-        bh=vCpcneTVpXPotDtJ4uB3+sBesXOArYmfRm3zlH/r+Ag=;
-        b=FqZa2p0JNRYtYift2qZlGfnQICO/gNoGvbUiMV4fXQKv9npXDtNyLjtSjFafakaCTv
-         mlZtaLTogN+lLe0S3EBnObPZ9XoGNzOMKOZ4vmpOa6DUUAj/20he2ztsH8vak2AU0tF0
-         Ho/3+S85ZmMC0wlM3qIAlMDH+nsCRlUket75krq+Lrpobr52opGwzRVV4yx4vYtWgxSA
-         V5as6q151BFpHTD1y07lhu2FveJNE5Qx8R0IKKrNHg8+U4aOrNCgvEIHuw92ul3Q7cHe
-         21LfyckJpzIy66Flp2xzYYMMttPYfh5mOxRtwT7UbOIxA8Dwr9LBYMxXkNTCFyogXFFN
-         9mHQ==
-X-Gm-Message-State: AOAM530y1uOi38moXFJSEHdWpHHZ/AM9yF9QQvC+Dp63HG9w+6witdVE
-        JAI8mKjSt9XVi6G5gVH3XFoBEn3oMGmAzy63ULReeHldQ5vm6oBimcZUbjXJvORFtvwhKANpn2N
-        IZ0WgG469XGJhDp6kWQfITQ==
-X-Received: by 2002:a17:90a:6d62:: with SMTP id z89mr7896922pjj.71.1607154277487;
-        Fri, 04 Dec 2020 23:44:37 -0800 (PST)
-X-Google-Smtp-Source: ABdhPJz01uHn2Kx0go77D/u8ElMAZDxWNuITKhIf1D/VWyUenqJ4+CFBeGdR+ONxxUJOacUOyEESNA==
-X-Received: by 2002:a17:90a:6d62:: with SMTP id z89mr7896910pjj.71.1607154277285;
-        Fri, 04 Dec 2020 23:44:37 -0800 (PST)
-Received: from xiangao.com ([209.132.188.80])
-        by smtp.gmail.com with ESMTPSA id a12sm4033257pjm.44.2020.12.04.23.44.35
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 04 Dec 2020 23:44:36 -0800 (PST)
-From:   Gao Xiang <hsiangkao@redhat.com>
-To:     Karel Zak <kzak@redhat.com>
-Cc:     util-linux@vger.kernel.org, Gao Xiang <hsiangkao@redhat.com>
-Subject: [PATCH] libblkid: add erofs filesystem support
-Date:   Sat,  5 Dec 2020 15:44:10 +0800
-Message-Id: <20201205074410.2317033-1-hsiangkao@redhat.com>
-X-Mailer: git-send-email 2.18.4
+        id S1726830AbgLHBuO (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Mon, 7 Dec 2020 20:50:14 -0500
+Received: from vsm-gw.hyogo-dai.ac.jp ([202.244.76.12]:46871 "EHLO
+        vsm-gw.hyogo-dai.ac.jp" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726396AbgLHBuN (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Mon, 7 Dec 2020 20:50:13 -0500
+Received: from humans-kc.hyogo-dai.ac.jp (humans-kc.hyogo-dai.ac.jp [202.244.77.11])
+        by vsm-gw.hyogo-dai.ac.jp (Postfix) with ESMTP id 401691A4F0E;
+        Tue,  8 Dec 2020 04:27:47 +0900 (JST)
+Received: from humans-kc.hyogo-dai.ac.jp (humans-kc.hyogo-dai.ac.jp [127.0.0.1])
+        by postfix.imss71 (Postfix) with ESMTP id F0BB983826D;
+        Tue,  8 Dec 2020 04:27:46 +0900 (JST)
+Received: from hyogo-dai.ac.jp (unknown [202.244.77.11])
+        by humans-kc.hyogo-dai.ac.jp (Postfix) with SMTP id BFDBA838260;
+        Tue,  8 Dec 2020 04:27:46 +0900 (JST)
+MIME-Version: 1.0
+Message-ID: <20201207192746.0000B9B0.0757@hyogo-dai.ac.jp>
+Date:   Tue, 08 Dec 2020 04:27:46 +0900
+From:   "Raymond " <hozumi@hyogo-dai.ac.jp>
+To:     <infocarferw1@aim.com>
+Reply-To: <infocarfer@aim.com>
+Subject: I am Vice Chairman of Hang Seng Bank, Dr. Raymond Chien
+         Kuo Fung I have Important Matter to Discuss with you concerning
+         my late client. Died without a NEXT OF KIN. Send me your private
+         email for full details information.
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
+X-Priority: 3
+X-MAILER: Active! mail
+X-TM-AS-MML: disable
+X-TM-AS-Product-Ver: IMSS-7.1.0.1808-8.2.0.1013-25446.007
+X-TM-AS-Result: No--2.951-5.0-31-10
+X-imss-scan-details: No--2.951-5.0-31-10
+X-TM-AS-User-Approved-Sender: No
+X-TMASE-MatchedRID: X41QhRrT5f5ITndh1lLRASsOycAMAhSTkCM77ifYafsBLhz6t76Ce6P0
+        clhHAFPyJA6GJqxAEzL554DD9nXlqqPFjJEFr+olfeZdJ1XsoriOub3SYcq1hJf7eAx/Ae/AbQo
+        eraIcZBRw7u01FqNA2K1Ia4IbeAdLm9ukrtqhno/rIUidklntLAP5zT0d393cymsk/wUE4hoZaR
+        NzIP3XI5u3uLPgwbAMH5RdHnhWfwyq9gpuf+A6coDeeVSgzszVDx5n520Z3eZyT7DDRtYlKaWBy
+        ZE9nSaC/rhfyjvqkZu/pNa4BidtZEMMprcbiest
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-Enhanced Read-Only File System (EROFS) has been included in Linux
-kernel, many Linux distributions, buildroot and Android AOSP for
-a while. Plus, nowadays, it's known that EROFS has been commercially
-used by several Android vendors for their system partitions.
-util-linux in busybox can also detect it recently.
+email:kraymond75@aol.com
 
-This patch adds support for detecting EROFS filesystem to libblkid.
 
-Signed-off-by: Gao Xiang <hsiangkao@redhat.com>
----
- libblkid/src/Makemodule.am             |  1 +
- libblkid/src/superblocks/erofs.c       | 73 ++++++++++++++++++++++++++
- libblkid/src/superblocks/superblocks.c |  3 +-
- libblkid/src/superblocks/superblocks.h |  1 +
- 4 files changed, 77 insertions(+), 1 deletion(-)
- create mode 100644 libblkid/src/superblocks/erofs.c
-
-diff --git a/libblkid/src/Makemodule.am b/libblkid/src/Makemodule.am
-index 1aa6dfcef..16a0a2826 100644
---- a/libblkid/src/Makemodule.am
-+++ b/libblkid/src/Makemodule.am
-@@ -101,6 +101,7 @@ libblkid_la_SOURCES = \
- 	libblkid/src/superblocks/xfs.c \
- 	libblkid/src/superblocks/zfs.c \
- 	libblkid/src/superblocks/zonefs.c \
-+	libblkid/src/superblocks/erofs.c \
- 	\
- 	libblkid/src/topology/topology.c \
- 	libblkid/src/topology/topology.h
-diff --git a/libblkid/src/superblocks/erofs.c b/libblkid/src/superblocks/erofs.c
-new file mode 100644
-index 000000000..0e7b4223d
---- /dev/null
-+++ b/libblkid/src/superblocks/erofs.c
-@@ -0,0 +1,73 @@
-+/*
-+ * Copyright (C) 2020 Gao Xiang
-+ *
-+ * This file may be redistributed under the terms of the
-+ * GNU Lesser General Public License
-+ */
-+#include <stddef.h>
-+#include <string.h>
-+
-+#include "superblocks.h"
-+
-+#define EROFS_SUPER_OFFSET      1024
-+#define EROFS_SB_KBOFF		(EROFS_SUPER_OFFSET >> 10)
-+
-+#define EROFS_SUPER_MAGIC_V1	"\xe2\xe1\xf5\xe0"
-+#define EROFS_MAGIC_OFF		0
-+
-+/* All in little-endian */
-+struct erofs_super_block {
-+	uint32_t	magic;
-+	uint32_t	checksum;
-+	uint32_t	feature_compat;
-+	uint8_t		blkszbits;
-+	uint8_t		reserved;
-+
-+	uint16_t	root_nid;
-+	uint64_t	inos;
-+
-+	uint64_t	build_time;
-+	uint32_t	build_time_nsec;
-+	uint32_t	blocks;
-+	uint32_t	meta_blkaddr;
-+	uint32_t	xattr_blkaddr;
-+	uint8_t		uuid[16];
-+	uint8_t		volume_name[16];
-+	uint32_t	feature_incompat;
-+	uint8_t		reserved2[44];
-+};
-+
-+static int probe_erofs(blkid_probe pr, const struct blkid_idmag *mag)
-+{
-+	struct erofs_super_block *sb;
-+
-+	sb = blkid_probe_get_sb(pr, mag, struct erofs_super_block);
-+	if (!sb)
-+		return errno ? -errno : BLKID_PROBE_NONE;
-+
-+	if (sb->volume_name[0])
-+		blkid_probe_set_label(pr, (unsigned char *)sb->volume_name,
-+				      sizeof(sb->volume_name));
-+
-+	blkid_probe_set_uuid(pr, sb->uuid);
-+
-+	if (sb->blkszbits < 32)
-+		blkid_probe_set_block_size(pr, 1U << sb->blkszbits);
-+	return BLKID_PROBE_OK;
-+}
-+
-+const struct blkid_idinfo erofs_idinfo =
-+{
-+	.name           = "erofs",
-+	.usage          = BLKID_USAGE_FILESYSTEM,
-+	.probefunc      = probe_erofs,
-+	.magics         =
-+        {
-+		{
-+			.magic = EROFS_SUPER_MAGIC_V1,
-+			.len = 4,
-+			.kboff = EROFS_SB_KBOFF,
-+			.sboff = EROFS_MAGIC_OFF,
-+		}, { NULL }
-+	}
-+};
-diff --git a/libblkid/src/superblocks/superblocks.c b/libblkid/src/superblocks/superblocks.c
-index 7b0f5eed0..f21365538 100644
---- a/libblkid/src/superblocks/superblocks.c
-+++ b/libblkid/src/superblocks/superblocks.c
-@@ -168,7 +168,8 @@ static const struct blkid_idinfo *idinfos[] =
- 	&f2fs_idinfo,
- 	&mpool_idinfo,
- 	&apfs_idinfo,
--	&zonefs_idinfo
-+	&zonefs_idinfo,
-+	&erofs_idinfo
- };
- 
- /*
-diff --git a/libblkid/src/superblocks/superblocks.h b/libblkid/src/superblocks/superblocks.h
-index 5ebe6bc43..9c489c438 100644
---- a/libblkid/src/superblocks/superblocks.h
-+++ b/libblkid/src/superblocks/superblocks.h
-@@ -85,6 +85,7 @@ extern const struct blkid_idinfo stratis_idinfo;
- extern const struct blkid_idinfo bitlocker_idinfo;
- extern const struct blkid_idinfo apfs_idinfo;
- extern const struct blkid_idinfo zonefs_idinfo;
-+extern const struct blkid_idinfo erofs_idinfo;
- 
- /*
-  * superblock functions
--- 
-2.18.4
 
