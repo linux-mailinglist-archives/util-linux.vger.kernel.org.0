@@ -2,53 +2,92 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id A0CEE2D2050
-	for <lists+util-linux@lfdr.de>; Tue,  8 Dec 2020 02:52:39 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 1D7E12D288C
+	for <lists+util-linux@lfdr.de>; Tue,  8 Dec 2020 11:11:24 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726830AbgLHBuO (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Mon, 7 Dec 2020 20:50:14 -0500
-Received: from vsm-gw.hyogo-dai.ac.jp ([202.244.76.12]:46871 "EHLO
-        vsm-gw.hyogo-dai.ac.jp" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726396AbgLHBuN (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Mon, 7 Dec 2020 20:50:13 -0500
-Received: from humans-kc.hyogo-dai.ac.jp (humans-kc.hyogo-dai.ac.jp [202.244.77.11])
-        by vsm-gw.hyogo-dai.ac.jp (Postfix) with ESMTP id 401691A4F0E;
-        Tue,  8 Dec 2020 04:27:47 +0900 (JST)
-Received: from humans-kc.hyogo-dai.ac.jp (humans-kc.hyogo-dai.ac.jp [127.0.0.1])
-        by postfix.imss71 (Postfix) with ESMTP id F0BB983826D;
-        Tue,  8 Dec 2020 04:27:46 +0900 (JST)
-Received: from hyogo-dai.ac.jp (unknown [202.244.77.11])
-        by humans-kc.hyogo-dai.ac.jp (Postfix) with SMTP id BFDBA838260;
-        Tue,  8 Dec 2020 04:27:46 +0900 (JST)
+        id S1727258AbgLHKKy (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Tue, 8 Dec 2020 05:10:54 -0500
+Received: from us-smtp-delivery-124.mimecast.com ([216.205.24.124]:46198 "EHLO
+        us-smtp-delivery-124.mimecast.com" rhost-flags-OK-OK-OK-OK)
+        by vger.kernel.org with ESMTP id S1726734AbgLHKKy (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Tue, 8 Dec 2020 05:10:54 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+        s=mimecast20190719; t=1607422168;
+        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+         in-reply-to:in-reply-to:references:references;
+        bh=ogGyimCq1GrhgYK0fTnF3U1F418pQGwe3tvmWC0c+Yc=;
+        b=VbEs3Lgby1DIYSP0r/8xNcxzjnnYdzfHM7FIu8GzzUZQ3R0RLkfiSqU6zOm5OrSjMtbGOC
+        Y+5kWT21JNDYpEiFQSoZU1xXRsB3VSx/nUibPoWOmqypMLomlVli8OjIOy77KCqUrmXzg3
+        Mcw+qT9emRr2mIc0MNicFcVdOQKpV5Y=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-245-TSySUCWGNR6ZnRhLPzjAyg-1; Tue, 08 Dec 2020 05:09:17 -0500
+X-MC-Unique: TSySUCWGNR6ZnRhLPzjAyg-1
+Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.phx2.redhat.com [10.5.11.13])
+        (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+        (No client certificate requested)
+        by mimecast-mx01.redhat.com (Postfix) with ESMTPS id DC000800D55
+        for <util-linux@vger.kernel.org>; Tue,  8 Dec 2020 10:09:16 +0000 (UTC)
+Received: from ws.net.home (unknown [10.40.194.248])
+        by smtp.corp.redhat.com (Postfix) with ESMTPS id 28E7A6091B;
+        Tue,  8 Dec 2020 10:09:12 +0000 (UTC)
+Date:   Tue, 8 Dec 2020 11:09:10 +0100
+From:   Karel Zak <kzak@redhat.com>
+To:     Gao Xiang <hsiangkao@redhat.com>
+Cc:     util-linux@vger.kernel.org
+Subject: Re: [PATCH] libblkid: add erofs filesystem support
+Message-ID: <20201208100910.dqqh5cqihewkyetc@ws.net.home>
+References: <20201205074410.2317033-1-hsiangkao@redhat.com>
 MIME-Version: 1.0
-Message-ID: <20201207192746.0000B9B0.0757@hyogo-dai.ac.jp>
-Date:   Tue, 08 Dec 2020 04:27:46 +0900
-From:   "Raymond " <hozumi@hyogo-dai.ac.jp>
-To:     <infocarferw1@aim.com>
-Reply-To: <infocarfer@aim.com>
-Subject: I am Vice Chairman of Hang Seng Bank, Dr. Raymond Chien
-         Kuo Fung I have Important Matter to Discuss with you concerning
-         my late client. Died without a NEXT OF KIN. Send me your private
-         email for full details information.
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
-X-Priority: 3
-X-MAILER: Active! mail
-X-TM-AS-MML: disable
-X-TM-AS-Product-Ver: IMSS-7.1.0.1808-8.2.0.1013-25446.007
-X-TM-AS-Result: No--2.951-5.0-31-10
-X-imss-scan-details: No--2.951-5.0-31-10
-X-TM-AS-User-Approved-Sender: No
-X-TMASE-MatchedRID: X41QhRrT5f5ITndh1lLRASsOycAMAhSTkCM77ifYafsBLhz6t76Ce6P0
-        clhHAFPyJA6GJqxAEzL554DD9nXlqqPFjJEFr+olfeZdJ1XsoriOub3SYcq1hJf7eAx/Ae/AbQo
-        eraIcZBRw7u01FqNA2K1Ia4IbeAdLm9ukrtqhno/rIUidklntLAP5zT0d393cymsk/wUE4hoZaR
-        NzIP3XI5u3uLPgwbAMH5RdHnhWfwyq9gpuf+A6coDeeVSgzszVDx5n520Z3eZyT7DDRtYlKaWBy
-        ZE9nSaC/rhfyjvqkZu/pNa4BidtZEMMprcbiest
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20201205074410.2317033-1-hsiangkao@redhat.com>
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.13
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-email:kraymond75@aol.com
+On Sat, Dec 05, 2020 at 03:44:10PM +0800, Gao Xiang wrote:
+> This patch adds support for detecting EROFS filesystem to libblkid.
+
+Applied, thanks!
+
+I have also added simple regression test to tests/ts/blkid/images-fs/erofs.img.xz. 
+
+Note that it seems the current mkfs.erofs cannot set volume_name (aka LABEL)
+although the filesystem superblock support it.
+ 
+
+A small nitpick to mkfs.erofs, see https://github.com/hsiangkao/erofs-utils/blob/dev/mkfs/main.c#L27
+
+The subdirectory in 
+
+    #include <uuid/uuid.h> 
+
+is unnecessary (or wrong), if you use 
+
+    PKG_CHECK_MODULES([libuuid], [uuid])
+
+than it returns the subdirectory as -I, see
+
+    $ pkg-config --cflags uuid
+    -I/usr/include/uuid 
+
+so the correct way is
+
+     #include <uuid.h>
+
+with the proper PKG_CHECK_MODULES(), btw you have it without
+subdirectory in configure.ac test.
+
+The problem is that your code reads the default include file from
+/usr/include/uuid/ rather the one specified by your build system.
 
 
+    Karel
+
+-- 
+ Karel Zak  <kzak@redhat.com>
+ http://karelzak.blogspot.com
 
