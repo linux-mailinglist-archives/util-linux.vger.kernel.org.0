@@ -2,69 +2,84 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id A70A62D8253
-	for <lists+util-linux@lfdr.de>; Fri, 11 Dec 2020 23:48:55 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 4E0062D85A7
+	for <lists+util-linux@lfdr.de>; Sat, 12 Dec 2020 11:05:49 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S2393157AbgLKWsW (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Fri, 11 Dec 2020 17:48:22 -0500
-Received: from vps.shalomsite.com ([198.38.90.177]:55226 "EHLO
-        vps.shalomsite.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S2394011AbgLKWsR (ORCPT
-        <rfc822;util-linux-ng@vger.kernel.org>);
-        Fri, 11 Dec 2020 17:48:17 -0500
-X-Greylist: delayed 1598 seconds by postgrey-1.27 at vger.kernel.org; Fri, 11 Dec 2020 17:48:16 EST
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-        d=menergy-uae.com; s=default; h=Content-Transfer-Encoding:Content-Type:
-        MIME-Version:Date:Message-ID:Subject:From:To:Sender:Reply-To:Cc:Content-ID:
-        Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
-        :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
-        List-Subscribe:List-Post:List-Owner:List-Archive;
-        bh=PeRHxYPPALbZhMrAR6K4OxufFH2+t6aFssiBx4kXwcc=; b=Lkkl1lbECLYUDJR7dame6Clmvs
-        Pca0UH1xPcp7ABUzFLzeDUkuoeWCh8MsMVW0s55IXguwjphCJOn3ertfZoPXfiPsZVq1B3d0M/jvK
-        BLB6QKMQnGOFKwZkmS+VkBdwUNpvqZbRZQnCg7NwtbNTVtfbznE7CZq5ERTGJf5RrpkA=;
-Received: from host-85-13-95-143.lidos.cz ([85.13.95.143]:37808 helo=menergy-uae.com)
-        by vps.shalomsite.com with esmtpsa  (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
-        (Exim 4.93)
-        (envelope-from <info@menergy-uae.com>)
-        id 1knqmW-00008p-K3; Fri, 11 Dec 2020 22:20:57 +0000
-To:     "rohit singh" <rohit_singh@hotmail.com>,
-        "jhall" <jhall@freedos.org>, "faqtrack" <faqtrack@freedos.org>,
-        "util linux ng" <util-linux-ng@vger.kernel.org>,
-        "Lana SigiGnild" <sigignild@googlemail.com>,
-        "tor ops" <tor-ops@torproject.org>, "dannys" <dannys@mail.com>,
-        "moore bryan" <moore.bryan@gmail.com>,
-        "mail" <mail@senioren-shop24.de>,
-        "renate kuenast" <renate.kuenast@bundestag.de>
-From:   sqelch-lebensmittel <info@menergy-uae.com>
-Subject: =?UTF-8?Q?FW=3Asqelch-lebensmittel=40yahoo.de?=
-Message-ID: <9b306542-cacf-4e50-b9ac-7f2cdc05c90a@menergy-uae.com>
-Date:   Fri, 11 Dec 2020 14:11:04 -0800
-User-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64; rv:60.0) Gecko/20100101
- Thunderbird/60.3.1
-MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Content-Language: en-US
-X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
-X-AntiAbuse: Primary Hostname - vps.shalomsite.com
-X-AntiAbuse: Original Domain - vger.kernel.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - menergy-uae.com
-X-Get-Message-Sender-Via: vps.shalomsite.com: authenticated_id: info@menergy-uae.com
-X-Authenticated-Sender: vps.shalomsite.com: info@menergy-uae.com
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
+        id S2438544AbgLLKF0 (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Sat, 12 Dec 2020 05:05:26 -0500
+Received: from master.hostvps.net ([85.234.128.110]:55936 "EHLO
+        host.sysriacomms.com" rhost-flags-OK-FAIL-OK-OK) by vger.kernel.org
+        with ESMTP id S2438549AbgLLKFY (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Sat, 12 Dec 2020 05:05:24 -0500
+X-Greylist: delayed 24194 seconds by postgrey-1.27 at vger.kernel.org; Sat, 12 Dec 2020 05:05:24 EST
+Received: from sysriacomms.com (ec2-3-129-59-77.us-east-2.compute.amazonaws.com [3.129.59.77])
+        by host.sysriacomms.com (Postfix) with ESMTPA id 929737D567F
+        for <util-linux@vger.kernel.org>; Sat, 12 Dec 2020 02:52:05 +0000 (GMT)
+DKIM-Filter: OpenDKIM Filter v2.11.0 host.sysriacomms.com 929737D567F
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sysriacomms.com;
+        s=default; t=1607741527;
+        bh=TyDrvEeEFdXlR/MshqaTYzQ7nnR7m/zs1uM19XkvmD0=;
+        h=Reply-To:From:To:Subject:Date:From;
+        b=ncfZtKdOJJxF+qJFiJ4XV2NH/MuhCUW20NGn2cLRtfamaXiCVBDl36wSLK0MzlnT3
+         Af7RfpoFi/KmRA1gEUFhW13m7V5FDAy+cR7hNTjeAlXeOiXQuTioMXlH3sD17A8mk3
+         voxJGehXPuLK1mfSNihPzQSCi32B51GVB1RydVlk=
+DKIM-Filter: OpenDKIM Filter v2.11.0 host.sysriacomms.com 929737D567F
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sysriacomms.com;
+        s=default; t=1607741526;
+        bh=TyDrvEeEFdXlR/MshqaTYzQ7nnR7m/zs1uM19XkvmD0=;
+        h=Reply-To:From:To:Subject:Date:From;
+        b=fK050PSOeUO5LAXX2x+c9LSWJyUj1kLRIdOm3Lg3IVQPbG055pVS23cyQcc6xeJFv
+         IWTqNo//BHXluGk8S51ofXya7eWazg8PAZ6tbBoPjPTY7oEj3uXlrQg9BDVxsCKEvE
+         bZNGbTqwAq12pgvvlXOvas806olfJvp5JTbTD8fo=
+Reply-To: moutraore02@syriservas.com
+From:   Moussa <moutraore02@sysriacomms.com>
+To:     util-linux@vger.kernel.org
+Subject: Get Back To Me
+Date:   12 Dec 2020 02:52:18 +0000
+Message-ID: <20201212025218.CB17A44E8862BD2E@sysriacomms.com>
+Mime-Version: 1.0
+Content-Type: text/plain;
+        charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-https://bit.ly/36Q7zms
+Greeetings from Mali. I am sorry for contacting you like this but=20
+I do have a very urgent matter that I want to discuss with you.=20
+Before I proceed, I want you to keep an open mind while reading=20
+this proposal. My name is Moussa Traore, I am the Personal=20
+Assistant to Mr. Issa Saley Maiga who was the head of the civil=20
+aviation agency in Mali during the tenure of Ibrahim Boubacar=20
+Ke=C3=AFta, the former president of Mali. His tenure was overtaken by=20
+the military during a coup d'etat. I am sure you would have read=20
+about this in your country because it was covered by the=20
+international news agencies worldwide. 
 
+Anyway, my boss was also affected by the coup d'etat and he was=20
+arrested along with other high profile politicians. Also, all of=20
+his local assets (bother property and financial assets) were=20
+seized by the Government. Due to this situation, my boss belives=20
+that he is at risk and he is now very scared for the safety of=20
+his family especially his wife and kids. In order to ensure that=20
+his family is taken care of and protected incase anything happens=20
+to him, he has asked me to help him find a foreign investor who=20
+can help him accommodate and manage the finanical assets that he=20
+has in Europe. These assets was secured with the help of a proxy=20
+and it is currently held with an offshore financial bank so it is=20
+safe so secure. Also, the Government of his country do not know=20
+of this asset hence why they are unable to seize it as they have=20
+done his other assets.
 
+My proposal to you is for you to help us manage these funds, and=20
+invest it in lucrative projects in your country that will yeild=20
+good profits. You also do not have to worry about if this is safe=20
+or not because everything will be handled in a legal and=20
+transparent manner. You will also be handosmely rewarded for your=20
+help if you decide to work with us. If this proposal interests=20
+you, please kindly respond so that I can give you more details. I=20
+hope to hear from you soon.
 
+Regards,
 
-
-
-
-sqelch-lebensmittel@yahoo.de
+Moussa.
