@@ -2,65 +2,91 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id DDE532E0C7B
-	for <lists+util-linux@lfdr.de>; Tue, 22 Dec 2020 16:11:35 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 67DEF2E229C
+	for <lists+util-linux@lfdr.de>; Thu, 24 Dec 2020 00:03:48 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1728093AbgLVPJj (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Tue, 22 Dec 2020 10:09:39 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:45920 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1728092AbgLVPJj (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Tue, 22 Dec 2020 10:09:39 -0500
-Received: from mail-lf1-x12f.google.com (mail-lf1-x12f.google.com [IPv6:2a00:1450:4864:20::12f])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id C1CFBC0613D3
-        for <util-linux@vger.kernel.org>; Tue, 22 Dec 2020 07:08:58 -0800 (PST)
-Received: by mail-lf1-x12f.google.com with SMTP id h22so23190929lfu.2
-        for <util-linux@vger.kernel.org>; Tue, 22 Dec 2020 07:08:58 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:reply-to:from:date:message-id:subject:to;
-        bh=ujiHBwaaGNuMhzojZ2C69RM25MjRj77aVtoAsKFcXTM=;
-        b=as450gf+Z9o9CMoH9WAiM/H5bMRzQMmQJk3Unkw7Odn5hImxEmOjyvLRUkzpw9wJL5
-         ex7BC2p/1l7syDtqyYDcCigzpcmpFW9MYbco8Le7CZy57S5Bk7zvR6LKTmz26ZRWN53E
-         izRJI4ylIxlOe9Buws2/Hf9OFTCw5l/LyrlINI5rpWFOAhYF06N5aHAYkDLbyrKujmD/
-         T9Jud4AqgjJWAGWvHHNiyrHrtnGkuczO+XqLv3NpX/JdTeTAW2Z+3zioDFgIPqSWOCnK
-         E3Kqc4xJQzWvOUyF8Cxpxp1uP6fj3HOuoZBVh2Q8O/bfOD2krwQ3rlAyagJfjM41bl2F
-         NGyw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
-         :subject:to;
-        bh=ujiHBwaaGNuMhzojZ2C69RM25MjRj77aVtoAsKFcXTM=;
-        b=kNGOWvArPpCwQn0xDlhORQkmfq66KD6U6Bpod7FIn/ZRvJ7hFzOmsi23Z8euE7PMgi
-         lXArQFUVTUQwqHxgAyl94rf2CWbHpAM+/vWfxUHH84/V7Uj80Yl6bo0Oka95x9/Aw51p
-         v5Y0r8kS0NuF1lktXXylDkcB9fLGi3Kqw9mqIG/NhxC31AWB0EjWy0mNmyop2r+ufCbJ
-         pOEA3rwPDv2EfD5ZGILNJTwAwSqBwvvbwJ8P2pXAKyBxYofeQ9NNEbcA7mZSnl4uOGGE
-         nG2mw+pLoeJnPfvOwfPeVsG/J9+Gb3IKW53G7pba+qp50r6NdVRGFxD0gDw4Nkd3HmT0
-         T20A==
-X-Gm-Message-State: AOAM530OiRWF+ffYKVMTrKrRU++5eMPdwbbngVlGvnw9d5kGTmjeWnAh
-        PxK6SQph0u79dK64yrVQdW+oc/pRVxg9a/rKlW8=
-X-Google-Smtp-Source: ABdhPJwR9F9S33imgQG6ua3sLEJNX7zXQJBOYl7vJo1Yginean4mdaMDPfweXTT2jIH8552YLVy7MF7IWfufyFLFEtI=
-X-Received: by 2002:a2e:97ce:: with SMTP id m14mr10307704ljj.380.1608649737391;
- Tue, 22 Dec 2020 07:08:57 -0800 (PST)
+        id S1726611AbgLWXD1 (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Wed, 23 Dec 2020 18:03:27 -0500
+Received: from aquckbulck.top ([117.50.12.210]:53871 "EHLO aquckbulck.top"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S1726319AbgLWXD1 (ORCPT <rfc822;util-linux@vger.kernel.org>);
+        Wed, 23 Dec 2020 18:03:27 -0500
+X-Greylist: delayed 644 seconds by postgrey-1.27 at vger.kernel.org; Wed, 23 Dec 2020 18:03:25 EST
+DKIM-Signature: v=1; a=rsa-sha1; c=relaxed/relaxed; s=default; d=aquckbulck.top;
+ h=Reply-To:From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding; i=sales@aquckbulck.top;
+ bh=MDtVvOBFMmp+704YsIBqQ6FpA/M=;
+ b=DdiLfS9i66LGKvkhTl9nzC7N8tS7NpovTdYNOp3f73Z5/h0yuBgYN8O55qL/qd4xC736k11KPTqU
+   O5II+fxXzt0SIrSVGVrUrKANVHRoP5wbjVEZnUlZ39ldOXC+o16H84CdqzmuHKWqqIKGkYie7fGX
+   PwpO2jKlpy2ey+IWR9U=
+DomainKey-Signature: a=rsa-sha1; c=nofws; q=dns; s=default; d=aquckbulck.top;
+ b=hKAYcywgeFJ54WNSpoFGCpcO0GC6SA0AAFlx3cid0DKmtL2ETG7eNqjY1tPJPqwJJbVEddfrft18
+   iELIXQ1vID0crKBzTSWUCJoxSriE6AdcMKAC+3neG/yNxsnvjRug1yZ5B5fYUMT5wcz3Ap59XJsC
+   I+pzeOm6n8Y62ortQ0A=;
+Reply-To: andrewgraham267@gmail.com
+From:   TWP PROGRAM 2021 <sales@aquckbulck.top>
+To:     util-linux@vger.kernel.org
+Subject: =?UTF-8?B?TWFucG93ZXIgUmVjcnVpdG1lbnQgRm9yIENhbmFkYeKEog==?=
+Date:   23 Dec 2020 23:51:54 +0100
+Message-ID: <20201223235154.DC653491E413EE41@aquckbulck.top>
 MIME-Version: 1.0
-Received: by 2002:a19:385d:0:0:0:0:0 with HTTP; Tue, 22 Dec 2020 07:08:57
- -0800 (PST)
-Reply-To: jessicavail020@gmail.com
-From:   Jessica Vail <generalsusanhelms68@gmail.com>
-Date:   Tue, 22 Dec 2020 15:08:57 +0000
-Message-ID: <CAK+Paz7yF=-wbepz3cJVgTE2m0JpUcyKZq=QJQ+kmCKYuaS-TQ@mail.gmail.com>
-Subject: Hi
-To:     undisclosed-recipients:;
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain;
+        charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-Hi dear,
+Dear Sir/Madam,
 
-I'm Jessica Vail, from the United States,please i wish to have a
-communication with you.
+We are authorized to recruit 120 unskilled workers to work in=20
+Canada on a two years contract. Please kindly let us know if you=20
+can supply the same workers as my client's requirements for the=20
+following positions. Fish Packers, Cleaners, Laborers, Fruit=20
+packers, Supervisors, supermarket manager, salesman/woman,=20
+Storekeeper, Ground Maintenance, Gardener, Truck Drivers.
+Age from 20 to 55 years old is eligible to work, Primary=20
+Location: Montreal Quebec Canada.
 
-I wait for your answer.
+NOTE: No qualification is needed.
 
-Jessica Vail.
+TERMS AND CONDITIONS:
+
+1. Accommodation =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 - Provided.
+2. Ticket =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0-Pr=
+ovided.
+3. Medical =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 - Provid=
+ed.
+4. Transportation =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0- Provided.
+5. Working hours =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 - 8a.m-4p.m [Mon-Sat]
+6. Vacation =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0- 28.5 d=
+ays every year
+7. Salary =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0- C=
+a$20 per hourly
+8. Contract =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0- 2 year=
+s. Renewable
+9. Extra time =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0- Ca$22per ho=
+urly
+10. Insurance & Pension =C2=A0 =C2=A0 - According to Quebec Labor laws.
+11. Requirement =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 120 worker=
+s
+12. job description =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 Laborers
+13. Skilled required =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0Physically fit
+Other Benefits =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0Famil=
+y Status, group benefit, and=20
+other fringe benefits.
+
+
+If you need more information regards to this recruitment please=20
+feel free to contact us at your most convenient time. Your Quick=20
+and Favorable Response would be highly appreciated.
+
+Best Regards
+
+
+Mr. Andrew Graham
+7450 Rue des Loutres
+Quebec City,
+Canada
+Phone: +1-581-533-6655
+Whats-app: +1-581-533-6655
+E-mail | andrewgraham267@gmail.com=20
