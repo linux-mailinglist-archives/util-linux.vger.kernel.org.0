@@ -2,91 +2,137 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 67DEF2E229C
-	for <lists+util-linux@lfdr.de>; Thu, 24 Dec 2020 00:03:48 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id B5B432E2359
+	for <lists+util-linux@lfdr.de>; Thu, 24 Dec 2020 02:16:05 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726611AbgLWXD1 (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Wed, 23 Dec 2020 18:03:27 -0500
-Received: from aquckbulck.top ([117.50.12.210]:53871 "EHLO aquckbulck.top"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1726319AbgLWXD1 (ORCPT <rfc822;util-linux@vger.kernel.org>);
-        Wed, 23 Dec 2020 18:03:27 -0500
-X-Greylist: delayed 644 seconds by postgrey-1.27 at vger.kernel.org; Wed, 23 Dec 2020 18:03:25 EST
-DKIM-Signature: v=1; a=rsa-sha1; c=relaxed/relaxed; s=default; d=aquckbulck.top;
- h=Reply-To:From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding; i=sales@aquckbulck.top;
- bh=MDtVvOBFMmp+704YsIBqQ6FpA/M=;
- b=DdiLfS9i66LGKvkhTl9nzC7N8tS7NpovTdYNOp3f73Z5/h0yuBgYN8O55qL/qd4xC736k11KPTqU
-   O5II+fxXzt0SIrSVGVrUrKANVHRoP5wbjVEZnUlZ39ldOXC+o16H84CdqzmuHKWqqIKGkYie7fGX
-   PwpO2jKlpy2ey+IWR9U=
-DomainKey-Signature: a=rsa-sha1; c=nofws; q=dns; s=default; d=aquckbulck.top;
- b=hKAYcywgeFJ54WNSpoFGCpcO0GC6SA0AAFlx3cid0DKmtL2ETG7eNqjY1tPJPqwJJbVEddfrft18
-   iELIXQ1vID0crKBzTSWUCJoxSriE6AdcMKAC+3neG/yNxsnvjRug1yZ5B5fYUMT5wcz3Ap59XJsC
-   I+pzeOm6n8Y62ortQ0A=;
-Reply-To: andrewgraham267@gmail.com
-From:   TWP PROGRAM 2021 <sales@aquckbulck.top>
+        id S1728141AbgLXBPk (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Wed, 23 Dec 2020 20:15:40 -0500
+Received: from us-smtp-delivery-124.mimecast.com ([63.128.21.124]:48854 "EHLO
+        us-smtp-delivery-124.mimecast.com" rhost-flags-OK-OK-OK-OK)
+        by vger.kernel.org with ESMTP id S1728128AbgLXBPk (ORCPT
+        <rfc822;util-linux@vger.kernel.org>);
+        Wed, 23 Dec 2020 20:15:40 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+        s=mimecast20190719; t=1608772453;
+        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+         to:to:cc:mime-version:mime-version:content-type:content-type;
+        bh=N4CqOjyH9b2AalVrjLCMZM6RJvLEOuuH6qVcZNTVt4A=;
+        b=EmneHkpZHSLfR+/tdubay4ss3a7/34VfwZZyT9BGfYf1uaA9gatIZvW53boOQT0pJV+2a0
+        HIXn/AmgAtUDmmpX8h7py/sO4FQgqGegOVt1+mPfzsxd38vywfufpQkINVrSAz88j+oOd2
+        Grc7gwrUnWVGiOv+SrY68Qd1VLymcQA=
+Received: from mail-pl1-f197.google.com (mail-pl1-f197.google.com
+ [209.85.214.197]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-472-bV3l-TZvNqikxeRO0W-T2A-1; Wed, 23 Dec 2020 20:14:11 -0500
+X-MC-Unique: bV3l-TZvNqikxeRO0W-T2A-1
+Received: by mail-pl1-f197.google.com with SMTP id 98so427310pla.12
+        for <util-linux@vger.kernel.org>; Wed, 23 Dec 2020 17:14:11 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:subject:message-id:date:user-agent
+         :mime-version;
+        bh=N4CqOjyH9b2AalVrjLCMZM6RJvLEOuuH6qVcZNTVt4A=;
+        b=mtXvlkh/jnrZuS29hLGZeum2cXeAqfJ/jvMM/8NDh6h44hsrxiGrG9u0FTmgswx5nq
+         tEoCAzK9OAqn/gumrcEKB94B6S75f92uEa6OT9+JQq6shVLQBt+RC0qlL45YOba4hbzF
+         CpA3mKLuIwKg2oOdfPv1OffRKKoLHbeHPDYjZJ0hwc0Zz0CRlijyLOAA7hGXJneEYORj
+         lmgwIZcuuSGUnO5qguuSe4QQXR61dylejpk5N2ckD9rlQp3aC3pTKE0aCwh0kcjCUcNX
+         KruW7V2shqiBnjEp+eJsFjk09ZTNoZ5BRm/EP/FASM6EZHpmLtQAThvDmgh3Hi0ikV6B
+         Tlsg==
+X-Gm-Message-State: AOAM533J7vTj2z/PzVssctUMan9f5Re+kxxrLwKmro8DAkNRFtgXuzxK
+        55GJmLrqL3QxNWzD/knzRY8MizW36rdfDIDkL8PVi8O95zTjWGNNAfWx/ByWU27oFWXfl11LnJy
+        rJY8Ukojq+L+SVb5vApK3sg==
+X-Received: by 2002:a17:90a:46c2:: with SMTP id x2mr2090362pjg.15.1608772450317;
+        Wed, 23 Dec 2020 17:14:10 -0800 (PST)
+X-Google-Smtp-Source: ABdhPJwCKC6ENrXa0h1afZfeJh8GCeyvoxMfLvVbJA9jpycnFAzqW0+b78Dxqk1I9TQRqOSoc/MpiA==
+X-Received: by 2002:a17:90a:46c2:: with SMTP id x2mr2090346pjg.15.1608772450054;
+        Wed, 23 Dec 2020 17:14:10 -0800 (PST)
+Received: from solaris.milky.way ([118.209.30.19])
+        by smtp.gmail.com with ESMTPSA id n4sm24486795pfu.150.2020.12.23.17.14.07
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Wed, 23 Dec 2020 17:14:08 -0800 (PST)
+From:   David O'Brien <daobrien@redhat.com>
 To:     util-linux@vger.kernel.org
-Subject: =?UTF-8?B?TWFucG93ZXIgUmVjcnVpdG1lbnQgRm9yIENhbmFkYeKEog==?=
-Date:   23 Dec 2020 23:51:54 +0100
-Message-ID: <20201223235154.DC653491E413EE41@aquckbulck.top>
+Subject: Bug in lsblk command or man page?
+Message-ID: <ed3332cf-794f-b0d3-caca-16fb65dfd5ac@redhat.com>
+Date:   Thu, 24 Dec 2020 11:14:04 +1000
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.5.0
 MIME-Version: 1.0
-Content-Type: text/plain;
-        charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="8dxUdkdzsEVnoO2DSCKwel1c0cEvdsUMt"
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-Dear Sir/Madam,
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--8dxUdkdzsEVnoO2DSCKwel1c0cEvdsUMt
+Content-Type: multipart/mixed; boundary="5h7qVfUQLG35Lyxx2pjWrn1XYtadTquuK";
+ protected-headers="v1"
+From: David O'Brien <daobrien@redhat.com>
+To: util-linux@vger.kernel.org
+Message-ID: <ed3332cf-794f-b0d3-caca-16fb65dfd5ac@redhat.com>
+Subject: Bug in lsblk command or man page?
 
-We are authorized to recruit 120 unskilled workers to work in=20
-Canada on a two years contract. Please kindly let us know if you=20
-can supply the same workers as my client's requirements for the=20
-following positions. Fish Packers, Cleaners, Laborers, Fruit=20
-packers, Supervisors, supermarket manager, salesman/woman,=20
-Storekeeper, Ground Maintenance, Gardener, Truck Drivers.
-Age from 20 to 55 years old is eligible to work, Primary=20
-Location: Montreal Quebec Canada.
+--5h7qVfUQLG35Lyxx2pjWrn1XYtadTquuK
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: quoted-printable
 
-NOTE: No qualification is needed.
+I don't know if this is expected or not, but it seems very odd:
 
-TERMS AND CONDITIONS:
+# lsblk -o=3DUUID /stratis/labpool/labfs
+lsblk: unknown column: =3DUUID
 
-1. Accommodation =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 - Provided.
-2. Ticket =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0-Pr=
-ovided.
-3. Medical =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 - Provid=
-ed.
-4. Transportation =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0- Provided.
-5. Working hours =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 - 8a.m-4p.m [Mon-Sat]
-6. Vacation =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0- 28.5 d=
-ays every year
-7. Salary =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0- C=
-a$20 per hourly
-8. Contract =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0- 2 year=
-s. Renewable
-9. Extra time =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0- Ca$22per ho=
-urly
-10. Insurance & Pension =C2=A0 =C2=A0 - According to Quebec Labor laws.
-11. Requirement =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 120 worker=
-s
-12. job description =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 Laborers
-13. Skilled required =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0Physically fit
-Other Benefits =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0Famil=
-y Status, group benefit, and=20
-other fringe benefits.
+[root@serverb ~]# lsblk -o UUID /stratis/labpool/labfs
+UUID
+0118efb8-66fe-406a-837c-725961bdad4d
+
+[root@serverb ~]# lsblk --output=3DUUID /stratis/labpool/labfs
+UUID
+0118efb8-66fe-406a-837c-725961bdad4d
 
 
-If you need more information regards to this recruitment please=20
-feel free to contact us at your most convenient time. Your Quick=20
-and Favorable Response would be highly appreciated.
+=46rom the man(8) page:
+-o, --output list
+              Specify which output columns to print.  Use --help to get
+              a list of all supported columns.  The columns may affect
+              tree-like output.  The default is to use tree for the
+              column 'NAME' (see also --tree).
 
-Best Regards
+              The default list of columns may be extended if list is
+              specified in the format +list (e.g., lsblk -o +UUID).
+
+There is no mention of "=3D" being required, causing failures, etc. I fou=
+nd this quite frustrating.
+
+I'm on Fedora 32.
+
+Thanks.
+--=20
+David
+Introvert/Unclubbable/Cool
+
+Red Hat's core values are freedom, courage, commitment, and accountabilit=
+y.
 
 
-Mr. Andrew Graham
-7450 Rue des Loutres
-Quebec City,
-Canada
-Phone: +1-581-533-6655
-Whats-app: +1-581-533-6655
-E-mail | andrewgraham267@gmail.com=20
+--5h7qVfUQLG35Lyxx2pjWrn1XYtadTquuK--
+
+--8dxUdkdzsEVnoO2DSCKwel1c0cEvdsUMt
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature"
+
+-----BEGIN PGP SIGNATURE-----
+
+wsB5BAABCAAjFiEEygp1l6BPbI+4B6BYZuPTn0fqi0wFAl/j61wFAwAAAAAACgkQZuPTn0fqi0xv
+cgf+M8Gzqz8YSWN5Y70+GQJqSrfvG4qzeCYBgxI32cwRdJDY42PwORksYk04U+IQf4mHDfI7pb4W
+JZwd8g7GXpEy9GhTbscRQbBBHeU4pR9G8+CBT1sXXT+avun4X04m9KLjhs8dLLcAS/PRhHkMLX3Y
+cRi7I9KnS6b1u7bvaUHze0BAR7gU2Pe3J3Dn4JVn6QrG0v0xslhMQRFK8fKmdWMAxs7n0GYVwW6b
+VqWXwz0Nz49SSYJ0uNo+Q4ZQlDCowbhiHXcIirPdbZMG/e6ZqTtneR8ogilK38SlqsiLj5dxx+Tp
+l1LxcYkFui3aiuzcBjq9buG/KhHUcdC1Ys3qRQPrdg==
+=lY8Q
+-----END PGP SIGNATURE-----
+
+--8dxUdkdzsEVnoO2DSCKwel1c0cEvdsUMt--
+
