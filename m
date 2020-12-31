@@ -2,61 +2,47 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 5F3EE2E7DEB
-	for <lists+util-linux@lfdr.de>; Thu, 31 Dec 2020 05:07:49 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id E7D682E86E7
+	for <lists+util-linux@lfdr.de>; Sat,  2 Jan 2021 11:19:29 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726064AbgLaEHQ (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Wed, 30 Dec 2020 23:07:16 -0500
-Received: from mail.kernel.org ([198.145.29.99]:40112 "EHLO mail.kernel.org"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1726037AbgLaEHQ (ORCPT <rfc822;util-linux@vger.kernel.org>);
-        Wed, 30 Dec 2020 23:07:16 -0500
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 1CB75207C7
-        for <util-linux@vger.kernel.org>; Thu, 31 Dec 2020 04:06:36 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=k20201202; t=1609387596;
-        bh=h/Ac8HBpZLvOh9NI/nKFpToGZY7aGjIWgrREZrY8Wfc=;
-        h=From:To:Subject:Date:From;
-        b=jGWr0GGauwGlqbpWdFPAYaNPVc+CUau6ve7jwceXWp8LlYkoPVGT1o8ZXOu5Qw1+H
-         nUjCXtMbVeIXllsfI1NlbHnicmvSiOgq+kgn0BM1iWyWSdTF3Qdj1+g9jfhzLRN/vo
-         PSOWKbw2rktx8v0hwEe+KkZ6rnskY0U+kfoS7TQWwBDx306FRFY+bCXgKnUME7QzP4
-         9wbHE3JZ3G5heL/PCYFf3w/DHDd4YJItdwyct+XqMfBVJ3/pbJhmwqD6HIgIQKaMHf
-         gCqZx7kxQDtZ7U37jB3siMJ121ZJWVM8QKXKNW9kaYH05z5hs3JTXefkr3EcfmQ7x4
-         DybdgCdlVCrKg==
-From:   Eric Biggers <ebiggers@kernel.org>
-To:     util-linux@vger.kernel.org
-Subject: [PATCH] sys-utils: mount.8: fix a typo
-Date:   Wed, 30 Dec 2020 20:05:57 -0800
-Message-Id: <20201231040557.324825-1-ebiggers@kernel.org>
-X-Mailer: git-send-email 2.29.2
+        id S1726386AbhABKTI convert rfc822-to-8bit (ORCPT
+        <rfc822;lists+util-linux@lfdr.de>); Sat, 2 Jan 2021 05:19:08 -0500
+Received: from mail.askinacable.net.np ([103.115.84.7]:40326 "EHLO
+        mail.askinacable.net.np" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726327AbhABKTI (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Sat, 2 Jan 2021 05:19:08 -0500
+Received: from localhost (localhost [127.0.0.1])
+        by mail.askinacable.net.np (Postfix) with ESMTP id 5CE154117653C;
+        Thu, 31 Dec 2020 17:53:08 +0545 (+0545)
+Received: from mail.askinacable.net.np ([127.0.0.1])
+        by localhost (mail.askinacable.net.np [127.0.0.1]) (amavisd-new, port 10032)
+        with ESMTP id jzyig1OmfmCg; Thu, 31 Dec 2020 17:53:07 +0545 (+0545)
+Received: from localhost (localhost [127.0.0.1])
+        by mail.askinacable.net.np (Postfix) with ESMTP id 3EDD0411AF592;
+        Thu, 31 Dec 2020 16:43:35 +0545 (+0545)
+X-Virus-Scanned: amavisd-new at mail.askinacable.net.np
+Received: from mail.askinacable.net.np ([127.0.0.1])
+        by localhost (mail.askinacable.net.np [127.0.0.1]) (amavisd-new, port 10026)
+        with ESMTP id Ucph5GEZVr1y; Thu, 31 Dec 2020 16:43:34 +0545 (+0545)
+Received: from Hp-??.tendawifi.com (unknown [31.202.16.82])
+        by mail.askinacable.net.np (Postfix) with ESMTPSA id 7E32E41055A50;
+        Thu, 31 Dec 2020 15:41:37 +0545 (+0545)
+Content-Type: text/plain; charset="iso-8859-1"
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 8BIT
+Content-Description: Mail message body
+Subject: my subject
+To:     Recipients <facundo@telviso.com.ar>
+From:   Mavis <facundo@telviso.com.ar>
+Date:   Thu, 31 Dec 2020 12:06:17 +0200
+Reply-To: sheryllgoedertdonation@hotmail.com
+Message-Id: <20201231095638.7E32E41055A50@mail.askinacable.net.np>
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-From: Eric Biggers <ebiggers@google.com>
+Mein Name ist Sheryll Goedert (geschäftsführendes Mitglied von Vacation Life LLC). Ich bin der Gewinner des Powerball-Jackpots in Höhe von 396,9 Millionen US-Dollar. Ich habe am 29. Januar 2020 gewonnen.
 
-It should be "inode", not "i-node".
+Dieser Gewinn ist ein Segen, daher haben wir beschlossen, der Gesellschaft etwas zurückzugeben, was bedeutet, dass wir Sie offiziell darüber informieren, dass Sie als einer der Begünstigten des Cash Aid-Programms für soziale Verantwortung von 2020 VACATION LIFE LLC ausgewählt wurden.
 
-Signed-off-by: Eric Biggers <ebiggers@google.com>
----
- sys-utils/mount.8 | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/sys-utils/mount.8 b/sys-utils/mount.8
-index 282a9cbbe..e33689b15 100644
---- a/sys-utils/mount.8
-+++ b/sys-utils/mount.8
-@@ -1300,7 +1300,7 @@ or
- .IP -
- an undeleted inode is evicted from memory
- .IP -
--more than 24 hours have passed since the i-node was written to disk.
-+more than 24 hours have passed since the inode was written to disk.
- .RE
- .sp
- .TP
--- 
-2.29.2
-
+Ihre E-Mail-Adresse wurde vom Topaz Ballot System zufällig ausgewählt. Sie haben von VACATION LIFE LLC die Summe von 4.800.000 EURO erhalten. Ich hoffe nur, dass Sie anderen in Ihrer Umgebung helfen können. Senden Sie mir eine E-Mail an (sheryllgoedertdonation@hotmail.com), um weitere Informationen darüber zu erhalten, wie Sie den gespendeten Betrag erhalten
