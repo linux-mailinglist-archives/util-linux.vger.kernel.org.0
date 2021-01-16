@@ -2,21 +2,21 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 68BDD2F8ED9
-	for <lists+util-linux@lfdr.de>; Sat, 16 Jan 2021 20:12:33 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id CD9172F8EDB
+	for <lists+util-linux@lfdr.de>; Sat, 16 Jan 2021 20:12:55 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726788AbhAPTMS (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Sat, 16 Jan 2021 14:12:18 -0500
-Received: from foss.arm.com ([217.140.110.172]:58728 "EHLO foss.arm.com"
+        id S1726878AbhAPTMz (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Sat, 16 Jan 2021 14:12:55 -0500
+Received: from foss.arm.com ([217.140.110.172]:58772 "EHLO foss.arm.com"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1725979AbhAPTMS (ORCPT <rfc822;util-linux@vger.kernel.org>);
-        Sat, 16 Jan 2021 14:12:18 -0500
+        id S1726619AbhAPTMz (ORCPT <rfc822;util-linux@vger.kernel.org>);
+        Sat, 16 Jan 2021 14:12:55 -0500
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-        by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 63B4712FC;
-        Sat, 16 Jan 2021 11:11:32 -0800 (PST)
+        by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 5917A1396;
+        Sat, 16 Jan 2021 11:11:34 -0800 (PST)
 Received: from e107158-lin.cambridge.arm.com (e107158-lin.cambridge.arm.com [10.1.194.78])
-        by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 7F8D83F70D;
-        Sat, 16 Jan 2021 11:11:31 -0800 (PST)
+        by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 74A4E3F70D;
+        Sat, 16 Jan 2021 11:11:33 -0800 (PST)
 From:   Qais Yousef <qais.yousef@arm.com>
 To:     util-linux@vger.kernel.org
 Cc:     "Peter Zijlstra (Intel)" <peterz@infradead.org>,
@@ -24,9 +24,9 @@ Cc:     "Peter Zijlstra (Intel)" <peterz@infradead.org>,
         Vincent Guittot <vincent.guittot@linaro.org>,
         Patrick Bellasi <patrick.bellasi@matbug.net>,
         Qais Yousef <qais.yousef@arm.com>
-Subject: [PATCH 4/5] uclampset: Plump into the build system
-Date:   Sat, 16 Jan 2021 19:09:39 +0000
-Message-Id: <20210116190940.2320819-5-qais.yousef@arm.com>
+Subject: [PATCH 5/5] uclampset: Plumb in bash-completion
+Date:   Sat, 16 Jan 2021 19:09:40 +0000
+Message-Id: <20210116190940.2320819-6-qais.yousef@arm.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20210116190940.2320819-1-qais.yousef@arm.com>
 References: <20210116190940.2320819-1-qais.yousef@arm.com>
@@ -38,45 +38,70 @@ X-Mailing-List: util-linux@vger.kernel.org
 
 Signed-off-by: Qais Yousef <qais.yousef@arm.com>
 ---
- configure.ac             | 9 +++++++++
- schedutils/Makemodule.am | 7 +++++++
- 2 files changed, 16 insertions(+)
+ bash-completion/Makemodule.am |  3 +++
+ bash-completion/uclampset     | 39 +++++++++++++++++++++++++++++++++++
+ 2 files changed, 42 insertions(+)
+ create mode 100644 bash-completion/uclampset
 
-diff --git a/configure.ac b/configure.ac
-index 20b6c3178..8f66d5ec4 100644
---- a/configure.ac
-+++ b/configure.ac
-@@ -2194,6 +2194,15 @@ AS_IF([test "x$build_chrt" = xyes], [
- 	UL_CHECK_SYSCALL([sched_setattr])
- ])
- 
-+UL_ENABLE_ALIAS([uclampset], [schedutils])
-+UL_BUILD_INIT([uclampset])
-+UL_REQUIRES_HAVE([uclampset], [schedsetter], [sched_set functions])
-+AM_CONDITIONAL([BUILD_UCLAMPSET], [test "x$build_uclampset" = xyes])
-+
-+AS_IF([test "x$build_uclampset" = xyes], [
-+	UL_CHECK_SYSCALL([sched_setattr])
-+])
-+
- 
- AC_ARG_ENABLE([wall],
-   AS_HELP_STRING([--disable-wall], [do not build wall]),
-diff --git a/schedutils/Makemodule.am b/schedutils/Makemodule.am
-index f32d2b307..c781ede63 100644
---- a/schedutils/Makemodule.am
-+++ b/schedutils/Makemodule.am
-@@ -18,3 +18,10 @@ dist_man_MANS += schedutils/taskset.1
- taskset_SOURCES = schedutils/taskset.c
- taskset_LDADD = $(LDADD) libcommon.la
+diff --git a/bash-completion/Makemodule.am b/bash-completion/Makemodule.am
+index b80c23f7b..3384ba4e2 100644
+--- a/bash-completion/Makemodule.am
++++ b/bash-completion/Makemodule.am
+@@ -210,6 +210,9 @@ endif
+ if BUILD_CHRT
+ dist_bashcompletion_DATA += bash-completion/chrt
  endif
-+
 +if BUILD_UCLAMPSET
-+usrbin_exec_PROGRAMS += uclampset
-+dist_man_MANS += schedutils/uclampset.1
-+uclampset_SOURCES = schedutils/uclampset.c
-+uclampset_LDADD = $(LDADD) libcommon.la
++dist_bashcompletion_DATA += bash-completion/uclampset
 +endif
+ if BUILD_IONICE
+ dist_bashcompletion_DATA += bash-completion/ionice
+ endif
+diff --git a/bash-completion/uclampset b/bash-completion/uclampset
+new file mode 100644
+index 000000000..44ae80365
+--- /dev/null
++++ b/bash-completion/uclampset
+@@ -0,0 +1,39 @@
++_uclampset_module()
++{
++	local cur prev OPTS
++	COMPREPLY=()
++	cur="${COMP_WORDS[COMP_CWORD]}"
++	prev="${COMP_WORDS[COMP_CWORD-1]}"
++	case $prev in
++		'-h'|'--help'|'-V'|'--version')
++			return 0
++			;;
++	esac
++	case $cur in
++		-*)
++			OPTS="
++				--all-tasks
++				--help
++				--max
++				--pid
++				--system
++				--verbose
++				--version
++			"
++			COMPREPLY=( $(compgen -W "${OPTS[*]}" -- $cur) )
++			return 0
++			;;
++	esac
++	local i
++	for i in ${COMP_WORDS[*]}; do
++		case $i in
++		'-p'|'--pid')
++			COMPREPLY=( $(compgen -W "$(cd /proc && echo [0-9]*)" -- $cur) )
++			return 0
++			;;
++		esac
++	done
++	COMPREPLY=( $(compgen -c -- $cur) )
++	return 0
++}
++complete -F _uclampset_module uclampset
 -- 
 2.25.1
 
