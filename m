@@ -2,21 +2,21 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id B77FC30985E
-	for <lists+util-linux@lfdr.de>; Sat, 30 Jan 2021 21:51:58 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id EBDC830985F
+	for <lists+util-linux@lfdr.de>; Sat, 30 Jan 2021 21:52:14 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231617AbhA3Uv6 (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        id S230095AbhA3Uv6 (ORCPT <rfc822;lists+util-linux@lfdr.de>);
         Sat, 30 Jan 2021 15:51:58 -0500
-Received: from foss.arm.com ([217.140.110.172]:40784 "EHLO foss.arm.com"
+Received: from foss.arm.com ([217.140.110.172]:40794 "EHLO foss.arm.com"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S230095AbhA3Uv4 (ORCPT <rfc822;util-linux@vger.kernel.org>);
-        Sat, 30 Jan 2021 15:51:56 -0500
+        id S231565AbhA3Uv6 (ORCPT <rfc822;util-linux@vger.kernel.org>);
+        Sat, 30 Jan 2021 15:51:58 -0500
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-        by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 59750143B;
-        Sat, 30 Jan 2021 12:51:10 -0800 (PST)
+        by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id DC3A4147A;
+        Sat, 30 Jan 2021 12:51:12 -0800 (PST)
 Received: from e107158-lin.cambridge.arm.com (unknown [10.1.194.78])
-        by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id E09AC3F73D;
-        Sat, 30 Jan 2021 12:51:08 -0800 (PST)
+        by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 8C80B3F73D;
+        Sat, 30 Jan 2021 12:51:11 -0800 (PST)
 From:   Qais Yousef <qais.yousef@arm.com>
 To:     util-linux@vger.kernel.org
 Cc:     Karel Zak <kzak@redhat.com>,
@@ -27,9 +27,9 @@ Cc:     Karel Zak <kzak@redhat.com>,
         Patrick Bellasi <patrick.bellasi@matbug.net>,
         Vincent Donnefort <vincent.donnefort@arm.com>,
         Qais Yousef <qais.yousef@arm.com>
-Subject: [PATCH v2 2/5] Add uclampset schedutil
-Date:   Sat, 30 Jan 2021 20:50:36 +0000
-Message-Id: <20210130205039.581764-3-qais.yousef@arm.com>
+Subject: [PATCH v2 3/5] uclampset: Add man page
+Date:   Sat, 30 Jan 2021 20:50:37 +0000
+Message-Id: <20210130205039.581764-4-qais.yousef@arm.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20210130205039.581764-1-qais.yousef@arm.com>
 References: <20210130205039.581764-1-qais.yousef@arm.com>
@@ -39,446 +39,192 @@ Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-Utilization clamping is a new kernel feature that got merged in 5.3. It
-allows controlling the performance of a process by manipulating the
-utilization such that the task appears bigger or smaller than what it
-really is.
-
-There's a system-wide control to to restrict what maximum values the
-process are allowed to use.
-
-Man page added in a later patch attempts to explain the usage in more
-detail.
-
 Signed-off-by: Qais Yousef <qais.yousef@arm.com>
 ---
- .gitignore              |   1 +
- include/pathnames.h     |   4 +
- schedutils/sched_attr.h |  30 ++++
- schedutils/uclampset.c  | 337 ++++++++++++++++++++++++++++++++++++++++
- 4 files changed, 372 insertions(+)
- create mode 100644 schedutils/uclampset.c
+ schedutils/uclampset.1 | 174 +++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 174 insertions(+)
+ create mode 100644 schedutils/uclampset.1
 
-diff --git a/.gitignore b/.gitignore
-index a6f379146..c01d2f644 100644
---- a/.gitignore
-+++ b/.gitignore
-@@ -180,3 +180,4 @@ ylwrap
- /wipefs
- /write
- /zramctl
-+/uclampset
-diff --git a/include/pathnames.h b/include/pathnames.h
-index 8f6233749..69a0b5524 100644
---- a/include/pathnames.h
-+++ b/include/pathnames.h
-@@ -207,4 +207,8 @@
- #define _PATH_DEV_RFKILL	"/dev/rfkill"
- #define _PATH_SYS_RFKILL	"/sys/class/rfkill"
- 
-+#define _PATH_PROC_KERNEL(file)	"/proc/sys/kernel" #file
-+#define _PATH_PROC_UCLAMP_MIN	_PATH_PROC_KERNEL(/sched_util_clamp_min)
-+#define _PATH_PROC_UCLAMP_MAX	_PATH_PROC_KERNEL(/sched_util_clamp_max)
-+
- #endif /* PATHNAMES_H */
-diff --git a/schedutils/sched_attr.h b/schedutils/sched_attr.h
-index b39d37b5d..39d8532a3 100644
---- a/schedutils/sched_attr.h
-+++ b/schedutils/sched_attr.h
-@@ -13,6 +13,8 @@
-  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
-  *
-  * Copyright (C) 2004 Robert Love
-+ * Copyright (C) 2020-2021 Qais Yousef
-+ * Copyright (C) 2020-2021 Arm Ltd
-  */
- #ifndef UTIL_LINUX_SCHED_ATTR_H
- #define UTIL_LINUX_SCHED_ATTR_H
-@@ -42,6 +44,30 @@
- # define SCHED_FLAG_RESET_ON_FORK 0x01
- #endif
- 
-+#if defined(__linux__) && !defined(SCHED_FLAG_RECLAIM)
-+# define SCHED_FLAG_RECLAIM 0x02
-+#endif
-+
-+#if defined(__linux__) && !defined(SCHED_FLAG_DL_OVERRUN)
-+# define SCHED_FLAG_DL_OVERRUN 0x04
-+#endif
-+
-+#if defined(__linux__) && !defined(SCHED_FLAG_KEEP_POLICY)
-+# define SCHED_FLAG_KEEP_POLICY 0x08
-+#endif
-+
-+#if defined(__linux__) && !defined(SCHED_FLAG_KEEP_PARAMS)
-+# define SCHED_FLAG_KEEP_PARAMS 0x10
-+#endif
-+
-+#if defined(__linux__) && !defined(SCHED_FLAG_UTIL_CLAMP_MIN)
-+# define SCHED_FLAG_UTIL_CLAMP_MIN 0x20
-+#endif
-+
-+#if defined(__linux__) && !defined(SCHED_FLAG_UTIL_CLAMP_MAX)
-+# define SCHED_FLAG_UTIL_CLAMP_MAX 0x40
-+#endif
-+
- #if defined (__linux__)
- # include <sys/syscall.h>
- #endif
-@@ -73,6 +99,10 @@ struct sched_attr {
- 	uint64_t sched_runtime;
- 	uint64_t sched_deadline;
- 	uint64_t sched_period;
-+
-+	/* UTILIZATION CLAMPING */
-+	uint32_t sched_util_min;
-+	uint32_t sched_util_max;
- };
- 
- static int sched_setattr(pid_t pid, const struct sched_attr *attr, unsigned int flags)
-diff --git a/schedutils/uclampset.c b/schedutils/uclampset.c
+diff --git a/schedutils/uclampset.1 b/schedutils/uclampset.1
 new file mode 100644
-index 000000000..b9a02aae1
+index 000000000..d877ac6b9
 --- /dev/null
-+++ b/schedutils/uclampset.c
-@@ -0,0 +1,337 @@
-+/*
-+ * uclampset.c - change utilization clamping attributes of a task or the system
-+ *
-+ * This program is free software; you can redistribute it and/or modify
-+ * it under the terms of the GNU General Public License, version 2, as
-+ * published by the Free Software Foundation
-+ *
-+ * This program is distributed in the hope that it will be useful,
-+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
-+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-+ * GNU General Public License for more details.
-+ *
-+ * You should have received a copy of the GNU General Public License along
-+ * with this program; if not, write to the Free Software Foundation, Inc.,
-+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
-+ *
-+ * Copyright (C) 2020-2021 Qais Yousef
-+ * Copyright (C) 2020-2021 Arm Ltd
-+ */
++++ b/schedutils/uclampset.1
+@@ -0,0 +1,174 @@
++.\" uclampset(1) manpage
++.\"
++.\" Copyright (C) 2020-2021 Qais Yousef <qais.yousef@arm.com>
++.\" Copyright (C) 2020-2021 Arm Ltd
++.\"
++.\" This is free documentation; you can redistribute it and/or
++.\" modify it under the terms of the GNU General Public License,
++.\" version 2, as published by the Free Software Foundation.
++.\"
++.\" The GNU General Public License's references to "object code"
++.\" and "executables" are to be interpreted as the output of any
++.\" document formatting or typesetting system, including
++.\" intermediate and printed output.
++.\"
++.\" This manual is distributed in the hope that it will be useful,
++.\" but WITHOUT ANY WARRANTY; without even the implied warranty of
++.\" MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++.\" GNU General Public License for more details.
++.\"
++.\" You should have received a copy of the GNU General Public License along
++.\" with this program; if not, write to the Free Software Foundation, Inc.,
++.\" 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
++.\"
++.TH UCLAMPSET 1 "August 2020" "util-linux" "User Commands"
++.SH NAME
++uclampset \- manipulate the utilization clamping attributes of the system or
++a process.
++.SH SYNOPSIS
++.B uclampset
++[options]
++.RI [ -m\ uclamp_min ]\ [ -M\ uclamp_max ]\ command\  [ argument ...]
++.br
++.B uclampset
++[options]
++.RI [ -m\ uclamp_min ]\ [ -M\ uclamp_max ]
++.B \-p
++.RI pid
++.SH DESCRIPTION
++.B uclampset
++sets or retrieves the utilization clamping attributes of an existing \fIpid\fR,
++or runs \fIcommand\fR with the given attributes.
 +
-+#include <errno.h>
-+#include <getopt.h>
-+#include <sched.h>
-+#include <stdio.h>
-+#include <stdlib.h>
++Utilization clamping is a new feature added in v5.3. It gives a hint to the
++scheduler about the allowed range of utilization the task should be operating
++at.
 +
-+#include "closestream.h"
-+#include "path.h"
-+#include "pathnames.h"
-+#include "procutils.h"
-+#include "sched_attr.h"
-+#include "strutils.h"
++The utilization of the task affects frequency selection and task placement.
++Only schedutil cpufreq governor understands handling util clamp hints at the
++time of writing. Consult your kernel docs for further info about other
++cpufreq governors support.
 +
-+#define NOT_SET		-2U
++If you're running on asymmetric heterogeneous system like Arm's big.LITTLE.
++Utilization clamping can help bias task placement. If the task is boosted such
++that
++.B util_min
++value is higher than the little cores' capacity, then the scheduler will do its
++best to place it on a big core.
 +
-+struct uclampset {
-+	unsigned int util_min;
-+	unsigned int util_max;
++Similarly, if
++.B util_max
++is smaller than or equal the capacity of the little cores, then the scheduler
++can still choose to place it there even if the actual utilization of the task
++is at max.
 +
-+	pid_t pid;
-+	unsigned int	all_tasks:1,		/* all threads of the PID */
-+			system:1,
-+			util_min_set:1,		/* indicates -m option was passed */
-+			util_max_set:1,		/* indicates -M option was passed */
-+			reset_on_fork:1,
-+			verbose:1;
-+	char *cmd;
-+};
++Setting a task's
++.B uclamp_min
++to a none zero value  will effectively boost the task as when it runs it'll
++always start from this utilization value.
 +
-+static void __attribute__((__noreturn__)) usage(void)
-+{
-+	FILE *out = stdout;
++By setting a task's
++.B uclamp_max
++below 1024, this will effectively cap the task as when it runs it'll never be
++able to go above this utilization value.
 +
-+	fprintf(out,
-+		_(" %1$s [options]\n"
-+		  " %1$s [options] --pid <pid> | --system | <command> <arg>...\n"),
-+		program_invocation_short_name);
++The full utilization range is: [0:1024].
++The special value -1 is used to reset to system's default.
 +
-+	fputs(USAGE_SEPARATOR, out);
-+	fputs(_("Show or change the utilization clamping attributes of a process or the system.\n"), out);
-+	fputs(_("Utilization range: [0:1024]\n"), out);
-+	fputs(_("Use special -1 value to reset to system's default\n"), out);
++.SH OPTIONS
++.TP
++.B \-m
++Set util_min value.
++.TP
++.B \-M
++Set util_max value.
++.TP
++.BR \-a ,\  \-\-all-tasks
++Set or retrieve the utilization clamping attributes of all the tasks (threads)
++for a given PID.
++.TP
++.BR \-p ,\  \-\-pid
++Operate on an existing PID and do not launch a new task.
++.TP
++.BR \-s ,\  \-\-system
++Set or retrieve the system-wide utilization clamping attributes.
++.TP
++.BR \-R ,\  \-\-reset-on-fork
++Set
++.B SCHED_FLAG_RESET_ON_FORK
++flag
++.TP
++.BR \-v ,\  \-\-verbose
++Show status information.
++.TP
++.BR \-V ,\  \-\-version
++Display version information and exit.
++.TP
++.BR \-h ,\  \-\-help
++Display help text and exit.
++.SH USAGE
++.TP
++The default behavior is to run a new command:
++.B uclampset
++.I [-m\ uclamp_min]
++.I [-M\ uclamp_max]
++.IR command\  [ arguments ]
++.TP
++You can also retrieve the utilization clamping attributes of an existing task:
++.B uclampset \-p
++.I pid
++.TP
++Or set them:
++.B uclampset \-p
++.I pid
++.I [-m\ uclamp_min]
++.I [-M\ uclamp_max]
++.TP
++Or control the system-wide attributes:
++.B uclampset \-s
++.I [-m\ uclamp_min]
++.I [-M\ uclamp_max]
++.SH PERMISSIONS
++A user must possess
++.B CAP_SYS_NICE
++to change the scheduling attributes of a process.  Any user can retrieve the
++scheduling information.
 +
-+	fputs(USAGE_OPTIONS, out);
-+	fputs(_(" -m                   util_min value to set\n"), out);
-+	fputs(_(" -M                   util_max value to set\n"), out);
-+	fputs(_(" -a, --all-tasks      operate on all the tasks (threads) for a given pid\n"), out);
-+	fputs(_(" -p, --pid            operate on existing given pid\n"), out);
-+	fputs(_(" -s, --system         operate on system\n"), out);
-+	fputs(_(" -R, --reset-on-fork  set reset-on-fork flag\n"), out);
-+	fputs(_(" -v, --verbose        display status information\n"), out);
++.SH NOTES
++The system wide utilization clamp attributes are there to control the _allowed_
++range the tasks can use. By default both
++.B uclamp_min
++and
++.B uclamp_max
++are set to 1024. This means users can set the utilization clamp values for
++their task across the full range [0:1024].
 +
-+	fputs(USAGE_SEPARATOR, out);
-+	printf(USAGE_HELP_OPTIONS(22));
++.TP
++For example:
++.B uclampset \-s
++.I -m\ 512
++.I -M\ 700
++.PP
++will prevent any task from being boosted higher than 512. And all tasks in the
++systems are capped to a utilization of 700. Effectively rendering the maximum
++performance of the system to 700.
 +
-+	printf(USAGE_MAN_TAIL("uclampset(1)"));
-+	exit(EXIT_SUCCESS);
-+}
-+
-+static void show_uclamp_pid_info(pid_t pid, char *cmd)
-+{
-+	struct sched_attr sa;
-+	char *comm;
-+
-+	/* don't display "pid 0" as that is confusing */
-+	if (!pid)
-+		pid = getpid();
-+
-+	if (sched_getattr(pid, &sa, sizeof(sa), 0) != 0)
-+		err(EXIT_FAILURE, _("failed to get pid %d's uclamp values"), pid);
-+
-+	if (cmd)
-+		comm = cmd;
-+	else
-+		comm = proc_get_command_name(pid);
-+
-+	printf(_("%s (%d) util_clamp: min: %d max: %d\n"),
-+	       comm ? : "uknown", pid, sa.sched_util_min, sa.sched_util_max);
-+
-+	if (!cmd)
-+		free(comm);
-+}
-+
-+static unsigned int read_uclamp_sysfs(char *filename)
-+{
-+	unsigned int val;
-+
-+	if (ul_path_read_u32(NULL, &val, filename) != 0)
-+		err(EXIT_FAILURE, _("cannot read %s"), filename);
-+
-+	return val;
-+}
-+
-+static void write_uclamp_sysfs(char *filename, unsigned int val)
-+{
-+	if (ul_path_write_u64(NULL, val, filename) != 0)
-+		err(EXIT_FAILURE, _("cannot write %s"), filename);
-+}
-+
-+static void show_uclamp_system_info(void)
-+{
-+	unsigned int min, max;
-+
-+	min = read_uclamp_sysfs(_PATH_PROC_UCLAMP_MIN);
-+	max = read_uclamp_sysfs(_PATH_PROC_UCLAMP_MAX);
-+
-+	printf(_("System util_clamp: min: %u max: %u\n"), min, max);
-+}
-+
-+static void show_uclamp_info(struct uclampset *ctl)
-+{
-+	if (ctl->system) {
-+		show_uclamp_system_info();
-+	} else if (ctl->all_tasks) {
-+		pid_t tid;
-+		struct proc_tasks *ts = proc_open_tasks(ctl->pid);
-+
-+		if (!ts)
-+			err(EXIT_FAILURE, _("cannot obtain the list of tasks"));
-+
-+		while (!proc_next_tid(ts, &tid))
-+			show_uclamp_pid_info(tid, NULL);
-+
-+		proc_close_tasks(ts);
-+	} else {
-+		show_uclamp_pid_info(ctl->pid, ctl->cmd);
-+	}
-+}
-+
-+static int set_uclamp_one(struct uclampset *ctl, pid_t pid)
-+{
-+	struct sched_attr sa;
-+
-+	if (sched_getattr(pid, &sa, sizeof(sa), 0) != 0)
-+		err(EXIT_FAILURE, _("failed to get pid %d's uclamp values"), pid);
-+
-+	if (ctl->util_min_set)
-+		sa.sched_util_min = ctl->util_min;
-+	if (ctl->util_max_set)
-+		sa.sched_util_max = ctl->util_max;
-+
-+	sa.sched_flags = SCHED_FLAG_KEEP_POLICY |
-+			 SCHED_FLAG_KEEP_PARAMS |
-+			 SCHED_FLAG_UTIL_CLAMP_MIN |
-+			 SCHED_FLAG_UTIL_CLAMP_MAX;
-+
-+	if (ctl->reset_on_fork)
-+		sa.sched_flags |= SCHED_FLAG_RESET_ON_FORK;
-+
-+	return sched_setattr(pid, &sa, 0);
-+}
-+
-+static void set_uclamp_pid(struct uclampset *ctl)
-+{
-+	if (ctl->all_tasks) {
-+		pid_t tid;
-+		struct proc_tasks *ts = proc_open_tasks(ctl->pid);
-+
-+		if (!ts)
-+			err(EXIT_FAILURE, _("cannot obtain the list of tasks"));
-+
-+		while (!proc_next_tid(ts, &tid))
-+			if (set_uclamp_one(ctl, tid) == -1)
-+				err(EXIT_FAILURE, _("failed to set tid %d's uclamp values"), tid);
-+
-+		proc_close_tasks(ts);
-+
-+	} else if (set_uclamp_one(ctl, ctl->pid) == -1) {
-+		err(EXIT_FAILURE, _("failed to set pid %d's uclamp values"), ctl->pid);
-+	}
-+}
-+
-+static void set_uclamp_system(struct uclampset *ctl)
-+{
-+	if (!ctl->util_min_set)
-+		ctl->util_min = read_uclamp_sysfs(_PATH_PROC_UCLAMP_MIN);
-+
-+	if (!ctl->util_max_set)
-+		ctl->util_max = read_uclamp_sysfs(_PATH_PROC_UCLAMP_MAX);
-+
-+	if (ctl->util_min > ctl->util_max) {
-+		errno = EINVAL;
-+		err(EXIT_FAILURE, _("util_min must be <= util_max"));
-+	}
-+
-+	write_uclamp_sysfs(_PATH_PROC_UCLAMP_MIN, ctl->util_min);
-+	write_uclamp_sysfs(_PATH_PROC_UCLAMP_MAX, ctl->util_max);
-+}
-+
-+static void validate_util(int val)
-+{
-+	if (val > 1024 || val < -1) {
-+		errno = EINVAL;
-+		err(EXIT_FAILURE, _("%d out of range"), val);
-+	}
-+}
-+
-+int main(int argc, char **argv)
-+{
-+	struct uclampset _ctl = {
-+		.pid = -1,
-+		.util_min = NOT_SET,
-+		.util_max = NOT_SET,
-+		.cmd = NULL
-+	};
-+	struct uclampset *ctl = &_ctl;
-+	int c;
-+
-+	static const struct option longopts[] = {
-+		{ "all-tasks",		no_argument, NULL, 'a' },
-+		{ "pid",		no_argument, NULL, 'p' },
-+		{ "system",		no_argument, NULL, 's' },
-+		{ "reset-on-fork",	no_argument, NULL, 'R' },
-+		{ "help",		no_argument, NULL, 'h' },
-+		{ "verbose",		no_argument, NULL, 'v' },
-+		{ "version",		no_argument, NULL, 'V' },
-+		{ NULL,			no_argument, NULL, 0 }
-+	};
-+
-+	setlocale(LC_ALL, "");
-+	bindtextdomain(PACKAGE, LOCALEDIR);
-+	textdomain(PACKAGE);
-+	close_stdout_atexit();
-+
-+	while((c = getopt_long(argc, argv, "+asRphmMvV", longopts, NULL)) != -1)
-+	{
-+		switch (c) {
-+		case 'a':
-+			ctl->all_tasks = 1;
-+			break;
-+		case 'p':
-+			errno = 0;
-+			ctl->pid = strtos32_or_err(argv[optind], _("invalid PID argument"));
-+			optind++;
-+			break;
-+		case 's':
-+			ctl->system = 1;
-+			break;
-+		case 'R':
-+			ctl->reset_on_fork = 1;
-+			break;
-+		case 'v':
-+			ctl->verbose = 1;
-+			break;
-+		case 'm':
-+			ctl->util_min = strtos32_or_err(argv[optind], _("invalid util_min argument"));
-+			ctl->util_min_set = 1;
-+			validate_util(ctl->util_min);
-+			optind++;
-+			break;
-+		case 'M':
-+			ctl->util_max = strtos32_or_err(argv[optind], _("invalid util_max argument"));
-+			ctl->util_max_set = 1;
-+			validate_util(ctl->util_max);
-+			optind++;
-+			break;
-+		case 'V':
-+			print_version(EXIT_SUCCESS);
-+			/* fallthrough */
-+		case 'h':
-+			usage();
-+		default:
-+			errtryhelp(EXIT_FAILURE);
-+		}
-+	}
-+
-+	if (argc == 1) {
-+		usage();
-+		exit(EXIT_FAILURE);
-+	}
-+
-+	/* all_tasks implies --pid */
-+	if (ctl->all_tasks && ctl->pid == -1) {
-+		errno = EINVAL;
-+		err(EXIT_FAILURE, _("missing -p option"));
-+	}
-+
-+	if (!ctl->util_min_set && !ctl->util_max_set) {
-+		/* -p or -s must be passed */
-+		if (!ctl->system && ctl->pid == -1) {
-+			usage();
-+			exit(EXIT_FAILURE);
-+		}
-+
-+		show_uclamp_info(ctl);
-+		return EXIT_SUCCESS;
-+	}
-+
-+	/* ensure there's a command to execute if no -s or -p */
-+	if (!ctl->system && ctl->pid == -1) {
-+		if (argc <= optind) {
-+			errno = EINVAL;
-+			err(EXIT_FAILURE, _("no cmd to execute"));
-+		}
-+
-+		argv += optind;
-+		ctl->cmd = argv[0];
-+	}
-+
-+	if (ctl->pid == -1)
-+		ctl->pid = 0;
-+
-+	if (ctl->system)
-+		set_uclamp_system(ctl);
-+	else
-+		set_uclamp_pid(ctl);
-+
-+	if (ctl->verbose)
-+		show_uclamp_info(ctl);
-+
-+	if (ctl->cmd) {
-+		execvp(ctl->cmd, argv);
-+		errexec(ctl->cmd);
-+	}
-+
-+	return EXIT_SUCCESS;
-+}
++Consult your kernel docs for the exact expected behavior on that kernel.
++.SH AUTHORS
++.UR qais.yousef@arm.com
++Qais Yousef
++.UE
++.SH SEE ALSO
++.BR nice (1),
++.BR renice (1),
++.BR taskset (1),
++.BR sched (7)
++.sp
++See
++.BR sched_setscheduler (2)
++and
++.BR sched_setattr (2)
++for a description of the Linux scheduling scheme.
++.SH AVAILABILITY
++The uclampset command is part of the util-linux package and is available from
++https://www.kernel.org/pub/linux/utils/util-linux/.
 -- 
 2.25.1
 
