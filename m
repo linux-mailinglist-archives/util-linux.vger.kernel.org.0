@@ -2,23 +2,23 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 54306316490
-	for <lists+util-linux@lfdr.de>; Wed, 10 Feb 2021 12:05:07 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 042BC316BE8
+	for <lists+util-linux@lfdr.de>; Wed, 10 Feb 2021 17:58:49 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S230231AbhBJLEm convert rfc822-to-8bit (ORCPT
-        <rfc822;lists+util-linux@lfdr.de>); Wed, 10 Feb 2021 06:04:42 -0500
-Received: from spam.auroraoh.com ([24.56.89.101]:49840 "EHLO
+        id S232854AbhBJQ63 convert rfc822-to-8bit (ORCPT
+        <rfc822;lists+util-linux@lfdr.de>); Wed, 10 Feb 2021 11:58:29 -0500
+Received: from spam.auroraoh.com ([24.56.89.101]:46694 "EHLO
         barracuda.auroraoh.com" rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org
-        with ESMTP id S231561AbhBJLCb (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Wed, 10 Feb 2021 06:02:31 -0500
-X-ASG-Debug-ID: 1612954876-112c0d6a799d130001-4SocVm
-Received: from COASRV-MAIL2.auroraoh.loc (coasrv-mail2.auroraoh.loc [10.3.1.15]) by barracuda.auroraoh.com with ESMTP id cXe4xVxvHi3InLQG; Wed, 10 Feb 2021 06:01:16 -0500 (EST)
+        with ESMTP id S232381AbhBJQ6H (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Wed, 10 Feb 2021 11:58:07 -0500
+X-ASG-Debug-ID: 1612976211-112c0d6a799e470004-4SocVm
+Received: from COASRV-MAIL2.auroraoh.loc (coasrv-mail2.auroraoh.loc [10.3.1.15]) by barracuda.auroraoh.com with ESMTP id Kfm58qBPelrCYVGz; Wed, 10 Feb 2021 11:56:53 -0500 (EST)
 X-Barracuda-Envelope-From: JanuskaD@auroraoh.com
 X-Barracuda-RBL-Trusted-Forwarder: 10.3.1.15
 Received: from [172.20.10.5] (197.210.29.8) by COASRV-MAIL2.auroraoh.loc
  (10.3.1.15) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.1713.5; Tue, 9 Feb 2021
- 02:50:53 -0500
+ 02:49:22 -0500
 Content-Type: text/plain; charset="iso-8859-1"
 X-Barracuda-RBL-Trusted-Forwarder: 172.20.10.5
 MIME-Version: 1.0
@@ -32,24 +32,24 @@ X-ASG-Orig-Subj: We are a registered Private Loan Investment Company in the Unit
  we also registered with the Turkish British Chamber of Commerce and Industry
  (TBCCI) we have operations in Europe and Asia.
 From:   <januskad@auroraoh.com>
-Date:   Tue, 9 Feb 2021 15:50:07 +0800
+Date:   Tue, 9 Feb 2021 15:48:35 +0800
 Reply-To: <cfolimiited@gmail.com>
 X-Priority: 1 (High)
 X-Antivirus: Avast (VPS 210207-2, 02/07/2021), Outbound message
 X-Antivirus-Status: Clean
-Message-ID: <9210dba9-0233-4a94-93b9-d853653b8064@COASRV-MAIL2.auroraoh.loc>
+Message-ID: <196b2ea0-f74d-4df8-9bb4-fc5d57910afb@COASRV-MAIL2.auroraoh.loc>
 X-Originating-IP: [197.210.29.8]
 X-ClientProxiedBy: COASRV-MAIL3.auroraoh.loc (10.3.1.13) To
  COASRV-MAIL2.auroraoh.loc (10.3.1.15)
 X-Barracuda-Connect: coasrv-mail2.auroraoh.loc[10.3.1.15]
-X-Barracuda-Start-Time: 1612954876
+X-Barracuda-Start-Time: 1612976212
 X-Barracuda-URL: https://10.3.1.12:443/cgi-mod/mark.cgi
 X-Virus-Scanned: by bsmtpd at auroraoh.com
 X-Barracuda-Scan-Msg-Size: 755
 X-Barracuda-BRTS-Status: 1
 X-Barracuda-Spam-Score: 1.61
 X-Barracuda-Spam-Status: No, SCORE=1.61 using global scores of TAG_LEVEL=1000.0 QUARANTINE_LEVEL=1000.0 KILL_LEVEL=5.0 tests=BSF_SC0_SA609_NRN, BSF_SC0_SA912_RP_FR, BSF_SC0_SA_TO_FROM_ADDR_MATCH, NO_REAL_NAME
-X-Barracuda-Spam-Report: Code version 3.2, rules version 3.2.3.87883
+X-Barracuda-Spam-Report: Code version 3.2, rules version 3.2.3.87889
         Rule breakdown below
          pts rule name              description
         ---- ---------------------- --------------------------------------------------
