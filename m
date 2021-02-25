@@ -2,60 +2,62 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 301673235FE
-	for <lists+util-linux@lfdr.de>; Wed, 24 Feb 2021 04:24:45 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 1B209324C1E
+	for <lists+util-linux@lfdr.de>; Thu, 25 Feb 2021 09:37:46 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S233167AbhBXDY3 (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Tue, 23 Feb 2021 22:24:29 -0500
-Received: from mail.jvpinto.com ([65.49.11.60]:41217 "EHLO mail.JVPinto.com"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S233004AbhBXDY2 (ORCPT <rfc822;util-linux@vger.kernel.org>);
-        Tue, 23 Feb 2021 22:24:28 -0500
-Received: from RW-EXC1.JVPinto.com (2002:ac20:10d::ac20:10d) by
- RW-EXC1.JVPinto.com (2002:ac20:10d::ac20:10d) with Microsoft SMTP Server
- (TLS) id 15.0.1497.2; Tue, 23 Feb 2021 19:00:51 -0800
-Received: from User (52.231.198.195) by RW-EXC1.JVPinto.com (172.32.1.13) with
- Microsoft SMTP Server id 15.0.1497.2 via Frontend Transport; Tue, 23 Feb 2021
- 19:00:37 -0800
-Reply-To: <ms.reem@yandex.com>
-From:   "Ms. Reem" <johnpinto@jvpinto.com>
-Subject: Hello okay
-Date:   Wed, 24 Feb 2021 03:00:51 +0000
+        id S235854AbhBYIgc (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Thu, 25 Feb 2021 03:36:32 -0500
+Received: from us-smtp-delivery-124.mimecast.com ([216.205.24.124]:46466 "EHLO
+        us-smtp-delivery-124.mimecast.com" rhost-flags-OK-OK-OK-OK)
+        by vger.kernel.org with ESMTP id S235168AbhBYIgb (ORCPT
+        <rfc822;util-linux@vger.kernel.org>);
+        Thu, 25 Feb 2021 03:36:31 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+        s=mimecast20190719; t=1614242104;
+        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+         content-transfer-encoding:content-transfer-encoding:
+         in-reply-to:in-reply-to:references:references;
+        bh=vFcSpCsL1mTIInnFJmjhQbyRRykxN+1i+s4svk888FY=;
+        b=UUzKQPjARvmmPJqA/9XptN8WmcYE8X6C6NmfgcAt13jgG9d/0KWFBgTFqbNNOOdebtbZae
+        Llc4hifwEXa/+jRoGa3zdadS2VILZ6c2LzpGL6/9kl0JgFFeYe3gaf2qdEyR3TVEnJJJ0a
+        4mkA144fXlYGzethygs1Yw4zwomfPBo=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-581-BlbB81T7MTO8eHYdr0t51Q-1; Thu, 25 Feb 2021 03:35:00 -0500
+X-MC-Unique: BlbB81T7MTO8eHYdr0t51Q-1
+Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.phx2.redhat.com [10.5.11.23])
+        (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+        (No client certificate requested)
+        by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 753441966323
+        for <util-linux@vger.kernel.org>; Thu, 25 Feb 2021 08:34:59 +0000 (UTC)
+Received: from ws.net.home (ovpn-114-3.ams2.redhat.com [10.36.114.3])
+        by smtp.corp.redhat.com (Postfix) with ESMTPS id 960ED19C79;
+        Thu, 25 Feb 2021 08:34:58 +0000 (UTC)
+Date:   Thu, 25 Feb 2021 09:34:56 +0100
+From:   Karel Zak <kzak@redhat.com>
+To:     =?utf-8?B?xaB0xJtww6FuIE7Em21lYw==?= <snemec@redhat.com>
+Cc:     util-linux@vger.kernel.org
+Subject: Re: [PATCH] su: fix man page typos
+Message-ID: <20210225083456.lamxe4qnwqfxmz5z@ws.net.home>
+References: <20210223152554.2649033-1-snemec@redhat.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="Windows-1251"
-Content-Transfer-Encoding: 7bit
-X-Priority: 3
-X-MSMail-Priority: Normal
-X-Mailer: Microsoft Outlook Express 6.00.2600.0000
-X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2600.0000
-Message-ID: <756c9500808840709979f35863c81045@RW-EXC1.JVPinto.com>
-To:     Undisclosed recipients:;
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <20210223152554.2649033-1-snemec@redhat.com>
+X-Scanned-By: MIMEDefang 2.84 on 10.5.11.23
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-Hello,
+On Tue, Feb 23, 2021 at 04:25:54PM +0100, Štěpán Němec wrote:
+>  login-utils/su.1 | 8 ++++----
+>  1 file changed, 4 insertions(+), 4 deletions(-)
 
-My name is Ms. Reem Ebrahim Al-Hashimi, I am the "Minister of state
-and Petroleum" also "Minister of State for International Cooperation"
-in UAE. I write to you on behalf of my other "three (3) colleagues"
-who has approved me to solicit for your "partnership in claiming of
-{us$47=Million}" from a Financial Home in Cambodia on their behalf and
-for our "Mutual Benefits".
+ Applied, thanks.
 
-The Fund {us$47=Million} is our share from the (over-invoiced) Oil/Gas
-deal with Cambodian/Vietnam Government within 2013/2014, however, we
-don't want our government to know about the fund. If this proposal
-interests you, let me know, by sending me an email and I will send to
-you detailed information on how this business would be successfully
-transacted. Be informed that nobody knows about the secret of this
-fund except us, and we know how to carry out the entire transaction.
-So I am compelled to ask, that you will stand on our behalf and
-receive this fund into any account that is solely controlled by you.
+-- 
+ Karel Zak  <kzak@redhat.com>
+ http://karelzak.blogspot.com
 
-We will compensate you with 15% of the total amount involved as
-gratification for being our partner in this transaction. Reply to:
-ms.reem@yandex.com
-
-Regards,
-Ms. Reem.
