@@ -2,60 +2,96 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 2D6393273C2
-	for <lists+util-linux@lfdr.de>; Sun, 28 Feb 2021 19:12:11 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 60A47328AB8
+	for <lists+util-linux@lfdr.de>; Mon,  1 Mar 2021 19:23:59 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231426AbhB1SLJ (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Sun, 28 Feb 2021 13:11:09 -0500
-Received: from mail.jvpinto.com ([65.49.11.60]:49031 "EHLO mail.JVPinto.com"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S231295AbhB1SLI (ORCPT <rfc822;util-linux@vger.kernel.org>);
-        Sun, 28 Feb 2021 13:11:08 -0500
-Received: from RW-EXC1.JVPinto.com (2002:ac20:10d::ac20:10d) by
- RW-EXC1.JVPinto.com (2002:ac20:10d::ac20:10d) with Microsoft SMTP Server
- (TLS) id 15.0.1497.2; Sun, 28 Feb 2021 10:09:57 -0800
-Received: from User (52.231.198.195) by RW-EXC1.JVPinto.com (172.32.1.13) with
- Microsoft SMTP Server id 15.0.1497.2 via Frontend Transport; Sun, 28 Feb 2021
- 10:09:42 -0800
-Reply-To: <ms.reem@yandex.com>
-From:   "Ms. Reem" <johnpinto@jvpinto.com>
-Subject: Hello okay
-Date:   Sun, 28 Feb 2021 18:09:56 +0000
-MIME-Version: 1.0
-Content-Type: text/plain; charset="Windows-1251"
-Content-Transfer-Encoding: 7bit
-X-Priority: 3
-X-MSMail-Priority: Normal
-X-Mailer: Microsoft Outlook Express 6.00.2600.0000
-X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2600.0000
-Message-ID: <5f4a8b805b97456d91278edef989f695@RW-EXC1.JVPinto.com>
-To:     Undisclosed recipients:;
+        id S239657AbhCASWL (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Mon, 1 Mar 2021 13:22:11 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:60626 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S239128AbhCASUH (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Mon, 1 Mar 2021 13:20:07 -0500
+Received: from mail-qv1-xf2b.google.com (mail-qv1-xf2b.google.com [IPv6:2607:f8b0:4864:20::f2b])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id A426FC061788
+        for <util-linux@vger.kernel.org>; Mon,  1 Mar 2021 10:19:23 -0800 (PST)
+Received: by mail-qv1-xf2b.google.com with SMTP id gi9so8572671qvb.10
+        for <util-linux@vger.kernel.org>; Mon, 01 Mar 2021 10:19:23 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=from:content-transfer-encoding:mime-version:subject:message-id:date
+         :to;
+        bh=pFmrCPQvIi44VDMEthwCxsE58nRPjCx+qvUzSEbltFY=;
+        b=krD0XWuD9LlePce+TnzNSlhH899dyCYb8yZVzZDwVbVFkMRUJPG91MyEKAUQ7YTozJ
+         yWX78W9MX3C0dj8ExPw/DxIMESQ5krCVfVgZuxrJFUsg9q2YU6PwXZO33rsanl+4rc4x
+         x2FZobOG+SbFp50f922vD+OI2I6VJjxJxDox7hULTE0ajmIELUSaOjysQJihxrGjp1Sf
+         USJRX+1pUYTv8yNFQmvPUQuRN2JG1H6XhM1v6QbdCbraU0WKRA5vJ5rqhBlGM5UQnIBr
+         BPn8ClZIwqMXsXMlxLF9TwxGmsRnU+oS3VVTB7TrIVvlNZIpDSMyrA1z7SA0/KS3fEcx
+         p5RQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:content-transfer-encoding:mime-version
+         :subject:message-id:date:to;
+        bh=pFmrCPQvIi44VDMEthwCxsE58nRPjCx+qvUzSEbltFY=;
+        b=jkNUfWN4fn6hiNCorTS5wf8wNB6YQDpNIEXBKltDricqX08NiR+a9j304+uaTh0ges
+         T/vaam41WmzWc6izD/uj5WX5+67akFfWR9uevQW2XCpQin3kirW4z8RJMt3S/axjPADB
+         ohgVbAQ8cdpyt7BcfqIBWDztAWUXUTs1XNnYnKRP2KvlwYJwp4P7iaqTgrUtLvFri7HD
+         uqFs6ZYcGEbJ3rEsRS6EiOZuy2afTbG+WZvu12FfPe3x64NUIgdbHR0JT/vm64Ag3D4a
+         fkBU9aqsAK5YHcgupoWC87SQONXcfxNjwYWcf2Duo6CRXlwyBtZJh1d8ubIheBcczP62
+         Wnmw==
+X-Gm-Message-State: AOAM53074rWMIQ0iHckzdyAB0WQ7/gTPpB1yhSR+NlU3smbc0khsFbbK
+        5Wj/w2UwSXJqRXTKgoCvS5MWm2qhl3mx4g==
+X-Google-Smtp-Source: ABdhPJzRgkRFss1GVH/BsRW8gxiUo8eMeaS3XVqGNZU0sNBBiO5N0qKWf9PZxLr2E0/e3SM4Xc9U8A==
+X-Received: by 2002:ad4:5bea:: with SMTP id k10mr15355288qvc.2.1614622762511;
+        Mon, 01 Mar 2021 10:19:22 -0800 (PST)
+Received: from [192.168.0.104] (c-73-87-224-7.hsd1.md.comcast.net. [73.87.224.7])
+        by smtp.gmail.com with ESMTPSA id x7sm13161908qkf.111.2021.03.01.10.19.21
+        for <util-linux@vger.kernel.org>
+        (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+        Mon, 01 Mar 2021 10:19:21 -0800 (PST)
+From:   Andrew Shapiro <anshapiro@gmail.com>
+Content-Type: text/plain;
+        charset=us-ascii
+Content-Transfer-Encoding: quoted-printable
+Mime-Version: 1.0 (Mac OS X Mail 13.4 \(3608.120.23.2.4\))
+Subject: [PATCH] utmpdup: Ensure flushing when using follow flag
+Message-Id: <593E7F58-59CA-4310-8420-D400CBF8ADE7@gmail.com>
+Date:   Mon, 1 Mar 2021 13:18:27 -0500
+To:     util-linux@vger.kernel.org
+X-Mailer: Apple Mail (2.3608.120.23.2.4)
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-Hello,
+The following usages of utmpdump result in no output being flushed to =
+the specified file because the default output buffering is fully =
+buffered:
 
-My name is Ms. Reem Ebrahim Al-Hashimi, I am the "Minister of state
-and Petroleum" also "Minister of State for International Cooperation"
-in UAE. I write to you on behalf of my other "three (3) colleagues"
-who has approved me to solicit for your "partnership in claiming of
-{us$47=Million}" from a Financial Home in Cambodia on their behalf and
-for our "Mutual Benefits".
+$ utmpdump --follow --output myOutputFile /var/log/utmp
+$ utmpdump --follow /var/log/utmp > myOutputFile
 
-The Fund {us$47=Million} is our share from the (over-invoiced) Oil/Gas
-deal with Cambodian/Vietnam Government within 2013/2014, however, we
-don't want our government to know about the fund. If this proposal
-interests you, let me know, by sending me an email and I will send to
-you detailed information on how this business would be successfully
-transacted. Be informed that nobody knows about the secret of this
-fund except us, and we know how to carry out the entire transaction.
-So I am compelled to ask, that you will stand on our behalf and
-receive this fund into any account that is solely controlled by you.
+This change configures line buffering for these scenarios so that output =
+will be flushed after each log event.
 
-We will compensate you with 15% of the total amount involved as
-gratification for being our partner in this transaction. Reply to:
-ms.reem@yandex.com
+Signed-off-by: Andrew Shapiro <anshapiro@gmail.com>
+---
+ login-utils/utmpdump.c | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-Regards,
-Ms. Reem.
+diff --git a/login-utils/utmpdump.c b/login-utils/utmpdump.c
+index 5ccae8655..b9a92b5f6 100644
+--- a/login-utils/utmpdump.c
++++ b/login-utils/utmpdump.c
+@@ -367,6 +367,10 @@ int main(int argc, char **argv)
+ 	if (!out)
+ 		out =3D stdout;
+
++	if (follow && (out !=3D stdout || !isatty(STDOUT_FILENO))) {
++		setvbuf(out, NULL, _IOLBF, 0);
++	}
++
+ 	if (optind < argc) {
+ 		filename =3D argv[optind];
+ 		in =3D fopen(filename, "r");
+--
+2.24.3 (Apple Git-128)
+
