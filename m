@@ -2,88 +2,154 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 2D27F33C30D
-	for <lists+util-linux@lfdr.de>; Mon, 15 Mar 2021 18:00:50 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id C2BAA33C6D5
+	for <lists+util-linux@lfdr.de>; Mon, 15 Mar 2021 20:30:33 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S234505AbhCOQ7q (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Mon, 15 Mar 2021 12:59:46 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:55826 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S234778AbhCOQ7W (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Mon, 15 Mar 2021 12:59:22 -0400
-Received: from mail-lf1-x12f.google.com (mail-lf1-x12f.google.com [IPv6:2a00:1450:4864:20::12f])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id CF6F1C061762
-        for <util-linux@vger.kernel.org>; Mon, 15 Mar 2021 09:59:20 -0700 (PDT)
-Received: by mail-lf1-x12f.google.com with SMTP id v2so44949479lft.9
-        for <util-linux@vger.kernel.org>; Mon, 15 Mar 2021 09:59:20 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:reply-to:from:date:message-id:subject:to;
-        bh=nn1W9Wc+k1CJYE8WxkSJGXK0N+qf/mcCb4Whw81sCBc=;
-        b=eLaM2VJC2VPxWCmJI4pRm7gIwsdtcXVX+gwqcmG5feM136k/MJaMOmGBB2kdOk6Af4
-         OdHMopIeKZg49h5cW6vGbxvuQTW/SkQ9HuA/ev1jJcl0AAurwCe0DNziSPl1EC93VQ1C
-         ZhL/pBGs4yClRQ+yNSuJ3e3yxg7nGxyN7EkaEc9UnMX6RUqxH4o2rsWq+1OyBGhsQ60t
-         mlr/pvPbTkbXwuQ72wwZySMbV7eKPbN/RoefzS3gvRqxUNqqkiwACUnwYhkfp8NF4XOV
-         usiuSlIdkRdT/XFr8JMUz5dBUV3A2ubIZJBv5AzJJikhHdudGeMH2zRoSMkB+ojxPFvS
-         VkOg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
-         :subject:to;
-        bh=nn1W9Wc+k1CJYE8WxkSJGXK0N+qf/mcCb4Whw81sCBc=;
-        b=JJHy4CFlWWmHUzYoIRVCsTP0Dvct3FwTrlgeRes7Nqn0A+StXF5EKMOqeZLEyGE845
-         MluLm1AYI19K8UlrAxt8hAsf7SPchYvYkyaelop5lLW9zww5Q4ICrwePXGdGQ2/NXHHZ
-         51R35LnlDhBjLllzh+Olu1h5DIbAFr1z4ZByADaWdc94wCu66eg49D2WevmV0vzrDJl2
-         R5Bi9uzXljpPDBbhvcrYKPMPg6jgFbZTiBfnEdl7rfT+i/tjW+3YkqZwJ/7Sn/sGnNZA
-         YOY84BYI/NIwZK+kgJ+BnRilZ3eW0fEoPtdrJo5PkFdQJIy1UnYtQ92PalvTMAeL0CI0
-         YKNA==
-X-Gm-Message-State: AOAM5334d1igR6emfuFTYwsJhV9l/F2Y+ZU7FPEDo64K4FxCFnWTmELY
-        SSPO8C2LvYlEQhhwba1vpOLuDYGbSRbNL5+nCJQ=
-X-Google-Smtp-Source: ABdhPJz7/gfpeD06O79Pnw07FE/mA8Ji4e09y71x9+hvfgu2S8MD9xmK2/Q/AOYN3ItI3qPG23+Pfv2arGi/0+HLTes=
-X-Received: by 2002:a05:6512:370f:: with SMTP id z15mr8619417lfr.562.1615827559310;
- Mon, 15 Mar 2021 09:59:19 -0700 (PDT)
+        id S231817AbhCOTaB convert rfc822-to-8bit (ORCPT
+        <rfc822;lists+util-linux@lfdr.de>); Mon, 15 Mar 2021 15:30:01 -0400
+Received: from ishtar.tlinx.org ([173.164.175.65]:45946 "EHLO
+        Ishtar.sc.tlinx.org" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S233635AbhCOT3l (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Mon, 15 Mar 2021 15:29:41 -0400
+Received: from [192.168.3.12] (Athenae [192.168.3.12])
+        by Ishtar.sc.tlinx.org (8.14.7/8.14.4/SuSE Linux 0.8) with ESMTP id 12FJTZWb074209;
+        Mon, 15 Mar 2021 12:29:38 -0700
+Message-ID: <604FB5A1.3010404@tlinx.org>
+Date:   Mon, 15 Mar 2021 12:29:37 -0700
+From:   L A Walsh <lkml@tlinx.org>
+User-Agent: Thunderbird 2.0.0.24 (Windows/20100228)
 MIME-Version: 1.0
-Received: by 2002:a05:651c:1382:0:0:0:0 with HTTP; Mon, 15 Mar 2021 09:59:18
- -0700 (PDT)
-Reply-To: ezbtg22@gmail.com
-From:   "Mrs.Glenn" <mrganuserge@gmail.com>
-Date:   Mon, 15 Mar 2021 09:59:18 -0700
-Message-ID: <CA+Wfa7YG6kanV1cpekUWYP2FGpSSSKYxaq+gNSZdX+nSoPjTrA@mail.gmail.com>
-Subject: From Mrs.Glenn
-To:     undisclosed-recipients:;
-Content-Type: text/plain; charset="UTF-8"
+To:     Karel Zak <kzak@redhat.com>
+CC:     util-linux@vger.kernel.org
+Subject: Re: is there a util, or can findmnt be enhanced...(RFE?)
+References: <604A8111.8090100@tlinx.org> <20210312075543.jei3secawflwrw6b@ws.net.home> <604C4427.3040501@tlinx.org> <20210315110221.fpz66zkpwqp6ebva@ws.net.home>
+In-Reply-To: <20210315110221.fpz66zkpwqp6ebva@ws.net.home>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8BIT
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
--- 
-Dear Beloved,
+Sorry, thought this was something simple, but when I thought
+about it I ended up with a few more details 😓
 
-I am Mrs Elizabet Glenn from Israel. I am a missionary but right now
-in a hospital bed in Israel. I am 59 years and childless; my husband
-is dead. I was diagnosed with terminal cancer. And my doctor just
-predicted that I have but very limited time to live due to damages in
-my system and as a result of that I decided to dispose my 10.5 million
-US dollars to a God-fearing one for the continuation of charitable
-work. This is why I located you.My guess about you may not be accurate
-because I came across your contact at the humanitarian calendar event
-of the year but I believe in God who  divinely directed me to you for
-this solemn proposal of charitable work. I wholeheartedly wish to
-bequeath my fortune to you as a God-fearing person for the
-continuation of charitable work anywhere around the world.
+On 2021/03/15 04:02, Karel Zak wrote:
+>  On Fri, Mar 12, 2021 at 08:48:39PM -0800, L A Walsh wrote:
+> > Why does it
+> > produce no output when a non-mount-point is entered?  I.e. -- is that
+> > behavior something that is currently relied upon?
+>
+>  Do you mean the default output (when --target is not specified)?
+>
+>  The problem is that findmnt follows mount(8) behavior when search for
+>  filesystem. It means you do not have to be explicit and you can use
+>  source as well as target...
+---
+  Note: commenting from mount manpage:
 
-I shall be going in for a surgery operations soonest and desire this
-money to be transferred to you as I do not wish to leave this money in
-the bank because bankers might misuse it for their own interest after
-my death. As soon as I receive your quick reply assuring me that you
-will utilize the money as I instructed you for the benefit of the less
-privilege, I shall give you more details and also instruct my bank to
-release the money to you for the charity project. I hope you receive
-this mail in good health.
+|   For more robust and customizable output  use  findmnt(8),  espe-
+|   cially  in  your  scripts.   Note that control characters in the
+|   mountpoint name are replaced with '?'.
+---
+  I.e. "findmnt" was created because the behavior of 'mount' was
+lacking. 😉   In 'mount', if you give a non-mount point, you get
+mount's idea of useful:
 
-Because I don t know what will be my situation in next minute,
+  mount: /dev/sda: can't find in /etc/fstab
+  mount /home/karel: can't find in /etc/fstab
 
-I am waiting for your reply.
+  Since findmnt was created because the output of 'mount' is
+lacking, findmnt shouldn't need to push off output to another
+util because it, itself is lacking! 😟
 
-Yours sincerely,
-Mrs Elizabet Glenn.
+Ex:
+>  $ findmnt --target /dev/sda3
+>  TARGET SOURCE   FSTYPE   OPTIONS
+>  /dev   devtmpfs devtmpfs 
+rw,nosuid,noexec,size=8144964k,nr_inodes=2036241,mode=755,inode64
+----
+    1st comment: unix philosophy, less is more: findmnt should only
+list headers when asked for them.  Two reasons:  Since the output
+doesn't fit on 1 line, it will be wrapped and will be confusing
+for interactive use, and for script use -- they don't need it and
+can adjust output for exactly what they want.  Usually, headers
+need removing so data fields can be processed.
+
+    2nd comment -- options should remain optional and not
+listed by default (use --verbose to display all options).
+
+    2a) default options should be suppressed by default (else
+--expand-defaults could be used if really needed).  At most, display
+'default' for an actual mountpoint (+ deltas from default)
+
+   3rd comment -- don't truncate by default, but do allow
+field width specifiers (%.20SOURCE\t %.30TARGET...).  To
+truncate, maybe have -w[maxwidth], with default being screen
+width if to tty?
+
+
+>  now try to imagine --target is the default, you will get always any
+>  answer for arbitrary path ... IMHO very confusing for many users.
+---
+  Honestly, isn't the default output likely confusing for many
+users?  😉  Alternatively,
+
+if device w/mount point, show:
+
+# findmnt /dev/sdb
+/dev/sdb1   [not] mounted on  /boot
+# findmnt /boot
+/dev/sdb1   [not] mounted on  /boot
+
+(i.e. ^^ keep same behavior of allowing dev or /mntpnt)
+
+if device w/no mountpoint in /etc/fstab, then same as 'mount':
+
+# findmnt /dev/sda
+findmnt: /dev/sda: can't find in /etc/fstab
+
+if not device and not mountpoint (I'm not 100% certain about
+the exact text, but something like):
+
+# findmnt /boot/sbin/v86d
+sbin/v86d   in /boot      (/dev/sdb1)
+  -or-
+/boot/[sbin/v86d]   on    /dev/sdb1
+
+Or if format specified, for above 2:
+# findmnt --format "%-40SUBPATH in TARGET\t(SOURCE)
+# findmnt --format "TARGET/[SUBPATH]\ton\tSOURCE"
+
+
+Having 'no output' for the default, is also a bit
+confusing for users
+
+
+
+>  I have doubts we can change this default behavior due to backward
+>  compatibility (yes, the proper way how to use findmnt in scripts is to
+>  use --target, --sources or --mountpoint, but people do not use it
+>  ...).
+---
+  That's just the thing... who/what could be relying on "no output"?
+
+
+
+>  It would be probably better to introduce a small new util "path2fs" to
+>  get mountpoint (or source), but without any other findmnt functionality.
+---
+See comment about why findmnt was needed in the 1st place... 😁
+
+
+>  We have mountpoint(1), but it returns TRUE/FALSE if the given path is
+>  a mountpoint.
+---
+
+  Ya, sorta unrelated, but that's where "no output" might be
+expected since it's only used for its return value, but I can't
+see how findmnt would be similarly used...
+
+*cheers*!
+😱
+
+
