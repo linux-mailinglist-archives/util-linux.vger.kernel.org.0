@@ -2,86 +2,113 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 49E0F339C7F
-	for <lists+util-linux@lfdr.de>; Sat, 13 Mar 2021 08:04:47 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id BC88333B08F
+	for <lists+util-linux@lfdr.de>; Mon, 15 Mar 2021 12:03:17 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231383AbhCMHEM convert rfc822-to-8bit (ORCPT
-        <rfc822;lists+util-linux@lfdr.de>); Sat, 13 Mar 2021 02:04:12 -0500
-Received: from bufferz.csloxinfo.com ([203.146.237.187]:22235 "EHLO
-        bufferz9.csloxinfo.com" rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org
-        with ESMTP id S230309AbhCMHEM (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Sat, 13 Mar 2021 02:04:12 -0500
-Received: from mailx1-13.cslox.com (unknown [10.20.140.13])
-        by bufferz9.csloxinfo.com (Postfix) with ESMTP id 19167224A2B7;
-        Sat, 13 Mar 2021 14:04:02 +0700 (ICT)
-IronPort-SDR: 8e7dnQR2J1tEuwqlCGgFQ6Xs13nxIWkKZVGyu9vZxan5rXjXgjMLMK9GaM5fjtuiJElLSei6cU
- xb7azBq6uBAm+MwmTs9Rw5e3Ct4kMpkYk=
-IronPort-HdrOrdr: =?us-ascii?q?A9a23=3A+gchhaz9uwpYZ4jKsiTyKrPwob1zdoIgy1?=
- =?us-ascii?q?knxilNYDZSddGVkN3rsfgA3wT1kSsQXnZIo6HjBICrR3TA+ZlppbQLNbC5Uw?=
- =?us-ascii?q?X8/EeuJodu7YztqgeQeBHW3OhbyKtmbuxCGMT9ZGIase/W6BS1euxQpuWv37?=
- =?us-ascii?q?uvgY7lvhBQZCVLT40l0AtjEAacFSRNJDVuIZYiDpKT6o5mqlObCAwqR/+2DH?=
- =?us-ascii?q?UEQOTPzuej/PmNDHFpOzcd5BCKnXeU7tfBYmGl9y0DWDBCy6pKyxmhryXF4M?=
- =?us-ascii?q?yYwpWG4y6Z6G/J844TotHozdxOCaW35vQoFg=3D=3D?=
-X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-Anti-Spam-Result: =?us-ascii?q?A0D//wAWYkxg/2OS/hsDVxkBAQEBAQE?=
- =?us-ascii?q?8AQEBAQEBAQEBAQEBAgEBAQEBAQEBAQEBFQeBQQEBAQEBAQMBAYE6AgEBAQE?=
- =?us-ascii?q?BATAGEgEBAQEBAQEBARSBTQEBDBkSFxqIPoQoAYccggOBLIF9hmgsB4E5g3E?=
- =?us-ascii?q?LcQMCEIIWgWQzhFtWE4FoCwEBAQEBAQEBAQ4BLAIEAQGBFIMvBQOBeQElPAI?=
- =?us-ascii?q?MAQIDAQELAQEFAwIBBgRxhTQIMkMBAQEBAQEBAQEBAwQFAYVdAQEBBgEBARM?=
- =?us-ascii?q?gEyMQMBQMJAIiAQ4BHgoJNQEBAQEBAQEBgi4ESQEBAQEBgggBAQIuBZ1chzu?=
- =?us-ascii?q?HT4EdARYNDQKDN4FzghQBIwQKgSE3d4E3AgEBAQEBAQEBixiCSYIogUeCMIJ?=
- =?us-ascii?q?EgikSARIBYIMMgisEgUsKgRwuUh0OFVMCKzeBEFMBAQGPSAyLQQGBIFmKPAe?=
- =?us-ascii?q?RSgEGAjGHBIIHjVeFNIJnDyIXgyeKXIVqA4NXDgEmgT2KQ4ZGhAyoD4VtU1A?=
- =?us-ascii?q?MDVpwcIFuL08BAUtQGYUBik4BAo1DIAEBMDgCBgoBAQMJWIVXhHGCICRDZIJ?=
- =?us-ascii?q?3gQ2CHwEB?=
-Spam_Positive: LL
-X-IronPort-AV: E=Sophos;i="5.81,245,1610384400"; 
-   d="scan'208";a="114176138"
-Received: from unknown (HELO mail.blithailand.com) ([27.254.146.99])
-  by mail-1.csloxinfo.com with ESMTP; 13 Mar 2021 14:04:02 +0700
-Received: from localhost (localhost [127.0.0.1])
-        by mail.blithailand.com (Postfix) with ESMTP id 4862D9EE22A;
-        Sat, 13 Mar 2021 13:44:46 +0700 (+07)
-Received: from mail.blithailand.com ([127.0.0.1])
-        by localhost (mail.blithailand.com [127.0.0.1]) (amavisd-new, port 10032)
-        with ESMTP id VNrBwRC5LelJ; Sat, 13 Mar 2021 13:44:46 +0700 (+07)
-Received: from localhost (localhost [127.0.0.1])
-        by mail.blithailand.com (Postfix) with ESMTP id DCD849EE22B;
-        Sat, 13 Mar 2021 13:44:45 +0700 (+07)
-X-Virus-Scanned: amavisd-new at blithailand.com
-Received: from mail.blithailand.com ([127.0.0.1])
-        by localhost (mail.blithailand.com [127.0.0.1]) (amavisd-new, port 10026)
-        with ESMTP id qzlyGU3lPhwk; Sat, 13 Mar 2021 13:44:45 +0700 (+07)
-Received: from reverse-dns.chicago (unknown [109.195.183.248])
-        by mail.blithailand.com (Postfix) with ESMTPA id 586579EE22A;
-        Sat, 13 Mar 2021 13:44:30 +0700 (+07)
-Content-Type: text/plain; charset="iso-8859-1"
+        id S229624AbhCOLCp (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Mon, 15 Mar 2021 07:02:45 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([63.128.21.124]:46689 "EHLO
+        us-smtp-delivery-124.mimecast.com" rhost-flags-OK-OK-OK-OK)
+        by vger.kernel.org with ESMTP id S229661AbhCOLCb (ORCPT
+        <rfc822;util-linux@vger.kernel.org>);
+        Mon, 15 Mar 2021 07:02:31 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+        s=mimecast20190719; t=1615806151;
+        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+         content-transfer-encoding:content-transfer-encoding:
+         in-reply-to:in-reply-to:references:references;
+        bh=A5qQL9Zd+ZpMBVll9dFpZdhS1xsgoE8kZ88yI7i1+zs=;
+        b=W3mBwfuVjqhXynydNt8GkBf/fF6hG3HQfxH/1cgoXfGN4H1L0/RjyNyinpTmBY6hd8AbJ3
+        Im/beA+5kcmznojL98sWRvEW53uQqd0+xK43yio+qPsdl23oh/2P6Sc6M6+q9ySSu7eJTu
+        CK8pKk9LwOjL0tm3jSQMr5few8GZklk=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-516-4aowmm4mM7uugr4D3qWesQ-1; Mon, 15 Mar 2021 07:02:25 -0400
+X-MC-Unique: 4aowmm4mM7uugr4D3qWesQ-1
+Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.phx2.redhat.com [10.5.11.15])
+        (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+        (No client certificate requested)
+        by mimecast-mx01.redhat.com (Postfix) with ESMTPS id A82A394EE3;
+        Mon, 15 Mar 2021 11:02:24 +0000 (UTC)
+Received: from ws.net.home (ovpn-113-171.ams2.redhat.com [10.36.113.171])
+        by smtp.corp.redhat.com (Postfix) with ESMTPS id F23785D768;
+        Mon, 15 Mar 2021 11:02:23 +0000 (UTC)
+Date:   Mon, 15 Mar 2021 12:02:21 +0100
+From:   Karel Zak <kzak@redhat.com>
+To:     L A Walsh <lkml@tlinx.org>
+Cc:     util-linux@vger.kernel.org
+Subject: Re: is there a util, or can findmnt be enhanced...(RFE?)
+Message-ID: <20210315110221.fpz66zkpwqp6ebva@ws.net.home>
+References: <604A8111.8090100@tlinx.org>
+ <20210312075543.jei3secawflwrw6b@ws.net.home>
+ <604C4427.3040501@tlinx.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8BIT
-Content-Description: Mail message body
-Subject: Help    
-To:     Recipients <angelacampbell349@aol.com>
-From:   angelacampbell349@aol.com
-Date:   Fri, 12 Mar 2021 22:44:23 -0800
-Reply-To: campbellangela827@gmail.com
-Message-Id: <20210313064431.586579EE22A@mail.blithailand.com>
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <604C4427.3040501@tlinx.org>
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.15
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-Good day.
+On Fri, Mar 12, 2021 at 08:48:39PM -0800, L A Walsh wrote:
+> On 2021/03/11 23:55, Karel Zak wrote:
+> > $ pwd
+> >  /home/projects/util-linux
+> > 
+> >  $ findmnt --target .
+> >  TARGET SOURCE         FSTYPE OPTIONS
+> >  /home  /dev/nvme0n1p2 ext4   rw,relatime
+> ----
+>    Hmmm.  Didn't know about that.  Thanks for the info!  Why does it
+> produce no output when a non-mount-point is entered?  I.e. -- is that
+> behavior something that is currently relied upon?
 
-I am sorry for interrupting your day, with due respect trust and humility, I write to you this proposal, which I believe would be of great interest to you. I am looking for a reliable and capable partner that will assist my family and I to transfer funds to his personal or company account for investment purposes because of my health..
+Do you mean the default output (when --target is not specified)?
 
-I am Mrs. Angela Campbell, A German citizen and wife to Late Mr. Mike Campbell, who was a Commercial Farmer and cocoa merchant in Bindura and Harare, the economic city of Zimbabwe.
+The problem is that findmnt follows mount(8) behavior when search for
+filesystem. It means you do not have to be explicit and you can use
+source as well as target:
 
-My husband was among the people that were murdered in cold blood by the President Robert Mugabe Administration during the land dispute that just happened in Zimbabwe wholly affected the white farmers and this resulted to the killing and mob action by Zimbabwean war veterans and some lunatics in the society. In fact, a lot of people were killed because of this land reformed Act.
+ $ findmnt /dev/sda2
+ TARGET SOURCE    FSTYPE OPTIONS
+ /boot  /dev/sda2 ext4   rw,relatime
 
-Please for further details, kindly email me with your direct contact informations to my private email address: campbellangela91@outlook.com
+ $ findmnt /boot
+ TARGET SOURCE    FSTYPE OPTIONS
+ /boot  /dev/sda2 ext4   rw,relatime
 
-Full Name:|Home Address|Telephone Number|Mobile Number|Date of Birth| Occupation:.
 
-Please do notify me immediately you receive this proposal.
+and if you try it with device which is not mounted
 
-Thanks and God bless you
-Mrs. Angela Campbell and (Family).
+ $ findmnt /dev/sda3
+
+you get nothing, but the same situation with --target:
+
+ $ findmnt --target /dev/sda3
+ TARGET SOURCE   FSTYPE   OPTIONS
+ /dev   devtmpfs devtmpfs rw,nosuid,noexec,size=8144964k,nr_inodes=2036241,mode=755,inode64
+
+now try to imagine --target is the default, you will get always any
+answer for arbitrary path ... IMHO very confusing for many users.
+
+
+I have doubts we can change this default behavior due to backward
+compatibility (yes, the proper way how to use findmnt in scripts is to
+use --target, --sources or --mountpoint, but people do not use it
+...).
+
+It would be probably better to introduce a small new util "path2fs" to
+get mountpoint (or source), but without any other findmnt functionality.
+
+We have mountpoint(1), but it returns TRUE/FALSE if the given path is
+a mountpoint.
+
+    Karel
+
+-- 
+ Karel Zak  <kzak@redhat.com>
+ http://karelzak.blogspot.com
+
