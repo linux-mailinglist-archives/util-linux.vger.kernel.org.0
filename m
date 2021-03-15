@@ -2,113 +2,88 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id BC88333B08F
-	for <lists+util-linux@lfdr.de>; Mon, 15 Mar 2021 12:03:17 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 2D27F33C30D
+	for <lists+util-linux@lfdr.de>; Mon, 15 Mar 2021 18:00:50 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229624AbhCOLCp (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Mon, 15 Mar 2021 07:02:45 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([63.128.21.124]:46689 "EHLO
-        us-smtp-delivery-124.mimecast.com" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S229661AbhCOLCb (ORCPT
-        <rfc822;util-linux@vger.kernel.org>);
-        Mon, 15 Mar 2021 07:02:31 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-        s=mimecast20190719; t=1615806151;
-        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-         content-transfer-encoding:content-transfer-encoding:
-         in-reply-to:in-reply-to:references:references;
-        bh=A5qQL9Zd+ZpMBVll9dFpZdhS1xsgoE8kZ88yI7i1+zs=;
-        b=W3mBwfuVjqhXynydNt8GkBf/fF6hG3HQfxH/1cgoXfGN4H1L0/RjyNyinpTmBY6hd8AbJ3
-        Im/beA+5kcmznojL98sWRvEW53uQqd0+xK43yio+qPsdl23oh/2P6Sc6M6+q9ySSu7eJTu
-        CK8pKk9LwOjL0tm3jSQMr5few8GZklk=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-516-4aowmm4mM7uugr4D3qWesQ-1; Mon, 15 Mar 2021 07:02:25 -0400
-X-MC-Unique: 4aowmm4mM7uugr4D3qWesQ-1
-Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.phx2.redhat.com [10.5.11.15])
-        (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
-        (No client certificate requested)
-        by mimecast-mx01.redhat.com (Postfix) with ESMTPS id A82A394EE3;
-        Mon, 15 Mar 2021 11:02:24 +0000 (UTC)
-Received: from ws.net.home (ovpn-113-171.ams2.redhat.com [10.36.113.171])
-        by smtp.corp.redhat.com (Postfix) with ESMTPS id F23785D768;
-        Mon, 15 Mar 2021 11:02:23 +0000 (UTC)
-Date:   Mon, 15 Mar 2021 12:02:21 +0100
-From:   Karel Zak <kzak@redhat.com>
-To:     L A Walsh <lkml@tlinx.org>
-Cc:     util-linux@vger.kernel.org
-Subject: Re: is there a util, or can findmnt be enhanced...(RFE?)
-Message-ID: <20210315110221.fpz66zkpwqp6ebva@ws.net.home>
-References: <604A8111.8090100@tlinx.org>
- <20210312075543.jei3secawflwrw6b@ws.net.home>
- <604C4427.3040501@tlinx.org>
+        id S234505AbhCOQ7q (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Mon, 15 Mar 2021 12:59:46 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:55826 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S234778AbhCOQ7W (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Mon, 15 Mar 2021 12:59:22 -0400
+Received: from mail-lf1-x12f.google.com (mail-lf1-x12f.google.com [IPv6:2a00:1450:4864:20::12f])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id CF6F1C061762
+        for <util-linux@vger.kernel.org>; Mon, 15 Mar 2021 09:59:20 -0700 (PDT)
+Received: by mail-lf1-x12f.google.com with SMTP id v2so44949479lft.9
+        for <util-linux@vger.kernel.org>; Mon, 15 Mar 2021 09:59:20 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=mime-version:reply-to:from:date:message-id:subject:to;
+        bh=nn1W9Wc+k1CJYE8WxkSJGXK0N+qf/mcCb4Whw81sCBc=;
+        b=eLaM2VJC2VPxWCmJI4pRm7gIwsdtcXVX+gwqcmG5feM136k/MJaMOmGBB2kdOk6Af4
+         OdHMopIeKZg49h5cW6vGbxvuQTW/SkQ9HuA/ev1jJcl0AAurwCe0DNziSPl1EC93VQ1C
+         ZhL/pBGs4yClRQ+yNSuJ3e3yxg7nGxyN7EkaEc9UnMX6RUqxH4o2rsWq+1OyBGhsQ60t
+         mlr/pvPbTkbXwuQ72wwZySMbV7eKPbN/RoefzS3gvRqxUNqqkiwACUnwYhkfp8NF4XOV
+         usiuSlIdkRdT/XFr8JMUz5dBUV3A2ubIZJBv5AzJJikhHdudGeMH2zRoSMkB+ojxPFvS
+         VkOg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
+         :subject:to;
+        bh=nn1W9Wc+k1CJYE8WxkSJGXK0N+qf/mcCb4Whw81sCBc=;
+        b=JJHy4CFlWWmHUzYoIRVCsTP0Dvct3FwTrlgeRes7Nqn0A+StXF5EKMOqeZLEyGE845
+         MluLm1AYI19K8UlrAxt8hAsf7SPchYvYkyaelop5lLW9zww5Q4ICrwePXGdGQ2/NXHHZ
+         51R35LnlDhBjLllzh+Olu1h5DIbAFr1z4ZByADaWdc94wCu66eg49D2WevmV0vzrDJl2
+         R5Bi9uzXljpPDBbhvcrYKPMPg6jgFbZTiBfnEdl7rfT+i/tjW+3YkqZwJ/7Sn/sGnNZA
+         YOY84BYI/NIwZK+kgJ+BnRilZ3eW0fEoPtdrJo5PkFdQJIy1UnYtQ92PalvTMAeL0CI0
+         YKNA==
+X-Gm-Message-State: AOAM5334d1igR6emfuFTYwsJhV9l/F2Y+ZU7FPEDo64K4FxCFnWTmELY
+        SSPO8C2LvYlEQhhwba1vpOLuDYGbSRbNL5+nCJQ=
+X-Google-Smtp-Source: ABdhPJz7/gfpeD06O79Pnw07FE/mA8Ji4e09y71x9+hvfgu2S8MD9xmK2/Q/AOYN3ItI3qPG23+Pfv2arGi/0+HLTes=
+X-Received: by 2002:a05:6512:370f:: with SMTP id z15mr8619417lfr.562.1615827559310;
+ Mon, 15 Mar 2021 09:59:19 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <604C4427.3040501@tlinx.org>
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.15
+Received: by 2002:a05:651c:1382:0:0:0:0 with HTTP; Mon, 15 Mar 2021 09:59:18
+ -0700 (PDT)
+Reply-To: ezbtg22@gmail.com
+From:   "Mrs.Glenn" <mrganuserge@gmail.com>
+Date:   Mon, 15 Mar 2021 09:59:18 -0700
+Message-ID: <CA+Wfa7YG6kanV1cpekUWYP2FGpSSSKYxaq+gNSZdX+nSoPjTrA@mail.gmail.com>
+Subject: From Mrs.Glenn
+To:     undisclosed-recipients:;
+Content-Type: text/plain; charset="UTF-8"
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-On Fri, Mar 12, 2021 at 08:48:39PM -0800, L A Walsh wrote:
-> On 2021/03/11 23:55, Karel Zak wrote:
-> > $ pwd
-> >  /home/projects/util-linux
-> > 
-> >  $ findmnt --target .
-> >  TARGET SOURCE         FSTYPE OPTIONS
-> >  /home  /dev/nvme0n1p2 ext4   rw,relatime
-> ----
->    Hmmm.  Didn't know about that.  Thanks for the info!  Why does it
-> produce no output when a non-mount-point is entered?  I.e. -- is that
-> behavior something that is currently relied upon?
-
-Do you mean the default output (when --target is not specified)?
-
-The problem is that findmnt follows mount(8) behavior when search for
-filesystem. It means you do not have to be explicit and you can use
-source as well as target:
-
- $ findmnt /dev/sda2
- TARGET SOURCE    FSTYPE OPTIONS
- /boot  /dev/sda2 ext4   rw,relatime
-
- $ findmnt /boot
- TARGET SOURCE    FSTYPE OPTIONS
- /boot  /dev/sda2 ext4   rw,relatime
-
-
-and if you try it with device which is not mounted
-
- $ findmnt /dev/sda3
-
-you get nothing, but the same situation with --target:
-
- $ findmnt --target /dev/sda3
- TARGET SOURCE   FSTYPE   OPTIONS
- /dev   devtmpfs devtmpfs rw,nosuid,noexec,size=8144964k,nr_inodes=2036241,mode=755,inode64
-
-now try to imagine --target is the default, you will get always any
-answer for arbitrary path ... IMHO very confusing for many users.
-
-
-I have doubts we can change this default behavior due to backward
-compatibility (yes, the proper way how to use findmnt in scripts is to
-use --target, --sources or --mountpoint, but people do not use it
-...).
-
-It would be probably better to introduce a small new util "path2fs" to
-get mountpoint (or source), but without any other findmnt functionality.
-
-We have mountpoint(1), but it returns TRUE/FALSE if the given path is
-a mountpoint.
-
-    Karel
-
 -- 
- Karel Zak  <kzak@redhat.com>
- http://karelzak.blogspot.com
+Dear Beloved,
 
+I am Mrs Elizabet Glenn from Israel. I am a missionary but right now
+in a hospital bed in Israel. I am 59 years and childless; my husband
+is dead. I was diagnosed with terminal cancer. And my doctor just
+predicted that I have but very limited time to live due to damages in
+my system and as a result of that I decided to dispose my 10.5 million
+US dollars to a God-fearing one for the continuation of charitable
+work. This is why I located you.My guess about you may not be accurate
+because I came across your contact at the humanitarian calendar event
+of the year but I believe in God who  divinely directed me to you for
+this solemn proposal of charitable work. I wholeheartedly wish to
+bequeath my fortune to you as a God-fearing person for the
+continuation of charitable work anywhere around the world.
+
+I shall be going in for a surgery operations soonest and desire this
+money to be transferred to you as I do not wish to leave this money in
+the bank because bankers might misuse it for their own interest after
+my death. As soon as I receive your quick reply assuring me that you
+will utilize the money as I instructed you for the benefit of the less
+privilege, I shall give you more details and also instruct my bank to
+release the money to you for the charity project. I hope you receive
+this mail in good health.
+
+Because I don t know what will be my situation in next minute,
+
+I am waiting for your reply.
+
+Yours sincerely,
+Mrs Elizabet Glenn.
