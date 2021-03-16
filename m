@@ -2,15 +2,16 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 5EC4B33D74A
-	for <lists+util-linux@lfdr.de>; Tue, 16 Mar 2021 16:25:14 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id E1F7D33D749
+	for <lists+util-linux@lfdr.de>; Tue, 16 Mar 2021 16:25:13 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S236505AbhCPPYd (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        id S231370AbhCPPYd (ORCPT <rfc822;lists+util-linux@lfdr.de>);
         Tue, 16 Mar 2021 11:24:33 -0400
 Received: from esa1.ssilver.iphmx.com ([68.232.153.64]:36312 "EHLO
         esa1.ssilver.iphmx.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
         with ESMTP id S229618AbhCPPYM (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Tue, 16 Mar 2021 11:24:12 -0400
+        <rfc822;util-linux-ng@vger.kernel.org>);
+        Tue, 16 Mar 2021 11:24:12 -0400
 X-Greylist: delayed 432 seconds by postgrey-1.27 at vger.kernel.org; Tue, 16 Mar 2021 11:24:12 EDT
 Message-Id: <ccb348$5pmmr@ob1.ssilver.iphmx.com>
 IronPort-SDR: ghidhOwPLcvf6qQsdEArAOSuPVhkv93lKbe+/rgECuXw/dH52nmyLYhe7KUeHZhT9cvlopl4LF
