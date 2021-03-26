@@ -2,37 +2,144 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 5CD433499A9
-	for <lists+util-linux@lfdr.de>; Thu, 25 Mar 2021 19:45:46 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id B0ACD34A577
+	for <lists+util-linux@lfdr.de>; Fri, 26 Mar 2021 11:26:26 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S230165AbhCYSpO convert rfc822-to-8bit (ORCPT
-        <rfc822;lists+util-linux@lfdr.de>); Thu, 25 Mar 2021 14:45:14 -0400
-Received: from mail.myleonidas.net ([194.78.70.161]:54938 "EHLO
-        webmail.myleonidas.net" rhost-flags-OK-FAIL-OK-OK) by vger.kernel.org
-        with ESMTP id S230146AbhCYSo4 (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Thu, 25 Mar 2021 14:44:56 -0400
-X-Greylist: delayed 758 seconds by postgrey-1.27 at vger.kernel.org; Thu, 25 Mar 2021 14:44:56 EDT
-Received: from localhost (localhost [127.0.0.1])
-        by webmail.myleonidas.net (Postfix) with ESMTP id B557E2C76BC;
-        Thu, 25 Mar 2021 19:30:13 +0100 (CET)
-Received: from webmail.myleonidas.net ([127.0.0.1])
-        by localhost (webmail.myleonidas.net [127.0.0.1]) (amavisd-new, port 10026)
-        with ESMTP id hpnfUG5kJvei; Thu, 25 Mar 2021 19:30:13 +0100 (CET)
-Received: from reverse-dns.chicago (cvetkrasok.ru [62.109.25.53])
-        by webmail.myleonidas.net (Postfix) with ESMTPSA id 4315F2C76A3;
-        Thu, 25 Mar 2021 19:30:02 +0100 (CET)
-Content-Type: text/plain; charset="iso-8859-1"
+        id S229744AbhCZKZw (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Fri, 26 Mar 2021 06:25:52 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([63.128.21.124]:57105 "EHLO
+        us-smtp-delivery-124.mimecast.com" rhost-flags-OK-OK-OK-OK)
+        by vger.kernel.org with ESMTP id S229622AbhCZKZ0 (ORCPT
+        <rfc822;util-linux@vger.kernel.org>);
+        Fri, 26 Mar 2021 06:25:26 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+        s=mimecast20190719; t=1616754325;
+        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+         content-transfer-encoding:content-transfer-encoding:
+         in-reply-to:in-reply-to:references:references;
+        bh=MLCzJLof9i3lRsGX1fh3jfugGO1vPXIULv1+t49SFdU=;
+        b=aLQw47DoCRNzAEKhhPw+S2Ld17Nn4aunoLdD3QA3oItaTxZ6K1Gn1/2XXyWlkE7XjRmKmH
+        tE+aKidT9xOQCUQ4bCeI/HZxqULpTR1BGemPim8tcm7dkzlRShW4/yRgQatojz88MQPFn2
+        if+pIMCz+yrCX/riGG7CERRxdl578Rk=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-400-MVR1C2BiNJ2eMgCwJSsZsg-1; Fri, 26 Mar 2021 06:25:22 -0400
+X-MC-Unique: MVR1C2BiNJ2eMgCwJSsZsg-1
+Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.phx2.redhat.com [10.5.11.23])
+        (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+        (No client certificate requested)
+        by mimecast-mx01.redhat.com (Postfix) with ESMTPS id E782C180FCA5;
+        Fri, 26 Mar 2021 10:25:21 +0000 (UTC)
+Received: from ws.net.home (ovpn-115-34.ams2.redhat.com [10.36.115.34])
+        by smtp.corp.redhat.com (Postfix) with ESMTPS id 422C219705;
+        Fri, 26 Mar 2021 10:25:21 +0000 (UTC)
+Date:   Fri, 26 Mar 2021 11:25:18 +0100
+From:   Karel Zak <kzak@redhat.com>
+To:     Mario =?utf-8?Q?Bl=C3=A4ttermann?= <mario.blaettermann@gmail.com>
+Cc:     util-linux@vger.kernel.org
+Subject: Re: Help needed with man page conversions to asciidoc?
+Message-ID: <20210326102518.ex4t7kj6chswe7du@ws.net.home>
+References: <karelzak/util-linux/issues/1257@github.com>
+ <karelzak/util-linux/issues/1257/792670506@github.com>
+ <CAHi0vA-d7EQostbdDMZGmKeNfLYvjUWkuvF01nw-CM9wOkWMow@mail.gmail.com>
+ <20210309084908.izmuxsrqujiml6ph@ws.net.home>
+ <CAHi0vA-SAQYJraWb6ZH5bTWcoGdXMKnHj7fVARRzJN_LpPGc9A@mail.gmail.com>
+ <CAHi0vA_Nk4GqS=gYCzwqqRoNPQLH2n9BtLozWgwaQ78MsBvVNg@mail.gmail.com>
+ <20210323092705.uaa2oas3ux5s3er7@ws.net.home>
+ <CAHi0vA_FL744Lap_GqkrhPPf_wK0BW2Ed_R2FVwQ+L_A4AJdHg@mail.gmail.com>
+ <CAHi0vA-OcifUioLiUXSg9UmaMNUzfLhwg+tfm0hFnXYipOq0DQ@mail.gmail.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8BIT
-Content-Description: Mail message body
-Subject: Final notice 2
-To:     Recipients <marketing@myleonidas.net>
-From:   "Info" <marketing@myleonidas.net>
-Date:   Thu, 25 Mar 2021 13:29:52 -0500
-Reply-To: trustees202000@consultant.com
-Message-Id: <20210325183003.4315F2C76A3@webmail.myleonidas.net>
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <CAHi0vA-OcifUioLiUXSg9UmaMNUzfLhwg+tfm0hFnXYipOq0DQ@mail.gmail.com>
+X-Scanned-By: MIMEDefang 2.84 on 10.5.11.23
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-We are reaching you once again as regards the estate of Late George Brumley, you were made one of the beneficiaries of his estate. Do get back to me at your earliest convenience. The Trustees
+On Wed, Mar 24, 2021 at 08:37:35PM +0100, Mario Blättermann wrote:
+> I found the problem, at least partially. A backslash was missing in
+> Makefile.am, and now "make gen-man" creates *roff man pages, as
+> expected. However, it stops here:
+
+OK.
+
+>   GEN      sys-utils/swapoff.8
+> asciidoctor: FAILED: input file ./sys-utils/swapoff.8.adoc is missing
+> make: *** [Makefile:15942: sys-utils/swapoff.8] Fehler 1
+> 
+> But I'm wondering why it doesn't complain about the other symlinks in
+> libuuid etc, and it didn't stop until the sys-utils directory has been
+> reached.
+
+It seems asciidoctor generates also the man page links (see below for
+more details). It's safe to remove the man page link files from the
+tree at all.
+
+The issue is that we have the link pages in the dist_man_MANS=
+and 'make' tries to verify the link file *before* the  original 
+man page. It means  
+
+  dist_man_MANS += sys-utils/swapon.8 sys-utils/swapoff.8
+
+is no problem, but:
+
+  dist_man_MANS += sys-utils/swapoff.8 sys-utils/swapon.8
+
+ends with error ;-)
+
+I'll send you pull request to your topic/asciidoc do fix this (and
+some others minor) issue.
+
+ Karel
+
+
+
+ $ git checkout -f
+ $ make clean
+ $ git status 
+On branch ad
+nothing to commit, working tree clean
+
+make the man page (V=1 for verbose output):
+
+ $  make libuuid/man/uuid_generate.3 V=1
+ /usr/bin/mkdir -p $(dirname libuuid/man/uuid_generate.3)
+ srcdir=''; \
+	test -f ./libuuid/man/uuid_generate.3.adoc || srcdir=./; \
+	/usr/bin/asciidoctor -b manpage -a 'VERSION=2.36.689-bdda0' -a 'ADJTIME_PATH=/etc/adjtime' ${srcdir}libuuid/man/uuid_generate.3.adoc
+
+now see that asciidoctor also updated the uuid_generate_*.3 man pages:
+
+ $ git diff
+diff --git a/libuuid/man/uuid_generate_random.3 b/libuuid/man/uuid_generate_random.3
+index 8405486e9..1e51c4e6e 100644
+--- a/libuuid/man/uuid_generate_random.3
++++ b/libuuid/man/uuid_generate_random.3
+@@ -1 +1 @@
+-.so man3/uuid_generate.3
++.so uuid_generate.3
+\ No newline at end of file
+diff --git a/libuuid/man/uuid_generate_time.3 b/libuuid/man/uuid_generate_time.3
+index 8405486e9..1e51c4e6e 100644
+--- a/libuuid/man/uuid_generate_time.3
++++ b/libuuid/man/uuid_generate_time.3
+@@ -1 +1 @@
+-.so man3/uuid_generate.3
++.so uuid_generate.3
+\ No newline at end of file
+diff --git a/libuuid/man/uuid_generate_time_safe.3 b/libuuid/man/uuid_generate_time_safe.3
+index 8405486e9..1e51c4e6e 100644
+--- a/libuuid/man/uuid_generate_time_safe.3
++++ b/libuuid/man/uuid_generate_time_safe.3
+@@ -1 +1 @@
+-.so man3/uuid_generate.3
++.so uuid_generate.3
+\ No newline at end of file
+
+-- 
+ Karel Zak  <kzak@redhat.com>
+ http://karelzak.blogspot.com
+
