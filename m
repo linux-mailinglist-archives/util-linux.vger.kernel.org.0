@@ -2,86 +2,62 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 0892634A5B6
-	for <lists+util-linux@lfdr.de>; Fri, 26 Mar 2021 11:39:55 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 6E1E534BE86
+	for <lists+util-linux@lfdr.de>; Sun, 28 Mar 2021 21:22:32 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229798AbhCZKjW (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Fri, 26 Mar 2021 06:39:22 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([216.205.24.124]:36026 "EHLO
-        us-smtp-delivery-124.mimecast.com" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S229474AbhCZKi7 (ORCPT
-        <rfc822;util-linux@vger.kernel.org>);
-        Fri, 26 Mar 2021 06:38:59 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-        s=mimecast20190719; t=1616755138;
-        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-         in-reply-to:in-reply-to:references:references;
-        bh=ERAnqPjQUDpPinqYR4pkAIOuXrHp9M1GrFqDuFKw8U4=;
-        b=XunFtbjplW7DuCP1FF914FN1pcjpKpOfjPDtg9uFUWMTqKUS/OYAn/MfHiP/UPIfzaBLmu
-        irtl4qewJMIbo7H26BIiZrAZ8pAfTuWxFXANqdzDrdikj3j3uGeHLgord/JQrgmpNWuUEv
-        57Zf9vzCagcMJqKxRntlvWsptbsChRw=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-427-_rmANVNHOlScaeuQ_Kkb9g-1; Fri, 26 Mar 2021 06:38:54 -0400
-X-MC-Unique: _rmANVNHOlScaeuQ_Kkb9g-1
-Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.phx2.redhat.com [10.5.11.13])
-        (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
-        (No client certificate requested)
-        by mimecast-mx01.redhat.com (Postfix) with ESMTPS id A6F04107BA56;
-        Fri, 26 Mar 2021 10:38:53 +0000 (UTC)
-Received: from ws.net.home (ovpn-115-34.ams2.redhat.com [10.36.115.34])
-        by smtp.corp.redhat.com (Postfix) with ESMTPS id 0247136807;
-        Fri, 26 Mar 2021 10:38:52 +0000 (UTC)
-Date:   Fri, 26 Mar 2021 11:38:50 +0100
-From:   Karel Zak <kzak@redhat.com>
-To:     Mario =?utf-8?Q?Bl=C3=A4ttermann?= <mario.blaettermann@gmail.com>
-Cc:     util-linux@vger.kernel.org
-Subject: Re: Help needed with man page conversions to asciidoc?
-Message-ID: <20210326103850.76r27yrk3fdaqnbs@ws.net.home>
-References: <karelzak/util-linux/issues/1257@github.com>
- <karelzak/util-linux/issues/1257/792670506@github.com>
- <CAHi0vA-d7EQostbdDMZGmKeNfLYvjUWkuvF01nw-CM9wOkWMow@mail.gmail.com>
- <20210309084908.izmuxsrqujiml6ph@ws.net.home>
- <CAHi0vA-SAQYJraWb6ZH5bTWcoGdXMKnHj7fVARRzJN_LpPGc9A@mail.gmail.com>
- <CAHi0vA_Nk4GqS=gYCzwqqRoNPQLH2n9BtLozWgwaQ78MsBvVNg@mail.gmail.com>
- <20210323092705.uaa2oas3ux5s3er7@ws.net.home>
- <CAHi0vA_FL744Lap_GqkrhPPf_wK0BW2Ed_R2FVwQ+L_A4AJdHg@mail.gmail.com>
- <CAHi0vA-OcifUioLiUXSg9UmaMNUzfLhwg+tfm0hFnXYipOq0DQ@mail.gmail.com>
- <20210326102518.ex4t7kj6chswe7du@ws.net.home>
+        id S229656AbhC1TV7 (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Sun, 28 Mar 2021 15:21:59 -0400
+Received: from mail.hanoi.gov.vn ([113.160.32.33]:29376 "EHLO
+        mx01.hanoi.gov.vn" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S229655AbhC1TVz (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Sun, 28 Mar 2021 15:21:55 -0400
+X-Greylist: delayed 1968 seconds by postgrey-1.27 at vger.kernel.org; Sun, 28 Mar 2021 15:21:55 EDT
+Received: from mx01.hanoi.gov.vn (localhost [127.0.0.1])
+        by IMSVA (Postfix) with ESMTP id 817B1EC00B;
+        Mon, 29 Mar 2021 01:40:50 +0700 (+07)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=hanoi.gov.vn;
+        s=default; t=1616956851;
+        bh=FuW10Z6fSdeNlf/0u/BQ1jcwkjYBw0uHUPQgn0LGo7I=; h=Date:From:To;
+        b=SJry5XG5r7eR8cYbxoeu9afg7BB7rCPl9b3xSHVNRFdsry+VFuRp6IFSS+dfZATBm
+         J1V56aOX92Xhw/kW4W3mRU+wNyFU2sMxqZCEWysiKDMMDp9mTkG16G8j6QRtt6wBJf
+         YL/QfLQgFHcCKx0eoAqAqWX7UjdePIFAbpOQ7dy4=
+X-IMSS-DKIM-Authentication-Result: mx01.hanoi.gov.vn; sigcount=0
+Received: from mx01.hanoi.gov.vn (localhost [127.0.0.1])
+        by IMSVA (Postfix) with ESMTP id B4A59EC002;
+        Mon, 29 Mar 2021 01:40:48 +0700 (+07)
+Received: from mail.hanoi.gov.vn (mail.hanoi.gov.vn [10.1.1.25])
+        by mx01.hanoi.gov.vn (Postfix) with ESMTPS;
+        Mon, 29 Mar 2021 01:40:48 +0700 (+07)
+Received: from mail.hanoi.gov.vn (localhost [127.0.0.1])
+        by mail.hanoi.gov.vn (Postfix) with ESMTPS id 40B257F41B5D;
+        Mon, 29 Mar 2021 01:40:43 +0700 (+07)
+Received: from localhost (localhost [127.0.0.1])
+        by mail.hanoi.gov.vn (Postfix) with ESMTP id CF6927F41B59;
+        Mon, 29 Mar 2021 01:40:38 +0700 (+07)
+Received: from mail.hanoi.gov.vn ([127.0.0.1])
+        by localhost (mail.hanoi.gov.vn [127.0.0.1]) (amavisd-new, port 10026)
+        with ESMTP id FThWhfPS-kle; Mon, 29 Mar 2021 01:40:34 +0700 (+07)
+Received: from mail.hanoi.gov.vn (mail.hanoi.gov.vn [10.1.1.25])
+        by mail.hanoi.gov.vn (Postfix) with ESMTP id 802B37F41B8C;
+        Mon, 29 Mar 2021 01:40:29 +0700 (+07)
+Date:   Mon, 29 Mar 2021 01:40:29 +0700 (ICT)
+From:   Mackenzie Scott <ttptqd_thanhoai@hanoi.gov.vn>
+Reply-To: Mackenzie Scott <propack@propck.net>
+Message-ID: <1521369784.25932009.1616956829436.JavaMail.zimbra@hanoi.gov.vn>
+Subject: Congratulations ($ 100,800,000.00)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20210326102518.ex4t7kj6chswe7du@ws.net.home>
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.13
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 7bit
+X-Originating-IP: [185.107.80.217]
+X-Mailer: Zimbra 8.8.15_GA_3894 (zclient/8.8.15_GA_3894)
+Thread-Index: bftW3N5iLldutNTIF2HEEgCYCeK+UA==
+Thread-Topic: Congratulations ($ 100,800,000.00)
+To:     undisclosed-recipients:;
+X-TM-AS-GCONF: 00
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-On Fri, Mar 26, 2021 at 11:25:22AM +0100, Karel Zak wrote:
-> The issue is that we have the link pages in the dist_man_MANS=
-> and 'make' tries to verify the link file *before* the  original 
-> man page. It means  
-> 
->   dist_man_MANS += sys-utils/swapon.8 sys-utils/swapoff.8
-> 
-> is no problem, but:
-> 
->   dist_man_MANS += sys-utils/swapoff.8 sys-utils/swapon.8
-> 
-> ends with error ;-)
-> 
-> I'll send you pull request to your topic/asciidoc do fix this (and
-> some others minor) issue.
 
-Note that fix it by "right order" in $dist_man_MANS is a poor solution,
-because for "make -j" it does not follow the order. The solution we
-need is split man pages and man page links to two variables. I'll do
-fix it.
 
-    Karel
-
--- 
- Karel Zak  <kzak@redhat.com>
- http://karelzak.blogspot.com
-
+Hello,i&#39;m Mackenzie Scott,Ex-wife of Amazon founder i&#39;m donating $4 billion to charities,individuals,universities across the Globe from my divorce funds,i&#39;m donating part of it to provide immediate support to people suffering economically during the COVID-19 pandemic,i have a donation worth $100,800,000.00 Dollars for you,you can contact me for more information if you&#39;re interested.
