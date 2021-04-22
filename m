@@ -2,63 +2,68 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id DAAC2364D10
-	for <lists+util-linux@lfdr.de>; Mon, 19 Apr 2021 23:29:23 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 4029936829A
+	for <lists+util-linux@lfdr.de>; Thu, 22 Apr 2021 16:41:50 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S238604AbhDSV3w (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Mon, 19 Apr 2021 17:29:52 -0400
-Received: from mbox.abcom.al ([217.73.143.249]:52074 "EHLO mbox.abcom.al"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S232885AbhDSV3w (ORCPT <rfc822;util-linux@vger.kernel.org>);
-        Mon, 19 Apr 2021 17:29:52 -0400
-Received: from localhost (localhost [127.0.0.1])
-        by mbox.abcom.al (Postfix) with ESMTP id 61698128E99E7;
-        Mon, 19 Apr 2021 22:38:43 +0200 (CEST)
-Received: from mbox.abcom.al ([127.0.0.1])
-        by localhost (mbox.abcom.al [127.0.0.1]) (amavisd-new, port 10032)
-        with ESMTP id 5PJGMH7nIjJe; Mon, 19 Apr 2021 22:38:43 +0200 (CEST)
-Received: from localhost (localhost [127.0.0.1])
-        by mbox.abcom.al (Postfix) with ESMTP id 0A60612B0786A;
-        Mon, 19 Apr 2021 22:38:43 +0200 (CEST)
-DKIM-Filter: OpenDKIM Filter v2.10.3 mbox.abcom.al 0A60612B0786A
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=abcom.al;
-        s=0F3BA0EE-D5D4-11E8-9596-F9115129F2F4; t=1618864723;
-        bh=BZv72htijiAiJQlxop8ucT2O5E8VQfLYZFZIV1NskB4=;
-        h=MIME-Version:To:From:Date:Message-Id;
-        b=WfA4O1myMZF2Iv/Y2JurGgtnZQPh9KqejAkOYjTqoSlAnwDgodtRyrlRi0MZyXvHV
-         BwAMIVbhWvxYGURMGMmZoxGx+abCmO3hkcszuvndZ8Vmb1jedpkCzjwETV9q/Ns4p8
-         io521PSLxBqLYv3+WmDBCLDLOYgII6kLleJ1LEWdTeYImLKjtAOzUEPMX+rnbM5fvh
-         nsrUsaewhHoVg+SrS+g7JdY/PN01KR4RavbC36jO0vanEsPIuwdw2TN5wtUA5Wpcp5
-         60UsgV3xupY/ok47VmjVcGOEe4kt7KVm75vGnRut/MXJKF6I/lWptGGS3DRejo/uer
-         Ddzu9uBLyzN+Q==
-X-Virus-Scanned: amavisd-new at mbox.abcom.al
-Received: from mbox.abcom.al ([127.0.0.1])
-        by localhost (mbox.abcom.al [127.0.0.1]) (amavisd-new, port 10026)
-        with ESMTP id EufHvYOIwTrj; Mon, 19 Apr 2021 22:38:42 +0200 (CEST)
-Received: from [192.168.43.60] (unknown [105.4.5.77])
-        by mbox.abcom.al (Postfix) with ESMTPSA id C8D4612B0786E;
-        Mon, 19 Apr 2021 22:38:35 +0200 (CEST)
-Content-Type: text/plain; charset="utf-8"
+        id S236398AbhDVOmW (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Thu, 22 Apr 2021 10:42:22 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([216.205.24.124]:47566 "EHLO
+        us-smtp-delivery-124.mimecast.com" rhost-flags-OK-OK-OK-OK)
+        by vger.kernel.org with ESMTP id S236496AbhDVOmV (ORCPT
+        <rfc822;util-linux@vger.kernel.org>);
+        Thu, 22 Apr 2021 10:42:21 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+        s=mimecast20190719; t=1619102506;
+        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+         in-reply-to:in-reply-to:references:references;
+        bh=kU7B7tF/1v2m32DXaucZ+XppsE2Vj52397TUHidgKSE=;
+        b=iT8aM1LN6iw/8sWZlvaI/xzqvmMv0ltjEGaxxIdR9BEpRa8NitlD+Yq6sgXROIGGYXjpiw
+        Mrtbe6OtnvP/oVStPnZ9bn+cQHT9JNLHUtqNRyzM6Ke6YJjL6wIR7aqIh6o1X7fDvpP/1Z
+        UV3wwCZBOhniadB0mFXFLlsRBnX7mNU=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-547-RqticIY9MgeW2e4rx0H_Dg-1; Thu, 22 Apr 2021 10:41:31 -0400
+X-MC-Unique: RqticIY9MgeW2e4rx0H_Dg-1
+Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.phx2.redhat.com [10.5.11.22])
+        (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+        (No client certificate requested)
+        by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 2BED91966323;
+        Thu, 22 Apr 2021 14:41:30 +0000 (UTC)
+Received: from ws.net.home (ovpn-115-34.ams2.redhat.com [10.36.115.34])
+        by smtp.corp.redhat.com (Postfix) with ESMTPS id BF0F110023AE;
+        Thu, 22 Apr 2021 14:41:28 +0000 (UTC)
+Date:   Thu, 22 Apr 2021 16:41:25 +0200
+From:   Karel Zak <kzak@redhat.com>
+To:     Naohiro Aota <naohiro.aota@wdc.com>
+Cc:     util-linux@vger.kernel.org, Damien Le Moal <damien.lemoal@wdc.com>,
+        Johannes Thumshirn <johannes.thumshirn@wdc.com>
+Subject: Re: [PATCH v2 0/3] implement zone-aware probing/wiping for zoned
+ btrfs
+Message-ID: <20210422144125.cqgji5i47osmcw7b@ws.net.home>
+References: <20210414013339.2936229-1-naohiro.aota@wdc.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Description: Mail message body
-Subject: =?utf-8?q?Hallo=2C_Sie_haben_eine_Spende_von_=E2=82=AC_2=2E000=2E000=2C00?=
-To:     Recipients <abashi@abcom.al>
-From:   <abashi@abcom.al>
-Date:   Mon, 19 Apr 2021 22:37:54 +0200
-Reply-To: tayebsouamidonationorg@gmail.com
-Message-Id: <20210419203835.C8D4612B0786E@mbox.abcom.al>
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20210414013339.2936229-1-naohiro.aota@wdc.com>
+X-Scanned-By: MIMEDefang 2.84 on 10.5.11.22
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-I'm Tayeb Souami, 55-year-old an elderly citizen of New Jersey, USA. I won =
-a $315.3 million jackpot, On behalf of my family and act of good will, we a=
-re donating to you and your family the sum of (=E2=82=AC 2,000,000.00 EUR) =
-I try to reach the public charity orphanages. Contribute to poverty reducti=
-on and ensure adequate health care for individuals. I also want you to inve=
-st part of this donation in public infrastructure to provide jobs for unemp=
-loyed citizens in your country.You can Watch me on youtube Claimed  https:/=
-/www.youtube.com/watch?v=3DZ6ui8ZDQ6Ks I choose you because I believe in yo=
-u. I need your full cooperation regarding this donation. Please contact me =
-back here at my private email: tayebsouamidonationorg@gmail.com
+On Wed, Apr 14, 2021 at 10:33:36AM +0900, Naohiro Aota wrote:
+>  configure.ac                     |   1 +
+>  libblkid/src/blkidP.h            |   5 +
+>  libblkid/src/probe.c             | 108 ++++++++++++++++--
+>  libblkid/src/superblocks/btrfs.c | 185 ++++++++++++++++++++++++++++++-
+>  4 files changed, 290 insertions(+), 9 deletions(-)
+
+Note that I'll merge it to v2.38, it seems too late for v2.37 where we
+have already -rc1 and I guess Naohiro will prepare v3 of the patchs too.
+
+  Karel
+
+-- 
+ Karel Zak  <kzak@redhat.com>
+ http://karelzak.blogspot.com
+
