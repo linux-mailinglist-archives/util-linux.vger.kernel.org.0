@@ -2,93 +2,200 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 614C236AA6A
-	for <lists+util-linux@lfdr.de>; Mon, 26 Apr 2021 03:38:33 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 1A35936ABE0
+	for <lists+util-linux@lfdr.de>; Mon, 26 Apr 2021 07:51:10 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231565AbhDZBjL (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Sun, 25 Apr 2021 21:39:11 -0400
-Received: from esa5.hgst.iphmx.com ([216.71.153.144]:48463 "EHLO
-        esa5.hgst.iphmx.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S231530AbhDZBjK (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Sun, 25 Apr 2021 21:39:10 -0400
+        id S231806AbhDZFvp (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Mon, 26 Apr 2021 01:51:45 -0400
+Received: from esa3.hgst.iphmx.com ([216.71.153.141]:39184 "EHLO
+        esa3.hgst.iphmx.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S229554AbhDZFvo (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Mon, 26 Apr 2021 01:51:44 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
-  t=1619401109; x=1650937109;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=jsRGEC8Z1J5o3VJ9uLNCdI2+6zJrkvNmHiVsJ/REU18=;
-  b=JXu3SiI75Q+jjCUfoz4Y10df2twxaF0BcwB/9lr3/JK46Der2Zpa6F6I
-   KtgU9VnvSo1MNpkeHlR7FphCLNNL7zy5wT6SC1I3eFRT08/KJzgr6RxK6
-   wGTo/IIvTav6yAFtU7c70QkXC7IBw22XcPpNuDdHEaHAptkKyhWo/9TAy
-   p3qhMGFFFgS3t8LxPZ2IVsoqQqlPKaWzg9UTAZQV/S194/w61R8bxB42k
-   ddu3xfw/e8C/qZAgRVOML7B8Ozc1RajJuVPCZEIxD+4mPp51CGaHUOzUI
-   RZO5dYHPyknd65pdu9jk8kmz5oS6B2ZVqn47kcRF4gKLmgKXXibcZMrAb
-   g==;
-IronPort-SDR: ZQSkgS4GaWfXAhan/BubqJSYUjwDH5qHXs59xGyRSVwuI60BKFTzZAxSmxa6oaHbDWsdyuDwMR
- UmFEXJRDrQyUy5aK8c05ZS5BrilX221F1pltIsjqt82gxlHGwoZqQghj86T+HX8OIjGtCRNSt6
- E/jdtz4ZUDkXvGiUl8yapvIwanrLExl+OFzUgzfillAuvk8bTM/IextxgcVOLoH9RlLDBlAojq
- OCvccAhuDxiQ2AFmopd7A1IE2hJYUhraLEdd5bFBJ7Nh04cRB7TcpgWwhg/TUGhK+rnwZQ1IYs
- SeI=
+  t=1619416263; x=1650952263;
+  h=from:to:cc:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=NlQsWQprKXe08pKCMfx5H2ZABkT/fuegOYXmH2aKQSY=;
+  b=ktIB8PXI1m2JatvWLOZ/XHwOSACOsdNIwSDeL8zNimkERfgY2ESpyT1I
+   ShP4GD5iz4Z3Kfi1RxdbEFVeTs4AxF8htxspsrHU0tGUqbsLuXvGeEAFc
+   wfLlS+B+qIOoa6/wWv5FqdCqIBLmnxebCnKhVZ4D3S+72jpnYsfe445cQ
+   eHSMSNrIJiPPFn3aTULDqbeh1xAfuuqE9ctbL+j+RlQXtt1QFHun/pO/k
+   Fto+nX1+l2BodUeG9Bi8+J5wyiQbSCNJQYwSITOxn3X0gA/HltQZA1MPR
+   jU0+ZKKMswPafSB42Hmgi9w8FjbbskEGMOBZo4X3WbZ8IXeFayXJfz9bm
+   w==;
+IronPort-SDR: myDcoxKq+1TFMRidxfJSKAknOBos9RIyA1iCuV9/5mEdsC8QgHOQs8G8XhOAI701zdmtrg3kly
+ oxMIWEfwqrNGAQlRz7mb3gBo3xnegGmatVstRm+gEidxO55F179ZDfIw+nPttjgVK+YKPt9yd4
+ pkRRSYjDppWAMubFqO1aWk5Ihu3UYLnKX6jI4xreZlRY85mVR1r7OUSE3RGfUhna4ynFO7vNy8
+ BTx58FPFr+ZoC80GrBzHZoGOgGavO51mvbSmySR/gAHAQrGTspC0LOTelMGh6vJDNXRMk4u9Er
+ HiA=
 X-IronPort-AV: E=Sophos;i="5.82,251,1613404800"; 
-   d="scan'208";a="166230282"
+   d="scan'208";a="170785777"
 Received: from h199-255-45-15.hgst.com (HELO uls-op-cesaep02.wdc.com) ([199.255.45.15])
-  by ob1.hgst.iphmx.com with ESMTP; 26 Apr 2021 09:38:29 +0800
-IronPort-SDR: aNPK10zEvpLarkjV6WlWhHALE31diD7ickaj+l6C+HszXF19XNssmj8hmicH4xrtVRNWBIl4I9
- sOGBn3b7XVIcZXdTwOasTy/Q3rHccQDtK3vY3Bw6QDz/dgz4I0d2vALjfUyOiOnepeiAirVRnl
- ne1ium39y+kVyuYxyv7SjusTJpS6Qtv/bPfD1paKNtzMZnpK4MYetNxTIrKUH+RVB7Rq447wQt
- 8L2otzKeqb7D+snbfDa+VUM+SKoYcesLo+97Sijpu6ZzQrwH6hKaN446kvl97yQg5nxyO7+/Ta
- oleDblkJzful/deOoF3mqrpW
+  by ob1.hgst.iphmx.com with ESMTP; 26 Apr 2021 13:51:02 +0800
+IronPort-SDR: U5jv1aoCPmB4uzsVXbmQMhODp3QA9pGKWBkN9sXV/793L1SccvgmTzIlzfXb2090e+0HPb/G1a
+ j8txgySFgY58apDP/rRS14Giut/6FgXIaheH1eWL8stkjZIiwGTNHAINufq7M7tNlyw5PtBWQx
+ 6X4tVhQBonszs1Q9ScBRbSsAaEUygMgCBFiopWUsxJW2xzYruNr9ggF2J62222m6Cf7Hc5zi/0
+ 8osbqZNy+sl0Bo7N8oV6OO9jO94FKVTe7+i2nry/v7qL2w26R895z18wunt4kHuH5hgtYH875j
+ fjXlbIZSo30A0Iy48IivVwTj
 Received: from uls-op-cesaip01.wdc.com ([10.248.3.36])
-  by uls-op-cesaep02.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 25 Apr 2021 18:17:26 -0700
-IronPort-SDR: 7KfzHh8m46zkU61gqkpQPm6XtgRJjhpOp1AzyquiLQ3oI9oqUoqSsSjqOPTqjheBMg9kJYTTlK
- z+GwpIYE5ZlGvKp9NRUk+MKq32tQVQVGPPV2R+5cdG+PFc3xtc9/50KunuAqcM3CaOkh/J/QTw
- KOO8IxvYIdzvVa3m36e/KSUCBjhr+C/TEaE+AEHCQl70KNl4VTNdiEOG6CTPSqWxOKuE8m1RV2
- 0AlIHqToRKvcYDa8xZK9TJNCqdDsFJ3y0R+0m28ggduEcCDa5KVYqJ8eIVmuBQH5B42f4grrr9
- jEU=
+  by uls-op-cesaep02.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 25 Apr 2021 22:29:59 -0700
+IronPort-SDR: ZfLcDBbbz23w4NpYewaf5X484NWgf89guZ1z3L0GYaLFgIEARKgxYuDqXRBykY50UEEZ4NL9bE
+ qZsd5d1VVs4KU1UIFcDr+/vy9oLRWRYlBr5h493EdJbIFJkrhCbMOJ1cVuj3OAdbgKM3FOcxvN
+ 5TkEkiMR/Wz6Hq41ExsvaIAI4+HPVWqMhMxKneUw/NLHFBfQOmAZMVCbRqQzJFzhHJIMxAN/LV
+ f9fGS3gfV+QFx4CCDzUxFjn+HcDTmkEj+dnDwXYYg+RVJjw91igtV+1ppba4Zuw1kUCDSgU5lf
+ uEo=
 WDCIronportException: Internal
-Received: from 3sdmw33.ad.shared (HELO naota-xeon) ([10.225.48.32])
-  by uls-op-cesaip01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 25 Apr 2021 18:38:29 -0700
-Date:   Mon, 26 Apr 2021 10:38:27 +0900
+Received: from bgy2573.ad.shared (HELO naota-xeon.wdc.com) ([10.225.48.58])
+  by uls-op-cesaip01.wdc.com with ESMTP; 25 Apr 2021 22:51:03 -0700
 From:   Naohiro Aota <naohiro.aota@wdc.com>
-To:     dsterba@suse.cz
-Cc:     Karel Zak <kzak@redhat.com>, util-linux@vger.kernel.org,
-        linux-btrfs@vger.kernel.org, linux-fsdevel@vger.kernel.org,
+To:     Karel Zak <kzak@redhat.com>
+Cc:     util-linux@vger.kernel.org, linux-btrfs@vger.kernel.org,
+        linux-fsdevel@vger.kernel.org,
         Damien Le Moal <damien.lemoal@wdc.com>,
-        Johannes Thumshirn <johannes.thumshirn@wdc.com>
-Subject: Re: [PATCH v2 2/3] blkid: add magic and probing for zoned btrfs
-Message-ID: <20210426013827.rijm2p2gba7wonlx@naota-xeon>
-References: <20210414013339.2936229-1-naohiro.aota@wdc.com>
- <20210414013339.2936229-3-naohiro.aota@wdc.com>
- <20210416155241.GY7604@twin.jikos.cz>
+        Johannes Thumshirn <johannes.thumshirn@wdc.com>,
+        Naohiro Aota <naohiro.aota@wdc.com>
+Subject: [PATCH v3 0/3] implement zone-aware probing/wiping for zoned btrfs
+Date:   Mon, 26 Apr 2021 14:50:33 +0900
+Message-Id: <20210426055036.2103620-1-naohiro.aota@wdc.com>
+X-Mailer: git-send-email 2.31.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20210416155241.GY7604@twin.jikos.cz>
+Content-Transfer-Encoding: 8bit
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-On Fri, Apr 16, 2021 at 05:52:41PM +0200, David Sterba wrote:
-> On Wed, Apr 14, 2021 at 10:33:38AM +0900, Naohiro Aota wrote:
-> > It also supports temporary magic ("!BHRfS_M") in zone #0. The mkfs.btrfs
-> > first writes the temporary superblock to the zone during the mkfs process.
-> > It will survive there until the zones are filled up and reset. So, we also
-> > need to detect this temporary magic.
-> 
-> > +	  /*
-> > +	   * For zoned btrfs, we also need to detect a temporary superblock
-> > +	   * at zone #0. Mkfs.btrfs creates it in the initialize process.
-> > +	   * It persits until both zones are filled up then reset.
-> > +	   */
-> > +	  { .magic = "!BHRfS_M", .len = 8, .sboff = 0x40,
-> > +	    .is_zoned = 1, .zonenum = 0, .kboff_inzone = 0 },
-> 
-> Should we rather reset the zone twice so the initial superblock does not
-> have the temporary signature?
+This series implements probing and wiping of the superblock of zoned btrfs.
 
-OK, sure. I'll modify the mkfs.btrfs to reset the superblock log zone
-before writing out final superblock.
+Changes:
+  - v3:
+     - Implement and use blkdev_get_zonereport()
+     - Also modify blkid_clone_probe() for completeness
+     - Drop temporary btrfs magic from the table
+     - Do not try to aggressively copy-paste the kernel side code
+     - Fix commit log
+  - v2:
+     - Fix zone alignment calculation
+     - Fix the build without HAVE_LINUX_BLKZONED_H
 
-> For the primary superblock at offset 64K and as a fallback the signature
-> should be valid for detection purposes (ie. not necessarily to get the
-> latest superblock).
+Zoned btrfs is merged with this series:
+https://lore.kernel.org/linux-btrfs/20210222160049.GR1993@twin.jikos.cz/T/
+
+And, superblock locations are finalized with this patch:
+https://lore.kernel.org/linux-btrfs/BL0PR04MB651442E6ACBF48342BD00FEBE7719@BL0PR04MB6514.namprd04.prod.outlook.com/T/
+
+Corresponding btrfs-progs is available here:
+https://github.com/naota/btrfs-progs/tree/btrfs-zoned
+
+A zoned block device consists of a number of zones. Zones are either
+conventional and accepting random writes or sequential and requiring that
+writes be issued in LBA order from each zone write pointer position.
+
+Superblock (and its copies) is the only data structure in btrfs with a
+fixed location on a device. Since we cannot overwrite in a sequential write
+required zone, we cannot place superblock in the zone.
+
+Thus, zoned btrfs use superblock log writing to update superblock on
+sequential write required zones. It uses two zones as a circular buffer to
+write updated superblocks. Once the first zone is filled up, start writing
+into the second buffer. When both zones are filled up and before start
+writing to the first zone again, it reset the first zone.
+
+This series first implements zone based detection of the magic location.
+Then, it adds magics for zoned btrfs and implements a probing function to
+detect the latest superblock. Finally, this series also implements
+zone-aware wiping by zone resetting.
+
+* Testing device
+
+You need devices with zone append writing command support to run ZONED
+btrfs.
+
+Other than real devices, null_blk supports zone append write command. You
+can use memory backed null_blk to run the test on it. Following script
+creates 12800 MB /dev/nullb0 filled with 4MB zones.
+
+    sysfs=/sys/kernel/config/nullb/nullb0
+    size=12800 # MB
+    zone_size= 4 # MB
+    
+    # drop nullb0
+    if [[ -d $sysfs ]]; then
+            echo 0 > "${sysfs}"/power
+            rmdir $sysfs
+    fi
+    lsmod | grep -q null_blk && rmmod null_blk
+    modprobe null_blk nr_devices=0
+    
+    mkdir "${sysfs}"
+    
+    echo "${size}" > "${sysfs}"/size
+    echo 1 > "${sysfs}"/zoned
+    echo "${zone_size}" > "${sysfs}"/zone_size
+    echo 0 > "${sysfs}"/zone_nr_conv
+    echo 1 > "${sysfs}"/memory_backed
+    
+    echo 1 > "${sysfs}"/power
+    udevadm settle
+
+Zoned SCSI devices such as SMR HDDs or scsi_debug also support the zone
+append command as an emulated command within the SCSI sd driver. This
+emulation is completely transparent to the user and provides the same
+semantic as a NVMe ZNS native drive support.
+
+Also, there is a qemu patch available to enable NVMe ZNS device.
+
+Then, you can create zoned btrfs with the above btrfs-progs.
+
+    $ mkfs.btrfs -d single -m single /dev/nullb0
+    btrfs-progs v5.11
+    See http://btrfs.wiki.kernel.org for more information.
+    
+    ERROR: superblock magic doesn't match
+    /dev/nullb0: host-managed device detected, setting zoned feature
+    Resetting device zones /dev/nullb0 (3200 zones) ...
+    Label:              (null)
+    UUID:               1e5912a2-b5c3-46fb-aa9a-ee3d073ff600
+    Node size:          16384
+    Sector size:        4096
+    Filesystem size:    12.50GiB
+    Block group profiles:
+      Data:             single            4.00MiB
+      Metadata:         single            4.00MiB
+      System:           single            4.00MiB
+    SSD detected:       yes
+    Zoned device:       yes
+    Zone size:          4.00MiB
+    Incompat features:  extref, skinny-metadata, zoned
+    Runtime features:   
+    Checksum:           crc32c
+    Number of devices:  1
+    Devices:
+       ID        SIZE  PATH
+        1    12.50GiB  /dev/nullb0
+    $ mount /dev/nullb0 /mnt/somewhere
+    $ dmesg | tail
+    ...
+    [272816.682461] BTRFS: device fsid 1e5912a2-b5c3-46fb-aa9a-ee3d073ff600 devid 1 transid 5 /dev/nullb0 scanned by mkfs.btrfs (44367)
+    [272883.678401] BTRFS info (device nullb0): has skinny extents
+    [272883.686373] BTRFS info (device nullb0): flagging fs with big metadata feature
+    [272883.699020] BTRFS info (device nullb0): host-managed zoned block device /dev/nullb0, 3200 zones of 4194304 bytes
+    [272883.711736] BTRFS info (device nullb0): zoned mode enabled with zone size 4194304
+    [272883.722388] BTRFS info (device nullb0): enabling ssd optimizations
+    [272883.731332] BTRFS info (device nullb0): checking UUID tree
+
+Naohiro Aota (3):
+  blkid: implement zone-aware probing
+  blkid: add magic and probing for zoned btrfs
+  blkid: support zone reset for wipefs
+
+ include/blkdev.h                 |   9 ++
+ lib/blkdev.c                     |  29 ++++++
+ libblkid/src/blkidP.h            |   5 +
+ libblkid/src/probe.c             |  99 +++++++++++++++++--
+ libblkid/src/superblocks/btrfs.c | 159 ++++++++++++++++++++++++++++++-
+ 5 files changed, 292 insertions(+), 9 deletions(-)
+
+-- 
+2.31.1
+
