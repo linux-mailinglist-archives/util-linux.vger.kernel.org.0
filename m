@@ -2,106 +2,300 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 806E8373969
-	for <lists+util-linux@lfdr.de>; Wed,  5 May 2021 13:32:50 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 9A1F63752A5
+	for <lists+util-linux@lfdr.de>; Thu,  6 May 2021 12:54:20 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S232909AbhEELdp (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Wed, 5 May 2021 07:33:45 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:54692 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S232907AbhEELdp (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Wed, 5 May 2021 07:33:45 -0400
-Received: from mail-vk1-xa36.google.com (mail-vk1-xa36.google.com [IPv6:2607:f8b0:4864:20::a36])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 489DFC061574
-        for <util-linux@vger.kernel.org>; Wed,  5 May 2021 04:32:48 -0700 (PDT)
-Received: by mail-vk1-xa36.google.com with SMTP id q135so407385vke.1
-        for <util-linux@vger.kernel.org>; Wed, 05 May 2021 04:32:48 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:reply-to:from:date:message-id:subject:to
-         :content-transfer-encoding;
-        bh=1kk2RB1dnhjkEapRULI8O9YYzpV07dBfo5vy8Z/B2lI=;
-        b=fCMJa2p0A3jqKgac6eCWNHp4f/CSw5f2u1LiMwSWCEx0NVdh8WfA2Q/QdPlVLL/qh5
-         sICD1kyEZBWJCoHp7MyJAZyamfGou+rUu3DJ8zffSqbWdzRP2A9n+wSzx/JarsGJpouV
-         PVrXNfZulGgZhy7vG47djzOkK663aekcuOCTdHzBlbqBhsUDMN1GA8voiSlZneKsqCXB
-         J+xJy1hkNSSFsAECTbFfpWOdPsSRBUcmrN3V7vmGDg5RAzh6O8+RXEBz92m+NjMAKh7F
-         Qfl1xRhO9NSB9ZHV3T1fT2SwQyo7RxICrw4IqM57AfZ4TgVhRyZltYPZenp36DqVCsKG
-         o+1g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
-         :subject:to:content-transfer-encoding;
-        bh=1kk2RB1dnhjkEapRULI8O9YYzpV07dBfo5vy8Z/B2lI=;
-        b=YPBTeU4Co/BnOnvBxbUNqZm6Yero19YVIxQlxhANVEYVYXkIuqy1A/QV5yCUW9kYva
-         enAiycRHN28nfUGv/593rAVgd2JEXY1oY/XKieTLvUMgugw9CsOrSrszJuHo9CNUzU02
-         pgODpdaAE44VRpNMxCWg/upwOuHCYYmSpY9jxe52nWIUTvZ2lZCU4Zg0KHpg7Xdb0GVA
-         Z3/EiroU6c6Ul1njWFIR1P9mlXKDMHiZqQ+IDg75mXl5xJD6M9ULFTlLkjFBS4lkZEzK
-         No3XLNOGf2qZQU4/TQDqXBB1yAal91q1IWX0WSLFxzTpDz8+Lyv6caXrS9dTfpd6l4sz
-         0EIA==
-X-Gm-Message-State: AOAM531RwpC4sUm5ioFb98Vov0FECDrO2C1aYBO6qJqG9URf7ZHgTf8z
-        RoAqMKA1/YymZ7I/oqHh57tjwQPUoLhDYdCkarpA7dFOMsg=
-X-Google-Smtp-Source: ABdhPJwjqdYbdo4/0HyKfXkXljk932/JiyHDoPOPFQ8J0uOvbVxYgHAJuZAakeQbIE6xEskM+gRclCNZYMWsCtGdrxU=
-X-Received: by 2002:a1f:3105:: with SMTP id x5mr24676866vkx.8.1620214367355;
- Wed, 05 May 2021 04:32:47 -0700 (PDT)
+        id S234616AbhEFKzQ (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Thu, 6 May 2021 06:55:16 -0400
+Received: from mx2.suse.de ([195.135.220.15]:57006 "EHLO mx2.suse.de"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S234614AbhEFKzN (ORCPT <rfc822;util-linux@vger.kernel.org>);
+        Thu, 6 May 2021 06:55:13 -0400
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.221.27])
+        by mx2.suse.de (Postfix) with ESMTP id BBD34AC1A
+        for <util-linux@vger.kernel.org>; Thu,  6 May 2021 10:54:14 +0000 (UTC)
+Date:   Thu, 6 May 2021 12:54:12 +0200
+From:   Werner Fink <werner@suse.de>
+To:     util-linux@vger.kernel.org
+Cc:     werner@suse.de
+Subject: [PATCH] sulogin: ignore not existing console devices
+Message-ID: <YJPK1JUPtKTuMJ1J@boole.suse.de>
+Mail-Followup-To: util-linux@vger.kernel.org
 MIME-Version: 1.0
-Received: by 2002:a05:6102:4a1:0:0:0:0 with HTTP; Wed, 5 May 2021 04:32:47
- -0700 (PDT)
-Reply-To: grayanna718@gmail.com
-From:   gray anna <boubaa088@gmail.com>
-Date:   Wed, 5 May 2021 04:32:47 -0700
-Message-ID: <CA+eaNVKKXPTSz5DZnH-9_V8tGqSj4v41GW0oHWYiWPDmKRLZHg@mail.gmail.com>
-Subject: 
-To:     undisclosed-recipients:;
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: multipart/signed; micalg=pgp-sha256;
+        protocol="application/pgp-signature"; boundary="dmITk4gbmOfpHNxn"
+Content-Disposition: inline
+X-GPG-Fingerprint: 1B06 BF5A 3829 90FB CBA2  75BE 50E9 0D55 1DC1 6B2E
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
---=20
-V=C3=A1=C5=BEen=C3=BD cenn=C3=BD v=C3=ADt=C4=9Bzi
 
-V=C3=A1=C5=BEen=C3=BD v=C3=BDherce, p=C3=AD=C5=A1u v=C3=A1m, abych v=C3=A1s=
- informoval o va=C5=A1em ned=C3=A1vn=C3=A9m fondu,
-kter=C3=BD vyhr=C3=A1la va=C5=A1e e-mailov=C3=A1 adresa. Jsme tu, abychom v=
-=C3=A1s informovali,
-=C5=BEe va=C5=A1e e-mailov=C3=A1 adresa byla vybr=C3=A1na jako jeden z v=C3=
-=ADt=C4=9Bz=C5=AF tohoto
-roku(Molottery 2021). jste z=C3=ADskali (1 800 000 000)
-milion osm set tis=C3=ADc dolar=C5=AF spojen=C3=BDch st=C3=A1t=C5=AF v leto=
-=C5=A1n=C3=ADm roce. mus=C3=ADte
-kontaktovat pan=C3=AD Annu Grayovou, pr=C3=A1voplatnou mana=C5=BEerku spole=
-=C4=8Dnosti
-molottery na jej=C3=AD e-mailov=C3=A9 adrese at(grayanna718@gmail.com), aby=
- v=C3=A1s
-nasm=C4=9Brovala a poskytla v=C3=A1m pokyny a postupy, jak z=C3=ADskat v=C3=
-=ADt=C4=9Bzn=C3=BD fond.
-my
-pora=C4=8Fte, abyste znovu potvrdili sv=C3=A9 =C3=BAdaje n=C3=AD=C5=BEe.
+--dmITk4gbmOfpHNxn
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-1) Va=C5=A1e cel=C3=A9 jm=C3=A9no:
-2) Va=C5=A1e =C3=BApln=C3=A1 adresa:
-3) Kontaktn=C3=AD telefon a fax =C4=8D.:
-3) Va=C5=A1e profese, v=C4=9Bk a rodinn=C3=BD stav:
-4) Jak=C3=A1koli platn=C3=A1 forma va=C5=A1eho pr=C5=AFkazu toto=C5=BEnosti=
-/=C5=99idi=C4=8Dsk=C3=A9ho pr=C5=AFkazu:
-5 Va=C5=A1e zem=C4=9B
-6) Va=C5=A1e m=C4=9Bsto:
-7) V=C3=A1=C5=A1 st=C3=A1t:
-8) Telefonn=C3=AD =C4=8D=C3=ADslo:
-9) Va=C5=A1e =C4=8D=C3=ADslo Whatsapp:
+and also not functional console devices. Redirect the error
+messages to the appropiate console device.
 
-Je dobr=C3=A9 kontaktovat pan=C3=AD Annu Grayovou (vedouc=C3=AD zpracov=C3=
-=A1n=C3=AD)
-Jej=C3=AD e-mailov=C3=A1 adresa (grayanna718@gmail.com)
-pro dal=C5=A1=C3=AD zpracov=C3=A1n=C3=AD a odesl=C3=A1n=C3=AD va=C5=A1=C3=
-=AD karty na va=C5=A1i nominovanou adresu.
+Signed-off-by: Werner Fink <werner@suse.de>
 
-Jm=C3=A9nem fondu spole=C4=8Dnosti Molottery, Sv=C4=9Btov=C3=A9 banky a
-Centr=C3=A1ln=C3=AD banka Evropy pod touto sou=C4=8Dasnou spr=C3=A1vou,
-omlouv=C3=A1me se za nep=C5=99=C3=ADjemnosti a zpo=C5=BEd=C4=9Bn=C3=AD plat=
-by.
+---
+ login-utils/sulogin-consoles.h |  1 +
+ login-utils/sulogin.c          | 97 +++++++++++++++++++++++++++++++++++---=
+----
+ 2 files changed, 82 insertions(+), 16 deletions(-)
 
-D=C4=9Bkuji za pochopen=C3=AD.
+diff --git a/login-utils/sulogin-consoles.h b/login-utils/sulogin-consoles.h
+index 0bfbc3871..12032c997 100644
+--- a/login-utils/sulogin-consoles.h
++++ b/login-utils/sulogin-consoles.h
+@@ -40,6 +40,7 @@ struct console {
+ 	int fd, id;
+ #define	CON_SERIAL	0x0001
+ #define	CON_NOTTY	0x0002
++#define	CON_EIO		0x0004
+ 	pid_t pid;
+ 	struct chardata cp;
+ 	struct termios tio;
+diff --git a/login-utils/sulogin.c b/login-utils/sulogin.c
+index 9091caf14..c833796e7 100644
+--- a/login-utils/sulogin.c
++++ b/login-utils/sulogin.c
+@@ -52,6 +52,7 @@
+ #ifdef __linux__
+ # include <sys/kd.h>
+ # include <sys/param.h>
++# include <linux/serial.h>
+ #endif
+=20
+ #include "c.h"
+@@ -104,6 +105,9 @@ static void tcinit(struct console *con)
+ 	int flags =3D 0, mode =3D 0;
+ 	struct termios *tio =3D &con->tio;
+ 	const int fd =3D con->fd;
++#if defined(TIOCGSERIAL)
++	struct serial_struct serinfo;
++#endif
+ #ifdef USE_PLYMOUTH_SUPPORT
+ 	struct termios lock;
+ 	int i =3D (plymouth_command(MAGIC_PING)) ? PLYMOUTH_TERMIOS_FLAGS_DELAY :=
+ 0;
+@@ -123,27 +127,72 @@ static void tcinit(struct console *con)
+ 	}
+ 	memset(&lock, 0, sizeof(struct termios));
+ 	ioctl(fd, TIOCSLCKTRMIOS, &lock);
++	errno =3D 0;
+ #endif
++
++#if defined(TIOCGSERIAL)
++	if (ioctl(fd, TIOCGSERIAL,  &serinfo) >=3D 0)
++	    	con->flags |=3D CON_SERIAL;
++	errno =3D 0;
++#else
++# if defined(KDGKBMODE)
++	if (ioctl(fd, KDGKBMODE, &mode) < 0)
++		con->flags |=3D CON_SERIAL;
+ 	errno =3D 0;
++# endif
++#endif
+=20
+ 	if (tcgetattr(fd, tio) < 0) {
+-		warn(_("tcgetattr failed"));
+-		con->flags |=3D CON_NOTTY;
+-		return;
++		int saveno =3D errno;
++#if defined(KDGKBMODE) || defined(TIOCGSERIAL)
++		if (con->flags & CON_SERIAL) {			/* Try to recover this */
++
++# if defined(TIOCGSERIAL)
++			serinfo.flags |=3D ASYNC_SKIP_TEST;	/* Skip test of UART */
++
++			if (ioctl(fd, TIOCSSERIAL, &serinfo) < 0)
++				goto tcgeterr;
++			if (ioctl(fd, TIOCSERCONFIG) < 0)	/* Try to autoconfigure */
++				goto tcgeterr;
++			if (ioctl(fd, TIOCGSERIAL,  &serinfo) < 0)
++				goto tcgeterr;			/* Ouch */
++# endif
++			if (tcgetattr(fd, tio) < 0)		/* Retry to get tty attributes */
++				saveno =3D errno;
++		}
++# if defined(TIOCGSERIAL)
++	tcgeterr:
++# endif
++		if (saveno)
++#endif
++		{
++			FILE *fcerr =3D fdopen(fd, "w");
++			if (fcerr) {
++				fprintf(fcerr, _("tcgetattr failed"));
++				fclose(fcerr);
++			}
++			warn(_("tcgetattr failed"));
++
++			con->flags &=3D ~CON_SERIAL;
++			if (saveno !=3D EIO)
++				con->flags |=3D CON_NOTTY;
++			else
++				con->flags |=3D CON_EIO;
++
++			errno =3D 0;
++			return;
++		}
+ 	}
+=20
+ 	/* Handle lines other than virtual consoles here */
+-#if defined(KDGKBMODE)
+-	if (ioctl(fd, KDGKBMODE, &mode) < 0)
++#if defined(KDGKBMODE) || defined(TIOCGSERIAL)
++	if (con->flags & CON_SERIAL)
+ #endif
+ 	{
+ 		speed_t ispeed, ospeed;
+ 		struct winsize ws;
+ 		errno =3D 0;
+=20
+-		/* this is a modem line */
+-		con->flags |=3D CON_SERIAL;
+-
+ 		/* Flush input and output queues on modem lines */
+ 		tcflush(fd, TCIOFLUSH);
+=20
+@@ -220,6 +269,8 @@ static void tcfinal(struct console *con)
+ 	struct termios *tio =3D &con->tio;
+ 	const int fd =3D con->fd;
+=20
++	if (con->flags & CON_EIO)
++		return;
+ 	if ((con->flags & CON_SERIAL) =3D=3D 0) {
+ 		xsetenv("TERM", "linux", 1);
+ 		return;
+@@ -557,12 +608,16 @@ err:
+ static void setup(struct console *con)
+ {
+ 	int fd =3D con->fd;
+-	const pid_t pid =3D getpid(), pgrp =3D getpgid(0), ppgrp =3D
+-	    getpgid(getppid()), ttypgrp =3D tcgetpgrp(fd);
++	const pid_t pid =3D getpid(), pgrp =3D getpgid(0), ppgrp =3D getpgid(getp=
+pid());
++	pid_t ttypgrp;
+=20
+ 	if (con->flags & CON_NOTTY)
++		goto notty;
++	if (con->flags & CON_EIO)
+ 		return;
+=20
++	ttypgrp =3D tcgetpgrp(fd);
++
+ 	/*
+ 	 * Only go through this trouble if the new
+ 	 * tty doesn't fall in this process group.
+@@ -585,6 +640,7 @@ static void setup(struct console *con)
+ 		ioctl(fd, TIOCSCTTY, (char *)1);
+ 		tcsetpgrp(fd, ppgrp);
+ 	}
++notty:
+ 	dup2(fd, STDIN_FILENO);
+ 	dup2(fd, STDOUT_FILENO);
+ 	dup2(fd, STDERR_FILENO);
+@@ -608,20 +664,25 @@ static const char *getpasswd(struct console *con)
+ 	struct termios tty;
+ 	static char pass[128], *ptr;
+ 	struct chardata *cp;
+-	const char *ret =3D pass;
++	const char *ret =3D NULL;
+ 	unsigned char tc;
+ 	char c, ascval;
+ 	int eightbit;
+ 	const int fd =3D con->fd;
+=20
+-	if (con->flags & CON_NOTTY)
++	if (con->flags & CON_EIO)
+ 		goto out;
++
+ 	cp =3D &con->cp;
+ 	tty =3D con->tio;
++	tc =3D 0;
++	ret =3D pass;
+=20
+ 	tty.c_iflag &=3D ~(IUCLC|IXON|IXOFF|IXANY);
+ 	tty.c_lflag &=3D ~(ECHO|ECHOE|ECHOK|ECHONL|TOSTOP|ISIG);
+-	tc =3D (tcsetattr(fd, TCSAFLUSH, &tty) =3D=3D 0);
++
++	if ((con->flags & CON_NOTTY) =3D=3D 0)
++		tc =3D (tcsetattr(fd, TCSAFLUSH, &tty) =3D=3D 0);
+=20
+ 	sigemptyset(&sa.sa_mask);
+ 	sa.sa_handler =3D alrm_handler;
+@@ -647,11 +708,12 @@ static const char *getpasswd(struct console *con)
+ 			}
+ 			ret =3D NULL;
+ 			switch (errno) {
+-			case 0:
+ 			case EIO:
++				con->flags |=3D CON_EIO;
+ 			case ESRCH:
+ 			case EINVAL:
+ 			case ENOENT:
++			case 0:
+ 				break;
+ 			default:
+ 				warn(_("cannot read %s"), con->tty);
+@@ -775,7 +837,7 @@ static void sushell(struct passwd *pwd)
+=20
+ #ifdef HAVE_LIBSELINUX
+ 	if (is_selinux_enabled() > 0) {
+-		security_context_t scon=3DNULL;
++		char *scon=3DNULL;
+ 		char *seuser=3DNULL;
+ 		char *level=3DNULL;
+ 		if (getseuserbyname("root", &seuser, &level) =3D=3D 0) {
+@@ -968,10 +1030,13 @@ int main(int argc, char **argv)
+ 		con =3D list_entry(ptr, struct console, entry);
+ 		if (con->id >=3D CONMAX)
+ 			break;
++		if (con->flags & CON_EIO)
++			goto next;
+=20
+ 		switch ((con->pid =3D fork())) {
+ 		case 0:
+ 			mask_signal(SIGCHLD, SIG_DFL, NULL);
++			dup2(con->fd, STDERR_FILENO);
+ 		nofork:
+ 			setup(con);
+ 			while (1) {
+@@ -1026,7 +1091,7 @@ int main(int argc, char **argv)
+ 		default:
+ 			break;
+ 		}
+-
++	next:
+ 		ptr =3D ptr->next;
+=20
+ 	} while (ptr !=3D &consoles);
 
-S pozdravem, pane ALMERICHU ADALHARDE.
+--dmITk4gbmOfpHNxn
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQJgBAABCABKFiEEGwa/WjgpkPvLonW+UOkNVR3Bay4FAmCTytAsFIAAAAAAFQAO
+cGthLWFkZHJlc3NAZ251cGcub3Jnd2VybmVyQHN1c2UuZGUACgkQUOkNVR3Bay4+
+wg/+L+Lv0SbsSaf50Ie3uzq6UNDVe3xCkRlXFuIchkEc1lx9mHhIP1prc94P1pow
+Bp7+mIZQDmqXrEI9q0HMjjYllckkFJ/eftzi/MPIRCgleCMIDwkyh0TbIsytwKf/
+hzqnAIv6ODfYyrtjrZqntENeknzASWcgUpdFv78qzgivc9zLPqqrBGUCRemV6M4n
+xXpXL/ggts8eecTD7WodlNGY3PwFXlECFdnszhm+XgsGvwsQgo0iXqBiUjsr4Gwh
+P5N81PJbAgmLuXzcvdHqFFeuaMug1ToDziMUS47Nhk4a2SsupezZHumBcXTzrVpZ
+GcaC8x6WIshwtNvEmVv0VawY84sUL2j6zXwVnb5Yn8SkbxuygOk8YP0k9EdzG1kU
+LHGyUYtZBFTMrN79q8MVFW+51jKQzl73O7/Rk/cQjHdjtqf6P2aJpOQN7z6YnIyC
+NY3MY37qWDh4xisiDG0tkcNvUgHwftyA6SY1Up7HVkX4mlYQ+Q8LLx19We62L/00
+8LZWXLg/CfGbyb5f1vQvZTMz15bW7eB8mqArZyir9iF5VZko3BGUx55gfEWbd6iJ
+SbI1oXjYpBm/T9OTLprBhoSj9cXgMrHWaZayBCadqO2RheUiUtAz1XzcPKEop/5x
+Na7ZUgOX8xjj67dyM8otkeaA7ILMjSLY3YOVMa0Az8Mr1u8=
+=oV1/
+-----END PGP SIGNATURE-----
+
+--dmITk4gbmOfpHNxn--
