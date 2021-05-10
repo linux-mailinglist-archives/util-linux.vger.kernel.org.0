@@ -2,81 +2,60 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 610C4376B74
-	for <lists+util-linux@lfdr.de>; Fri,  7 May 2021 23:07:39 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 098E1378B62
+	for <lists+util-linux@lfdr.de>; Mon, 10 May 2021 14:07:59 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S230286AbhEGVIh (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Fri, 7 May 2021 17:08:37 -0400
-Received: from bosmailout07.eigbox.net ([66.96.187.7]:51615 "EHLO
-        bosmailout07.eigbox.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S230093AbhEGVIg (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Fri, 7 May 2021 17:08:36 -0400
-X-Greylist: delayed 1993 seconds by postgrey-1.27 at vger.kernel.org; Fri, 07 May 2021 17:08:34 EDT
-Received: from bosmailscan09.eigbox.net ([10.20.15.9])
-        by bosmailout07.eigbox.net with esmtp (Exim)
-        id 1lf7Av-0006tO-7P; Fri, 07 May 2021 16:34:17 -0400
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-        d=godsofu4.com; s=dkim; h=Sender:Content-Transfer-Encoding:Content-Type:
-        Message-ID:Reply-To:Subject:To:From:Date:MIME-Version:Cc:Content-ID:
-        Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
-        :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
-        List-Subscribe:List-Post:List-Owner:List-Archive;
-        bh=aM9bUFGSTpfnep8zAVAJMnojqhcwpuHDFPgQnPqW4M4=; b=L/dzd5zNAEgsj4wIrKa+NtSPJw
-        eQ6m0GeIJ6FqTTz2wiDrKQSrTcort882vfn/+WrQRiS6dPQyUMnRoYzBdTC3E+FPhQC0J5kKK/D0H
-        LM0KWgEROPL9XGkkPtDbKcgO4+OMnZdyobiKxOhkfe91ky2DNAXxyoYHdAO9zpzXG+7mrT96w/C0D
-        cSd8H7hg5/xg61MAGwsjzNLbBqB/Um6CNHq79BiaCrU/VOU9jFfq+aQrz3oTlTvSP7fReohDtc0So
-        ompsD7yaXBZ9hvgSYsYha8MroiFNOSv4R+xYZEYz8YP739+DdmhMwQWEH6X2KZGYjJyQTGC+0Ty8F
-        p4i+Ml+Q==;
-Received: from [10.115.3.33] (helo=bosimpout13)
-        by bosmailscan09.eigbox.net with esmtp (Exim)
-        id 1lf7Ap-0008KG-EB; Fri, 07 May 2021 16:34:11 -0400
-Received: from boswebmail06.eigbox.net ([10.20.16.6])
-        by bosimpout13 with 
-        id 1wa22500Q07qujN01wa7Wz; Fri, 07 May 2021 16:34:11 -0400
-X-EN-SP-DIR: OUT
-X-EN-SP-SQ: 1
-Received: from [127.0.0.1] (helo=homestead)
-        by boswebmail06.eigbox.net with esmtp (Exim)
-        id 1lf79s-0005SY-TS; Fri, 07 May 2021 16:33:12 -0400
-Received: from [197.239.81.229]
- by emailmg.homestead.com
- with HTTP (HTTP/1.1 POST); Fri, 07 May 2021 16:33:12 -0400
+        id S233210AbhEJMG0 (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Mon, 10 May 2021 08:06:26 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124]:43952 "EHLO
+        us-smtp-delivery-124.mimecast.com" rhost-flags-OK-OK-OK-OK)
+        by vger.kernel.org with ESMTP id S242249AbhEJLl0 (ORCPT
+        <rfc822;util-linux@vger.kernel.org>);
+        Mon, 10 May 2021 07:41:26 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+        s=mimecast20190719; t=1620646821;
+        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+         to:to:cc:mime-version:mime-version:content-type:content-type;
+        bh=c2EMITgh/9rv6FOZ12NnHFSXYVvMF0DZkdWIA47bYTc=;
+        b=OJKKh0yoeQNUmAop2oxXDqCKVAiAhQpVw096S+XBHgkSdSd3uav2Fapib/e0fAWbSFysOv
+        okFamPoR5jpGd6pxksp2zXvoPSoTtVn3i/OKzhODzSpiAu1VwwS+OB05Q9XFUXG+Z13FJq
+        FBETbYkOz9SkOgYAiiXUKOzlVxlZDUU=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-602-KiWip6bgN-GIVK0iq1VKsg-1; Mon, 10 May 2021 07:40:16 -0400
+X-MC-Unique: KiWip6bgN-GIVK0iq1VKsg-1
+Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.phx2.redhat.com [10.5.11.13])
+        (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+        (No client certificate requested)
+        by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 0D26C801817;
+        Mon, 10 May 2021 11:40:16 +0000 (UTC)
+Received: from ws.net.home (ovpn-115-34.ams2.redhat.com [10.36.115.34])
+        by smtp.corp.redhat.com (Postfix) with ESMTPS id 3306460936;
+        Mon, 10 May 2021 11:40:15 +0000 (UTC)
+Date:   Mon, 10 May 2021 13:40:12 +0200
+From:   Karel Zak <kzak@redhat.com>
+To:     linux-kernel@vger.kernel.org, linux-fsdevel@vger.kernel.org,
+        util-linux@vger.kernel.org
+Subject: [ANNOUNCE] util-linux v2.37-rc2
+Message-ID: <20210510114012.ggmuwudv3sel4w3m@ws.net.home>
 MIME-Version: 1.0
-Date:   Fri, 07 May 2021 20:33:12 +0000
-From:   Mrs Suzara Maling Wan <fast65@godsofu4.com>
-To:     undisclosed-recipients:;
-Subject: URGENT REPLY NEEDED
-Reply-To: suzara2017malingwan@gmail.com
-Mail-Reply-To: suzara2017malingwan@gmail.com
-Message-ID: <631345976938ca35031d7e185b0c5f57@godsofu4.com>
-X-Sender: fast65@godsofu4.com
-User-Agent: Roundcube Webmail/1.3.14
-Content-Type: text/plain; charset=US-ASCII;
- format=flowed
-Content-Transfer-Encoding: 7bit
-X-EN-AuthUser: fast65@godsofu4.com
-Sender:  Mrs Suzara Maling Wan <fast65@godsofu4.com>
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.13
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
 
+The util-linux release v2.37-rc2 is available at
+ 
+  http://www.kernel.org/pub/linux/utils/util-linux/v2.37/
+ 
+Feedback and bug reports, as always, are welcomed.
+ 
+  Karel
 
-My names are Mrs Suzara Maling Wan, I am a Nationality of the Republic
-of the Philippine presently base in West Africa B/F, dealing with
-exportation of Gold, I was diagnose of blood Causal decease, and my
-doctor have announce to me that I have few days to leave due to the
-condition of my sickness.
+-- 
+ Karel Zak  <kzak@redhat.com>
+ http://karelzak.blogspot.com
 
-I have a desire to build an orphanage home in your country of which i
-cannot execute the project myself due to my present health condition,
-I am willing to hand over the project under your care for you to help
-me fulfill my dreams and desire of building an orphanage home in your
-country.
-
-Reply in you are will to help so that I can direct you to my bank for
-the urgent transfer of the fund/money require for the project to your
-account as I have already made the fund/money available.
-
-With kind regards
-Mrs Suzara Maling Wan
