@@ -2,73 +2,40 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 90C9037915C
-	for <lists+util-linux@lfdr.de>; Mon, 10 May 2021 16:51:54 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 4198D379CFB
+	for <lists+util-linux@lfdr.de>; Tue, 11 May 2021 04:41:54 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S240099AbhEJOwz (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Mon, 10 May 2021 10:52:55 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124]:26553 "EHLO
-        us-smtp-delivery-124.mimecast.com" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S235783AbhEJOwX (ORCPT
+        id S229840AbhEKCm6 (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Mon, 10 May 2021 22:42:58 -0400
+Received: from [125.7.54.12] ([125.7.54.12]:52587 "EHLO
+        snhve01-ext-001.mktdns.com" rhost-flags-FAIL-FAIL-OK-OK)
+        by vger.kernel.org with ESMTP id S229684AbhEKCm6 (ORCPT
         <rfc822;util-linux@vger.kernel.org>);
-        Mon, 10 May 2021 10:52:23 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-        s=mimecast20190719; t=1620658278;
-        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-         in-reply-to:in-reply-to:references:references;
-        bh=gFbfnU2qIW6o4DQl/Mb0Vabk6JyZRfX3G7NzyX/Ok1w=;
-        b=WvKR12mHlnpJe0aA1wnpMl69KiGh+EdZjf1XYtzf5D7xz23ElpeGzi3YE79ElV0hDFBPHA
-        mN1Dp/SsCAWjnt1nYmu5ZRiBcLPy7wRAf/tPtlcgCZWQwOM9G9oZmPaXfJmaMTSQMvaKGG
-        ta3hnhyK4v2Q5mJL6ETFhh70NecteDI=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-172-IhMPtqfCPPq3BboaWx_Zzw-1; Mon, 10 May 2021 10:51:16 -0400
-X-MC-Unique: IhMPtqfCPPq3BboaWx_Zzw-1
-Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.phx2.redhat.com [10.5.11.11])
-        (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
-        (No client certificate requested)
-        by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 399CF801B15;
-        Mon, 10 May 2021 14:51:15 +0000 (UTC)
-Received: from ws.net.home (ovpn-115-34.ams2.redhat.com [10.36.115.34])
-        by smtp.corp.redhat.com (Postfix) with ESMTPS id 86A5F2DAD6;
-        Mon, 10 May 2021 14:51:14 +0000 (UTC)
-Date:   Mon, 10 May 2021 16:51:11 +0200
-From:   Karel Zak <kzak@redhat.com>
-To:     util-linux@vger.kernel.org
-Cc:     Werner Fink <werner@suse.de>
-Subject: Re: [PATCH] sulogin: ignore not existing console devices
-Message-ID: <20210510145111.x5ap5raymlfoewi5@ws.net.home>
-References: <YJPK1JUPtKTuMJ1J@boole.suse.de>
+        Mon, 10 May 2021 22:42:58 -0400
+X-MSFBL: 3hpJzgC3W9yEcznu0ninGja2JO5VCyVt05eSIzIXsWU=|eyJnIjoiYmctc25odmU
+        wMWQtMDEiLCJ1IjoiJXZjdHhfbWVzc3tta3RvTWFpbGluZ0lEfSIsImIiOiJzbmh
+        2ZTAxLW10YTA0LTEyNS03LTU0LTEyIiwiciI6InV0aWwtbGludXhAdmdlci5rZXJ
+        uZWwub3JnIn0=
+Reply-To: <avislmarie@yahoo.com>
+Message-ID: <45.99.13762.4EEE9906@snhve01-mta04.marketo.org>
+From:   "COMPANY" <marieaviss@gmail.com>
+Subject: Re: Business inquiries 05:11:2021
+Date:   Mon, 10 May 2021 19:41:24 -0700
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <YJPK1JUPtKTuMJ1J@boole.suse.de>
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.11
+Content-Type: text/plain;
+        charset="Windows-1251"
+Content-Transfer-Encoding: 7bit
+X-Priority: 3
+X-MSMail-Priority: Normal
+X-Mailer: Microsoft Outlook Express 6.00.2600.0000
+X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2600.0000
+To:     unlisted-recipients:; (no To-header on input)
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-On Thu, May 06, 2021 at 12:54:12PM +0200, Werner Fink wrote:
->  login-utils/sulogin-consoles.h |  1 +
->  login-utils/sulogin.c          | 97 +++++++++++++++++++++++++++++++++++-------
->  2 files changed, 82 insertions(+), 16 deletions(-)
-
-Seems good, but git does not like the patch from your e-mail:
-
-        Applying: sulogin: ignore not existing console devices
-        .git/rebase-apply/patch:49: space before tab in indent.
-                    con->flags |= CON_SERIAL;
-        error: patch failed: login-utils/sulogin.c:775
-        error: login-utils/sulogin.c: patch does not apply
-        Patch failed at 0001 sulogin: ignore not existing console devices
-
-
-    Karel
-
-
-
--- 
- Karel Zak  <kzak@redhat.com>
- http://karelzak.blogspot.com
-
+Hello
+How are you doing today?
+I am willing to initiate a business relationship with you.
+Yours sincerely
+MA/PM
