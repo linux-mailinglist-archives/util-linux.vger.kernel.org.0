@@ -2,69 +2,75 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 19C0D3929B4
-	for <lists+util-linux@lfdr.de>; Thu, 27 May 2021 10:42:51 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 702AA3945FD
+	for <lists+util-linux@lfdr.de>; Fri, 28 May 2021 18:41:44 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S235427AbhE0IoW (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Thu, 27 May 2021 04:44:22 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([216.205.24.124]:33845 "EHLO
-        us-smtp-delivery-124.mimecast.com" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S235284AbhE0IoW (ORCPT
-        <rfc822;util-linux@vger.kernel.org>);
-        Thu, 27 May 2021 04:44:22 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-        s=mimecast20190719; t=1622104969;
-        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-         in-reply-to:in-reply-to:references:references;
-        bh=z3aI8wcLCEvKvhRjyyFyjbTVzQJD0hb5vmk/E0kwERQ=;
-        b=XPEaQgIFvmIHUgVaFs0zu4/Y2IC5nQJ2t4dAbpHNGUq2FehFEZBNjs0bEKD7VtDkWKwG+S
-        dHozoSZ98spqSklMRN+XlAAC9Hn3rGjHaza0AeKuE4v6OjV0nV+lr4N9liMaELS76ZvpLO
-        Zu1wAGu097PK3j7B8T1pkECResjwgjA=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-489-zP8iTJj2NyOOyzxXnRS4Ng-1; Thu, 27 May 2021 04:42:44 -0400
-X-MC-Unique: zP8iTJj2NyOOyzxXnRS4Ng-1
-Received: from smtp.corp.redhat.com (int-mx06.intmail.prod.int.phx2.redhat.com [10.5.11.16])
-        (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
-        (No client certificate requested)
-        by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 19CAC107ACF2;
-        Thu, 27 May 2021 08:42:43 +0000 (UTC)
-Received: from ws.net.home (ovpn-113-152.ams2.redhat.com [10.36.113.152])
-        by smtp.corp.redhat.com (Postfix) with ESMTPS id 707AB6787B;
-        Thu, 27 May 2021 08:42:42 +0000 (UTC)
-Date:   Thu, 27 May 2021 10:42:39 +0200
-From:   Karel Zak <kzak@redhat.com>
-To:     Petr Pisar <petr.pisar@atlas.cz>
-Cc:     util-linux@vger.kernel.org
-Subject: Re: util-linux-2.37-rc2: "%delta:" is not C-format string
-Message-ID: <20210527084239.zpxwitzm2hwzyla7@ws.net.home>
-References: <YKgRQPRRbMUYR2d9@album.bayer.uni.cx>
+        id S235400AbhE1QnS convert rfc822-to-8bit (ORCPT
+        <rfc822;lists+util-linux@lfdr.de>); Fri, 28 May 2021 12:43:18 -0400
+Received: from cpe-144-130-100-110.static.tas.asp.telstra.net ([144.130.100.110]:55622
+        "EHLO u3aserver.local" rhost-flags-OK-FAIL-OK-FAIL) by vger.kernel.org
+        with ESMTP id S235570AbhE1QnP (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Fri, 28 May 2021 12:43:15 -0400
+X-Greylist: delayed 507 seconds by postgrey-1.27 at vger.kernel.org; Fri, 28 May 2021 12:43:15 EDT
+Received: from localhost (localhost [127.0.0.1])
+        by u3aserver.local (Postfix) with ESMTP id 4756F117D4606
+        for <util-linux@vger.kernel.org>; Sat, 29 May 2021 02:32:49 +1000 (AEST)
+X-Virus-Scanned: amavisd-new at u3aserver.local
+Received: from u3aserver.local ([127.0.0.1])
+        by localhost (u3aserver.local [127.0.0.1]) (amavisd-new, port 10024)
+        with ESMTP id wcmqnNWtsaw7 for <util-linux@vger.kernel.org>;
+        Sat, 29 May 2021 02:32:39 +1000 (AEST)
+Received: from johnlewis.co.uk (ec2-34-210-103-201.us-west-2.compute.amazonaws.com [34.210.103.201])
+        by u3aserver.local (Postfix) with ESMTPSA id 76EE2116C6DED
+        for <util-linux@vger.kernel.org>; Fri, 28 May 2021 03:44:36 +1000 (AEST)
+Reply-To: robert_turner@johnlewis-trading.com,
+          pippawicks.sales@johnlewis-trading.com
+From:   John Lewis Partnersip <robert.turner7@johnlewis.co.uk>
+To:     util-linux@vger.kernel.org
+Subject: Product Inquiry [JL] 05/27/21,,
+Date:   27 May 2021 17:44:36 +0000
+Message-ID: <20210527152021.2C7714FE05E87FE5@johnlewis.co.uk>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <YKgRQPRRbMUYR2d9@album.bayer.uni.cx>
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.16
+Content-Type: text/plain;
+        charset="utf-8"
+Content-Transfer-Encoding: 8BIT
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-On Fri, May 21, 2021 at 10:00:00PM +0200, Petr Pisar wrote:
-> when translating util-linux-2.37-rc2, I found that:
-> 
-> #: sys-utils/irq-common.c:482
-> #, fuzzy, c-format
-> msgid "%delta:"
-> 
-> is mishandled by gettext. Because it is marked as c-format, I cannot translatedo
+Dear util-linux
 
-Fixed (I hope) by https://github.com/karelzak/util-linux/commit/b97e2145fa44c754ab78dd20e3ca8c13df68b624
+The famous brand John Lewis Partnership, is UK's largest multi-
+channel retailer with over 126 shops and multiple expansion in 
+Africa furnished by European/Asian/American products. We are 
+sourcing new products to attract new customers and also retain 
+our existing ones, create new partnerships with companies dealing 
+with different kinds of goods globally.
 
-Thanks for your report.
+Your company's products are of interest to our market as we have 
+an amazing market for your products.
 
-  Karel
+Provide us your current catalog through email to review more. We 
+hope to be able to order with you and start a long-term friendly,
+respectable and solid business partnership. Please we would 
+appreciate it if you could send us your stock availability via 
+email if any.
 
--- 
- Karel Zak  <kzak@redhat.com>
- http://karelzak.blogspot.com
+Our payment terms are 15 days net in Europe, 30 days Net in UK 
+and 30 days net in Asia/USA as we operate with over 5297 
+suppliers around the globe for the past 50 years now. For 
+immediate response Send your reply to robert_turner@johnlewis-
+trading.com for us to be able to 
+treat with care and urgency.
 
+
+Best Regards
+
+Rob Turner
+Head Of Procurement Operations
+John Lewis & Partners.
+robert_turner@johnlewis-trading.com
+Tel: +44-7451-274090
+WhatsApp: +447497483925
+www.johnlewis.com
+REGISTERED OFFICE: 171 VICTORIA STREET, LONDON SW1E 5NN  
