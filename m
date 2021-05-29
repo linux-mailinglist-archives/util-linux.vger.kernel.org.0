@@ -2,75 +2,88 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 702AA3945FD
-	for <lists+util-linux@lfdr.de>; Fri, 28 May 2021 18:41:44 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 2F8613949DE
+	for <lists+util-linux@lfdr.de>; Sat, 29 May 2021 03:44:51 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S235400AbhE1QnS convert rfc822-to-8bit (ORCPT
-        <rfc822;lists+util-linux@lfdr.de>); Fri, 28 May 2021 12:43:18 -0400
-Received: from cpe-144-130-100-110.static.tas.asp.telstra.net ([144.130.100.110]:55622
-        "EHLO u3aserver.local" rhost-flags-OK-FAIL-OK-FAIL) by vger.kernel.org
-        with ESMTP id S235570AbhE1QnP (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Fri, 28 May 2021 12:43:15 -0400
-X-Greylist: delayed 507 seconds by postgrey-1.27 at vger.kernel.org; Fri, 28 May 2021 12:43:15 EDT
-Received: from localhost (localhost [127.0.0.1])
-        by u3aserver.local (Postfix) with ESMTP id 4756F117D4606
-        for <util-linux@vger.kernel.org>; Sat, 29 May 2021 02:32:49 +1000 (AEST)
-X-Virus-Scanned: amavisd-new at u3aserver.local
-Received: from u3aserver.local ([127.0.0.1])
-        by localhost (u3aserver.local [127.0.0.1]) (amavisd-new, port 10024)
-        with ESMTP id wcmqnNWtsaw7 for <util-linux@vger.kernel.org>;
-        Sat, 29 May 2021 02:32:39 +1000 (AEST)
-Received: from johnlewis.co.uk (ec2-34-210-103-201.us-west-2.compute.amazonaws.com [34.210.103.201])
-        by u3aserver.local (Postfix) with ESMTPSA id 76EE2116C6DED
-        for <util-linux@vger.kernel.org>; Fri, 28 May 2021 03:44:36 +1000 (AEST)
-Reply-To: robert_turner@johnlewis-trading.com,
-          pippawicks.sales@johnlewis-trading.com
-From:   John Lewis Partnersip <robert.turner7@johnlewis.co.uk>
+        id S229547AbhE2BqZ (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Fri, 28 May 2021 21:46:25 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:41060 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S229543AbhE2BqZ (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Fri, 28 May 2021 21:46:25 -0400
+Received: from mail-pg1-x535.google.com (mail-pg1-x535.google.com [IPv6:2607:f8b0:4864:20::535])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id CB8A2C061574
+        for <util-linux@vger.kernel.org>; Fri, 28 May 2021 18:44:49 -0700 (PDT)
+Received: by mail-pg1-x535.google.com with SMTP id f22so3827844pgb.9
+        for <util-linux@vger.kernel.org>; Fri, 28 May 2021 18:44:49 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=date:from:to:subject:message-id:mime-version:content-disposition
+         :user-agent;
+        bh=WzuG/nxaFx5ugQAxMAjVYzlCQnkeGWtV7/k+iDwlbdw=;
+        b=sBYb7SBLJNHzvtO87CRdlGpdsvuo9UvJckI/WgTjI7/2kyngneJ8lpslN5tDNCNPoe
+         wajLhdmGIInV4mQh3j1CBex7UylzHxUD72rYnrGlg0wejM1d4tJUBUpEtDj3yroBmnYB
+         bX0fvCnCMS8sDBZNBMz+F4u7NLIVIyOMWTs+TveQRU6f687Rj0P1f59xuoGi6uHloRIp
+         pHmY9qIqzHgO5KhexGUX6t+r/Kp3XQAGaKR9LiyUNCM3BlTvaTF4AU8vQfWql5QwjNhA
+         mXn9HzoV+UPNWA+Hro+8IOuH3cUJbreXoV8yWAhr89+WITs1NK58PZFMKiUqtjUJAjMF
+         2FcA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:date:from:to:subject:message-id:mime-version
+         :content-disposition:user-agent;
+        bh=WzuG/nxaFx5ugQAxMAjVYzlCQnkeGWtV7/k+iDwlbdw=;
+        b=N7RjN1NuZKu3ywK4+3hmIh5sGznL0E5uyKUrjIGX8PzhS5LrHFy1ZA6jJMQLS4858C
+         6RRV/Uq25rYnYrTLcGf9HGRNLFAck5J2lgyhV2GRIw84Ah0zmgcrtIL0dvuOiREO7qyB
+         0G5d/Lh2AMX8BMCShkrVn36HOvRvXXZqfKPhLrvI0v+XqJcbp0N0LdHuvHhuhqxjqq3i
+         kWZYyJuyQ6pJZf8klqMZzhEoDxphII6rNSCUPtSfgk3lxpaW2mjMoNa25vF57jX2VR5J
+         apeYYzvDw2jDk9FN8UJZRHS4Ufh4eRqSMDvQ+cy5P8ZCksfuCgcyyp6OU5JrLsCdy1QH
+         cGRA==
+X-Gm-Message-State: AOAM530JdWqzi0eels27tx5jgr7lD56+HRuBsXDmowyS7bYisA9Ahd0g
+        h8i/Hr3hh4gLgZ4vRW7kZlk5DzGahB4=
+X-Google-Smtp-Source: ABdhPJwNaVc11TWrQ01tGFNBwjRGZ3ZoiK7rMZACvVOTHwn/jIHehsbfHfkpVSReJ0bYMmitHjLmtw==
+X-Received: by 2002:a62:30c2:0:b029:289:116c:ec81 with SMTP id w185-20020a6230c20000b0290289116cec81mr6657584pfw.42.1622252688247;
+        Fri, 28 May 2021 18:44:48 -0700 (PDT)
+Received: from marlonpc-debian (pa49-183-171-130.pa.vic.optusnet.com.au. [49.183.171.130])
+        by smtp.gmail.com with ESMTPSA id r25sm4437574pfh.18.2021.05.28.18.44.46
+        for <util-linux@vger.kernel.org>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 28 May 2021 18:44:47 -0700 (PDT)
+Date:   Sat, 29 May 2021 11:44:44 +1000
+From:   Marlon Rac Cambasis <marlonrc08@gmail.com>
 To:     util-linux@vger.kernel.org
-Subject: Product Inquiry [JL] 05/27/21,,
-Date:   27 May 2021 17:44:36 +0000
-Message-ID: <20210527152021.2C7714FE05E87FE5@johnlewis.co.uk>
+Subject: [PATCH] agetty: Change size_t to const size_t to match other
+ function.
+Message-ID: <20210529014444.GA2525@marlonpc-debian>
 MIME-Version: 1.0
-Content-Type: text/plain;
-        charset="utf-8"
-Content-Transfer-Encoding: 8BIT
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+User-Agent: Mutt/1.10.1 (2018-07-13)
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-Dear util-linux
+In xgetdomainname() it is 'const size_t sz', however in xgethostname()
+it is 'size_t sz'. Add 'const' in xgethostname() to match the other
+function.
 
-The famous brand John Lewis Partnership, is UK's largest multi-
-channel retailer with over 126 shops and multiple expansion in 
-Africa furnished by European/Asian/American products. We are 
-sourcing new products to attract new customers and also retain 
-our existing ones, create new partnerships with companies dealing 
-with different kinds of goods globally.
+Signed-off-by: Marlon Rac Cambasis <marlonrc08@gmail.com>
+---
+ term-utils/agetty.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Your company's products are of interest to our market as we have 
-an amazing market for your products.
+diff --git a/term-utils/agetty.c b/term-utils/agetty.c
+index a48998c16..eb7959d34 100644
+--- a/term-utils/agetty.c
++++ b/term-utils/agetty.c
+@@ -1476,7 +1476,7 @@ static void auto_baud(struct termios *tp)
+ static char *xgethostname(void)
+ {
+ 	char *name;
+-	size_t sz = get_hostname_max() + 1;
++	const size_t sz = get_hostname_max() + 1;
+ 
+ 	name = malloc(sizeof(char) * sz);
+ 	if (!name)
+-- 
+2.20.1
 
-Provide us your current catalog through email to review more. We 
-hope to be able to order with you and start a long-term friendly,
-respectable and solid business partnership. Please we would 
-appreciate it if you could send us your stock availability via 
-email if any.
-
-Our payment terms are 15 days net in Europe, 30 days Net in UK 
-and 30 days net in Asia/USA as we operate with over 5297 
-suppliers around the globe for the past 50 years now. For 
-immediate response Send your reply to robert_turner@johnlewis-
-trading.com for us to be able to 
-treat with care and urgency.
-
-
-Best Regards
-
-Rob Turner
-Head Of Procurement Operations
-John Lewis & Partners.
-robert_turner@johnlewis-trading.com
-Tel: +44-7451-274090
-WhatsApp: +447497483925
-www.johnlewis.com
-REGISTERED OFFICE: 171 VICTORIA STREET, LONDON SW1E 5NN  
