@@ -2,111 +2,85 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 676A43A70F8
-	for <lists+util-linux@lfdr.de>; Mon, 14 Jun 2021 23:04:37 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 659C83A71B0
+	for <lists+util-linux@lfdr.de>; Mon, 14 Jun 2021 23:59:51 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S234580AbhFNVGj (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Mon, 14 Jun 2021 17:06:39 -0400
-Received: from wforward2-smtp.messagingengine.com ([64.147.123.31]:54513 "EHLO
-        wforward2-smtp.messagingengine.com" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S229771AbhFNVGj (ORCPT
-        <rfc822;util-linux@vger.kernel.org>);
-        Mon, 14 Jun 2021 17:06:39 -0400
-Received: from compute4.internal (compute4.nyi.internal [10.202.2.44])
-        by mailforward.west.internal (Postfix) with ESMTP id BAF50F96
-        for <util-linux@vger.kernel.org>; Mon, 14 Jun 2021 17:04:35 -0400 (EDT)
-Received: from mailfrontend2 ([10.202.2.163])
-  by compute4.internal (MEProxy); Mon, 14 Jun 2021 17:04:35 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-        messagingengine.com; h=content-type:date:from:in-reply-to
-        :message-id:mime-version:references:subject:to:x-me-proxy
-        :x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm3; bh=EvxBHr
-        ouymSup32ANsXFlpgGXFQEx1Gh4i6HW6vjmno=; b=JeWR7oZ0/SV0cqIHndtJVh
-        QyfM7Ll97gqan02ujL7rvKUrYHgAxhPsJQZ4SyCi5NE8C5lFlKhBsif4F1GcjqXI
-        scFkAKRQ1yfPjayd41bMtRtMLz1IQF3QxNyfpVwKQH7PWI36/iQds0rguPo7wtyC
-        eOjTjjH7y2s0t5wYaufOCik4YqYobZJe9eb9Z6bU8g/ZBI+VyfdfXUFCKe9pbVGB
-        R7i4pjJj9fW1rlKpGwpykI7o13XjD+aM19ArGldRGrmN+QiVSVIh43Se3knmUrsQ
-        u0ZWDN/XYM0fpO6eDLcfm6Jso8gU+fMCAtR4rfVkR0TBndKij1Ui7Mha1ORMHuTQ
-        ==
-X-ME-Sender: <xms:Y8THYLXoEIx1tXkKA1gcV_3mrDdaQliBctRzD_qWbkKL2DpwBAGLZg>
-    <xme:Y8THYDnPF5m9-LP_bwKmsDuxMT9-MTpaphgF1BglDo5EseW2jiX5SQ7kHyRR5E_Zl
-    Wj4ReE9hCrmI7UnfA>
-X-ME-Received: <xmr:Y8THYHbJPAH17ZUpanFc7HS-iwkgN1oa23jtwaT8B4cVZIwk6TvK4sskvcUd5bscaTQa-rC6xevhqKa2n5KqTseCC0RKhw>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeduledrfedvhedgudehfecutefuodetggdotefrod
-    ftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfgh
-    necuuegrihhlohhuthemuceftddtnecunecujfgurhepfffhvffukfhfgggtuggjsehgtd
-    dtredttddvnecuhfhrohhmpeetlhihshhsrgcutfhoshhsuceohhhisegrlhihshhsrgdr
-    ihhsqeenucggtffrrghtthgvrhhnpeeuffegffdtvdffiedttefggfehtdfgudfhfffgte
-    efgfdugeegveffieffudduvdenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhep
-    mhgrihhlfhhrohhmpehqhihlihhsshesvghvvgdrqhihlhhishhsrdhnvght
-X-ME-Proxy: <xmx:Y8THYGU3jXUVXI_ipDVzn_xbqW5BsUcN04yJoiZTTDZQpl8DzuV8PA>
-    <xmx:Y8THYFkYRdB-7AdI8QrlzoNtcMgg3BubytfimmI2QJU3JaRIx1ikCA>
-    <xmx:Y8THYDfwPeK0bonxQJdRHvYyaFP9-UEhp7hkowkrZ1f7e1nVcfXjXw>
-    <xmx:Y8THYDRQx0_air-vmyvJYMP1cp3nSfGniy-2mbEPEEc-YCkZ-sN9B70rakI>
-Received: by mail.messagingengine.com (Postfix) with ESMTPA for
- <util-linux@vger.kernel.org>; Mon, 14 Jun 2021 17:04:35 -0400 (EDT)
-Received: by eve.qyliss.net (Postfix, from userid 1000)
-        id CB8D4EF0; Mon, 14 Jun 2021 21:04:33 +0000 (UTC)
-Date:   Mon, 14 Jun 2021 21:04:33 +0000
-From:   Alyssa Ross <hi@alyssa.is>
-To:     util-linux@vger.kernel.org
-Subject: Re: [PATCH] libblkid: match uppercase UUIDs
-Message-ID: <20210614210433.p62vxkx3cm7ynwbk@eve.qyliss.net>
-References: <20210614204017.49499-1-hi@alyssa.is>
+        id S231580AbhFNWBt (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Mon, 14 Jun 2021 18:01:49 -0400
+Received: from mail-qk1-f182.google.com ([209.85.222.182]:33716 "EHLO
+        mail-qk1-f182.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S231277AbhFNWBn (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Mon, 14 Jun 2021 18:01:43 -0400
+Received: by mail-qk1-f182.google.com with SMTP id c9so13705936qkm.0
+        for <util-linux@vger.kernel.org>; Mon, 14 Jun 2021 14:59:40 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=mime-version:reply-to:from:date:message-id:subject:to;
+        bh=1lGgBqcW5K9OGibLJ4OHzDuCFfS1P9S5IkLN1gfKCKE=;
+        b=YMrIXTdunO7UtxCAsYJuaJzR15yS/AMYcVyM9hNVhXJBmw2lab8mjwuGrIuWKflJfn
+         hbhFT2JLoWM5UJKoplTB1rAGjla1TJ182IUS6uIUQSN4PO5/oyMAlzpLgCZpE/zdP2AR
+         2L3htVNWETlSm92rccQOT0k3AZqMDi0fffq/0S+y2TCu0OchkHss8b8VEMgp/ghM/k1r
+         zuLcUHBdQ2ig3dcM5RYIrocq9oWu9KymmWS7YmreSDfiaUnYZkKihm/M+r+H9LMBcnBr
+         f3kCMcCfXnAa7TinQSrmmWXksmIMKooiYZjggmxVvH3iQ8G87NOqFbjISpvHDlY03NpA
+         VcfQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
+         :subject:to;
+        bh=1lGgBqcW5K9OGibLJ4OHzDuCFfS1P9S5IkLN1gfKCKE=;
+        b=RfGK9p9mT/VLRRW1pLwDzTLNzJpLwr9H6SWw7oY5D+9O+xxFqoSJlofPu8WtX3j4Sw
+         6yX63GPx+45u+wGVI3xYcM4IJ81ITg+4hR95pqIlVJfhVT2rGuhUMjUg7V0XlK2E04V5
+         eOLp3xoGy2BW+lF6jeR44S7R0I8rEhrTZ3dISeKLDHf3mkZ1qz5q8zKCkyUKQAO3XW2L
+         K3vG46Ec+Ue5vR1fis7kNndN1iyeQ3DjSetiNW62wsHRiOpwxD9rcNtSuke3r/gXsruQ
+         zQUhip6zqWbqOa7yPkGUbxTI4VyYWPDOFEpBnTI4Il1iHw9Lh8xggsxS/CzEuL3Pa+PB
+         bVYw==
+X-Gm-Message-State: AOAM532giuLwIrmdkT1FyHjnk1ytGgtiOcexTzWO/PI2/kZChnJ6ZrA4
+        jd7p2ya0dUonsP0M7zhSNw27Mm+44nwGTMgu1eQ=
+X-Google-Smtp-Source: ABdhPJwgrxGXNlXc/cmyXZXiaBQy8RG/B05l2jG5R8Vvnn+L+OnxTibK73/TdiR629G92YBdNFNy8ecq3+IjNc886Wg=
+X-Received: by 2002:a05:620a:6b3:: with SMTP id i19mr18820670qkh.55.1623707919956;
+ Mon, 14 Jun 2021 14:58:39 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha256;
-        protocol="application/pgp-signature"; boundary="qwdfjr5ziegmrstt"
-Content-Disposition: inline
-In-Reply-To: <20210614204017.49499-1-hi@alyssa.is>
+Received: by 2002:a05:6214:c42:0:0:0:0 with HTTP; Mon, 14 Jun 2021 14:58:39
+ -0700 (PDT)
+Reply-To: denniswilliamjr6@gmail.com
+From:   "Mr.Steven Stratis" <acctantgeneraldesk1@gmail.com>
+Date:   Mon, 14 Jun 2021 14:58:39 -0700
+Message-ID: <CAEQg=bGbWRXnf0KCm=UxQnzW_2sF46otoW4wZTZ5VOdoN-4oRA@mail.gmail.com>
+Subject: contact my secretary and ask him for a cheque
+To:     undisclosed-recipients:;
+Content-Type: text/plain; charset="UTF-8"
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
+-- 
+Dear Friend,
 
---qwdfjr5ziegmrstt
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+I am very happy to inform you about my success in getting that fund
+transferred. Now I want you to contact my secretary and ask him for a
+cheque worth of USD $800,000 million which I kept for you as a
+Compensation of your past assistance to me. His
 
-On Mon, Jun 14, 2021 at 08:40:17PM +0000, Alyssa Ross wrote:
-> In a script, I wanted to look up the device node for the booted EFI
-> partition.  systemd-boot exposes this in an EFI variable but it's
-> uppercase, so when I tried to do this, it didn't work:
->
->     findfs "(< /sys/firmware/efi/vars/LoaderDevicePartUUID-4a67b082-0a4c-41cf-b6c7-440)"
+contact details is below;
 
-Bogus command here, sorry.  It should have been:
+Name: Dennis William Jr,
+Email;denniswilliamjr6@gmail.com
+Kindly reconfirm to him the following below information:
 
-    findfs PARTUUID="$(cat /sys/firmware/efi/vars/LoaderDevicePartUUID-4a67b082-0a4c-41cf-b6c7-440b29bb8c4f/data)"
+Your full name_________________________
+Your address__________________________
+Your country___________________________
+Your age______________________________
+Your occupation________________________
+Your Phone number______________________
+Your Passport/Drivers license ______________________
 
-But my point stands. :)
+Note that if you did not send him the above information complete,he
+will not release the cheque to you because he has to be sure that it
+is you. Note also that I will not be reached by email or phone at this
+moment because I am currently in London for investment trip with my
+share.
 
-> This was very confusing to me, and I lost some time trying to figure
-> out what was wrong before I realised that case of UUIDs was
-> significant to findfs.
->
-> Here, I've made comparisons of UUID and PARTUUID case-insensitive in
-> libblkid, which fixes the command above.
->
-> Signed-off-by: Alyssa Ross <hi@alyssa.is>
+Regards,
 
---qwdfjr5ziegmrstt
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCAAdFiEEH9wgcxqlHM/ARR3h+dvtSFmyccAFAmDHxF4ACgkQ+dvtSFmy
-ccAmqw//bwlZHric1QebteQZ9/7jjqT5sTsuHPy3T2E0H5TrjogwmCeFUvahN5M8
-T+lfibGiDk0xuaWjGf/cgH1XAjMXvtlf/CaqPBogFNHKXPPZKFxz1F3RykKpfcCu
-r40jaQa24NVH2kgXHjWWJ5obc41bEo7QgE88x35rzKZKtwGFnH1zzui46HXbkgkS
-QZpMIeY2qNqQVZtpyV69SfMa5YPOKFkru9XWYxK/LXk3njYRvhLl3vCEEAnORcf1
-m4EzhQlBV8lkQcZ+yo2Q9AOJc4BQATPWoia85biSfYm2hEMVbGGX2e1nNdIUXavI
-jXnh1b3Wh9SC3kcWhCFg7ihe3Hfp94NRXFveda8ts6qr0nu9PtsngOmRFkvzvfGC
-UvosnbTsycY1urwZgkuFVTEKOXhSZdSqOysednGHggybcZgca89RPuQq1kMSk3yA
-7efwUCO9pMoE7+X5BwW8HbvbEfJrgF/KbdIAxets40rikhVN5POOm7ueSU+2hLSe
-/tyDtlF7hjAecaPmbrLlv4dWkVCeKnTXtXYoD2bQY1X2zd2lhipk6wvYjXEgihfV
-J/o0o1h3GtrKP4kNF5bR9yBGVYGOfyjyXncrZ+EEWfK/7FAnoo1lJKdcXr4+LCq9
-ZvL/El1n0AQATr0DRE9UXIpU1XWNRGjHtqJSNOjppewG+AawoLs=
-=oxwu
------END PGP SIGNATURE-----
-
---qwdfjr5ziegmrstt--
+Mr.Steven Stratis.
