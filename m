@@ -2,91 +2,55 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 1B8DA3AA57B
-	for <lists+util-linux@lfdr.de>; Wed, 16 Jun 2021 22:42:09 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 7A1F93AA92F
+	for <lists+util-linux@lfdr.de>; Thu, 17 Jun 2021 04:53:56 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S233626AbhFPUoN (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Wed, 16 Jun 2021 16:44:13 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:52650 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S233639AbhFPUoN (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Wed, 16 Jun 2021 16:44:13 -0400
-Received: from mail-oi1-x232.google.com (mail-oi1-x232.google.com [IPv6:2607:f8b0:4864:20::232])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id C17DEC061574
-        for <util-linux@vger.kernel.org>; Wed, 16 Jun 2021 13:42:06 -0700 (PDT)
-Received: by mail-oi1-x232.google.com with SMTP id d19so3917380oic.7
-        for <util-linux@vger.kernel.org>; Wed, 16 Jun 2021 13:42:06 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=to:from:subject:message-id:date:user-agent:mime-version
-         :content-language:content-transfer-encoding;
-        bh=mPWy7jnzKVja56TsTd2K7ginmgXdWlSPmLdQ5LqiKJE=;
-        b=HiSQ9hOZ/f43SUxC5u9+f6Grbv6MHywRcR2t6TdcwNYnDDolx9cTAAyNLjNbhEDwvx
-         8W8XLPXsWqdzb1Px5vbh0R+qpQoEtqLuyPN7UMwsbDcJ92gnf+CCq0G3hnFJM5Vzx6SD
-         O58OZWw+PXYB9lDv4RiV28bOgryxbSOci9JPk9GJ3OX9Vf/7viGLFZoQHRD5/SbxTD5i
-         gw051CwXFQVWp8egOvhpfy2EgLFZ0AKdIw6MuvzHHnO5uSiC1hFPYHwyXeEYgNnynVgh
-         5YSmM+RxVwr44X2yhuBX+8fO3S6F6hSXpllf0Ga76BOKSoZhn7yS5uC4mxjy0QDhVmNK
-         4Ubg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:to:from:subject:message-id:date:user-agent
-         :mime-version:content-language:content-transfer-encoding;
-        bh=mPWy7jnzKVja56TsTd2K7ginmgXdWlSPmLdQ5LqiKJE=;
-        b=aGm/ho/pjNPj/XyVIWHTauNqFs//BMB+Tnlayz6mjLbrsP9Xn7tpp2sZMeHwRNKtwn
-         YNMUjSVQmEJu2P8XnqwIJ+3jDFnOYQKEm4S8T1fm0QTzFfZNy/wV1mflTBCLLYS6/2DU
-         yETzLjglOFISTIgy9uo5l7FlUxHZqUyTbCZ8WwYZSGMy6+tpqfZhSckevdN4yoP8Bukj
-         g3oVmP18ujPzY5BGrgoGgs1XvqjGzlhzzf1XuctsUVX1uqU1Xkn+cqcOSv9aZ5HWMrx5
-         wfmxVIpwyS4Vj3p9n2c0fE5+Gf3SrlcG+Wkgd+UhQr6fPBGKUwbRycIZup85liefgD89
-         L63Q==
-X-Gm-Message-State: AOAM5335HIGv4KNYtnilKW7kutQp2G/s28iBhBBFgUAsrB5q/swEFZTA
-        neqJu9icLOKapRW1ybukrDx4gtZO9VA=
-X-Google-Smtp-Source: ABdhPJy1r5ExaYXlYXMXR9M5pB52P2lpVJyBlbRkJG7Haks3Y7U5buRZ9uvcekfd1edTUBcETydMzA==
-X-Received: by 2002:a05:6808:10a:: with SMTP id b10mr8006999oie.65.1623876126080;
-        Wed, 16 Jun 2021 13:42:06 -0700 (PDT)
-Received: from [192.168.0.92] (cpe-70-94-157-206.satx.res.rr.com. [70.94.157.206])
-        by smtp.gmail.com with ESMTPSA id t39sm697881ooi.42.2021.06.16.13.42.05
-        for <util-linux@vger.kernel.org>
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 16 Jun 2021 13:42:05 -0700 (PDT)
-To:     util-linux@vger.kernel.org
-From:   Bruce Dubbs <bruce.dubbs@gmail.com>
-Subject: An obscure problem with v2.37 make check
-Message-ID: <cdfa712c-c918-c5bd-e320-b3dbe8599bbd@gmail.com>
-Date:   Wed, 16 Jun 2021 15:42:04 -0500
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.10.1
+        id S230103AbhFQC4C (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Wed, 16 Jun 2021 22:56:02 -0400
+Received: from [122.15.141.162] ([122.15.141.162]:47540 "EHLO
+        UPCDCDAMX02.upcl.org" rhost-flags-FAIL-FAIL-OK-FAIL)
+        by vger.kernel.org with ESMTP id S229868AbhFQC4B (ORCPT
+        <rfc822;util-linux@vger.kernel.org>);
+        Wed, 16 Jun 2021 22:56:01 -0400
+X-Greylist: delayed 7633 seconds by postgrey-1.27 at vger.kernel.org; Wed, 16 Jun 2021 22:56:01 EDT
+Received: from UPCDCDAMX02.upcl.org (unknown [127.0.0.1])
+        by IMSVA (Postfix) with ESMTP id A51891AB14;
+        Thu, 17 Jun 2021 02:13:56 +0530 (IST)
+Received: from UPCDCDAMX02.upcl.org (unknown [127.0.0.1])
+        by IMSVA (Postfix) with ESMTP id BA5841AAAD;
+        Thu, 17 Jun 2021 02:13:42 +0530 (IST)
+Received: from User (unknown [210.212.82.37])
+        by UPCDCDAMX02.upcl.org (Postfix) with SMTP;
+        Thu, 17 Jun 2021 02:13:41 +0530 (IST)
+Reply-To: <josechoondak@gmail.com>
+From:   "Jose Choondak" <info@infotools.in>
+Subject: Re: Contact Me It Very Urgent.
+Date:   Wed, 16 Jun 2021 20:45:03 -0000
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
+Content-Type: text/plain;
+        charset="Windows-1251"
 Content-Transfer-Encoding: 7bit
+X-Priority: 3
+X-MSMail-Priority: Normal
+X-Mailer: Microsoft Outlook Express 6.00.2600.0000
+X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2600.0000
+Message-Id: <20210616204342.BA5841AAAD@UPCDCDAMX02.upcl.org>
+To:     undisclosed-recipients:;
+X-TM-AS-GCONF: 00
+X-TM-AS-Product-Ver: IMSVA-9.1.0.1960-8.6.0.1013-26224.002
+X-TM-AS-Result: No-0.514-5.0-31-10
+X-imss-scan-details: No-0.514-5.0-31-10
+X-TMASE-Version: IMSVA-9.1.0.1960-8.6.1013-26224.002
+X-TMASE-Result: 10-0.513600-10.000000
+X-TMASE-MatchedRID: awbNJYK2QqboJ7ZHxnJI6/6CJzEkJBKD1QKnkgzg6vZ5bx7TGUAszssw
+        rEghLf6dKEGVr0q/O26tNOiSGUvwKTqV8jNP9SD8myiLZetSf8nJ4y0wP1A6AMoI4RYd3wmQ2Kw
+        OXdq4UsPOTw7jcM4POhmwh28tOMvYijr74ISIXwSw0gNx7o/VtOd2r66ykP1T5ovesN7TVeoqoi
+        2h7laWfD9BWL7GG0LsKrauXd3MZDVNsuP/5lMQK6JZimiGoG/MpIyVsI8WTnxJN04+08rPXv8Z8
+        RZsK5EEvvz+1V+xcgseXBB206GQ9uVUzO4EpVyvomJVoMP9vKE6yfYFZPVRaA==
+X-IMSS-DKIM-White-List: No
+X-TMASE-SNAP-Result: 1.821001.0001-0-1-12:0,22:0,33:0,34:0-0
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-When I built version v2.37, make check hung on me.  The problem was in 
-my kernel configuration, but I thought I would pass this on.
-
-First of all, my biggest problem was finding out what had failed.  A 
-simple 'make check' ran the tests and when it got to the end, hung.
-
-I could not find any documentation about running the tests, but diving 
-into the Makefile led me to tests/run.sh.  By default this runs tests 
-using all cores, but it is unclear if this is meant to be run directly.
-
-In any case running run.sh --parallel=1 (instead of the default 24) 
-allowed me to find the problem test, tests/ts/lsns/ioctl_ns.  In this 
-test, it is doing:
-
-my_userns=$(stat -c %i -L /proc/self/ns/user)
-
-My problem was that /proc/self/ns/user did not exist on my system.  This 
-was due to a missing CONFIG option in my kernel configuration.  Adding 
-that and rebuilding the kernel allowed all tests to pass.
-
-One solution to this problem may be to test for the existence of the 
-file before running 'stat' similar to the tests for programs like 
-'touch' and 'uniq'.  Since this is such an unusual situation, I can 
-understand if you just ignore the issue, however I thought you should 
-know about it.
-
-   -- Bruce
+please respond to me, if you are still alive.
