@@ -2,103 +2,180 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 60C233ADEC9
-	for <lists+util-linux@lfdr.de>; Sun, 20 Jun 2021 15:36:46 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 666893AE1CB
+	for <lists+util-linux@lfdr.de>; Mon, 21 Jun 2021 05:10:47 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229806AbhFTNiz (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Sun, 20 Jun 2021 09:38:55 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:40552 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229745AbhFTNis (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Sun, 20 Jun 2021 09:38:48 -0400
-Received: from mail-io1-xd42.google.com (mail-io1-xd42.google.com [IPv6:2607:f8b0:4864:20::d42])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 351AFC061767
-        for <util-linux@vger.kernel.org>; Sun, 20 Jun 2021 06:36:16 -0700 (PDT)
-Received: by mail-io1-xd42.google.com with SMTP id s19so6093754ioc.3
-        for <util-linux@vger.kernel.org>; Sun, 20 Jun 2021 06:36:16 -0700 (PDT)
+        id S230047AbhFUDM6 (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Sun, 20 Jun 2021 23:12:58 -0400
+Received: from mail-dm6nam11on2102.outbound.protection.outlook.com ([40.107.223.102]:1248
+        "EHLO NAM11-DM6-obe.outbound.protection.outlook.com"
+        rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org with ESMTP
+        id S229877AbhFUDM6 (ORCPT <rfc822;util-linux@vger.kernel.org>);
+        Sun, 20 Jun 2021 23:12:58 -0400
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=JUU+slRXtPgeJsSnRkTJzSBFTXnvN6hKp0nh0u/Il6EHZx3shrw7xS8NEiPr6ZibRoeIq1ruRwkIw7cpdqZu8e1GkL4E789nllKXtTiMXqjA2+frIoBOD2hvjUjahzE+LOS7/MlfWL0ihKcM1FlszaJKCV3dYAx15wqFe3mqSm6xBavSgzZQ3/B4ueVBeO0uhXmboTevMVXpHZ7h9i7Kmagkzo2KfsvTl6SCHKW5KJ16qlfxvHM0tsDvZTuhD0yzgr1O9ElFIMUSqR9X0NH8Np2JqeX5TTb8Nh/ozYKiGatwPmoQkwtvWoaMApoIF87z8pyLeNl1KY+ZUv8ZFGBJ7A==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=+k+ZAN1SvRqp2QAgOTXuKSb4yLQaG9ZVN/PQ+dVKa8w=;
+ b=YJGZNPwI58n9QarmuwtidYfIZCofBr7N1dD9CBuMwD96XVrC9TWpxGdNo+EVTZKBYksGnrtRNDkgZL3fawoHDuNBwfUC2FB+uzcm5dIT3yDBmNPDclKyFNO2yTXNnhXbbDUiwASEiLhrN7KG7N/XUM33KxikjXqF9sOnJzaMzCPuyiz+3oqFjhfjz5KhUT1Ha682KNYxVA8o9b2h6c5irjmOJImdQBVrVEiVrZKbwqYc28tQWOU3XaDWi8aG9CATcW68epwP9PCevAWrL9hUtdseF7InfrqaWB/Xwht0o6det4F+OkHfwrGwmocKGrknG/9gzJTaUXR9LFgpzo3QPQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=os.amperecomputing.com; dmarc=pass action=none
+ header.from=os.amperecomputing.com; dkim=pass
+ header.d=os.amperecomputing.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:reply-to:from:date:message-id:subject:to;
-        bh=D7l/Y2nU4ivOXB3kYNarWKNDy1SUWuawPt7q4q/Bhv4=;
-        b=uDIEtWfgl91FDet7ZYX1u1ozW0abpKvg4acx3thqXBCDoYcWKg7eyNZSXNk+51VeuJ
-         sYbwx77CCJt/Xl1UBy7P++4/uHOQjQcptGzc4BiJd5A/7x+FLCtsFr6R08yAScCPxE/G
-         ycRitdP5UZQCPHBcljPWiYz9qooX9+o9VlIcE1iBIKjgWFsG58IfpnIZmKh5Mer/et0Q
-         Wvv2McVtUA6rn+iTugaAQulni5t+7gIBWkpgi42U+JEUmcEEUifIxcViVFyKhDEEgfNV
-         A33afccbptAYxVMQ3XRd6cg8QS8Vl2AEYQyihFbFLRpIaiCXlHMQE4BSfPfytvzUMqcd
-         FXMw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
-         :subject:to;
-        bh=D7l/Y2nU4ivOXB3kYNarWKNDy1SUWuawPt7q4q/Bhv4=;
-        b=D3b9vOlw36w3zuHQiXvmKfqADQQP80LKXquSw8HsvxqrRu1s2nLtsdUETgGeoQbV48
-         XXnZkx99dRBmA47o+sJ0aHvz7Hf+2J0bwoRjyU5x98A4zFLRix12KY5Bnh1TRNBJn2o1
-         SQLGVstysTLEJIsVeU4U75Hl0NRAfLNyuidSV4FHumrFp7lPyYw2o7YXQpBKSimnAmUT
-         tHGvi0uWxtQXwvlCrLDyi5dry+FHAfqYRF3REcjCbfXTKT5yPkAj/hjnXRc6YVzIC54w
-         mAdhf9XGXR/CGnIrJYxCaApurOgqADUyjJm9UFlUGHA3ryROoHwkGvAupZxw0P0xOIz6
-         1oOA==
-X-Gm-Message-State: AOAM530jbppQSdWRFOYsaUGczS7fgCr/sdl54zFcmDnLCeQALDfaMLPF
-        QxtPYk1sWPM51N8tiNrlEBH2vKM6i4MD01rggUI=
-X-Google-Smtp-Source: ABdhPJwOQ5lA8oaPxit1UXNypL8Kah2QWj0jtAWNuj5/Z8/Rl7T8YsfxHtOIriCZuXo1tXOWzxp5d5YlbnVjDFRsY5Q=
-X-Received: by 2002:a02:a810:: with SMTP id f16mr12630337jaj.64.1624196175568;
- Sun, 20 Jun 2021 06:36:15 -0700 (PDT)
+ d=os.amperecomputing.com; s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=+k+ZAN1SvRqp2QAgOTXuKSb4yLQaG9ZVN/PQ+dVKa8w=;
+ b=H4RHNdqGledWnQWj3x12+aT0arASJrHtSZ9TrhnZpwn/gORWeZ3LEQezyPdTr3SbbaontxpEbkQBmMQwoYdnFVUaV7vm5eiGJ3ZK1VYoPlyLUob8yikZZnn2PifyN40Yzxi1Bq0NOJ3TqPPFMI/uC4HHwfwBpcsPC5NU2loR2tE=
+Authentication-Results: vger.kernel.org; dkim=none (message not signed)
+ header.d=none;vger.kernel.org; dmarc=none action=none
+ header.from=os.amperecomputing.com;
+Received: from MWHPR0101MB3165.prod.exchangelabs.com (2603:10b6:301:2f::19) by
+ MWHPR0101MB2990.prod.exchangelabs.com (2603:10b6:301:2d::18) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.4242.22; Mon, 21 Jun 2021 03:10:41 +0000
+Received: from MWHPR0101MB3165.prod.exchangelabs.com
+ ([fe80::921:cd21:94b0:c87b]) by MWHPR0101MB3165.prod.exchangelabs.com
+ ([fe80::921:cd21:94b0:c87b%6]) with mapi id 15.20.4242.023; Mon, 21 Jun 2021
+ 03:10:41 +0000
+From:   Huang Shijie <shijie@os.amperecomputing.com>
+To:     util-linux@vger.kernel.org
+Cc:     kzak@redhat.com, patches@amperecomputing.com,
+        zwang@amperecomputing.com, mas@amperecomputing.com,
+        ilkka@os.amperecomputing.com, jeremy.linton@arm.com,
+        jbastian@redhat.com, m.mizuma@jp.fujitsu.com,
+        patrick.zhang@amperecomputing.com,
+        Huang Shijie <shijie@os.amperecomputing.com>
+Subject: [RFC PATCH] lscpu: get more infomation when using  "/sys/firmware/dmi/entries/4-0/raw"
+Date:   Mon, 21 Jun 2021 11:09:00 +0000
+Message-Id: <20210621110900.41043-1-shijie@os.amperecomputing.com>
+X-Mailer: git-send-email 2.30.2
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-Originating-IP: [180.167.209.74]
+X-ClientProxiedBy: CY1PR07CA0033.namprd07.prod.outlook.com
+ (2a01:111:e400:c60a::43) To MWHPR0101MB3165.prod.exchangelabs.com
+ (2603:10b6:301:2f::19)
 MIME-Version: 1.0
-Received: by 2002:a05:6e02:1baf:0:0:0:0 with HTTP; Sun, 20 Jun 2021 06:36:14
- -0700 (PDT)
-Reply-To: sarahkoffi389@yahoo.co.jp
-From:   Sarah Koffi <sarah.koffi101@gmail.com>
-Date:   Sun, 20 Jun 2021 15:36:14 +0200
-Message-ID: <CA+ifgLE1g7jgi567M2HhZfvRSUF63Hu6stsW+ysX=3U-=qnn6Q@mail.gmail.com>
-Subject: Greetings From Mrs. Sarah Koffi
-To:     sarahkoffi389@yahoo.co.jp
-Content-Type: text/plain; charset="UTF-8"
+X-MS-Exchange-MessageSentRepresentingType: 1
+Received: from hsj.amperecomputing.com (180.167.209.74) by CY1PR07CA0033.namprd07.prod.outlook.com (2a01:111:e400:c60a::43) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4242.16 via Frontend Transport; Mon, 21 Jun 2021 03:10:37 +0000
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: e7e36105-f61e-4e8c-79eb-08d934622629
+X-MS-TrafficTypeDiagnostic: MWHPR0101MB2990:
+X-MS-Exchange-Transport-Forked: True
+X-Microsoft-Antispam-PRVS: <MWHPR0101MB2990D4971042C2CC8A989896ED0A9@MWHPR0101MB2990.prod.exchangelabs.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:901;
+X-MS-Exchange-SenderADCheck: 1
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: EYLexc0oGp8ijOwhevBKZPbvlsGwXMTWgybm78fB19jUlbHQQG/G5UytbweuGgSQW2J51LPDu07iwGNUmgk6VxJybpPThHL8aR+2HNSJZvS4hPe/Xc62cN5nutcVVEH5+/5O4C5s9X51gCKDD88K9UIKrGJjKRgNuuNUU52GU9l2DcBg+Db2p5H91x/rjW9/7qiMS0NGf/5Xnl9RNRbDMYSHNQAhEOxByG02aeB//PL/oHXwZ4u8JWRGu5nuATBsI5ij5OiGRiQ6zJmZJWV9iK6ZG0Be+gk8zfiUg7S99J7tztLcy2PoEYCo3500n/qjqU8JnW5DdQU4rZK67nE78Q2iuMexnY5umXst0AuoJDXPB71sp2oSkwpV3GFpwKgiUC/9vXy51K2XcVtouym+pS37HUjKOJ3NGGBR8xMH0XBGxcMwRD4N/007aZ4Al1j465iPgrwNeN3r7V+5mws7s9GNVaa4/oQ58aMoW0H0Ke2PplZZPqLf48y10eLbg0Sxk7adQ3h/i/KKTS65agxc10mzOH83x2q7tPa9sRHJ+MTB3rn6fB/3RIh9dR4NFyc1YtxtaRcGIQdtfpjT4AtATLOAMC8pmSR7iby6blttIeRfMImxxLTItEt+7NF0TlwQourSoag6nSkG2a/+3cE4JA==
+X-Forefront-Antispam-Report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:MWHPR0101MB3165.prod.exchangelabs.com;PTR:;CAT:NONE;SFS:(4636009)(39840400004)(376002)(366004)(136003)(346002)(396003)(2906002)(8676002)(66946007)(4326008)(8936002)(478600001)(6916009)(956004)(6506007)(316002)(2616005)(83380400001)(26005)(6512007)(38350700002)(38100700002)(5660300002)(186003)(1076003)(16526019)(86362001)(6666004)(66476007)(6486002)(107886003)(52116002)(66556008);DIR:OUT;SFP:1102;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?SGdUNkNGUlhpOHdUS2lqLzVJS0k5Z0pCdE5tRmtZZjdFRG5IOHRNSHg0UXdy?=
+ =?utf-8?B?SEhmeVhmL3pkdSszOEdKVys1c2RtSVcyWlZSdFBTUkIrNkltWUF1S3NNSVVr?=
+ =?utf-8?B?TzlDWmtZRXNmUDJncGpycUdMOXNqSitHZHRwNVpISjNyNTk4Wmp3MWllZEE2?=
+ =?utf-8?B?TFhubFJEbElFQnA4akFmdGFveDVUdmtQWm9oMmNFNWk4emh1VUQxZ09YMytY?=
+ =?utf-8?B?MWtjYXdCOWsvSTJ3TVdCK0tWN3pxd2ZRRnhhaXZSNWRua2V4WXYzRXU5SmY2?=
+ =?utf-8?B?aFBDWE5mMmZoVFg2U3licUszRGhsYnVCLyt6c1czMW5JS0Y1aHN5ajIvbGc3?=
+ =?utf-8?B?eFhOekRlWHltUWRWQ1BBTHoycWY4TDFJTEtFOXYzTlUwMTBoQzdyOVFhdFV1?=
+ =?utf-8?B?U2hNNTdhN2x4Smo0SWY3RW43RHF3MlpTcm1MQW1qWFZ0bnJnTUwvV3J6Kzgr?=
+ =?utf-8?B?aFJsUmZmWTlBQXN4UjNNYkViamZJeVZCMlp3MlI1YVdJdCtTUGFuYUZGTHYz?=
+ =?utf-8?B?bnhDd2taZEI2WVY4ZkdlT3NzeXpSQUFVK3RzOFhQMThqSVhBRGVIampPTzJ6?=
+ =?utf-8?B?M0FpNEMwRGs5MDJXang2SnptWmExL2pUdGlGTElCZWl1QVlPaVQwdnl2b3NG?=
+ =?utf-8?B?Nm5TOUNVbG9lbExBYnZubGxwVnJpNWJSLzEzY2dGWERQZHFtOXVqbzRVM2JM?=
+ =?utf-8?B?MFRFUkxrbFd2Smo3NnNZM2xHTUpRZ3FiTHhNc3RQaHMzd2ZLbWV6SXJtcUtw?=
+ =?utf-8?B?bTgzd0xjZzVTbW01WmdFbFZCVk9MaWVvTXoxUk5qUlVERUczUU1QSzI5WVFu?=
+ =?utf-8?B?UEF4NXZiYm5CNndCNVlGaUx0eU1MaE8wTzh5Mkw5K3FOT0VZL3hNbG0xNExO?=
+ =?utf-8?B?UHYzNWRDUWQ5dFREMXpidzFDdi83dTJwdDQyZ2FGRWVoRlowQ1gzWUlrSVR2?=
+ =?utf-8?B?WnpCTDBmZ1JySWY4WHZreHRwamljNER6Y294dUhab2RydkRRK3FLWXhWb3VD?=
+ =?utf-8?B?dDBXRmNVSC9NRDJjL2crSElmQnptRXVNVjkxKzdEeCtIekRxM1Z0MmJZUElE?=
+ =?utf-8?B?YjVjRHFDclFwNjFVWk5KT1l2VTJnMjlHNzZFTFIrekU4RGVDbmhDaTRWVU0y?=
+ =?utf-8?B?UXBLR0k0dDRDeFBaRk9lU3J1RjdvRGlLZDRvQ0dzb1VDSE96VFpDSHh0aW9k?=
+ =?utf-8?B?SzJNTjQyYW0rdFhjMXl2VEdCbmF2VUE5bUp3WUtSaGQrQUE5bHI5dnJhcjc1?=
+ =?utf-8?B?VVUySHN4Y25WRWZVbUZKMDUva1NsMHkvNFZHenRHZkJac2lka1R2K0dmb2ho?=
+ =?utf-8?B?VE9SQ1R3S0I0SXkvK3lFUmJ6bkVVMHBsdGp1MmsrUEgrN21vYk5GSisrb3dq?=
+ =?utf-8?B?aTZ1V1dwV091NWtZcG1QTW9ZSFBKeWlLdzhPc25rcHZZOGRaYlQ0VHlZNmRj?=
+ =?utf-8?B?Sko1TVllYzBJcGRzTHVUMUJmY04vWHlscmxMNTBCZDBoOTk5bnhNVVZJdkh4?=
+ =?utf-8?B?bG5ZS3VoSnkwVFlqeXFhT0V5YmcrYVZlUU9LMjFRRkg4Y2IwQ1JIaXdqc3lo?=
+ =?utf-8?B?T1ByQ202aHdLQ1NXZ3JOZmtTZjc4MEVGNkJkZ1dnOGg2bitvS0NGaE5UcWho?=
+ =?utf-8?B?c0YzT2FRanFFdnVUNmRCWXFSbHV1ZHRnaE5MMytwZWZSWGY1cjdMQnJRWDRF?=
+ =?utf-8?B?cURHYzlERVN0SFJMZURVaDcyQlQvemlIWUZlZVg2NXZ5RFdHUHRYYXQ0L25s?=
+ =?utf-8?Q?x9SnfrHtAy9VGgM833l8jGzXkHXjXG1F09C1qCc?=
+X-OriginatorOrg: os.amperecomputing.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: e7e36105-f61e-4e8c-79eb-08d934622629
+X-MS-Exchange-CrossTenant-AuthSource: MWHPR0101MB3165.prod.exchangelabs.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Jun 2021 03:10:40.6914
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 3bc2b170-fd94-476d-b0ce-4229bdc904a7
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 7IUB1l5rvfHzL21yFLPrtIeFvGjBNTG0Kw0TfLxgjx+7S1BGOxiOCV87pbm6W7513tQWjDqSfFsfUi03itDdmx6ZDg3gZGLucbqfQUv7E5M7RoIz53OlDqy536oFkwjY
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MWHPR0101MB2990
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-Greetings From Mrs. Sarah Koffi
+This patch gets more infomation for "BIOS Model name"
+from the file "/sys/firmware/dmi/entries/4-0/raw"
 
-I'm contacting you based on your good profiles I read and for a good
-reasons, I am in search of a property to buy in your country as I
-intended to come over to your
-country for investment, Though I have not meet with you before but I
-believe that one has to risk confiding in someone to succeed sometimes
-in life.
+Before this patch, we can get the output from Centos 7.9:
+  ----------------------------------------------------
+  BIOS Vendor ID:                  Ampere(TM)
+  Model name：                     Neoverse-N1
+    BIOS Model name:               Ampere(TM) Altra(TM) Processor
+  ----------------------------------------------------
 
-My name is Mrs. Sarah Koffi. My late husband deals on Crude Oil with
-Federal Government of Sudan and he has a personal Oil firm in Bentiu
-Oil zone town and Upper
-Nile city. What I have experience physically, I don't wish to
-experience it again in my life due to the recent civil Ethnic war
-cause by our President Mr. Salva Kiir
-and the rebel leader Mr Riek Machar, I have been Under United Nation
-refuge camp in chad to save my life and that of my little daughter.
+ After this patch, in Centos 7.9, we get:
+  ----------------------------------------------------
+  BIOS Vendor ID:                  Ampere(TM)
+  Model name：                     Neoverse-N1
+    BIOS Model name:               Ampere(TM) Altra(TM) Processor Q00-00 CPU @ 2.8GHz
+  ----------------------------------------------------
 
-Though, I do not know how you will feel to my proposal, but the truth
-is that I sneaked into Chad our neighboring country where I am living
-now as a refugee.
-I escaped with my little daughter when the rebels bust into our house
-and killed my husband as one of the big oil dealers in the country,
-ever since then, I have being on the run.
+Signed-off-by: Huang Shijie <shijie@os.amperecomputing.com>
+---
+ sys-utils/lscpu-arm.c | 13 ++++++++++---
+ 1 file changed, 10 insertions(+), 3 deletions(-)
 
-I left my country and move to Chad our neighboring country with the
-little ceasefire we had, due to the face to face peace meeting accord
-coordinated by the US Secretary of State, Mr John Kerry and United
-Nations in Ethiopia (Addis Ababa) between our President Mr Salva Kiir
-and the rebel leader Mr Riek Machar to stop this war.
+diff --git a/sys-utils/lscpu-arm.c b/sys-utils/lscpu-arm.c
+index 885aadc36..1af689649 100644
+--- a/sys-utils/lscpu-arm.c
++++ b/sys-utils/lscpu-arm.c
+@@ -317,6 +317,8 @@ static int arm_rXpY_decode(struct lscpu_cputype *ct)
+ 
+ #define PROC_MFR_OFFSET		0x07
+ #define PROC_VERSION_OFFSET	0x10
++#define PROC_CURRENT_SPEED	0x16
++#define PROC_PART_NUM		0x22
+ 
+ /*
+  * Use firmware to get human readable names
+@@ -324,7 +326,8 @@ static int arm_rXpY_decode(struct lscpu_cputype *ct)
+ static int arm_smbios_decode(struct lscpu_cputype *ct)
+ {
+ 	uint8_t data[8192];
+-	char buf[128], *str;
++	char buf[128], *str, *str1;
++	uint16_t current_speed;
+ 	struct lscpu_dmi_header h;
+ 	int fd;
+ 	ssize_t rs;
+@@ -348,8 +351,12 @@ static int arm_smbios_decode(struct lscpu_cputype *ct)
+ 	}
+ 
+ 	str = dmi_string(&h, data[PROC_VERSION_OFFSET]);
+-	if (str) {
+-		xstrncpy(buf, str, 127);
++	str1 = dmi_string(&h, data[PROC_PART_NUM]);
++	current_speed = *((uint16_t *)(&data[PROC_CURRENT_SPEED]));
++	if (str || str1) {
++		snprintf(buf, sizeof(buf), "%s %s CPU @ %d.%dGHz",
++			(str ?: ""), (str1 ?: ""),
++			current_speed / 1000, (current_speed % 1000) / 100);
+ 		ct->bios_modelname = xstrdup(buf);
+ 	}
+ 
+-- 
+2.30.2
 
-I want to solicit for your partnership with trust to invest the $8
-million dollars deposited by my late husband in Bank because my life
-is no longer safe in our country, since the rebels are looking for the
-families of all the oil business men in the country to kill, saying
-that they are they one that is milking the country dry.
-
-I will offer you 20% of the total fund for your help while I will
-partner with you for the investment in your country.
-If I get your reply.
-
-I will wait to hear from you so as to give you details.With love from
-
- i need you to contact me here sarahkoffi389@yahoo.co.jp
-
-Mrs. Sarah Koffi
