@@ -2,85 +2,53 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 5E8B23B4284
-	for <lists+util-linux@lfdr.de>; Fri, 25 Jun 2021 13:28:23 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 1FEE53B72D0
+	for <lists+util-linux@lfdr.de>; Tue, 29 Jun 2021 14:58:44 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229470AbhFYLam (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Fri, 25 Jun 2021 07:30:42 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([216.205.24.124]:52664 "EHLO
-        us-smtp-delivery-124.mimecast.com" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S229458AbhFYLam (ORCPT
-        <rfc822;util-linux@vger.kernel.org>);
-        Fri, 25 Jun 2021 07:30:42 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-        s=mimecast20190719; t=1624620501;
-        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-         in-reply-to:in-reply-to:references:references;
-        bh=rw9PPeh+TZjRSNUmH9KefiVqmTE3lwNgCQtFVLr33+w=;
-        b=cgHBAigGdQVkGEFMFeQ/eq6W6TaHwqes8RoAM6JP7BVrVoQMfRYL+j6lNsxvL0t4cRXBg+
-        MIlIRf/UACWO1v2dK3GEVEMrF4f7F9k0lsrApME18r8GnHUJkKoD83uPmDiwt6C1BVb+iB
-        EhUbr53u/VK23sp2MPNk6H1OVmJu22U=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-439-QZPCwg4tO5-qP_IY75micg-1; Fri, 25 Jun 2021 07:28:17 -0400
-X-MC-Unique: QZPCwg4tO5-qP_IY75micg-1
-Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.phx2.redhat.com [10.5.11.14])
-        (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
-        (No client certificate requested)
-        by mimecast-mx01.redhat.com (Postfix) with ESMTPS id E1EA5100C610;
-        Fri, 25 Jun 2021 11:28:15 +0000 (UTC)
-Received: from ws.net.home (ovpn-112-214.ams2.redhat.com [10.36.112.214])
-        by smtp.corp.redhat.com (Postfix) with ESMTPS id C93A85D9C6;
-        Fri, 25 Jun 2021 11:28:13 +0000 (UTC)
-Date:   Fri, 25 Jun 2021 13:28:11 +0200
-From:   Karel Zak <kzak@redhat.com>
-To:     Huang Shijie <shijie@os.amperecomputing.com>
-Cc:     util-linux@vger.kernel.org, patches@amperecomputing.com,
-        zwang@amperecomputing.com, mas@amperecomputing.com,
-        ilkka@os.amperecomputing.com, jeremy.linton@arm.com,
-        jbastian@redhat.com, m.mizuma@jp.fujitsu.com,
-        patrick.zhang@amperecomputing.com
-Subject: Re: [RFC PATCH] lscpu: get more infomation when using
- "/sys/firmware/dmi/entries/4-0/raw"
-Message-ID: <20210625112811.lf2eztyp42jdpssf@ws.net.home>
-References: <20210621110900.41043-1-shijie@os.amperecomputing.com>
- <20210625092301.6zlyufiwjkta7rf7@ws.net.home>
- <YNWi14N4DToDMlUa@hsj-NUC11PAHi7>
+        id S233846AbhF2NBJ convert rfc822-to-8bit (ORCPT
+        <rfc822;lists+util-linux@lfdr.de>); Tue, 29 Jun 2021 09:01:09 -0400
+Received: from [218.75.92.58] ([218.75.92.58]:49398 "EHLO WIN-VTPUBHNS72V"
+        rhost-flags-FAIL-FAIL-OK-FAIL) by vger.kernel.org with ESMTP
+        id S233850AbhF2NBD (ORCPT <rfc822;util-linux@vger.kernel.org>);
+        Tue, 29 Jun 2021 09:01:03 -0400
+Received: from [192.168.43.47] (Unknown [197.210.85.75])
+        by WIN-VTPUBHNS72V with ESMTPA
+        ; Thu, 24 Jun 2021 20:47:11 +0800
+Message-ID: <856DE802-2D15-4C53-AAD8-AA1EE73D31A9@WIN-VTPUBHNS72V>
+Content-Type: text/plain; charset="iso-8859-1"
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <YNWi14N4DToDMlUa@hsj-NUC11PAHi7>
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.14
+Content-Transfer-Encoding: 8BIT
+Content-Description: Mail message body
+Subject: URGENT ATTENTION
+To:     Recipients <wjjt@wjjt.cn>
+From:   "Andres Auchincloss" <wjjt@wjjt.cn>
+Date:   Thu, 24 Jun 2021 14:46:43 +0200
+Reply-To: andresauchincloss926@gmail.com
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-On Fri, Jun 25, 2021 at 05:33:11PM +0800, Huang Shijie wrote:
-> Hi Karel,
-> On Fri, Jun 25, 2021 at 11:23:01AM +0200, Karel Zak wrote:
-> > 
-> > I've lost in your patches :-) 
-> > 
-> > Your previous patch "[PATCH] lscpu: remove the old code" removes all
-> > arm_smbios_decode() as it's unnecessary. This next patch tries to
-> > extend arm_smbios_decode().
-> I thought you do not like the patch "[PATCH] lscpu: remove the old code".
+Hi,
 
-If I don't like anything then I provide feedback, ignore contributors
-in silent way is not polite from my point of view ;-)
+I will like to use this opportunity to wish you a productive time in 2021 and also confide in you to finalize this transaction of mutual benefits. It may seem strange to you, but it is real. This is a transaction that has no risk at all, due process shall be followed and it shall be carried out under the ambit of the financial laws. Being the Chief Financial Officer, BP Plc. I want to trust and put in your care Eighteen Million British Pounds Sterling, The funds were acquired from an over-invoiced payment from a past contract executed in one of my departments.
 
-I've thought that jbastian and m.mizuma will provide any feedback
-about /sys/firmware/dmi/entries/4-0/raw removal from lscpu.
+I can't successfully achieve this transaction without presenting you as foreign contractor who will provide a bank account to receive the funds.
 
-> It is okay that any patch of the two is merged. :)
+Documentation for the claim of the funds will be legally processed and documented, so I will need your full cooperation on this matter for our mutual benefits. We will discuss details if you are interested to work with me to secure this funds. I will appreciate your prompt response in every bit of our communication. Stay Blessed and Stay Safe.
 
-OK, removed code is a good code. So it seems the first patch is
-probably a good idea.
 
-  Karel
 
--- 
- Karel Zak  <kzak@redhat.com>
- http://karelzak.blogspot.com
+Best Regards
+
+
+
+
+Tel: +1 (587) 770-0485
+Andres .B. Auchincloss
+Chief financial officerBP Petroleum p.l.c.
+
+
+
+
+                                  Copyright ©? 1996-2021
 
