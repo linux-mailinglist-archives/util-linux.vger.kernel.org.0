@@ -2,53 +2,65 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 1FEE53B72D0
-	for <lists+util-linux@lfdr.de>; Tue, 29 Jun 2021 14:58:44 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 3D52E3B7FF3
+	for <lists+util-linux@lfdr.de>; Wed, 30 Jun 2021 11:28:41 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S233846AbhF2NBJ convert rfc822-to-8bit (ORCPT
-        <rfc822;lists+util-linux@lfdr.de>); Tue, 29 Jun 2021 09:01:09 -0400
-Received: from [218.75.92.58] ([218.75.92.58]:49398 "EHLO WIN-VTPUBHNS72V"
-        rhost-flags-FAIL-FAIL-OK-FAIL) by vger.kernel.org with ESMTP
-        id S233850AbhF2NBD (ORCPT <rfc822;util-linux@vger.kernel.org>);
-        Tue, 29 Jun 2021 09:01:03 -0400
-Received: from [192.168.43.47] (Unknown [197.210.85.75])
-        by WIN-VTPUBHNS72V with ESMTPA
-        ; Thu, 24 Jun 2021 20:47:11 +0800
-Message-ID: <856DE802-2D15-4C53-AAD8-AA1EE73D31A9@WIN-VTPUBHNS72V>
-Content-Type: text/plain; charset="iso-8859-1"
+        id S233653AbhF3JbI (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Wed, 30 Jun 2021 05:31:08 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124]:46663 "EHLO
+        us-smtp-delivery-124.mimecast.com" rhost-flags-OK-OK-OK-OK)
+        by vger.kernel.org with ESMTP id S233541AbhF3JbI (ORCPT
+        <rfc822;util-linux@vger.kernel.org>);
+        Wed, 30 Jun 2021 05:31:08 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+        s=mimecast20190719; t=1625045318;
+        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+         in-reply-to:in-reply-to:references:references;
+        bh=o1hYgag00O+tzOPq0CrQ7U14BANMrF8FrDNsOH1beNs=;
+        b=X/LECoqhrjwEPel9y26Q85yduh8MEzlQ1FaaCt7vJbxtkIi1umV09yS4HoWONlRDHSVD0h
+        XwD9trvraKevHTy0+fqfq5Z0/Kj33sLJNVqSZSXiqq0RWvtgV7cxw9R88sS5LrvpTNg+ts
+        wyWJWsAxM/h7hHkNG4jvclYAuXgBm4A=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-162-9a3uspyWMuaEhn0qJMz_Ag-1; Wed, 30 Jun 2021 05:28:35 -0400
+X-MC-Unique: 9a3uspyWMuaEhn0qJMz_Ag-1
+Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com [10.5.11.12])
+        (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+        (No client certificate requested)
+        by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 0A6371084F54;
+        Wed, 30 Jun 2021 09:28:34 +0000 (UTC)
+Received: from ws.net.home (ovpn-112-214.ams2.redhat.com [10.36.112.214])
+        by smtp.corp.redhat.com (Postfix) with ESMTPS id E181260C17;
+        Wed, 30 Jun 2021 09:28:31 +0000 (UTC)
+Date:   Wed, 30 Jun 2021 11:28:29 +0200
+From:   Karel Zak <kzak@redhat.com>
+To:     Huang Shijie <shijie@os.amperecomputing.com>
+Cc:     util-linux@vger.kernel.org, patches@amperecomputing.com,
+        zwang@amperecomputing.com, mas@amperecomputing.com,
+        ilkka@os.amperecomputing.com, jeremy.linton@arm.com,
+        jbastian@redhat.com, m.mizuma@jp.fujitsu.com,
+        patrick.zhang@amperecomputing.com
+Subject: Re: [PATCH] lscpu: remove the old code
+Message-ID: <20210630092829.reohvkzshmtqacrl@ws.net.home>
+References: <20210617124116.6841-1-shijie@os.amperecomputing.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8BIT
-Content-Description: Mail message body
-Subject: URGENT ATTENTION
-To:     Recipients <wjjt@wjjt.cn>
-From:   "Andres Auchincloss" <wjjt@wjjt.cn>
-Date:   Thu, 24 Jun 2021 14:46:43 +0200
-Reply-To: andresauchincloss926@gmail.com
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20210617124116.6841-1-shijie@os.amperecomputing.com>
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.12
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-Hi,
+On Thu, Jun 17, 2021 at 12:41:16PM +0000, Huang Shijie wrote:
+>  sys-utils/lscpu-arm.c | 46 +------------------------------------------
+>  sys-utils/lscpu.h     |  1 -
+>  2 files changed, 1 insertion(+), 46 deletions(-)
 
-I will like to use this opportunity to wish you a productive time in 2021 and also confide in you to finalize this transaction of mutual benefits. It may seem strange to you, but it is real. This is a transaction that has no risk at all, due process shall be followed and it shall be carried out under the ambit of the financial laws. Being the Chief Financial Officer, BP Plc. I want to trust and put in your care Eighteen Million British Pounds Sterling, The funds were acquired from an over-invoiced payment from a past contract executed in one of my departments.
+Applied, thanks.
 
-I can't successfully achieve this transaction without presenting you as foreign contractor who will provide a bank account to receive the funds.
-
-Documentation for the claim of the funds will be legally processed and documented, so I will need your full cooperation on this matter for our mutual benefits. We will discuss details if you are interested to work with me to secure this funds. I will appreciate your prompt response in every bit of our communication. Stay Blessed and Stay Safe.
-
-
-
-Best Regards
-
-
-
-
-Tel: +1 (587) 770-0485
-Andres .B. Auchincloss
-Chief financial officerBP Petroleum p.l.c.
-
-
-
-
-                                  Copyright ©? 1996-2021
+-- 
+ Karel Zak  <kzak@redhat.com>
+ http://karelzak.blogspot.com
 
