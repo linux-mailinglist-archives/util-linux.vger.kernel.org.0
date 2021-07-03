@@ -2,46 +2,65 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id D09083BA782
-	for <lists+util-linux@lfdr.de>; Sat,  3 Jul 2021 08:15:04 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 01F5B3BB668
+	for <lists+util-linux@lfdr.de>; Mon,  5 Jul 2021 06:33:06 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229811AbhGCGRf (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Sat, 3 Jul 2021 02:17:35 -0400
-Received: from pujrelay1.mygovuc.gov.my ([103.156.82.33]:38567 "EHLO
-        pujrelay1.mygovuc.gov.my" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229740AbhGCGRf (ORCPT
+        id S229733AbhGEEfl (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Mon, 5 Jul 2021 00:35:41 -0400
+Received: from static-190-25-223-138.static.etb.net.co ([190.25.223.138]:39978
+        "EHLO correo.hdv.gov.co" rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org
+        with ESMTP id S229560AbhGEEfl (ORCPT
         <rfc822;util-linux-ng@vger.kernel.org>);
-        Sat, 3 Jul 2021 02:17:35 -0400
-X-Greylist: delayed 3604 seconds by postgrey-1.27 at vger.kernel.org; Sat, 03 Jul 2021 02:17:34 EDT
-Received: from node02.icewarp10.mygovuc.gov.my
-        by pujrelay1.mygovuc.gov.my (13.0.1 (2021-02-23) RHEL7 x64) with ESMTP (SSL) id 01202107030640011082
-        for <util-linux-ng@vger.kernel.org>; Sat, 03 Jul 2021 06:40:01 +0800
-DKIM-Signature: a=rsa-sha256; t=1625265601; x=1625870401; s=mygovuc; d=kpkt.gov.my; c=relaxed/relaxed; v=1; bh=akAmzelDeu+uttKkNFCPBD0MRNlFXzKHnL6hZBq9fQY=; h=From:Sender:Reply-To:Subject:Date:Message-ID:To:MIME-Version:Content-Type:Content-Transfer-Encoding;
-   b=+w4fI/9QglFL8b4G7p5+BD1iYOT9F5zvkZCBPZIXi0Q0WLZ31UhTPDHn9elF57zZCTeFK4WhGlnjqOCbqzZqoWXZcKQ7vDVf8AyzTzGk++4Wg+laFBvU69VGVLj6Ey+nZH6GV/4UQiBWtrpyhDc1haoHdN3UYO9p5Sf5yZANCSk=
-Received: from [192.168.8.100]
-        by node02.icewarp10.mygovuc.gov.my (13.0.0 build 4 (2021-03-26) RHEL7 x64) with ASMTP (SSL) id 02202107030640005361
-        for <util-linux-ng@vger.kernel.org>; Sat, 03 Jul 2021 06:40:00 +0800
-From:   "aideal.fadhirul@kpkt.gov.my" <aideal.fadhirul@kpkt.gov.my>
-Date:   Fri, 02 Jul 2021 23:40:00 +0100
-Subject: Problemloses Darlehen mit reduziertem Zinssatz [info]
-Message-Id: <IQ2GWOME5EU4.YVPUX3D85LJE@kpkt.mygovuc.gov.my>
-To:     util-linux-ng@vger.kernel.org
-Sender: "aideal.fadhirul@kpkt.gov.my" <aideal.fadhirul@kpkt.gov.my>
-Reply-To: icapital fs <info@icapitalf.com>
+        Mon, 5 Jul 2021 00:35:41 -0400
+Received: from localhost (localhost [127.0.0.1])
+        by correo.hdv.gov.co (Postfix) with ESMTP id AE79A18775E9;
+        Sat,  3 Jul 2021 07:28:31 -0500 (-05)
+Received: from correo.hdv.gov.co ([127.0.0.1])
+        by localhost (correo.hdv.gov.co [127.0.0.1]) (amavisd-new, port 10032)
+        with ESMTP id khDSyTG9f9Xd; Sat,  3 Jul 2021 07:28:31 -0500 (-05)
+Received: from localhost (localhost [127.0.0.1])
+        by correo.hdv.gov.co (Postfix) with ESMTP id CBEFD187E270;
+        Sat,  3 Jul 2021 07:15:17 -0500 (-05)
+DKIM-Filter: OpenDKIM Filter v2.10.3 correo.hdv.gov.co CBEFD187E270
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=hdv.gov.co;
+        s=11DF984A-9D1F-11E6-B193-F2669FC4C452; t=1625314518;
+        bh=YlrueNvYvQTA/rsidM4wE66HE6f1WhuqcZM/LO2K65o=;
+        h=MIME-Version:To:From:Date:Message-Id;
+        b=obBqMyfLrNOvTdU9XtpwKUWjxTidPNBVKUDO2z11qliPAkAQt1s/isir+Yceh/daf
+         sBbijYQ6z1GxfEjMnl244JPqZy4mE1LZtubYtQWKLHbzLyvyHi+4KYcGALuMEAb8Ji
+         GpCFw4bUoWhW+vjSewBr1gw7j67nxAnYn23wuLfs=
+X-Virus-Scanned: amavisd-new at correo.hdv.gov.co
+Received: from correo.hdv.gov.co ([127.0.0.1])
+        by localhost (correo.hdv.gov.co [127.0.0.1]) (amavisd-new, port 10026)
+        with ESMTP id Gp9LIqL3JL6B; Sat,  3 Jul 2021 07:15:17 -0500 (-05)
+Received: from [172.20.10.6] (unknown [41.147.1.129])
+        by correo.hdv.gov.co (Postfix) with ESMTPSA id 23DFD18697D9;
+        Sat,  3 Jul 2021 06:43:11 -0500 (-05)
+Content-Type: text/plain; charset="iso-8859-1"
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: quoted-printable
+Content-Description: Mail message body
+Subject: my subject
+To:     Recipients <planeacion.arquitecto@hdv.gov.co>
+From:   planeacion.arquitecto@hdv.gov.co
+Date:   Sat, 03 Jul 2021 04:43:01 -0700
+Reply-To: callumfoundation001@gmail.com
+Message-Id: <20210703114312.23DFD18697D9@correo.hdv.gov.co>
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-Hallo util-linux-ng,
+Hallo,
 
-Interessieren Sie sich für ein Darlehen? Wir bieten verschiedene Kreditpakete zu günstigen Zinsen an.
+ Sie haben eine Spende von 2.800.000,00 USD. Ich gewann die amerikanische L=
+otterie im Wert von 343 Millionen US-Dollar in Amerika und spendete einen T=
+eil davon an f=FCnf gl=FCckliche Menschen und Wohlt=E4tigkeitsorganisatione=
+n, die sich an meinen verstorbenen Enkel erinnern, der Anfang April vorzeit=
+ig geboren wurde und nur einen Tag lebte. F=FCr weitere Informationen wende=
+n Sie sich bitte an: callumfoundation001@gmail.com
 
-Wir können Ihnen helfen, Ihr Projekt zu finanzieren, Investitionskapital verfügbar. Sie können alles von € 5.000 - € 10.000.000,00 über einen Zeitraum von 1 bis 30 Jahren ausleihen.
+ =
 
-Für weitere Details, E-mail- info@icapitalf.com
 
-Vielen Dank.
-util-linux-ng@vger.kernel.org
+Mit freundlichen Gr=FC=DFen
+Frau Lerynne West
