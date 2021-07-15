@@ -2,82 +2,76 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 31FB33C7301
-	for <lists+util-linux@lfdr.de>; Tue, 13 Jul 2021 17:17:25 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 1C1DF3CA430
+	for <lists+util-linux@lfdr.de>; Thu, 15 Jul 2021 19:25:45 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S236966AbhGMPUO (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Tue, 13 Jul 2021 11:20:14 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:55032 "EHLO
+        id S235519AbhGOR2g (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Thu, 15 Jul 2021 13:28:36 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:37432 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S236931AbhGMPUN (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Tue, 13 Jul 2021 11:20:13 -0400
-Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com [IPv6:2a00:1450:4864:20::430])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id AB127C0613DD
-        for <util-linux@vger.kernel.org>; Tue, 13 Jul 2021 08:17:23 -0700 (PDT)
-Received: by mail-wr1-x430.google.com with SMTP id p8so30957818wrr.1
-        for <util-linux@vger.kernel.org>; Tue, 13 Jul 2021 08:17:23 -0700 (PDT)
+        with ESMTP id S235098AbhGOR2f (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Thu, 15 Jul 2021 13:28:35 -0400
+Received: from mail-pj1-x102d.google.com (mail-pj1-x102d.google.com [IPv6:2607:f8b0:4864:20::102d])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 9146CC061765
+        for <util-linux@vger.kernel.org>; Thu, 15 Jul 2021 10:25:42 -0700 (PDT)
+Received: by mail-pj1-x102d.google.com with SMTP id p4-20020a17090a9304b029016f3020d867so4944066pjo.3
+        for <util-linux@vger.kernel.org>; Thu, 15 Jul 2021 10:25:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=mime-version:reply-to:from:date:message-id:subject:to;
-        bh=a0Q68UYK6naDMCzpIkiD9XNTetS4Vqmyb/j2W5J0li8=;
-        b=RE3LEeUkxOSVik3egTeB/CrqZP/DmwMbKLqTU62ozqmppA/ODUC520IDJB2QJn0y2b
-         BhLxEF23t7VtGQwVZRE2NoXq0BiTvUVKFwWUkNGevfkAg1MEEsWn1lm+WkHgu8PWdTa3
-         CIEM7u74KUI7YUK7D7ppGAL6QkRzsPa0VqWjOJjsON453r/mcoJWOPx2oE8EeMIJsv6J
-         g5kQB3/NqmABIzn17tI8oPmAtjTpvY0SfD4FiFGs3Nrj1TK5RLZ8ESaj4lqC9EE/V4wr
-         8CNjQdeXMlWm9IBcCXFGbvNkzGX3b95gNA+5LH6kjNIQAn2Gg0YQw6qqmMJqkhUCCAoq
-         xBVw==
+        bh=Ibb5KNEw1DKqJEg9n4gJy5KnzVasBofn6QaWYsu9UCQ=;
+        b=A07qw47jpyx7/pJf1ZS9aQv4pD7PiHBZWlsl9UoiurRqqc+7ZndQI51YdaaD0nkecu
+         Qd4i+G02coH8O2I/r6ZupOF8oYSIAoIwVq4zkuCtuhDJYsbynWGQdegcG7aq+QxGg/bp
+         poyp2DbaibSeABlojQr/pIAqMWExNaHg4RIE+IQzBlXdCiQq16Yp/UqkBXwITYu4DgIP
+         XTs1gXkC7Br62pPmJXs/2nF+jRhXCAs3iAxTxuy51YthTghMWE/kONdSGZKCG8sWM+Ev
+         WU1ATEDaIH5W63c7UQCvZTdM21+mq9I9FOl7BCTb650pCRFEJMZ521zklByg85zlNwmj
+         7b/w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:mime-version:reply-to:from:date:message-id
          :subject:to;
-        bh=a0Q68UYK6naDMCzpIkiD9XNTetS4Vqmyb/j2W5J0li8=;
-        b=t1KKvJAyH3d8rPs6maiRGAGo5EBXURQUAp9+4C+AO2ipXuH4Eh5+BXWpkoT1g2vB7R
-         zrDz4hAa1/kVKHny+VQ5wryV/Yo1USyLN7699HBs3XTvCY93w1ypDcrP0523lSTn5shQ
-         KnITt+qjP3PrR52Hu06qkWsvKBM842+/SMVX6ykaLF1M61Teb/BoDELavlK7DZ7vEc/N
-         WLVXVqzBlXVUvItgt8xQkVYW/D9XWXtE/xmGgbWyV0bcbYIZACDREJxp0B9obDuWUjAi
-         EBt9wUp5SR7zEhQyxweBZleO5qHCQ4jeFwmkeFoxLe+rjncz+o4A99cGLJtjk6xZrD6P
-         2UpQ==
-X-Gm-Message-State: AOAM530spjJHTEGpCj6CBNlmELbkLHaOHQT02g+tBFQ7QboB1X8gCuKL
-        KLg8q5GWkBXnyXkSAJ7R7aljWfgowtrQEapNszk=
-X-Google-Smtp-Source: ABdhPJyymsJRR8/2QEtBITdRm57a2yq9GMqwfLKXITcPPKACN00+TFaeHM0b76VAYZBKW73KVdDcAyLuYl/ZGhPeO/0=
-X-Received: by 2002:a5d:638b:: with SMTP id p11mr6522680wru.380.1626189441976;
- Tue, 13 Jul 2021 08:17:21 -0700 (PDT)
+        bh=Ibb5KNEw1DKqJEg9n4gJy5KnzVasBofn6QaWYsu9UCQ=;
+        b=tdgjvyLJFxEuNTtgTRPGPZWBs2TW/V79C3kWfShg2CTVqs64os92J8Bv7A2jBtq86D
+         J9vd+t8i2+EiC+dHojbXphCWyYgbTE06aDdjJjqpSuCcE2MWTUBruA+1XIm9UNySzo6i
+         th1MsHyqw0pittZdfhjK10W4C0MbgNTxP4iaoTayrBDvOv9QQKMCJGEtqcje1mb0oW0E
+         +jdLbPU/koRjjrHsBOjdcTJVxOVemr715stbYisavYO1v+vuK5NJASO/VobZScnAywns
+         c5plVOO0TX7IK2Lh0yzX7jRczS6HWti0tjhEH3GzH7i2OqK+u71nzcuCXUx4o641aNsB
+         kIbw==
+X-Gm-Message-State: AOAM530rV7URfEAWkvQOmnKb+p4IEQVoxOGYiM9oPrNpLxf02yueEFTh
+        WlhrV/LYDHxCj92onHigIlHLlBxkNRoFuyxu4jU=
+X-Google-Smtp-Source: ABdhPJyZMrq1Z7I3pjjmyAtUHW3ABh0oEghTe77F5dAxRk/llsByjQhtZ30eIUOoh7sIooPsLTy5+nPJ1BCNgIavtsM=
+X-Received: by 2002:a17:90b:d8f:: with SMTP id bg15mr10963237pjb.152.1626369941880;
+ Thu, 15 Jul 2021 10:25:41 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 2002:a5d:6088:0:0:0:0:0 with HTTP; Tue, 13 Jul 2021 08:17:21
+Received: by 2002:a05:6a10:fc85:0:0:0:0 with HTTP; Thu, 15 Jul 2021 10:25:41
  -0700 (PDT)
-Reply-To: bazaatg@gmail.com
-From:   Tchao Ago Bazaa <crenetogo6@gmail.com>
-Date:   Tue, 13 Jul 2021 08:17:21 -0700
-Message-ID: <CABuQhevmZFSfDvipgsXxZu3xhknQinaY-KP++cCZoe8_5dJCJg@mail.gmail.com>
-Subject: Proposal
+Reply-To: faty.muhamad@gmail.com
+From:   Ms Fatima Muhammad <general.infofederalreserve@gmail.com>
+Date:   Thu, 15 Jul 2021 17:25:41 +0000
+Message-ID: <CAJzJz_Dwu6rUxmnqq1QV9qD4hugxutFJZuENGUwx7RamXm5txA@mail.gmail.com>
+Subject: Hello Dear
 To:     undisclosed-recipients:;
 Content-Type: text/plain; charset="UTF-8"
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-Greetings
+Hello Dear,
 
-I apologize for using this medium to contact you. My name is Barrister
-Tchao Ago Bazaa and I am a lawyer by profession. I am contacting you
-in respect of my late client who bears the same surname as you and a
-citizen of your country, my late client died in a car accident along
-with his family some years back, leaving no next of kin. My late
-client  was a business man who was into the oil and gold business here
-in my country.
+My name is Ms.Fatima Muhammad., Please forgive me for stressing you
+with my predicaments and I sorry to approach you through this media
+because is serves the fastest means of  my communication right now,
 
-He left behind a fund deposit value of  ( Five Million Nine Hundred
-Thousand United States Dollars only ) the bank where this money was
-deposited is trying to confiscate it, since i cannot locate any member
-of the family a long time after his demise, I therefore seek your
-since partnership since you share the same family names with my late
-client and probably from the same country, do not hesitate to send me
-the following information below for easy  communication and endeavor
-to reply through my private email address for more details:
+I came across your Email from my personal search and I decided to
+contact you believing you will be honest to fulfill my business
+proposal which I believe that will be a very good opportunity for both
+of us. Please it is my pleasure to contact you today for a business
+partnership investments projects worth $4.6 million USD which I intend
+to establish in your country..
 
-Your full names
-Your private Telephone Number
+Pls If this business proposal offends your moral and ethic values do
+accept my apology. therefore kindly contact me immediately if you are
+interested for more details.
 
-Thanks
-
-Tchao Ago Bazaa
+Thank you for your wiliness to help me
+Yours Sincerely Fatima Muhammad
