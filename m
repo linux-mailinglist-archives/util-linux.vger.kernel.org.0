@@ -2,76 +2,58 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 1C1DF3CA430
-	for <lists+util-linux@lfdr.de>; Thu, 15 Jul 2021 19:25:45 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 966813CF9CF
+	for <lists+util-linux@lfdr.de>; Tue, 20 Jul 2021 14:44:39 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S235519AbhGOR2g (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Thu, 15 Jul 2021 13:28:36 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:37432 "EHLO
+        id S238401AbhGTMDs (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Tue, 20 Jul 2021 08:03:48 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:46946 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S235098AbhGOR2f (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Thu, 15 Jul 2021 13:28:35 -0400
-Received: from mail-pj1-x102d.google.com (mail-pj1-x102d.google.com [IPv6:2607:f8b0:4864:20::102d])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 9146CC061765
-        for <util-linux@vger.kernel.org>; Thu, 15 Jul 2021 10:25:42 -0700 (PDT)
-Received: by mail-pj1-x102d.google.com with SMTP id p4-20020a17090a9304b029016f3020d867so4944066pjo.3
-        for <util-linux@vger.kernel.org>; Thu, 15 Jul 2021 10:25:42 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:reply-to:from:date:message-id:subject:to;
-        bh=Ibb5KNEw1DKqJEg9n4gJy5KnzVasBofn6QaWYsu9UCQ=;
-        b=A07qw47jpyx7/pJf1ZS9aQv4pD7PiHBZWlsl9UoiurRqqc+7ZndQI51YdaaD0nkecu
-         Qd4i+G02coH8O2I/r6ZupOF8oYSIAoIwVq4zkuCtuhDJYsbynWGQdegcG7aq+QxGg/bp
-         poyp2DbaibSeABlojQr/pIAqMWExNaHg4RIE+IQzBlXdCiQq16Yp/UqkBXwITYu4DgIP
-         XTs1gXkC7Br62pPmJXs/2nF+jRhXCAs3iAxTxuy51YthTghMWE/kONdSGZKCG8sWM+Ev
-         WU1ATEDaIH5W63c7UQCvZTdM21+mq9I9FOl7BCTb650pCRFEJMZ521zklByg85zlNwmj
-         7b/w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
-         :subject:to;
-        bh=Ibb5KNEw1DKqJEg9n4gJy5KnzVasBofn6QaWYsu9UCQ=;
-        b=tdgjvyLJFxEuNTtgTRPGPZWBs2TW/V79C3kWfShg2CTVqs64os92J8Bv7A2jBtq86D
-         J9vd+t8i2+EiC+dHojbXphCWyYgbTE06aDdjJjqpSuCcE2MWTUBruA+1XIm9UNySzo6i
-         th1MsHyqw0pittZdfhjK10W4C0MbgNTxP4iaoTayrBDvOv9QQKMCJGEtqcje1mb0oW0E
-         +jdLbPU/koRjjrHsBOjdcTJVxOVemr715stbYisavYO1v+vuK5NJASO/VobZScnAywns
-         c5plVOO0TX7IK2Lh0yzX7jRczS6HWti0tjhEH3GzH7i2OqK+u71nzcuCXUx4o641aNsB
-         kIbw==
-X-Gm-Message-State: AOAM530rV7URfEAWkvQOmnKb+p4IEQVoxOGYiM9oPrNpLxf02yueEFTh
-        WlhrV/LYDHxCj92onHigIlHLlBxkNRoFuyxu4jU=
-X-Google-Smtp-Source: ABdhPJyZMrq1Z7I3pjjmyAtUHW3ABh0oEghTe77F5dAxRk/llsByjQhtZ30eIUOoh7sIooPsLTy5+nPJ1BCNgIavtsM=
-X-Received: by 2002:a17:90b:d8f:: with SMTP id bg15mr10963237pjb.152.1626369941880;
- Thu, 15 Jul 2021 10:25:41 -0700 (PDT)
+        with ESMTP id S238330AbhGTMDo (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Tue, 20 Jul 2021 08:03:44 -0400
+X-Greylist: delayed 383 seconds by postgrey-1.37 at lindbergh.monkeyblade.net; Tue, 20 Jul 2021 05:44:20 PDT
+Received: from forward106p.mail.yandex.net (forward106p.mail.yandex.net [IPv6:2a02:6b8:0:1472:2741:0:8b7:109])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id DB368C061762
+        for <util-linux@vger.kernel.org>; Tue, 20 Jul 2021 05:44:20 -0700 (PDT)
+Received: from forward103q.mail.yandex.net (forward103q.mail.yandex.net [IPv6:2a02:6b8:c0e:50:0:640:b21c:d009])
+        by forward106p.mail.yandex.net (Yandex) with ESMTP id 858201C81C47
+        for <util-linux@vger.kernel.org>; Tue, 20 Jul 2021 15:37:48 +0300 (MSK)
+Received: from vla1-700fb1e46924.qloud-c.yandex.net (vla1-700fb1e46924.qloud-c.yandex.net [IPv6:2a02:6b8:c0d:1386:0:640:700f:b1e4])
+        by forward103q.mail.yandex.net (Yandex) with ESMTP id 808CF61E0009
+        for <util-linux@vger.kernel.org>; Tue, 20 Jul 2021 15:37:48 +0300 (MSK)
+Received: from vla5-8422ddc3185d.qloud-c.yandex.net (vla5-8422ddc3185d.qloud-c.yandex.net [2a02:6b8:c18:3495:0:640:8422:ddc3])
+        by vla1-700fb1e46924.qloud-c.yandex.net (mxback/Yandex) with ESMTP id bNLeWJiSSI-bmHKdVBv;
+        Tue, 20 Jul 2021 15:37:48 +0300
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=brighterdan.com; s=mail;
+        t=1626784668; bh=Hj/avOuqzLlRb8atv0cAV2ZWaglq88iiom15KYCFLKo=;
+        h=Date:Message-ID:Subject:From:To;
+        b=c9WYRWdh8nv5JOjMZzaKEq9wz+ZLr0/mrCKJ0etZiQQUdahFn0vsGSVwA7A+ai1pO
+         K+Zaf/0EQAGDA/ByCzgR4TBK0yyIavMryc8yfTtCgnmM06y1UhJfq0q+FFS3pa1mdZ
+         Hy1cXIZ3C7kLQhkBQhauxivDcJETy7Q62vh5C4QU=
+Authentication-Results: vla1-700fb1e46924.qloud-c.yandex.net; dkim=pass header.i=@brighterdan.com
+Received: by vla5-8422ddc3185d.qloud-c.yandex.net (smtp/Yandex) with ESMTPSA id KwMkCvVDY8-bl2mJKDh;
+        Tue, 20 Jul 2021 15:37:48 +0300
+        (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+        (Client certificate not present)
+To:     util-linux@vger.kernel.org
+From:   Daniel Santos <hello@brighterdan.com>
+Subject: Portuguese cal uncapitalized problem
+Message-ID: <7495c66f-4114-3ed7-fcfb-839cdfa8a9db@brighterdan.com>
+Date:   Tue, 20 Jul 2021 13:37:46 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.12.0
 MIME-Version: 1.0
-Received: by 2002:a05:6a10:fc85:0:0:0:0 with HTTP; Thu, 15 Jul 2021 10:25:41
- -0700 (PDT)
-Reply-To: faty.muhamad@gmail.com
-From:   Ms Fatima Muhammad <general.infofederalreserve@gmail.com>
-Date:   Thu, 15 Jul 2021 17:25:41 +0000
-Message-ID: <CAJzJz_Dwu6rUxmnqq1QV9qD4hugxutFJZuENGUwx7RamXm5txA@mail.gmail.com>
-Subject: Hello Dear
-To:     undisclosed-recipients:;
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-GB-large
+Content-Transfer-Encoding: 7bit
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-Hello Dear,
-
-My name is Ms.Fatima Muhammad., Please forgive me for stressing you
-with my predicaments and I sorry to approach you through this media
-because is serves the fastest means of  my communication right now,
-
-I came across your Email from my personal search and I decided to
-contact you believing you will be honest to fulfill my business
-proposal which I believe that will be a very good opportunity for both
-of us. Please it is my pleasure to contact you today for a business
-partnership investments projects worth $4.6 million USD which I intend
-to establish in your country..
-
-Pls If this business proposal offends your moral and ethic values do
-accept my apology. therefore kindly contact me immediately if you are
-interested for more details.
-
-Thank you for your wiliness to help me
-Yours Sincerely Fatima Muhammad
+Hi everyone.
+I would like for the Portuguese months and days of the week of `cal`, to 
+be capitalized.
+  . Can anyone do this?
+  . Should I do this? Where can I find the days of the week and the 
+months translation? (it does no seem to be in the 
+https://translationproject.org/POT-files/util-linux-2.37-rc2.pot file)
