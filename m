@@ -2,54 +2,65 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 1C8223DC391
-	for <lists+util-linux@lfdr.de>; Sat, 31 Jul 2021 07:34:23 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id B39A83DCABA
+	for <lists+util-linux@lfdr.de>; Sun,  1 Aug 2021 10:14:54 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229683AbhGaFe1 convert rfc822-to-8bit (ORCPT
-        <rfc822;lists+util-linux@lfdr.de>); Sat, 31 Jul 2021 01:34:27 -0400
-Received: from mail.maynitek.ru ([94.137.227.4]:59296 "EHLO mail.maynitek.ru"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S231529AbhGaFe0 (ORCPT <rfc822;util-linux@vger.kernel.org>);
-        Sat, 31 Jul 2021 01:34:26 -0400
-X-Greylist: delayed 34278 seconds by postgrey-1.27 at vger.kernel.org; Sat, 31 Jul 2021 01:34:26 EDT
+        id S231292AbhHAIPA (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Sun, 1 Aug 2021 04:15:00 -0400
+Received: from poczta.vectranet.pl ([88.156.222.93]:44839 "EHLO
+        poczta.vectranet.pl" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S229885AbhHAIPA (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Sun, 1 Aug 2021 04:15:00 -0400
+X-Greylist: delayed 1225 seconds by postgrey-1.27 at vger.kernel.org; Sun, 01 Aug 2021 04:14:59 EDT
 Received: from localhost (localhost [127.0.0.1])
-        by mail.maynitek.ru (Postfix) with ESMTP id E38EA14F9602A;
-        Fri, 30 Jul 2021 21:54:58 +0500 (+05)
-Received: from mail.maynitek.ru ([127.0.0.1])
-        by localhost (mail.maynitek.ru [127.0.0.1]) (amavisd-new, port 10032)
-        with ESMTP id tk3Yw6lLl2Vx; Fri, 30 Jul 2021 21:54:58 +0500 (+05)
-Received: from localhost (localhost [127.0.0.1])
-        by mail.maynitek.ru (Postfix) with ESMTP id 57E1E14F96035;
-        Fri, 30 Jul 2021 21:46:02 +0500 (+05)
-X-Virus-Scanned: amavisd-new at maynitek.ru
-Received: from mail.maynitek.ru ([127.0.0.1])
-        by localhost (mail.maynitek.ru [127.0.0.1]) (amavisd-new, port 10026)
-        with ESMTP id 8PjjjxGxazRH; Fri, 30 Jul 2021 21:46:02 +0500 (+05)
-Received: from [192.168.0.113] (unknown [109.87.38.218])
-        by mail.maynitek.ru (Postfix) with ESMTPSA id E874114F96E99;
-        Fri, 30 Jul 2021 21:34:51 +0500 (+05)
-Content-Type: text/plain; charset="iso-8859-1"
+        by poczta.vectranet.pl (Postfix) with ESMTP id 4AC80460870;
+        Sun,  1 Aug 2021 09:54:25 +0200 (CEST)
+Received: from poczta.vectranet.pl ([127.0.0.1])
+        by localhost (abo-poczta.vectranet.pl [127.0.0.1]) (amavisd-new, port 10024)
+        with ESMTP id zE7cxtbYHcfY; Sun,  1 Aug 2021 09:54:25 +0200 (CEST)
+Received: from evbox.pl (localhost [127.0.0.1])
+        by poczta.vectranet.pl (Postfix) with ESMTP id 69A0D460804;
+        Sun,  1 Aug 2021 09:54:24 +0200 (CEST)
+Received: from 41.144.71.155
+        (SquirrelMail authenticated user rnowakowskii@evbox.pl)
+        by evbox.pl with HTTP;
+        Sun, 1 Aug 2021 09:54:24 +0200
+Message-ID: <cf28f4395c4b8ea7511c823018d4577a.squirrel@evbox.pl>
+Date:   Sun, 1 Aug 2021 09:54:24 +0200
+Subject: Invitation to Bid
+From:   "Pfizer" <info@pfizer.com>
+Reply-To: pfizersupplier@daum.net
+User-Agent: SquirrelMail/1.4.19
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8BIT
-Content-Description: Mail message body
-Subject: Spende.
-To:     Recipients <vao@maynitek.ru>
-From:   vao@maynitek.ru
-Date:   Fri, 30 Jul 2021 19:34:35 +0300
-Reply-To: rinatakhmeto@gmail.com
-Message-Id: <20210730163451.E874114F96E99@mail.maynitek.ru>
+Content-Type:   text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7BIT
+X-Priority: 3 (Normal)
+Importance: Normal
+To:     undisclosed-recipients:;
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-Ich, Rinat Akhmetov, bin ein ukrainischer Milliardär, Oligarch und Gründer und Präsident von System Capital Management in der Ukraine (Europa). Sie können über mich lesen auf:
+Good Day Sir / Ms.,
 
-https://en.wikipedia.org/wiki/Rinat_Akhmetov
+We are pleased to invite you or your company to quote the following item
+listed below:
 
-Ich beabsichtige, Ihnen einen Teil (Viertel) meines Nettovermögens von jeweils 500.000 EURO an 4 Personen weltweit im Rahmen unseres Wohltätigkeitsprojekts zu geben, das ich überwiesen habe. Wenn Sie meine E-Mail erhalten haben, senden Sie uns bitte Ihre Daten so dass wir unsere Bank anweisen, die Überweisung der
+Product/Model No: ADEX MEDIUM PRESSURE PUMP MODEL NO: WK2789
+Qty. 45 units
 
-500.000 EURO zu finanzieren, in der Hoffnung, dass es auch Ihnen und anderen hilft.
+We are in desperate need of this item due to the overwhelming demand for
+COVID 19 vaccine.
 
-E-Mail zur Bestätigung unten.
+If your supplier have the items to the quantity required, kindly send us
+your quotation to order@pfizersupplier.com for immediate approval.
 
-E-Mail oder Antwort an:rinatakhmeto@gmail.com
+Kind Regards,
+Albert Bourla
+
+PFIZER BV Supply Chain Manager
+Phone: 31 (0) 208 080 880
+Email: order@pfizersupplier.com
+ADDRESS: Rivium Westlaan 142, 2909 LD
+Capelle aan den IJssel, Netherlands
+
