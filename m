@@ -2,54 +2,54 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 230EA3DFAA6
-	for <lists+util-linux@lfdr.de>; Wed,  4 Aug 2021 06:39:16 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id ED9963E1241
+	for <lists+util-linux@lfdr.de>; Thu,  5 Aug 2021 12:10:09 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S235058AbhHDEj0 (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Wed, 4 Aug 2021 00:39:26 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:33582 "EHLO
+        id S240303AbhHEKKW (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Thu, 5 Aug 2021 06:10:22 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:38904 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S234920AbhHDEjV (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Wed, 4 Aug 2021 00:39:21 -0400
-Received: from mail-pj1-x1043.google.com (mail-pj1-x1043.google.com [IPv6:2607:f8b0:4864:20::1043])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id E2671C0613D5
-        for <util-linux@vger.kernel.org>; Tue,  3 Aug 2021 21:39:09 -0700 (PDT)
-Received: by mail-pj1-x1043.google.com with SMTP id q17-20020a17090a2e11b02901757deaf2c8so1922764pjd.0
-        for <util-linux@vger.kernel.org>; Tue, 03 Aug 2021 21:39:09 -0700 (PDT)
+        with ESMTP id S240339AbhHEKKT (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Thu, 5 Aug 2021 06:10:19 -0400
+Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com [IPv6:2a00:1450:4864:20::529])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 97284C06179A
+        for <util-linux@vger.kernel.org>; Thu,  5 Aug 2021 03:10:04 -0700 (PDT)
+Received: by mail-ed1-x529.google.com with SMTP id y12so7563309edo.6
+        for <util-linux@vger.kernel.org>; Thu, 05 Aug 2021 03:10:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=mime-version:reply-to:from:date:message-id:subject:to;
-        bh=GvSEm2IhMBJ052xe9DI9VvCgaL6z88P134FZp7B8Jpk=;
-        b=p9PPyLH0zz8KbFI02PYyVMq+BnAbPSa4Ge8pp1MeKoWjDZPQkB6hyWx2lIJ0kQBXZN
-         0MC0wmJ8CSjJ8Z4/sP483JhPLogYkfJvVe06wgZ6LuKfmSuvXMNut2om/gHhHFWeS0LP
-         aZHx7NFYnDWMi4Zkrf4FOD+ZL9SYsHGVBKGYQvtx8IybWr4oKrsaSn3t42cxcAfde0rt
-         4zuCqTKqPL87yTwa2YEJZvN8AxYZmYPQY9BIOOQGov5YBZP5uYMAjdtk5Rk+hBvTOYbz
-         QKN7MPbYcS6hxZdJaAikx1wNgWF0nnniAXZff2y8yqwgiS83EhAJOtueB5e++D3Z9rae
-         jCVQ==
+        bh=J67+rxbQxfS8kPDQ/50P30WNOuT2eFzd+bURjICaS/k=;
+        b=mi7yqQmOLKzEVXr7wZThmDGoqeJFGIgCDYiykBvaZDH33/GJ2mshOA3hFWFOAMEVTV
+         RGHdbeyE8TefpTiUekIFXfL8f6Qmwvmpk7XWI5JExFDXhij754H7PBmVgU+DZ3Caw0KD
+         KSoQGPNapPGzVsgcTMgRYRGzhtThqQtYzCnCJjAwFFtUkFM1OREvkgYWVDEzrRARMNNk
+         6I9g7jNZLp73gOrhlB9U6TP30MA3/u2HcBxT0iI535tV9n6Gs5IdX23sa+kBivMIknKi
+         vpTklzE3+XjTCg0YgVpNjd4C+MEnHMjgJBcUdb6GeieDZfU+8HNFUETz+YzllsEPIlBB
+         ensw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:mime-version:reply-to:from:date:message-id
          :subject:to;
-        bh=GvSEm2IhMBJ052xe9DI9VvCgaL6z88P134FZp7B8Jpk=;
-        b=lTaD3pVtVk13Fh+IJIeFfsRJ+HDafRimvGPanksSoTS3ro3rgaA6a1lzXoW7T+Eg6w
-         5HP4BKJqzOSM411iXI6h09soUxi4Qvg8B4/FY9BUYIrBqkJ/vzmqXBh0IdMIm5n4cQw0
-         HVP/U52vyhYNxTAFem69oLMTkY7GnnOeKkP1lj6J5oIZL4VrcrdXxXh4ODg4GXbtEzkU
-         6FDs35PQhdteEzImASUL33KCRIzNZvWQBqJ4mW/cjqe43T2+YtNgcdj7401aHK0wBvRG
-         zY0YEWMk4fwMiMZQA3rBMAleIyFk/wJHsYO+HA1CUKe/B2oSsPvN0Ru2AXk6E+fiU/Ub
-         dQbg==
-X-Gm-Message-State: AOAM532l33qGqlKzz0zdctQV0Rck9njjFlqdeeDFXrZ4tGr/7db3OXAl
-        RYT2hPgQxg9nJWga+MqHIwr6cTrlmdLSDgx5jVc=
-X-Google-Smtp-Source: ABdhPJw57hHylvVEPBiJA25ObWXAc6UrOAoCwhkNja/GOI+GVZ2W6Kt3aKwtV+sy/p2pQ6QXyT+X3yFDodgtT3nn904=
-X-Received: by 2002:a17:90a:a883:: with SMTP id h3mr26780995pjq.226.1628051949549;
- Tue, 03 Aug 2021 21:39:09 -0700 (PDT)
+        bh=J67+rxbQxfS8kPDQ/50P30WNOuT2eFzd+bURjICaS/k=;
+        b=fr2b1jSSgmL52tMh8ZyzdEdgb8CUOUTbNLPhiImyVqv9n3EcBcnMZUeodQ0MXy73yL
+         67peizAuuNLjkN1xuWQuCI2RFch9ExE3kKxJ7k1tsvl4T7BqoClFT3h/P7nYln5Qd/OO
+         jt3GWJitF3sCZ96PHlrq7Rxwyu0fHyoSNBF5o5BDSFKs4fCqEOfWbRZ9puek1hjrYkPx
+         7XjydSQSF2YAfOMmMH8y5NksAvBFCbsufXI0YtTqjlw3qPMZL69OiVAdZTtqMEskemL2
+         6/+b/RfFRJ3Ii7PAK6fTUPptp1Q7zcGxyLu7EzlVfKCNVGa/Qap5Dqh3lr3AnBpZ+Giv
+         n79Q==
+X-Gm-Message-State: AOAM5336aiQMVpfl64a13P2V36nxiACHajnRs6QpsGxOu+VdbMRBZgco
+        Ci4PiPSt9xyJuor+46B5+Jt/AnsRHqv8+5dHCME=
+X-Google-Smtp-Source: ABdhPJyc6kq4jxhLPfEHrwJQcuNjuK59ctIFdrqoitA1rgwEt2xq2bVZ01pmYykWojTA+YLqXBFaxgvJXBJe8yBl6SU=
+X-Received: by 2002:aa7:c50a:: with SMTP id o10mr5420087edq.118.1628158203271;
+ Thu, 05 Aug 2021 03:10:03 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 2002:a05:6a10:6901:0:0:0:0 with HTTP; Tue, 3 Aug 2021 21:39:09
- -0700 (PDT)
-Reply-To: ablahikazabl67@gmail.com
-From:   Abdoulahi Kazim <kazimhammed0@gmail.com>
-Date:   Wed, 4 Aug 2021 05:39:09 +0100
-Message-ID: <CAOqwCaMEzyx1QiknLG4FMLakpNiY3ypH3oU1PSfmgtQdcBPAKw@mail.gmail.com>
-Subject: More Authentic Information
+Received: by 2002:a05:6408:258c:b029:e3:fe5c:5c2d with HTTP; Thu, 5 Aug 2021
+ 03:10:02 -0700 (PDT)
+Reply-To: theresabangurah3333@yahoo.com
+From:   Theresa Bangurah <mariamabah77879@gmail.com>
+Date:   Thu, 5 Aug 2021 11:10:02 +0100
+Message-ID: <CAAi==jpQpEPQWUPEqzapg6pajWjV52XxDfY2zJeX+gxNgAMo8w@mail.gmail.com>
+Subject: Hello
 To:     undisclosed-recipients:;
 Content-Type: text/plain; charset="UTF-8"
 Precedence: bulk
@@ -57,18 +57,6 @@ List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
 -- 
-Dear Partner,
-
-I am soliciting your partnership to relocate $12.5 Million to your
-country for investment on my behalf and you will be entitled to 30% of
-the sum once the transaction is successful made.
-
- Please indicate your genuine interest if you are capable so that i
-will send you the authentic details and documents of the transaction
-in awareness with some of my fellow Directors in the bank.
-If you are interested, here is my private Email address: (
-ablahikazabl67@gmail.com )
-For more authentic and legit information.
-
-
-Regards : Abdoulahi Kazim
+My name is Mrs.Theresa Bangurah,i am American citizen i have something
+important to tell you.Reply me immediately you get this message.God
+bless you.
