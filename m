@@ -2,30 +2,30 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id C0B383EDBA3
-	for <lists+util-linux@lfdr.de>; Mon, 16 Aug 2021 18:52:48 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 8BC903EDBAA
+	for <lists+util-linux@lfdr.de>; Mon, 16 Aug 2021 18:52:50 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231959AbhHPQxD (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Mon, 16 Aug 2021 12:53:03 -0400
+        id S232249AbhHPQxF (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Mon, 16 Aug 2021 12:53:05 -0400
 Received: from luckmann.name ([213.239.213.133]:50635 "EHLO
         static.213-239-213-133.clients.your-server.de" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S232180AbhHPQxC (ORCPT
+        by vger.kernel.org with ESMTP id S230383AbhHPQxD (ORCPT
         <rfc822;util-linux@vger.kernel.org>);
-        Mon, 16 Aug 2021 12:53:02 -0400
+        Mon, 16 Aug 2021 12:53:03 -0400
 Received: from localhost (localhost [127.0.0.1])
   (uid 502)
   by static.213-239-213-133.clients.your-server.de with local
-  id 0000000000BD6056.00000000611A97C2.00001535; Mon, 16 Aug 2021 18:52:18 +0200
-Date:   Mon, 16 Aug 2021 18:52:18 +0200
+  id 0000000000BD602F.00000000611A97C3.00001591; Mon, 16 Aug 2021 18:52:19 +0200
+Date:   Mon, 16 Aug 2021 18:52:19 +0200
 From:   Helge Kreutzmann <debian@helgefjell.de>
 To:     util-linux@vger.kernel.org
 Cc:     mario.blaettermann@gmail.com
-Subject: Issue in man page script.1
-Message-ID: <20210816165218.GA5414@Debian-50-lenny-64-minimal>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
+Subject: Issue in man page scriptreplay.1
+Message-ID: <20210816165219.GA5506@Debian-50-lenny-64-minimal>
+Mime-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
 X-Public-Key-URL: http://www.helgefjell.de/data/debian_neu.asc
 X-homepage: http://www.helgefjell.de/debian
 User-Agent: Mutt/1.10.1 (2018-07-13)
@@ -35,9 +35,12 @@ X-Mailing-List: util-linux@vger.kernel.org
 
 Without further ado, the following was found:
 
-Issue: supports new timing → supports a new timing
+Issue: output doesn't match the real output exactly
 
-"Since version 2.35, B<script> supports multiple streams and allows the "
-"logging of input and output to separate files or all the one file. This "
-"version also supports new timing file which records additional information. "
-"The command B<scriptreplay --summary> then provides all the information."
+"% script --log-timing file.tm --log-out script.out\n"
+"Script started, file is script.out\n"
+"% ls\n"
+"E<lt>etc, etcE<gt>\n"
+"% exit\n"
+"Script done, file is script.out\n"
+"% scriptreplay --log-timing file.tm --log-out script.out\n"
