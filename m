@@ -2,26 +2,26 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 1F6463EDBA8
-	for <lists+util-linux@lfdr.de>; Mon, 16 Aug 2021 18:52:50 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 0408C3EDBAC
+	for <lists+util-linux@lfdr.de>; Mon, 16 Aug 2021 18:52:51 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S232237AbhHPQxF (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        id S232381AbhHPQxF (ORCPT <rfc822;lists+util-linux@lfdr.de>);
         Mon, 16 Aug 2021 12:53:05 -0400
-Received: from luckmann.name ([213.239.213.133]:60273 "EHLO
+Received: from luckmann.name ([213.239.213.133]:48775 "EHLO
         static.213-239-213-133.clients.your-server.de" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S232249AbhHPQxD (ORCPT
+        by vger.kernel.org with ESMTP id S232043AbhHPQxE (ORCPT
         <rfc822;util-linux@vger.kernel.org>);
-        Mon, 16 Aug 2021 12:53:03 -0400
+        Mon, 16 Aug 2021 12:53:04 -0400
 Received: from localhost (localhost [127.0.0.1])
   (uid 502)
   by static.213-239-213-133.clients.your-server.de with local
-  id 0000000000BD602E.00000000611A97C3.0000157A; Mon, 16 Aug 2021 18:52:19 +0200
-Date:   Mon, 16 Aug 2021 18:52:19 +0200
+  id 0000000000BD6033.00000000611A97C4.000015A8; Mon, 16 Aug 2021 18:52:20 +0200
+Date:   Mon, 16 Aug 2021 18:52:20 +0200
 From:   Helge Kreutzmann <debian@helgefjell.de>
 To:     util-linux@vger.kernel.org
 Cc:     mario.blaettermann@gmail.com
-Subject: Issue in man page scriptreplay.1
-Message-ID: <20210816165219.GA5483@Debian-50-lenny-64-minimal>
+Subject: Issue in man page setarch.8
+Message-ID: <20210816165219.GA5529@Debian-50-lenny-64-minimal>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
@@ -35,8 +35,6 @@ X-Mailing-List: util-linux@vger.kernel.org
 
 Without further ado, the following was found:
 
-Issue: B<script>(1)) → B<script>(1)
+Issue: arch → setarch?
 
-"Display details about the session recorded in the specified timing file and "
-"exit. The session has to be recorded using I<advanced> format (see "
-"B<script>(1)) option B<--logging-format> for more details)."
+"B<arch> [options] [I<program> [I<argument>...]]"
