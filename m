@@ -2,26 +2,26 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id A70893EDBA6
+	by mail.lfdr.de (Postfix) with ESMTP id 3A7873EDBA4
 	for <lists+util-linux@lfdr.de>; Mon, 16 Aug 2021 18:52:49 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S232207AbhHPQxE (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        id S232180AbhHPQxE (ORCPT <rfc822;lists+util-linux@lfdr.de>);
         Mon, 16 Aug 2021 12:53:04 -0400
-Received: from luckmann.name ([213.239.213.133]:53499 "EHLO
+Received: from luckmann.name ([213.239.213.133]:48775 "EHLO
         static.213-239-213-133.clients.your-server.de" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S232237AbhHPQxD (ORCPT
+        by vger.kernel.org with ESMTP id S231925AbhHPQxD (ORCPT
         <rfc822;util-linux@vger.kernel.org>);
         Mon, 16 Aug 2021 12:53:03 -0400
 Received: from localhost (localhost [127.0.0.1])
   (uid 502)
   by static.213-239-213-133.clients.your-server.de with local
-  id 0000000000BD6040.00000000611A97C2.00001563; Mon, 16 Aug 2021 18:52:18 +0200
+  id 0000000000BD6058.00000000611A97C2.0000154C; Mon, 16 Aug 2021 18:52:18 +0200
 Date:   Mon, 16 Aug 2021 18:52:18 +0200
 From:   Helge Kreutzmann <debian@helgefjell.de>
 To:     util-linux@vger.kernel.org
 Cc:     mario.blaettermann@gmail.com
-Subject: Issue in man page scriptreplay.1
-Message-ID: <20210816165218.GA5460@Debian-50-lenny-64-minimal>
+Subject: Issue in man page script.1
+Message-ID: <20210816165218.GA5437@Debian-50-lenny-64-minimal>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
@@ -35,9 +35,9 @@ X-Mailing-List: util-linux@vger.kernel.org
 
 Without further ado, the following was found:
 
-Issue: second »speed-up« should be actually »speed-down«
+Issue: socond → second
 
-"If the third parameter or B<--divisor> is specified, it is used as a speed-"
-"up multiplier. For example, a speed-up of 2 makes B<scriptreplay> go twice "
-"as fast, and a speed-up of 0.1 makes it go ten times slower than the "
-"original session."
+"The first field is an entry type identifier (\\(aqI\\(cqnput, \\(aqO"
+"\\(cqutput, \\(aqH\\(cqeader, \\(aqS\\(cqignal). The socond field is how "
+"much time elapsed since the previous entry, and the rest of the entry is "
+"type-specific data."
