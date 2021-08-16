@@ -2,26 +2,26 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 1DB3C3EDBA0
-	for <lists+util-linux@lfdr.de>; Mon, 16 Aug 2021 18:52:48 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id D6CD43EDBA7
+	for <lists+util-linux@lfdr.de>; Mon, 16 Aug 2021 18:52:49 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S230383AbhHPQxJ (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Mon, 16 Aug 2021 12:53:09 -0400
+        id S232462AbhHPQxK (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Mon, 16 Aug 2021 12:53:10 -0400
 Received: from luckmann.name ([213.239.213.133]:50635 "EHLO
         static.213-239-213-133.clients.your-server.de" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S232258AbhHPQxH (ORCPT
+        by vger.kernel.org with ESMTP id S232183AbhHPQxJ (ORCPT
         <rfc822;util-linux@vger.kernel.org>);
-        Mon, 16 Aug 2021 12:53:07 -0400
+        Mon, 16 Aug 2021 12:53:09 -0400
 Received: from localhost (localhost [127.0.0.1])
   (uid 502)
   by static.213-239-213-133.clients.your-server.de with local
-  id 0000000000BD6047.00000000611A97C8.000016A6; Mon, 16 Aug 2021 18:52:24 +0200
-Date:   Mon, 16 Aug 2021 18:52:24 +0200
+  id 0000000000BD606C.00000000611A97C9.00001703; Mon, 16 Aug 2021 18:52:25 +0200
+Date:   Mon, 16 Aug 2021 18:52:25 +0200
 From:   Helge Kreutzmann <debian@helgefjell.de>
 To:     util-linux@vger.kernel.org
 Cc:     mario.blaettermann@gmail.com
-Subject: Issue in man page swapon.8
-Message-ID: <20210816165223.GA5783@Debian-50-lenny-64-minimal>
+Subject: Issue in man page umount.8
+Message-ID: <20210816165225.GA5876@Debian-50-lenny-64-minimal>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
@@ -35,6 +35,10 @@ X-Mailing-List: util-linux@vger.kernel.org
 
 Without further ado, the following was found:
 
-Issue: swapoff → B<swapoff>(2) syscalls
+Issue: libmount → B<libmount>
 
-"all swapoff failed on B<--all>"
+"Since version 2.35 B<umount> command does not exit when user permissions are "
+"inadequate by internal libmount security rules. It drops suid permissions "
+"and continue as regular non-root user. This can be used to support use-cases "
+"where root permissions are not necessary (e.g., fuse filesystems, user "
+"namespaces, etc)."
