@@ -2,26 +2,26 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 85FF43EDB85
-	for <lists+util-linux@lfdr.de>; Mon, 16 Aug 2021 18:52:17 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id B8A163EDB89
+	for <lists+util-linux@lfdr.de>; Mon, 16 Aug 2021 18:52:38 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S232128AbhHPQwr (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Mon, 16 Aug 2021 12:52:47 -0400
-Received: from luckmann.name ([213.239.213.133]:60273 "EHLO
+        id S231609AbhHPQwt (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Mon, 16 Aug 2021 12:52:49 -0400
+Received: from luckmann.name ([213.239.213.133]:53499 "EHLO
         static.213-239-213-133.clients.your-server.de" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S230249AbhHPQwp (ORCPT
+        by vger.kernel.org with ESMTP id S232148AbhHPQwq (ORCPT
         <rfc822;util-linux@vger.kernel.org>);
-        Mon, 16 Aug 2021 12:52:45 -0400
+        Mon, 16 Aug 2021 12:52:46 -0400
 Received: from localhost (localhost [127.0.0.1])
   (uid 502)
   by static.213-239-213-133.clients.your-server.de with local
-  id 0000000000BD6034.00000000611A97B8.000012F4; Mon, 16 Aug 2021 18:52:08 +0200
-Date:   Mon, 16 Aug 2021 18:52:08 +0200
+  id 0000000000BD603C.00000000611A97B9.00001322; Mon, 16 Aug 2021 18:52:09 +0200
+Date:   Mon, 16 Aug 2021 18:52:09 +0200
 From:   Helge Kreutzmann <debian@helgefjell.de>
 To:     util-linux@vger.kernel.org
 Cc:     mario.blaettermann@gmail.com
 Subject: Issue in man page mount.8
-Message-ID: <20210816165208.GA4837@Debian-50-lenny-64-minimal>
+Message-ID: <20210816165208.GA4883@Debian-50-lenny-64-minimal>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
@@ -35,8 +35,12 @@ X-Mailing-List: util-linux@vger.kernel.org
 
 Without further ado, the following was found:
 
-Issue: operations It's → operations. It's
+Issue: "-o remount" → B<-o remount>
 
-"Human readable partition identifier. This identifier is independent on "
-"filesystem and does not change by mkfs or mkswap operations It\\(cqs "
-"supported for example for GUID Partition Tables (GPT)."
+"Since util-linux 2.31, B<mount> ignores the B<bind> flag from I</etc/fstab> "
+"on a B<remount> operation (if \"-o remount\" is specified on command line). "
+"This is necessary to fully control mount options on remount by command line. "
+"In previous versions the bind flag has been always applied and it was "
+"impossible to re-define mount options without interaction with the bind "
+"semantic. This B<mount> behavior does not affect situations when \"remount,"
+"bind\" is specified in the I</etc/fstab> file."
