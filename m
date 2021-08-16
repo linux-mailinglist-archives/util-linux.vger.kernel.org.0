@@ -2,97 +2,106 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 3F3DD3EC9A1
-	for <lists+util-linux@lfdr.de>; Sun, 15 Aug 2021 16:39:17 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 293573ED7DF
+	for <lists+util-linux@lfdr.de>; Mon, 16 Aug 2021 15:46:38 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S234850AbhHOOjq (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Sun, 15 Aug 2021 10:39:46 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:55562 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S232465AbhHOOjp (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Sun, 15 Aug 2021 10:39:45 -0400
-Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com [IPv6:2a00:1450:4864:20::530])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 93C47C061764
-        for <util-linux@vger.kernel.org>; Sun, 15 Aug 2021 07:39:15 -0700 (PDT)
-Received: by mail-ed1-x530.google.com with SMTP id r19so19225683eds.13
-        for <util-linux@vger.kernel.org>; Sun, 15 Aug 2021 07:39:15 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:reply-to:from:date:message-id:subject:to;
-        bh=/7pyoQc6wSOUJ/9O2BH3dvkhV/QWFqr1Skl+YnHc7wU=;
-        b=qesW4Q/if/baVhilOMEyE2qWycCAS5NFyuYcHsnpjjONQppgFO8ttJmtNKwS3cpBDT
-         Ks250I3yqzKhmfya6uwO/hNGBhXSQrNNlEIbyJGMQaduhcfVru+s0LBtZbKuBzEO1dWi
-         P9dpWUFrISwmSRWNaBQc8LeqP1Jg5dIVblXZ570H8WsaxVLfgiaRr81AGZfKU26W/6Cj
-         pn90QLNfSsubiqp5mpd/2q966Rq1QVrwsY/CPpZmuRxy1fGILhVNRER+JSh/oJPMY+1k
-         TTVAo+Cleot5dABE74kGxF/8zkboKGbVjtQEtTs/ZJb8hNxh1lEDrE3evEQHtKNGjYY8
-         nRrQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
-         :subject:to;
-        bh=/7pyoQc6wSOUJ/9O2BH3dvkhV/QWFqr1Skl+YnHc7wU=;
-        b=dz7MwH3YzVzt8IM1NV/TmuZY6P2ZswSSq+d0qZm5LsblnyaPf6vjcLm7TvDgfBNnDm
-         0xyVwSwtIdH+VtHCc9rTYP7psDhDCsOC3mxMc/owFfyRWCy01369sv+LBLLTqIk3/VwV
-         Yq7V+tS8bnL4AIyf1LchFCFGkrtNHVhpjWVyG9MyMn8uzaX+r2K0z4CMcD/bxmNOy5Ka
-         CRT2HHcaVXkF7s9QCMU3En1vSjrnwLABAvWbXJwDkCGz9FXX/mTN6UHO34jtLVJ4i5D4
-         jSQTBvAJmPWO8sCCSY3s2F3PPt3xQHFSSupnJg4em/s91JpzWJjiB3DiUKdQA6gbEqAs
-         IJVQ==
-X-Gm-Message-State: AOAM531WSmiFrI/m5Xoi0RWhC7/xrvW7omdcgKRTHhOnbjxHN6JDh88T
-        W4kjqRIVN/0dRUrPg+chutMEfdUqvDBX0vDq2lM=
-X-Google-Smtp-Source: ABdhPJzSKzof9okq1lVE0TPCrIUz3+zcmivwMRe7akEaQTxeY7p/lFne5zjrgDhjooz9npZxv0wWXY+yjGBWDe0ZTWI=
-X-Received: by 2002:a05:6402:2317:: with SMTP id l23mr14777190eda.265.1629038354038;
- Sun, 15 Aug 2021 07:39:14 -0700 (PDT)
+        id S231829AbhHPNrI (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Mon, 16 Aug 2021 09:47:08 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([216.205.24.124]:26745 "EHLO
+        us-smtp-delivery-124.mimecast.com" rhost-flags-OK-OK-OK-OK)
+        by vger.kernel.org with ESMTP id S230486AbhHPNrH (ORCPT
+        <rfc822;util-linux@vger.kernel.org>);
+        Mon, 16 Aug 2021 09:47:07 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+        s=mimecast20190719; t=1629121595;
+        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+         to:to:cc:mime-version:mime-version:content-type:content-type:
+         content-transfer-encoding:content-transfer-encoding;
+        bh=3+2CPPVNiLbbkvD0700s3MjZBti+X1rB8bf9dsclTrk=;
+        b=LkVv/3eLwAw6Lz8mYdutd+iHpwtsnxPVVuaxJc4+XPK6X8MFeZjBxzPUxQAk7xahUbVXc0
+        Vj4cMN626doefQYSe6Kl3DB3EjRWnLRJNZmE6AT+IBB1Qs/8jXSDwWbnB4bTgi7dH0EEum
+        QEp+v48XM92qcVDfi0asfXiFdzMfJMc=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-497-IY96OcNMMLK2okNQrI881w-1; Mon, 16 Aug 2021 09:46:32 -0400
+X-MC-Unique: IY96OcNMMLK2okNQrI881w-1
+Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.phx2.redhat.com [10.5.11.11])
+        (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+        (No client certificate requested)
+        by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 11CB51009607;
+        Mon, 16 Aug 2021 13:46:31 +0000 (UTC)
+Received: from ws.net.home (ovpn-112-16.ams2.redhat.com [10.36.112.16])
+        by smtp.corp.redhat.com (Postfix) with ESMTPS id 435A02C00F;
+        Mon, 16 Aug 2021 13:46:30 +0000 (UTC)
+Date:   Mon, 16 Aug 2021 15:46:27 +0200
+From:   Karel Zak <kzak@redhat.com>
+To:     linux-kernel@vger.kernel.org, linux-fsdevel@vger.kernel.org,
+        util-linux@vger.kernel.org
+Subject: [ANNOUNCE] util-linux v2.37.2
+Message-ID: <20210816134627.kzuyn4yewvhxjd75@ws.net.home>
 MIME-Version: 1.0
-Received: by 2002:aa7:c9d7:0:0:0:0:0 with HTTP; Sun, 15 Aug 2021 07:39:13
- -0700 (PDT)
-Reply-To: mrsrose.hersi@gmail.com
-From:   "mrs Rose.Hersi" <lilianjonathan59@gmail.com>
-Date:   Sun, 15 Aug 2021 15:39:13 +0100
-Message-ID: <CAH5de0_pTN=dd27tFeqD7ubdOjy_Nh=eTorSkNa6=4bdqbgc1w@mail.gmail.com>
-Subject: My Name Mrs.Rose.Hersi
-To:     mrsrose.hersi@gmail.com
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.11
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-My Name Mrs.Rose.Hersi
+
+The util-linux stable release v2.37.2 is available at
+      
+  http://www.kernel.org/pub/linux/utils/util-linux/v2.37
+      
+Feedback and bug reports, as always, are welcomed.
+ 
+  Karel
 
 
-I am writing you base on your good profile. I am in search of
-aproperty to buy in your country; I intended to come over to
-youcountry for investment? I believe that I have to partner with a
-citizen to be safe in investing in your country. My name is
-Mrs.Rose.Hersi,My late husband deals on Crude Oil with Federal
-Government of Sudan and we have a private Oil firm in Bentiu Oil zone
-town and Upper Nile city.
 
-What I have experience physically, I don't wish to experience it again
-in my life due to the recent civil and Ethnic crises caused by our
-President Mr.Salva Kiir and the rebel leader Mr. Riek Machar, I have
-been Under United Nation refugee camp in Rue De Bass am west Africa,to
-save my life and that of my little daughter
+util-linux 2.37.2 Release Notes
+===============================
 
-.I want to solicit for your partnership with trust to transfer and
-invest with my fund deposited at Bank by my late husband,I will
-disclose the Amount to you as we proceed.I need your help to move this
-fund to your country,because my life is no longer safe in Africa,
-since the rebels are looking for the families of all the oil business
-partners in the country, very scaring I wish you will understand my
-predicaments.
+blockdev:
+   - allow for larger values for start sector  [Thomas Abraham]
+   - use snprintf() rather than sprintf()  [Karel Zak]
+docs:
+   - fix info about LIBSMARTCOLS_DEBUG_PADDING  [Karel Zak]
+   - update AUTHORS file  [Karel Zak]
+lib/pwdutils:
+   - don't use getlogin(3).  [Érico Nogueira]
+   - use assert to check correct usage.  [Érico Nogueira]
+libfdisk:
+   - (dos) don't ignore MBR+FAT use-case  [Karel Zak]
+   - (dos) support partition and MBR overlap  [Karel Zak]
+libmount:
+   - don't use setgroups at all()  [Karel Zak]
+   - fix setgroups() use  [Karel Zak]
+logger:
+   - use xgetlogin from pwdutils.  [Érico Nogueira]
+losetup:
+   - use LOOP_CONFIGURE in a more robust way  [Karel Zak]
+lscpu:
+   - Add Phytium FT-2000+ & S2500 support  [panchenbo]
+   - Add Phytium aarch64 cpupart  [panchenbo]
+   - fix NULL dereference  [Karel Zak]
+   - fix compilation against librtas  [Karel Zak]
+mount:
+   - mount.8 don't consider additional mounts as experimental  [Karel Zak]
+po:
+   - add sk.po (from translationproject.org)  [Jose Riha]
+   - merge changes  [Karel Zak]
+   - update pl.po (from translationproject.org)  [Jakub Bogusz]
+prlimit:
+   - fix compiler warning [-Wmaybe-uninitialized]  [Karel Zak]
+sulogin:
+   - fix getpasswd()  [Karel Zak]
+sys-utils/ipcutils:
+   - be careful when call calloc() for uint64 nmembs  [Karel Zak]
+wall:
+   - use xgetlogin.  [Érico Nogueira]
 
+-- 
+ Karel Zak  <kzak@redhat.com>
+ http://karelzak.blogspot.com
 
-But the truth is that I and my daughter was lucky to be part of the bagde
-taken by UN KEEPING FORCE to Addis Ababa our Neighboring country where
-I WE BOARD to Abidjan Ivory Coast,We left Sudan and move to Addis
-Ababa our neighboring country with the few days ceasefire which was
-announced by United Nation Peace keeping Force., Because of face to
-face peace meeting accord coordinated by US Secretary of State, and
-United Nations in Ethiopia (Addis Ababa) between The sitting President
-Mr. Salva Kiir and the rebel leader Mr. Riek Machar to stop this war.I
-will send you the document of the fund with other details for your
-acknowledgement and prove.
-
-With love from
-
-Mrs.Rose.Hersi
