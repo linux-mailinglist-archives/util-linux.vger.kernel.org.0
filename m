@@ -2,26 +2,26 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id D71453EDB9E
-	for <lists+util-linux@lfdr.de>; Mon, 16 Aug 2021 18:52:47 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id A70893EDBA6
+	for <lists+util-linux@lfdr.de>; Mon, 16 Aug 2021 18:52:49 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S232266AbhHPQxD (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Mon, 16 Aug 2021 12:53:03 -0400
+        id S232207AbhHPQxE (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Mon, 16 Aug 2021 12:53:04 -0400
 Received: from luckmann.name ([213.239.213.133]:53499 "EHLO
         static.213-239-213-133.clients.your-server.de" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S231932AbhHPQxB (ORCPT
+        by vger.kernel.org with ESMTP id S232237AbhHPQxD (ORCPT
         <rfc822;util-linux@vger.kernel.org>);
-        Mon, 16 Aug 2021 12:53:01 -0400
+        Mon, 16 Aug 2021 12:53:03 -0400
 Received: from localhost (localhost [127.0.0.1])
   (uid 502)
   by static.213-239-213-133.clients.your-server.de with local
-  id 0000000000BD6052.00000000611A97C1.00001507; Mon, 16 Aug 2021 18:52:17 +0200
-Date:   Mon, 16 Aug 2021 18:52:17 +0200
+  id 0000000000BD6040.00000000611A97C2.00001563; Mon, 16 Aug 2021 18:52:18 +0200
+Date:   Mon, 16 Aug 2021 18:52:18 +0200
 From:   Helge Kreutzmann <debian@helgefjell.de>
 To:     util-linux@vger.kernel.org
 Cc:     mario.blaettermann@gmail.com
-Subject: Issue in man page rtcwake.8
-Message-ID: <20210816165217.GA5368@Debian-50-lenny-64-minimal>
+Subject: Issue in man page scriptreplay.1
+Message-ID: <20210816165218.GA5460@Debian-50-lenny-64-minimal>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
@@ -35,10 +35,9 @@ X-Mailing-List: util-linux@vger.kernel.org
 
 Without further ado, the following was found:
 
-Issue: to terminal → for the terminal
+Issue: second »speed-up« should be actually »speed-down«
 
-"The suspend setup may be interrupted by active hardware; for example "
-"wireless USB input devices that continue to send events for some fraction of "
-"a second after the return key is pressed. B<rtcwake> tries to avoid this "
-"problem and it waits to terminal to settle down before entering a system "
-"sleep."
+"If the third parameter or B<--divisor> is specified, it is used as a speed-"
+"up multiplier. For example, a speed-up of 2 makes B<scriptreplay> go twice "
+"as fast, and a speed-up of 0.1 makes it go ten times slower than the "
+"original session."
