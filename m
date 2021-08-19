@@ -2,41 +2,101 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id D54533EDBB5
-	for <lists+util-linux@lfdr.de>; Mon, 16 Aug 2021 18:52:52 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id E0A4B3F1CE1
+	for <lists+util-linux@lfdr.de>; Thu, 19 Aug 2021 17:33:57 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231652AbhHPQxM (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Mon, 16 Aug 2021 12:53:12 -0400
-Received: from luckmann.name ([213.239.213.133]:53499 "EHLO
-        static.213-239-213-133.clients.your-server.de" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S229872AbhHPQxL (ORCPT
-        <rfc822;util-linux@vger.kernel.org>);
-        Mon, 16 Aug 2021 12:53:11 -0400
-Received: from localhost (localhost [127.0.0.1])
-  (uid 502)
-  by static.213-239-213-133.clients.your-server.de with local
-  id 0000000000BD602C.00000000611A97CC.000017A6; Mon, 16 Aug 2021 18:52:28 +0200
-Date:   Mon, 16 Aug 2021 18:52:28 +0200
-From:   Helge Kreutzmann <debian@helgefjell.de>
-To:     util-linux@vger.kernel.org
-Cc:     mario.blaettermann@gmail.com
-Subject: Issue in man page blkzone.8
-Message-ID: <20210816165228.GA6039@Debian-50-lenny-64-minimal>
+        id S240602AbhHSPeY (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Thu, 19 Aug 2021 11:34:24 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:58788 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S240638AbhHSPeX (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Thu, 19 Aug 2021 11:34:23 -0400
+Received: from mail-wr1-x42b.google.com (mail-wr1-x42b.google.com [IPv6:2a00:1450:4864:20::42b])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 6CF06C061757
+        for <util-linux@vger.kernel.org>; Thu, 19 Aug 2021 08:33:47 -0700 (PDT)
+Received: by mail-wr1-x42b.google.com with SMTP id r7so9832656wrs.0
+        for <util-linux@vger.kernel.org>; Thu, 19 Aug 2021 08:33:47 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=mime-version:reply-to:from:date:message-id:subject:to;
+        bh=ovRohL0S09O0g2yqlE9MP24xrDvA30mKbGD9YeR3sEY=;
+        b=W8UTz6Y3Xs8mDf8+HkZFJC/5ygcd4Hthum+2VykgskjhozAubhW3PPePjr83ThrOA8
+         UEB5oyBydHTQ6uqKD2DxOCezOneNMBdaJHVbWTO/eulmAUrpweZGPSetP1EcPR12143h
+         9/lwrrY4aShcIG0jB7o9zAUrKOckRmCHsY15Loga6maM75RXLgyfTHVF/MwyG7bZaUiu
+         scS7FYNDqLZ2z/oT9SscGQxhtdeJB2oZ4emhg/MFW5pZGlCNhwda+Xhr5LJu9rJqyS3u
+         ypL6x37fxFB59f55TWorwWNL92YH7+TXSQp4OyDKprdShwUC6AQOIHk47YphRYN4+lWR
+         Kkkw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
+         :subject:to;
+        bh=ovRohL0S09O0g2yqlE9MP24xrDvA30mKbGD9YeR3sEY=;
+        b=Bo7zOSrhL+41GDDWBw+Zfpc7T5bX4MRK58P8d9StCNsDgx/hVa7h6WUbJVBrN+nqRG
+         WIc/5oSthw1Ffmv5BCwEQATC00MSGhfMtBO3vbHgMZqyYllj1T88hs0ybC3A8WjdQgAe
+         qM8C3tmjih6gbAb6uZuKSOAaO0wQZ2kp4L4YhWU1jvpxs8yY9cFPxg+hfys+4WkKtjQ6
+         yTVKzrMPIfwsAfoNpkAGCS/fVtGg0Ml7b0jerG2+nSAbbmFLZaUVTK4MWbndayJgosYG
+         1fh1WT+uBR1seMgQEOqIFb9E/SjoehO9Mag7ZImhm1di0nHm0otIZL+hb26wCL4/kefM
+         0qIA==
+X-Gm-Message-State: AOAM530le1ND9U4TrP8EUx+RQeJJ/vhUe3jRI/cgOBE10eACOmXpcP5J
+        4X6Wbnm6sPgyTmIvBjP4m/M629s0eMS7CUGgkqw=
+X-Google-Smtp-Source: ABdhPJwqfmb78X+PF5wx9ZtkcPaa6I+/V5L3bk+DnS6b/U69T+caMtxFuONzStUePYEDTom9wWksiZwekeBlxXRnC0w=
+X-Received: by 2002:a5d:51cb:: with SMTP id n11mr4652166wrv.221.1629387225980;
+ Thu, 19 Aug 2021 08:33:45 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-X-Public-Key-URL: http://www.helgefjell.de/data/debian_neu.asc
-X-homepage: http://www.helgefjell.de/debian
-User-Agent: Mutt/1.10.1 (2018-07-13)
+Received: by 2002:a1c:4d:0:0:0:0:0 with HTTP; Thu, 19 Aug 2021 08:33:45 -0700 (PDT)
+Reply-To: rraya9989@gmail.com
+From:   Louisa Besson <len66086@gmail.com>
+Date:   Thu, 19 Aug 2021 15:33:45 +0000
+Message-ID: <CAAM5jAwPYO7Xr8kFWbodUQiPqR8JF2S6OizeKZsoPcU3x8hbpQ@mail.gmail.com>
+Subject: TRANSFER
+To:     rraya9989@gmail.com
+Content-Type: text/plain; charset="UTF-8"
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-Without further ado, the following was found:
+MY SINCERE GREETINGS,
 
-Issue: reset, open, close and finish → B<reset>, B<open>, B<close> and B<finish>
+HOW ARE YOU DOING TODAY? I AM MRS.LOUISA BESSON FROM FRANCE; I HAVE
+DECIDED TO DONATE WHAT I HAVE TO YOU /CHURCHES/ MOTHERLESS BABIES/LESS
+PRIVILEGED/WIDOWS' BECAUSE I AM DYING AND DIAGNOSED WITH CANCER. I
+HAVE BEEN TOUCHED BY GOD ALMIGHTY TO DONATE FROM WHAT I HAVE INHERITED
+FROM MY LATE HUSBAND TO YOU FOR THE GOOD WORK OF GOD ALMIGHTY. I HAVE
+ASKED ALMIGHTY GOD TO FORGIVE ME AND BELIEVE HE HAS, BECAUSE HE IS A
+MERCIFUL GOD I WILL BE GOING IN FOR AN OPERATION SOON.
 
-"By default, the reset, open, close and finish commands will operate from the "
-"zone at device sector 0 and operate on all zones. Options may be used to "
-"modify this behavior as explained below."
+I DECIDED TO DONATE THE SUM OF ($8.5 MILLION DOLLARS) TO YOU FOR THE
+GOOD WORK OF GOD ALMIGHTY, AND ALSO TO HELP THE MOTHERLESS AND LESS
+PRIVILEGED AND ALSO FOR ASSISTANCE OF THE WIDOWS. AS SOON AS I READ
+FROM YOU, I SHALL GIVE YOU INFO ON WHAT I NEED FROM YOU, THEN YOU WILL
+CONTACT THE BANK AND TELL THEM I HAVE WILLED MY INHERITANCE TO YOU BY
+QUOTING MY PERSONAL FILE ROUTING AND ACCOUNT INFORMATION TO YOU FOR
+GOOD, EFFECTIVE AND PRUDENT WORK. I KNOW I DON'T KNOW YOU BUT I HAVE
+BEEN DIRECTED TO DO THIS BY GOD ALMIGHTY.
+
+PLEASE I WILL NEED YOU TO RESPECT MY DECISION AND KEEP EVERY PROCESS
+OF THIS TRANSFER CONFIDENTIAL / TOP SECRET UNTIL EVERY PROCESS IS
+FINALIZED, BEFORE TAKING FAMILY AND FRIENDS FOR THANKSGIVING. IF YOU
+ARE INTERESTED IN CARRYING OUT THIS TASK, I WILL NEED YOU TO GET BACK
+TO ME AND ANSWER THE BELOW QUESTIONS,
+
+1). THAT YOU ARE IN A POSITION TO BE TRUSTED WITH SUCH A LARGE AMOUNT
+OF FUNDS, AND THAT YOU HAVE A HEART FOR CHARITY AND THUS WOULD NOT
+HAVE ANY PROBLEMS LOCATING THE RIGHT CHARITY AND HUMAN AID GROUPS TO
+DISBURSE THE FUND TO. IT WOULD BE NICE TO KNOW WHAT CHARITIES YOU HAVE
+IN MIND TO DONATE THE MONEY TO?
+
+2). THAT YOU ARE WILLING TO CONTACT THE BANK HOLDING THE DEPOSIT TO
+DISCUSS THE TERMS OF RELEASING THE FUNDS TO YOU?
+
+3). THAT YOU PROMISE TO RESPECT MY DECISION AND KEEP EVERY PROCESS OF
+THIS TRANSFER CONFIDENTIAL / TOP SECRET UNTIL EVERY PROCESS IS
+FINALIZED?
+
+4). THAT YOU FULLY UNDERSTAND THIS TRANSACTION AND YOU ARE READY TO
+PROCEED UNDER THESE TERMS?
+
+I WISH YOU ALL THE BEST AND MAY THE GOOD LORD BLESS YOU ABUNDANTLY.
+
+YOURS FAITHFULLY,
+MRS.LOUISA BESSON
