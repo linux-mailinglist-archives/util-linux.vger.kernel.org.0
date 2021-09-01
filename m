@@ -2,64 +2,59 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id D44FE3FC81F
-	for <lists+util-linux@lfdr.de>; Tue, 31 Aug 2021 15:22:01 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id D5C933FDFF6
+	for <lists+util-linux@lfdr.de>; Wed,  1 Sep 2021 18:32:44 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S236497AbhHaNWw (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Tue, 31 Aug 2021 09:22:52 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([216.205.24.124]:49339 "EHLO
-        us-smtp-delivery-124.mimecast.com" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S235961AbhHaNWw (ORCPT
-        <rfc822;util-linux@vger.kernel.org>);
-        Tue, 31 Aug 2021 09:22:52 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-        s=mimecast20190719; t=1630416116;
-        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-         in-reply-to:in-reply-to:references:references;
-        bh=JTMlFWYqHP2SAfmPSIA4TrxL9QWURglyauDW74e3OwA=;
-        b=NIKQ4xuKWIwdFtfhSH3Bsw+xtqPlz8KDUcaG3FZSrxlCIvUP5AdJNcSrxkdEljttSyl7l3
-        lJ127pBndEKD45Fg6qqi3KlNERjYBxYFDd2dX+NIWQXh3rP0Flvi5x780ZJdBn/hrPcbbP
-        tyjZYtYHkYSQ5g1nZMxGAYGNhxfcHlU=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-451-lPc63twHN76Rsy242G2GzQ-1; Tue, 31 Aug 2021 09:21:55 -0400
-X-MC-Unique: lPc63twHN76Rsy242G2GzQ-1
-Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com [10.5.11.12])
-        (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
-        (No client certificate requested)
-        by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 39B90101C8A6;
-        Tue, 31 Aug 2021 13:21:54 +0000 (UTC)
-Received: from ws.net.home (ovpn-112-16.ams2.redhat.com [10.36.112.16])
-        by smtp.corp.redhat.com (Postfix) with ESMTPS id 8EB7C60C9F;
-        Tue, 31 Aug 2021 13:21:53 +0000 (UTC)
-Date:   Tue, 31 Aug 2021 15:21:50 +0200
-From:   Karel Zak <kzak@redhat.com>
-To:     Chris Hofstaedtler <zeha@debian.org>
-Cc:     util-linux@vger.kernel.org
-Subject: Re: [PATCH] Skip lsns/ioctl_ns test if unshare fails
-Message-ID: <20210831132150.dd4epdcksrkpjyrl@ws.net.home>
-References: <20210820103050.1636810-1-zeha@debian.org>
+        id S245250AbhIAQdk (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Wed, 1 Sep 2021 12:33:40 -0400
+Received: from mail-io1-f41.google.com ([209.85.166.41]:36791 "EHLO
+        mail-io1-f41.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S232876AbhIAQdj (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Wed, 1 Sep 2021 12:33:39 -0400
+Received: by mail-io1-f41.google.com with SMTP id q3so4836007iot.3
+        for <util-linux@vger.kernel.org>; Wed, 01 Sep 2021 09:32:42 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+        bh=wvZgugBxXPIeukGlr3awh2HVMSuIKxJrWhdHXovVLwQ=;
+        b=F+V085Ft7m6CSRbHC4NgKOkncco9oIC2z+LQIDfjzaTXflX5sB3x4wjyde8d4kcyy4
+         AV9A55gyEhcLAExs5xqJBmNq9Yedmd7bmhpEpSV1T1DtpvvKr1VnGxTG/R5kQnGosKYG
+         uAs3uiqphD2dmf5foi3N3aeawGjM/fhpw2nKPn8/14HNzG1wpKN1f3yKfMYlwqTEWcca
+         gUhvkmajA3aXgaN9hQUFTCBRYvOAl2gJZkdkdmzs91f75jlI7/Th0sSYJMyp7K9qEzMi
+         epWtU+hGIpo9Un8K8tfValEkeamdp4SIW8L04lwkW11tHl+Q62XnK6tYat3H3YRgQ4Qr
+         sA4A==
+X-Gm-Message-State: AOAM531zihngrWRe7SsUZ0DOrquH5oyzQ7UX5kTMLYIg6QEhRVa4ND93
+        qQoHLCYQOglTvQ6DG2JU/3GAsiucXAOVQr+D
+X-Google-Smtp-Source: ABdhPJwXvcXuDRC98o9ZB3l2icy48R1gfhSlP83dUrqaKzIK53fCzpgS1iD3aEItlTh9bLB1MotLwQ==
+X-Received: by 2002:a5e:d712:: with SMTP id v18mr373449iom.65.1630513962480;
+        Wed, 01 Sep 2021 09:32:42 -0700 (PDT)
+Received: from mail-io1-f52.google.com (mail-io1-f52.google.com. [209.85.166.52])
+        by smtp.gmail.com with ESMTPSA id u13sm48068iot.29.2021.09.01.09.32.40
+        for <util-linux@vger.kernel.org>
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Wed, 01 Sep 2021 09:32:40 -0700 (PDT)
+Received: by mail-io1-f52.google.com with SMTP id y18so4882184ioc.1
+        for <util-linux@vger.kernel.org>; Wed, 01 Sep 2021 09:32:40 -0700 (PDT)
+X-Received: by 2002:a6b:b512:: with SMTP id e18mr407274iof.98.1630513960173;
+ Wed, 01 Sep 2021 09:32:40 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20210820103050.1636810-1-zeha@debian.org>
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.12
+From:   Rafael Fontenelle <rafaelff@gnome.org>
+Date:   Wed, 1 Sep 2021 13:32:04 -0300
+X-Gmail-Original-Message-ID: <CAFPa+S=yR41168UsfjoJ1NshK_EfAbrdpgmJiEy-Yzd6rEW14A@mail.gmail.com>
+Message-ID: <CAFPa+S=yR41168UsfjoJ1NshK_EfAbrdpgmJiEy-Yzd6rEW14A@mail.gmail.com>
+Subject: Update translations in Translation Project
+To:     util-linux@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-On Fri, Aug 20, 2021 at 10:30:50AM +0000, Chris Hofstaedtler wrote:
-> +$TS_CMD_UNSHARE --user --pid --mount-proc true || ts_skip "Namespace support failure"
+Hi there,
 
-The --pid requires --fork, fixed and committed:
-https://github.com/karelzak/util-linux/commit/597ccb7bf564f65bb059bfe420224cab0fba46ac
+Translation Project has util-linux-man domain POT in version 2.37-rc2,
+and it seems that a few strings are different from released 2.37.
+Please consider updating the POT version on the Translation Project to
+avoid losing translation effort.
 
-
-Thanks
-   Karel
-
--- 
- Karel Zak  <kzak@redhat.com>
- http://karelzak.blogspot.com
-
+Best regards,
+Rafael Fontenelle
