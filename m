@@ -2,91 +2,74 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id D21273FE22F
-	for <lists+util-linux@lfdr.de>; Wed,  1 Sep 2021 20:14:19 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id DF5DC3FEC87
+	for <lists+util-linux@lfdr.de>; Thu,  2 Sep 2021 12:55:12 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1344411AbhIASPD (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Wed, 1 Sep 2021 14:15:03 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:54468 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S239018AbhIASPD (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Wed, 1 Sep 2021 14:15:03 -0400
-Received: from mail-vs1-xe2c.google.com (mail-vs1-xe2c.google.com [IPv6:2607:f8b0:4864:20::e2c])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 2782BC061760
-        for <util-linux@vger.kernel.org>; Wed,  1 Sep 2021 11:14:06 -0700 (PDT)
-Received: by mail-vs1-xe2c.google.com with SMTP id s25so582278vsa.9
-        for <util-linux@vger.kernel.org>; Wed, 01 Sep 2021 11:14:06 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=mime-version:from:date:message-id:subject:to;
-        bh=2joGkq8i8C5vglZO1FYNTlWqLyr4vSiCXKQYXBVnv4Q=;
-        b=kHTHw9paPXIrQdued1Y4q8p6feQAUKI/KpOQr7IMYAO2GzbSCPaCgM17Ei9qAS1OwZ
-         E4G0tXEg+9kh8d6SpKiYchp9e8A3PtZgKngYOZDdHVJRRTSCcUbk0zcY0kiiolV4bzRe
-         XbkXphBP/bt5rxW0h8AC3OjvRDSxJik+IdzXZYVB4/X8BU5KS18CHrn98389tFZDTUhM
-         i15IPveK8eLviezIw3pr3fj3PMs3kmLmtky0vQ1abxKuFsjYkVy2NhaGhGef7mavYFDL
-         SWGlEgwScMZ6/nFgnXkwDRPW6ozXiOPRZQtGOQg5rRJVmVqZwDG6KsNhsIh/w1Gr9BUn
-         8eCg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
-        bh=2joGkq8i8C5vglZO1FYNTlWqLyr4vSiCXKQYXBVnv4Q=;
-        b=HR3Ze1auTbHyAhoVEc/Xd89Q5rbABs92Ak0pEnTdBa3FFmJGgwcPASh3fkhHhTp4Ms
-         vCxe9Uc8oRUEy14TB0cB55f5RG+6GUJ9sw7SBA4VHpptNsLtcWjP7C18Y1OJpVBu58WM
-         gZ3GBey++qpnXCHJiVbQ9z5krlmei/WZwjCAnvuuez86vcQfZ6n1MLYruTTESR9BU1yy
-         /oOpbIxm9kfFBxGhe56L0zMGyDP6zfr0W/WjPHu9blhPUPv13+/ZwQOQPCAbxYiXReB7
-         wPa5YPk9+GyfNcaWsuFIGDIhe5QTpHq5sqEqUg0QtJoYCQ1k9IIfJKWQXIMCUlHTQzEG
-         hSWw==
-X-Gm-Message-State: AOAM530TRmUHGdsaXQt7lZCM6EuMSq3BXUhCdaA8uA+tJ69hmL+5XvbN
-        FNxMsFomz7P0zjF3xDUxp9if1cUS3fCLyllXB2s=
-X-Google-Smtp-Source: ABdhPJwpmBx2oXbQIXrbRYde2lPyHgJ76VpsE7byX7nLZn23cmh824bZOT4Nftoni3ebPOzqpWOEaluvcwK7YiX0Fa0=
-X-Received: by 2002:a67:d981:: with SMTP id u1mr983349vsj.9.1630520044838;
- Wed, 01 Sep 2021 11:14:04 -0700 (PDT)
+        id S243555AbhIBK4J (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Thu, 2 Sep 2021 06:56:09 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124]:52684 "EHLO
+        us-smtp-delivery-124.mimecast.com" rhost-flags-OK-OK-OK-OK)
+        by vger.kernel.org with ESMTP id S233761AbhIBK4I (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Thu, 2 Sep 2021 06:56:08 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+        s=mimecast20190719; t=1630580109;
+        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+         in-reply-to:in-reply-to:references:references;
+        bh=LxyQcy83I/jXZ0z7vqMPVv7q0hHa6IKHp1K/O7w9Xyc=;
+        b=PhwBgo9B9hv10vK5PhUBL5W3CT/zbvvjjoXTc6hV2kqQKOxEtT4OtA7WEfzOonoSRaLbgI
+        tRFn1YZo8RkTCzmYuWAxgiNcdZw4/fdjHQaSv9Y/kkX0uVc7BT9o3sih8re8QeTdTxnaVw
+        4lWLOpBy1M7W0LI8VCUzxt+TfBfHq1E=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-330-fCeg_yAHOjGr8CXwGL44dA-1; Thu, 02 Sep 2021 06:55:08 -0400
+X-MC-Unique: fCeg_yAHOjGr8CXwGL44dA-1
+Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.phx2.redhat.com [10.5.11.11])
+        (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+        (No client certificate requested)
+        by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 206FB801AFC;
+        Thu,  2 Sep 2021 10:55:07 +0000 (UTC)
+Received: from ws.net.home (ovpn-112-16.ams2.redhat.com [10.36.112.16])
+        by smtp.corp.redhat.com (Postfix) with ESMTPS id 7438669CAD;
+        Thu,  2 Sep 2021 10:55:06 +0000 (UTC)
+Date:   Thu, 2 Sep 2021 12:55:03 +0200
+From:   Karel Zak <kzak@redhat.com>
+To:     Rafael Fontenelle <rafaelff@gnome.org>
+Cc:     util-linux@vger.kernel.org
+Subject: Re: Update translations in Translation Project
+Message-ID: <20210902105503.qk6ecxca7t43o4nb@ws.net.home>
+References: <CAFPa+S=yR41168UsfjoJ1NshK_EfAbrdpgmJiEy-Yzd6rEW14A@mail.gmail.com>
 MIME-Version: 1.0
-Received: by 2002:ab0:740d:0:0:0:0:0 with HTTP; Wed, 1 Sep 2021 11:14:04 -0700 (PDT)
-From:   CorisBank International <corisbankintlbf@gmail.com>
-Date:   Wed, 1 Sep 2021 11:14:04 -0700
-Message-ID: <CA+25hwzAX0aBDNcDkQJb7bAbM8CTKivYeGqFcsHVsqgaaGJ7JA@mail.gmail.com>
-Subject: CORISBANK INTERNATIONAL OFFICIAL NOTIFICATION
-To:     undisclosed-recipients:;
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <CAFPa+S=yR41168UsfjoJ1NshK_EfAbrdpgmJiEy-Yzd6rEW14A@mail.gmail.com>
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.11
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-Att: Client
+On Wed, Sep 01, 2021 at 01:32:04PM -0300, Rafael Fontenelle wrote:
+> Translation Project has util-linux-man domain POT in version 2.37-rc2,
+> and it seems that a few strings are different from released 2.37.
+> Please consider updating the POT version on the Translation Project to
+> avoid losing translation effort.
+
+We usually update TP before a release, and I think it's only time when
+it makes sense, because the upstream release is the way how translations are
+distributed to downstream/users.
+                    
+The goal is to keep strings after -rc2 frozen, but sometimes we need
+to fix bugs in code ...
 
 
-CORISBANK INTERNATIONAL URGENT NOTIFICATION
+We can update TP before maintenance releases too (e.g., v2.37.2) and       
+wait for translations, but these changes will be lost after the next  
+upgrade (e.g., v2.38) as upstream work continues in parallel. IMHO
+this is really bad idea.
 
-Notification / Notification/ Notification
+   Karel
 
-Note, We are writing to inform you officially that Finally the Central
-Bank Financial Authority have approved to transfer your $8.2Million
-which was signed by late Mrs Rose Banneth the COVID.19 victim to
-transfer to you, Late Mrs Rose Banneth the France Lady contacted us to
-transfer her fund in our bank to you for Orphanage work before she
-died by the COVID.19
-and as it is now, you will receive your fund through our corresponding
-bank in Dubai [Emirate Investment Bank ] for security reason. Please
-you should reconfirm your details to receive the $8.2Million.
+-- 
+ Karel Zak  <kzak@redhat.com>
+ http://karelzak.blogspot.com
 
-Name, Country, Address, occupations, Age, Telephone number, account
-Details so that we can immediately forward to the World Bank to
-transfer the fund.
-You are advised to comply on timely manner to permit this esteem bank
-transfer your fund as scheduled.
-
-We look forward to serving you better
-Your Financial Comfort Is A Priority
-Thank you for choosing Corisbank International.
-
-Sincerely,
-
-----
-
-Mr Diakarya Ouattara
-Managing Director
-Bank Coris
-Burkina Faso
-+226 556 163 37
-financial_bf_info@accountant.com
