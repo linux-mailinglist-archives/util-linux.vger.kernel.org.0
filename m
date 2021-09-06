@@ -2,73 +2,72 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 5364D3FFD94
-	for <lists+util-linux@lfdr.de>; Fri,  3 Sep 2021 11:55:36 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 12434401EBB
+	for <lists+util-linux@lfdr.de>; Mon,  6 Sep 2021 18:54:05 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1348948AbhICJ4e (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Fri, 3 Sep 2021 05:56:34 -0400
-Received: from mail.repatriados.gov.py ([168.90.176.63]:42484 "EHLO
-        mail.repatriados.gov.py" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1348882AbhICJ4a (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Fri, 3 Sep 2021 05:56:30 -0400
-Received: from localhost (localhost [127.0.0.1])
-        by mail.repatriados.gov.py (Postfix) with ESMTP id 3632964276;
-        Wed,  1 Sep 2021 05:19:59 -0400 (-04)
-Received: from mail.repatriados.gov.py ([127.0.0.1])
-        by localhost (mail.repatriados.gov.py [127.0.0.1]) (amavisd-new, port 10032)
-        with ESMTP id wKZl6cJYXceE; Wed,  1 Sep 2021 05:19:58 -0400 (-04)
-Received: from localhost (localhost [127.0.0.1])
-        by mail.repatriados.gov.py (Postfix) with ESMTP id 8C99169235;
-        Wed,  1 Sep 2021 01:11:40 -0400 (-04)
-DKIM-Filter: OpenDKIM Filter v2.10.3 mail.repatriados.gov.py 8C99169235
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=repatriados.gov.py;
-        s=66AB3A4C-4957-11E8-AF15-073A956E488A; t=1630473102;
-        bh=re+Bi7IjhFEavKutGVOnSLzHkgr9hnVuewhYSbG4AUw=;
-        h=MIME-Version:To:From:Date:Message-Id;
-        b=un+oSgy/cYOGirOsquVD+xtk8EddzuROkt1C14hK8dHtCMNZO6EVbJlne1mCCXbQX
-         Bzha+pQauYtB/3ECoi72Af2URIBb+9KqeDvTRG4AnZVHDb8mlDqXCGoTmAx9TCRhcu
-         +1jiUYi8zu/S2y4bjOXGgw5KnKts9z6Wb8bnCvzG8lUqE5cX/m1Pqx53P9Nkn01F1F
-         L7rneYK7ZHiBS5a3ZLf26kC4JXi5WGl2XTZoKQr4113NQ1CR9aiun6DsEZUNPhUqZA
-         hLtQQ7KUlm5xg+m7rd7wj75mQtchAvh41KzMx3DLDKqCDYcEDVwDChItzzwQXSPs5W
-         5RN+NZdY/1Tmg==
-X-Virus-Scanned: amavisd-new at repatriados.gov.py
-Received: from mail.repatriados.gov.py ([127.0.0.1])
-        by localhost (mail.repatriados.gov.py [127.0.0.1]) (amavisd-new, port 10026)
-        with ESMTP id Pt7tiuahRbwq; Wed,  1 Sep 2021 01:11:40 -0400 (-04)
-Received: from cris-PC.www.huaweimobilewifi.com (unknown [105.4.4.195])
-        by mail.repatriados.gov.py (Postfix) with ESMTPSA id E4BED68AB0;
-        Tue, 31 Aug 2021 22:14:15 -0400 (-04)
-Content-Type: text/plain; charset="iso-8859-1"
+        id S241972AbhIFQzH (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Mon, 6 Sep 2021 12:55:07 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:37522 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S240965AbhIFQzH (ORCPT
+        <rfc822;util-linux-ng@vger.kernel.org>);
+        Mon, 6 Sep 2021 12:55:07 -0400
+Received: from mail-io1-xd2b.google.com (mail-io1-xd2b.google.com [IPv6:2607:f8b0:4864:20::d2b])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 8E231C061575
+        for <util-linux-ng@vger.kernel.org>; Mon,  6 Sep 2021 09:54:02 -0700 (PDT)
+Received: by mail-io1-xd2b.google.com with SMTP id a13so9397516iol.5
+        for <util-linux-ng@vger.kernel.org>; Mon, 06 Sep 2021 09:54:02 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=mime-version:reply-to:from:date:message-id:subject:to;
+        bh=25DiHGX2HVq2lSMom3bYTxyMXf7aXX0X1TG0x1mt1pY=;
+        b=cZtFCbkk14jXD1BIgIjNKKVjXrUcXnmqtV9WJKpKmMa8dvlTNyG6m9yv1eG9mhHOT4
+         /DkpHMF3NRDYT0ct1mHn4m9/SPQIqRzKYyI/thT68YIm1GEC/6UeP8Go1TOACvtNlc1h
+         TpniFuVS7mETSIXVeRVlqAPvz+Ko1eoKbn7T7vCQPswY1XmjpUZ1RrcICgijdP1e29Wn
+         6EN31iKCd+xfgY388VWyJFoPD3uNN+UFCHnMbxbUsnlxhJjhr4MKfz/m8bzmM2w6zOPP
+         8B47W2yWmR0/YuFW6hDfqWHeY4gWzdTRqv8rKnTnkbGrF22dz49ZarV1COn04ZKj+xnz
+         KK2g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
+         :subject:to;
+        bh=25DiHGX2HVq2lSMom3bYTxyMXf7aXX0X1TG0x1mt1pY=;
+        b=FvEe9sONq/nXxbsJD2JFxA05An5Dzn5BEyUQJjw+p/m1rF+A9lgXuNIen9eXnk8GZO
+         Tz0MJpNgf0WFfyYfJ6jh5jVw+jGjZWtAiBayR+41zHYf+BaaHANAsv/hRjAhaOAxQr6/
+         A0ZHiG53w/TA/CbMev5oRmfhEUNukwU36li/gcQ19Rs9H9K5Aie0GKNSzLDt8ZJvwxa4
+         tnPTEKg4mELf2HthHsux86Xs80Xy/fIyQuGkAnvoDGH7cxHJqrONL1gc9ChPqacgB3Xq
+         OCjd5H5TJiycA4PtUJOfME0nU0xCjg2Ds3U8vfwyIWgQJuQE7m+GJ/uta1B9nw88vF3V
+         lMOQ==
+X-Gm-Message-State: AOAM531wMkJkpDfOrhlRsD9t8HEYGd+VJ24XmZEwXW4KK1HgMnovfjQJ
+        O8ZFsTtAvU4AbLODawxKvaHrjagaFy+yIiKc+R4=
+X-Google-Smtp-Source: ABdhPJxbgqVH5dOPLZQr4wkkvVXJcAledZvCkoTqM2zMa3LCQcKdpP8n0YXAj/Q8cfv/YPPp3FZ1fwsU8gWuEvJCgeQ=
+X-Received: by 2002:a02:b183:: with SMTP id t3mr11605681jah.93.1630947241502;
+ Mon, 06 Sep 2021 09:54:01 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Description: Mail message body
-Subject: =?utf-8?q?Wohlt=C3=A4tigkeitsspende_von_2=2E000=2E000_Euro?=
-To:     Recipients <mdominguez@repatriados.gov.py>
-From:   ''Charles jackon'' <mdominguez@repatriados.gov.py>
-Date:   Wed, 01 Sep 2021 04:14:48 +0200
-Reply-To: charlesjacksonjr001@gmail.com
-Message-Id: <20210901021416.E4BED68AB0@mail.repatriados.gov.py>
+Received: by 2002:a92:cb0b:0:0:0:0:0 with HTTP; Mon, 6 Sep 2021 09:54:00 -0700 (PDT)
+Reply-To: suzara.wans2021@gmail.com
+From:   Mrs Suzara Maling Wan <mrssuzaramaling661@gmail.com>
+Date:   Mon, 6 Sep 2021 09:54:00 -0700
+Message-ID: <CAB1fA5NHPuXqwui_4AxO8i0z+ArEF9XBn1MouhQfNR6JeQVZ+g@mail.gmail.com>
+Subject: Hello
+To:     undisclosed-recipients:;
+Content-Type: text/plain; charset="UTF-8"
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-Hallo
+-- 
+I am Mrs Suzara Maling Wan from (Philippine) but based in West
+AfricaCountry since eight years as a business woman dealing with gold
+exportation, I have a dream and desire of building an orphanage home
+in your country, and i have a deposit fund to the project, but
+presently my health condition we not allow me to carry out the project
+my self, now my doctor has already told me that I have just few period
+of time to leave because of my ovarian cancer disease, can you help
+fulfill this project.
 
-Ich bin Charles W. Jackson aus North Carolina, Vereinigte Staaten von Ameri=
-ka, und ich bin der Gewinner des Mega-Millionen-Jackpots von 344 Millionen =
-US-Dollar. Ich spende die Summe von 2.000.000 Millionen Euro als Teil der H=
-ilfsgelder f=FCr das Corona-Virus.
+If you have the mind to help me in this project, contact me privet
+email address  for more details on the way forward
 
-Dies ist Ihr Spendencode: [CJ530342019]
-
-www.youtube.com/watch?v=3DBSr8myiLPMQ
-
-
-Bitte antworten Sie auf diese E-Mail mit dem SPENDERCODE:
-
-charlesjacksonjr001@gmail.com
-
-Ich hoffe, dass Sie und Ihre Familie dies durchkommen
-
-
-Herr Charles Jackson
+With kind Regards,
+Mrs Suzara Maling Wan
