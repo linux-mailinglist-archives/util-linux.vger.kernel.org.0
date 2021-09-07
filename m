@@ -2,72 +2,88 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 12434401EBB
-	for <lists+util-linux@lfdr.de>; Mon,  6 Sep 2021 18:54:05 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 6032F402A95
+	for <lists+util-linux@lfdr.de>; Tue,  7 Sep 2021 16:17:11 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S241972AbhIFQzH (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Mon, 6 Sep 2021 12:55:07 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:37522 "EHLO
+        id S235545AbhIGOSN (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Tue, 7 Sep 2021 10:18:13 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:40190 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S240965AbhIFQzH (ORCPT
-        <rfc822;util-linux-ng@vger.kernel.org>);
-        Mon, 6 Sep 2021 12:55:07 -0400
-Received: from mail-io1-xd2b.google.com (mail-io1-xd2b.google.com [IPv6:2607:f8b0:4864:20::d2b])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 8E231C061575
-        for <util-linux-ng@vger.kernel.org>; Mon,  6 Sep 2021 09:54:02 -0700 (PDT)
-Received: by mail-io1-xd2b.google.com with SMTP id a13so9397516iol.5
-        for <util-linux-ng@vger.kernel.org>; Mon, 06 Sep 2021 09:54:02 -0700 (PDT)
+        with ESMTP id S233562AbhIGOSJ (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Tue, 7 Sep 2021 10:18:09 -0400
+Received: from mail-il1-x144.google.com (mail-il1-x144.google.com [IPv6:2607:f8b0:4864:20::144])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id CB690C061575
+        for <util-linux@vger.kernel.org>; Tue,  7 Sep 2021 07:17:02 -0700 (PDT)
+Received: by mail-il1-x144.google.com with SMTP id l10so10173697ilh.8
+        for <util-linux@vger.kernel.org>; Tue, 07 Sep 2021 07:17:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=mime-version:reply-to:from:date:message-id:subject:to;
-        bh=25DiHGX2HVq2lSMom3bYTxyMXf7aXX0X1TG0x1mt1pY=;
-        b=cZtFCbkk14jXD1BIgIjNKKVjXrUcXnmqtV9WJKpKmMa8dvlTNyG6m9yv1eG9mhHOT4
-         /DkpHMF3NRDYT0ct1mHn4m9/SPQIqRzKYyI/thT68YIm1GEC/6UeP8Go1TOACvtNlc1h
-         TpniFuVS7mETSIXVeRVlqAPvz+Ko1eoKbn7T7vCQPswY1XmjpUZ1RrcICgijdP1e29Wn
-         6EN31iKCd+xfgY388VWyJFoPD3uNN+UFCHnMbxbUsnlxhJjhr4MKfz/m8bzmM2w6zOPP
-         8B47W2yWmR0/YuFW6hDfqWHeY4gWzdTRqv8rKnTnkbGrF22dz49ZarV1COn04ZKj+xnz
-         KK2g==
+        h=mime-version:reply-to:sender:from:date:message-id:subject:to;
+        bh=k+ZiBH4BwTeVysoRDt2ZKluFTvkRqmIR2fv9R9Fr5sY=;
+        b=hDOWroBl4hpYPRuAyGe2rcga/NarGa1+iZ9aTR5q0lmh5VyJHPu6N1eCBa1nPUVFck
+         jBD/zsjPnPc+9MAXLoWkxMspXEz93PfsLedcfnjiFeOEWhWvhw7cSUA/VE4MXWhYWxAq
+         Q7ZHZwagKY0b3DvmQO4x3wYvNiOQaBA/3oQOeqJLOaz/m5843HW696UZIqHVpa9U39/l
+         3DulJRwht+zDf/vNH1r+QtKAiSGJk8vFZGofFllWrbomqwmHXWwUQ54d5wOHlLAZKfOK
+         ALBpXy5KymU3DyGWOTsDpQk/jjIKAy6nNpEkEr3YYAqSz8PYwIFz7fEP9OKXchNrETVk
+         dKpg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
-         :subject:to;
-        bh=25DiHGX2HVq2lSMom3bYTxyMXf7aXX0X1TG0x1mt1pY=;
-        b=FvEe9sONq/nXxbsJD2JFxA05An5Dzn5BEyUQJjw+p/m1rF+A9lgXuNIen9eXnk8GZO
-         Tz0MJpNgf0WFfyYfJ6jh5jVw+jGjZWtAiBayR+41zHYf+BaaHANAsv/hRjAhaOAxQr6/
-         A0ZHiG53w/TA/CbMev5oRmfhEUNukwU36li/gcQ19Rs9H9K5Aie0GKNSzLDt8ZJvwxa4
-         tnPTEKg4mELf2HthHsux86Xs80Xy/fIyQuGkAnvoDGH7cxHJqrONL1gc9ChPqacgB3Xq
-         OCjd5H5TJiycA4PtUJOfME0nU0xCjg2Ds3U8vfwyIWgQJuQE7m+GJ/uta1B9nw88vF3V
-         lMOQ==
-X-Gm-Message-State: AOAM531wMkJkpDfOrhlRsD9t8HEYGd+VJ24XmZEwXW4KK1HgMnovfjQJ
-        O8ZFsTtAvU4AbLODawxKvaHrjagaFy+yIiKc+R4=
-X-Google-Smtp-Source: ABdhPJxbgqVH5dOPLZQr4wkkvVXJcAledZvCkoTqM2zMa3LCQcKdpP8n0YXAj/Q8cfv/YPPp3FZ1fwsU8gWuEvJCgeQ=
-X-Received: by 2002:a02:b183:: with SMTP id t3mr11605681jah.93.1630947241502;
- Mon, 06 Sep 2021 09:54:01 -0700 (PDT)
+        h=x-gm-message-state:mime-version:reply-to:sender:from:date
+         :message-id:subject:to;
+        bh=k+ZiBH4BwTeVysoRDt2ZKluFTvkRqmIR2fv9R9Fr5sY=;
+        b=ky30R/POeRXenrdOwFzUTQdCuPj+KQtOHqUJIj3G6uQ3gZ3bgclmOxDrkJGWAEOyIC
+         jUMf25HOW4m56G5po66lRecUjsx51HmAXhbigeDEx7Kr3riIPb+H3NI7tlDAYCNsv/Lz
+         YRj2dufcHmSROkarjhRNA+Uh3Mg5p+ltUV3JuU+mljO8bIoHvjoNKkku6/NRzLySYU7G
+         lOktufXd3URjm8f3Tsv/yPgUVXdB9YuYSn1GCpIZVcly1DLJ17Q/sfgHXP9EH8F/UbTx
+         06kez9ZbZpJ+P/xXGrn0rc0iyJA0SrFXodjDx+8CM3nlRrc36OlxZcoSomHjbt2wD0Pw
+         VXdg==
+X-Gm-Message-State: AOAM530VnAkej9x6PKmYkZTYF1dpnX3oH5iACNRtc3qlO3b4nc+sQIAb
+        gP/93MTQzZLB0r6lpb3PEoYr5mnWXsvsAqID7o4=
+X-Google-Smtp-Source: ABdhPJz5qDkoQ9vRq+MIj/80WluNr4hzk8fzWCcdbkeTtUPpkACf9lWFcXkvwkNV/YjtGNO1NF+oawRd1seHezYRnrM=
+X-Received: by 2002:a05:6e02:104b:: with SMTP id p11mr12597002ilj.21.1631024222094;
+ Tue, 07 Sep 2021 07:17:02 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 2002:a92:cb0b:0:0:0:0:0 with HTTP; Mon, 6 Sep 2021 09:54:00 -0700 (PDT)
-Reply-To: suzara.wans2021@gmail.com
-From:   Mrs Suzara Maling Wan <mrssuzaramaling661@gmail.com>
-Date:   Mon, 6 Sep 2021 09:54:00 -0700
-Message-ID: <CAB1fA5NHPuXqwui_4AxO8i0z+ArEF9XBn1MouhQfNR6JeQVZ+g@mail.gmail.com>
-Subject: Hello
+Reply-To: bibahmohamed029@gmail.com
+Sender: sdrbwo@gmail.com
+Received: by 2002:a5e:941a:0:0:0:0:0 with HTTP; Tue, 7 Sep 2021 07:17:01 -0700 (PDT)
+From:   Habibah Mohammad <bibamohamed029@gmail.com>
+Date:   Tue, 7 Sep 2021 15:17:01 +0100
+X-Google-Sender-Auth: 5PkGlQQPJsIgvRmtG5cAXoLtlnM
+Message-ID: <CAOkCFDd6faxxFt+9DGpy1EpDuFxBd51bXRE1bjGnfySGxGDZnA@mail.gmail.com>
+Subject: RE: Foreign Business Investment
 To:     undisclosed-recipients:;
 Content-Type: text/plain; charset="UTF-8"
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
--- 
-I am Mrs Suzara Maling Wan from (Philippine) but based in West
-AfricaCountry since eight years as a business woman dealing with gold
-exportation, I have a dream and desire of building an orphanage home
-in your country, and i have a deposit fund to the project, but
-presently my health condition we not allow me to carry out the project
-my self, now my doctor has already told me that I have just few period
-of time to leave because of my ovarian cancer disease, can you help
-fulfill this project.
+Asal-am Aleikum,
 
-If you have the mind to help me in this project, contact me privet
-email address  for more details on the way forward
+Peace be with you,
 
-With kind Regards,
-Mrs Suzara Maling Wan
+I sincerely seek for a good business ventures in your country in which
+i am willing to invest and partner with you in a good profiting
+business in your country with my last resort deposited in a foreign
+bank.
+
+I am Madam Habibah Mohamed from Syria, a muslin woman, I was engaged
+in selling Jewelries, diamond gold etc. here in Syria before this
+unending war here in Syria started, because of on going bloody war
+here in Syria my shop's and home was destroyed by rebels all my
+jewelries which worth much money was looted. Now i want start up
+business afresh in a peaceful country. I am afraid that what happened
+in Afghanistan not to happen in Syria which is a worrying situation
+here. for everyone and because of this unending war i have decided to
+start foreign business investment in a peaceful country.
+
+Please tell or advice me on good profitable business in your country
+in-which we can invest and partner together for a profitable business
+with my last resort deposited in a foreign bank to start up a new good
+business,
+
+I am looking forward to reading from you as soon as possible for a
+good business partnership with you in your country.
+
+Allah hafiz,
+
+Mrs` Habiba MohameD.
