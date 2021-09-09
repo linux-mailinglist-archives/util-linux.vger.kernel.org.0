@@ -2,67 +2,116 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 1873A403B36
-	for <lists+util-linux@lfdr.de>; Wed,  8 Sep 2021 16:07:41 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 20F0840420A
+	for <lists+util-linux@lfdr.de>; Thu,  9 Sep 2021 02:08:45 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S235446AbhIHOIs (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Wed, 8 Sep 2021 10:08:48 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:54992 "EHLO
+        id S235595AbhIIAJu (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Wed, 8 Sep 2021 20:09:50 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:49728 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S233747AbhIHOIr (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Wed, 8 Sep 2021 10:08:47 -0400
-Received: from mail-vk1-xa2f.google.com (mail-vk1-xa2f.google.com [IPv6:2607:f8b0:4864:20::a2f])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id E6CB0C061575
-        for <util-linux@vger.kernel.org>; Wed,  8 Sep 2021 07:07:39 -0700 (PDT)
-Received: by mail-vk1-xa2f.google.com with SMTP id t13so804180vkm.4
-        for <util-linux@vger.kernel.org>; Wed, 08 Sep 2021 07:07:39 -0700 (PDT)
+        with ESMTP id S1347902AbhIIAJs (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Wed, 8 Sep 2021 20:09:48 -0400
+Received: from mail-pl1-x631.google.com (mail-pl1-x631.google.com [IPv6:2607:f8b0:4864:20::631])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 4C7D4C061575
+        for <util-linux@vger.kernel.org>; Wed,  8 Sep 2021 17:08:40 -0700 (PDT)
+Received: by mail-pl1-x631.google.com with SMTP id w6so1929968pll.3
+        for <util-linux@vger.kernel.org>; Wed, 08 Sep 2021 17:08:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=mime-version:reply-to:from:date:message-id:subject:to
+        h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=XnxR1dZaQUNFLCPP/3fv+f8YConc30Mv0mhqx6/Cl18=;
-        b=WAvrk9F65AsVZwDpNYHJhaFaKE6KaYxdCa/F/RBczDMOVx7cKQMgD1lDIxNYUZqdx0
-         47GluUjWTAwvf627LQu+oxbnXDoHAQ2eN+rNobJzeVotGpBLrQNrX6Ym5Z44Gz9Xnxau
-         /ejjD+jB/nSuxoUI8PG2oTAw2tVmIGvg8ckRAtonFof+I/mA2ttk8DKfFEhxDYtvX+eB
-         +F2g1QVhmdM5ZuYo12IDtnK+LfiHDH4hPOaLOIoXqhQTPrLIZup+ZoG/6L3t7yeoGQup
-         Q9B3dQ/uzWyG9eRFf/jARll1dpP2Pqpt/tUdN4KByfO1+xkFVzR4nSsDrWYpXkOe+97C
-         ZQMg==
+        bh=jDfdpnyVAhmIl56pup3aYoLlwsvmlQyQ/hlVK4dDSh4=;
+        b=cQM81lyuwtzhYaRwGONJGdbAMe8mHQKJMGC2U+M5NOLPTXkYguY4gGm0gYfxprSeIM
+         PhAfvBzyuZuqNQP/CQlau1l7+Jus6HhKHL/hri/byxyMcQKp6bKMxROQ1ewZ4zpjPI/j
+         JtMFckm7gYSjEuF9OxvqJHoAPw+N+3UPzjGU6lRFrlmz4tFKZn0obXzptu7EyFvu8CtR
+         p65Dw1vsgO9RWAKSB8yXcK7ppPHrcHRj0u8TryehaHbxMa1rdX+lQ0EkvHYAK879Hl1p
+         uYdTqJwvIUwGIayU7x/uuRJ6NtaF2znt6JT0gSllIuhDkBXI6R80FXEo8EkFvCn2c9Co
+         ikdw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
-         :subject:to:content-transfer-encoding;
-        bh=XnxR1dZaQUNFLCPP/3fv+f8YConc30Mv0mhqx6/Cl18=;
-        b=DMXLh2/9L8cvP2h4zwbFDrjGmVy7vZ7ENlKzURk+kFnH7QCx6XXVjvRQRVUbsFS679
-         ZiCT5H7Uebb/9uq/RnMqZE/jGQOnQhT9Y47nOvGFVE1oVs1no06ThcB92APUdC6UnWnT
-         qGk3lqWRjbB7+8t2GCg9xGhIdVeOyszq4nkmsBG8HafDu26wocNru6eP/tZcK0SWH4bR
-         25Z0Ue0VpEWOLkqqQiXh9fWAXeLxzvzsao951s5NYhiZ/ZBdZd2dAocobRqBbEfAQMJ/
-         GIJnPIYkU3LRBl/9K+kONvohnpHcLU0lkJKC17TjKLB/YcGpv50sB+1TA+rqZZXXR7hd
-         QHug==
-X-Gm-Message-State: AOAM5334cXNN3n2CsJtWwD/tbSim30hEDLMEwyMV74AqNFI9JUnmszb4
-        SUsdcPHqtV74GM8RvoUXy+Zf8QguACc6CbehENw=
-X-Google-Smtp-Source: ABdhPJwrgLDdzfG6R1CfyLoGEP70itNb3mfiDYJVaTc9iAJ6embm3qhwgjzhxdfdb0BrCUZ/xpykUnY7tIUXvPG01r8=
-X-Received: by 2002:a1f:a64d:: with SMTP id p74mr2009099vke.19.1631110059100;
- Wed, 08 Sep 2021 07:07:39 -0700 (PDT)
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=jDfdpnyVAhmIl56pup3aYoLlwsvmlQyQ/hlVK4dDSh4=;
+        b=CoaSrkmCm4MAn9yjxzMlS3nKJ41geSefZxpWlZP0Bsbuc2uHhNiqT+Rclay1AP+/5Q
+         B2xN3qHBdVVTQBEHlKR76q79n0b9MCM1Pwq1cp2em9mOkSwVuTCPzRdPSpoV2ZHfLNTB
+         ZWe4KjIdkK4QecsfsxgmagBdagSukPxCBb0Gq5H4IYxiDFlCAM/UCuMixp+DAJZwziFf
+         +H1prO2+sWvLnesJe8eBKnJKfwNNVQmfkR816cUqQA2tC+kiS5MZ7ux4AQIXALCqOeFp
+         y4uVo+74QsDiUCOZ8FSa/6FCXVHxbB9l3/tL/VRwX7oBr5WdAHa19qNaBTMGd2H1WbG9
+         c2SA==
+X-Gm-Message-State: AOAM533UH6QA8xYkhFzt2mvxKOg3AViPuR/J8+Za4FPMcrAFGCiFhu5R
+        lguw6jHNF0dJF5thV5MT+ptm9uE89sY=
+X-Google-Smtp-Source: ABdhPJzF/WXZXVu1ZXXBiokDfia6Qa7RD3lFN3Oy3qtIU1yXPZwGHjtkrKwrZIZPtxyVLVtjLCtYKQ==
+X-Received: by 2002:a17:902:a710:b029:12b:9b9f:c461 with SMTP id w16-20020a170902a710b029012b9b9fc461mr254871plq.59.1631146119738;
+        Wed, 08 Sep 2021 17:08:39 -0700 (PDT)
+Received: from localhost.localdomain (122-61-176-117-fibre.sparkbb.co.nz. [122.61.176.117])
+        by smtp.gmail.com with ESMTPSA id r8sm73677pgp.30.2021.09.08.17.08.37
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 08 Sep 2021 17:08:39 -0700 (PDT)
+From:   Michael Kerrisk <mtk.manpages@gmail.com>
+To:     mtk.manpages@gmail.com, Karel Zak <kzak@redhat.com>
+Cc:     util-linux@vger.kernel.org
+Subject: [PATCH 1/2] unshare.1.adoc: Improve wording re namespace creation
+Date:   Thu,  9 Sep 2021 02:08:27 +0200
+Message-Id: <20210909000828.203994-1-mtk.manpages@gmail.com>
+X-Mailer: git-send-email 2.31.1
 MIME-Version: 1.0
-Received: by 2002:a67:10c7:0:0:0:0:0 with HTTP; Wed, 8 Sep 2021 07:07:38 -0700 (PDT)
-Reply-To: tomcrist760@gmail.com
-From:   Tom Crist <muhammadhussaini6492@gmail.com>
-Date:   Wed, 8 Sep 2021 15:07:38 +0100
-Message-ID: <CANT+-7nmOBWE7-GEzX=f8HnaBFzQr33wJo4sF3PyksKbFFX+zg@mail.gmail.com>
-Subject: Spende
-To:     undisclosed-recipients:;
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
---=20
-Bin Herr Tom Crist. Ich spende einen Zuschuss von 10.500.000 USD
+The terminonoly "unshare the namespace" is not very helpful.
+Instead, use wording that explains what these options actually
+fo: "create a new namespace".
 
-an dich.Kontaktiere mich (tomcrist760@gmail.com) f=C3=BCr
+Signed-off-by: Michael Kerrisk <mtk.manpages@gmail.com>
+---
+ sys-utils/unshare.1.adoc | 16 ++++++++--------
+ 1 file changed, 8 insertions(+), 8 deletions(-)
 
-weitere Details.
+diff --git a/sys-utils/unshare.1.adoc b/sys-utils/unshare.1.adoc
+index f0fdf506f..2f1be8fc3 100644
+--- a/sys-utils/unshare.1.adoc
++++ b/sys-utils/unshare.1.adoc
+@@ -53,30 +53,30 @@ The process can have a distinct view of *CLOCK_MONOTONIC* and/or *CLOCK_BOOTTIME
+ == OPTIONS
+ 
+ *-i*, *--ipc*[**=**__file__]::
+-Unshare the IPC namespace. If _file_ is specified, then a persistent namespace is created by a bind mount.
++Create a new IPC namespace. If _file_ is specified, then a persistent namespace is created by a bind mount.
+ 
+ *-m*, *--mount*[**=**__file__]::
+-Unshare the mount namespace. If _file_ is specified, then a persistent namespace is created by a bind mount. Note that _file_ must be located on a mount whose propagation type is not *shared* (or an error results). Use the command *findmnt -o+PROPAGATION* when not sure about the current setting. See also the examples below.
++Create a new mount namespace. If _file_ is specified, then a persistent namespace is created by a bind mount. Note that _file_ must be located on a mount whose propagation type is not *shared* (or an error results). Use the command *findmnt -o+PROPAGATION* when not sure about the current setting. See also the examples below.
+ 
+ *-n*, *--net*[**=**__file__]::
+-Unshare the network namespace. If _file_ is specified, then a persistent namespace is created by a bind mount.
++Create a new network namespace. If _file_ is specified, then a persistent namespace is created by a bind mount.
+ 
+ *-p*, *--pid*[**=**__file__]::
+-Unshare the PID namespace. If _file_ is specified, then a persistent namespace is created by a bind mount. (Creation of a persistent PID namespace will fail if the *--fork* option is not also specified.)
++Create a new PID namespace. If _file_ is specified, then a persistent namespace is created by a bind mount. (Creation of a persistent PID namespace will fail if the *--fork* option is not also specified.)
+ +
+ See also the *--fork* and *--mount-proc* options.
+ 
+ *-u*, *--uts*[**=**__file__]::
+-Unshare the UTS namespace. If _file_ is specified, then a persistent namespace is created by a bind mount.
++Create a new UTS namespace. If _file_ is specified, then a persistent namespace is created by a bind mount.
+ 
+ *-U*, *--user*[**=**__file__]::
+-Unshare the user namespace. If _file_ is specified, then a persistent namespace is created by a bind mount.
++Create a new user namespace. If _file_ is specified, then a persistent namespace is created by a bind mount.
+ 
+ *-C*, *--cgroup*[**=**__file__]::
+-Unshare the cgroup namespace. If _file_ is specified, then persistent namespace is created by bind mount.
++Create a new cgroup namespace. If _file_ is specified, then persistent namespace is created by bind mount.
+ 
+ *-T*, *--time*[**=**__file__]::
+-Unshare the time namespace. If _file_ is specified, then a persistent namespace is created by a bind mount. The *--monotonic* and *--boottime* options can be used to specify the corresponding offset in the time namespace.
++Create a new time namespace. If _file_ is specified, then a persistent namespace is created by a bind mount. The *--monotonic* and *--boottime* options can be used to specify the corresponding offset in the time namespace.
+ 
+ *-f*, *--fork*::
+ Fork the specified _program_ as a child process of *unshare* rather than running it directly. This is useful when creating a new PID namespace. Note that when *unshare* is waiting for the child process, then it ignores *SIGINT* and *SIGTERM* and does not forward any signals to the child. It is necessary to send signals to the child process.
+-- 
+2.31.1
 
-Danke und Gottes Segen.
-Tom Crist
