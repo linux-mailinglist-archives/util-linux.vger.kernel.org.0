@@ -2,83 +2,60 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id B526C40BAF2
-	for <lists+util-linux@lfdr.de>; Wed, 15 Sep 2021 00:07:59 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 7662D40D1BC
+	for <lists+util-linux@lfdr.de>; Thu, 16 Sep 2021 04:44:37 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S234905AbhINWJQ (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Tue, 14 Sep 2021 18:09:16 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:33884 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S234720AbhINWJQ (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Tue, 14 Sep 2021 18:09:16 -0400
-Received: from mail-pl1-x629.google.com (mail-pl1-x629.google.com [IPv6:2607:f8b0:4864:20::629])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id AE694C061574
-        for <util-linux@vger.kernel.org>; Tue, 14 Sep 2021 15:07:58 -0700 (PDT)
-Received: by mail-pl1-x629.google.com with SMTP id 5so346064plo.5
-        for <util-linux@vger.kernel.org>; Tue, 14 Sep 2021 15:07:58 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=38s8PnPyKeRDlekeSYK3CEt0PDWbnPGxffjCKx0nOAc=;
-        b=HyYIOiGX/TzJiDUCc/kGFf32rGSBJMiTRS8CHX0QB8Ztzq7xGlgSU4cUlLcZBiBpg1
-         Wva5kRHBLFpq+I0GOJ51IqOE1bewr5ZzuTQEKj7CyMuL0jb7NA8VK0d7vHXBHV5m/pMv
-         a6599IO7ucCvZDhOD/3xAV3G4vLe0iKu6vud5m8dvETQFwC3sJ9S0s87Q4y0oNo5evJL
-         ZcH5lN3d1/zcIRkOawUgUsbfajLyTQFLfWZ6KPafrs/V32NLVYZc5HtJzPgUt52hRYJv
-         2HpkJg2ypNpQVOsrjqI3qJb+kuVL3KCA7vmDXnEoU77j2ziJ2PczPReMFEMGgPbGiSBo
-         4QOg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=38s8PnPyKeRDlekeSYK3CEt0PDWbnPGxffjCKx0nOAc=;
-        b=cyZxrkjYeQWI5KVc5oq+zFLOwpJXEGhJ78xynDmbMfw30zJFcT8J4mPBXtSjKRArqK
-         JYEJ3bkMJrZLQauJqaZmHHJmZn3gVuEw64h4OIRQqYJrkwIFIp1OPJYsdmafwC5p0PQE
-         jLfNtgC3pSCTpg4MZwEZ8oaOo/KlHYUEDJ3484IDFQRg+3PSCqAqf3/8KVjxpaJuv2BP
-         x60gpzxtJD6i0a6GD1sa5h1qOePmm7uWz7/ggPbUvC+Gs+XdaWSIJknwb6jB8W9U6bwh
-         egCgJi4NhayjOnB5F/kF/jYCp+CEvAvO2Ayki5FvKpbtu7JaAXxK5E+TCydJmGVSjL9P
-         tEvw==
-X-Gm-Message-State: AOAM5300N/J0+6JonSiMTbaKSh8C+gr5atZxK5PUQpe2WvsBBaXswEx1
-        DEKNppITgFfxpWmgg6qcbghc8i2VaZRVO/z4
-X-Google-Smtp-Source: ABdhPJwAAdnSDDALT/44QnPQIqhP0dwL9B/UKj1Nr44pLftdPK77EXLHZt7X9I2DUxvSpfw7rkMVKQ==
-X-Received: by 2002:a17:902:8a90:b0:139:f0fd:5349 with SMTP id p16-20020a1709028a9000b00139f0fd5349mr16822739plo.53.1631657278097;
-        Tue, 14 Sep 2021 15:07:58 -0700 (PDT)
-Received: from Rajdev.localdomain ([49.156.64.163])
-        by smtp.googlemail.com with ESMTPSA id z124sm12302821pgz.94.2021.09.14.15.07.56
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 14 Sep 2021 15:07:57 -0700 (PDT)
-From:   ritikrajdev <ritikrajdev761@gmail.com>
-To:     util-linux@vger.kernel.org
-Cc:     ritikrajdev <ritikrajdev761@gmail.com>
-Subject: [PATCH 1/1] more - Bug Resolve - new line separated command execution
-Date:   Wed, 15 Sep 2021 03:34:13 +0530
-Message-Id: <20210914220413.65881-2-ritikrajdev761@gmail.com>
-X-Mailer: git-send-email 2.33.0
-In-Reply-To: <20210914220413.65881-1-ritikrajdev761@gmail.com>
-References: <20210914220413.65881-1-ritikrajdev761@gmail.com>
+        id S231724AbhIPCpz (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Wed, 15 Sep 2021 22:45:55 -0400
+Received: from dkpb0ek.cn ([106.75.27.222]:39584 "EHLO dkpb0ek.cn"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S233927AbhIPCpz (ORCPT <rfc822;util-linux@vger.kernel.org>);
+        Wed, 15 Sep 2021 22:45:55 -0400
+X-Greylist: delayed 516 seconds by postgrey-1.27 at vger.kernel.org; Wed, 15 Sep 2021 22:45:54 EDT
+Received: from ajsie (unknown [122.226.180.195])
+        by dkpb0ek.cn (Postfix) with ESMTPA id 420FC335DA24
+        for <util-linux@vger.kernel.org>; Thu, 16 Sep 2021 10:35:46 +0800 (CST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dkpb0ek.cn; s=default;
+        t=1631759746;
+        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+         to:to:cc:mime-version:mime-version:content-type:content-type:
+         content-transfer-encoding:content-transfer-encoding;
+        bh=oUUxL1mVp2z9h9nFeUiYPH3ms4rfQFcm7RQ23Y4smYk=;
+        b=UhUYmlVd7d27k4HekD7ifVpF6vvHuCPIKa3ZYGam5kozkgxnw5nOp73lkWam6sJmgAo/iq
+        whoKKN6ptq0cFQK6JOE+PkfMx5wcy/Gp0OEvSsfQu1Ek7Rzu/OZpr/wA4ErU1e/aCTdkdx
+        +3ZOMtQMYs1tHYhbmwVKT2AxPub4718=
+Message-ID: <20210916103546015584@dkpb0ek.cn>
+From:   =?utf-8?B?77yl77y077yj44K144O844OT44K544Gu5LiA5pmC5YGc5q2i?= 
+        <etc-update@dkpb0ek.cn>
+To:     <util-linux@vger.kernel.org>
+Subject: =?utf-8?B?RVRD44K144O844OT44K544KS44GU5Yip55So44Gu44GK5a6i5qeY?=
+Date:   Thu, 16 Sep 2021 10:35:34 +0800
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain;
+        charset="utf-8"
+Content-Transfer-Encoding: base64
+X-mailer: Pabo 9
+X-Spam: Yes
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
----
- text-utils/more.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+RVRD44K144O844OT44K544KS44GU5Yip55So44Gu44GK5a6i5qeYOg0KDQpFVEPjgrXjg7zjg5Pj
+grnjga/nhKHlirnjgavjgarjgorjgb7jgZfjgZ/jgIINCuW8leOBjee2muOBjeOCteODvOODk+OC
+ueOCkuOBlOWIqeeUqOOBhOOBn+OBoOOBjeOBn+OBhOWgtOWQiOOBr+OAgeS4i+iomOODquODs+OC
+r+OCiOOCiuips+e0sOOCkuOBlOeiuuiqjeOBj+OBoOOBleOBhOOAgg0KDQrkuIvoqJjjga7mjqXn
+tprjgYvjgonlgZzmraLljp/lm6DjgpLnorroqo3jgZfjgabjgY/jgaDjgZXjgYQNCg0KaHR0cHM6
+Ly9ldGMtbWVpc2FpLmpwLmZuLWluZm8udG9wLw0KDQoo55u05o6l44Ki44Kv44K744K544Gn44GN
+44Gq44GE5aC05ZCI44Gv44CB5omL5YuV44Gn44OW44Op44Km44K244Gr44Kz44OU44O844GX44Gm
+6ZaL44GE44Gm44GP44Gg44GV44GEKQ0KDQrigLvjgZPjga7jg6Hjg7zjg6vjga/pgIHkv6HlsILn
+lKjjgafjgZnjgIINCuOAgOOBk+OBruOCouODieODrOOCueOBq+mAgeS/oeOBhOOBn+OBoOOBhOOB
+puOCgui/lOS/oeOBhOOBn+OBl+OBi+OBreOBvuOBmeOBruOBp+OAgeOBguOCieOBi+OBmOOCgeOB
+lOS6huaJv+mhmOOBhOOBvuOBmeOAgg0K4oC744Gq44GK44CB44GU5LiN5piO44Gq54K544Gr44Gk
+44GN44G+44GX44Gm44Gv44CB44GK5omL5pWw44Gn44GZ44GM44CBDQogIEVUQ+OCteODvOODk+OC
+ueS6i+WLmeWxgOOBq+OBiuWVj+OBhOWQiOOCj+OBm+OBj+OBoOOBleOBhOOAgg0KDQrilqBFVEPl
+iKnnlKjnhafkvJrjgrXjg7zjg5Pjgrnkuovli5nlsYANCuW5tOS4reeEoeS8keOAgDk6MDDvvZ4x
+ODowMA0K44OK44OT44OA44Kk44Ok44Or44CAMDU3MC0wMTAxMzkNCu+8iOODiuODk+ODgOOCpOOD
+pOODq+OBjOOBlOWIqeeUqOOBhOOBn+OBoOOBkeOBquOBhOOBiuWuouOBleOBvuOAgDA0NS03NDQt
+MTM3Mu+8iQ0KMDQ1LTc0NC03MzkNCg==
 
-diff --git a/text-utils/more.c b/text-utils/more.c
-index 6c538f724..72953fd8f 100644
---- a/text-utils/more.c
-+++ b/text-utils/more.c
-@@ -1285,7 +1285,7 @@ static void run_shell(struct more_control *ctl, char *filename)
- 	putchar('!');
- 	fflush(NULL);
- 	if (ctl->previous_command.key == more_kc_run_shell && ctl->shell_line)
--		fputs(ctl->shell_line, stdout);
-+		fputs(ctl->shell_line, stderr);
- 	else {
- 		ttyin(ctl, cmdbuf, sizeof(cmdbuf) - 2, '!');
- 		if (strpbrk(cmdbuf, "%!\\"))
--- 
-2.33.0
 
