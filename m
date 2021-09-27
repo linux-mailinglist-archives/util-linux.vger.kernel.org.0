@@ -2,80 +2,207 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 59D0C415BE5
-	for <lists+util-linux@lfdr.de>; Thu, 23 Sep 2021 12:24:18 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id A96D4418FB9
+	for <lists+util-linux@lfdr.de>; Mon, 27 Sep 2021 09:10:46 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S240305AbhIWKZs (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Thu, 23 Sep 2021 06:25:48 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124]:38713 "EHLO
-        us-smtp-delivery-124.mimecast.com" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S235605AbhIWKZs (ORCPT
-        <rfc822;util-linux@vger.kernel.org>);
-        Thu, 23 Sep 2021 06:25:48 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-        s=mimecast20190719; t=1632392656;
-        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-         content-transfer-encoding:content-transfer-encoding:
-         in-reply-to:in-reply-to:references:references;
-        bh=hy+qq/qQbyVi8AEEZ225p2/fggrNXwx0/KltiVr4Cf8=;
-        b=EeQzxjNTgJ4pOxzAGNz5+wbMR8jFyp4KNFmsWYBnPDm27jKQ4643ZwgKVTJGmCRfUUnxJR
-        Jijh04eQLZ+08J3bgH80OCIUVvgHFJ0m+dOqTxjKn9bhUADJ9M9Gyyk9W7uyqTVie3+/J0
-        1Ke0BUL16IpRyYREFqynUUrZz/Yn7YA=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-588-Xba62-ZZMtOa4yHzCIDkag-1; Thu, 23 Sep 2021 06:24:14 -0400
-X-MC-Unique: Xba62-ZZMtOa4yHzCIDkag-1
-Received: from smtp.corp.redhat.com (int-mx06.intmail.prod.int.phx2.redhat.com [10.5.11.16])
-        (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
-        (No client certificate requested)
-        by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 09A4A180830E;
-        Thu, 23 Sep 2021 10:24:14 +0000 (UTC)
-Received: from ws.net.home (ovpn-112-16.ams2.redhat.com [10.36.112.16])
-        by smtp.corp.redhat.com (Postfix) with ESMTPS id 5F4F277E26;
-        Thu, 23 Sep 2021 10:24:13 +0000 (UTC)
-Date:   Thu, 23 Sep 2021 12:24:10 +0200
-From:   Karel Zak <kzak@redhat.com>
-To:     Mario =?utf-8?Q?Bl=C3=A4ttermann?= <mario.blaettermann@gmail.com>
-Cc:     util-linux@vger.kernel.org
-Subject: Re: agetty.8.adoc: Replace /usr/lib with a variable?
-Message-ID: <20210923102410.n3hylc6muys34por@ws.net.home>
-References: <CAHi0vA__mxJoQ4c2jqZsZiR+omLqwwRAcKb4J+Ypp=5qqDwKpQ@mail.gmail.com>
+        id S232952AbhI0HMX (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Mon, 27 Sep 2021 03:12:23 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:41040 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S233083AbhI0HMW (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Mon, 27 Sep 2021 03:12:22 -0400
+Received: from mail.namespace.at (mail.namespace.at [IPv6:2a01:190:1801:100::235])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 41A36C061570
+        for <util-linux@vger.kernel.org>; Mon, 27 Sep 2021 00:10:45 -0700 (PDT)
+From:   Chris Hofstaedtler <zeha@debian.org>
+To:     util-linux@vger.kernel.org
+Cc:     Eduard Bloch <blade@debian.org>
+Subject: [PATCH] Let user choose larger buffers for IO reading
+Date:   Mon, 27 Sep 2021 09:07:23 +0200
+Message-Id: <20210927070723.76950-1-zeha@debian.org>
+X-Mailer: git-send-email 2.33.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <CAHi0vA__mxJoQ4c2jqZsZiR+omLqwwRAcKb4J+Ypp=5qqDwKpQ@mail.gmail.com>
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.16
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-On Tue, Sep 21, 2021 at 09:17:48PM +0200, Mario Blättermann wrote:
-> in agetty.8.adoc the file path /usr/lib/ is hardcoded. At least the
-> Mageia distribution (possibly others, too) uses /usr/lib64 for the
-> x86_64 version instead. Would it be better to use {libdir} and let
-> replace it on demand by a ./configure option? As far as I can
-> evaluate, this should work with an option in Makefile.am:
-> 
-> AM_CPPFLAGS = \
-> ...
->         -D_PATH_LIBDIR=\"${libdir}\"
-> 
-> Similarly, we could think about to replace all file paths in man pages
-> which are configurable during the installation.
+From: Eduard Bloch <blade@debian.org>
 
-Yes, use variables is perfect solution, go ahead and send patch ;-)
+Simultaneous reading of multiple files through a small one-page buffer
+is slow with classic HDDs. Let the user improve it by chosing buffers of
+several mebibytes if needed.
 
-For now there is a problem that we distribute in tarball already
-generated man pages (to avoid dependence on asciidoctor for some
-use-cases). Maybe all we need is to add some sed(1) call to "if
-HAVE_MANPAGES" section to modify these man pages. I'll try to improve
-it. Anyway, for .adoc files is this irrelevant issue.
+Signed-off-by: Eduard Bloch <blade@debian.org>
+---
+ misc-utils/hardlink.1.adoc |  6 +++++
+ misc-utils/hardlink.c      | 50 ++++++++++++++++++++++++++++++++------
+ 2 files changed, 49 insertions(+), 7 deletions(-)
 
- Karel
-
+diff --git a/misc-utils/hardlink.1.adoc b/misc-utils/hardlink.1.adoc
+index 1fab77d71..107cd6997 100644
+--- a/misc-utils/hardlink.1.adoc
++++ b/misc-utils/hardlink.1.adoc
+@@ -71,6 +71,12 @@ A regular expression to include files. If the option *--exclude* has been given,
+ *-s*, *--minimum-size* _size_::
+ The minimum size to consider. By default this is 1, so empty files will not be linked. The _size_ argument may be followed by the multiplicative suffixes KiB (=1024), MiB (=1024*1024), and so on for GiB, TiB, PiB, EiB, ZiB and YiB (the "iB" is optional, e.g., "K" has the same meaning as "KiB").
+ 
++*-S*, *--buffer-size* _size_::
++The size of read buffer used when comparing file contents (default: 8KiB). This
++costs some additional memory but potentially reduces the amount of seek
++operations and therefore improve performance, especially with mechanic disk
++drives. Optional factor suffixes are supported, like with the *-s* option. This is mostly efficient with other filters (i.e. with *-f* or *-X*) and can be less efficient with *-top* options.
++
+ == ARGUMENTS
+ 
+ *hardlink* takes one or more directories which will be searched for files to be linked.
+diff --git a/misc-utils/hardlink.c b/misc-utils/hardlink.c
+index 29c8509e3..aeb486ce5 100644
+--- a/misc-utils/hardlink.c
++++ b/misc-utils/hardlink.c
+@@ -91,6 +91,10 @@ enum log_level {
+ 	JLOG_VERBOSE2
+ };
+ 
++#ifndef DEF_SCAN_BUF_SIZE
++#define DEF_SCAN_BUF_SIZE 8192
++#endif
++
+ /**
+  * struct statistic - Statistics about the file
+  * @started: Whether we are post command-line processing
+@@ -144,6 +148,7 @@ static struct options {
+ 	unsigned int keep_oldest:1;
+ 	unsigned int dry_run:1;
+ 	uintmax_t min_size;
++	size_t buf_size;
+ } opts = {
+ 	/* default setting */
+ 	.respect_mode = TRUE,
+@@ -151,7 +156,8 @@ static struct options {
+ 	.respect_time = TRUE,
+ 	.respect_xattrs = FALSE,
+ 	.keep_oldest = FALSE,
+-	.min_size = 1
++	.min_size = 1,
++  .buf_size = DEF_SCAN_BUF_SIZE
+ };
+ 
+ /*
+@@ -163,6 +169,12 @@ static struct options {
+ static void *files;
+ static void *files_by_ino;
+ 
++/*
++ * Temporary buffers for reading file contents
++ */
++char *buf_a = NULL;
++char *buf_b = NULL;
++
+ /*
+  * last_signal
+  *
+@@ -523,8 +535,6 @@ static int file_contents_equal(const struct file *a, const struct file *b)
+ {
+ 	FILE *fa = NULL;
+ 	FILE *fb = NULL;
+-	char buf_a[8192];
+-	char buf_b[8192];
+ 	int cmp = 0;		/* zero => equal */
+ 	off_t off = 0;		/* current offset */
+ 
+@@ -550,11 +560,11 @@ static int file_contents_equal(const struct file *a, const struct file *b)
+ 		size_t ca;
+ 		size_t cb;
+ 
+-		ca = fread(buf_a, 1, sizeof(buf_a), fa);
++		ca = fread(buf_a, 1, opts.buf_size, fa);
+ 		if (ca < sizeof(buf_a) && ferror(fa))
+ 			goto err;
+ 
+-		cb = fread(buf_b, 1, sizeof(buf_b), fb);
++		cb = fread(buf_b, 1, opts.buf_size, fb);
+ 		if (cb < sizeof(buf_b) && ferror(fb))
+ 			goto err;
+ 
+@@ -889,7 +899,8 @@ static void __attribute__((__noreturn__)) usage(void)
+ 		"                              (lower precedence than minimize/maximize)\n"), out);
+ 	fputs(_(" -x, --exclude <regex>      regular expression to exclude files\n"), out);
+ 	fputs(_(" -i, --include <regex>      regular expression to include files/dirs\n"), out);
+-	fputs(_(" -s, --minimum-size <size>  minimum size for files.\n"), out);
++	fputs(_(" -s, --minimum-size=<size>  minimum size for files.\n"), out);
++        fputs(_(" -S, --buffer-size=<size>   Buffer size for file reading (speedup, using more RAM)\n"), out);
+ 	fputs(_(" -c, --content              compare only file contents, same as -pot\n"), out);
+ 
+ 	fputs(USAGE_SEPARATOR, out);
+@@ -923,6 +934,20 @@ static void register_regex(struct regex_link **pregs, const char *regex)
+ 	link->next = *pregs; *pregs = link;
+ }
+ 
++static int init_buffers(size_t bufsize)
++{
++	buf_a = malloc(bufsize);
++	buf_b = malloc(bufsize);
++	// report non-zero if any failed
++	return (NULL == buf_a || NULL == buf_b);
++}
++
++static void deinit_buffers(void)
++{
++	free(buf_a);
++	free(buf_b);
++}
++
+ /**
+  * parse_options - Parse the command line options
+  * @argc: Number of options
+@@ -930,7 +955,7 @@ static void register_regex(struct regex_link **pregs, const char *regex)
+  */
+ static int parse_options(int argc, char *argv[])
+ {
+-	static const char optstr[] = "VhvnfpotXcmMOx:i:s:q";
++	static const char optstr[] = "VhvnfpotXcmMOx:i:s:S:q";
+ 	static const struct option long_options[] = {
+ 		{"version", no_argument, NULL, 'V'},
+ 		{"help", no_argument, NULL, 'h'},
+@@ -947,6 +972,7 @@ static int parse_options(int argc, char *argv[])
+ 		{"exclude", required_argument, NULL, 'x'},
+ 		{"include", required_argument, NULL, 'i'},
+ 		{"minimum-size", required_argument, NULL, 's'},
++		{"buffer-size", required_argument, NULL, 'S'},
+ 		{"content", no_argument, NULL, 'c'},
+ 		{"quiet", no_argument, NULL, 'q'},
+ 		{NULL, 0, NULL, 0}
+@@ -1012,6 +1038,9 @@ static int parse_options(int argc, char *argv[])
+ 		case 's':
+ 			opts.min_size = strtosize_or_err(optarg, _("failed to parse size"));
+ 			break;
++		case 'S':
++			opts.buf_size = strtosize_or_err(optarg, _("failed to parse size"));
++			break;
+ 		case 'h':
+ 			usage();
+ 		case 'V':
+@@ -1068,6 +1097,10 @@ int main(int argc, char *argv[])
+ 		errx(EXIT_FAILURE, _("no directory or file specified"));
+ 
+ 	gettime_monotonic(&stats.start_time);
++
++	if (init_buffers(opts.buf_size) != 0)
++		err(EXIT_FAILURE, _("failed to allocate buffer memory"));
++
+ 	stats.started = TRUE;
+ 
+ 	for (; optind < argc; optind++) {
+@@ -1076,5 +1109,8 @@ int main(int argc, char *argv[])
+ 	}
+ 
+ 	twalk(files, visitor);
++
++	deinit_buffers();
++
+ 	return 0;
+ }
 -- 
- Karel Zak  <kzak@redhat.com>
- http://karelzak.blogspot.com
+2.33.0
 
