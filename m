@@ -2,60 +2,76 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 21B9F420940
-	for <lists+util-linux@lfdr.de>; Mon,  4 Oct 2021 12:19:07 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 2DFCD42231A
+	for <lists+util-linux@lfdr.de>; Tue,  5 Oct 2021 12:10:05 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229760AbhJDKUy (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Mon, 4 Oct 2021 06:20:54 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([216.205.24.124]:50088 "EHLO
-        us-smtp-delivery-124.mimecast.com" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S229478AbhJDKUx (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Mon, 4 Oct 2021 06:20:53 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-        s=mimecast20190719; t=1633342744;
-        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-         in-reply-to:in-reply-to:references:references;
-        bh=feC/5bkXrZlmSuw7OSaDz6A+nHEDE9OjcKWzDXkxIGE=;
-        b=W0YruMB+eFeVNESwyqfY+rAkGxoqcNZm/YMzxQT1NkYPHNGQgZ8vE3IjEcWmZ2rS24ykAs
-        PndGgAB69g8b0pru08BedoalUv7EXsfnBQX5ZPhL9GR4yWPXe7z2QI7u40fUW3kseKTevE
-        jW+a4pdDoTDEBynthxmY8+QJHQLBeEc=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-223-9jwEh8wVN9OwqlK7qTJUqQ-1; Mon, 04 Oct 2021 06:19:03 -0400
-X-MC-Unique: 9jwEh8wVN9OwqlK7qTJUqQ-1
-Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com [10.5.11.12])
-        (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
-        (No client certificate requested)
-        by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 2497510199A0;
-        Mon,  4 Oct 2021 10:19:02 +0000 (UTC)
-Received: from ws.net.home (ovpn-112-16.ams2.redhat.com [10.36.112.16])
-        by smtp.corp.redhat.com (Postfix) with ESMTPS id 2B59B60BF4;
-        Mon,  4 Oct 2021 10:19:01 +0000 (UTC)
-Date:   Mon, 4 Oct 2021 12:18:58 +0200
-From:   Karel Zak <kzak@redhat.com>
-To:     Jeff Layton <jlayton@kernel.org>
-Cc:     util-linux@vger.kernel.org, Jan Kara <jack@suse.cz>
-Subject: Re: [PATCH] mount.8.adoc: note that mandatory locking is fully
- deprecated in Linux 5.15
-Message-ID: <20211004101858.klmvpyk4pdtlohfp@ws.net.home>
-References: <20211001122553.18345-1-jlayton@kernel.org>
+        id S233477AbhJEKLy (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Tue, 5 Oct 2021 06:11:54 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:40252 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S233839AbhJEKLx (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Tue, 5 Oct 2021 06:11:53 -0400
+Received: from mail-pl1-x636.google.com (mail-pl1-x636.google.com [IPv6:2607:f8b0:4864:20::636])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 9C914C06161C
+        for <util-linux@vger.kernel.org>; Tue,  5 Oct 2021 03:10:03 -0700 (PDT)
+Received: by mail-pl1-x636.google.com with SMTP id y1so1972634plk.10
+        for <util-linux@vger.kernel.org>; Tue, 05 Oct 2021 03:10:03 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=mime-version:reply-to:from:date:message-id:subject:to
+         :content-transfer-encoding;
+        bh=LKMdW8eXJJQoIzur5jtUB7TYD/pVRqgw99BRVM74YbM=;
+        b=m35cwURwCCWBiyCijo8Lsx3hNgDKkC/8RtE4GIQLQR/Ck16Kw/jL71JhQ0IKJmLmA7
+         ka6+FNM7IdZI2xeD1QSwRlQi/GEJ/978N0awaQgSbFj17UPns5RAh8wn4fBwOPGjMQkB
+         BrdG+upTKQnMfwllyHVArv+0dY454EeJRGCMvyRunbwV0BmI7JYohApUSOinYmo49g2P
+         Dv8QAWJaKOLPovsKSOpFIO3LGkfFzosH2AvP1fcTz8qZxjDwTobfBhCsZavBgKcM9Hka
+         3AHgcPT+HSeMHrJvD9OB+jyMts8T4R2lNi6mHJegFziwFz31OymnC2tiP4UKZZFt7qHG
+         2ATg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
+         :subject:to:content-transfer-encoding;
+        bh=LKMdW8eXJJQoIzur5jtUB7TYD/pVRqgw99BRVM74YbM=;
+        b=74YSsTzEcbOu0CsoAgC3i4LyhQrccSgYEr128fhYh5KGVJNTkjmQe5LvyrqHPiWPEU
+         s/OhFsAhnKK6jk9OHzF/76VzvZ7Ppjdhk1ryTbMUSvDylAagSZOzNyHRqAl0BSvmzUGg
+         s1/4o10BQxB1nM6j0zQ2hfRMrvIbKdtmEX69cjqTPYL4TU1dk9cXFBRQiOdU23Ld56xT
+         828t3BhetRDxQVBWtbhQ9TAkzJ2RShry4m+Ez0f2dZBNWXzzkWOarqTK2Fkhlh1QTvSD
+         +7RPiTs8NjKGxus649mjZC3rNB2M+ixvCwfutPFcioXq0XFZtWFNJJfw8CL2Ro66W+f1
+         6XZg==
+X-Gm-Message-State: AOAM531UAiBbuExB6GP/DduL990jlwuKhxUzJYin2KfHS76XIpJ8PqxD
+        bIE8WTrRcfzgn9RwyjqDnK2yTG901Nmd9xzDLVk=
+X-Google-Smtp-Source: ABdhPJwVfFn6OnsGMuJxTfkgL0jg9WBpylpU4VzyWuuhIlLDYRsCHcuo01IXCdWcYZu2bccx4MFUOBaXDjhJP+cqHCQ=
+X-Received: by 2002:a17:902:8543:b029:12d:461f:a6a8 with SMTP id
+ d3-20020a1709028543b029012d461fa6a8mr4444810plo.1.1633428603123; Tue, 05 Oct
+ 2021 03:10:03 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20211001122553.18345-1-jlayton@kernel.org>
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.12
+Received: by 2002:a05:7300:76cb:b0:3f:de06:fa40 with HTTP; Tue, 5 Oct 2021
+ 03:10:02 -0700 (PDT)
+Reply-To: lydiawright836@gmail.com
+From:   LYDIA WRIGHT <bryanwalker534@gmail.com>
+Date:   Tue, 5 Oct 2021 13:10:02 +0300
+Message-ID: <CAKxfBbQcE2rgds_5fdFRWLbm+TQxkyQvA_uSwOKqzse9+dwBww@mail.gmail.com>
+Subject: Greetings to You
+To:     undisclosed-recipients:;
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-On Fri, Oct 01, 2021 at 08:25:53AM -0400, Jeff Layton wrote:
->  sys-utils/mount.8.adoc | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+Greetings dear,
 
-Applied, thanks.
+My name is Lydia A. Wright, and I'm from Akron, Ohio. The U.S.A, This
+message will most likely surprise you. I'm dying of cancer, which I
+was diagnosed with around two years ago, and I'm recovering from a
+stroke that has made walking difficult.
+Mr. L=C3=A9vi Wright, my husband, passed away in mid-March 2011 from a
+heart attack. I'll be having surgery soon.  I only have a few years
+left in this world, my late spouse has  $10.5 million as a family
+valuable , which I intend to gift to charity.
 
--- 
- Karel Zak  <kzak@redhat.com>
- http://karelzak.blogspot.com
+For more information, please contact me at (lydiawright836@gmail.com)
+. Thank you sincerely!
 
+Mrs. Lydia A. Wright
+Rosalind Ct, Akron, Ohio , U.S.A
