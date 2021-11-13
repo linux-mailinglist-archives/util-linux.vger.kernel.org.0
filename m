@@ -2,69 +2,86 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id A0DF944D521
-	for <lists+util-linux@lfdr.de>; Thu, 11 Nov 2021 11:37:53 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 8060444F2D8
+	for <lists+util-linux@lfdr.de>; Sat, 13 Nov 2021 12:44:16 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S232866AbhKKKkk (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Thu, 11 Nov 2021 05:40:40 -0500
-Received: from us-smtp-delivery-124.mimecast.com ([216.205.24.124]:57629 "EHLO
-        us-smtp-delivery-124.mimecast.com" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S230256AbhKKKkk (ORCPT
-        <rfc822;util-linux@vger.kernel.org>);
-        Thu, 11 Nov 2021 05:40:40 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-        s=mimecast20190719; t=1636627069;
-        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-         in-reply-to:in-reply-to:references:references;
-        bh=thL7sw7IX2f6mSBabpulOLYIWPUFG6kka4DGT6cjIME=;
-        b=M+IJYWV9UCzkSa63UZ1qFrAt/eEytJ7CCdFUW7Sgt9m/fhBlueI/WAjLMGF0urSoFwiJ0n
-        kPBYeZpFE2G4VEKbhA9n/82ND+P46JCZbtG8rJvqdmUH63MCVD6i6lSs3AwGI8WE/cg/lw
-        kpi9Hie2dVyuEB8GTKPOFozwc3/BU8U=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-399-GWg1-oa5PlaJIziianjPTw-1; Thu, 11 Nov 2021 05:37:48 -0500
-X-MC-Unique: GWg1-oa5PlaJIziianjPTw-1
-Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.phx2.redhat.com [10.5.11.11])
-        (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
-        (No client certificate requested)
-        by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 7C62118125C4;
-        Thu, 11 Nov 2021 10:37:47 +0000 (UTC)
-Received: from ws.net.home (ovpn-112-9.ams2.redhat.com [10.36.112.9])
-        by smtp.corp.redhat.com (Postfix) with ESMTPS id 7911E67842;
-        Thu, 11 Nov 2021 10:37:46 +0000 (UTC)
-Date:   Thu, 11 Nov 2021 11:37:43 +0100
-From:   Karel Zak <kzak@redhat.com>
-To:     Peter Seiderer <ps.report@gmx.net>
-Cc:     zhenwei pi <pizhenwei@bytedance.com>, util-linux@vger.kernel.org
-Subject: Re: [PATCH] irqtop: add -c/--cpus option
-Message-ID: <20211111103743.caaxd3chyct4uc4f@ws.net.home>
-References: <20211110031642.141240-1-pizhenwei@bytedance.com>
- <20211110095843.lfg6c7zxhrst42xb@ws.net.home>
- <20211110195051.66091d14@gmx.net>
+        id S233645AbhKMLrG (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Sat, 13 Nov 2021 06:47:06 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:40556 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S232651AbhKMLrD (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Sat, 13 Nov 2021 06:47:03 -0500
+Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com [IPv6:2a00:1450:4864:20::531])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 3C16EC061766
+        for <util-linux@vger.kernel.org>; Sat, 13 Nov 2021 03:44:11 -0800 (PST)
+Received: by mail-ed1-x531.google.com with SMTP id z10so22210568edc.11
+        for <util-linux@vger.kernel.org>; Sat, 13 Nov 2021 03:44:11 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=message-id:from:mime-version:content-transfer-encoding
+         :content-description:subject:to:date:reply-to;
+        bh=cajfq7+/uz+VI+HV0Kjd41gh0t5VS30unom68dBjK08=;
+        b=p+x72EjipMxWgpXvQtho7ddfPeYUKe9vf3RV8nSoYaTcUfdds6mOJJfuSbMy9BnQip
+         e6jCxU726RnQopZOd+KkGbTlLlYWaInkBBH8spAQLxun+uEsp1XRbgiHaEX6YLE/Bg9M
+         xendK5pdPuvgnQqHkw5vDWtMcNn5dj48M5usSF+EkTjZiKo4ZMGn7xebQI3ADcx2wBVE
+         rW9TYtaSvDMd4nq4Tcr+addjmtP+8pIo5zy60Fa7OBc+yHu25hB+wm8WbUznlG2y0sU/
+         SiMc7hxIug/qiHRVjEviRWqNUOeg5GhwQR2ATCcslVk/EgLk98fbO5n4QDZfgbMTxrwa
+         ftVg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:message-id:from:mime-version
+         :content-transfer-encoding:content-description:subject:to:date
+         :reply-to;
+        bh=cajfq7+/uz+VI+HV0Kjd41gh0t5VS30unom68dBjK08=;
+        b=38skMlzSNSLkN1lj8KiI0+Dm5ekLHt5P6Dm9bk86VeWtjcEPB/fIorqT9koARMn8GZ
+         w2CBCsVrmzF0tHUI6IkNu5bK1EZ7ucHI9N09+aYkjtNsnAuDkrvfZYGai7g1YN6cDuMo
+         BTuje+DscCASLoQ/7vfTwydC50QkzYtAsycXcrNeLvGjIncFpM+0hXPltjWcwrWTuMFh
+         6c3JWtmfPsyh0BDa7GKEWgtJBoAB+w6zQQDCOKiM2NV8587zgSr9aUMRfDXVEvcgP6qU
+         5Vw+/AqPxzkoEp2tFuV9Kp4Te8ptZHssLl3lFp7gGPfhXZuafIf57UeL5s4qhhl+ubCD
+         ZqCg==
+X-Gm-Message-State: AOAM5307s08wkV1vm2UskO2fcLZWk80lBX/dFtpYYXMvq8f3FPL9DyX4
+        4tVexoSyqtQzi38NWQmS7cY=
+X-Google-Smtp-Source: ABdhPJzb3rYJx3B9Ar/0b5uBzSdzNNCShUUyy561P2Hkx4JE6YjT4S+AYNDCcIHFf0nsQ3/X6qHpNw==
+X-Received: by 2002:a17:907:628b:: with SMTP id nd11mr24257652ejc.114.1636803849906;
+        Sat, 13 Nov 2021 03:44:09 -0800 (PST)
+Received: from [10.166.224.18] ([212.102.63.69])
+        by smtp.gmail.com with ESMTPSA id z6sm4445520edc.53.2021.11.13.03.44.05
+        (version=TLS1 cipher=AES128-SHA bits=128/128);
+        Sat, 13 Nov 2021 03:44:09 -0800 (PST)
+Message-ID: <618fa509.1c69fb81.480e6.42b0@mx.google.com>
+From:   "Pointerscott Financial Corporation." <drjakes09@gmail.com>
+X-Google-Original-From: Pointerscott Financial Corporation.
+Content-Type: text/plain; charset="iso-8859-1"
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20211110195051.66091d14@gmx.net>
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.11
+Content-Transfer-Encoding: quoted-printable
+Content-Description: Mail message body
+Subject: Business Offer.
+To:     Recipients <Pointerscott@vger.kernel.org>
+Date:   Sat, 13 Nov 2021 12:44:03 +0100
+Reply-To: pointerscott009@gmail.com
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-On Wed, Nov 10, 2021 at 07:50:51PM +0100, Peter Seiderer wrote:
->  	static const struct option longopts[] = {
-> +		{"cpus", required_argument, NULL, 'c'},
->  		{"delay", required_argument, NULL, 'd'},
->  		{"sort", required_argument, NULL, 's'},
->  		{"output", required_argument, NULL, 'o'},
-> 
-> s/cpus/cpu-stat/ ?
+Dear Sir / Madam, =
 
-Ah, yes. Fixed, thanks for your review!
+We are experts in Loan Finance, Investments & Advisory. =
 
- Karel
+We grant loans  in the range of $5,000.00 up to $500,000,000.00 @ 3% intres=
+t rate duration of 1 to 15 years to interested Investors, Companies,  & Ind=
+ividuals.
 
--- 
- Karel Zak  <kzak@redhat.com>
- http://karelzak.blogspot.com
+We fund for:-
+**Xmas Loan**  **Personal Loan**
+**Debt Consolidation** **Buying Building** =
 
+**Business Improving** **Refinancing Commercial Property & many more.
+
+Let us know  if you have projects that need funding for immediate considera=
+tion & negotiation.
+
+Pointerscott Financial Corporation, =
+
+25954 Eden Landing Rd, Hayward CA 94545 United States.
+MOTTO: Making life better for good =A9Copyright 1996-2021 Pointerscott Fina=
+nce Loan Lending Company all rights reserved.
