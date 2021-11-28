@@ -2,14 +2,14 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 66820460B52
-	for <lists+util-linux@lfdr.de>; Mon, 29 Nov 2021 01:00:33 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 617EA460B53
+	for <lists+util-linux@lfdr.de>; Mon, 29 Nov 2021 01:00:39 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S230325AbhK2ADs (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Sun, 28 Nov 2021 19:03:48 -0500
+        id S239202AbhK2ADz (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Sun, 28 Nov 2021 19:03:55 -0500
 Received: from mail.vallenar.cl ([200.54.241.89]:52300 "EHLO mail.vallenar.cl"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S233903AbhK2ABr (ORCPT <rfc822;util-linux@vger.kernel.org>);
+        id S233903AbhK2ABr (ORCPT <rfc822;util-linux-ng@vger.kernel.org>);
         Sun, 28 Nov 2021 19:01:47 -0500
 X-Greylist: delayed 9804 seconds by postgrey-1.27 at vger.kernel.org; Sun, 28 Nov 2021 19:01:47 EST
 Received: from localhost (localhost [127.0.0.1])
