@@ -2,77 +2,59 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id A5042465149
-	for <lists+util-linux@lfdr.de>; Wed,  1 Dec 2021 16:18:03 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 650804654A9
+	for <lists+util-linux@lfdr.de>; Wed,  1 Dec 2021 19:02:47 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1344328AbhLAPVT (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Wed, 1 Dec 2021 10:21:19 -0500
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124]:21302 "EHLO
-        us-smtp-delivery-124.mimecast.com" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S1350872AbhLAPT6 (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Wed, 1 Dec 2021 10:19:58 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-        s=mimecast20190719; t=1638371797;
-        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-         in-reply-to:in-reply-to:references:references;
-        bh=SkbWj/d+Us7+z1Kb6j/BO/TN2sAhF/HRQNDWwJd37GM=;
-        b=c3/8lWpMP2S3NdVYKWBkDmJjl/qfL+XHhUhroJ4yoWZd9AcPpIDbHDlC71gDEdvah4Z1Xt
-        eSqSnrYe67G3Tsc+yJ38eoCwsXQmUveAaEmPPhXrFx/ASbr4pZ3E//HG2tYgjDN8VKIPtN
-        rwVgHR5Vxz44sqOOYCxq4vpxb7esA28=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-80-aHwXferdPsmgaJv4dvyQPQ-1; Wed, 01 Dec 2021 10:16:34 -0500
-X-MC-Unique: aHwXferdPsmgaJv4dvyQPQ-1
-Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.phx2.redhat.com [10.5.11.23])
-        (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
-        (No client certificate requested)
-        by mimecast-mx01.redhat.com (Postfix) with ESMTPS id CBD32760C0;
-        Wed,  1 Dec 2021 15:16:32 +0000 (UTC)
-Received: from ws.net.home (ovpn-112-12.ams2.redhat.com [10.36.112.12])
-        by smtp.corp.redhat.com (Postfix) with ESMTPS id 8845D1972D;
-        Wed,  1 Dec 2021 15:16:31 +0000 (UTC)
-Date:   Wed, 1 Dec 2021 16:16:28 +0100
-From:   Karel Zak <kzak@redhat.com>
-To:     Sean Anderson <seanga2@gmail.com>
-Cc:     util-linux@vger.kernel.org,
-        Mikhail Gusarov <dottedmag@dottedmag.net>,
-        Matthew Harm Bekkema <id@mbekkema.name>,
-        James Peach <jpeach@apache.org>
-Subject: Re: [PATCH v2 0/6] unshare: Add support for mapping ranges of
- user/group IDs
-Message-ID: <20211201151628.gy4t4nnfhk66juc2@ws.net.home>
-References: <20211124182618.1801447-1-seanga2@gmail.com>
+        id S233084AbhLASGH (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Wed, 1 Dec 2021 13:06:07 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:38996 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S229975AbhLASGG (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Wed, 1 Dec 2021 13:06:06 -0500
+Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com [IPv6:2a00:1450:4864:20::42c])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 646AFC061574
+        for <util-linux@vger.kernel.org>; Wed,  1 Dec 2021 10:02:45 -0800 (PST)
+Received: by mail-wr1-x42c.google.com with SMTP id a9so54173767wrr.8
+        for <util-linux@vger.kernel.org>; Wed, 01 Dec 2021 10:02:45 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=mime-version:reply-to:from:date:message-id:subject:to;
+        bh=PA5Eb3SKatYFaqsO/40bx9AAytaL07oA6ydkj8EAbzQ=;
+        b=l0dyQFhZwdC0NrQFbpXNprCAUP9RN2FdUpJjz54WC6ItlDEhHRxpFoh7cavCIloQs8
+         Dvq77Qdh5SMaCUKD4pyABfWOIfRico1G8UKqKur/Z3KRByuWZIUQW7CShhL2YZXCwiUx
+         k7QXF23lwm/UIR9bBcUFWOC+PdLAc5HIoyyFc0DPj3uHstIIWtLGnDzoyw16R3tfrbK/
+         O92fn423du4ThwtvNzFETr/hILRIPJRj6Xu3Q872U6MGvgqTVynsTasCvHZkEgi5lAcv
+         YjVmA5OOSEHws6hpScLgSWeFJwR8Io2F5LZGnBTMgI+g/ew99gR6jsusAkN1dZcyPMaK
+         TiIA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
+         :subject:to;
+        bh=PA5Eb3SKatYFaqsO/40bx9AAytaL07oA6ydkj8EAbzQ=;
+        b=BqaHSyp6NAWFYT0Y6hozkC0rNXZSuBEVFkPjytW5eWTZ8UhNlO1L5FH1220i2Wwc4/
+         5vToMCES2p8I/akVfAbwPkqIn+3NdMdR0yTldA7XM3bSt727Jo7iP6mDzFiih56NMI0/
+         72sHoFiQ7jptX7kHDP8QXKu/OcAA++nKZ2nBTrRMFSgnYD6TyUO204qtav8DbgAggVz1
+         hGZ/wYFVpeAHwLV5QFVuXZD7ve+jYUbZc0jytrax9lxzPKB8M6BIcDVWfQo+AvyOCx06
+         4tD2YtIdi9tFSiSOtfITC5aiseZV/OML6SrI9ruF1317tkrc30Ha2iO+CBjISiRHmmxI
+         nM/w==
+X-Gm-Message-State: AOAM532bQLXZddjh5sOYkaGcaHzjG8XIDNcEo7ri1/Yh8d3kKPQiLOa1
+        h02GuXb0upL+Yn/AawFzlBcZ6IsovAOszPgo4+w=
+X-Google-Smtp-Source: ABdhPJz6NHa4ftTbMIy2i+mdD+18BELfR0sa4J3BDDSsSxJ8KwKluy2ec9nFCZG/HsganGFkSdhZSxE7oS/0Ji3wkZo=
+X-Received: by 2002:a5d:61ca:: with SMTP id q10mr8106170wrv.102.1638381763754;
+ Wed, 01 Dec 2021 10:02:43 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20211124182618.1801447-1-seanga2@gmail.com>
-X-Scanned-By: MIMEDefang 2.84 on 10.5.11.23
+Received: by 2002:adf:f791:0:0:0:0:0 with HTTP; Wed, 1 Dec 2021 10:02:43 -0800 (PST)
+Reply-To: revfrpaulwilliams2@gmail.com
+From:   "Rev. Fr. Paul Williams" <melindagatesfoundation33@gmail.com>
+Date:   Wed, 1 Dec 2021 23:32:43 +0530
+Message-ID: <CA+s4q7=+kt6uEBjOo7eVD8jJQdqD0JbSa2sidoXdcwcYAueCag@mail.gmail.com>
+Subject: Hope This Message Finds You In Good Health.
+To:     undisclosed-recipients:;
+Content-Type: text/plain; charset="UTF-8"
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-On Wed, Nov 24, 2021 at 01:26:12PM -0500, Sean Anderson wrote:
-> Sean Anderson (6):
->   include/c: Add abs_diff macro
->   unshare: Add waitchild helper
->   unshare: Add some helpers for forking and synchronizing
->   unshare: Add options to map blocks of user/group IDs
->   unshare: Add option to automatically create user and group maps
->   unshare: Document --map-{groups,users,auto}
-> 
->  include/c.h              |   8 +
->  include/pathnames.h      |   3 +
->  sys-utils/unshare.1.adoc |  32 +++
->  sys-utils/unshare.c      | 477 ++++++++++++++++++++++++++++++++++-----
->  4 files changed, 465 insertions(+), 55 deletions(-)
-
-Applied, thanks!
-
- Karel
-
--- 
- Karel Zak  <kzak@redhat.com>
- http://karelzak.blogspot.com
-
+Contact Rev. Fr. Paul Williams Immediately For A Charity Donation Of
+$6,200,000.00 United States Dollars At E-Mail:
+revfrpaulwilliams2@gmail.com
