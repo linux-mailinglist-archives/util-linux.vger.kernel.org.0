@@ -2,59 +2,69 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 650804654A9
-	for <lists+util-linux@lfdr.de>; Wed,  1 Dec 2021 19:02:47 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 93348467AB7
+	for <lists+util-linux@lfdr.de>; Fri,  3 Dec 2021 17:00:51 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S233084AbhLASGH (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Wed, 1 Dec 2021 13:06:07 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:38996 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229975AbhLASGG (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Wed, 1 Dec 2021 13:06:06 -0500
-Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com [IPv6:2a00:1450:4864:20::42c])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 646AFC061574
-        for <util-linux@vger.kernel.org>; Wed,  1 Dec 2021 10:02:45 -0800 (PST)
-Received: by mail-wr1-x42c.google.com with SMTP id a9so54173767wrr.8
-        for <util-linux@vger.kernel.org>; Wed, 01 Dec 2021 10:02:45 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=mime-version:reply-to:from:date:message-id:subject:to;
-        bh=PA5Eb3SKatYFaqsO/40bx9AAytaL07oA6ydkj8EAbzQ=;
-        b=l0dyQFhZwdC0NrQFbpXNprCAUP9RN2FdUpJjz54WC6ItlDEhHRxpFoh7cavCIloQs8
-         Dvq77Qdh5SMaCUKD4pyABfWOIfRico1G8UKqKur/Z3KRByuWZIUQW7CShhL2YZXCwiUx
-         k7QXF23lwm/UIR9bBcUFWOC+PdLAc5HIoyyFc0DPj3uHstIIWtLGnDzoyw16R3tfrbK/
-         O92fn423du4ThwtvNzFETr/hILRIPJRj6Xu3Q872U6MGvgqTVynsTasCvHZkEgi5lAcv
-         YjVmA5OOSEHws6hpScLgSWeFJwR8Io2F5LZGnBTMgI+g/ew99gR6jsusAkN1dZcyPMaK
-         TiIA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
-         :subject:to;
-        bh=PA5Eb3SKatYFaqsO/40bx9AAytaL07oA6ydkj8EAbzQ=;
-        b=BqaHSyp6NAWFYT0Y6hozkC0rNXZSuBEVFkPjytW5eWTZ8UhNlO1L5FH1220i2Wwc4/
-         5vToMCES2p8I/akVfAbwPkqIn+3NdMdR0yTldA7XM3bSt727Jo7iP6mDzFiih56NMI0/
-         72sHoFiQ7jptX7kHDP8QXKu/OcAA++nKZ2nBTrRMFSgnYD6TyUO204qtav8DbgAggVz1
-         hGZ/wYFVpeAHwLV5QFVuXZD7ve+jYUbZc0jytrax9lxzPKB8M6BIcDVWfQo+AvyOCx06
-         4tD2YtIdi9tFSiSOtfITC5aiseZV/OML6SrI9ruF1317tkrc30Ha2iO+CBjISiRHmmxI
-         nM/w==
-X-Gm-Message-State: AOAM532bQLXZddjh5sOYkaGcaHzjG8XIDNcEo7ri1/Yh8d3kKPQiLOa1
-        h02GuXb0upL+Yn/AawFzlBcZ6IsovAOszPgo4+w=
-X-Google-Smtp-Source: ABdhPJz6NHa4ftTbMIy2i+mdD+18BELfR0sa4J3BDDSsSxJ8KwKluy2ec9nFCZG/HsganGFkSdhZSxE7oS/0Ji3wkZo=
-X-Received: by 2002:a5d:61ca:: with SMTP id q10mr8106170wrv.102.1638381763754;
- Wed, 01 Dec 2021 10:02:43 -0800 (PST)
+        id S244984AbhLCQEN (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Fri, 3 Dec 2021 11:04:13 -0500
+Received: from foss.arm.com ([217.140.110.172]:50870 "EHLO foss.arm.com"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S235197AbhLCQEN (ORCPT <rfc822;util-linux@vger.kernel.org>);
+        Fri, 3 Dec 2021 11:04:13 -0500
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+        by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id EB3EA1435;
+        Fri,  3 Dec 2021 08:00:48 -0800 (PST)
+Received: from localhost.localdomain (unknown [10.57.3.4])
+        by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 9924B3F73B;
+        Fri,  3 Dec 2021 08:00:47 -0800 (PST)
+From:   =?UTF-8?q?Vincent=20Stehl=C3=A9?= <vincent.stehle@arm.com>
+To:     util-linux@vger.kernel.org
+Cc:     =?UTF-8?q?Vincent=20Stehl=C3=A9?= <vincent.stehle@arm.com>
+Subject: [PATCH] libfdisk: (MBR) recognize EBBR protective partitions
+Date:   Fri,  3 Dec 2021 16:59:08 +0100
+Message-Id: <20211203155908.6906-1-vincent.stehle@arm.com>
+X-Mailer: git-send-email 2.33.0
 MIME-Version: 1.0
-Received: by 2002:adf:f791:0:0:0:0:0 with HTTP; Wed, 1 Dec 2021 10:02:43 -0800 (PST)
-Reply-To: revfrpaulwilliams2@gmail.com
-From:   "Rev. Fr. Paul Williams" <melindagatesfoundation33@gmail.com>
-Date:   Wed, 1 Dec 2021 23:32:43 +0530
-Message-ID: <CA+s4q7=+kt6uEBjOo7eVD8jJQdqD0JbSa2sidoXdcwcYAueCag@mail.gmail.com>
-Subject: Hope This Message Finds You In Good Health.
-To:     undisclosed-recipients:;
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-Contact Rev. Fr. Paul Williams Immediately For A Charity Donation Of
-$6,200,000.00 United States Dollars At E-Mail:
-revfrpaulwilliams2@gmail.com
+The MBR partition type 0xF8 is used by the Arm EBBR specification for
+protective partitions over fixed-location firmware images.
+
+References: https://github.com/ARM-software/ebbr
+Signed-off-by: Vincent Stehlé <vincent.stehle@arm.com>
+---
+ include/pt-mbr-partnames.h | 1 +
+ include/pt-mbr.h           | 1 +
+ 2 files changed, 2 insertions(+)
+
+diff --git a/include/pt-mbr-partnames.h b/include/pt-mbr-partnames.h
+index 19a345029..9304793db 100644
+--- a/include/pt-mbr-partnames.h
++++ b/include/pt-mbr-partnames.h
+@@ -101,6 +101,7 @@
+ 	{0xf1, N_("SpeedStor")},
+ 	{0xf4, N_("SpeedStor")},	/* SpeedStor large partition */
+ 	{0xf2, N_("DOS secondary")},	/* DOS 3.3+ secondary */
++	{0xf8, N_("EBBR protective")},	/* Arm EBBR firmware protective partition */
+ 	{0xfb, N_("VMware VMFS")},
+ 	{0xfc, N_("VMware VMKCORE")},	/* VMware kernel dump partition */
+ 	{0xfd, N_("Linux raid autodetect")},/* Linux raid partition with
+diff --git a/include/pt-mbr.h b/include/pt-mbr.h
+index 0f014cd88..ff658f346 100644
+--- a/include/pt-mbr.h
++++ b/include/pt-mbr.h
+@@ -199,6 +199,7 @@ enum {
+ 	MBR_SPEEDSTOR1_PARTITION	= 0xf1,
+ 	MBR_SPEEDSTOR2_PARTITION	= 0xf4, /* SpeedStor large partition */
+ 	MBR_DOS_SECONDARY_PARTITION	= 0xf2, /* DOS 3.3+ secondary */
++	MBR_EBBR_PROTECTIVE_PARTITION	= 0xf8, /* Arm EBBR firmware protective partition */
+ 	MBR_VMWARE_VMFS_PARTITION	= 0xfb,
+ 	MBR_VMWARE_VMKCORE_PARTITION	= 0xfc, /* VMware kernel dump partition */
+ 	MBR_LINUX_RAID_PARTITION	= 0xfd, /* Linux raid partition with autodetect using persistent superblock */
+-- 
+2.33.0
+
