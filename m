@@ -2,60 +2,92 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 5830146A6E7
-	for <lists+util-linux@lfdr.de>; Mon,  6 Dec 2021 21:34:03 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 3485C46CC23
+	for <lists+util-linux@lfdr.de>; Wed,  8 Dec 2021 05:13:40 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229867AbhLFUha (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Mon, 6 Dec 2021 15:37:30 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:49330 "EHLO
+        id S244170AbhLHERI (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Tue, 7 Dec 2021 23:17:08 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:41508 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S243449AbhLFUh3 (ORCPT
-        <rfc822;util-linux-ng@vger.kernel.org>);
-        Mon, 6 Dec 2021 15:37:29 -0500
-Received: from mail-wr1-x42a.google.com (mail-wr1-x42a.google.com [IPv6:2a00:1450:4864:20::42a])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 9C332C061746
-        for <util-linux-ng@vger.kernel.org>; Mon,  6 Dec 2021 12:33:59 -0800 (PST)
-Received: by mail-wr1-x42a.google.com with SMTP id a18so24965619wrn.6
-        for <util-linux-ng@vger.kernel.org>; Mon, 06 Dec 2021 12:33:59 -0800 (PST)
+        with ESMTP id S233805AbhLHERH (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Tue, 7 Dec 2021 23:17:07 -0500
+Received: from mail-il1-x142.google.com (mail-il1-x142.google.com [IPv6:2607:f8b0:4864:20::142])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 90421C061D5E
+        for <util-linux@vger.kernel.org>; Tue,  7 Dec 2021 20:13:36 -0800 (PST)
+Received: by mail-il1-x142.google.com with SMTP id t8so1052145ilu.8
+        for <util-linux@vger.kernel.org>; Tue, 07 Dec 2021 20:13:36 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=mime-version:reply-to:from:date:message-id:subject:to;
-        bh=2vsWEYJWUfndCUzT3V5P+gV9YCth1b+K4O/I+3P07XU=;
-        b=KiehD49fySEbKS8vRGxgUj2YXdYHtuuW6A+HlplTM4EXDjrSAnNiwPYx8JYeguSmVo
-         Qjg11kbfWXOwTIzpldfioEOfJQ68gFMLMd/6XjguP+23vVyifAmCXKHXAmveqtEKLO5n
-         dyPT5/3rQdrC0jUz2KS06c5UPwOS2+ZwhUvttVmdtwynckLmCTg/SIwBywsoYQ55jykf
-         TD6lMztHckKpmpqkZaxNMm7xATsnB2sVd+xKb2GsI/Zz7xn/XEi4q9Q0e168EoXUtKIk
-         y7PT6qA4eqEcPNg3Rzcrwdge0yvW6dIJkhHu0yUQfm+5fO6PM1XFPKkvzl62PK0rNqY6
-         U7ig==
+        bh=w0n14T57zPuvlg1YaFYy3gRfrUPFN1bDHGIrct+fXgc=;
+        b=cGWxDwe8B66FlIrZtrergIqE5+JvdqJ48sEvPTrvhBJ9xEqZLGyWZmuSPdCEFce/7D
+         /sVR44uqtlb2dmBH+iwgt0kboAu4/HTy3OZt9J6nwOu1H5twbKwVBnMykOKrBLHcBBEb
+         cgMJ7/59oMUtMggaQ9x/N1xe+U0YzN1k+xfCXkO5L7YIW30RFDnvCB0PrD7sMExliX7S
+         joeNtgfdJmxv3l42BA4cQp1HveXj/LpauGoYMsZKrrlYurvW6FC9Nrn9v/z7yklCLUv+
+         2uZJGSHlx+O0Rg+LxyFVcXJ8erZC2O96QnEFLkA1QmSl94RBUxOevwSkF8rG8CDqN06m
+         KdcQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:mime-version:reply-to:from:date:message-id
          :subject:to;
-        bh=2vsWEYJWUfndCUzT3V5P+gV9YCth1b+K4O/I+3P07XU=;
-        b=UJBzoypwVVh9BdFD5PsDIejoJm9ZsHvn9ct4c14rrkw0qsRP4mHiP2bPJrHZdSX9y8
-         iscc5R9T9xKOndn37q5LKW4U1h+IMqV9U44i1K4s6C6up6PjK41aMuFx/AsLLLUYWWq7
-         QL65A29JTb1hIFZhoDZHuje1xvyFdhqZXFJCCsHjudmjvC+IAyNWDM4YKGqxx57E2+ja
-         Da3Dg4+L3CD31TPeNK35TRsFUwBU4ikshtxYQ1CpSnRMuKZZaIAURXSuae/8W1m/XiBV
-         +3l485wtFZRND6vZVKks3LrtXYYO8VwMb0vi0MApg0afmpK+8awZhwBPaQhP5QHHF1QP
-         E9SA==
-X-Gm-Message-State: AOAM531oVRCYxiTvhRJQB1nG9HRqAVMrr1dD3UFx3nuHPs59wCQAhnod
-        gGVWLRPWfxlyTZoagjwTnh0iHjqiuutVBOA70wE=
-X-Google-Smtp-Source: ABdhPJwEEm/gGvd5Qt1Xvvukb8ifVY5M0uuGyTDwqdRXZMPGamsU9Ex9DvOGxDsZO/HidacnvAHgNEnHA9bzfXDFRz4=
-X-Received: by 2002:adf:fb86:: with SMTP id a6mr46007997wrr.35.1638822838205;
- Mon, 06 Dec 2021 12:33:58 -0800 (PST)
+        bh=w0n14T57zPuvlg1YaFYy3gRfrUPFN1bDHGIrct+fXgc=;
+        b=yqlNHpA6JTvy+cFG+ggkMU4A9sWcNpxa6OyjjCrUMf+/abX5UyKVniTrH9i0ppHi7g
+         GPQB8GikmcKXMy3mTwYKvZHMUHzS68efpTtCWyk41E9n1nFpdpFMPK1SMyfeb9pc9ZQY
+         T27jbRlklpwog3PGkykFIZeOzlrGUS4dyr61uXIEt8tLFsAb1U24M3j42pUL1xm73g+z
+         JMNeCBuH8Bp5Gas0dbjciQv2GjFlG7n6dRslcKHXx/pO7kB40lVu7c9iWAbi4vrPuq26
+         yWfH81zTYB0JGzQRHKETiwRfs1KYD6bJptkKr8Lui3+IMeNb9fyYXTPr1BN7uMx+/yO4
+         xxoQ==
+X-Gm-Message-State: AOAM530YQF5F4XtHKRnGKlTnKCYBWL6Fi6TxmWITpTZDx1e60Z+aFtuE
+        1XsW/PVKRvoynvsGVREOkmWPpxxFH2pgkJz+3CY=
+X-Google-Smtp-Source: ABdhPJx498jQ3rDCAEAukf875uPMCUUvAAHHJyp/169nhahBv8dg1ZTt80/LmlBc7j967yPpWx87fZn4PQyrL4JX27A=
+X-Received: by 2002:a92:600f:: with SMTP id u15mr3954317ilb.292.1638936815828;
+ Tue, 07 Dec 2021 20:13:35 -0800 (PST)
 MIME-Version: 1.0
-Received: by 2002:a05:6000:1543:0:0:0:0 with HTTP; Mon, 6 Dec 2021 12:33:57
+Received: by 2002:a05:6e02:1a07:0:0:0:0 with HTTP; Tue, 7 Dec 2021 20:13:35
  -0800 (PST)
-Reply-To: mk83770911@gmail.com
-From:   Margaret Ko May Leung <selinahmukhonyi@gmail.com>
-Date:   Mon, 6 Dec 2021 23:33:57 +0300
-Message-ID: <CAO-4K4NoWtYyZ4UE-zFCsyJz-2p8eWe5ruwaYfDvVTATpd1_2Q@mail.gmail.com>
-Subject: Re
+Reply-To: dj0015639@gmail.com
+From:   David Jackson <enkenpaul@gmail.com>
+Date:   Wed, 8 Dec 2021 05:13:35 +0100
+Message-ID: <CAG7-cQ_JEx-8fDdxn0Ex314ViSE32kaUjoR=sUvV7wmCUiKRGw@mail.gmail.com>
+Subject: FEDERAL BUREAU OF INVESTIGATION
 To:     undisclosed-recipients:;
 Content-Type: text/plain; charset="UTF-8"
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
--- 
-I have a beneficial Business Proposal for you
+Our Ref: RTB /SNT/STB
+To: Beneficiary
+
+This is FBI special agents, David Jackson. I was delegated along side
+others by the United Nations to investigate scammers who has been in
+the business of swindling foreigners especially those that has one
+form of transaction/contracts and another. Please be informed that in
+the course of our investigation, we detected that your name and
+details in our Scammed Monitoring Network. We also found out that you
+were scammed of a huge sum of money by scammers via Western union and
+MoneyGram. Be informed here that in a bid to alleviate the suffering
+of scammed victims, the United Nations initiated this compensation
+program and therefore, you are entitled to the sum of Five Million Two
+Hundred Thousand United States Dollars ($5,200,000.00 USD) for being a
+victim.
+
+Note that the said fund will be transfer to you via the Citibank being
+the paying bank mandated by the United Nations officials.
+
+However, we have to inform you that we have been able to arrest some
+of the swindlers who has been in this illicit business and will all be
+prosecuted accordingly. Be informed as well that we have limited time
+to stay back here, so we will advice that you urgently respond to this
+message ASAP. And do not inform any of the people that collected money
+from you before now about this new development to avoid jeopardizing
+our investigation. All you need to do is to follow our instruction and
+receive your compensation accordingly as directed by the United
+Nations.
+
+We urgently wait to receive your response.
+
+Regards,
+DAVID JACKSON
+FEDERAL BUREAU OF INVESTIGATION
+INVESTIGATION ON ALL ONLINE WIRE TRANSFER
