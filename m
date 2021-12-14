@@ -2,63 +2,85 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id A792B472B00
-	for <lists+util-linux@lfdr.de>; Mon, 13 Dec 2021 12:15:25 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id A219A474069
+	for <lists+util-linux@lfdr.de>; Tue, 14 Dec 2021 11:25:22 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S234628AbhLMLPY (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Mon, 13 Dec 2021 06:15:24 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:50364 "EHLO
+        id S233026AbhLNKZV (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Tue, 14 Dec 2021 05:25:21 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:60686 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S234627AbhLMLPY (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Mon, 13 Dec 2021 06:15:24 -0500
-Received: from mail-ot1-x32c.google.com (mail-ot1-x32c.google.com [IPv6:2607:f8b0:4864:20::32c])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 41B95C061574
-        for <util-linux@vger.kernel.org>; Mon, 13 Dec 2021 03:15:24 -0800 (PST)
-Received: by mail-ot1-x32c.google.com with SMTP id i5-20020a05683033e500b0057a369ac614so17019223otu.10
-        for <util-linux@vger.kernel.org>; Mon, 13 Dec 2021 03:15:24 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=mime-version:reply-to:from:date:message-id:subject:to;
-        bh=OGjovOLLCNX5QV/XTVfdAcAkHFV5TFmZScvINXsyNcw=;
-        b=amxbeW1qbSU8i3+SiOTT0SZezf59ioTCAIPemlbYkGhEuvRsPRmm0abhtT2ET2/Z05
-         ve2h9Rf8RBmWaYddLm8hQXtDI4zkXNpv1V1QSzhHmeywQeuuJx13wnx28KHmCxsqX6Uj
-         WvMl8ToobZZgEQTW2GAg9bRtqlZovMQFWJ3HBcKT5aDeOuvICpXJqOSiN9YCVx9w4go0
-         IqCVFSYMwbqa1FjJdx5qVTVjIs0elTaDA2+X7QNv0f4QkxsREu84mtdSk7sEWn/RGHBi
-         PXPmrMBUik0cIVt5IQ/MbjAgKMpqEWyYI/lOKoEMgzAoBngywvaw2xOG2ZrdII813sjs
-         2ZUQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
-         :subject:to;
-        bh=OGjovOLLCNX5QV/XTVfdAcAkHFV5TFmZScvINXsyNcw=;
-        b=HVjfEUdm2mxRZandDw/FW/VSD7dBZi5OQ7FBDyRrnXzR2ILrFWzGgATYXleOVvIRDg
-         MHWZrNyZlj7fln8BxQ0//hph4X17rjpE+0GVbdO+asSY6EX8WYOCTDdseekYSILA7y3Q
-         sU0rXVER4yKtc1XVrpWyXel0apB1k2/NyJLw8gCH7SF2tmH7YzatV3dvtQ7Pu3MEUpe/
-         DiPTnOHGAUZSgMbHan4w71vrWrZBZr1Vb3PLe2B/mJYNbEsW10Tj4bhho5BRxDWh8ksI
-         iQtUlxIJlhyW1BT4EMsGcAcphuHC79otZBXH/QmM4e+PZ57x7BwddIVWPrhAPM0PrUiO
-         MfvA==
-X-Gm-Message-State: AOAM53192xqNW2TV2Ub+wcNRLdSGjZ4wUiax0wSw9Z1OZHLBMIbMOh9V
-        yweqqDOyaZvdzL02Ynrffg/xu/Dn8AirnuxCck8=
-X-Google-Smtp-Source: ABdhPJy3gnDuHJCydMnxzGDroXPY9eDQFXLkxMT1N4Jh/hpn0hUZ/KgJ1RXILTpYwgQWPWW04yAonaOJy7DVaLBf7B8=
-X-Received: by 2002:a9d:1ca9:: with SMTP id l41mr21084204ota.341.1639394123676;
- Mon, 13 Dec 2021 03:15:23 -0800 (PST)
+        with ESMTP id S233032AbhLNKZU (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Tue, 14 Dec 2021 05:25:20 -0500
+Received: from ams.source.kernel.org (ams.source.kernel.org [IPv6:2604:1380:4601:e00::1])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 7F408C061748
+        for <util-linux@vger.kernel.org>; Tue, 14 Dec 2021 02:25:20 -0800 (PST)
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        (No client certificate requested)
+        by ams.source.kernel.org (Postfix) with ESMTPS id 4AB22B8184A
+        for <util-linux@vger.kernel.org>; Tue, 14 Dec 2021 10:25:19 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 88BA6C34600;
+        Tue, 14 Dec 2021 10:25:16 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+        s=k20201202; t=1639477518;
+        bh=zNtLt9nDpbL31wYC0+OUq9zAEzZAYI95yB2NG8H4Me8=;
+        h=Date:From:To:cc:Subject:In-Reply-To:References:From;
+        b=ppcdbngGyIUH29E/vn+CaaSd+L4Q4pm7hSbSD+RmyhPRANB2NDC0uLqTMvcJttN5q
+         rV0Khac//OSHx23SYL2QMvm22vnYkF9fz7DQvi6l2y08hIn59IFPfVRobLl//FlBQ9
+         pF1YAxjwo4u/+5IFCXt1JFS5fBKMsU6ltP2q1ZICFloVaMee/qEjMjF17fnaG13PMn
+         7ewfEHHYoKPbHZBxiWdfnNYVCEZNkXh4nRluIUPsxUTzYeW2iT6ntOowaZXTsVGlGh
+         F1lwh8tl79PyoJSBuw+m+spPvSIqZC3jo/uBwn8A2X19RtR4J2IdtSmnE85R1piEmP
+         zocBJkVDHqRJA==
+Date:   Tue, 14 Dec 2021 11:25:14 +0100 (CET)
+From:   Jiri Kosina <jikos@kernel.org>
+To:     Vladimir Sementsov-Ogievskiy <vsementsov@virtuozzo.com>
+cc:     util-linux@vger.kernel.org, kzak@redhat.com, kurt@garloff.de,
+        den@openvz.org, msuchanek@suse.de, efremov@linux.com
+Subject: Re: [PATCH 0/2] libblkid: don't use O_NONBLOCK for floppy
+In-Reply-To: <20211209141233.3774937-1-vsementsov@virtuozzo.com>
+Message-ID: <nycvar.YFH.7.76.2112141123570.16505@cbobk.fhfr.pm>
+References: <20211209141233.3774937-1-vsementsov@virtuozzo.com>
+User-Agent: Alpine 2.21 (LSU 202 2017-01-01)
 MIME-Version: 1.0
-Received: by 2002:ac9:5e12:0:0:0:0:0 with HTTP; Mon, 13 Dec 2021 03:15:23
- -0800 (PST)
-Reply-To: rolandnyemih200@gmail.com
-From:   Rowland Nyemih <ki1802416@gmail.com>
-Date:   Mon, 13 Dec 2021 12:15:23 +0100
-Message-ID: <CAPomzy5sraELgHBL4EaMM18838X8y6eUbmQfc68UrX0PYVRL2A@mail.gmail.com>
-Subject: Re:
-To:     undisclosed-recipients:;
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=US-ASCII
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-HI,
-Good day.
-Kindly confirm to me if this is your correct email Address and get
-back to me for our interest.
-Sincerely,
-Rowland
+On Thu, 9 Dec 2021, Vladimir Sementsov-Ogievskiy wrote:
+
+> Good day everyone!
+> 
+> The commit "floppy: reintroduce O_NDELAY fix" was removed from kernel,
+> so we faced the bug described and discussed here:
+> https://bugzilla.suse.com/show_bug.cgi?id=1181018
+> 
+> Discussion in kernel list on reverting the commit:
+> https://www.spinics.net/lists/stable/msg493061.html
+> 
+> In short, I can quote Jiri Kosina's comment:
+> 
+>    opening floppy device node with O_NONBLOCK is asking for all kinds
+>    of trouble
+> 
+> So opening floppy with O_NONBLOCK in blkid leads to failure of blkid,
+> probable failure of mount and unpleasant error messages in dmesg (see
+> also patch 02 for details).
+> 
+> Vladimir Sementsov-Ogievskiy (2):
+>   libblkid: introduce blkid_safe_open
+>   libblkid: reopen floppy without O_NONBLOCK
+
+Ah, thanks, finally someone found the motivation to look into what it'd 
+take to fix this properly in libblkid. FWIW,
+
+	Acked-by: Jiri Kosina <jkosina@suse.cz>
+
+for the changes.
+
+Thank you!
+
+-- 
+Jiri Kosina
+SUSE Labs
+
