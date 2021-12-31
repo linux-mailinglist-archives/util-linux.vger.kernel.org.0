@@ -2,80 +2,47 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 8AF4747FE36
-	for <lists+util-linux@lfdr.de>; Mon, 27 Dec 2021 16:26:17 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 3BF15482724
+	for <lists+util-linux@lfdr.de>; Sat,  1 Jan 2022 10:05:52 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S230158AbhL0P0P (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Mon, 27 Dec 2021 10:26:15 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:33754 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229766AbhL0P0P (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Mon, 27 Dec 2021 10:26:15 -0500
-Received: from mail-oi1-x233.google.com (mail-oi1-x233.google.com [IPv6:2607:f8b0:4864:20::233])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 3CFC5C06173E
-        for <util-linux@vger.kernel.org>; Mon, 27 Dec 2021 07:26:15 -0800 (PST)
-Received: by mail-oi1-x233.google.com with SMTP id j124so25794312oih.12
-        for <util-linux@vger.kernel.org>; Mon, 27 Dec 2021 07:26:15 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=to:from:subject:message-id:date:user-agent:mime-version
-         :content-language:content-transfer-encoding;
-        bh=mAEAhTGfMIlDa+64fpcg52XtTJXuZZCEOJk5oOIDm7E=;
-        b=WYjJDkAaYbnPO3S6VUm8vWVKa1GWhYwSGexQeZlNGnYXvB6JRaliuE9z/qK2MxpSJ0
-         DKyX89bc/OJgOS7359Y79xyuxM0LXbH4veafUNDQd2wKCTFoWuDqvZB0qh22ZrDJWrz3
-         Ka1MdbhImIYKh5qAnKNPtt8dEZuBCNGp2NEBxFSQvsEN6uiU3AH+Qrq7mAaD6xiGjA0t
-         Oh1xE3dCyHhJ0tD+VQfmEDkhurZJEwW41QDtppIJbedysdYNifHJOvD8gXFLpkdMn1gm
-         UHzZ65zAHiGaykf3Esu9FO8hFzwmUIwR30aiUWuYVLCrlidy+Kuq+gan/VdXpUwS129M
-         I2mA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:to:from:subject:message-id:date:user-agent
-         :mime-version:content-language:content-transfer-encoding;
-        bh=mAEAhTGfMIlDa+64fpcg52XtTJXuZZCEOJk5oOIDm7E=;
-        b=ZMdsTkkdesZWKJtyygxaGqLYD4bwktzZj7eI59NPil3+1oRCF/jMzzxLsaIY03f+dF
-         MDR1Q+8I6TnrYEF0A2n0hA8SqrPiBKIPiN0pyNpfk1Bm8H6HbrMVagjlErZEn44ZV8br
-         C8hn4DAscAeuft/uykeRpQlXl/++eiwBeiPGLyEIBN4SVp2Ss04UsrpandU4lff5+9rN
-         6GLxUv/KIyxAdvJOFCRXCpgGrw7GS1ezJnOncAFH49FYSgfqiq7uaj97TGgkVTxfjjRR
-         WaNAjzIu2Wy0pwPFV4i4aZglncgPI1kDbDWLCSyZdlpJ9vJt80Nt2WT+Iq3grRmCInrn
-         thAg==
-X-Gm-Message-State: AOAM531/nmPZXDOKewRsfQqwXYTwoqdaFamGTMMQfln85fLZZFt4YaDm
-        BoiXJMtIwbA3VFaQohbjGZAM8ufG0Xg=
-X-Google-Smtp-Source: ABdhPJyOAsipGs4adPXfxUhPChfHrJiZfSpg3j+IY2sZ908O/xCXRtH/I0mOuY/fnusx2MuovnwJtA==
-X-Received: by 2002:a54:4e90:: with SMTP id c16mr12888922oiy.107.1640618774439;
-        Mon, 27 Dec 2021 07:26:14 -0800 (PST)
-Received: from [192.168.0.92] (cpe-70-94-157-206.satx.res.rr.com. [70.94.157.206])
-        by smtp.gmail.com with ESMTPSA id i16sm3283214oig.15.2021.12.27.07.26.13
-        for <util-linux@vger.kernel.org>
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 27 Dec 2021 07:26:14 -0800 (PST)
-To:     util-linux@vger.kernel.org
-From:   Bruce Dubbs <bruce.dubbs@gmail.com>
-Subject: su currently requires PAM
-Message-ID: <0616772a-c45c-d003-c338-45dd7071fb70@gmail.com>
-Date:   Mon, 27 Dec 2021 09:26:01 -0600
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.10.1
+        id S231422AbiAAJFr (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Sat, 1 Jan 2022 04:05:47 -0500
+Received: from mail.osorio.rs.gov.br ([177.73.0.123]:33713 "EHLO
+        mail.osorio.rs.gov.br" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S231408AbiAAJFr (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Sat, 1 Jan 2022 04:05:47 -0500
+Received: by mail.osorio.rs.gov.br (Postfix, from userid 999)
+        id 1583648AAD49; Fri, 31 Dec 2021 18:14:09 -0200 (BRST)
+Received: from localhost (nac.osorio.rs.gov.br [127.0.0.1])
+        by nac (Postfix) with SMTP id A09BB488F927;
+        Fri, 31 Dec 2021 17:26:39 -0200 (BRST)
+Received: from User (unknown [84.38.132.16])
+        by mail.osorio.rs.gov.br (Postfix) with ESMTP id 47B35488C37A;
+        Fri, 31 Dec 2021 14:58:02 -0200 (BRST)
+Reply-To: <andbaill228@mail2world.com>
+From:   "Ads" <projetos@gov.br>
+Subject: Very Importante Notice
+Date:   Fri, 31 Dec 2021 18:13:17 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
+Content-Type: text/plain;
+        charset="Windows-1251"
 Content-Transfer-Encoding: 7bit
+X-Priority: 3
+X-MSMail-Priority: Normal
+X-Mailer: Microsoft Outlook Express 6.00.2600.0000
+X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2600.0000
+Message-Id: <20211231165802.47B35488C37A@mail.osorio.rs.gov.br>
+To:     undisclosed-recipients:;
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-In linuxfromscratch, we have been using su from the shadow package because the 
-util-linux version requires Linux-PAM.  Recently the maintainers of shadow have 
-announced that they are deprecating su.  Our problem is that some of our users prefer 
-to not install PAM.
+Sir/Madam,
 
-Is it possible to make the requirement of Linux-PAM optional in the util-linux 
-version of su?  From a preliminary inspection of the code, it looks like only 
-login-utils/su-common.c would need to be modified with some #ifdef constructs, but I 
-am not completely comfortable doing that myself.
+Good day to you.
 
-I am asking one of the maintainers to make the change, but I am willing to attempt 
-creating a patch if no one else wants to do it and the approach would be acceptable 
-to the util-linux project.
+I am Dr.Gertjan Vlieghe personal Secretary to Andrew Bailey who double as the Governor, Bank of England (https://en.wikipedia.org/wiki/Andrew_Bailey_%28banker%29). We have an inheritance of a deceased client, who bear the same name  with your surname. kindly contact Andrew Bailey through his personal email (andbaill228@mail2world.com) with your details for more information.
 
-   -- Bruce Dubbs
-      linuxfromscratch.org
+Thank you.
+
+Dr.Gertjan Vlieghe
