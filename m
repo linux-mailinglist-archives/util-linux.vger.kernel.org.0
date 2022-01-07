@@ -2,105 +2,66 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 2B630486708
-	for <lists+util-linux@lfdr.de>; Thu,  6 Jan 2022 16:48:09 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 6B8B3486EFE
+	for <lists+util-linux@lfdr.de>; Fri,  7 Jan 2022 01:40:56 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S240585AbiAFPsI (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Thu, 6 Jan 2022 10:48:08 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:46392 "EHLO
+        id S1344001AbiAGAky (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Thu, 6 Jan 2022 19:40:54 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:56010 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S239388AbiAFPsI (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Thu, 6 Jan 2022 10:48:08 -0500
-Received: from mail-ot1-x32f.google.com (mail-ot1-x32f.google.com [IPv6:2607:f8b0:4864:20::32f])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id E9778C061245
-        for <util-linux@vger.kernel.org>; Thu,  6 Jan 2022 07:48:07 -0800 (PST)
-Received: by mail-ot1-x32f.google.com with SMTP id r7-20020a05683001c700b005906f5b0969so3513350ota.5
-        for <util-linux@vger.kernel.org>; Thu, 06 Jan 2022 07:48:07 -0800 (PST)
+        with ESMTP id S1343865AbiAGAky (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Thu, 6 Jan 2022 19:40:54 -0500
+Received: from mail-io1-xd30.google.com (mail-io1-xd30.google.com [IPv6:2607:f8b0:4864:20::d30])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 792B5C061245
+        for <util-linux@vger.kernel.org>; Thu,  6 Jan 2022 16:40:54 -0800 (PST)
+Received: by mail-io1-xd30.google.com with SMTP id s6so5293542ioj.0
+        for <util-linux@vger.kernel.org>; Thu, 06 Jan 2022 16:40:54 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=subject:to:cc:references:from:message-id:date:user-agent
-         :mime-version:in-reply-to:content-language:content-transfer-encoding;
-        bh=mVbms8uRuxTmpFr310HGXJxRxb0QYt9jatfZGipveew=;
-        b=PFwThjaTmvv1sGhaE/Lu93nOAMO1xgMqkkKtr3YDtEjmJz/KfyBxUN11on0zQFtVsL
-         DbnD8eTQJkH56neTfhJBfhDyTRnxYFaLsn/ieaxUqvZbe65ptnTJ6ZVHal2iW3JRZ+8J
-         fUoeLpL1uWsb7YpBLwhv8YXONxd7cW/1i2LtkKup5UTKJ5Zs4JGyBghVn7DBO7sY9Ujn
-         5kHJ70ASNkhGrh/LYiscscG0faiah6wabRe+WnhPWjy3zcDppeD0fDr1T+gzdta7OunI
-         DBhNi76TbxImFDnVo2h8JxJ5EzmDBRZqEN6z4JrWuFZoH9YKrtyCql9j5g+zY3mVtMVK
-         46dQ==
+        h=mime-version:reply-to:from:date:message-id:subject:to;
+        bh=+s1C11QdmYaQv0ZE2pYGb7Y+Y5UMvBkPF2mRgNMw4lc=;
+        b=o+MKdByC8KmZopIS6GA6P/Yfr/qe7QM5XuqRO6pjcvGHuT2oDE16yfJJc/G4w8jdJ9
+         8ObgdLD1SXp46wDGL/ymWaCjYLqOB0QQAYI/jgo/rqMAXoTMgaPWnHNrookTyt4uNOff
+         WefebM1EDEPzUrO+1A8qw031qCBNcybeiBCU9SYB192AwyHQOn/O5RYxhv4dZ9cpc/Or
+         TBoUYSqzC2negBu8SMgYlF/YrFUeq4xr8FmzIdtx2tvFHxMjZupggaCcWIiVcTnU6Uvq
+         7DJ2Q0+ZHdpa//x5F10hGTxrzDVh1+j7gdpPHPAzb+QfFqGyQE0EZCfObLKf/vb4X6TN
+         9eHQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:subject:to:cc:references:from:message-id:date
-         :user-agent:mime-version:in-reply-to:content-language
-         :content-transfer-encoding;
-        bh=mVbms8uRuxTmpFr310HGXJxRxb0QYt9jatfZGipveew=;
-        b=AtPZrvc1FGKHEpmAssliam+PQ+nkxL4+RV+w46pC97MErZZurJlyXyIv8WNhAxQ3BC
-         allotJ1oGcwefHxiPl3n7N9ZsOqS69fMuAhXRlX+rLHS7PQq9JxDKHDHk2DGpJnno0u/
-         xDfoIBM/cBvWbvCIQLBWDFPOCoMAJHq+l+IpVN8/hwV4fWoVd7p9LGR0YET1cD6BehmC
-         ol1BTzlBJC6cttDC2oDUfszustKQDlQs4PS3WBUSjN6sPrzvHjvzvCId0Jc4489KyjSe
-         8jVgErPacGEoJZxjMAh9wuaJ2HrcDfny8q7ZJ4rTWGM+/GlD5cpKizzo8H0HGtZ/QdOy
-         ETdg==
-X-Gm-Message-State: AOAM533bT3sBXLanaLQN9BFGJt/ruYgFOiXV4RsZjjuGhNTJCnHIWXNA
-        TfZ5c0qO3ZgrfRVESt772v2wwhY442Y=
-X-Google-Smtp-Source: ABdhPJwePFe6/AuxNBqR8LM+U4Cf8DelT/t/+LcDE+dfc3YmWHxGbzKBARqx7cWe9nYNTjbmbs7JIQ==
-X-Received: by 2002:a05:6830:1384:: with SMTP id d4mr5310349otq.139.1641484087201;
-        Thu, 06 Jan 2022 07:48:07 -0800 (PST)
-Received: from [192.168.0.92] (cpe-70-94-157-206.satx.res.rr.com. [70.94.157.206])
-        by smtp.gmail.com with ESMTPSA id z24sm398598oti.32.2022.01.06.07.48.06
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 06 Jan 2022 07:48:07 -0800 (PST)
-Subject: Re: su currently requires PAM
-To:     "Serge E. Hallyn" <serge@hallyn.com>, Karel Zak <kzak@redhat.com>
-Cc:     util-linux@vger.kernel.org
-References: <0616772a-c45c-d003-c338-45dd7071fb70@gmail.com>
- <20220106132746.pcxng3anm5kave6w@ws.net.home>
- <20220106143950.GB24764@mail.hallyn.com>
-From:   Bruce Dubbs <bruce.dubbs@gmail.com>
-Message-ID: <a0dbafed-68d8-5770-b065-886aacbb629c@gmail.com>
-Date:   Thu, 6 Jan 2022 09:48:06 -0600
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.10.1
+        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
+         :subject:to;
+        bh=+s1C11QdmYaQv0ZE2pYGb7Y+Y5UMvBkPF2mRgNMw4lc=;
+        b=7X1vVN5rdbHLuYIfaGBrBwhkJpHNvAD1qYNz7dcEBNphAVg9QoxD6ue5wTbttNtlcx
+         Z6VabTl0KBYKtsn8vb+21Z5O2n8phJmcMxRq7elHrcqpNpUgSCxs04RkWITo1v3ViLWI
+         P7knaZ877pZhlqMfzAMltoJ/bG6wSX0a8XQ4qEZQOY8SBqpBJC2XkBnG30mE1Ign9ztA
+         THdnzEuMIb+nRcpg8bmcYqKoUnKaLU2pywQp8/fFQpB41OWPQJgy6ySjg1glOr3P3yJ+
+         jMNPreVRb85GdCLuUtqIDxBft0M7Ea/VU+2T46WkV2HR/z1NCNh0tENFjRNYY3LZfxPY
+         tGpA==
+X-Gm-Message-State: AOAM532ZsU2/PSKaqJ7bHhsv+yfLNDrRK+rIW+YQDOHv5N23qv5BXd+J
+        4DsQ7Sl3JzQXzW7amUQieCtUNEXBmVhpXZsYuTA=
+X-Google-Smtp-Source: ABdhPJxoY5U1xU/wPz5YtsVXReTdtDAIokwJD0WtmYnSX/uWKYjHOaFROERc8LLPspSRhppQlhoPPFgOmCldCYps4U8=
+X-Received: by 2002:a02:3b5b:: with SMTP id i27mr6936719jaf.64.1641516053946;
+ Thu, 06 Jan 2022 16:40:53 -0800 (PST)
 MIME-Version: 1.0
-In-Reply-To: <20220106143950.GB24764@mail.hallyn.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+Received: by 2002:a05:6e02:b4d:0:0:0:0 with HTTP; Thu, 6 Jan 2022 16:40:53
+ -0800 (PST)
+Reply-To: kimsukyang1@outlook.com
+From:   Kim Suk Yang <legals.unitoffice@gmail.com>
+Date:   Fri, 7 Jan 2022 08:40:53 +0800
+Message-ID: <CAGqQm4d35UxDnq5VneA0uDNBnHsFB7fd2cAbo6a8SRTu=krH6Q@mail.gmail.com>
+Subject: Do You need A Loan?
+To:     undisclosed-recipients:;
+Content-Type: text/plain; charset="UTF-8"
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-On 1/6/22 8:39 AM, Serge E. Hallyn wrote:
-> On Thu, Jan 06, 2022 at 02:27:46PM +0100, Karel Zak wrote:
->> On Mon, Dec 27, 2021 at 09:26:01AM -0600, Bruce Dubbs wrote:
->>> In linuxfromscratch, we have been using su from the shadow package because
->>> the util-linux version requires Linux-PAM.  Recently the maintainers of
->>> shadow have announced that they are deprecating su.  Our problem is that
->>> some of our users prefer to not install PAM.
->>
->> I had a discussion about it with Serge (in CC), it seems the current
->> the conclusion is that "for now shadow will have to keep shipping su".
+-- 
+Hello,
 
-That sounds good.  Thanks for looking into it.
+I am a broker with a linked to high profile investors willing to
+granting loan as debt to fund any projects.
 
-   -- Bruce
-
-> I haven't mentioned it in the Changelog, but have implied here
-> https://github.com/shadow-maint/shadow/issues/464
-> that yes we will not drop su in shadow until there is an alternative.
-> 
->>> Is it possible to make the requirement of Linux-PAM optional in the
->>> util-linux version of su?  From a preliminary inspection of the code, it
->>> looks like only login-utils/su-common.c would need to be modified with some
->>> #ifdef constructs, but I am not completely comfortable doing that myself.
->>
->> The problem is not #ifdef, but that you need local reimplementation
->> for the very basic PAM functionality.
->>
->> I have suggested creating some minimalistic library with PAM
->> compatible API, but without all the functionality. Maybe we can
->> develop this library in util-linux and later offer it to other
->> projects. Volunteers? ;-)
->>                                                           
->> Another possibility is to improve the original PAM to make it possible
->> to compile it without modules, etc.
-
-
+Kim Suk Yang
+Investment Manager
+Please stay safe
