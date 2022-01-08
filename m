@@ -2,66 +2,89 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 6B8B3486EFE
-	for <lists+util-linux@lfdr.de>; Fri,  7 Jan 2022 01:40:56 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id B69B4488419
+	for <lists+util-linux@lfdr.de>; Sat,  8 Jan 2022 15:54:13 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1344001AbiAGAky (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Thu, 6 Jan 2022 19:40:54 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:56010 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1343865AbiAGAky (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Thu, 6 Jan 2022 19:40:54 -0500
-Received: from mail-io1-xd30.google.com (mail-io1-xd30.google.com [IPv6:2607:f8b0:4864:20::d30])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 792B5C061245
-        for <util-linux@vger.kernel.org>; Thu,  6 Jan 2022 16:40:54 -0800 (PST)
-Received: by mail-io1-xd30.google.com with SMTP id s6so5293542ioj.0
-        for <util-linux@vger.kernel.org>; Thu, 06 Jan 2022 16:40:54 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=mime-version:reply-to:from:date:message-id:subject:to;
-        bh=+s1C11QdmYaQv0ZE2pYGb7Y+Y5UMvBkPF2mRgNMw4lc=;
-        b=o+MKdByC8KmZopIS6GA6P/Yfr/qe7QM5XuqRO6pjcvGHuT2oDE16yfJJc/G4w8jdJ9
-         8ObgdLD1SXp46wDGL/ymWaCjYLqOB0QQAYI/jgo/rqMAXoTMgaPWnHNrookTyt4uNOff
-         WefebM1EDEPzUrO+1A8qw031qCBNcybeiBCU9SYB192AwyHQOn/O5RYxhv4dZ9cpc/Or
-         TBoUYSqzC2negBu8SMgYlF/YrFUeq4xr8FmzIdtx2tvFHxMjZupggaCcWIiVcTnU6Uvq
-         7DJ2Q0+ZHdpa//x5F10hGTxrzDVh1+j7gdpPHPAzb+QfFqGyQE0EZCfObLKf/vb4X6TN
-         9eHQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
-         :subject:to;
-        bh=+s1C11QdmYaQv0ZE2pYGb7Y+Y5UMvBkPF2mRgNMw4lc=;
-        b=7X1vVN5rdbHLuYIfaGBrBwhkJpHNvAD1qYNz7dcEBNphAVg9QoxD6ue5wTbttNtlcx
-         Z6VabTl0KBYKtsn8vb+21Z5O2n8phJmcMxRq7elHrcqpNpUgSCxs04RkWITo1v3ViLWI
-         P7knaZ877pZhlqMfzAMltoJ/bG6wSX0a8XQ4qEZQOY8SBqpBJC2XkBnG30mE1Ign9ztA
-         THdnzEuMIb+nRcpg8bmcYqKoUnKaLU2pywQp8/fFQpB41OWPQJgy6ySjg1glOr3P3yJ+
-         jMNPreVRb85GdCLuUtqIDxBft0M7Ea/VU+2T46WkV2HR/z1NCNh0tENFjRNYY3LZfxPY
-         tGpA==
-X-Gm-Message-State: AOAM532ZsU2/PSKaqJ7bHhsv+yfLNDrRK+rIW+YQDOHv5N23qv5BXd+J
-        4DsQ7Sl3JzQXzW7amUQieCtUNEXBmVhpXZsYuTA=
-X-Google-Smtp-Source: ABdhPJxoY5U1xU/wPz5YtsVXReTdtDAIokwJD0WtmYnSX/uWKYjHOaFROERc8LLPspSRhppQlhoPPFgOmCldCYps4U8=
-X-Received: by 2002:a02:3b5b:: with SMTP id i27mr6936719jaf.64.1641516053946;
- Thu, 06 Jan 2022 16:40:53 -0800 (PST)
+        id S229885AbiAHOyM (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Sat, 8 Jan 2022 09:54:12 -0500
+Received: from 139-28-40-42.artus.net.pl ([139.28.40.42]:57416 "EHLO
+        tarta.nabijaczleweli.xyz" rhost-flags-OK-FAIL-OK-OK)
+        by vger.kernel.org with ESMTP id S229703AbiAHOyM (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Sat, 8 Jan 2022 09:54:12 -0500
+Received: from tarta.nabijaczleweli.xyz (unknown [192.168.1.250])
+        by tarta.nabijaczleweli.xyz (Postfix) with ESMTPSA id EFF3A18F4;
+        Sat,  8 Jan 2022 15:54:07 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=nabijaczleweli.xyz;
+        s=202006; t=1641653648;
+        bh=eek8bppQlqDK4ip/7CDpRJc3uTo0BmEzhL7cdljVeso=;
+        h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+        b=o7Rryw22MaK7yK6rEvZWaQzsT25EtIUDDtRxTyWehnGmJPLQIRMOMQjFRS1eSBDKI
+         81Pgha3E6aknYFqepzCj1IvZzMKnjvuJy9BXAixXb9GQmWXfKPSicKpYVf4xVpHEWL
+         Tz2e57K6B6wPKuJ65QJawa5XQxO9rftZkBf5V8RPxUSAEi0lslmiiM5rS6b6i/KkR+
+         ApDU+T+vQFp8H7KGzsnOYleYBogcv7cpg8vN2ke57TorPe0pcSY5WsMoi9xz08gzFU
+         7GKeAGe3ZFD4IJ4p5IvWmmXqfL4UriBdwzT1ulJ5/9dvbF8rIsTuc53833DGH8RvZi
+         ZIHO0p7zGUCCw==
+Date:   Sat, 8 Jan 2022 15:54:06 +0100
+From:   =?utf-8?B?0L3QsNCx?= <nabijaczleweli@nabijaczleweli.xyz>
+To:     1003095@bugs.debian.org
+Cc:     Chris Hofstaedtler <zeha@debian.org>, util-linux@vger.kernel.org
+Subject: Re: Bug#1003095: /usr/bin/script: hangs when child doesn't read
+ input fast enough
+Message-ID: <20220108145406.vkiuvl6iji4oypay@tarta.nabijaczleweli.xyz>
+Mail-Followup-To: 1003095@bugs.debian.org,
+        Chris Hofstaedtler <zeha@debian.org>, util-linux@vger.kernel.org
+References: <20220103230422.syzm2ryzcixuhl7r@tarta.nabijaczleweli.xyz>
+ <20220104162454.3agbsfqfpvaxr5ny@percival.namespace.at>
+ <20220104173124.lv2fyxuxuvc34jdo@tarta.nabijaczleweli.xyz>
 MIME-Version: 1.0
-Received: by 2002:a05:6e02:b4d:0:0:0:0 with HTTP; Thu, 6 Jan 2022 16:40:53
- -0800 (PST)
-Reply-To: kimsukyang1@outlook.com
-From:   Kim Suk Yang <legals.unitoffice@gmail.com>
-Date:   Fri, 7 Jan 2022 08:40:53 +0800
-Message-ID: <CAGqQm4d35UxDnq5VneA0uDNBnHsFB7fd2cAbo6a8SRTu=krH6Q@mail.gmail.com>
-Subject: Do You need A Loan?
-To:     undisclosed-recipients:;
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: multipart/signed; micalg=pgp-sha512;
+        protocol="application/pgp-signature"; boundary="4qitzd6cppbrssi6"
+Content-Disposition: inline
+In-Reply-To: <20220104173124.lv2fyxuxuvc34jdo@tarta.nabijaczleweli.xyz>
+User-Agent: NeoMutt/20211029
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
--- 
-Hello,
 
-I am a broker with a linked to high profile investors willing to
-granting loan as debt to fund any projects.
+--4qitzd6cppbrssi6
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Kim Suk Yang
-Investment Manager
-Please stay safe
+FTR: I've also reported this bug against FreeBSD, which uses a similar
+model but with select(2):
+  https://bugs.freebsd.org/bugzilla/show_bug.cgi?id=3D260938
+
+The proposed patch consists of requesting O_NONBLOCK on the master pty
+and stashing the input received from the child into a buffer,
+pending such a time that the write won't block:
+  https://reviews.freebsd.org/D33789
+
+This seems much easier to apply to the current single-process util-linux
+model (which is to say: I've tried to cleave the current implementation
+into two processes and failed miserably).
+
+=D0=BD=D0=B0=D0=B1
+
+--4qitzd6cppbrssi6
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCgAdFiEEfWlHToQCjFzAxEFjvP0LAY0mWPEFAmHZpYwACgkQvP0LAY0m
+WPFlxA/9GuG4YTWL/ePaTagVCjddmAu2I6WOW0bDIbt0i/XsIbKL1vXMJdBZ0kC1
+kX872hsVjemjLLAGZ06HPbuuPY7capZ/fGDV8nwo/QKh7cHWUNfU00D3zxKTjXeq
+l/Sc0AxmEBdcQQTEwqZN15UC0GsvLXaKgPg2HuZTQHSZmvG9us+3PyVbRwYNr+hH
+3OuFpmbZOqRhhXZYrLofdqrZYsiBnYyF6iz3Q5pous5bTvSRk+mT138CrWLr4Lin
+ML8mse7ifWYubBjw5YV2Z6DecgUXvyPQT7UsNwE9+7Qm0m0VBzyNqQuWTMmwmhoN
+K9XrgVsUeKBRBxmsNSEq7+KOVgodwKgr7IJytfreGyFM6XLHXB1b44prIcdVVHPg
+TTc7voWEunneWAg3qvK+jLysdbewNXdnd0jcVNd3GpzwORVgkbZmosyJPNI76QKp
+4fJUVYkPWY26Hff79iHnHTLAoK2Fn5fd69wyEMSsDrzUUqzTSQmnpKPPyHmiBw63
+rRqMlA/cuLl5MfgR6qrtxZ7/NicNxqULMIb3ODr/sr/hObYb73CKl4hb/3ZpJMV8
+VdKCtSU9L/OCaDLQXr1gQTC7sGvrotW39l+eA3C+xc/YlsPIQg7/wDg2+VqN/i0e
+T1aug4xGYhG9IoHszLlrom0c29QFf2voFYBp0u34KjnNpfAf3+0=
+=cEv9
+-----END PGP SIGNATURE-----
+
+--4qitzd6cppbrssi6--
