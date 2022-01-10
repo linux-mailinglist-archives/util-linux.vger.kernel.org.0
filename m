@@ -2,89 +2,93 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id B69B4488419
-	for <lists+util-linux@lfdr.de>; Sat,  8 Jan 2022 15:54:13 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 2FA8648960D
+	for <lists+util-linux@lfdr.de>; Mon, 10 Jan 2022 11:12:12 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229885AbiAHOyM (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Sat, 8 Jan 2022 09:54:12 -0500
-Received: from 139-28-40-42.artus.net.pl ([139.28.40.42]:57416 "EHLO
-        tarta.nabijaczleweli.xyz" rhost-flags-OK-FAIL-OK-OK)
-        by vger.kernel.org with ESMTP id S229703AbiAHOyM (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Sat, 8 Jan 2022 09:54:12 -0500
-Received: from tarta.nabijaczleweli.xyz (unknown [192.168.1.250])
-        by tarta.nabijaczleweli.xyz (Postfix) with ESMTPSA id EFF3A18F4;
-        Sat,  8 Jan 2022 15:54:07 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=nabijaczleweli.xyz;
-        s=202006; t=1641653648;
-        bh=eek8bppQlqDK4ip/7CDpRJc3uTo0BmEzhL7cdljVeso=;
-        h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-        b=o7Rryw22MaK7yK6rEvZWaQzsT25EtIUDDtRxTyWehnGmJPLQIRMOMQjFRS1eSBDKI
-         81Pgha3E6aknYFqepzCj1IvZzMKnjvuJy9BXAixXb9GQmWXfKPSicKpYVf4xVpHEWL
-         Tz2e57K6B6wPKuJ65QJawa5XQxO9rftZkBf5V8RPxUSAEi0lslmiiM5rS6b6i/KkR+
-         ApDU+T+vQFp8H7KGzsnOYleYBogcv7cpg8vN2ke57TorPe0pcSY5WsMoi9xz08gzFU
-         7GKeAGe3ZFD4IJ4p5IvWmmXqfL4UriBdwzT1ulJ5/9dvbF8rIsTuc53833DGH8RvZi
-         ZIHO0p7zGUCCw==
-Date:   Sat, 8 Jan 2022 15:54:06 +0100
-From:   =?utf-8?B?0L3QsNCx?= <nabijaczleweli@nabijaczleweli.xyz>
-To:     1003095@bugs.debian.org
-Cc:     Chris Hofstaedtler <zeha@debian.org>, util-linux@vger.kernel.org
-Subject: Re: Bug#1003095: /usr/bin/script: hangs when child doesn't read
- input fast enough
-Message-ID: <20220108145406.vkiuvl6iji4oypay@tarta.nabijaczleweli.xyz>
-Mail-Followup-To: 1003095@bugs.debian.org,
-        Chris Hofstaedtler <zeha@debian.org>, util-linux@vger.kernel.org
-References: <20220103230422.syzm2ryzcixuhl7r@tarta.nabijaczleweli.xyz>
- <20220104162454.3agbsfqfpvaxr5ny@percival.namespace.at>
- <20220104173124.lv2fyxuxuvc34jdo@tarta.nabijaczleweli.xyz>
+        id S243689AbiAJKMF (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Mon, 10 Jan 2022 05:12:05 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:59274 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S243700AbiAJKMD (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Mon, 10 Jan 2022 05:12:03 -0500
+Received: from mail-pl1-x632.google.com (mail-pl1-x632.google.com [IPv6:2607:f8b0:4864:20::632])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id F0741C061759
+        for <util-linux@vger.kernel.org>; Mon, 10 Jan 2022 02:12:00 -0800 (PST)
+Received: by mail-pl1-x632.google.com with SMTP id z3so11374339plg.8
+        for <util-linux@vger.kernel.org>; Mon, 10 Jan 2022 02:12:00 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=mime-version:reply-to:from:date:message-id:subject:to;
+        bh=qH7DEHGX/pvouiOmaf+DP+DQ4PWFk+GMEcmnDIJfLZM=;
+        b=mS/+GUPqGjlfiAI7P3l+h62mM1uTCGYrOIQniATD3g8jC6iL1ROwGx/WRTdb7Alyon
+         6nS3OjNikujf/URJQ6l4d0kIHKCsXqhmy35fPfMni7SIUZmDuPTG9lChIVr+huL+i0gr
+         LODrvL6n0dNCFWk1gZC7XnCgT2Lq97XTX9safH3fEMIJ4ih8kQO6JJ/82Het74NYLoXw
+         T7qSAPvSwlQrJrKkgo9MA3dBa28w37P5HsTonvUdJoC1+Upip/pcTWnx/04y2895Nfjc
+         /oZv9XO+X1aXEO7HKljlEzxTYl28GGaMapOO2kVmDu/YLxpRrgkvnkIDt8i87AAgpibw
+         xm3A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
+         :subject:to;
+        bh=qH7DEHGX/pvouiOmaf+DP+DQ4PWFk+GMEcmnDIJfLZM=;
+        b=TmvgZ+fBZhjzuDonKFzM+0dn9a8/ofbzMD3bMkCIguMmNOWGOmpjp5Tiz8Kd/e5umP
+         7+4RsF38dHFZgDcwSj10nR0xbZejI/M+py4huWZGWSyHD6gocMRmh2bXuLU+zfx8Uolk
+         98g4w4aZvEoNFOlQDxGSC2MCaYz/qsbcpH1pTaG2FTSsZ1caPn5KfjD0rhSzKlXNW8Ye
+         Q/zDZASOUDhaVX8gEpYuFH2/0k7+3zAQowLt7SsUcK/FshMpyxOr0EvVW8o8s4ARHM4n
+         SnqDhymPp9mUMGh/kL0/QUfuE3qCNTTyLfLKnmh/olSz0AJyq1aqe+uy10tNcdLnB9D7
+         RqMA==
+X-Gm-Message-State: AOAM530BTSpwdoem9m9DPIuDJz9YOOZ5E/hEiwPqshiBCop8GvoS0+0X
+        VzJs+ys/am8EOPE+9o0+C1UkhHbzZOtgYbod8dA=
+X-Google-Smtp-Source: ABdhPJx5LxpflSWh785lJHj7R/DSz5vmGEEImx03iyDy2+NAuUh/XOf3YKAL105HYnfFQtwirMjJ6eFIc3wCcSfZJ9o=
+X-Received: by 2002:a17:90a:630c:: with SMTP id e12mr1066547pjj.59.1641809520407;
+ Mon, 10 Jan 2022 02:12:00 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
-        protocol="application/pgp-signature"; boundary="4qitzd6cppbrssi6"
-Content-Disposition: inline
-In-Reply-To: <20220104173124.lv2fyxuxuvc34jdo@tarta.nabijaczleweli.xyz>
-User-Agent: NeoMutt/20211029
+Received: by 2002:a05:6a10:e90a:0:0:0:0 with HTTP; Mon, 10 Jan 2022 02:11:59
+ -0800 (PST)
+Reply-To: mgramtransfer110@gmail.com
+From:   deborah mgbogi <komadancasmir@gmail.com>
+Date:   Mon, 10 Jan 2022 02:11:59 -0800
+Message-ID: <CAKfpZ+4Vyj7=ANCiRSpEEiqMQO4HLwfPZoj3YYpuKmSZ6bqnCg@mail.gmail.com>
+Subject: GOOD DAYBENEFICIARY
+To:     undisclosed-recipients:;
+Content-Type: text/plain; charset="UTF-8"
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
+ATTENTION
 
---4qitzd6cppbrssi6
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+we have concluded to Send your payment through Money Gram money
+transfer $4,000.00 daily until the total fund of ($10.5MILLION ) is
+completely transferred. Meanwhile, Mr Hector Giroud has Send you
+$4,000.00 in your name today. So contact Mr Hector Giroud, through
+Money
+Gram money transfer payment Agent to SEND you the MTCN to pick up this
+$4000 now:
 
-FTR: I've also reported this bug against FreeBSD, which uses a similar
-model but with select(2):
-  https://bugs.freebsd.org/bugzilla/show_bug.cgi?id=3D260938
+CONTACT PERSON: Mr Hector Giroud
+Whatsaap Number: (+229) 60738541
+Email Address:(mgramtransfer110@gmail.com)
 
-The proposed patch consists of requesting O_NONBLOCK on the master pty
-and stashing the input received from the child into a buffer,
-pending such a time that the write won't block:
-  https://reviews.freebsd.org/D33789
+Please remember to Call and ask him to give you the Reference Number,
+sender name, question and answer to pick up the $4000.00. Also you
+should send to him your information to cross check it to avoid
+mistake.
+Receiver's Name________________
+Address: ______________________
+Country: ______________________
+Phone Number: _________________
+Your Occupation _______________
+I.D Card:______________________
 
-This seems much easier to apply to the current single-process util-linux
-model (which is to say: I've tried to cleave the current implementation
-into two processes and failed miserably).
+Though, Mr Hector Giroud has sent $4000 in your name today so contact
+Mr Hector Girouad or you call him as soon as you
+receive
+this email and tell him to give you the Reference Number, sender name
+and question/answer to pick the $4000 Please let us know as soon as
+you
+received all your fund
 
-=D0=BD=D0=B0=D0=B1
-
---4qitzd6cppbrssi6
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCgAdFiEEfWlHToQCjFzAxEFjvP0LAY0mWPEFAmHZpYwACgkQvP0LAY0m
-WPFlxA/9GuG4YTWL/ePaTagVCjddmAu2I6WOW0bDIbt0i/XsIbKL1vXMJdBZ0kC1
-kX872hsVjemjLLAGZ06HPbuuPY7capZ/fGDV8nwo/QKh7cHWUNfU00D3zxKTjXeq
-l/Sc0AxmEBdcQQTEwqZN15UC0GsvLXaKgPg2HuZTQHSZmvG9us+3PyVbRwYNr+hH
-3OuFpmbZOqRhhXZYrLofdqrZYsiBnYyF6iz3Q5pous5bTvSRk+mT138CrWLr4Lin
-ML8mse7ifWYubBjw5YV2Z6DecgUXvyPQT7UsNwE9+7Qm0m0VBzyNqQuWTMmwmhoN
-K9XrgVsUeKBRBxmsNSEq7+KOVgodwKgr7IJytfreGyFM6XLHXB1b44prIcdVVHPg
-TTc7voWEunneWAg3qvK+jLysdbewNXdnd0jcVNd3GpzwORVgkbZmosyJPNI76QKp
-4fJUVYkPWY26Hff79iHnHTLAoK2Fn5fd69wyEMSsDrzUUqzTSQmnpKPPyHmiBw63
-rRqMlA/cuLl5MfgR6qrtxZ7/NicNxqULMIb3ODr/sr/hObYb73CKl4hb/3ZpJMV8
-VdKCtSU9L/OCaDLQXr1gQTC7sGvrotW39l+eA3C+xc/YlsPIQg7/wDg2+VqN/i0e
-T1aug4xGYhG9IoHszLlrom0c29QFf2voFYBp0u34KjnNpfAf3+0=
-=cEv9
------END PGP SIGNATURE-----
-
---4qitzd6cppbrssi6--
+Best Regards.
+mrs deborah mgbogi
+...
