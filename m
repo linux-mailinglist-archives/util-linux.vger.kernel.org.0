@@ -2,21 +2,21 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id C94944996A4
-	for <lists+util-linux@lfdr.de>; Mon, 24 Jan 2022 22:19:43 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id C38A249A671
+	for <lists+util-linux@lfdr.de>; Tue, 25 Jan 2022 03:21:33 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1376545AbiAXVFY convert rfc822-to-8bit (ORCPT
-        <rfc822;lists+util-linux@lfdr.de>); Mon, 24 Jan 2022 16:05:24 -0500
-Received: from [103.153.79.64] ([103.153.79.64]:65289 "EHLO [103.153.79.64]"
+        id S245739AbiAYCAK convert rfc822-to-8bit (ORCPT
+        <rfc822;lists+util-linux@lfdr.de>); Mon, 24 Jan 2022 21:00:10 -0500
+Received: from [103.153.79.64] ([103.153.79.64]:64334 "EHLO [103.153.79.64]"
         rhost-flags-FAIL-FAIL-OK-FAIL) by vger.kernel.org with ESMTP
-        id S1392081AbiAXUu0 (ORCPT <rfc822;util-linux-ng@vger.kernel.org>);
-        Mon, 24 Jan 2022 15:50:26 -0500
+        id S1356772AbiAXTta (ORCPT <rfc822;util-linux@vger.kernel.org>);
+        Mon, 24 Jan 2022 14:49:30 -0500
 Reply-To: Nasser Rashid <nasserrashid.uae@gmail.com>
 From:   Nasser Rashid <anice.fronteracapitalgroup@gmail.com>
-To:     util-linux-ng@vger.kernel.org
+To:     util-linux@vger.kernel.org
 Subject: EXPO 2020 BUSINESS PROPOSAL
-Date:   24 Jan 2022 12:50:28 -0800
-Message-ID: <20220124125028.7CB3C8E08EB12CEE@gmail.com>
+Date:   24 Jan 2022 11:49:30 -0800
+Message-ID: <20220124114929.2550024DF2BA9155@gmail.com>
 MIME-Version: 1.0
 Content-Type: text/plain;
         charset="utf-8"
