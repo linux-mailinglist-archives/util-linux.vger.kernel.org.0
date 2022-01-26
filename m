@@ -2,94 +2,40 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id CA08F4A5276
-	for <lists+util-linux@lfdr.de>; Mon, 31 Jan 2022 23:35:23 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 1655D4A5559
+	for <lists+util-linux@lfdr.de>; Tue,  1 Feb 2022 03:44:12 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S233483AbiAaWfV (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Mon, 31 Jan 2022 17:35:21 -0500
-Received: from smtp-out1.suse.de ([195.135.220.28]:40402 "EHLO
-        smtp-out1.suse.de" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S233207AbiAaWfV (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Mon, 31 Jan 2022 17:35:21 -0500
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
-        (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-         key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
-        (No client certificate requested)
-        by smtp-out1.suse.de (Postfix) with ESMTPS id 4395021118;
-        Mon, 31 Jan 2022 22:35:20 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.cz; s=susede2_rsa;
-        t=1643668520; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-         mime-version:mime-version:content-type:content-type:
-         content-transfer-encoding:content-transfer-encoding:
-         in-reply-to:in-reply-to:references:references;
-        bh=YnEMLlUufvNedtiHvS8s8SClqfNhu/MvtWPFG5+MWvA=;
-        b=eWA37jTPv6dy1esb3iqY970SWMezttcY5ECgJtN2gpG1cgxUNvjzqFvQ+hO5TCC/I2MXLt
-        xUnhc0a4IbbzfzaOv0syj9CITZwn7NV6MghKHgn+yKt5UhJOrXKRmTzzlXH9UXJ4SQwpP2
-        2koKLIMQvuwSVE2v7FmUQjz/SHtyef4=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.cz;
-        s=susede2_ed25519; t=1643668520;
-        h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-         mime-version:mime-version:content-type:content-type:
-         content-transfer-encoding:content-transfer-encoding:
-         in-reply-to:in-reply-to:references:references;
-        bh=YnEMLlUufvNedtiHvS8s8SClqfNhu/MvtWPFG5+MWvA=;
-        b=d29daOdI9HnkfQFQwNsEW0ijisgQ5HPcCtOdwf6erAS4yfCiuDDMgJ1detQc9UwCSsks7p
-        Rn/0FlJIUPkllOCA==
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
-        (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-         key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
-        (No client certificate requested)
-        by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 21D5413CC7;
-        Mon, 31 Jan 2022 22:35:20 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([192.168.254.65])
-        by imap2.suse-dmz.suse.de with ESMTPSA
-        id RmraBShk+GGHFgAAMHmgww
-        (envelope-from <sbrabec@suse.cz>); Mon, 31 Jan 2022 22:35:20 +0000
-Message-ID: <55ff6182-f447-dd80-67f0-7e230c28712c@suse.cz>
-Date:   Mon, 31 Jan 2022 23:35:19 +0100
+        id S232729AbiBACoL (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Mon, 31 Jan 2022 21:44:11 -0500
+Received: from [36.155.112.122] ([36.155.112.122]:36080 "EHLO
+        ecs-42a4.novalocal" rhost-flags-FAIL-FAIL-OK-FAIL) by vger.kernel.org
+        with ESMTP id S232663AbiBACoJ (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Mon, 31 Jan 2022 21:44:09 -0500
+Received: from User (localhost [127.0.0.1])
+        by ecs-42a4.novalocal (Postfix) with SMTP id B689B40DE0E;
+        Thu, 27 Jan 2022 00:16:49 +0800 (CST)
+Reply-To: <ande.bailey@mail2world.com>
+From:   "Bailey" <ande.bailey@mail2world.com>
+Subject: read
+Date:   Wed, 26 Jan 2022 18:15:24 +0200
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.5.0
-Subject: Re: [PATCH] fstrim: Add fstab option x-fstrim.notrim
-Content-Language: en-US
-To:     Karel Zak <kzak@redhat.com>
-Cc:     util-linux@vger.kernel.org
-References: <823c644a-9eec-4832-0f52-e5e9419aad95@suse.cz>
- <20220131095517.ngxxlu3vb74orljy@ws.net.home>
-From:   Stanislav Brabec <sbrabec@suse.cz>
-Organization: SUSE Linux, s. r. o.
-In-Reply-To: <20220131095517.ngxxlu3vb74orljy@ws.net.home>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain;
+        charset="Windows-1251"
+Content-Transfer-Encoding: 7bit
+X-Priority: 3
+X-MSMail-Priority: Normal
+X-Mailer: Microsoft Outlook Express 6.00.2600.0000
+X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2600.0000
+Message-Id: <20220126161649.B689B40DE0E@ecs-42a4.novalocal>
+To:     undisclosed-recipients:;
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-My original patch contains 2 adoc chunks: one for -A, second for 
---listed-in. X-fstrim.notrim works for both. Was the omitting of the 
-chunk for --listed-in intentional?
-
-(Maybe it could be mentioned in a better way, so only one mention will 
-be enough.)
-
-Karel Zak wrote:
-> On Mon, Jan 31, 2022 at 01:21:30AM +0100, Stanislav Brabec wrote:
->> Sometimes it makes sense to skip fstrim for selected file mounts, but
->> still be able to use fstrim.service.
->>
->> Add a possibility to specify "x-fstrim.notrim" in fstab.
-> Good idea, but I've merged it with small change.
->
-
--- 
-Best Regards / S pozdravem,
-
-Stanislav Brabec
-software developer
----------------------------------------------------------------------
-SUSE LINUX, s. r. o.                         e-mail: sbrabec@suse.com
-Křižíkova 148/34 (Corso IIa)                    tel: +420 284 084 060
-186 00 Praha 8-Karlín                          fax:  +420 284 084 001
-Czech Republic                                    http://www.suse.cz/
-PGP: 830B 40D5 9E05 35D8 5E27 6FA3 717C 209F A04F CD76
-
+Good Day
+I Am Andrew Bailey Governor Bank of England (https://en.wikipedia.org/wiki/Andrew_Bailey_%28banker%29)
+I have a proposal for you, if you know you can Handle this,
+Contact me through my private email:(ande.bailey@mail2world.com)
+with your full names and address, phone numbers for more details. I await your reply,
+Regards,
+Andrew Bailey.
