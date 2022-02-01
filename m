@@ -2,40 +2,66 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 1655D4A5559
-	for <lists+util-linux@lfdr.de>; Tue,  1 Feb 2022 03:44:12 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 641924A58C9
+	for <lists+util-linux@lfdr.de>; Tue,  1 Feb 2022 09:51:49 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S232729AbiBACoL (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Mon, 31 Jan 2022 21:44:11 -0500
-Received: from [36.155.112.122] ([36.155.112.122]:36080 "EHLO
-        ecs-42a4.novalocal" rhost-flags-FAIL-FAIL-OK-FAIL) by vger.kernel.org
-        with ESMTP id S232663AbiBACoJ (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Mon, 31 Jan 2022 21:44:09 -0500
-Received: from User (localhost [127.0.0.1])
-        by ecs-42a4.novalocal (Postfix) with SMTP id B689B40DE0E;
-        Thu, 27 Jan 2022 00:16:49 +0800 (CST)
-Reply-To: <ande.bailey@mail2world.com>
-From:   "Bailey" <ande.bailey@mail2world.com>
-Subject: read
-Date:   Wed, 26 Jan 2022 18:15:24 +0200
+        id S235693AbiBAIvr (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Tue, 1 Feb 2022 03:51:47 -0500
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124]:30175 "EHLO
+        us-smtp-delivery-124.mimecast.com" rhost-flags-OK-OK-OK-OK)
+        by vger.kernel.org with ESMTP id S233828AbiBAIvq (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Tue, 1 Feb 2022 03:51:46 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+        s=mimecast20190719; t=1643705506;
+        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+         in-reply-to:in-reply-to:references:references;
+        bh=Tnxc9vEF31LxzHzOkY3Tm8WhK5FD/QwIc50MRepiQks=;
+        b=NB14oqY99imsw1s9qjL08Nisx9AGXnrPY40Z1sCel0wTVP3sy+eYaT8uyhbCYx0JheLe/A
+        u5hQI2ibCgDZk39Xm0Ar2bXKl9hKaK3F6d2wHpn395NMTiBYBvLzX6oqMIBDanWSY30h9w
+        iFmyifHsJa1a4FTV5/kKMddepE6XRcE=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ us-mta-441-dVhCQ_vrNwmf-Ys9HMub8Q-1; Tue, 01 Feb 2022 03:51:45 -0500
+X-MC-Unique: dVhCQ_vrNwmf-Ys9HMub8Q-1
+Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.phx2.redhat.com [10.5.11.13])
+        (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+        (No client certificate requested)
+        by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 250EC84DA41;
+        Tue,  1 Feb 2022 08:51:44 +0000 (UTC)
+Received: from ws.net.home (ovpn-112-8.ams2.redhat.com [10.36.112.8])
+        by smtp.corp.redhat.com (Postfix) with ESMTPS id 756BE5E4B7;
+        Tue,  1 Feb 2022 08:51:43 +0000 (UTC)
+Date:   Tue, 1 Feb 2022 09:51:40 +0100
+From:   Karel Zak <kzak@redhat.com>
+To:     Stanislav Brabec <sbrabec@suse.cz>
+Cc:     util-linux@vger.kernel.org
+Subject: Re: [PATCH] fstrim: Add fstab option x-fstrim.notrim
+Message-ID: <20220201085140.2mjhxln3zvvx43tq@ws.net.home>
+References: <823c644a-9eec-4832-0f52-e5e9419aad95@suse.cz>
+ <20220131095517.ngxxlu3vb74orljy@ws.net.home>
+ <55ff6182-f447-dd80-67f0-7e230c28712c@suse.cz>
 MIME-Version: 1.0
-Content-Type: text/plain;
-        charset="Windows-1251"
-Content-Transfer-Encoding: 7bit
-X-Priority: 3
-X-MSMail-Priority: Normal
-X-Mailer: Microsoft Outlook Express 6.00.2600.0000
-X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2600.0000
-Message-Id: <20220126161649.B689B40DE0E@ecs-42a4.novalocal>
-To:     undisclosed-recipients:;
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <55ff6182-f447-dd80-67f0-7e230c28712c@suse.cz>
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.13
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-Good Day
-I Am Andrew Bailey Governor Bank of England (https://en.wikipedia.org/wiki/Andrew_Bailey_%28banker%29)
-I have a proposal for you, if you know you can Handle this,
-Contact me through my private email:(ande.bailey@mail2world.com)
-with your full names and address, phone numbers for more details. I await your reply,
-Regards,
-Andrew Bailey.
+On Mon, Jan 31, 2022 at 11:35:19PM +0100, Stanislav Brabec wrote:
+> My original patch contains 2 adoc chunks: one for -A, second for
+> --listed-in. X-fstrim.notrim works for both. Was the omitting of the chunk
+> for --listed-in intentional?
+
+Ah, no. I have applied the patch manually as git-am had a problem with
+your email. Fixed now.
+
+    Karel
+
+-- 
+ Karel Zak  <kzak@redhat.com>
+ http://karelzak.blogspot.com
+
