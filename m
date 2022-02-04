@@ -1,194 +1,65 @@
 Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
-Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 3197A4A9E8F
-	for <lists+util-linux@lfdr.de>; Fri,  4 Feb 2022 19:03:36 +0100 (CET)
+Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
+	by mail.lfdr.de (Postfix) with ESMTP id D1E704A9F97
+	for <lists+util-linux@lfdr.de>; Fri,  4 Feb 2022 20:01:06 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1377330AbiBDSDf (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Fri, 4 Feb 2022 13:03:35 -0500
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124]:42679 "EHLO
-        us-smtp-delivery-124.mimecast.com" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S241744AbiBDSDc (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Fri, 4 Feb 2022 13:03:32 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-        s=mimecast20190719; t=1643997812;
-        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-         content-transfer-encoding:content-transfer-encoding:
-         in-reply-to:in-reply-to:references:references;
-        bh=o7XcRwxCW7bpdO1D8PIhj5dP5XyhvAOmpO56rjcmtyk=;
-        b=TJcvfjse30jz8TGu+ICre9yjQYI8G/qQwDzPkDkuKl4nLxoyvJlSmWVDKg4iLRaWv4woZs
-        FwZLUSBii8eUKs2L80FZc6+8mm27upx+1WAbHAfqdAPtT5G5rszrjyqnbU130/n54OMxfT
-        JUiOdyWdfOnDzLq/rWvHF/RVWCBMn2Q=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-176-gShzDbcuMjW3KS_PkIIQDQ-1; Fri, 04 Feb 2022 13:03:27 -0500
-X-MC-Unique: gShzDbcuMjW3KS_PkIIQDQ-1
-Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.phx2.redhat.com [10.5.11.11])
-        (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
-        (No client certificate requested)
-        by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 22018814245;
-        Fri,  4 Feb 2022 18:03:26 +0000 (UTC)
-Received: from localhost (unknown [10.64.242.145])
-        by smtp.corp.redhat.com (Postfix) with ESMTP id 20D457E22F;
-        Fri,  4 Feb 2022 18:03:25 +0000 (UTC)
-Date:   Sat, 05 Feb 2022 03:03:24 +0900 (JST)
-Message-Id: <20220205.030324.1280110384368183671.yamato@redhat.com>
-To:     matorola@gmail.com
-Cc:     zeha@debian.org, kzak@redhat.com, linux-kernel@vger.kernel.org,
-        linux-fsdevel@vger.kernel.org, util-linux@vger.kernel.org
-Subject: Re: [ANNOUNCE] util-linux v2.38-rc1
-From:   Masatake YAMATO <yamato@redhat.com>
-In-Reply-To: <20220202.232106.1642450897216370276.yamato@redhat.com>
-References: <20220131192337.lzpofr4pz3lhgtl3@zeha.at>
-        <CADxRZqwq=XmXZnnENU+vD7_2oC_VtqhG40P-xg=QAzKchT-3Ng@mail.gmail.com>
-        <20220202.232106.1642450897216370276.yamato@redhat.com>
-Organization: Red Hat Japan, Inc.
-Mime-Version: 1.0
-Content-Type: Text/Plain; charset=us-ascii
-Content-Transfer-Encoding: 7bit
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.11
+        id S229737AbiBDTBF (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Fri, 4 Feb 2022 14:01:05 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:53668 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S229854AbiBDTBE (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Fri, 4 Feb 2022 14:01:04 -0500
+Received: from mail-yb1-xb35.google.com (mail-yb1-xb35.google.com [IPv6:2607:f8b0:4864:20::b35])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 6F7CFC061714
+        for <util-linux@vger.kernel.org>; Fri,  4 Feb 2022 11:01:04 -0800 (PST)
+Received: by mail-yb1-xb35.google.com with SMTP id m6so21403136ybc.9
+        for <util-linux@vger.kernel.org>; Fri, 04 Feb 2022 11:01:04 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=mime-version:reply-to:from:date:message-id:subject:to;
+        bh=/rL+TycpMQLfB5P4Zn9xgGfUWg8yPCNTwrE46ZNldMM=;
+        b=bUwW99I8/Qu4cQ1dlLvyVODEkIuoC3AudDf31hL4TN0y116p/Th+Rudum50G8yX/vG
+         ENLcdJZ1dwf6CPpYTS0fsox5PJh1V8jkIBNjHdJ7YqEAk3YXLcxJfmykDNuWDT0t49sj
+         LAvx7cFwTrHCB/r0SI5n8hLaFJi8A3Ojd3zlRagVzwj73s+BzREC5emREGcx+6f978fV
+         +ifhpingPF0QzLufJVeUrGkg+pyoRNHeOJo3Tgvi1rNnRWtnmkZtDnlbyMQTdBZYCsgJ
+         7S2o7E9Sht4Quo2IdZl6HpCMqkRg8wJy9hLEjs9oMovumfTsnHUl9Iq6J+HYZOliWEnZ
+         +aPw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
+         :subject:to;
+        bh=/rL+TycpMQLfB5P4Zn9xgGfUWg8yPCNTwrE46ZNldMM=;
+        b=SaHubgSPABYGjHmJdbGZ0tTQOdSKcOya2hpIHfTXrJ+Vvph7Lu1xeZ6fuvi8BL1rZF
+         bFDah9ors3rJXBraisDMIn2QU2IWVKlCZ6fhzuEmpFXJX2L3XokbMhmtlPYlHVYTg01z
+         Gm9QKB0QU90mVr3lGp1beUP9q702HVPdESYoin5qSJ1KZlGaTiYA3Rwj32EHSJSNh3qJ
+         wm0ryabYR0kqVqyPODxMNbeROeiB3igFWtjLrXwGvlPtx+MVD2W3mJ4eGrENN8ZB4ZIi
+         XUJ3Sg/40lhXEE05qouUdl2Lzvb/17JAsg0mzn3DyiqLLsUx3X+uV7ISQ9AafRaeZDON
+         r9ew==
+X-Gm-Message-State: AOAM531JA2uT27n19ursslbmEapiNfSu8SDN7r1D9hY48SCRwWIi2XI4
+        zvvyMN6oI5aCjdO8Rvtc8y8K2KFlA/ce3oYWdUs=
+X-Google-Smtp-Source: ABdhPJyaqv2zIVT7j61NUrwAdVvhCX2kR6KreaNt4fFbqWhFTxHrR6z5BvojAbT2x2jbrz0BcYqz4d8t4J2zr2qmOVM=
+X-Received: by 2002:a5b:a0f:: with SMTP id k15mr552318ybq.477.1644001263182;
+ Fri, 04 Feb 2022 11:01:03 -0800 (PST)
+MIME-Version: 1.0
+Received: by 2002:a05:7010:5da4:b0:1f3:2acd:2a5 with HTTP; Fri, 4 Feb 2022
+ 11:01:02 -0800 (PST)
+Reply-To: avamedicinemed3@gmail.com
+From:   Dr Ava Smith <tracywilliam091@gmail.com>
+Date:   Fri, 4 Feb 2022 11:01:02 -0800
+Message-ID: <CADSJPKxg09EVU0PNzW3cGR2_J+pr+ZnziP2r17Ux3O81S5gHxg@mail.gmail.com>
+Subject: From Dr Ava Smith from United States
+To:     undisclosed-recipients:;
+Content-Type: text/plain; charset="UTF-8"
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-Hi,
-
-As I commented on GitHub, I made a pull request for fixing this issue.
-I found a bug in the test case, not in lsfd itself.
-
-https://github.com/util-linux/util-linux/pull/1595
-https://github.com/util-linux/util-linux/pull/1595/commits/abd93fcecfbb1a1fac7032fac9d2903c5d2d3a38
-
-Masatake YAMATO
-
-From: Masatake YAMATO <yamato@redhat.com>
-Subject: Re: [ANNOUNCE] util-linux v2.38-rc1
-Date: Wed, 02 Feb 2022 23:21:06 +0900 (JST)
-
-> Hi,
-> 
-> thank you for testing lsfd.
-> 
-> Could you tell me what kind of file system for /etc/passwd do you use for testing?
-> When trying to reproduce the bug, could you applying the following change?
-> 
-> 
-> diff --git a/tests/ts/lsfd/lsfd-functions.bash b/tests/ts/lsfd/lsfd-functions.bash
-> index 597e48cf4..a81647ccb 100644
-> --- a/tests/ts/lsfd/lsfd-functions.bash
-> +++ b/tests/ts/lsfd/lsfd-functions.bash
-> @@ -43,6 +43,13 @@ function lsfd_compare_dev {
->      # if we use findmnt.
->      local FINDMNT_MNTID_DEV=$("${FINDMNT}" --raw -n -o ID,MAJ:MIN | grep "^${MNTID}")
->      echo 'FINDMNT[RUN]:' $?
-> -    [ "${MNTID} ${DEV}" == "${FINDMNT_MNTID_DEV}" ]
-> -    echo 'DEV[STR]:' $?
-> +    if [ "${MNTID} ${DEV}" == "${FINDMNT_MNTID_DEV}" ]; then
-> +	echo 'DEV[STR]:' 0
-> +    else
-> +	echo 'DEV[STR]:' 1
-> +	echo 'MNTID:' "${MNTID}"
-> +	echo 'DEV:' "${DEV}"
-> +	echo 'MNTID DEV:' "${MNTID} ${DEV}"
-> +	echo 'FINDMNT_MNTID_DEV:' "${FINDMNT_MNTID_DEV}"
-> +    fi
->  }
-> 
-> 
-> Masatake YAMATO
-> 
-> From: Anatoly Pugachev <matorola@gmail.com>
-> Subject: Re: [ANNOUNCE] util-linux v2.38-rc1
-> Date: Wed, 2 Feb 2022 12:57:47 +0300
-> 
->> On Tue, Feb 1, 2022 at 11:48 PM Chris Hofstaedtler <zeha@debian.org> wrote:
->>>
->>> Hello,
->>>
->>> * Karel Zak <kzak@redhat.com> [220131 16:15]:
->>> >
->>> > The util-linux release v2.38-rc1 is available at
->>> >
->>> >   http://www.kernel.org/pub/linux/utils/util-linux/v2.38/
->>> >
->>> > Feedback and bug reports, as always, are welcomed.
->>>
->>> Thanks.
->>>
->>> Some lsfd tests appear to fail in a Debian sbuild build environment,
->>> in that they differ in the expected/actual values of DEV[STR] (see
->>> below). I did not find time to investigate this closer, but thought
->>> it would be best to report it sooner than later.
->>>
->>> Best,
->>> Chris
->>>
->>> ---snip---
->>>
->>>          lsfd: read-only regular file         ... FAILED (lsfd/mkfds-ro-regular-file)
->>> ========= script: /<<PKGBUILDDIR>>/tests/ts/lsfd/mkfds-ro-regular-file =================
->>> ================= OUTPUT =====================
->>>      1  ABC         3  r--  REG /etc/passwd   1
->>>      2  COMMAND,ASSOC,MODE,TYPE,NAME,POS: 0
->>>      3  PID[RUN]: 0
->>>      4  PID[STR]: 0
->>>      5  INODE[RUN]: 0
->>>      6  INODE[STR]: 0
->>>      7  UID[RUN]: 0
->>>      8  UID[STR]: 0
->>>      9  USER[RUN]: 0
->>>     10  USER[STR]: 0
->>>     11  SIZE[RUN]: 0
->>>     12  SIZE[STR]: 0
->>>     13  MNTID[RUN]: 0
->>>     14  DEV[RUN]: 0
->>>     15  FINDMNT[RUN]: 0
->>>     16  DEV[STR]: 1
->>> ================= EXPECTED ===================
->>>      1  ABC         3  r--  REG /etc/passwd   1
->>>      2  COMMAND,ASSOC,MODE,TYPE,NAME,POS: 0
->>>      3  PID[RUN]: 0
->>>      4  PID[STR]: 0
->>>      5  INODE[RUN]: 0
->>>      6  INODE[STR]: 0
->>>      7  UID[RUN]: 0
->>>      8  UID[STR]: 0
->>>      9  USER[RUN]: 0
->>>     10  USER[STR]: 0
->>>     11  SIZE[RUN]: 0
->>>     12  SIZE[STR]: 0
->>>     13  MNTID[RUN]: 0
->>>     14  DEV[RUN]: 0
->>>     15  FINDMNT[RUN]: 0
->>>     16  DEV[STR]: 0
->>> ================= O/E diff ===================
->>> --- /<<PKGBUILDDIR>>/tests/output/lsfd/mkfds-ro-regular-file    2022-01-31 19:12:43.802603811 +0000
->>> +++ /<<PKGBUILDDIR>>/tests/expected/lsfd/mkfds-ro-regular-file  2022-01-31 14:57:47.000000000 +0000
->>> @@ -13,4 +13,4 @@
->>>  MNTID[RUN]: 0
->>>  DEV[RUN]: 0
->>>  FINDMNT[RUN]: 0
->>> -DEV[STR]: 1
->>> +DEV[STR]: 0
->>> ==============================================
->> 
->> Chris,
->> 
->> i had this error on my test system
->> 
->> https://github.com/util-linux/util-linux/issues/1511
->> 
->> but i can't reliably reproduce it now (on my current kernel 5.17.0-rc2
->> and on debian kernel 5.15.0-3-sparc64-smp )
->> Tested with the following command line (for current git util-linux sources):
->> $ for i in {1..100}; do tests/run.sh lsfd; done  | grep FAILED
->> 
->> ^^ no failed output
->> 
->> I can reopen the issue above, so we could try to reproduce it.
->> 
-> 
-
+-- 
+Hello Dear,
+how are you today?hope you are fine
+My name is Dr Ava Smith ,Am an English and French nationalities.
+I will give you pictures and more details about me as soon as i hear from you
+Thanks
+Ava
