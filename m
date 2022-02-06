@@ -2,72 +2,91 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 459F44AACB4
-	for <lists+util-linux@lfdr.de>; Sat,  5 Feb 2022 22:29:50 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 3E18F4AAE34
+	for <lists+util-linux@lfdr.de>; Sun,  6 Feb 2022 07:12:19 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S236857AbiBEV3s (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Sat, 5 Feb 2022 16:29:48 -0500
-Received: from [194.99.46.237] ([194.99.46.237]:48099 "EHLO
-        slot0.bluewaterleisure.com" rhost-flags-FAIL-FAIL-OK-OK)
-        by vger.kernel.org with ESMTP id S232507AbiBEV3r (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Sat, 5 Feb 2022 16:29:47 -0500
-DKIM-Signature: v=1; a=rsa-sha1; c=relaxed/relaxed; s=dkim; d=bluewaterleisure.com;
- h=Reply-To:From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding; i=ker.mon@bluewaterleisure.com;
- bh=ImQGtuRDoNbvtdFGjvjF16Jk5vk=;
- b=UN+w9J3yR4fKkjHhQ84OETgH5rW69W3DbY4v4p8MU0YOhoHBT8cR8SLsNSL6LaBSWMWkdLXAGzqX
-   IEfbamRxtVpSQJI2aUjfxEvCWNUgv6NC1uBcUkbH7IbAE+vN7Xokb2ZmdgdYn/CGEBrtkJS00dEG
-   /NjwSbv1NPHfqgCrCgHOfKm4jbAc+YAjY7e+WipHuyaHZzcRQkWL8ka1155EwaR+yp4Z+TjxUaoU
-   RG0ODoVPFnpvA2dlyEfeXq9FkQtGHkS+5ZWD6BvCsNJBUojxXkZn6gQyApTrvLzvIQ3HbE46E0w3
-   9+wB4UAKr+CbKlPBcvDx6vIDnSq1bG1R58Umcw==
-DomainKey-Signature: a=rsa-sha1; c=nofws; q=dns; s=dkim; d=bluewaterleisure.com;
- b=su3yPv6e+9gT1JkuR2ZVqbLCwFYGJ4Pb2eHTZ2BY6QE48+ZXgRH37K/r750HW9tsAEMcrvwMsDIo
-   sn+wetniHTCes/QyTlp5QOYr2S1weUGedJWUVt4D1ZGWRzvDeKyZOHEQ60B/7XYEPx6g3lir6EUx
-   Bjke2gswvRGa0V6Xid0x3ux2GKFtjdhSyX6tKh0MFbukUv2Lu68+KavjoNrVcVbkKjPrj3ZLwo+1
-   oFNnyzlYaQx/l+7QcD6luc48yq0UesznyKhWnvFndxnJ1Yz8zLp+3Opqe7MuKYmjGOcF1Km4oqSb
-   aoD0855LrnZHVM6DhhjLwUeQcHrXKRvf1AK1qQ==;
-Reply-To: tomander231@gmail.com
-From:   "Barrister Mustafa" <ker.mon@bluewaterleisure.com>
+        id S229773AbiBFGMN (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Sun, 6 Feb 2022 01:12:13 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:40326 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S229436AbiBFGMN (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Sun, 6 Feb 2022 01:12:13 -0500
+Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com [IPv6:2a00:1450:4864:20::62e])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 9A79EC06173B
+        for <util-linux@vger.kernel.org>; Sat,  5 Feb 2022 22:12:12 -0800 (PST)
+Received: by mail-ej1-x62e.google.com with SMTP id og43so8514933ejc.0
+        for <util-linux@vger.kernel.org>; Sat, 05 Feb 2022 22:12:12 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=AJNplkduRkwArIJLwhgWwaoFpxt+TkYbd0CiNXfgt6E=;
+        b=Dga1aMl4KRmU3Y8AZC0nwfa5oU7IiUxNs+UAw1k4ZS69Ikn63XqrfSQOuC2bMo/khO
+         yn3FBMNppgB+Ai7MLnpPt2zgzZalFMHY3ye8HQtTPLVBNkg21TicoVdM5fSc7ptUcOto
+         n+jqgwWXfsIPBX0hMwI8hG3RPzqNw+9M2tl//Xazm0sAWNWN2OMhOGu8J7EcNM2K97Eb
+         3sGaW5CiBZHs9jBCr52LW0K/z7HTzzR/vUCAb5NRCA6ovTn+LZXAxkMXlcP8hs0f2zFa
+         w66RuopfmwsDxAQdajkE6MHYA+FsF9J9/5LvLDbTOKODNsgeGf91rtWIQZC4+LOX6f8N
+         Eh5w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=AJNplkduRkwArIJLwhgWwaoFpxt+TkYbd0CiNXfgt6E=;
+        b=dzSL1IYbpo9ygyGiXalaO+Ft3vREDz4BSrEWbx73b3sqma1A2KQWFYuX1kV8fbM8qq
+         +a8IzzWZpitbgQs6zhbG5f/InltFI/jgaEiNq4DB2ZVEaSYOzqeA7fk7H67/9qczlk+8
+         Dz9tsKT5iZ3nDO02T6KeC0E+0iUgL7++Y+qhTk51MOC7EGR2j93Y6C9UDfpmOPfLqh8+
+         3w4QmnYKtKIDfPWLGzAZbVBnrcrbN/GFE8k2nakbuamkgbACMCiDH+aM1PVhf4zTGp4l
+         OwCuuNeXrhhv8uBcqb9SbUF2VavE3q+L2KhHLcHwFjTSP6mvYnPMvWjzFpT5Ww3itjrn
+         pWcg==
+X-Gm-Message-State: AOAM530Yl3y2vWdkdtUoCImrlNsjNWOL9ZLJlVsm3vx4Q8tAdj3Djddf
+        HYdU/XmU3gSf+RvcgxvvSySGzKCKt74=
+X-Google-Smtp-Source: ABdhPJzk7tYBjyq6u6wyRVYHaUY1h81p0s1M2v3Fshb4lPEmdaPbI5HTgBbGVws5q45WIg/uPivOiA==
+X-Received: by 2002:a17:907:3e0c:: with SMTP id hp12mr5372087ejc.685.1644127930980;
+        Sat, 05 Feb 2022 22:12:10 -0800 (PST)
+Received: from localhost.localdomain (178.115.71.30.wireless.dyn.drei.com. [178.115.71.30])
+        by smtp.gmail.com with ESMTPSA id bv2sm2264420ejb.154.2022.02.05.22.12.10
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sat, 05 Feb 2022 22:12:10 -0800 (PST)
+From:   Johannes Altmanninger <aclopte@gmail.com>
 To:     util-linux@vger.kernel.org
-Subject: Aufmerksamkeit:
-Date:   5 Feb 2022 22:21:54 +0100
-Message-ID: <20220205222154.FE4E063C92856403@bluewaterleisure.com>
+Cc:     Johannes Altmanninger <aclopte@gmail.com>
+Subject: [PATCH 1/4] newgrp.1.adoc: use bold font for command name in synopsis
+Date:   Sun,  6 Feb 2022 07:11:55 +0100
+Message-Id: <20220206061158.752262-1-aclopte@gmail.com>
+X-Mailer: git-send-email 2.35.1.301.gcdacdcff8b.dirty
 MIME-Version: 1.0
-Content-Type: text/plain;
-        charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,
+        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE
+        autolearn=ham autolearn_force=no version=3.4.6
+X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
+        lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-Lieb util-linux,
+newgrp.1.adoc is our only man page that doesn't use bold font for
+the command name in the synopsis. Fix that.
 
-Ich bin Barrister Mustafa Ayvaz, hoffe, diese E-Mail findet Sie=20
-gut. Ich bin Anwalt des verstorbenen Herrn Robert, der aufgrund=20
-des Coronavirus sein Leben verlor, kontaktierte er w=C3=A4hrend seiner=20
-Gesch=C3=A4ftsreise in China. Ich kontaktiere Sie, um mit mir=20
-zusammenzuarbeiten, um die =C3=9Cberweisung eines Fonds von vier=20
-Millionen vierhundertzwanzigtausend Dollar zu sichern, verlie=C3=9F=20
-er.
+Signed-off-by: Johannes Altmanninger <aclopte@gmail.com>
+---
+ login-utils/newgrp.1.adoc | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Ich habe nach dem n=C3=A4chsten Angeh=C3=B6rigen meines verstorbenen Kunden=
-=20
-gesucht, ohne Erfolg, da ich seinen aktuellen Wohnsitz und seine=20
-Kontaktdaten nicht habe. Als ich suchte, stie=C3=9F ich auf Ihr Profil=20
-mit dem gleichen Nachnamen und am selben Ort mit den N=C3=A4chsten=20
-Angeh=C3=B6rigen. Ich beschloss, dich zu kontaktieren und dich als=20
-Bonafide Next Of Kin zu benutzen.
+diff --git a/login-utils/newgrp.1.adoc b/login-utils/newgrp.1.adoc
+index b50b0d5f3..629078b5e 100644
+--- a/login-utils/newgrp.1.adoc
++++ b/login-utils/newgrp.1.adoc
+@@ -14,7 +14,7 @@ newgrp - log in to a new group
+ 
+ == SYNOPSIS
+ 
+-newgrp [_group_]
++*newgrp* [_group_]
+ 
+ == DESCRIPTION
+ 
+-- 
+2.35.1.301.gcdacdcff8b.dirty
 
-Ich bitte Sie um Ihre Zustimmung, Sie als Next Of Kin meines=20
-verstorbenen Kunden zu pr=C3=A4sentieren, da Sie beide den gleichen=20
-Nachnamen tragen. Die Gelder werden dann an Sie als Beg=C3=BCnstigten=20
-in Ihrem Land =C3=BCberwiesen und im Verh=C3=A4ltnis 60:40 geteilt, das=20
-sind 60% f=C3=BCr mich und 40% f=C3=BCr Sie. F=C3=BCr weitere Details=20
-kontaktieren Sie mich bitte sofort f=C3=BCr weitere Informationen =C3=BCber=
-=20
-diese meine E-Mail. 
-
-Danach sende ich Ihnen die Details, wie die Transaktion beginnen=20
-wird
-
-Gr=C3=BC=C3=9Fe
-Mustafa Ayvaz
