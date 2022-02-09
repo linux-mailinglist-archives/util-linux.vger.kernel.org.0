@@ -2,55 +2,68 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id ED4514AEE0B
-	for <lists+util-linux@lfdr.de>; Wed,  9 Feb 2022 10:31:27 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 52B334AF7E6
+	for <lists+util-linux@lfdr.de>; Wed,  9 Feb 2022 18:11:55 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229498AbiBIJ2U (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Wed, 9 Feb 2022 04:28:20 -0500
-Received: from gmail-smtp-in.l.google.com ([23.128.96.19]:55122 "EHLO
+        id S238031AbiBIRLk (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Wed, 9 Feb 2022 12:11:40 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:45654 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229544AbiBIJ2U (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Wed, 9 Feb 2022 04:28:20 -0500
-Received: from mail.namespace.at (mail.namespace.at [IPv6:2a01:190:1801:100::235])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 776C9E0BBB6E
-        for <util-linux@vger.kernel.org>; Wed,  9 Feb 2022 01:28:14 -0800 (PST)
-Date:   Wed, 9 Feb 2022 10:26:52 +0100
-From:   Chris Hofstaedtler <zeha@debian.org>
-To:     util-linux <util-linux@vger.kernel.org>
-Cc:     Karel Zak <kzak@redhat.com>
-Subject: hardlink test failures on arm* in 2.38-rc1
-Message-ID: <20220209092652.2f76mnewhwxlnxsr@zeha.at>
+        with ESMTP id S237888AbiBIRLj (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Wed, 9 Feb 2022 12:11:39 -0500
+Received: from mail-vk1-xa2a.google.com (mail-vk1-xa2a.google.com [IPv6:2607:f8b0:4864:20::a2a])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 43CA1C05CB89
+        for <util-linux@vger.kernel.org>; Wed,  9 Feb 2022 09:11:42 -0800 (PST)
+Received: by mail-vk1-xa2a.google.com with SMTP id d27so1553629vkn.5
+        for <util-linux@vger.kernel.org>; Wed, 09 Feb 2022 09:11:42 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=mime-version:from:date:message-id:subject:to;
+        bh=n5JZG3l5wSabHxVEIH8twRo71vloJ96XZUgmhfr5JbA=;
+        b=k7QtO3rv3Hv+0PinM4Xe+M70Weo0s1TwJXul4dwN+dLYUFxgnWn4JMOXyW+hkfcLNY
+         QnSTOEkUw4Q0zy2JxltiwGahR6yuLucBPkSUQcQDRVFTbHMqmjzIWqumsQPqv8kbtE/T
+         oxAoXOqieD87HYvJAYCofybvm8Y1NC6leqeiZ29DjLU79pQtGMfD7oIQfFzHtazbHnGb
+         Isr+XjmlwqQp9F0dGo85jI1Db7TYntrdA/FI2AoyGfVbH7TGPwrQD2vFLhBhv3b4F0On
+         6/vsS52Uy3gOyDIURuqLbKS2tdz61HF9Fl/fxC0JCKCrwxHGn/W0/0BK63dYkwttm0QE
+         FL2g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+        bh=n5JZG3l5wSabHxVEIH8twRo71vloJ96XZUgmhfr5JbA=;
+        b=QZOsUhbIzXWLShkXqHIXB71fniBBXm2SOcGBmuzTHs1sUWBk9n5aAm9Rq4nW5vFBLm
+         UEl3Y0/jL23I07VH9XpFxldCv5XkGyblwHUxb2fvfYKVysqFFjTlBKUYxVp42FPerV9Y
+         3i72iW9uosJW0k58qhB3ipLzxxtby6lis8QXvzSv/qsboWvRUt6wJVMBIqNrifR/xZhF
+         HAcjsUu11ypMVJLmG2AqhPHanAJC0E4s/jyz/y7j7+QoQxXXEBIImnFY9FawUGnr/e3b
+         tqimKqANX20w8h4v8ydrIlljJUy3wm7miEWTOyCfUSTwc+pvj1V2683AOu4jo19/hyb1
+         +UKw==
+X-Gm-Message-State: AOAM530oWqCrRtI/lkCQfCIGYlxZ//CDI/XsOJ4lIcjE9macFp42yjxG
+        mlpWnYZypvHuSue1XJYeaQaTf3uFzxIEXuQhMg==
+X-Google-Smtp-Source: ABdhPJzT6MJQZBvIMRXsciDylCg6Hn1xMqLrkM1qz1YXkF2ImsTbXiTV5jMTmRFw/HKUQbeVjUt4HqMiK7XvKQzqbFE=
+X-Received: by 2002:a05:6122:1297:: with SMTP id i23mr1196658vkp.30.1644426701441;
+ Wed, 09 Feb 2022 09:11:41 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,SPF_HELO_NONE,
-        SPF_NONE,T_SCC_BODY_TEXT_LINE autolearn=ham autolearn_force=no
-        version=3.4.6
+Received: by 2002:a05:612c:2106:b0:287:788b:a71d with HTTP; Wed, 9 Feb 2022
+ 09:11:40 -0800 (PST)
+From:   Lomax Chambers <barrlomaxchambers@gmail.com>
+Date:   Wed, 9 Feb 2022 17:11:40 +0000
+Message-ID: <CA++gbhs8ghS9EGLu0kfF6q7_E65izg=nduGEgsb_aFSkcmHsCw@mail.gmail.com>
+Subject: Dearest
+To:     undisclosed-recipients:;
+Content-Type: text/plain; charset="UTF-8"
+X-Spam-Status: No, score=0.8 required=5.0 tests=BAYES_20,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,FREEMAIL_REPLY,
+        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE
+        autolearn=no autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-Hello Karel, list,
+Dearest,
+I sent this message to you before without responding.
+please,confirm this and reply for more
+instruction.(jerryesq22@gmail.com or wilfredesq23@gmail.com)
 
-in 25a125ee89d0da9e4b815b1ca27b001c7d07ce8a the hardlink test
-outputs added "Method:     sha256". It appears this is not constant
-across architectures. On the Debian buildds at least, on arm64,
-armel, armhf hardlink produces this output and then obviously
-the test output comparison fails:
-
-  hardlink: cannot initialize sha256 method, use 'memcmp' fallback
-
--Method:                   memcmp
-+Method:                   sha256
-
-If you want to look at the logs:
-https://buildd.debian.org/status/fetch.php?pkg=util-linux&arch=arm64&ver=2.38~rc1-1&stamp=1644348017&file=log
-https://buildd.debian.org/status/fetch.php?pkg=util-linux&arch=armel&ver=2.38~rc1-1&stamp=1644348866&file=log
-
-Can this be made tolerant of architecture or is the "method" relevant
-for these particular tests?
-
-Many thanks,
-Chris
+WILFRED Esq.
+Telephone +228 96277913
