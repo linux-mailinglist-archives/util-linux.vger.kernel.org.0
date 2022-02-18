@@ -2,73 +2,122 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 011C14BB4A1
-	for <lists+util-linux@lfdr.de>; Fri, 18 Feb 2022 09:55:53 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id B45344BBC9D
+	for <lists+util-linux@lfdr.de>; Fri, 18 Feb 2022 16:56:45 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S232923AbiBRI4F convert rfc822-to-8bit (ORCPT
-        <rfc822;lists+util-linux@lfdr.de>); Fri, 18 Feb 2022 03:56:05 -0500
-Received: from mxb-00190b01.gslb.pphosted.com ([23.128.96.19]:37030 "EHLO
+        id S235174AbiBRP47 (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Fri, 18 Feb 2022 10:56:59 -0500
+Received: from mxb-00190b01.gslb.pphosted.com ([23.128.96.19]:58716 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S232922AbiBRI4F (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Fri, 18 Feb 2022 03:56:05 -0500
-Received: from fjxxll.cn (unknown [IPv6:240e:37a:2bb:f700:211:32ff:fe2c:a785])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 9385847AC4
-        for <util-linux@vger.kernel.org>; Fri, 18 Feb 2022 00:55:48 -0800 (PST)
-Received: from Unknown (unknown [192.241.178.187])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        with ESMTP id S231990AbiBRP47 (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Fri, 18 Feb 2022 10:56:59 -0500
+Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 422D1E0D0
+        for <util-linux@vger.kernel.org>; Fri, 18 Feb 2022 07:56:41 -0800 (PST)
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+        (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+         key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
         (No client certificate requested)
-        by fjxxll.cn (Postfix) with ESMTPSA id 270AE6DC0012;
-        Thu, 17 Feb 2022 21:16:22 +0800 (CST)
-Message-ID: <5055E3B0BB6F41F22E2B62DF3BEC35D0@cdxhyqu>
-Reply-To: "Fredrik Elvebakk" <fcresswell9@gmail.com>
-From:   "Fredrik Elvebakk" <investment@dnb.no>
-Subject: Re:
-Date:   Thu, 17 Feb 2022 05:16:20 -0800
+        by smtp-out1.suse.de (Postfix) with ESMTPS id 02D75219A7
+        for <util-linux@vger.kernel.org>; Fri, 18 Feb 2022 15:56:40 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.cz; s=susede2_rsa;
+        t=1645199800; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:
+         mime-version:mime-version:content-type:content-type:
+         content-transfer-encoding:content-transfer-encoding;
+        bh=dbRNJSf8AZC3Y2pGsPqmOyKIVZXG11U7XITXCUE8GwE=;
+        b=et9glVTQgf82a7QJk6IiGoB7+JYaRwOExcw+WB0H/kDKx7SxQ4ONj1pc4/2zhMjUe9yhzr
+        H35npPCGaIFGxJPI+z+hSUuS4QudOeKmPYA+CwjoYqDYTTKer0dEHIpBZlWxEHt6tKMgqk
+        GqI/C+UC0ncoRGYKYas3yvXK97JO5IY=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.cz;
+        s=susede2_ed25519; t=1645199800;
+        h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:
+         mime-version:mime-version:content-type:content-type:
+         content-transfer-encoding:content-transfer-encoding;
+        bh=dbRNJSf8AZC3Y2pGsPqmOyKIVZXG11U7XITXCUE8GwE=;
+        b=B8OD/dvgNEs0KGCwUJrUu5DKTXyef/T/Ee88skGTUnLb8WA+xjfjtVB0RYTdoOqWt+0Z68
+        351bNgfXBqGR6ECQ==
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+        (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+         key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+        (No client certificate requested)
+        by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id E0A2B13C9B
+        for <util-linux@vger.kernel.org>; Fri, 18 Feb 2022 15:56:39 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([192.168.254.65])
+        by imap2.suse-dmz.suse.de with ESMTPSA
+        id ZGhSNLfBD2JTMQAAMHmgww
+        (envelope-from <sbrabec@suse.cz>)
+        for <util-linux@vger.kernel.org>; Fri, 18 Feb 2022 15:56:39 +0000
+Message-ID: <1a366a68-8f04-44d7-2a26-6cbe2989d2d4@suse.cz>
+Date:   Fri, 18 Feb 2022 16:56:39 +0100
 MIME-Version: 1.0
-Content-Type: text/plain;
-        format=flowed;
-        charset="windows-1251";
-        reply-type=original
-Content-Transfer-Encoding: 8BIT
-X-Priority: 3
-X-MSMail-Priority: Normal
-X-Mailer: Microsoft Windows Live Mail 16.4.3528.331
-X-MimeOLE: Produced By Microsoft MimeOLE V16.4.3528.331
-X-Spam-Status: Yes, score=7.6 required=5.0 tests=BAYES_50,
-        FREEMAIL_FORGED_REPLYTO,FREEMAIL_REPLYTO_END_DIGIT,MISSING_HEADERS,
-        RDNS_NONE,REPLYTO_WITHOUT_TO_CC,SPF_HELO_NONE,SPF_SOFTFAIL,
-        STOX_REPLY_TYPE,T_SCC_BODY_TEXT_LINE,XPRIO autolearn=no
-        autolearn_force=no version=3.4.6
-X-Spam-Report: *  0.8 BAYES_50 BODY: Bayes spam probability is 40 to 60%
-        *      [score: 0.5000]
-        *  0.4 STOX_REPLY_TYPE No description available.
-        *  1.0 MISSING_HEADERS Missing To: header
-        *  0.2 FREEMAIL_REPLYTO_END_DIGIT Reply-To freemail username ends in
-        *      digit
-        *      [fcresswell9[at]gmail.com]
-        *  0.7 SPF_SOFTFAIL SPF: sender does not match SPF record (softfail)
-        *  0.0 SPF_HELO_NONE SPF: HELO does not publish an SPF Record
-        *  1.6 REPLYTO_WITHOUT_TO_CC No description available.
-        * -0.0 T_SCC_BODY_TEXT_LINE No description available.
-        *  0.8 RDNS_NONE Delivered to internal network by a host with no rDNS
-        *  2.1 FREEMAIL_FORGED_REPLYTO Freemail in Reply-To, but not From
-        *  0.0 XPRIO Has X-Priority header
-X-Spam-Level: *******
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.5.0
+To:     util-linux@vger.kernel.org
+Content-Language: en-US
+From:   Stanislav Brabec <sbrabec@suse.cz>
+Subject: [RFC] uuid_generate_time_safe() without uuidd should always return -1
+Organization: SUSE Linux, s. r. o.
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Spam-Status: No, score=-2.8 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_LOW,SPF_HELO_NONE,
+        SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=ham autolearn_force=no
+        version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
-To:     unlisted-recipients:; (no To-header on input)
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-Hello,
+After a research we realized that only the uuidd provides the guarantee 
+of uniqueness of UUIDs across different CPUs and different UIDs.
 
-Am Fredrik Elvebakk an Investment Manager from Norway. I wish to solicit 
-your interest in an investment project that is currently ongoing in my 
-company (DNB); It is a short term investment with good returns. Simply 
-reply for me to confirm the validity of your email so i shall give you 
-comprehensive details about the project.
+Without it, there is a probability that two different processes on two 
+different CPUs with a different UID will call uuid_generate_time_safe() 
+in the same time and generate duplicated UUIDs.
 
-Best Regards,
-Fredrik Elvebakk
-Business Consultant
+There is a LIBUUID_CLOCK_FILE that should prevent it. But this approach 
+can work properly for a single UID only. And creating it world-writable 
+file would cause more problems that it will fix.
+
+That is why I propose that uuid_generate_time_safe() should always 
+return -1 in case that it cannot interact with uuidd.
+
+To realize this, uuid_generate_time_generic() should return -1 instead 
+of __uuid_generate_time() return code.
+
+It should not break uuidd, as it calls __uuid_generate_time() directly.
+
+
+In the last month, we had a discussion about one clock file per UID in 
+the home directory and one for uuidd as a solution of LIBUUID_CLOCK_FILE 
+being handled in a first-UID-wins manner. It could improve the 
+situation, but only for UUIDs generated by the same UID.
+
+Both changes are partially mutually exclusive: If 
+uuid_generate_time_safe() will always return -1, there will be no chance 
+to inform the program, that the alternative synchronization was 
+successfully used and that the UUIDs are safe in the local context. That 
+it why I propose a small change of API:
+
+Add a new return code of uuid_generate_time_safe().
+
+== RETURN VALUE
+
+The newly created UUID is returned in the memory location pointed to by 
+_out_. *uuid_generate_time_safe*() returns zero if the UUID has been 
+generated in a safe manner, 1 if the UUID has been generated in a manner 
+that is safe for a single UID, -1 otherwise.
+
+-- 
+Best Regards / S pozdravem,
+
+Stanislav Brabec
+software developer
+---------------------------------------------------------------------
+SUSE LINUX, s. r. o.                         e-mail: sbrabec@suse.com
+Křižíkova 148/34 (Corso IIa)                    tel: +420 284 084 060
+186 00 Praha 8-Karlín                          fax:  +420 284 084 001
+Czech Republic                                    http://www.suse.cz/
+PGP: 830B 40D5 9E05 35D8 5E27 6FA3 717C 209F A04F CD76
+
