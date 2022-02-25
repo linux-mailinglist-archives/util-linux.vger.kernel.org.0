@@ -2,125 +2,94 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 0AE244C5064
-	for <lists+util-linux@lfdr.de>; Fri, 25 Feb 2022 22:13:02 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 7EF764C51B4
+	for <lists+util-linux@lfdr.de>; Fri, 25 Feb 2022 23:44:51 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S235656AbiBYVNc (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Fri, 25 Feb 2022 16:13:32 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:50084 "EHLO
+        id S238492AbiBYWpW (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Fri, 25 Feb 2022 17:45:22 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:46792 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S234504AbiBYVNc (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Fri, 25 Feb 2022 16:13:32 -0500
-Received: from bombadil.infradead.org (bombadil.infradead.org [IPv6:2607:7c80:54:e::133])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 5B604154732;
-        Fri, 25 Feb 2022 13:12:57 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-        d=infradead.org; s=bombadil.20210309; h=Sender:In-Reply-To:Content-Type:
-        MIME-Version:References:Message-ID:Subject:Cc:To:From:Date:Reply-To:
-        Content-Transfer-Encoding:Content-ID:Content-Description;
-        bh=Z7wdJC+0kx3l3p5CC3OcwuCNDMS9JX4YUo0ttYZ2ZwM=; b=ygSlH9a1M/ftI6oY6my+MlD6eC
-        EEV0B1vnHT25QM5WDR+hJ0S7ubm+ux4FI9SzqVWUVUaSQVdUTeTRiIuAFKd8TL1JUnYGgN1vlijpw
-        xIm00yGWOeN2BiA8lNJEF36tz8t3MFtfYhqDTJviUfTO62k/QzdHFEcPgnszHhTb5IHUCTwLWRz6Q
-        o0N8qtN+IBPbblm1H8jj9aSu92jwkTPjjJTSJuZaJXsuqrVld3e+6+zhlBhFY98m0JIqx4Ni5CsBB
-        WKxctf6LS6EblB1BbeN/8WNm+el64EN6OQGCsX47ptE89Ppf1rxd+Db5kLduntNmWUyucNPcbOWMy
-        lLUZHNag==;
-Received: from mcgrof by bombadil.infradead.org with local (Exim 4.94.2 #2 (Red Hat Linux))
-        id 1nNhtY-006zda-Pp; Fri, 25 Feb 2022 21:12:56 +0000
-Date:   Fri, 25 Feb 2022 13:12:56 -0800
-From:   Luis Chamberlain <mcgrof@kernel.org>
-To:     Christoph Hellwig <hch@lst.de>
-Cc:     util-linux@vger.kernel.org, linux-block@vger.kernel.org
-Subject: Re: [PATCH] losetup: don't skip adding a new device if it already
- has a device node
-Message-ID: <YhlGWEJ8w2iXmie7@bombadil.infradead.org>
-References: <20220225180903.1341819-1-hch@lst.de>
+        with ESMTP id S238112AbiBYWpV (ORCPT
+        <rfc822;util-linux-ng@vger.kernel.org>);
+        Fri, 25 Feb 2022 17:45:21 -0500
+Received: from mail-wr1-x441.google.com (mail-wr1-x441.google.com [IPv6:2a00:1450:4864:20::441])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 4BFF9218CDD
+        for <util-linux-ng@vger.kernel.org>; Fri, 25 Feb 2022 14:44:48 -0800 (PST)
+Received: by mail-wr1-x441.google.com with SMTP id r10so6524501wrp.3
+        for <util-linux-ng@vger.kernel.org>; Fri, 25 Feb 2022 14:44:48 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=message-id:from:mime-version:content-transfer-encoding
+         :content-description:subject:to:date:reply-to;
+        bh=wDqO81NhFUy4AUfl9g/OaMtN+AfPRGAGgd64KYk/mg0=;
+        b=AUFqJbIXmNTUlNaz/J7hG1yavg4SWdwSKBNpD4h7VtXC9xaeRndcJssBkfNdVWwqGi
+         FqVb14E2VPpufIX7yKQJcLdazDM7OK7IICox+/a+6qgZn4D6/JR43g8+0qSohK9/DGnG
+         fpLOY3+5HcFoBJ+kPn8zq7yoZQxGEskP3JRyHzTBcLXv7gq9ArjYwMmt6kKoGRuuiLl0
+         AqKUcCHf/Z81KbiRkIzLCpNBmoqvSiWcl+dSm5heVkgyuaR1AssFUtS7vF1nFTQSvIHK
+         thB74OIKlkge+5BeeFPpwj7yzUzys6mlyxztSZ10A0MUDeddzTleSz4T4iltSSzgvmBb
+         FlMg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:message-id:from:mime-version
+         :content-transfer-encoding:content-description:subject:to:date
+         :reply-to;
+        bh=wDqO81NhFUy4AUfl9g/OaMtN+AfPRGAGgd64KYk/mg0=;
+        b=yu9Gi6PxAnlMAjNhZTZYLpj6wvnC3U6m46Q+i3S/e8TIABJolLRvGiszYAmLTTLYe1
+         eG+SsflD288z/H7TGcUknzF0BbCBTuwt9HSnGwxNCQ80aF+xXb3ZTsmin9w0b2zmRN+K
+         p28mN6B7N0a/iHUOLnl4DK5nk8qEC1+2SQ1/0MKqWfQ6mdipZAOymBQL35rkr7dSoiiU
+         tH3FOdo28+9nBZjomqUAV7sLFchs1mEATg7fjMI7AKR1a0IPqEpqQ7TsZdbgTgS/qDtF
+         PRuFfy5jVD4+k918ObPNV/59H7spuxjoRWMHXRweaBMcLcFlehcO1PSE7/AgsNqAxQcr
+         5AOw==
+X-Gm-Message-State: AOAM533qZ3R93w46pN2Jz6cGZ/vOKkpr4bpbvy+sZRU1d51mzwETD0bp
+        jjQjJxeiXDr6yEflSt0oQr8=
+X-Google-Smtp-Source: ABdhPJwewnLbBpyryuLGq7f3oYxWPyW32YemfTgno3lgo6lXCfCev6v5ouzQojVApYDC8uTHDCVaBw==
+X-Received: by 2002:a5d:5981:0:b0:1ef:8304:d9c1 with SMTP id n1-20020a5d5981000000b001ef8304d9c1mr283009wri.43.1645829086913;
+        Fri, 25 Feb 2022 14:44:46 -0800 (PST)
+Received: from DESKTOP-26CLNVD.localdomain ([105.112.10.69])
+        by smtp.gmail.com with ESMTPSA id r4-20020a05600c35c400b0037e9868e364sm7392282wmq.33.2022.02.25.14.44.41
+        (version=TLS1 cipher=AES128-SHA bits=128/128);
+        Fri, 25 Feb 2022 14:44:46 -0800 (PST)
+Message-ID: <62195bde.1c69fb81.14b70.ac0a@mx.google.com>
+From:   Mrs Maria Elisabeth Schaeffler <usmankwasau87@gmail.com>
+X-Google-Original-From: Mrs Maria Elisabeth Schaeffler  <info@gmail.com>
+Content-Type: text/plain; charset="iso-8859-1"
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20220225180903.1341819-1-hch@lst.de>
-Sender: Luis Chamberlain <mcgrof@infradead.org>
-X-Spam-Status: No, score=-4.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-        RCVD_IN_DNSWL_MED,SPF_HELO_NONE,SPF_NONE,T_SCC_BODY_TEXT_LINE
-        autolearn=ham autolearn_force=no version=3.4.6
+Content-Transfer-Encoding: quoted-printable
+Content-Description: Mail message body
+Subject: Spende
+To:     Recipients <info@gmail.com>
+Date:   Fri, 25 Feb 2022 14:44:36 -0800
+Reply-To: mariaelisabethschaeffler88@gmail.com
+X-Spam-Status: No, score=2.1 required=5.0 tests=BAYES_50,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_ENVFROM_END_DIGIT,
+        FREEMAIL_FROM,FREEMAIL_REPLYTO,FREEMAIL_REPLYTO_END_DIGIT,
+        LOTS_OF_MONEY,MONEY_FREEMAIL_REPTO,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,
+        SPF_PASS,T_HK_NAME_FM_MR_MRS,T_SCC_BODY_TEXT_LINE autolearn=no
+        autolearn_force=no version=3.4.6
+X-Spam-Level: **
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-On Fri, Feb 25, 2022 at 07:09:03PM +0100, Christoph Hellwig wrote:
-> Linux plans to deprecate the auto-creation of block devices based on
-> access to the devic node starting from kernel 5.18.  Without that feature
-> losetup will fail to create the loop device if a device node already
-> exists, but the loop device to back it in the kernel does not exist yet.
-> This is a scenario that should not happen in modern udev based
-> distributions, but apparently there still are various scripts around that
-> manually call the superflous mknod.
-> 
-> Change losetup to unconditionally call loopcxt_add_device when a specific
-> device node is specified on the command line.  If the loop device
-> already exists the LOOP_CTL_ADD ioctl will fail, but given that losetup
-> ignores the return value from loopcxt_add_device that failure has no
-> further effect.
 
-I think it would help to explain what the issue is, with a simple
-example on the commit log.
+Hallo,
 
-By default loading the loop module we'll create only 8 loopback
-devices. Prior to the new CONFIG_BLOCK_LEGACY_AUTOLOAD which intends
-to deprecate the whole oldschool probe functionality which used try
-to load the respective block driver (loop in this case) when the
-driver is not present but the nodes are created manually, the following
-piece of code would work:
+Ich bin Frau Maria Elisabeth Schaeffler, eine deutsche Wirtschaftsmagnatin,=
+ Investorin und Philanthropin. Ich bin der Vorsitzende von Wipro Limited. I=
+ch habe 25 Prozent meines pers=F6nlichen Verm=F6gens f=FCr wohlt=E4tige Zwe=
+cke ausgegeben. Und ich habe auch versprochen, die restlichen 25% dieses Ja=
+hr 2022 an Einzelpersonen zu verschenken. Ich habe mich entschieden, 1.500.=
+000,00 Euro an Sie zu spenden. Wenn Sie an meiner Spende interessiert sind,=
+ kontaktieren Sie mich f=FCr weitere Informationen.
 
-losetup -D
-modprobe -r loop
-modprobe loop
+Unter folgendem Link k=F6nnen Sie auch mehr =FCber mich lesen
 
-rm -f foo.img
-truncate -s 10M foo.img
+https://en.wikipedia.org/wiki/Maria-Elisabeth_Schaeffler
 
-# Note: /dev/loop8 by default won't exist as we default to 7
-# loop devices
-rm -f /dev/loop8
-mknod /dev/loop8 b 7 8
-losetup /dev/loop8 foo.img
+Gr=FC=DFe
+Gesch=E4ftsf=FChrer Wipro Limited
+Maria-Elisabeth_Schaeffler
+Email:mariaelisabethschaeffler88@gmail.com
 
-When deprecating this probe --> module load logic, if the
-mknod is run we'd currently fail at the last step. With this
-fix the last step will still work. However please note that
-CONFIG_BLOCK_LEGACY_AUTOLOAD goes away the above will require
-manually loading the loop module. Scripts which fail to load
-the loop module prior to mknod will fail by definition of the
-deprecation effort.
-
-> Reported-by: Luis Chamberlain <mcgrof@kernel.org>
-> Signed-off-by: Christoph Hellwig <hch@lst.de>
-
-With that said:
-
-Tested-by: Luis Chamberlain <mcgrof@kernel.org>
-
-  Luis
-
-> ---
->  sys-utils/losetup.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
-> 
-> diff --git a/sys-utils/losetup.c b/sys-utils/losetup.c
-> index c400cbf12..09c028b6b 100644
-> --- a/sys-utils/losetup.c
-> +++ b/sys-utils/losetup.c
-> @@ -522,7 +522,7 @@ static int create_loop(struct loopdev_cxt *lc,
->  		}
->  	}
->  
-> -	if (hasdev && !is_loopdev(loopcxt_get_device(lc)))
-> +	if (hasdev)
->  		loopcxt_add_device(lc);
->  
->  	/* losetup --noverlap /dev/loopN file.img */
-> -- 
-> 2.30.2
-> 
