@@ -2,70 +2,75 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 8BEDC4CD7E2
-	for <lists+util-linux@lfdr.de>; Fri,  4 Mar 2022 16:33:11 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 5E5194CEA0E
+	for <lists+util-linux@lfdr.de>; Sun,  6 Mar 2022 09:30:31 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S234561AbiCDPd4 (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Fri, 4 Mar 2022 10:33:56 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:33428 "EHLO
+        id S232586AbiCFIbU (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Sun, 6 Mar 2022 03:31:20 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:40408 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S240353AbiCDPdx (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Fri, 4 Mar 2022 10:33:53 -0500
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTP id 0BF0AA0BE9
-        for <util-linux@vger.kernel.org>; Fri,  4 Mar 2022 07:33:02 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-        s=mimecast20190719; t=1646407982;
-        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-         to:to:cc:mime-version:mime-version:content-type:content-type;
-        bh=iPllYbp+BzV1UH6pWfe2q+hKkQ82v3Y8ieI8IHwja/A=;
-        b=gOjww4hm+azeMrZHnIdqadDcm3qXcOv44jXKPrVkzupI5z+wCnX1p0ySh/sx8RL6QvK6fh
-        4KEvhl3vihXMrLGR1djUk0cAcB/+r81eii3x0+TCZNWrFM4Ca7QrM3XL4s52YjLZYLUqP8
-        h++v7wF7Xzm2bE6RYy182JNhsEixoi4=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-488-R_7vjVZSPpWcprrDTiT0Eg-1; Fri, 04 Mar 2022 10:32:58 -0500
-X-MC-Unique: R_7vjVZSPpWcprrDTiT0Eg-1
-Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.phx2.redhat.com [10.5.11.11])
-        (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
-        (No client certificate requested)
-        by mimecast-mx01.redhat.com (Postfix) with ESMTPS id C5CED824FA6;
-        Fri,  4 Mar 2022 15:32:57 +0000 (UTC)
-Received: from ws.net.home (unknown [10.36.112.12])
-        by smtp.corp.redhat.com (Postfix) with ESMTPS id EC1337A53E;
-        Fri,  4 Mar 2022 15:32:56 +0000 (UTC)
-Date:   Fri, 4 Mar 2022 16:32:54 +0100
-From:   Karel Zak <kzak@redhat.com>
-To:     linux-kernel@vger.kernel.org, linux-fsdevel@vger.kernel.org,
-        util-linux@vger.kernel.org
-Subject: [ANNOUNCE] util-linux v2.38-rc2
-Message-ID: <20220304153254.3bfkjhijdwqsrztx@ws.net.home>
+        with ESMTP id S231853AbiCFIbQ (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Sun, 6 Mar 2022 03:31:16 -0500
+Received: from mail-lf1-x129.google.com (mail-lf1-x129.google.com [IPv6:2a00:1450:4864:20::129])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id ECFB845504
+        for <util-linux@vger.kernel.org>; Sun,  6 Mar 2022 00:30:24 -0800 (PST)
+Received: by mail-lf1-x129.google.com with SMTP id j15so21260740lfe.11
+        for <util-linux@vger.kernel.org>; Sun, 06 Mar 2022 00:30:24 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=mime-version:reply-to:sender:from:date:message-id:subject:to;
+        bh=VaaSLAJ+hgNGNq49WyPsh3ndDLo+mnrYcswrOHpJSv8=;
+        b=SoueaYez2gvmNOOc8ETToAZ5HVaHXRvSYE4A7erwotlEZo10n50LCXqKlSuhqWlMrL
+         ajV0FAvqYUclKeWw5ok/HaMWtYsgQ10b44DamX+0Gir0c+XMUfFxsZXPFIs+yzeUFcvY
+         Wljp40L1FkJhgrK6NsIiFFvbJz+5AAHAFx3qjSwwCIkaN/4gecoGis8N4iptcDxFrbJz
+         Al9Ayz5nBefyNyrKZ7t5P9IhjR1fSnp558zGXd+ij7pNXzqWjEzH8Mw90Ks940Yvkwa0
+         dOaA0/4+ooFfnU+zACCGl1XVbtQ++rFqEAm5zsvs86iQ85Szt60o/L4WgUSXv/ZuR0dJ
+         aNbw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:mime-version:reply-to:sender:from:date
+         :message-id:subject:to;
+        bh=VaaSLAJ+hgNGNq49WyPsh3ndDLo+mnrYcswrOHpJSv8=;
+        b=J69NTfDD79MLxu3Wq6ngOAnRXGif+ouXPO9VVd2LLy5dXApD9SCdw/CkxU/ndR/SYl
+         R4EHCU9HEfgXMhXbanWI4WPvSVLCoDYzlh4sXemEaHmKvol9PzbnwTXmENinpG1n/9yM
+         SIXnuhQBZEdOHZRBF/xKVXAQfRBz5+zBIf0cwLeww5sZ66KTNZ/Mr5YmrufRV4Gc4+oI
+         2MBxPMUQChkcLA8UAckDjvMV5XFdvW82ROweJ+XQy7UOJeStbWngtcs7ckgFc6YLhoOf
+         IRWOokwCBeYrTTaEylBZpatJ578WBl32PtX3RdWCbhXjWtjg9Xx+x3Y4lOrPamWzBzFg
+         Dlzg==
+X-Gm-Message-State: AOAM533IW4/7b4P+dm5M/s1P8QrgD55PlHNTukvqo7W/ZH3dnuHBYWay
+        wIC/PbCaLyDTJTTqgc4hE4kxvuAazCfIeIxsi6I=
+X-Google-Smtp-Source: ABdhPJwsa2hxETv15JGwFIT5CEXbieAPG7EQ6jMwyHowA3SQyNbpBEZVkAr/Qc7bDRdkf5MVihwY1zowFoWmTC/AKm4=
+X-Received: by 2002:a05:6512:220d:b0:448:2d1f:5523 with SMTP id
+ h13-20020a056512220d00b004482d1f5523mr1081675lfu.492.1646555423354; Sun, 06
+ Mar 2022 00:30:23 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.11
-X-Spam-Status: No, score=-3.2 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_LOW,
-        RCVD_IN_MSPIKE_H5,RCVD_IN_MSPIKE_WL,SPF_HELO_NONE,SPF_NONE,
-        T_SCC_BODY_TEXT_LINE autolearn=unavailable autolearn_force=no
-        version=3.4.6
+Reply-To: mrs.susanelwoodhara17@gmail.com
+Sender: mrs.arawyann@gmail.com
+Received: by 2002:ab3:7d89:0:0:0:0:0 with HTTP; Sun, 6 Mar 2022 00:30:22 -0800 (PST)
+From:   Mrs Susan Elwood Hara <mrs.susanelwoodhara17@gmail.com>
+Date:   Sun, 6 Mar 2022 08:30:22 +0000
+X-Google-Sender-Auth: tbOG5lPB_p4z6IG7ZjxDUgodimQ
+Message-ID: <CACppo45=+9FUnwhF1YvXi3hNZqWEympWu8htcGrHnPRNSxL-Zw@mail.gmail.com>
+Subject: GOD BLESS YOU AS YOU REPLY URGENTLY
+To:     undisclosed-recipients:;
+Content-Type: text/plain; charset="UTF-8"
+X-Spam-Status: No, score=4.9 required=5.0 tests=BAYES_50,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,
+        FREEMAIL_REPLYTO_END_DIGIT,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,
+        SUBJ_ALL_CAPS,T_HK_NAME_FM_MR_MRS,T_SCC_BODY_TEXT_LINE,UNDISC_MONEY
+        autolearn=no autolearn_force=no version=3.4.6
+X-Spam-Level: ****
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
+GOD BLESS YOU AS YOU REPLY URGENTLY
 
-The util-linux release v2.38-rc2 is available at
- 
-  http://www.kernel.org/pub/linux/utils/util-linux/v2.38/
- 
-Feedback and bug reports, as always, are welcomed.
- 
-  Karel
-
--- 
- Karel Zak  <kzak@redhat.com>
- http://karelzak.blogspot.com
-
+ Hello Dear,
+Greetings, I am contacting you regarding an important information i
+have for you please reply to confirm your email address and for more
+details Thanks
+Regards
+Mrs Susan Elwood Hara.
