@@ -2,111 +2,120 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 3AE094CF1A0
-	for <lists+util-linux@lfdr.de>; Mon,  7 Mar 2022 07:07:55 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 84CCC4D4754
+	for <lists+util-linux@lfdr.de>; Thu, 10 Mar 2022 13:53:28 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S232491AbiCGGIq (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Mon, 7 Mar 2022 01:08:46 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:52136 "EHLO
+        id S229881AbiCJMx0 (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Thu, 10 Mar 2022 07:53:26 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:47840 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S232683AbiCGGIp (ORCPT
-        <rfc822;util-linux-ng@vger.kernel.org>);
-        Mon, 7 Mar 2022 01:08:45 -0500
-Received: from mail-yb1-xb33.google.com (mail-yb1-xb33.google.com [IPv6:2607:f8b0:4864:20::b33])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 5BB081AF39
-        for <util-linux-ng@vger.kernel.org>; Sun,  6 Mar 2022 22:07:51 -0800 (PST)
-Received: by mail-yb1-xb33.google.com with SMTP id g26so28803929ybj.10
-        for <util-linux-ng@vger.kernel.org>; Sun, 06 Mar 2022 22:07:51 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=mime-version:reply-to:from:date:message-id:subject:to;
-        bh=7Im1JG6q3q15hqSa7NWQHVGGERLfnPf1iBbuaSTqgJQ=;
-        b=j/sl3tGgN80YTM456lvU34pwf4ks9xekVM+SinjDUxg/2XQIxEZoA3PYL9FZF+ZvT1
-         5iYOjch6nwI3UAnXyEXt6BsJy8Sjh7wZep59KHFG0ZqFKua595GZm122sRjwQeWGfGOg
-         hpUfLDJzuDo0gEwf6G6s86u6xGH6nyLYM82r0t5CzBOmwG8nICTY2eD3R6xrrwmB9GPw
-         KvjGAiB/p3AYCCCOk1MM6e2udMgN4fDEyCDmpNB1TB3riMS/NcKFJ7fpm70Q+WIvKjtF
-         qyLqNAmmxPsKZNWVCogeCAT1wQHZeuubSq8gKIowykYzdsHlz8GeE5Mm2cXcyUoQkgGr
-         rD+w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
-         :subject:to;
-        bh=7Im1JG6q3q15hqSa7NWQHVGGERLfnPf1iBbuaSTqgJQ=;
-        b=vIMTie+kcMkehTASu1A8HBRD3TIdi/LEwjlKIUWIyi2EW00sBIW/ewNPFDVLUtOpZq
-         0ZAPThBPrq6AITQMgVbhH+kviN1+ooVbTBk2PdQIyRWkSfPnYE0TQYJfNC75cd5ogWBk
-         E9gD3bx0FwP79ukovA8k/LNFKtI6tg2vkzyiigz1L4bj5JpGn1Q9swevguMLLiv3qr5S
-         VE+tDld0Q/gZ0HUfJ8TMlh9MAUmVaVS/LgCkgpX8Xz3D7bys+/04jS7yMsG0dkGTcNzG
-         as8kcOk0jV/9Hd6WugsSJwlU5wtS0l3qRAjg0Q6B/CqYbqhRsYYqjFcLnMrOgHrFUKlA
-         jIEA==
-X-Gm-Message-State: AOAM533J+bBN9vATvRbSug8vo54X+uIDCsJEFpqcdP6OxloucdIj/mnT
-        rOpCBawyKi8Ozuh7l/p7wQQrzVr8u/jVWnd2E60=
-X-Google-Smtp-Source: ABdhPJzVNm4o7IPLEvDjqNGP/mErivcRRRj6vjdT6LS86kEshG6qEd/gDuADoWMnSxRjX6tHwgpSDUJTrSssiHxEz8s=
-X-Received: by 2002:a25:7481:0:b0:628:9995:351f with SMTP id
- p123-20020a257481000000b006289995351fmr6852705ybc.648.1646633270086; Sun, 06
- Mar 2022 22:07:50 -0800 (PST)
+        with ESMTP id S234887AbiCJMxY (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Thu, 10 Mar 2022 07:53:24 -0500
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTP id 55DC214996A
+        for <util-linux@vger.kernel.org>; Thu, 10 Mar 2022 04:52:24 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+        s=mimecast20190719; t=1646916743;
+        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+         in-reply-to:in-reply-to:references:references;
+        bh=yNmP33ouIyriF1qDMKqV2JkcgYRqVcWW1Rh+IwmXB8s=;
+        b=gCfqBacihs3tM8oJxjqrsUQ1HT7Jiba6ODetWoDZxM/aQVMGVvDbvjfSCasOeiu22oLzDk
+        3X1rUS4KVMtVNPyZg6Vj35MDWxvHEzQ3s4jCXbzoEksZg+ofZUOW0+RcAaFKk0U20FaIVg
+        LDIIQwb7bzly3c3QilTgKx8EmS6PKYw=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ us-mta-527-ZXYNYcDoOOSE-sHj9RMAyA-1; Thu, 10 Mar 2022 07:52:20 -0500
+X-MC-Unique: ZXYNYcDoOOSE-sHj9RMAyA-1
+Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com [10.5.11.12])
+        (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+        (No client certificate requested)
+        by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 3A8A1FC83;
+        Thu, 10 Mar 2022 12:52:19 +0000 (UTC)
+Received: from ws.net.home (unknown [10.36.112.12])
+        by smtp.corp.redhat.com (Postfix) with ESMTPS id 8394B8495E;
+        Thu, 10 Mar 2022 12:52:18 +0000 (UTC)
+Date:   Thu, 10 Mar 2022 13:52:15 +0100
+From:   Karel Zak <kzak@redhat.com>
+To:     Michael Trapp <michael.trapp@sap.com>
+Cc:     util-linux@vger.kernel.org
+Subject: Re: [PATCH] libuuid, extend cache in uuid_generate_time_generic()
+Message-ID: <20220310125215.stx3fsbjw6inkzw7@ws.net.home>
+References: <20220224104651.74944-1-michael.trapp@sap.com>
 MIME-Version: 1.0
-Received: by 2002:a05:6918:b986:b0:a4:b698:78d9 with HTTP; Sun, 6 Mar 2022
- 22:07:49 -0800 (PST)
-Reply-To: markwillima00@gmail.com
-From:   Mark <markpeterdavid@gmail.com>
-Date:   Sun, 6 Mar 2022 22:07:49 -0800
-Message-ID: <CAC_St2_=JZZLALG5ToDf+cmiTdcvFm=Un1=h2Cv0Kdt7mTmf0g@mail.gmail.com>
-Subject: Re: Greetings!
-To:     undisclosed-recipients:;
-Content-Type: text/plain; charset="UTF-8"
-X-Spam-Status: Yes, score=5.4 required=5.0 tests=BAYES_50,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,FREEMAIL_REPLYTO,
-        FREEMAIL_REPLYTO_END_DIGIT,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,
-        T_SCC_BODY_TEXT_LINE,UNDISC_FREEM autolearn=no autolearn_force=no
-        version=3.4.6
-X-Spam-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
-        *      https://www.dnswl.org/, no trust
-        *      [2607:f8b0:4864:20:0:0:0:b33 listed in]
-        [list.dnswl.org]
-        *  0.8 BAYES_50 BODY: Bayes spam probability is 40 to 60%
-        *      [score: 0.5000]
-        *  0.0 SPF_HELO_NONE SPF: HELO does not publish an SPF Record
-        * -0.0 SPF_PASS SPF: sender matches SPF record
-        *  0.2 FREEMAIL_REPLYTO_END_DIGIT Reply-To freemail username ends in
-        *      digit
-        *      [markwillima00[at]gmail.com]
-        *  0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail
-        *      provider
-        *      [markpeterdavid[at]gmail.com]
-        * -0.1 DKIM_VALID_EF Message has a valid DKIM or DK signature from
-        *      envelope-from domain
-        *  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
-        *       valid
-        * -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-        * -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
-        *      author's domain
-        * -0.0 T_SCC_BODY_TEXT_LINE No description available.
-        *  3.6 UNDISC_FREEM Undisclosed recipients + freemail reply-to
-        *  1.0 FREEMAIL_REPLYTO Reply-To/From or Reply-To/body contain
-        *      different freemails
-X-Spam-Level: *****
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20220224104651.74944-1-michael.trapp@sap.com>
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.12
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_NONE,
+        RCVD_IN_MSPIKE_H5,RCVD_IN_MSPIKE_WL,SPF_HELO_NONE,SPF_NONE,
+        T_SCC_BODY_TEXT_LINE autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-Hello,
-Good day,
+On Thu, Feb 24, 2022 at 11:46:51AM +0100, Michael Trapp wrote:
+> In a high load scenario, where an application continiously reads time
+> based version 1 uuids from uuidd, we have noticed the following
+> behaviour.
 
-The HSBC Bank is a financial institution in United Kingdom. We
-promotes long-term,sustainable and broad-based economic growth in
-developing and emerging countries by providing financial support like
-loans and investment to large, small and
-medium-sized companies (SMEs) as well as fast-growing enterprises
-which in turn helps to create secure and permanent jobs and reduce
-poverty.
+It means that your application reads more than 1000 UUIDs per second
+in one thread :-) The "cache" has 1 second live-time.
 
-If you need fund to promotes your business, project(Project Funding),
-Loan, planning, budgeting and expansion of your business(s) , do not
-hesitate to indicate your interest as we are here to serve you better
-by granting your request.
+> The application reads more uuids as there are available in the
+> corresponding timeframe and each bulk request results in an increment of
+> the clock sequence because of the 'step back' in time. Due to the
+> 14bit size of the clock sequence this also results in overflows of
+> the clock sequence.
+
+hmm ...
+
+> 
+> As uuidd calls
+>     uuid_generate_time_safe()
+>        uuid_generate_time_generic()
+> the default value for the bulk request in the '#ifdef HAVE_TLS' section
+> of uuid_generate_time_generic() is set to 1000.
+> 
+> Extending the 'cache' of uuid_generate_time_generic() by increasing
+> the default of num to 1000000 doesn't solve the issue, but reduces
+> the clock sequence increments by factor 1000 and it also improves
+> the uuid throughput in our setup by factor 3-4.
+
+Well, uu.time_low is uint32_t, so there should be enough bytes to
+handle 1000000 UUIDs by the cache (and it also increments uu.time_mid
+and uu.time_hi_and_version).
+
+If I read the code correctly than in theory the cache size could
+be UINT32_MAX.
+
+> It might be possible to implement a cache for
+>   UUIDD_OP_BULK_TIME_UUID
+>   UUIDD_OP_TIME_UUID
+> in the uuidd request handling, but it would not be as simple as this fix
+> in uuid_generate_time_generic().
+
+The question is, what is the bottleneck? From my point            
+
+    rewind/flock/fscanf/rewind/fprintf/fflush/unlock             
+                                    
+seems like a pretty expensive solution for the sequence file. Maybe for
+the next development we should think about something more elegant like
+a memory shared between uuidd instances. The question is also if uuidd 
+has to share the file with the library because for extreme use-case like
+databases, it does not make sense.
+
+>  src/gen_uuid.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+
+ Applied, thanks!
+
+ https://github.com/util-linux/util-linux/commit/0f8de4902fe3f3512ee5043c5277d002a488a804
 
 
-Thank you
-Mr:Mark
+   Karel
+
