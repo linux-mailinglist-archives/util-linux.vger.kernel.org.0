@@ -2,94 +2,84 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id D18CB4D6634
-	for <lists+util-linux@lfdr.de>; Fri, 11 Mar 2022 17:28:06 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id D0FA14D6E8A
+	for <lists+util-linux@lfdr.de>; Sat, 12 Mar 2022 12:53:27 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1350355AbiCKQ1p (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Fri, 11 Mar 2022 11:27:45 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:40774 "EHLO
+        id S229622AbiCLLy3 (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Sat, 12 Mar 2022 06:54:29 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:57550 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1350420AbiCKQ1C (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Fri, 11 Mar 2022 11:27:02 -0500
-Received: from ewsoutbound.kpnmail.nl (ewsoutbound.kpnmail.nl [195.121.94.185])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 3E1A510DA4B
-        for <util-linux@vger.kernel.org>; Fri, 11 Mar 2022 08:25:31 -0800 (PST)
-X-KPN-MessageId: b17f244c-a157-11ec-8338-005056999439
-Received: from smtp.kpnmail.nl (unknown [10.31.155.7])
-        by ewsoutbound.so.kpn.org (Halon) with ESMTPS
-        id b17f244c-a157-11ec-8338-005056999439;
-        Fri, 11 Mar 2022 17:24:15 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=telfort.nl; s=telfort01;
-        h=mime-version:message-id:date:subject:to:from;
-        bh=mfz+CSF8Cbw5s+OXy7L6fEVFCcfJfbBgh34iFP4QbeQ=;
-        b=MdJH0vSIs5jBe8oFSl7XFwXTdU5bC3Tn7vJya55ByodiTdG7nSJYrQ/xIn2UoVTlSixDiWKN/ZsZV
-         adeLHJFLk9qfMTZAopxd/BcAdHwhscs1qPrQTwONPm5pZpmgvEUGcmVryz8Yf4Goub+DsFyNtmL1CH
-         CNyqn1CnaLJgluik=
-X-KPN-MID: 33|CILLu5Vp+s2m/9GTEfBbG1KBQK7731LEJLSp/Qhjy2hKwEBVDaUuOiDcVP6fn0/
- b1yHWjaKaQsicn9tneHLc2w==
-X-KPN-VerifiedSender: Yes
-X-CMASSUN: 33|0LIjtGPVs5C0FyJeBUbDCJHMGrMSIV6GsjRsa2HXnjXc3NsfG+piT5xF0rBKhlE
- kF5AdVaHJaYT7Cl/IWsj0Cw==
-X-Originating-IP: 82.168.50.91
-Received: from localhost (82-168-50-91.fixed.kpn.net [82.168.50.91])
-        by smtp.kpnmail.nl (Halon) with ESMTPSA
-        id b898f7fc-a157-11ec-b2a4-005056998788;
-        Fri, 11 Mar 2022 17:24:27 +0100 (CET)
-From:   Benno Schulenberg <bensberg@telfort.nl>
+        with ESMTP id S229505AbiCLLy3 (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Sat, 12 Mar 2022 06:54:29 -0500
+X-Greylist: delayed 459 seconds by postgrey-1.37 at lindbergh.monkeyblade.net; Sat, 12 Mar 2022 03:53:21 PST
+Received: from smtp.dkm.cz (smtp.dkm.cz [62.24.64.39])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id ADA862FD
+        for <util-linux@vger.kernel.org>; Sat, 12 Mar 2022 03:53:21 -0800 (PST)
+Received: from smtp.dkm.cz (localhost [127.0.0.1])
+        by smtp.dkm.cz (Postfix) with ESMTP id B8F5521EF5
+        for <util-linux@vger.kernel.org>; Sat, 12 Mar 2022 12:45:35 +0100 (CET)
+Received: from router.bayer.uni.cx (ip-78-45-76-93.net.upcbroadband.cz [78.45.76.93])
+        by smtp.dkm.cz (Postfix) with ESMTP
+        for <util-linux@vger.kernel.org>; Sat, 12 Mar 2022 12:45:35 +0100 (CET)
+Received: from album.bayer.uni.cx (album.bayer.uni.cx [IPv6:2001:470:993c:1:5246:5dff:fe8e:a186])
+        by router.bayer.uni.cx (Postfix) with SMTP id 8CA5DAA15C
+        for <util-linux@vger.kernel.org>; Sat, 12 Mar 2022 12:45:34 +0100 (CET)
+Received: by album.bayer.uni.cx (sSMTP sendmail emulation); Sat, 12 Mar 2022 12:45:35 +0100
+Date:   Sat, 12 Mar 2022 12:45:35 +0100
+From:   Petr Pisar <petr.pisar@atlas.cz>
 To:     util-linux@vger.kernel.org
-Subject: [PATCH 2/2] hardlink: grammarize the main description in the man page
-Date:   Fri, 11 Mar 2022 17:23:38 +0100
-Message-Id: <20220311162338.4375-2-bensberg@telfort.nl>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20220311162338.4375-1-bensberg@telfort.nl>
-References: <20220311162338.4375-1-bensberg@telfort.nl>
+Subject: A mistake in "failed to cache size" message
+Message-ID: <YiyH3zt/z206Hs3K@album.bayer.uni.cx>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Spam-Status: No, score=-2.8 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_LOW,
-        RCVD_IN_MSPIKE_H4,RCVD_IN_MSPIKE_WL,SPF_HELO_NONE,SPF_PASS,
-        T_SCC_BODY_TEXT_LINE autolearn=ham autolearn_force=no version=3.4.6
+Content-Type: multipart/signed; micalg=pgp-sha256;
+        protocol="application/pgp-signature"; boundary="7Tjcyej3yG4WmjoW"
+Content-Disposition: inline
+X-Spam-Status: No, score=2.0 required=5.0 tests=BAYES_40,FREEMAIL_FROM,
+        RCVD_IN_DNSWL_LOW,SPF_HELO_NONE,SPF_NEUTRAL,SPOOFED_FREEMAIL,
+        T_SCC_BODY_TEXT_LINE autolearn=no autolearn_force=no version=3.4.6
+X-Spam-Level: *
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-(Also hard-wrap the extremely long line to resonable widths,
-so that later small changes are easier to observe in git.)
 
-Signed-off-by: Benno Schulenberg <bensberg@telfort.nl>
----
- misc-utils/hardlink.1.adoc | 15 ++++++++++++---
- 1 file changed, 12 insertions(+), 3 deletions(-)
+--7Tjcyej3yG4WmjoW
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-diff --git a/misc-utils/hardlink.1.adoc b/misc-utils/hardlink.1.adoc
-index 851bb285d..5e13fde19 100644
---- a/misc-utils/hardlink.1.adoc
-+++ b/misc-utils/hardlink.1.adoc
-@@ -22,9 +22,18 @@ hardlink - link multiple copies of a file
- 
- == DESCRIPTION
- 
--*hardlink* is a tool which replaces copies of a file with hardlinks or copy-on-write clones, therefore saving space.
--
--*hardlink* creates a binary tree from file sizes and after that, it compares files with the same sizes. There are two basic content comparison methods. *memcmp* method directly reads data blocks from files and compares them. The other method is based on checksums (like SHA256), in this case for each data block is calculated checksum by Linux kernel crypto API, and this checksum is stored in userspace and used for files comparison. For each file is also cached "intro" buffer (32 bytes), this buffer is used independently on the comparison method and requested cache-size and io-size. The "intro" buffer dramatically reduces operations with data content as files are very often different from the beginning.
-+*hardlink* is a tool that replaces copies of a file with either hardlinks or copy-on-write
-+clones, thus saving space.
-+
-+*hardlink* first creates a binary tree of file sizes and then compares the content of files
-+that have the same size. There are two basic content comparison methods. The *memcmp* method
-+directly reads data blocks from files and compares them. The other method is based on checksums
-+(like SHA256); in this case for each data block a checksum is calculated by the Linux kernel
-+crypto API, and this checksum is stored in userspace and used for file comparisons.
-+
-+For each file also an "intro" buffer (32 bytes) is cached. This buffer is used independently
-+from the comparison method and requested cache-size and io-size. The "intro" buffer dramatically
-+reduces operations with data content as files are very often different from the beginning.
- 
- == OPTIONS
- 
--- 
-2.34.1
+Hello,
 
+while translating util-linux-2.38-rc2, I noticed that this message:
+
+#: misc-utils/hardlink.c:1262
+msgid "failed to cache size"
+
+should read:
+
+msgid "failed to parse a cache size"
+
+-- Petr
+
+--7Tjcyej3yG4WmjoW
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCAAdFiEE4/QvzhVoMKgDWObpT9GuwzZa978FAmIsh94ACgkQT9GuwzZa
+97+B/w//YCBbs8xvB/F84OBGSfRr6NHgkRYiLII4he9TQIj6uBgwFGctxRenRHAY
+DFMrO4MaXWVp1RdCHXALwlGbM0pxmJxvUAPNEXClPPF8vBr02vhK31tejYiRoGUT
+bz44C785PI/U62tLxoBoN5rVaiUCk+bZT7OGP06NyCK93G0q6HHnXaHv+4sqHoov
+7nIQRabNYZPq6tjeTHVagxUgJnW4MHYKQwr6tVz8NQYV8twKjDSkXNRXn/Eb8llJ
+BeeAndJoIRtqZQwhad+Wa07TI8MBd2WY5jNbXid5mhRV0D551aO2OW8pGxP7oUP7
+5WHlyBPltpNhZY/kIHWF89fhhmd2k7oJoUz8T88Ycpd4iJhLtn3NuZGKc9xDs13I
+tjlhsiDFuBgfhIKD7FzhisIyOBKw1gcBpta5rYEX2wOXY05/NxKlFZ5cfN7EhY8M
+95h1qBb2aavRhLZ4WeZYK7g3NOO4ykZc31lylFXswhRRsV6bzo9fX+aT17gLNUN1
+9jx9MIKuvOXZ0bPh28XTjph4+cIH9HmOMuAjBj2lrP28wl+rFxGBdfYeSVGA3CyM
+Tvi0w4yt90aZC1IHpB7g0zMTrvdFgP+UQnt/Wc9Z77qfHWCTgr+TFZwf95svJXJK
+11rdNBrZvqdXF4no9vWBNpd9KzQBmYs/fBUtjSeAI2IsQAzE0tc=
+=P2S2
+-----END PGP SIGNATURE-----
+
+--7Tjcyej3yG4WmjoW--
