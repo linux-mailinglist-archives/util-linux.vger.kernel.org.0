@@ -2,84 +2,103 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id D0FA14D6E8A
-	for <lists+util-linux@lfdr.de>; Sat, 12 Mar 2022 12:53:27 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 3168F4D73C4
+	for <lists+util-linux@lfdr.de>; Sun, 13 Mar 2022 09:51:07 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229622AbiCLLy3 (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Sat, 12 Mar 2022 06:54:29 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:57550 "EHLO
+        id S232055AbiCMIwJ (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Sun, 13 Mar 2022 04:52:09 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:33338 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229505AbiCLLy3 (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Sat, 12 Mar 2022 06:54:29 -0500
-X-Greylist: delayed 459 seconds by postgrey-1.37 at lindbergh.monkeyblade.net; Sat, 12 Mar 2022 03:53:21 PST
-Received: from smtp.dkm.cz (smtp.dkm.cz [62.24.64.39])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id ADA862FD
-        for <util-linux@vger.kernel.org>; Sat, 12 Mar 2022 03:53:21 -0800 (PST)
-Received: from smtp.dkm.cz (localhost [127.0.0.1])
-        by smtp.dkm.cz (Postfix) with ESMTP id B8F5521EF5
-        for <util-linux@vger.kernel.org>; Sat, 12 Mar 2022 12:45:35 +0100 (CET)
-Received: from router.bayer.uni.cx (ip-78-45-76-93.net.upcbroadband.cz [78.45.76.93])
-        by smtp.dkm.cz (Postfix) with ESMTP
-        for <util-linux@vger.kernel.org>; Sat, 12 Mar 2022 12:45:35 +0100 (CET)
-Received: from album.bayer.uni.cx (album.bayer.uni.cx [IPv6:2001:470:993c:1:5246:5dff:fe8e:a186])
-        by router.bayer.uni.cx (Postfix) with SMTP id 8CA5DAA15C
-        for <util-linux@vger.kernel.org>; Sat, 12 Mar 2022 12:45:34 +0100 (CET)
-Received: by album.bayer.uni.cx (sSMTP sendmail emulation); Sat, 12 Mar 2022 12:45:35 +0100
-Date:   Sat, 12 Mar 2022 12:45:35 +0100
-From:   Petr Pisar <petr.pisar@atlas.cz>
-To:     util-linux@vger.kernel.org
-Subject: A mistake in "failed to cache size" message
-Message-ID: <YiyH3zt/z206Hs3K@album.bayer.uni.cx>
+        with ESMTP id S232000AbiCMIwJ (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Sun, 13 Mar 2022 04:52:09 -0400
+Received: from mail-ej1-x641.google.com (mail-ej1-x641.google.com [IPv6:2a00:1450:4864:20::641])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id BC859635B
+        for <util-linux@vger.kernel.org>; Sun, 13 Mar 2022 00:51:00 -0800 (PST)
+Received: by mail-ej1-x641.google.com with SMTP id qt6so27806304ejb.11
+        for <util-linux@vger.kernel.org>; Sun, 13 Mar 2022 00:51:00 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=mime-version:reply-to:from:date:message-id:subject:to;
+        bh=BInys1GjUr//SczNrV06SUmmwPshVO7ak/x6YbQBYgQ=;
+        b=YYXp9+RIYxKQrnWsuMZERT+PtRWQseeOJdESHFHXruDrF1C2N9Q60ohN3xSRJqeau1
+         N00U/uBbH3ZIId+sAtnTdvdsovZQPX3ZeBFTEnLlA91fxOzc3z8FZ40XbM0Gv1Bw/Vs2
+         ei7GHffeJmQs6Y0i2Ti7E/Uxn3RRHhl4SHf0Sngcf/aSYR3iUSD1oj3hByq6Dk8+5Rg8
+         dKLGgxvBzwuYKEUGtdM7xFOqLYTcNKLnkLi1BkNX+h+iB5WhHe5m2aV9IdUNuKRTb8F3
+         SBJCNBY49OIwTXM8brkK91CWk//w/vP0ch83nSbMw3D4PsUlw/REXaXFfjET9RoaErF5
+         2qLQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
+         :subject:to;
+        bh=BInys1GjUr//SczNrV06SUmmwPshVO7ak/x6YbQBYgQ=;
+        b=C7DGqG5KIYjn48rNmdSZ/39DkBm3ZbCUJr6phXqke9Mjg5kftqSkFL1Q+lqcuKfGGa
+         qNWOm7Kn+nW4I390HPjGT9LUWqPkGwWnlU1qUh+Y8K/WtVXdx3pWTtD58+l1pxPL4skw
+         pQ2JYqwpAdFruBOs/mFwwTS9MKs+fT8lEOTQtTclk8zpXnRsE0YiVmGpkTpxSuRrVnHI
+         9EbVCCPRzyNNpygUJ/zC5QtaLFyzT9saxs4DY1/xwS6e7xOSz4Xao07wFsmwRswnral9
+         lDBvzPup/0b8IUZHfV3V9PoKm4W+C9qrvQZUVVrKrostp0muRIrzeSeMVBc0+zg2xqUk
+         za8Q==
+X-Gm-Message-State: AOAM530PN8tgcLFYQ+ClSO6U3/fX5sf3jz/A0k9PeyrZKhVsX9F3vPzb
+        n56Txk2XKl9r2jgSw73Yo0V3SYNhH6H0/nxTmhw=
+X-Google-Smtp-Source: ABdhPJxLV6vSB0kRUtVN7R7bckAs/PYHMcfF1D//GLlr+YRcWRMqNBHu0SfnT56OmQJ8Pjx1sL4KYwSwZEhOHZYmnZQ=
+X-Received: by 2002:a17:906:a046:b0:6b9:20c:47c1 with SMTP id
+ bg6-20020a170906a04600b006b9020c47c1mr14607843ejb.615.1647161458988; Sun, 13
+ Mar 2022 00:50:58 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha256;
-        protocol="application/pgp-signature"; boundary="7Tjcyej3yG4WmjoW"
-Content-Disposition: inline
-X-Spam-Status: No, score=2.0 required=5.0 tests=BAYES_40,FREEMAIL_FROM,
-        RCVD_IN_DNSWL_LOW,SPF_HELO_NONE,SPF_NEUTRAL,SPOOFED_FREEMAIL,
-        T_SCC_BODY_TEXT_LINE autolearn=no autolearn_force=no version=3.4.6
-X-Spam-Level: *
+Received: by 2002:a50:338b:0:0:0:0:0 with HTTP; Sun, 13 Mar 2022 00:50:58
+ -0800 (PST)
+Reply-To: avamedicinemed1@gmail.com
+From:   Dr Ava Smith <brightotabor4@gmail.com>
+Date:   Sun, 13 Mar 2022 00:50:58 -0800
+Message-ID: <CA+1QR34uUdwFmv2jGuJwS63okn1vnJHZLSrz2FT0wGJ9EhN0vg@mail.gmail.com>
+Subject: From Dr. Ava Smith From United States
+To:     undisclosed-recipients:;
+Content-Type: text/plain; charset="UTF-8"
+X-Spam-Status: Yes, score=5.7 required=5.0 tests=BAYES_50,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_ENVFROM_END_DIGIT,
+        FREEMAIL_FROM,FREEMAIL_REPLYTO,FREEMAIL_REPLYTO_END_DIGIT,
+        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE,
+        UNDISC_FREEM autolearn=no autolearn_force=no version=3.4.6
+X-Spam-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
+        *      https://www.dnswl.org/, no trust
+        *      [2a00:1450:4864:20:0:0:0:641 listed in]
+        [list.dnswl.org]
+        *  0.8 BAYES_50 BODY: Bayes spam probability is 40 to 60%
+        *      [score: 0.5000]
+        *  0.2 FREEMAIL_REPLYTO_END_DIGIT Reply-To freemail username ends in
+        *      digit
+        *      [avamedicinemed1[at]gmail.com]
+        *  0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail
+        *      provider
+        *      [brightotabor4[at]gmail.com]
+        *  0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends
+        *       in digit
+        *      [brightotabor4[at]gmail.com]
+        * -0.0 SPF_PASS SPF: sender matches SPF record
+        *  0.0 SPF_HELO_NONE SPF: HELO does not publish an SPF Record
+        * -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+        * -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
+        *      author's domain
+        * -0.1 DKIM_VALID_EF Message has a valid DKIM or DK signature from
+        *      envelope-from domain
+        *  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
+        *       valid
+        * -0.0 T_SCC_BODY_TEXT_LINE No description available.
+        *  3.6 UNDISC_FREEM Undisclosed recipients + freemail reply-to
+        *  1.0 FREEMAIL_REPLYTO Reply-To/From or Reply-To/body contain
+        *      different freemails
+X-Spam-Level: *****
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-
---7Tjcyej3yG4WmjoW
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-
-Hello,
-
-while translating util-linux-2.38-rc2, I noticed that this message:
-
-#: misc-utils/hardlink.c:1262
-msgid "failed to cache size"
-
-should read:
-
-msgid "failed to parse a cache size"
-
--- Petr
-
---7Tjcyej3yG4WmjoW
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCAAdFiEE4/QvzhVoMKgDWObpT9GuwzZa978FAmIsh94ACgkQT9GuwzZa
-97+B/w//YCBbs8xvB/F84OBGSfRr6NHgkRYiLII4he9TQIj6uBgwFGctxRenRHAY
-DFMrO4MaXWVp1RdCHXALwlGbM0pxmJxvUAPNEXClPPF8vBr02vhK31tejYiRoGUT
-bz44C785PI/U62tLxoBoN5rVaiUCk+bZT7OGP06NyCK93G0q6HHnXaHv+4sqHoov
-7nIQRabNYZPq6tjeTHVagxUgJnW4MHYKQwr6tVz8NQYV8twKjDSkXNRXn/Eb8llJ
-BeeAndJoIRtqZQwhad+Wa07TI8MBd2WY5jNbXid5mhRV0D551aO2OW8pGxP7oUP7
-5WHlyBPltpNhZY/kIHWF89fhhmd2k7oJoUz8T88Ycpd4iJhLtn3NuZGKc9xDs13I
-tjlhsiDFuBgfhIKD7FzhisIyOBKw1gcBpta5rYEX2wOXY05/NxKlFZ5cfN7EhY8M
-95h1qBb2aavRhLZ4WeZYK7g3NOO4ykZc31lylFXswhRRsV6bzo9fX+aT17gLNUN1
-9jx9MIKuvOXZ0bPh28XTjph4+cIH9HmOMuAjBj2lrP28wl+rFxGBdfYeSVGA3CyM
-Tvi0w4yt90aZC1IHpB7g0zMTrvdFgP+UQnt/Wc9Z77qfHWCTgr+TFZwf95svJXJK
-11rdNBrZvqdXF4no9vWBNpd9KzQBmYs/fBUtjSeAI2IsQAzE0tc=
-=P2S2
------END PGP SIGNATURE-----
-
---7Tjcyej3yG4WmjoW--
+Hello Dear,
+My name is Dr Ava Smith from United States.I am a French and American national
+(dual)living in the U.S and sometimes in the U.K for the Purpose of Work.
+I hope you consider my friend request and consider me worthy to be your friend.
+I will share some of my pics and more details about my self when i get
+your response
+Thanks
+With love
+Ava
