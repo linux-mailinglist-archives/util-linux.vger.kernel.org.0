@@ -2,107 +2,69 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 534C24EEA49
-	for <lists+util-linux@lfdr.de>; Fri,  1 Apr 2022 11:21:27 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 500314F0DC9
+	for <lists+util-linux@lfdr.de>; Mon,  4 Apr 2022 05:51:42 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S245680AbiDAJXH (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Fri, 1 Apr 2022 05:23:07 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:49928 "EHLO
+        id S242326AbiDDDxY (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Sun, 3 Apr 2022 23:53:24 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:46844 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S242965AbiDAJXG (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Fri, 1 Apr 2022 05:23:06 -0400
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTP id EEE9C20A966
-        for <util-linux@vger.kernel.org>; Fri,  1 Apr 2022 02:21:16 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-        s=mimecast20190719; t=1648804875;
-        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-         to:to:cc:cc:mime-version:mime-version:content-type:content-type;
-        bh=Pn9gn0rhop3OovfYCm2Qdnc1RHVv9VHCGpwY+lgn2fw=;
-        b=SgAgt2QTEWbxsvkz68u8GGoco8vn7mZkr93f5YD97plIAzZdy45+NPMO+qBZlRu5qaHcE+
-        oQnshtoVzWlqQeqdxnGeqzPM3Ao+X/6l6jhh1JxU/j8NBRuCsHxgsBhIO6PjlZ+4eslVvi
-        vGd19r/PhpZsnsVCjWmoHs2Kji5pyOM=
-Received: from mimecast-mx02.redhat.com (mx3-rdu2.redhat.com
- [66.187.233.73]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-623-OWxNQLP6Ok27F2-zCZstxA-1; Fri, 01 Apr 2022 05:21:07 -0400
-X-MC-Unique: OWxNQLP6Ok27F2-zCZstxA-1
-Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.rdu2.redhat.com [10.11.54.2])
-        (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
-        (No client certificate requested)
-        by mimecast-mx02.redhat.com (Postfix) with ESMTPS id E1A8D1C0B050;
-        Fri,  1 Apr 2022 09:21:06 +0000 (UTC)
-Received: from ws.net.home (unknown [10.36.112.12])
-        by smtp.corp.redhat.com (Postfix) with ESMTPS id 49B61400F8FE;
-        Fri,  1 Apr 2022 09:21:06 +0000 (UTC)
-Date:   Fri, 1 Apr 2022 11:21:04 +0200
-From:   Karel Zak <kzak@redhat.com>
+        with ESMTP id S242330AbiDDDxW (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Sun, 3 Apr 2022 23:53:22 -0400
+Received: from mta-out-02.alice.it (mta-out-02.alice.it [217.169.118.8])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTP id 64B5531227
+        for <util-linux@vger.kernel.org>; Sun,  3 Apr 2022 20:51:25 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=alice.it; s=20211207; t=1649044286; 
+        bh=47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=;
+        h=Reply-To:From:To:Date:Message-ID:MIME-Version;
+        b=pAyChSC1m2IE4SG/AwUCaG9+PDgkD/byn1PfALQBL9UylnS7yx+0Au60mJ9NAhW7In264DGWdrp96K90wxCuzobz+INGqwRal/BV3N8TrlPefQR5MZvLrK5GbxKR9owb/qT2EnigpvO4JX/hClm18kysAAHZqJTLqi86f9TLuQ25WIhklXuf5ak1j8HyDEiTm44gmI4uswqpHDAlBfOW0bIWzNOFqbMQ87VuvmpAQ77NGlU9OB4MatldaiAr7GdX0Ccwl65PEH+AdajB/gwZVEKbgYiTJejhS0jnGaKrf9Ujt5xxuii1Mc2ovcaz+lue1KpeVyzeCESh5/OnYHzsdQ==
+X-RazorGate-Vade: gggruggvucftvghtrhhoucdtuddrgedvvddrudejuddgjeehucetufdoteggodetrfdotffvucfrrhhofhhilhgvmecuvffgnffgvefqoffkvfetnffktedpqfgfvfenuceurghilhhouhhtmecufedtudenucfgmhhpthihuchsuhgsjhgvtghtucdluddtmdengfhmphhthicusghougihucdlhedtmdenucfjughrpehrhffvfffkggestddtfedttddttdenucfhrhhomhephggvuchhrghvvgcurghnuchofhhfvghruchtohcuihhnvhgvshhtuchinhcuhihouhhrucgtohhunhhtrhihuchunhguvghrucgruchjohhinhhtuchvvghnthhurhgvuchprghrthhnvghrshhhihhpuchplhgvrghsvgcurhgvphhlhicufhhorhcumhhorhgvucguvghtrghilhhsuceofhgpphgvnhhnrgesrghlihgtvgdrihhtqeenucggtffrrghtthgvrhhnpeehjeetgefhleetiedtkeelfffgjeeugeegleekueffgfegtdekkeeifedvvdffteenucfkphepudejiedrvddvjedrvdegvddrudeltdenucevlhhushhtvghrufhiiigvpedvkeelnecurfgrrhgrmhephhgvlhhopegrlhhitggvrdhithdpihhnvghtpedujeeirddvvdejrddvgedvrdduledtpdhmrghilhhfrhhomhepfhgpphgvnhhnrgesrghlihgtvgdrihhtpdhnsggprhgtphhtthhopedupdhrtghpthhtohepuhhtihhlqdhlihhnuhigsehvghgvrhdrkhgvrhhnvghlrdhorhhg
+X-RazorGate-Vade-Verdict: clean 60
+X-RazorGate-Vade-Classification: clean
+Received: from alice.it (176.227.242.190) by mta-out-02.alice.it (5.8.807.04) (authenticated as f_penna@alice.it)
+        id 623C9D0B011F4C97 for util-linux@vger.kernel.org; Mon, 4 Apr 2022 05:51:23 +0200
+Reply-To: dougfield20@inbox.lv
+From:   We have an offer to invest in your country under a
+         joint venture partnership please reply for more
+         details <f_penna@alice.it>
 To:     util-linux@vger.kernel.org
-Cc:     Stanislav Brabec <sbrabec@suse.cz>,
-        "Trapp, Michael" <michael.trapp@sap.com>
-Subject: libuuid related tasks for next v2.39
-Message-ID: <20220401092104.b2snvmahp56zturm@ws.net.home>
+Date:   03 Apr 2022 20:51:21 -0700
+Message-ID: <20220403205121.A3A8F400D4D6F675@alice.it>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-X-Scanned-By: MIMEDefang 2.84 on 10.11.54.2
-X-Spam-Status: No, score=-2.8 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_LOW,
-        RCVD_IN_MSPIKE_H4,RCVD_IN_MSPIKE_WL,SPF_HELO_NONE,SPF_NONE,
-        T_SCC_BODY_TEXT_LINE autolearn=ham autolearn_force=no version=3.4.6
+X-Spam-Status: Yes, score=6.6 required=5.0 tests=BAYES_50,BODY_EMPTY,
+        DKIM_INVALID,DKIM_SIGNED,EMPTY_MESSAGE,FREEMAIL_FROM,FREEMAIL_REPLYTO,
+        FREEMAIL_REPLYTO_END_DIGIT,MISSING_SUBJECT,RCVD_IN_DNSWL_LOW,
+        RCVD_IN_MSPIKE_BL,RCVD_IN_MSPIKE_L3,SPF_HELO_NONE,SPF_PASS
+        autolearn=no autolearn_force=no version=3.4.6
+X-Spam-Report: * -0.7 RCVD_IN_DNSWL_LOW RBL: Sender listed at https://www.dnswl.org/,
+        *       low trust
+        *      [217.169.118.8 listed in list.dnswl.org]
+        *  0.8 BAYES_50 BODY: Bayes spam probability is 40 to 60%
+        *      [score: 0.5003]
+        *  0.9 RCVD_IN_MSPIKE_L3 RBL: Low reputation (-3)
+        *      [217.169.118.8 listed in bl.mailspike.net]
+        *  0.2 FREEMAIL_REPLYTO_END_DIGIT Reply-To freemail username ends in
+        *      digit
+        *      [dougfield20[at]inbox.lv]
+        * -0.0 SPF_PASS SPF: sender matches SPF record
+        *  0.0 SPF_HELO_NONE SPF: HELO does not publish an SPF Record
+        *  0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail
+        *      provider
+        *      [f_penna[at]alice.it]
+        *  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
+        *       valid
+        *  0.0 RCVD_IN_MSPIKE_BL Mailspike blacklisted
+        *  1.8 MISSING_SUBJECT Missing Subject: header
+        *  2.3 EMPTY_MESSAGE Message appears to have no textual parts and no
+        *      Subject: text
+        *  0.1 DKIM_INVALID DKIM or DK signature exists, but is not valid
+        *  0.0 BODY_EMPTY No body text in message
+        *  1.0 FREEMAIL_REPLYTO Reply-To/From or Reply-To/body contain
+        *      different freemails
+X-Spam-Level: ******
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
-
-
-
- Hi,
-
- I'd like to invest time to libuuid and uuidd in the next v2.39.
-
- Stanislav had same ideas and a lot of research in libuuid code to
- make things more stable, and I'd like to improve testability of the
- all UUID stack we have in util-linux. 
-
- TODO:
-
-  * uuid_generate_* functions refactoring to make things readable and
-    to separate ways how UUIDs are generated
-
-  * clean up uuidd to generate UUID only by the most robust UUIDs way 
-    without any fallback (use uuid_generate_time_sync_by_file())
-
-  * report all issues on uuidd stderr
-
-  * optionally keep clockfile (/var/lib/libuuid/clock.txt) in uuidd hands
-    to make sure the file is not shared with other users if the system
-    is only-uuidd based; for example add --clock-file uuidd option to
-    overwrite libuuid default.
-
-  * invite our SAP friends to the upstream development to share ideas
-    and requirement :-)
-
-  * rewrite misc-utils/test_uuidd.c to something commonly usable
-    (uuidinfo tool?) and use it in util-linux regression tests,
-    features:
-
-     - detect if uuidd is running
-     - add statistics to the uuidd (number of generated UUIDs,
-       clients, errors, ...)
-     - add new UUIDD_OP_* to the uuidd to get additional information
-       about the daemon (paths, statistics, etc.)
-     - stress test (like the current test_uuidd.c)
-
-
-  * anything else?
-
-
-   Karel
-  
-
--- 
- Karel Zak  <kzak@redhat.com>
- http://karelzak.blogspot.com
 
