@@ -2,87 +2,108 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 48B4D4F371F
-	for <lists+util-linux@lfdr.de>; Tue,  5 Apr 2022 16:18:03 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 169C14F53AD
+	for <lists+util-linux@lfdr.de>; Wed,  6 Apr 2022 06:37:38 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1349623AbiDELKE (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Tue, 5 Apr 2022 07:10:04 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:33766 "EHLO
+        id S229969AbiDFEAD (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Wed, 6 Apr 2022 00:00:03 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:59994 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S243604AbiDEKhF (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Tue, 5 Apr 2022 06:37:05 -0400
-Received: from mail-wm1-f54.google.com (mail-wm1-f54.google.com [209.85.128.54])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 982E05548D
-        for <util-linux@vger.kernel.org>; Tue,  5 Apr 2022 03:22:42 -0700 (PDT)
-Received: by mail-wm1-f54.google.com with SMTP id k124-20020a1ca182000000b0038c9cf6e2a6so1345747wme.0
-        for <util-linux@vger.kernel.org>; Tue, 05 Apr 2022 03:22:42 -0700 (PDT)
+        with ESMTP id S1573175AbiDESIv (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Tue, 5 Apr 2022 14:08:51 -0400
+Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com [IPv6:2a00:1450:4864:20::329])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 0A47C1F623
+        for <util-linux@vger.kernel.org>; Tue,  5 Apr 2022 11:06:49 -0700 (PDT)
+Received: by mail-wm1-x329.google.com with SMTP id l7-20020a05600c1d0700b0038c99618859so2127627wms.2
+        for <util-linux@vger.kernel.org>; Tue, 05 Apr 2022 11:06:48 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=5lP7JVLIk85dMBYzGQIDTQ1sj5hZvvmHWW8L/kedb2A=;
+        b=GvcyYVrSM9N58PfWHxJQ/dHV+BIIaTK5X/0TtvCSUbqKSZ0JtLSfJNfCKzDFmjSXY9
+         ONFC7rUm7ic7LcbMA093vm+5Vpx9pAwonlGZPY7WOd0KmiEvUhxPqzuvdhjNp3tK6ad3
+         P3Nj9/j1Dpzxl0YgsaPgprP+MWLcECHi8flKxwMTCcyutGRE7q9PwytRH2S02WNGahUa
+         hdFm80XiC/6WXUDSwxTx70xzJxvXZpW5AtLXVy4T2cP3Ahvfm+4Im+v+MUWapjyhVu2D
+         Hs2E1b+Y/A6Qf6HFSVAmpXtPbPRA284+QWcyJFJMRJSWfVJ/NLgt37dyNNhzLDS1m7Vw
+         1cRQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:message-id:date:mime-version:user-agent:subject
-         :content-language:to:cc:references:from:in-reply-to
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=plsFhNPT2nAQaT+BVTZqkhvH58bKHg1xVmV0bMSQzis=;
-        b=MEHUb1u6+A5gQsqRkEZWfZNRSjfgsirFJ/MVPKkDX/C+DgP29beDfobQBcj1/Htdms
-         hmlhJlc+9SXq2L3eI1QPI6k51dOk6+E5omQnrYv2q6bB1aNTqo1fnRwcOrtn3/Vu88rj
-         7cjBjma+EJ4dMGxEC5le+5kKNVSkEA1xAdnYjgwVBvEphWGsxkHHNpe0Ek30n3jJpBU3
-         8r/ONLMGq/+mxB8NgBW8gmPNH4mwqNQQhXfi3TlYgKGAfOmWtaSuutKwbBIymXCngABe
-         nHzLZUDGwDHS9qmoSN+Po23UG199Q6lh4WdZ0OFsudRnX4J1AOqMDdExBtouipamKWFS
-         MUNQ==
-X-Gm-Message-State: AOAM530LX6AMhZB/RADxOEpDchhRdobzHqFNoSY3VsmjR3dpaTavY84a
-        M+gdZNmmIHKbhO7rAOFSbNw=
-X-Google-Smtp-Source: ABdhPJwSZmAgbLANOfDy4dlsDindjkNMaQP5a2QXAL3sZUYFd009VAzB5m5LsyoL8U/2q/04AZ28WQ==
-X-Received: by 2002:a05:600c:1d9b:b0:38c:af70:9998 with SMTP id p27-20020a05600c1d9b00b0038caf709998mr2398458wms.169.1649154160871;
-        Tue, 05 Apr 2022 03:22:40 -0700 (PDT)
-Received: from [192.168.64.180] (bzq-219-42-90.isdn.bezeqint.net. [62.219.42.90])
-        by smtp.gmail.com with ESMTPSA id 185-20020a1c19c2000000b0038a1d06e862sm1773616wmz.14.2022.04.05.03.22.39
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 05 Apr 2022 03:22:40 -0700 (PDT)
-Message-ID: <1105c039-372f-f105-8d69-887a62e0223e@grimberg.me>
-Date:   Tue, 5 Apr 2022 13:22:38 +0300
+        bh=5lP7JVLIk85dMBYzGQIDTQ1sj5hZvvmHWW8L/kedb2A=;
+        b=5NWcG/4fit7OBaFbA8X2nRFbvRDKbeWxrSLQWf2ykoRC7UhldzXURpaLU7nuUb38KM
+         1kOfuwGGOGg3il15ETGNp6AGGuI6yGz75e6HCWNsybHxny+iWKwiisB6srYqKkT0fmDX
+         iRlsa6GaVNSqwy3alUQIENk67EXG4XXpMZQmS8J/RzpIjf9x38Yq5MhiyWJrabpPYar8
+         PVCUqAPPTNGaQ0hGPmkCgvvcaXaazBf5VPTghC5+iPQtqn74dGQZGuPNSx0U/3UcNfzu
+         wSwDN9kS4Mv6IhAUIAH168qXacHQ/VqJqk9hm66Q08uGPnFkoCfnkFUAxs24iKba/3Sb
+         j4lQ==
+X-Gm-Message-State: AOAM530iIxNzTzuF9B1jZO4a5ovAHilC/jXCi2UEwq8miVgvuSYhqH2f
+        aGE9IbU5Xk7HtzZ138GXrYpJy1UbMDU=
+X-Google-Smtp-Source: ABdhPJzIhySScEjo0uvldOPNANNGYVgGKty07MBp5OK631fjFndBYmWcp5BxvJ8freBw5U8ep76vaA==
+X-Received: by 2002:a05:600c:34d4:b0:38c:5ec7:1e38 with SMTP id d20-20020a05600c34d400b0038c5ec71e38mr4064870wmq.184.1649182007242;
+        Tue, 05 Apr 2022 11:06:47 -0700 (PDT)
+Received: from kali.home (2a01cb088e0b5b002be75de2a1caa253.ipv6.abo.wanadoo.fr. [2a01:cb08:8e0b:5b00:2be7:5de2:a1ca:a253])
+        by smtp.gmail.com with ESMTPSA id h8-20020a05600c350800b0038cc9096507sm3034867wmq.3.2022.04.05.11.06.46
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 05 Apr 2022 11:06:46 -0700 (PDT)
+From:   Fabrice Fontaine <fontaine.fabrice@gmail.com>
+To:     util-linux@vger.kernel.org
+Cc:     Fabrice Fontaine <fontaine.fabrice@gmail.com>
+Subject: [PATCH] configure.ac: add lsns option
+Date:   Tue,  5 Apr 2022 20:04:59 +0200
+Message-Id: <20220405180459.944658-1-fontaine.fabrice@gmail.com>
+X-Mailer: git-send-email 2.35.1
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.5.0
-Subject: Re: [PATCH] nvme: add namespace paths links
-Content-Language: en-US
-To:     Hannes Reinecke <hare@suse.de>, Christoph Hellwig <hch@lst.de>
-Cc:     Keith Busch <kbusch@kernel.org>, linux-nvme@lists.infradead.org,
-        util-linux@vger.kernel.org,
-        Thadeu Lima de Souza Cascardo <cascardo@canonical.com>
-References: <20220401092855.90652-1-hare@suse.de>
- <20220405054205.GA23466@lst.de>
- <289ee526-8f3f-9a2b-eef4-70816eb4f42e@suse.de>
- <20220405054836.GA23647@lst.de>
- <b997ceac-a391-cc5a-a397-0d68f91736eb@grimberg.me>
- <0d53d5cb-a22d-c620-1a35-1ab408e0f747@suse.de>
-From:   Sagi Grimberg <sagi@grimberg.me>
-In-Reply-To: <0d53d5cb-a22d-c620-1a35-1ab408e0f747@suse.de>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,
-        FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,
-        NICE_REPLY_A,RCVD_IN_DNSWL_NONE,RCVD_IN_MSPIKE_H2,SPF_HELO_NONE,
-        SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=ham autolearn_force=no
-        version=3.4.6
+X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,
+        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE
+        autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
+lsns unconditionally uses NS_GET_NSTYPE since version 2.38 and
+https://git.kernel.org/pub/scm/utils/util-linux/util-linux.git/commit/?id=de72df79d72fa906e71e2ac922d8745ff22deee5
+which is only available since kernel 4.11 and
+https://github.com/torvalds/linux/commit/e5ff5ce6e20ee22511398bb31fb912466cf82a36
+resulting in the following build failure:
 
->> Why not stick to slaves/ like the device mapper?
-> 
-> Because:
-> 
-> /**
->   * bd_link_disk_holder - create symlinks between holding disk and slave 
-> bdev
->   * @bdev: the claimed slave bdev
->   * @disk: the holding disk
->   *
->   * DON'T USE THIS UNLESS YOU'RE ALREADY USING IT.
->   *
-> 
-> Not sure _why_ it's there, but it is there.
+sys-utils/lsns.c: In function 'add_namespace_for_nsfd':
+sys-utils/lsns.c:719:25: error: 'NS_GET_NSTYPE' undeclared (first use in this function)
+  719 |  clone_type = ioctl(fd, NS_GET_NSTYPE);
+      |                         ^~~~~~~~~~~~~
 
-Fair enough
+So add an option to allow the user to disable lsns
+
+Fixes:
+ - http://autobuild.buildroot.org/results/572ecf8e37ac733a4e4265f4f78f35230337278e
+
+Signed-off-by: Fabrice Fontaine <fontaine.fabrice@gmail.com>
+---
+ configure.ac | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
+
+diff --git a/configure.ac b/configure.ac
+index 11c86b9a7..52c5b280a 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -1922,7 +1922,11 @@ UL_REQUIRES_LINUX([lsipc])
+ UL_REQUIRES_BUILD([lsipc], [libsmartcols])
+ AM_CONDITIONAL([BUILD_LSIPC], [test "x$build_lsipc" = xyes])
+ 
+-UL_BUILD_INIT([lsns], [check])
++AC_ARG_ENABLE([lsns],
++  AS_HELP_STRING([--disable-lsns], [do not build lsns]),
++  [], [UL_DEFAULT_ENABLE([lsns], [check])]
++)
++UL_BUILD_INIT([lsns])
+ UL_REQUIRES_LINUX([lsns])
+ UL_REQUIRES_BUILD([lsns], [libsmartcols])
+ UL_REQUIRES_BUILD([lsns], [libmount])
+-- 
+2.35.1
+
