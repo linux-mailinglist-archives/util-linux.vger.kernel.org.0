@@ -2,95 +2,95 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id A58024FCE67
-	for <lists+util-linux@lfdr.de>; Tue, 12 Apr 2022 07:00:00 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 2BE664FCE68
+	for <lists+util-linux@lfdr.de>; Tue, 12 Apr 2022 07:00:14 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S235187AbiDLFCK (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Tue, 12 Apr 2022 01:02:10 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:47218 "EHLO
+        id S1346495AbiDLFCQ (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Tue, 12 Apr 2022 01:02:16 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:47298 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1347291AbiDLFCH (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Tue, 12 Apr 2022 01:02:07 -0400
+        with ESMTP id S231631AbiDLFCI (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Tue, 12 Apr 2022 01:02:08 -0400
 Received: from NAM04-BN8-obe.outbound.protection.outlook.com (mail-bn8nam08olkn2076.outbound.protection.outlook.com [40.92.47.76])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 9760B340C8
-        for <util-linux@vger.kernel.org>; Mon, 11 Apr 2022 21:59:50 -0700 (PDT)
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 05151340D3
+        for <util-linux@vger.kernel.org>; Mon, 11 Apr 2022 21:59:52 -0700 (PDT)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=fddVJWJeJ5KE/D0wlKNHOPcMcW0+H+Q9B2cTQLKNJ+8x/lYx4nnE16Y6xqdhMtP+/xJJaO+HIJc4SUJBVCMKPSZqw6bHJsrEU+psHpUcvo6EUSC+kQ1UZKFXPhT1TS5kRa1dLrhNz2PA3KF+l37cIzfDZteSSfmQdmn0ABhBjXrv3HRFRJCTEWdDzhOAMintaDvkDKRbzEmEME9JtIAY22C+FlD/qa+9Y+bOt4O5hCoPB0Q2Nt3DTJgdzb2AGjKD46Fj5grqMDa21ce2+VQYSq6Ruoiv0s0q8omEm67YL1kZfQS2BrZIX6ld5pDKmHVMPEuqCE9pken+x27tiR/+vg==
+ b=V+E0rv3iVY0wvzoNLUFG/6UaRyE1XJ0fRmbJgh6OZjLfHX36NmSnwdt/5S9rWlj6GD69+ANB6GRvsY0WkTEKaxc1NSVDl3gKFMtDfONefznU4LBbRqB70niuKtBrHjMutASb71y4XXKnuBlID1CfDZ6IneYziyMHFyo6dSfaiw3/Eg84LjHEhRg5RFKl5yk11rbzZz7D6scOWGLFZOSHXZ+lFcfxtf6FBqLf1mAllz2ZqIXyz0/foSSfjd263Y8KL5W+q7hyDgdjkGdL1MKzeXltifEemQgsDSlGHIENn6oOpw2i41qFzYV4uynHaVVQL0SsXnk2tZjjVgLxL35Jfw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=FWLxB2FlG2OgDaH2cyhxQQedVgplm+uQoWNz5Kw+6R0=;
- b=OXQPkSRi/qzW1mGOQWglz1PTVO1VrjRQ5PR9wCYiBTlaSDmzr/lBHvIvxuNQaQzrgAGVw/YNrm9bMAUXrIZ+eINRGpkUqqWX31TId3yTRkk+Fg3/3PQIVwBRsK27DqAMywAbJcDrclfZp8JJJxr9L2CYhNCLIeQxS2zR+6UvW61Lcp/Dr4ai6Bi4zMLl6b5r96HJu5MdLfWe0XwcjqWbDnJHAB+wIQBDSaGrxUGe088iX0vPA8q/C+995xh/UQ8lEdjbrV7eG94G6BgLf14eaWRetTbQ02VORWVLoQh0iMSU3H15pBgZFRMWOhftCap2A+vT8iCvdFYAtgVSYkXvtQ==
+ bh=XHOl6x9AeLbKRTScYF5JHJlGHtZBUR734vnEu1cBieQ=;
+ b=lld2YOykWACtPEG5fl56udbySma+fE+Z8ZKUTANEk6B46/5dlMLP3834ahxlOIXhawcgavAhJ3+ZWpKnvholnRmnVthHslW8T0dHq6TC2t0MNAbkcHzeI9lsS1u7uHYCAkRvk18ntxjgySnmkbASlO+LDiu9JSowA4cNmg5FtfRr4qs+U1/0pb0Tasq14Wzs+v/5aH1eL3iEOdZS0Bd9Ajp6obBDfdy4+7AeX63Y3EuATLBUSt0UV9d/A8vOtBnbohRkfqMyMApz240fBqxVf4jilxjzXOU0AfyFyP8NvkPzzwhKifEtDDmPI2H0yXz6Z3jMaCxExpjVRru46PUVkw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
  dkim=none; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=live.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=FWLxB2FlG2OgDaH2cyhxQQedVgplm+uQoWNz5Kw+6R0=;
- b=IVHmDrGzKcY2zfGwCPmj5Dxj57zjY/7gwuxAUdtn0aC4630nhTl2hbgLeDOAvkcPi/lHaUGTLQb9avtFDOAwYhV4JVf9RDUXXuI7x16PkqOKc/wu5janad2TfO0fWT7ogu+IAfA6Da4RfoORbsvmnrj1ogPhSMRxibzsptihAJRJkWc9PhTbj7uAKetjjYEQ3FIpBkmRygsgkVY+lX1iqvPMimFLzT0BsHxupKlzRZgUUQvFMYjoN9yjroR+1WSthCYFEQOtHjZOdYNFDGaAWGOyGoKBiRe997aD1zLaqolczu9rx0te8dunHHSj+yjRYbHS7pEgVsx12zblUPvEig==
+ bh=XHOl6x9AeLbKRTScYF5JHJlGHtZBUR734vnEu1cBieQ=;
+ b=VEkQ4Q6cNXScqa6DeIoX/4obqYQN2WdhH6hXN9NgOwFizOjI918cIZb9+3nextbZlOZRwZ5WmuWBRTyJZQWLOxjMIlZ0S+rAQCajh9/9wlcX7kdY0SfSIRoCKqFU/EsBNRS9YIwpZNsG3qYOKUypZ9KDfFiohVqep+rJixDAllj6OnAUDV7Z04bu9vfbCiFkIYNBXYD72J/1unoUSjtaKwJL3M1Qf2RmcuCblUA3lD21S7/9OVk8xjpaXjWuyuqQWvhD8ZuD8YeUfdRAh0BisYJNtVFVNhYo/xfP5xUTsSzdRZ3fAVvuM4wKxpxKmQ4Hn8u7qzoLLlcwWbzzKxYf8w==
 Received: from SN6PR04MB3983.namprd04.prod.outlook.com (2603:10b6:805:4c::19)
  by BL0PR04MB5043.namprd04.prod.outlook.com (2603:10b6:208:53::16) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5144.29; Tue, 12 Apr
- 2022 04:59:46 +0000
+ 2022 04:59:49 +0000
 Received: from SN6PR04MB3983.namprd04.prod.outlook.com
  ([fe80::5102:79c8:1ec5:d316]) by SN6PR04MB3983.namprd04.prod.outlook.com
  ([fe80::5102:79c8:1ec5:d316%5]) with mapi id 15.20.5144.030; Tue, 12 Apr 2022
- 04:59:46 +0000
+ 04:59:49 +0000
 From:   Nathan Sharp <nwsharp@live.com>
 To:     util-linux@vger.kernel.org
 Cc:     Nathan Sharp <nwsharp@live.com>
-Subject: [PATCH RFC 1/4] misc-utils: add the pipesz utility
-Date:   Mon, 11 Apr 2022 22:59:27 -0600
-Message-ID: <SN6PR04MB3983957C75B4FF779E3D611CC2ED9@SN6PR04MB3983.namprd04.prod.outlook.com>
+Subject: [PATCH RFC 2/4] pipesz: add tests
+Date:   Mon, 11 Apr 2022 22:59:28 -0600
+Message-ID: <SN6PR04MB398387B3E32DD916801C6F93C2ED9@SN6PR04MB3983.namprd04.prod.outlook.com>
 X-Mailer: git-send-email 2.35.1
 In-Reply-To: <20220412045930.236051-1-nwsharp@live.com>
 References: <20220412045930.236051-1-nwsharp@live.com>
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-TMN:  [Ptra6lYR1xBt541qgjO/yeOKbkpeIopu]
+X-TMN:  [J4tEL6GYuhQhI+8m6r2CYywAPeYHHp6o]
 X-ClientProxiedBy: CH2PR10CA0015.namprd10.prod.outlook.com
  (2603:10b6:610:4c::25) To SN6PR04MB3983.namprd04.prod.outlook.com
  (2603:10b6:805:4c::19)
-X-Microsoft-Original-Message-ID: <20220412045930.236051-2-nwsharp@live.com>
+X-Microsoft-Original-Message-ID: <20220412045930.236051-3-nwsharp@live.com>
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 2f261ae5-c3e6-412d-b4bb-08da1c41439e
-X-MS-Exchange-SLBlob-MailProps: S/btQ8cKWiThIBhrdRr4cLcE9KU0705s/jl1q8GM7NWHMPe0qADj91wESf5qLtB4Gx913zxkrSkmW5RqY4P2O1wE6grJkq6MPAUhOBeFETdvwhi4/puP9MK8fPUzV7jA8SyZegwVHQkNRurrSOdagUrLNqNpEWItBmjGbL6OanHXPZ+ny95QtRRr9FUO+cnyX8Gq9nIXSxpIxTGZkMwbfsI1HCq7yYei76n3VQCnVPviQdwghv2fo13pX7nyblSLGm1z8hdBwAa4qJuIqN9axgRBNf9Ze3MSDaDEB4pO910b6cBhp49ANje1FpTP5jxCte+Jtusxi8A2mWZlhIiUUtbM7cqKMHGSl5hUui7eniQRdbtxgV2EwQjcqWB+o0t0njhki+pmdyVG8yGIbkCuLsECXTP2Ldk9S1bCuGbvPO0IdmFgmdPzGx7SWFTcZ0bkRGVFCAw5vSGHoWXgLi0GEze78Eg31vuAVskuQWztQj5GQ0mxufIKk17hzaIlxvTeyMn/RdHml0jz5bR9IxxR2DP7HkSdLsr2h3HZqbMPorX3adE0JDnR24Q+0o4AqyGTrwGVXrFxZjQC8f2aYy5EwJZwEVnODMUkYjm1RpOfQNJSJgVHzadg0317UwcUzRsgvnKHR2njQ5t9O8NC6U7DihtPKwAdy3JpO0wgXg2aWoWfvRTt7rv7uHksbbAKULUHzW0sEPevjvumUg8a/erBE618PQFd3c7hpKoAewoDS+c0Rn3ZIkYCkHjJoJh2tvLJRZUehtYyHiU=
+X-MS-Office365-Filtering-Correlation-Id: b4fdbb6e-bf64-4ae9-09a3-08da1c4145a4
+X-MS-Exchange-SLBlob-MailProps: gjx25WM8ZNWTUkYsfs8LU6BtPgaYLwsWIegbKbWxPuvBfZ4hty81lfvuzSpIKysWNIs7wrSjIGdkzVqukwS9OX7m5xNjwqNLt6ZsfQbL2/16ch4UVfp8hCph5k51vDzB1W7wopxuyTsCPU+m7Ch4UqeO+Hu1VQ7KMXFN3hNq4m5osthaK9rrsLLyEKNaTCNaeBxxMfLBgZAuVWHnKjXWPl+Z/6NnrUxK/TXtS4qSNzXjMPLwfuIS4cTlWAq9rw01IdI/nocpgzbHpzf+Z4MiG+Zzikip3Y9TKPaTKnu7kuLn2oc81lrK8qzrtAX6DiSRpkMtpJ+DqBn9fFhsokwa5wUPbqhnpSPYY+xrn30XyVGnygF1yPPrA8Do0KKY0looxi2yT/9V0dmWZbLXwL+E+JWxSCa98OeC4c41FkInHK9f+3/Lz59qtsZAv1hMSEoHKsypMTGT3XFIhumiOD1bfVc+Ra03Ejzjwf2gJZqhWybY8wICmqAUJNUwrW1WrpupjvHfYacdJOPnNxkQZbuS1D4RHzcKgESCOmu4W3xM0XaedHwIFzbGg2IYutdWthx9lnKTD3iGWBTf2JJ2knAHLJXlDRuVlX86qI8OpFIrLLHfpUIAUm2V+SkZSKB/8MV8kFxTFYfBax8pDrBKuJMhs6oVMCotBxQdfJaRdrkwLqb3CNO9U1wd8C5wIsCb4Nm76VXTeVR5jrbfH14W06ktjoMGt6l6HnTaDkNfz4TToy4=
 X-MS-TrafficTypeDiagnostic: BL0PR04MB5043:EE_
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: /l+CAQDO08RqSZJKHZ4dUXXxouaHP0GYTiA6hMXFls1XRQMY/HrMF/uNlbcUIicE5CzHRbl9rgBBgkqPtF/7ZMzmgVh0ykPa4c7WtxzFKA++b3clrdkdcMRgVqz7nmHXtF7uU5OLPyvn31kI6hSQjKVsa8MhQEnjZngPfz6Ey8OH5xUtHQEZHjQaIb6dvjflA+22r0ZyHaymv5gj2GNkB19ez1/7Vr/xz+ktEBm7ibxV0aWMCZAEIznsDaejem0XclgXB6jICG9Cvs7RuoNaY9pN5Hn0StlZqCt2whddRpUeanVi/V8JhogkT1B/VpCOzxHDgvzl1xKfvCY0JsDNczs1K+PpRzxH72A9pum+f8yhCu7WMGSE94SdOmRFI5CRBJA5LO6OSkM6ELCxsxLBYJc1mo0zjH/kEsIuiR32dDAzHJ1hnasdyhSOT+jvMb834bSshAXWBZahWMhFT+2RHnEY5rAAvrLr1MPRbKwE/CtciSjDAPBohvF1MXwBofekpFAqtMX87z9ItdsqNCeG9oIpj3tGG5cUFRqqDz6ZNlAEBynUAoyNamLBqNz/3AbXcXbstWyN+sS1Cw7jLI+6JQ==
+X-Microsoft-Antispam-Message-Info: 8+vzBvxamBiY+XZsz8G5o3v7ez2mVbTWRiEiI3ocsECpEP+svRtk9oDGEs1H+qc8a9osZ3KlsxZiXWqlx72x2bm7P034ggoQ7FfnH3iCGYFxz3nih3eAxJS8JO7xMoBu08jtf9rWzaflCESMwnJ7zE8s0GDKyA0yvF1UceB5Q72aTgRm8Zetvc0kZsWK8Lgw87gsERXrkJlUsnXogI+GUfzjDj11zDekQRAxRVkjjt3MAoo6XY6os/n2I7mHpwEeZGh7wQ57HVEcm1GrEO1a6aPrsKkplqh6wPBwxazqDH+XzuCWhzcdAYlzM92ORW4Uxa7C2AcMu1vrCW9D1rpzCJKM1qdsKH33lrrjCu8dkY08oPh78MHTNklgUQ0ErOqm00gyQBjZ4gHMTNxW09gAfbXcWnpVx6DUAo+Q/hJbFKpKwBS1b/k+4BvylkXut0S/i/Sd14bxoD2QaPs7AXa/NT3XU7I7LD5xIjoMsW7i2eVzp8ihpFovuy/5sU/BZ6d3NEVlFZ0nNlwDc6E8PgTEsw5LqbAKJXTN9W9kQNwIRffD0EAPYxnxys0OA1g8EN6KFSRMyevmeLofulmWVGPuUQ==
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?TGisoKOGSyKvxSW7GfOtGmPfOX+CwM6/9isVW5sNxMBRo9bjn3E40VijOUe/?=
- =?us-ascii?Q?Q+wPdcIB+BU7yzRL9Nf3P/sAl95gxNzYpJRPkvjoFyDbVfTQkmf//CwTMHds?=
- =?us-ascii?Q?CR8arCTaQIdLX/6c8HfJn0NeVmJhMtcWxf12mEa4LE0YLP8K4aEk/QR7d/K1?=
- =?us-ascii?Q?KbJNZyAFEfxtdeDrLjmuO+kRSsU8OJplHPzF/mrTs/7DBN+klK3kAoBdAX7b?=
- =?us-ascii?Q?wON4dyRvsqvFVay0+1NCBKx8WZGtLCkQpPM1wHafX82VTxe7JWp7hYvUG7yb?=
- =?us-ascii?Q?lzdVFtvcFEAn07kPYMhDc1AdEUtYXBFSyIWvDZGheivx5zyI1s1YLcUGu1UZ?=
- =?us-ascii?Q?L4jLEs4bGVhyJ20W2V00oVA5VYnqfrPVpv2e7fXgPxdviUXJuj3AEpCoz8mU?=
- =?us-ascii?Q?HN2VhFtFy97nkQ0MH7tvQinPm4j9hDhV9ITHc+aHnk1LLaqfDjMS8j61e1ig?=
- =?us-ascii?Q?sjn0knAwRyewD8/6PQyo72r0pJ1iO9iZq0zSVvBdML3mQIjVdIsEtYtiLb+/?=
- =?us-ascii?Q?9BjcS59K8mIlnX5tbTrCxn388saGpcJIa0inPG/NBXWTfvJln8c61LFj9kn+?=
- =?us-ascii?Q?w8KdgW6715BIsKP/ozeIjHLeKS2DdvV0S3CKjBvMjHDPwmFkv6vbyLbVnwQ7?=
- =?us-ascii?Q?drhwod9p4KfAh8CcDOBMiTvmr3jRLXHPbPh9d77Y9Y08ZRnslIawLHIjTMQ3?=
- =?us-ascii?Q?8eKauBVyK8coiEw6lb589KRpQRm/K4okr/fpg7M5drBMVmRHen91H+snLso9?=
- =?us-ascii?Q?eI4raYu/w7DFMoaorz+Df6RWjje8HLSPaBsY4Htt8aowwPdo2ZqK1UGpnoZH?=
- =?us-ascii?Q?+LAmqgvaPV0iNma17pbiNyeFOAQgkIOICEG9g3OgplS+Ouhd+fM1XOqPfBpB?=
- =?us-ascii?Q?vzMVhZGrue+QYp02zTYZUR35mbcgCYIGAOvDtVYbNk78YV3MX3wOgKAdaqbG?=
- =?us-ascii?Q?Jv2oATctshTXqQShT/9QpRA1jsWidBJXVbShE+4SnbItUsoE4LkP+42dk//M?=
- =?us-ascii?Q?t2rZOrMuCWq6iKC54oo9ych4O31lLJ//P+xu2IcE1ZRYBvznw0etynqx9Y1l?=
- =?us-ascii?Q?aNPOmJRQSfnMkBhRlSMMiDY/7bZZ6L7/yIT+yFd8QkLgHDLKuRIkVBDiE3k7?=
- =?us-ascii?Q?15+QtWW41CvB32VcSxqmO4nYaM/5EgWQGJ+au3xvHKO1zxRtdXuEiDXFoj/V?=
- =?us-ascii?Q?SyC7dKfSa654UJl8dPr4aixz82DEq+VZPmn2pYjw4qUB+5bgTx3rk0MhMhCw?=
- =?us-ascii?Q?+Y75zfnsT+V8jMzdOK8ALk1Gt3BHcbLQEDzwrfusLpwaJcEGbokuxCCO57Hj?=
- =?us-ascii?Q?epTCu+DTa92h6DKibm6ybxk0lGhWJKUhDUV46L+1ScAt50ONWo9iiv5QHAdX?=
- =?us-ascii?Q?/RkiYLPl6rvk/0/9bO3oSH9VW3ZrCEl1CMwOZMKEJk+rM4U83AkboigvwS03?=
- =?us-ascii?Q?FNZNZNCZLsU=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?X/EyrurCa4/bKqHyCk/+hSVRl7LzZrWlVnhmH+TbreeIXCM3uAqj1fwyPpiz?=
+ =?us-ascii?Q?32/kAxAAhMf29DxD7UxAs3l2oAgjK5E943u/ihPv0/62TXbdQ6l0u5cDj6JZ?=
+ =?us-ascii?Q?pQTHZNwhMCJtUobRmTVPuudmiX+Qw6RO+CtDaCnAjcIMjhA65lVxHvzXc5Oc?=
+ =?us-ascii?Q?gDHomdFKML9cPHYoc3kGiBOp0PCXZOVf72Kux+WAnm48rxkHqoGKJbXAsSKz?=
+ =?us-ascii?Q?dFBk/C+AzpCjh0HWrt3QiUB4CueQa9Bvxfxfj/aWlk6FD36SvOsoapOCp69x?=
+ =?us-ascii?Q?dAano5SGA0ACkASGAURXB3edLPf267qblM6WwbZ+3vEHZI5iXdEV2qLS7MvY?=
+ =?us-ascii?Q?u6Vv4+ogR48Mcr7sCsPPq2YdFObzyeFfGXhK/7k118Y0xKvZE2qeviHuk+YV?=
+ =?us-ascii?Q?Pvvvl/gJDbpuz/KSWviW+OhJaSlWuSnCtvdkId786Og5GHDrNU/YuJbM7Pm6?=
+ =?us-ascii?Q?0VusZMRHfJ1ek6IJpAFoS7Dp9NNsQ7lrYOrsnrcZe1sLb6AJUGVfAKw+IR10?=
+ =?us-ascii?Q?6kxcXHDO6Cg1rBatdbZqnm23koXPEl9jG2A3ydtCmDYX4xFU7fCC/QBE/o/g?=
+ =?us-ascii?Q?51fQUS5H48DlTNR3fi2BSrQYYnoo55w75Zdw+hc1x/m6s+ylB8rDEOImhWZo?=
+ =?us-ascii?Q?+A42HDiI/oG0En5/wc5u2iqMiYqDMys/MRmuqp5Y8nWjIOH8Gi3+7dINXpjH?=
+ =?us-ascii?Q?XGvo/3UOfc99E4hU1W36ipKvPYPdZfPdEoE5FOCwT3n6blg17SfaPgEoscTY?=
+ =?us-ascii?Q?JIfbdZZbyIoEzwhoRNtk1vFmR7ySEj9icC4bordWIhDbfYe0b/ztAKXKaIav?=
+ =?us-ascii?Q?iQmqGG506ovnpnBLXBc5nomA9BX16aNW7jhuu8vFTT+GhGX85w2KSiupQ/+6?=
+ =?us-ascii?Q?bYh7iocAqG0gUIyKccOc3MWC6S1r1GtjUfLKZV5k0QVQ1YsG8gow9iSHy3O0?=
+ =?us-ascii?Q?XwHox6/xMR8bFnZLMpE1S4dcCzIxl/PXTFuH0z8ynCpJqB4mFN4OMKf2CQrq?=
+ =?us-ascii?Q?j0fRs2KXk1eVPjasYH/dkTiQ0LmzM1TUkj6CHQIaJYobQ7sVIMr1kyIIdn/Y?=
+ =?us-ascii?Q?0vTXVoe9pFSFoVdgKjXjNMfaKa5OXuKthqnn44dKbnpWDBwuWAQrierHwW7r?=
+ =?us-ascii?Q?UbRqQLSeRCZii893VoBmfhC11RPR5xRZn9h7O60Jn4efmcD7EY0cN1mVxH5N?=
+ =?us-ascii?Q?SJNb5MSkTxF/fbzNdbphcWWd3i29NzKPy80DVKd/GMqtArn6VacF43Bev7hP?=
+ =?us-ascii?Q?mNG3vacrG6igpCeQC2XlR+YxDSH8ibtVlRCWhT9+GvZyrYsMRdWIZa8ZrXPe?=
+ =?us-ascii?Q?zCtPId8glg2W6xtBmysJW7uZge9Y+CHxuBF3CbeUQO5iQMQdt2RK+hCFnDpT?=
+ =?us-ascii?Q?ZdlF+ezf2/93LMqlns6paDp0uPzdCbL6PsuaGx+1x0JvFmfOmFoWiNkLtTJR?=
+ =?us-ascii?Q?L0Ku5hqHPVU=3D?=
 X-OriginatorOrg: sct-15-20-4755-11-msonline-outlook-edb50.templateTenant
-X-MS-Exchange-CrossTenant-Network-Message-Id: 2f261ae5-c3e6-412d-b4bb-08da1c41439e
+X-MS-Exchange-CrossTenant-Network-Message-Id: b4fdbb6e-bf64-4ae9-09a3-08da1c4145a4
 X-MS-Exchange-CrossTenant-AuthSource: SN6PR04MB3983.namprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Apr 2022 04:59:46.2085
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Apr 2022 04:59:49.6145
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
@@ -106,488 +106,167 @@ Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-pipesz is a utility to examine and adjust the size of pipe buffers.
-
-It uses fctnl F_GETPIPE_SZ and F_SETPIPE_SZ to examine and resize
-these buffers. This functionality is unique to Linux and was added in
-version 2.6.35. Minor bugfixes were made in 4.9, but these do not
-obviate the use of pipesz prior to that release.
-
 Signed-off-by: Nathan Sharp <nwsharp@live.com>
 ---
- .gitignore               |   1 +
- configure.ac             |   8 +
- include/pathnames.h      |   4 +
- meson.build              |  12 ++
- meson_options.txt        |   2 +
- misc-utils/Makemodule.am |   7 +
- misc-utils/meson.build   |   4 +
- misc-utils/pipesz.c      | 347 +++++++++++++++++++++++++++++++++++++++
- 8 files changed, 385 insertions(+)
- create mode 100644 misc-utils/pipesz.c
+ tests/commands.sh                           |  1 +
+ tests/expected/misc/pipesz-exec             |  1 +
+ tests/expected/misc/pipesz-get-fd           |  1 +
+ tests/expected/misc/pipesz-get-fd-bad.err   |  1 +
+ tests/expected/misc/pipesz-get-file         |  1 +
+ tests/expected/misc/pipesz-get-file-bad.err |  1 +
+ tests/expected/misc/pipesz-set-fd-bad.err   |  1 +
+ tests/expected/misc/pipesz-set-file-bad.err |  1 +
+ tests/ts/misc/pipesz                        | 73 +++++++++++++++++++++
+ 9 files changed, 81 insertions(+)
+ create mode 100644 tests/expected/misc/pipesz-exec
+ create mode 100644 tests/expected/misc/pipesz-get-fd
+ create mode 100644 tests/expected/misc/pipesz-get-fd-bad.err
+ create mode 100644 tests/expected/misc/pipesz-get-file
+ create mode 100644 tests/expected/misc/pipesz-get-file-bad.err
+ create mode 100644 tests/expected/misc/pipesz-set-fd-bad.err
+ create mode 100644 tests/expected/misc/pipesz-set-file-bad.err
+ create mode 100755 tests/ts/misc/pipesz
 
-diff --git a/.gitignore b/.gitignore
-index 840f646..a31e7e5 100644
---- a/.gitignore
-+++ b/.gitignore
-@@ -143,6 +143,7 @@ ylwrap
- /nsenter
- /partx
- /pg
-+/pipesz
- /pivot_root
- /prlimit
- /raw
-diff --git a/configure.ac b/configure.ac
-index 2c3b432..3ac79a5 100644
---- a/configure.ac
-+++ b/configure.ac
-@@ -1785,6 +1785,14 @@ AC_ARG_ENABLE([whereis],
- UL_BUILD_INIT([whereis])
- AM_CONDITIONAL([BUILD_WHEREIS], [test "x$build_whereis" = xyes])
- 
-+AC_ARG_ENABLE([pipesz],
-+  AS_HELP_STRING([--disable-pipesz], [do not build pipesz]),
-+  [], [UL_DEFAULT_ENABLE([pipesz])]
-+)
-+UL_BUILD_INIT([pipesz])
-+UL_REQUIRES_LINUX([pipesz])
-+AM_CONDITIONAL([BUILD_PIPESZ], [test "x$build_pipesz" = xyes])
-+
- UL_BUILD_INIT([getopt], [yes])
- AM_CONDITIONAL([BUILD_GETOPT], [test "x$build_getopt" = xyes])
- 
-diff --git a/include/pathnames.h b/include/pathnames.h
-index d86d9d5..0887bd7 100644
---- a/include/pathnames.h
-+++ b/include/pathnames.h
-@@ -198,6 +198,10 @@
- #define _PATH_PROC_UCLAMP_MIN	_PATH_PROC_KERNEL "/sched_util_clamp_min"
- #define _PATH_PROC_UCLAMP_MAX	_PATH_PROC_KERNEL "/sched_util_clamp_max"
- 
-+/* sysctl fs paths */
-+#define _PATH_PROC_SYS_FS	"/proc/sys/fs"
-+#define _PATH_PROC_PIPE_MAX_SIZE	_PATH_PROC_SYS_FS "/pipe-max-size"
-+
- /* irqtop paths */
- #define _PATH_PROC_INTERRUPTS	"/proc/interrupts"
- #define _PATH_PROC_SOFTIRQS	"/proc/softirqs"
-diff --git a/meson.build b/meson.build
-index 0642ab5..358572e 100644
---- a/meson.build
-+++ b/meson.build
-@@ -2678,6 +2678,18 @@ if not is_disabler(exe)
-   bashcompletions += ['hardlink']
- endif
- 
-+opt = not get_option('build-pipesz').disabled()
-+exe = executable(
-+  'pipesz',
-+  pipesz_sources,
-+  include_directories : includes,
-+  link_with : [lib_common],
-+  install_dir : usrbin_exec_dir,
-+  install : true)
-+if opt and not is_disabler(exe)
-+  exes += exe
-+endif
-+
- exe = executable(
-   'test_cal',
-   cal_sources,
-diff --git a/meson_options.txt b/meson_options.txt
-index 64c9924..5272cb3 100644
---- a/meson_options.txt
-+++ b/meson_options.txt
-@@ -150,6 +150,8 @@ option('build-more', type : 'feature',
-        description : 'build more')
- option('build-pg', type : 'feature',
-        description : 'build pg')
-+option('build-pipesz', type : 'feature',
-+       description : 'build pipesz')
- option('build-setterm', type : 'feature',
-        description : 'build setterm')
- option('build-schedutils', type : 'feature',
-diff --git a/misc-utils/Makemodule.am b/misc-utils/Makemodule.am
-index cc18acb..60c7fe1 100644
---- a/misc-utils/Makemodule.am
-+++ b/misc-utils/Makemodule.am
-@@ -266,3 +266,10 @@ lsfd_SOURCES = \
- lsfd_LDADD = $(LDADD) libsmartcols.la libcommon.la
- lsfd_CFLAGS = $(AM_CFLAGS) -I$(ul_libsmartcols_incdir)
- endif
-+
-+if BUILD_PIPESZ
-+bin_PROGRAMS += pipesz
-+pipesz_SOURCES = misc-utils/pipesz.c
-+pipesz_LDADD = $(LDADD) libcommon.la
-+pipesz_CFLAGS = $(AM_CFLAGS)
-+endif
-diff --git a/misc-utils/meson.build b/misc-utils/meson.build
-index d435207..16310a9 100644
---- a/misc-utils/meson.build
-+++ b/misc-utils/meson.build
-@@ -140,3 +140,7 @@ hardlink_sources = files(
- cal_sources = files(
-   'cal.c',
- )
-+
-+pipesz_sources = files(
-+  'pipesz.c',
-+)
-diff --git a/misc-utils/pipesz.c b/misc-utils/pipesz.c
+diff --git a/tests/commands.sh b/tests/commands.sh
+index 18467cb..aff324c 100644
+--- a/tests/commands.sh
++++ b/tests/commands.sh
+@@ -92,6 +92,7 @@ TS_CMD_MOUNT=${TS_CMD_MOUNT:-"${ts_commandsdir}mount"}
+ TS_CMD_MOUNTPOINT=${TS_CMD_MOUNTPOINT:-"${ts_commandsdir}mountpoint"}
+ TS_CMD_NAMEI=${TS_CMD_NAMEI-"${ts_commandsdir}namei"}
+ TS_CMD_PARTX=${TS_CMD_PARTX-"${ts_commandsdir}partx"}
++TS_CMD_PIPESZ=${TS_CMD_PIPESZ-"${ts_commandsdir}pipesz"}
+ TS_CMD_RENAME=${TS_CMD_RENAME-"${ts_commandsdir}rename"}
+ TS_CMD_RUNUSER=${TS_CMD_RUNUSER-"${ts_commandsdir}runuser"}
+ TS_CMD_REV=${TS_CMD_REV:-"${ts_commandsdir}rev"}
+diff --git a/tests/expected/misc/pipesz-exec b/tests/expected/misc/pipesz-exec
 new file mode 100644
-index 0000000..1283d86
+index 0000000..1c6f03b
 --- /dev/null
-+++ b/misc-utils/pipesz.c
-@@ -0,0 +1,347 @@
-+/*
-+ * pipesz(1) - Set or examine pipe buffer sizes.
-+ *
-+ * Copyright (c) 2022 Nathan Sharp
-+ * Written by Nathan Sharp <nwsharp@live.com>
-+ *
-+ * This program is free software; you can redistribute it and/or
-+ * modify it under the terms of the GNU General Public License as
-+ * published by the Free Software Foundation.
-+ *
-+ * This program is distributed in the hope that it would be useful,
-+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
-+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-+ * GNU General Public License for more details.
-+ *
-+ * You should have received a copy of the GNU General Public License along
-+ * with this program; if not, write to the Free Software Foundation, Inc.,
-+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
-+ */
++++ b/tests/expected/misc/pipesz-exec
+@@ -0,0 +1 @@
++this_should_be_output_by_cat
+diff --git a/tests/expected/misc/pipesz-get-fd b/tests/expected/misc/pipesz-get-fd
+new file mode 100644
+index 0000000..ef103dc
+--- /dev/null
++++ b/tests/expected/misc/pipesz-get-fd
+@@ -0,0 +1 @@
++fd 0	65536	0
+diff --git a/tests/expected/misc/pipesz-get-fd-bad.err b/tests/expected/misc/pipesz-get-fd-bad.err
+new file mode 100644
+index 0000000..0394206
+--- /dev/null
++++ b/tests/expected/misc/pipesz-get-fd-bad.err
+@@ -0,0 +1 @@
++pipesz: cannot get pipe buffer size of fd 42: Bad file descriptor
+diff --git a/tests/expected/misc/pipesz-get-file b/tests/expected/misc/pipesz-get-file
+new file mode 100644
+index 0000000..c1e1a9d
+--- /dev/null
++++ b/tests/expected/misc/pipesz-get-file
+@@ -0,0 +1 @@
++/dev/stdin	65536	0
+diff --git a/tests/expected/misc/pipesz-get-file-bad.err b/tests/expected/misc/pipesz-get-file-bad.err
+new file mode 100644
+index 0000000..793301d
+--- /dev/null
++++ b/tests/expected/misc/pipesz-get-file-bad.err
+@@ -0,0 +1 @@
++pipesz: cannot get pipe buffer size of /dev/null: Bad file descriptor
+diff --git a/tests/expected/misc/pipesz-set-fd-bad.err b/tests/expected/misc/pipesz-set-fd-bad.err
+new file mode 100644
+index 0000000..199d18c
+--- /dev/null
++++ b/tests/expected/misc/pipesz-set-fd-bad.err
+@@ -0,0 +1 @@
++pipesz: cannot set pipe buffer size of fd 42: Bad file descriptor
+diff --git a/tests/expected/misc/pipesz-set-file-bad.err b/tests/expected/misc/pipesz-set-file-bad.err
+new file mode 100644
+index 0000000..f97b1f8
+--- /dev/null
++++ b/tests/expected/misc/pipesz-set-file-bad.err
+@@ -0,0 +1 @@
++pipesz: cannot set pipe buffer size of /dev/null: Bad file descriptor
+diff --git a/tests/ts/misc/pipesz b/tests/ts/misc/pipesz
+new file mode 100755
+index 0000000..be5eb45
+--- /dev/null
++++ b/tests/ts/misc/pipesz
+@@ -0,0 +1,73 @@
++#!/bin/bash
 +
-+#include <getopt.h>
-+#include <sys/ioctl.h>		/* FIONREAD */
-+#include <fcntl.h>		/* F_GETPIPE_SZ F_SETPIPE_SZ */
++# This file is part of util-linux.
++#
++# This file is free software; you can redistribute it and/or modify
++# it under the terms of the GNU General Public License as published by
++# the Free Software Foundation; either version 2 of the License, or
++# (at your option) any later version.
++#
++# This file is distributed in the hope that it will be useful,
++# but WITHOUT ANY WARRANTY; without even the implied warranty of
++# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++# GNU General Public License for more details.
 +
-+#include "c.h"
-+#include "nls.h"
++TS_TOPDIR="${0%/*}/../.."
++TS_DESC="pipesz"
 +
-+#include "closestream.h"	/* close_stdout_atexit */
-+#include "optutils.h"		/* err_exclusive_options */
-+#include "path.h"		/* ul_path_read_s32 */
-+#include "pathnames.h"		/* _PATH_PROC_PIPE_MAX_SIZE */
-+#include "strutils.h"		/* strtos32_or_err strtosize_or_err */
++. $TS_TOPDIR/functions.sh
++ts_init "$*"
 +
-+static char opt_check = 0;	/* --check */
-+static char opt_get = 0; 	/* --get */
-+static char opt_quiet = 0;	/* --quiet */
-+static int opt_size = -1;	/* --set <size> */
-+static char opt_verbose = 0;	/* --verbose */
++ts_check_test_command "$TS_CMD_PIPESZ"
 +
-+/* fallback file for default size */
-+#ifndef PIPESZ_DEFAULT_SIZE_FILE
-+#define PIPESZ_DEFAULT_SIZE_FILE _PATH_PROC_PIPE_MAX_SIZE
-+#endif
++ts_init_subtest "set-fd-bad"
++$TS_CMD_PIPESZ --check --set 4096 --fd 42 >> $TS_OUTPUT 2>> $TS_ERRLOG
++[[ $? -eq 0 ]] && ts_logerr "expected failure"
++ts_finalize_subtest
 +
-+/* convenience macros, since pipesz is by default very lenient */
-+#define check(FMT...) do {			\
-+	if (opt_check) {			\
-+		err(EXIT_FAILURE, FMT);		\
-+	} else if (!opt_quiet)	{		\
-+		warn(FMT);			\
-+	}					\
-+} while (0)
++ts_init_subtest "set-fd"
++echo -n | $TS_CMD_PIPESZ --check --set 4096 --stdin >> $TS_OUTPUT 2>> $TS_ERRLOG
++[[ $? -ne 0 ]] && ts_logerr "expected success"
++ts_finalize_subtest
 +
-+#define checkx(FMT...) do {			\
-+	if (opt_check) {			\
-+		errx(EXIT_FAILURE, FMT);	\
-+	} else if (!opt_quiet) {		\
-+		warnx(FMT);			\
-+	}					\
-+} while (0)
++ts_init_subtest "set-file-bad"
++$TS_CMD_PIPESZ --check --set 4096 --file "/dev/null" >> $TS_OUTPUT 2>> $TS_ERRLOG
++[[ $? -eq 0 ]] && ts_logerr "expected failure"
++ts_finalize_subtest
 +
-+static void __attribute__((__noreturn__)) usage(void)
-+{
-+	fputs(USAGE_HEADER, stdout);
-+	printf(_(" %s [options] [--set <size>] [--] [command]\n"), program_invocation_short_name);
-+	printf(_(" %s [options] --get\n"), program_invocation_short_name);
++ts_init_subtest "set-file"
++echo -n | $TS_CMD_PIPESZ --check --set 4096 --file "/dev/stdin" >> $TS_OUTPUT 2>> $TS_ERRLOG
++[[ $? -ne 0 ]] && ts_logerr "expected success"
++ts_finalize_subtest
 +
-+	fputs(USAGE_SEPARATOR, stdout);
-+	/* TRANSLATORS: 'command' refers to a program argument */
-+	puts(_("Set or examine pipe buffer sizes and optionally execute command."));
++ts_init_subtest "get-fd-bad"
++$TS_CMD_PIPESZ --check --get --fd 42 >> $TS_OUTPUT 2>> $TS_ERRLOG
++[[ $? -eq 0 ]] && ts_logerr "expected failure"
++ts_finalize_subtest
 +
-+	fputs(USAGE_OPTIONS, stdout);
-+	puts(_(" -g, --get          examine pipe buffers"));
-+	/* TRANSLATORS: '%s' refers to a system file */
-+	printf(_(" -s, --set <size>  set pipe buffer sizes\n"
-+		"                      size defaults to %s\n"
-+	), PIPESZ_DEFAULT_SIZE_FILE);
++ts_init_subtest "get-fd"
++echo -n | $TS_CMD_PIPESZ --check --get --stdin >> $TS_OUTPUT 2>> $TS_ERRLOG
++[[ $? -ne 0 ]] && ts_logerr "expected success"
++ts_finalize_subtest
 +
-+	fputs(USAGE_SEPARATOR, stdout);
-+	puts(_(" -f, --file <path>  act on a file"));
-+	puts(_(" -n, --fd <num>     act on a file descriptor"));
-+	puts(_(" -i, --stdin        act on standard input"));
-+	puts(_(" -o, --stdout       act on standard output"));
-+	puts(_(" -e, --stderr       act on standard error"));
++ts_init_subtest "get-file-bad"
++$TS_CMD_PIPESZ --check --get --file "/dev/null" >> $TS_OUTPUT 2>> $TS_ERRLOG
++[[ $? -eq 0 ]] && ts_logerr "expected failure"
++ts_finalize_subtest
 +
-+	fputs(USAGE_SEPARATOR, stdout);
-+	puts(_(" -c, --check        do not continue after an error"));
-+	puts(_(" -q, --quiet        do not warn of non-fatal errors"));
-+	puts(_(" -v, --verbose      provide detailed output"));
++ts_init_subtest "get-file"
++echo -n | $TS_CMD_PIPESZ --check --get --file "/dev/stdin" >> $TS_OUTPUT 2>> $TS_ERRLOG
++[[ $? -ne 0 ]] && ts_logerr "expected success"
++ts_finalize_subtest
 +
-+	fputs(USAGE_SEPARATOR, stdout);
-+	printf(USAGE_HELP_OPTIONS(20));
++ts_init_subtest "pipe-max-size"
++echo -n | $TS_CMD_PIPESZ --check --stdin >> $TS_OUTPUT 2>> $TS_ERRLOG
++[[ $? -ne 0 ]] && ts_logerr "expected success"
++ts_finalize_subtest
 +
-+	printf(USAGE_MAN_TAIL("pipesz(1)"));
++ts_init_subtest "exec"
++echo this_should_be_output_by_cat | $TS_CMD_PIPESZ --check --stdin cat >> $TS_OUTPUT 2>> $TS_ERRLOG
++[[ $? -ne 0 ]] && ts_logerr "expected success"
++ts_finalize_subtest
 +
-+	exit(EXIT_SUCCESS);
-+}
-+
-+/*
-+ * performs F_GETPIPE_SZ and FIONREAD
-+ * outputs a table row
-+ */
-+static void do_get(int fd, const char *name)
-+{
-+	int sz, used;
-+	
-+	sz = fcntl(fd, F_GETPIPE_SZ);
-+	if (sz < 0) {
-+		/* TRANSLATORS: '%s' refers to a file */
-+		check(_("cannot get pipe buffer size of %s"), name);
-+		return;
-+	}
-+
-+	if (ioctl(fd, FIONREAD, &used))
-+		used = 0;
-+
-+	printf("%s\t%d\t%d\n", name, sz, used);
-+}
-+
-+/*
-+ * performs F_SETPIPE_SZ
-+ */
-+static void do_set(int fd, const char *name)
-+{
-+	int sz;
-+	
-+	sz = fcntl(fd, F_SETPIPE_SZ, opt_size);
-+	if (sz < 0)
-+		/* TRANSLATORS: '%s' refers to a file */
-+		check(_("cannot set pipe buffer size of %s"), name);
-+	else if (opt_verbose)
-+		/* TRANSLATORS: '%s' refers to a file, '%d' to a buffer size in bytes */
-+		warnx(_("%s pipe buffer size set to %d"), name, sz);
-+}
-+
-+/*
-+ * does the requested operation on an fd
-+ */
-+static void do_fd(int fd)
-+{
-+	char name[sizeof(stringify(INT_MIN)) + 3];
-+
-+	sprintf(name, "fd %d", fd);
-+
-+	if (opt_get)
-+		do_get(fd, name);
-+	else
-+		do_set(fd, name);
-+}
-+
-+/*
-+ * does the requested operation on a file
-+ */
-+static void do_file(const char *path)
-+{
-+	int fd;
-+
-+	fd = open(path, O_RDONLY | O_CLOEXEC);
-+	if (fd < 0) {
-+		/* TRANSLATORS: '%s' refers to a file */
-+		check(_("cannot open %s"), path);
-+		return;
-+	}
-+
-+	if (opt_get)
-+		do_get(fd, path);
-+	else
-+		do_set(fd, path);
-+
-+	close(fd);
-+}
-+
-+/*
-+ * if necessary, determines a default buffer size and places it in opt_size
-+ * returns FALSE if this could not be done
-+ */
-+static char set_size_default(void)
-+{
-+	if (opt_size >= 0)
-+		return TRUE;
-+
-+	if (ul_path_read_s32(NULL, &opt_size, PIPESZ_DEFAULT_SIZE_FILE)) {
-+		/* TRANSLATORS: '%s' refers to a system file */
-+		check(_("cannot parse %s"), PIPESZ_DEFAULT_SIZE_FILE);
-+		return FALSE;
-+	}
-+
-+	if (opt_size < 0) {
-+		/* TRANSLATORS: '%s' refers to a system file */
-+		checkx(_("cannot parse %s"), PIPESZ_DEFAULT_SIZE_FILE);
-+		return FALSE;
-+	}
-+
-+	return TRUE;
-+}
-+
-+int main(int argc, char **argv)
-+{
-+	static const char shortopts[] = "+cef:ghin:oqs:vV";
-+	static const struct option longopts[] = {
-+		{ "check",     no_argument,       NULL, 'c' },
-+		{ "fd",        required_argument, NULL, 'n' },
-+		{ "file",      required_argument, NULL, 'f' },
-+		{ "get",       no_argument,       NULL, 'g' },
-+		{ "help",      no_argument,       NULL, 'h' },
-+		{ "quiet",     no_argument,       NULL, 'q' },
-+		{ "set",       required_argument, NULL, 's' },
-+		{ "stdin",     no_argument,       NULL, 'i' },
-+		{ "stdout",    no_argument,       NULL, 'o' },
-+		{ "stderr",    no_argument,       NULL, 'e' },
-+		{ "verbose",   no_argument,       NULL, 'v' },
-+		{ "version",   no_argument,       NULL, 'V' },
-+		{ NULL, 0, NULL, 0 }
-+	};
-+	static const ul_excl_t excl[] = {
-+		{ 'g', 's' },
-+		{ 0 }
-+	};
-+
-+	int c, fd, n_opt_pipe = 0, n_opt_size = 0;
-+	uintmax_t sz;
-+
-+	int excl_st[ARRAY_SIZE(excl)] = UL_EXCL_STATUS_INIT;
-+
-+	setlocale(LC_ALL, "");
-+	bindtextdomain(PACKAGE, LOCALEDIR);
-+	textdomain(PACKAGE);
-+	close_stdout_atexit();
-+
-+	/* check for --help or --version */
-+	while ((c = getopt_long(argc, argv, shortopts, longopts, NULL)) != -1)
-+		switch (c) {
-+		case 'h':
-+			usage();
-+		case 'V':
-+			print_version(EXIT_SUCCESS);
-+		}
-+
-+	/* gather normal options */
-+	optind = 1;
-+	while ((c = getopt_long(argc, argv, shortopts, longopts, NULL)) != -1) {
-+		err_exclusive_options(c, longopts, excl, excl_st);
-+
-+		switch (c) {
-+		case 'c':
-+			opt_check = TRUE;
-+			break;
-+		case 'e':
-+			++n_opt_pipe;
-+			break;
-+		case 'f':
-+			++n_opt_pipe;
-+			break;
-+		case 'g':
-+			opt_get = TRUE;
-+			break;
-+		case 'i':
-+			++n_opt_pipe;
-+			break;
-+		case 'n':
-+			fd = strtos32_or_err(optarg, _("invalid fd argument"));
-+			++n_opt_pipe;
-+			break;
-+		case 'o':
-+			++n_opt_pipe;
-+			break;
-+		case 'q':
-+			opt_quiet = TRUE;
-+			break;
-+		case 's':
-+			sz = strtosize_or_err(optarg, _("invalid size argument"));
-+			opt_size = sz >= INT_MAX ? INT_MAX : (int)sz;
-+			break;
-+		case 'v':
-+			opt_verbose = TRUE;
-+			break;
-+		default:
-+			errtryhelp(EXIT_FAILURE);
-+		}
-+	}
-+
-+	/* check arguments */
-+	if (opt_get) {
-+		if (argv[optind])
-+			errx(EXIT_FAILURE, _("cannot specify a command with --get"));
-+
-+		/* print column headers, if requested */
-+		if (opt_verbose)
-+			printf("%s\t%s\t%s\n",
-+/* TRANSLATORS: a column that contains the names of files that are unix pipes */
-+				_("pipe"),
-+/* TRANSLATORS: a column that contains buffer sizes in bytes */
-+				_("size"),
-+/* TRANSLATORS: a column that contains an amount of data which has not been used by a program */
-+				_("unread")
-+			);
-+
-+		/* special behavior for --get */
-+		if (!n_opt_pipe) {
-+			do_fd(STDIN_FILENO);
-+			return EXIT_SUCCESS;
-+		}
-+	} else {
-+		if (!set_size_default())
-+			goto execute_command;
-+
-+		if (!opt_quiet && n_opt_size > 1)
-+			warnx(_("using last specified size"));
-+
-+		/* special behavior for --set */
-+		if (!n_opt_pipe) {
-+			do_fd(STDOUT_FILENO);
-+			goto execute_command;
-+		}
-+	}
-+
-+	/* go through the arguments again and do the requested operations */
-+	optind = 1;
-+	while ((c = getopt_long(argc, argv, shortopts, longopts, NULL)) != -1)
-+		switch (c) {
-+		case 'e':
-+			do_fd(STDERR_FILENO);
-+			break;
-+		case 'f':
-+			do_file(optarg);
-+			break;
-+		case 'i':
-+			do_fd(STDIN_FILENO);
-+			break;
-+		case 'n':
-+			/* optarg was checked before, but it's best to be safe */
-+			fd = strtos32_or_err(optarg, _("invalid fd argument"));
-+			do_fd(fd);
-+			break;
-+		case 'o':
-+			do_fd(STDOUT_FILENO);
-+			break;
-+		}
-+
-+execute_command:
-+	/* exec the command, if it's present */
-+	if (!argv[optind])
-+		return EXIT_SUCCESS;
-+
-+	execvp(argv[optind], &argv[optind]);
-+	errexec(argv[optind]);
-+}
++ts_finalize
 -- 
 2.35.1
 
