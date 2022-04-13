@@ -2,78 +2,69 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id D26064FF0FC
-	for <lists+util-linux@lfdr.de>; Wed, 13 Apr 2022 09:54:03 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 2EE964FF144
+	for <lists+util-linux@lfdr.de>; Wed, 13 Apr 2022 10:02:36 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231515AbiDMH4F (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Wed, 13 Apr 2022 03:56:05 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:47354 "EHLO
+        id S230224AbiDMIEm (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Wed, 13 Apr 2022 04:04:42 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:56250 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S233544AbiDMH4E (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Wed, 13 Apr 2022 03:56:04 -0400
-Received: from nksmu.kylinos.cn (mailgw.kylinos.cn [123.150.8.42])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id F1C2A41FB2
-        for <util-linux@vger.kernel.org>; Wed, 13 Apr 2022 00:53:42 -0700 (PDT)
-X-UUID: b5b52ba051284ded9f72ef4004744a0f-20220413
-X-CPASD-INFO: e712d8a21e264582bc5630b69c893f53@rodrUpFqj2JdhXSCg3iDbIKTYVaCcpx
-        WaZFoZVO7h396Ul9sWVWEfWxUYGJgYVVzeW1ZZF5gXlF2fn91f1CFYmBcUJl6gI9rhWdfYg==
-X-CLOUD-ID: e712d8a21e264582bc5630b69c893f53
-X-CPASD-SUMMARY: SIP:-1,APTIP:-2.0,KEY:0.0,FROMBLOCK:1,OB:0.0,URL:-5,TVAL:197.
-        0,ESV:0.0,ECOM:-5.0,ML:0.0,FD:0.0,CUTS:47.0,IP:-2.0,MAL:-5.0,PHF:-5.0,PHC:-5.
-        0,SPF:4.0,EDMS:-5,IPLABEL:4480.0,FROMTO:0,AD:0,FFOB:0.0,CFOB:0.0,SPC:0,SIG:-5
-        ,AUF:12,DUF:37045,ACD:252,DCD:354,SL:0,EISP:0,AG:0,CFC:0.241,CFSR:0.048,UAT:0
-        ,RAF:0,IMG:-5.0,DFA:0,DTA:0,IBL:-2.0,ADI:-5,SBL:0,REDM:0,REIP:0,ESB:0,ATTNUM:
-        0,EAF:0,CID:-5.0,VERSION:2.3.17
-X-CPASD-ID: b5b52ba051284ded9f72ef4004744a0f-20220413
-X-CPASD-BLOCK: 0
-X-CPASD-STAGE: 1
-X-UUID: b5b52ba051284ded9f72ef4004744a0f-20220413
-X-User: lienze@kylinos.cn
-Received: from fedora.. [(106.37.198.36)] by nksmu.kylinos.cn
-        (envelope-from <lienze@kylinos.cn>)
-        (Generic MTA with TLSv1.2 ECDHE-RSA-AES256-GCM-SHA384 256/256)
-        with ESMTP id 1828485290; Wed, 13 Apr 2022 15:52:29 +0800
-From:   Enze Li <lienze@kylinos.cn>
-To:     util-linux@vger.kernel.org
-Subject: [PATCH] build-sys: add gnu global outputs to gitignore
-Date:   Wed, 13 Apr 2022 15:53:50 +0800
-Message-Id: <20220413075350.2190928-1-lienze@kylinos.cn>
-X-Mailer: git-send-email 2.35.1
+        with ESMTP id S233658AbiDMIEl (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Wed, 13 Apr 2022 04:04:41 -0400
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTP id 9A79E205F1
+        for <util-linux@vger.kernel.org>; Wed, 13 Apr 2022 01:02:21 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+        s=mimecast20190719; t=1649836940;
+        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+         in-reply-to:in-reply-to:references:references;
+        bh=bjyvklNtsTXraB9VvmjocvRs2V/OaYikzD5BIH8lZ2A=;
+        b=JjQeZIN3iLV+EDYsRKlHxJM3sDJIgBAPoWz1XNuGOuKq6zbk/9Nw5fBZFB0RSbNNn5U2Qx
+        u1YTnqvTwHbZOUr3FhuN1Hpc7gy+l2d8mD4rD2uEI/wjqdyc7Nj8Qqf0Pw9S1pbiBuvwr+
+        7pE1LAlSSbwRlM/LI1UfJmpnY67qJH0=
+Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
+ [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ us-mta-447-HUUmc4TFNfut2_pWaB97rQ-1; Wed, 13 Apr 2022 04:02:17 -0400
+X-MC-Unique: HUUmc4TFNfut2_pWaB97rQ-1
+Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.rdu2.redhat.com [10.11.54.8])
+        (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+        (No client certificate requested)
+        by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 28FB8185A7B2;
+        Wed, 13 Apr 2022 08:02:17 +0000 (UTC)
+Received: from ws.net.home (unknown [10.36.112.12])
+        by smtp.corp.redhat.com (Postfix) with ESMTPS id A247BC2812C;
+        Wed, 13 Apr 2022 08:02:16 +0000 (UTC)
+Date:   Wed, 13 Apr 2022 10:02:14 +0200
+From:   Karel Zak <kzak@redhat.com>
+To:     Enze Li <lienze@kylinos.cn>
+Cc:     util-linux@vger.kernel.org
+Subject: Re: [PATCH] build-sys: add gnu global outputs to gitignore
+Message-ID: <20220413080214.d6rvlzu3txmchwdf@ws.net.home>
+References: <20220413075350.2190928-1-lienze@kylinos.cn>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Spam-Status: No, score=-1.8 required=5.0 tests=BAYES_00,KHOP_HELO_FCRDNS,
-        SPF_HELO_NONE,T_SCC_BODY_TEXT_LINE,T_SPF_PERMERROR,UNPARSEABLE_RELAY
-        autolearn=ham autolearn_force=no version=3.4.6
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20220413075350.2190928-1-lienze@kylinos.cn>
+X-Scanned-By: MIMEDefang 2.85 on 10.11.54.8
+X-Spam-Status: No, score=-2.8 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_LOW,
+        RCVD_IN_MSPIKE_H4,RCVD_IN_MSPIKE_WL,SPF_HELO_NONE,SPF_NONE,
+        T_SCC_BODY_TEXT_LINE autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-Some people like to use gnu global to browse code, so we add the global
-output files to gitignore, which is safe because no function-related
-code is changed.
+On Wed, Apr 13, 2022 at 03:53:50PM +0800, Enze Li wrote:
+>  .gitignore | 4 ++++
+>  1 file changed, 4 insertions(+)
 
-Signed-off-by: Enze Li <lienze@kylinos.cn>
----
- .gitignore | 4 ++++
- 1 file changed, 4 insertions(+)
+Applied, thanks.
 
-diff --git a/.gitignore b/.gitignore
-index 840f64615..3274563ec 100644
---- a/.gitignore
-+++ b/.gitignore
-@@ -62,6 +62,10 @@ tests/run.sh.log
- tests/run.sh.trs
- update.log
- ylwrap
-+GPATH
-+GRTAGS
-+GTAGS
-+GSYMS
- 
- #
- # binaries
 -- 
-2.35.1
+ Karel Zak  <kzak@redhat.com>
+ http://karelzak.blogspot.com
 
