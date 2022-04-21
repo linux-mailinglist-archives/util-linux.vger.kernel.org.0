@@ -2,90 +2,96 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 14762509D78
-	for <lists+util-linux@lfdr.de>; Thu, 21 Apr 2022 12:21:17 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 2501F50A06D
+	for <lists+util-linux@lfdr.de>; Thu, 21 Apr 2022 15:10:18 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229877AbiDUKXJ (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Thu, 21 Apr 2022 06:23:09 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:49646 "EHLO
+        id S230468AbiDUNND (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Thu, 21 Apr 2022 09:13:03 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:35474 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1388388AbiDUKWr (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Thu, 21 Apr 2022 06:22:47 -0400
+        with ESMTP id S231493AbiDUNM4 (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Thu, 21 Apr 2022 09:12:56 -0400
 Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTP id 9F35B6168
-        for <util-linux@vger.kernel.org>; Thu, 21 Apr 2022 03:19:57 -0700 (PDT)
+        by lindbergh.monkeyblade.net (Postfix) with ESMTP id AA18A38B0
+        for <util-linux@vger.kernel.org>; Thu, 21 Apr 2022 06:10:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-        s=mimecast20190719; t=1650536396;
+        s=mimecast20190719; t=1650546605;
         h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-         content-transfer-encoding:content-transfer-encoding:
-         in-reply-to:in-reply-to:references:references;
-        bh=dg0HyUwJfwTSvuoOdsJD1vTCx/by2RO94hLDhY+6b9k=;
-        b=WE4ZHbg+nEQVP7mB1MGzBiKMZlUlfyOZX1Vxcq0auYy2y6QSmIqp4jPojoRjNlsHHToqCb
-        rYRC96/4ceB6zppioe2DYhMEPOe4PVPQWo1+1Y2gZX3h2jzHiXdi3JAU1JsZXVF5DcVmg3
-        F06ajsR8wRapueZwaz9ZVKp1KlKwNKM=
-Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
- [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
+         to:to:cc:cc:mime-version:mime-version:
+         content-transfer-encoding:content-transfer-encoding;
+        bh=jP00jMmaDdVYztni9YgQfSe3YdUSdnC2L48Bn7bNkNs=;
+        b=V+lwp2wed5vLOrAmCKEVAnU/3OOEdTuqrZ7iVOdgX+EL6v9yqywdtAEfaP/bWbTSvJSZPG
+        9oNpMfScbySVEIXMxwauP3B+hWnmbUo08PC3pzJ+TKouY4poFPYMbIOAn6m6PzYjn8pZGI
+        hvVEdauShAIMItd5XrpHV2EBkBmSVcw=
+Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
+ [209.85.221.72]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-443-pCgAbw7wO3G8vx-rVCedvQ-1; Thu, 21 Apr 2022 06:19:52 -0400
-X-MC-Unique: pCgAbw7wO3G8vx-rVCedvQ-1
-Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.rdu2.redhat.com [10.11.54.2])
-        (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
-        (No client certificate requested)
-        by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 9DC71185A79C;
-        Thu, 21 Apr 2022 10:19:52 +0000 (UTC)
-Received: from ws.net.home (unknown [10.36.112.12])
-        by smtp.corp.redhat.com (Postfix) with ESMTPS id 2373C404D2E8;
-        Thu, 21 Apr 2022 10:19:52 +0000 (UTC)
-Date:   Thu, 21 Apr 2022 12:19:49 +0200
-From:   Karel Zak <kzak@redhat.com>
-To:     =?utf-8?B?0L3QsNCx?= <nabijaczleweli@nabijaczleweli.xyz>
-Cc:     util-linux@vger.kernel.org
-Subject: Re: [PATCH v3] libmount: accept X-mount.{owner,group,mode}=
-Message-ID: <20220421101949.4zc7kojyujdiv2lb@ws.net.home>
-References: <20220406113814.twdo4mwkevwuayht@ws.net.home>
- <20220407183913.kvchb7hbrfhyxjoc@tarta.nabijaczleweli.xyz>
- <20220419111341.7n2jhxlf4446rmle@ws.net.home>
- <20220419145607.wk3wpsmudkmkdqvg@tarta.nabijaczleweli.xyz>
+ us-mta-631-KNpJi-tfNpalGYFm2MXQSw-1; Thu, 21 Apr 2022 09:10:03 -0400
+X-MC-Unique: KNpJi-tfNpalGYFm2MXQSw-1
+Received: by mail-wr1-f72.google.com with SMTP id w22-20020adf8bd6000000b0020aaff5af82so1127351wra.7
+        for <util-linux@vger.kernel.org>; Thu, 21 Apr 2022 06:10:03 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=jP00jMmaDdVYztni9YgQfSe3YdUSdnC2L48Bn7bNkNs=;
+        b=32GhBE0g5lzyws74QmfgSDoPvDUBCLfbbc1kfFqbMNsgNE2ug4JXS73UyPUfBHAlpl
+         Hxp6sfzt4jHQ3aN7H8DQmhVzC6UbPZVsxPvpLjkIYBWnBrdT3BF+/yInZXFW0z0hY4/q
+         reMJ4dhF1e1bKnB+TyNZJ2CNKxIzPl2uEEhb+jGy0mr3oFCzUAu48q8q4myOKcphWpgm
+         rqvkvXB1dGiawiQ0bXd4UBPA0son09CmZaZERY4y0Ri+Oq4IAmUOAlf8vrTeT6oirhNz
+         9uLbKH2HEVqdlMvP4AQ5XGL/AsEGC2PWqCCtnShiiNAdEn4y3fIb9+F7VUYumfyrGJjf
+         3euA==
+X-Gm-Message-State: AOAM532AvFZ5Lc5GrZu2RtucZvyhNwwbmvFRzHui68aB6scYT798FDcZ
+        XQL9V267ce572p+TOvthoMFkQW5PBJp3kafzkQBRZK50Xnh338ZB2r2HWENgQu/LUy2+LkE19/g
+        V/qG/EdOrTRP18WLClpzZvhps8S9rkFOCSTARWxwanD8XiZLVe5WRDL5QepDmTmujT9bEHPFa
+X-Received: by 2002:a1c:acc4:0:b0:392:9dd4:fbcc with SMTP id v187-20020a1cacc4000000b003929dd4fbccmr8434550wme.78.1650546601651;
+        Thu, 21 Apr 2022 06:10:01 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJwj2QLE0t7c+W1A1zI66xtMe2VrmvbsInaE1mIB2dBlv25fFAS7XNtBJy/tayezvPH5sOeY0w==
+X-Received: by 2002:a1c:acc4:0:b0:392:9dd4:fbcc with SMTP id v187-20020a1cacc4000000b003929dd4fbccmr8434523wme.78.1650546601339;
+        Thu, 21 Apr 2022 06:10:01 -0700 (PDT)
+Received: from aalbersh.remote.csb ([109.183.6.197])
+        by smtp.gmail.com with ESMTPSA id a7-20020adffb87000000b00207982c7f4dsm2284875wrr.67.2022.04.21.06.10.00
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 21 Apr 2022 06:10:00 -0700 (PDT)
+From:   Andrey Albershteyn <aalbersh@redhat.com>
+To:     util-linux@vger.kernel.org
+Cc:     Andrey Albershteyn <aalbersh@redhat.com>
+Subject: [PATCH 0/2] libblkid: add FSSIZE with XFS implementation
+Date:   Thu, 21 Apr 2022 15:09:44 +0200
+Message-Id: <20220421130946.318737-1-aalbersh@redhat.com>
+X-Mailer: git-send-email 2.27.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <20220419145607.wk3wpsmudkmkdqvg@tarta.nabijaczleweli.xyz>
-X-Scanned-By: MIMEDefang 2.84 on 10.11.54.2
 X-Spam-Status: No, score=-3.4 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
         DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_LOW,
-        RCVD_IN_MSPIKE_H4,RCVD_IN_MSPIKE_WL,SPF_HELO_NONE,SPF_NONE
-        autolearn=ham autolearn_force=no version=3.4.6
+        SPF_HELO_NONE,SPF_NONE autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-On Tue, Apr 19, 2022 at 04:56:07PM +0200, наб wrote:
->  libmount/src/context.c             |  12 ++-
->  libmount/src/context_mount.c       |  87 +++++++++++++++++++-
->  libmount/src/libmount.h.in         |  13 ++-
->  libmount/src/mountP.h              |   7 ++
->  libmount/src/optstr.c              |  19 +----
->  libmount/src/utils.c               | 126 +++++++++++++++++++++++++++++
->  sys-utils/mount.8.adoc             |   6 ++
->  tests/expected/mount/set_ugid_mode |   1 +
->  tests/ts/mount/set_ugid_mode       |  65 +++++++++++++++
->  9 files changed, 315 insertions(+), 21 deletions(-)
->  create mode 100644 tests/expected/mount/set_ugid_mode
->  create mode 100755 tests/ts/mount/set_ugid_mode
+In discussion [1] it was suggested that adding new field FSSIZE
+would be useful (size of filesystem, like in lsblk). These patches
+add new FSSIZE field together with implementation for XFS.
 
-Applied. Thanks for all the work and patience. I think the result is
-pretty usable and readable :-)
+[1]: https://bugzilla.redhat.com/show_bug.cgi?id=2064810
 
-I did some additional small changes to the code:
-https://github.com/util-linux/util-linux/commit/24e896c1400c2328b8bdffde674a3d74429acdf1
+I had a look into other fs, like ext4 and btrfs, to implement FSSIZE
+for them, but I think I don't have enough expertize to do that as
+they have not so trivial metadata overhead calculation :)
 
-    Karel
+Andrey Albershteyn (2):
+  libblkid: add interface for FSSIZE field
+  libblkid: implement FSSIZE calculation for XFS
+
+ libblkid/samples/superblocks.c         |  2 +-
+ libblkid/src/blkid.h.in                |  1 +
+ libblkid/src/superblocks/superblocks.c | 13 +++++++++++++
+ libblkid/src/superblocks/superblocks.h |  1 +
+ libblkid/src/superblocks/xfs.c         | 10 ++++++++++
+ 5 files changed, 26 insertions(+), 1 deletion(-)
 
 -- 
- Karel Zak  <kzak@redhat.com>
- http://karelzak.blogspot.com
+2.27.0
 
