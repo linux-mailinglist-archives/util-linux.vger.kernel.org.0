@@ -2,73 +2,100 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 69EEF516E5C
-	for <lists+util-linux@lfdr.de>; Mon,  2 May 2022 12:46:14 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id B290C5170AB
+	for <lists+util-linux@lfdr.de>; Mon,  2 May 2022 15:37:10 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1384622AbiEBKti (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Mon, 2 May 2022 06:49:38 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:36978 "EHLO
+        id S243189AbiEBNk2 (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Mon, 2 May 2022 09:40:28 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:46334 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1384731AbiEBKtc (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Mon, 2 May 2022 06:49:32 -0400
-X-Greylist: delayed 569 seconds by postgrey-1.37 at lindbergh.monkeyblade.net; Mon, 02 May 2022 03:45:48 PDT
-Received: from mx4.uni-regensburg.de (mx4.uni-regensburg.de [IPv6:2001:638:a05:137:165:0:4:4e7a])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id B303C19023
-        for <util-linux@vger.kernel.org>; Mon,  2 May 2022 03:45:46 -0700 (PDT)
-Received: from mx4.uni-regensburg.de (localhost [127.0.0.1])
-        by localhost (Postfix) with SMTP id 8E8096000052
-        for <util-linux@vger.kernel.org>; Mon,  2 May 2022 12:36:11 +0200 (CEST)
-Received: from gwsmtp.uni-regensburg.de (gwsmtp1.uni-regensburg.de [132.199.5.51])
-        by mx4.uni-regensburg.de (Postfix) with ESMTP id 780BB600004F
-        for <util-linux@vger.kernel.org>; Mon,  2 May 2022 12:36:11 +0200 (CEST)
-Received: from uni-regensburg-smtp1-MTA by gwsmtp.uni-regensburg.de
-        with Novell_GroupWise; Mon, 02 May 2022 12:36:11 +0200
-Message-Id: <626FB419020000A100049B7A@gwsmtp.uni-regensburg.de>
-X-Mailer: Novell GroupWise Internet Agent 18.4.0 
-Date:   Mon, 02 May 2022 12:36:09 +0200
-From:   "Ulrich Windl" <Ulrich.Windl@rz.uni-regensburg.de>
-To:     <util-linux@vger.kernel.org>
-Subject: logger: invalid structured data parameter: 'fo\o="b\"a\"r"'
-Mime-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+        with ESMTP id S1385334AbiEBNk0 (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Mon, 2 May 2022 09:40:26 -0400
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTP id C886715822
+        for <util-linux@vger.kernel.org>; Mon,  2 May 2022 06:36:55 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+        s=mimecast20190719; t=1651498614;
+        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+         content-transfer-encoding:content-transfer-encoding:
+         in-reply-to:in-reply-to:references:references;
+        bh=XynN5vA2TbXpQPKGLtCmjRxK24BTpVV/clMZh7rt9to=;
+        b=MaLLch2onpsYvcJc9BXZGQgLYS0NG0LKWGl4F6wjIQ2rOs59me6XPVroZ//KuNVqw6y3US
+        fmmCM5AV23ZqXorBK/49Qtayb7B8VgPoDGOJ1G4xv23bs7fr75UIf5NqwbUmgByWjPrOjw
+        g7aVWhTI8agvUFpUcXcMmyaqnGGWpGk=
+Received: from mimecast-mx02.redhat.com (mx3-rdu2.redhat.com
+ [66.187.233.73]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ us-mta-640-R9t_hgOwMC2oTMDcyy9ivw-1; Mon, 02 May 2022 09:36:51 -0400
+X-MC-Unique: R9t_hgOwMC2oTMDcyy9ivw-1
+Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.rdu2.redhat.com [10.11.54.1])
+        (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+        (No client certificate requested)
+        by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 419D13C025D2;
+        Mon,  2 May 2022 13:36:51 +0000 (UTC)
+Received: from ws.net.home (unknown [10.36.112.12])
+        by smtp.corp.redhat.com (Postfix) with ESMTPS id B85FC40E7F06;
+        Mon,  2 May 2022 13:36:50 +0000 (UTC)
+Date:   Mon, 2 May 2022 15:36:48 +0200
+From:   Karel Zak <kzak@redhat.com>
+To:     Ulrich Windl <Ulrich.Windl@rz.uni-regensburg.de>
+Cc:     util-linux@vger.kernel.org
+Subject: Re: logger: invalid structured data parameter: 'fo\o="b\"a\"r"'
+Message-ID: <20220502133648.dbztxenhvc3n2sde@ws.net.home>
+References: <626FB419020000A100049B7A@gwsmtp.uni-regensburg.de>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
-X-Spam-Status: No, score=-0.5 required=5.0 tests=BAYES_05,SPF_HELO_NONE,
-        SPF_PASS,T_SCC_BODY_TEXT_LINE autolearn=ham autolearn_force=no
-        version=3.4.6
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <626FB419020000A100049B7A@gwsmtp.uni-regensburg.de>
+X-Scanned-By: MIMEDefang 2.84 on 10.11.54.1
+X-Spam-Status: No, score=-3.4 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_LOW,
+        SPF_HELO_NONE,SPF_NONE,T_SCC_BODY_TEXT_LINE autolearn=ham
+        autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-Hi!
+On Mon, May 02, 2022 at 12:36:09PM +0200, Ulrich Windl wrote:
+> Hi!
+> 
+> Testing my syslogd that was extended to handle RFC 5424 type messages, I found
+> out that
+> 
+> --sd-param 'fo\o="bar"'
+> 
+> would work, but
+> 
+> --sd-param 'fo\o="b\"a\"r"'
+> 
+> won't. Reading RFC 5424, I guess that using \" in PARAM-VALUE is OK (passing a
+> literal "):
+> 
+> On page 16, 6.3.3.:
+>    Inside PARAM-VALUE, the characters ’"’ (ABNF %d34), ’\’ (ABNF %d92),
+>    and ’]’ (ABNF %d93) MUST be escaped.  This is necessary to avoid
+>    parsing errors.
+> 
+> So I guess if " miust be escaped, it's allowed to be escaped (to pass a
+> literal ").
+> 
+> Found in util-linux-systemd-2.33.2-4.18.1.x86_64 of SLES12 SP5.
+> Still present in util-linux-systemd-2.36.2-150300.4.20.1.x86_64 of SLES15
+> SP3.
 
-Testing my syslogd that was extended to handle RFC 5424 type messages, I found
-out that
+Fixed by commit:
+https://github.com/util-linux/util-linux/commit/6ab10df254c62e1abf962a8756c0cd4aa333a47f
 
---sd-param 'fo\o="bar"'
+Thanks for your report.
 
-would work, but
+  Karel
 
---sd-param 'fo\o="b\"a\"r"'
 
-won't. Reading RFC 5424, I guess that using \" in PARAM-VALUE is OK (passing a
-literal "):
-
-On page 16, 6.3.3.:
-   Inside PARAM-VALUE, the characters ’"’ (ABNF %d34), ’\’ (ABNF %d92),
-   and ’]’ (ABNF %d93) MUST be escaped.  This is necessary to avoid
-   parsing errors.
-
-So I guess if " miust be escaped, it's allowed to be escaped (to pass a
-literal ").
-
-Found in util-linux-systemd-2.33.2-4.18.1.x86_64 of SLES12 SP5.
-Still present in util-linux-systemd-2.36.2-150300.4.20.1.x86_64 of SLES15
-SP3.
-
-Regards,
-Ulrich Windl
-
+-- 
+ Karel Zak  <kzak@redhat.com>
+ http://karelzak.blogspot.com
 
