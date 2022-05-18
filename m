@@ -2,132 +2,67 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 2F75552B785
-	for <lists+util-linux@lfdr.de>; Wed, 18 May 2022 12:13:34 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 9927052C767
+	for <lists+util-linux@lfdr.de>; Thu, 19 May 2022 01:20:44 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S234646AbiERJqg (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Wed, 18 May 2022 05:46:36 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:35244 "EHLO
+        id S231146AbiERXUn (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Wed, 18 May 2022 19:20:43 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:45154 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S234868AbiERJqS (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Wed, 18 May 2022 05:46:18 -0400
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTP id 37517B0D2F
-        for <util-linux@vger.kernel.org>; Wed, 18 May 2022 02:46:04 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-        s=mimecast20190719; t=1652867108;
-        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-         content-transfer-encoding:content-transfer-encoding:
-         in-reply-to:in-reply-to:references:references;
-        bh=59t27MFHgkVRnXqT13xWAu4Ab0IdFUqfto8gIv0WlcA=;
-        b=GJ6mfb2cksv+12sfUvjjVMMAj/oz/vLKSFEeWrlwPEP7F+Qu7Y0XJN9QWHmVB9DARDT93G
-        xtlMoejNkLaUq9aQkhwAC6A4gy3HhPIG9GaJljNWAP6Xipo321kxgFfWpeVfie1uA6fxO0
-        VSdQpT8X33fSogOSvwWMegQ77E/n/MY=
-Received: from mimecast-mx02.redhat.com (mx3-rdu2.redhat.com
- [66.187.233.73]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-644-MckFaN2xO66PYoLCpUHelA-1; Wed, 18 May 2022 05:45:04 -0400
-X-MC-Unique: MckFaN2xO66PYoLCpUHelA-1
-Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.rdu2.redhat.com [10.11.54.2])
-        (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
-        (No client certificate requested)
-        by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 9E11F3C19030;
-        Wed, 18 May 2022 09:45:04 +0000 (UTC)
-Received: from ws.net.home (unknown [10.36.112.6])
-        by smtp.corp.redhat.com (Postfix) with ESMTPS id 1B19F400D277;
-        Wed, 18 May 2022 09:45:03 +0000 (UTC)
-Date:   Wed, 18 May 2022 11:45:01 +0200
-From:   Karel Zak <kzak@redhat.com>
-To:     "Trapp, Michael" <michael.trapp@sap.com>
-Cc:     "util-linux@vger.kernel.org" <util-linux@vger.kernel.org>
-Subject: Re: uuidd: Implement continuous clock handling for time based UUIDs
-Message-ID: <20220518094501.tdrxnup7buaitrvt@ws.net.home>
-References: <20220422100830.32187-1-michael.trapp@sap.com>
- <20220429114607.6ggqozhcir7pp2h2@ws.net.home>
- <F954A285-6204-4317-8295-1EAE38849E83@sap.com>
+        with ESMTP id S230058AbiERXUn (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Wed, 18 May 2022 19:20:43 -0400
+Received: from mail-pj1-x102d.google.com (mail-pj1-x102d.google.com [IPv6:2607:f8b0:4864:20::102d])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id CF26946641
+        for <util-linux@vger.kernel.org>; Wed, 18 May 2022 16:20:41 -0700 (PDT)
+Received: by mail-pj1-x102d.google.com with SMTP id n10so3524403pjh.5
+        for <util-linux@vger.kernel.org>; Wed, 18 May 2022 16:20:41 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=mime-version:reply-to:from:date:message-id:subject:to;
+        bh=675CvuSp++zNLeIUZybBsP51nvc83dY+2bSGb3FYErQ=;
+        b=O/vu94gnge39QGrfD025m3Zo6Z127oOr8bPqNIxHwAhzN1SFa26A8YjsJHXdxlteuE
+         +dpItDtE2fkHVglQ0PJTJDRs/2aAz8aIvKc7m61TMVcj25IDtYwYDylMkgK627eiAWiJ
+         Y6h4kSUbSZhmF4lhLArhjeJsyZctmtsxn31LSqhW2TC094DTEtb+4o8QYWTUA8YkrA4D
+         UytdRf8EJT4KgCDagajolcucEpsJN72zvgapOiQQEInc/vGRzHtY7s8eUUKHBhnjlWil
+         3cwFe6pelmSHUOb5faUn1LyzuwBmdu9qUVKGqosk3waYN9yP53yZ6uxsWeqSAMT3Lgs2
+         LsaA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
+         :subject:to;
+        bh=675CvuSp++zNLeIUZybBsP51nvc83dY+2bSGb3FYErQ=;
+        b=eQlHjM+OtVBSE1ig9L1ibaJb2pfeXlJHqLywK+nNzWAqFLiZ5at4FOQ6FhLkQkjhiI
+         Nb2yCcwSPkCtXpJE3bbqY4zFJlLvB4EOdkkRbCuSSTufhtpuQwo6xbjK2mdz0XI+a9pE
+         LK4FwSHsB2b/vT8wzaRUsSXIlYRMaqZejfVJq1hovjMfTGTeYGijqBcUywIMgzhxDFRk
+         vlM4OKP4wVIHGz+CMYeZV4NFEKsaedo/FH0Tz+2oWdpyq/wKFZhDXa1zCnIvgbDcLHDJ
+         /kDXWASrt0mozssXUY874EaFZM2o8THW/2hVTJQ+V42mKMs2RtMcDeCM/1beSc2KTN1/
+         DtgQ==
+X-Gm-Message-State: AOAM532TYlVQh37cJx90Vb1hA201Aaoi35w2xD9G2IDSJ/S2kMyMitc5
+        24Afbb69EtvNAeKk8GWXvnXNQP9ynZBUlqL07hE=
+X-Google-Smtp-Source: ABdhPJyGhkizYGoQHiRx/VowFi2xLrLfGPWOAbL/snGKFyu8yyQkVofAu1VwYWkEK9kfS2R4QWSBVENNKe8ofguxQu0=
+X-Received: by 2002:a17:903:234d:b0:161:994f:f850 with SMTP id
+ c13-20020a170903234d00b00161994ff850mr1721957plh.47.1652916041377; Wed, 18
+ May 2022 16:20:41 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <F954A285-6204-4317-8295-1EAE38849E83@sap.com>
-X-Scanned-By: MIMEDefang 2.84 on 10.11.54.2
-X-Spam-Status: No, score=-3.1 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_LOW,
-        SPF_HELO_NONE,SPF_NONE,T_SCC_BODY_TEXT_LINE autolearn=ham
+Received: by 2002:a05:6a06:88d:b0:4ba:87bd:247f with HTTP; Wed, 18 May 2022
+ 16:20:40 -0700 (PDT)
+Reply-To: tonywenn@asia.com
+From:   Tony Wen <board0455@gmail.com>
+Date:   Thu, 19 May 2022 07:20:40 +0800
+Message-ID: <CA+OyLeQKs9LZfrhpC70D-Mqe+6Vj=Typ7a75GEQwhuBOQwgqnw@mail.gmail.com>
+Subject: work
+To:     undisclosed-recipients:;
+Content-Type: text/plain; charset="UTF-8"
+X-Spam-Status: No, score=4.4 required=5.0 tests=BAYES_40,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_ENVFROM_END_DIGIT,
+        FREEMAIL_FROM,FREEMAIL_REPLYTO,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,
+        SPF_PASS,T_SCC_BODY_TEXT_LINE,UNDISC_FREEM autolearn=no
         autolearn_force=no version=3.4.6
+X-Spam-Level: ****
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-On Fri, May 06, 2022 at 02:06:14PM +0000, Trapp, Michael wrote:
-> 
-> 
-> > On 29. Apr 2022, at 13:46, Karel Zak <kzak@redhat.com> wrote:
-> > 
-> > On Fri, Apr 22, 2022 at 12:08:30PM +0200, Michael Trapp wrote:
-> >> +static int get_clock_cont(uint32_t *clock_high,
-> >> +			    uint32_t *clock_low,
-> >> +			    int num)
-> >> +{
-> >> +	/* 100ns based time offset according to RFC 4122. 4.1.4. */
-> >> +	const uint64_t reg_offset = (((uint64_t) 0x01B21DD2) << 32) + 0x13814000;
-> >> +	THREAD_LOCAL uint64_t last_clock_reg = 0;
-> >> +	uint64_t clock_reg;
-> >> +
-> >> +	if (last_clock_reg == 0)
-> >> +		last_clock_reg = get_clock_counter();
-> >> +
-> >> +	clock_reg = get_clock_counter();
-> >> +	clock_reg += MAX_ADJUSTMENT;
-> >> +
-> >> +	if ((last_clock_reg + num) >= clock_reg)
-> >> +		return -1;
-> > 
-> > 
-> > If I read your code correctly, it initializes the clock at uuidd start
-> > and then continues (forever). Each short time of inactivity will
-> > increase the difference between time stored in UUIDs and real-time.
-> > For example, this difference will be huge for databases where users
-> > don't allocate new UUIDs at night.
-> > 
-> > 
-> > Maybe we can implement some hybrid model that resets the continuous
-> > clock start point (last_clock_reg) from time to time, for example,
-> > every minute (hour, ...). I don't think it will be a performance
-> > problem when it does not use LIBUUID_CLOCK_FILE. The result will be
-> > UUIDs that match with reality. Does it make sense?
-> 
-> Of course, we can use a <max_offset_value> as optarg for the ‘-C’ option and update last_clock_reg accordingly.
-> A custom value could be set with ‘-C <NUM>’ and the feature could also be deactivated by omitting ‘-C’.
-> What do you think about that?
-
-Sounds good.
-
-The question is (from my point of view), do we need fully continuous
-(= disconnected) time in uuidd by default for -C? I guess it will be
-confusing for UUIDs consumers. Maybe the default should be reset every
-N minutes and <max_offset_value> as optional argument to modify it.
-
- -C                     -- default is reset every N minutes
- -C=<num>               -- overwrite the default
- -C=0 or -C=noreset     -- don't reset
-
-But I have no strong opinion about it, the default could be -C without
-reset as well.
-
-
-Do you plan to use -C for SAP databases? I guess it will resolve all
-the performance issues for SAP use-cases.
-
-My plan to keep /var/lib/libuuid/clock.txt in uuidd hands will be
-unnecessary (or less important) if -C will be good enough.
-
-    Karel
-
--- 
- Karel Zak  <kzak@redhat.com>
- http://karelzak.blogspot.com
-
+Can you work with me?
