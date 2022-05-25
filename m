@@ -2,107 +2,107 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id B78835335C8
-	for <lists+util-linux@lfdr.de>; Wed, 25 May 2022 05:26:51 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id B9EDD534523
+	for <lists+util-linux@lfdr.de>; Wed, 25 May 2022 22:41:59 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S238471AbiEYD00 (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Tue, 24 May 2022 23:26:26 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:42134 "EHLO
+        id S1345047AbiEYUl6 (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Wed, 25 May 2022 16:41:58 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:36094 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S235350AbiEYD00 (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Tue, 24 May 2022 23:26:26 -0400
-Received: from mail-il1-x129.google.com (mail-il1-x129.google.com [IPv6:2607:f8b0:4864:20::129])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 92D2F15A01
-        for <util-linux@vger.kernel.org>; Tue, 24 May 2022 20:26:24 -0700 (PDT)
-Received: by mail-il1-x129.google.com with SMTP id t13so6190746ilm.9
-        for <util-linux@vger.kernel.org>; Tue, 24 May 2022 20:26:24 -0700 (PDT)
+        with ESMTP id S233959AbiEYUl6 (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Wed, 25 May 2022 16:41:58 -0400
+Received: from mail-yb1-xb2c.google.com (mail-yb1-xb2c.google.com [IPv6:2607:f8b0:4864:20::b2c])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 393D437ABD
+        for <util-linux@vger.kernel.org>; Wed, 25 May 2022 13:41:57 -0700 (PDT)
+Received: by mail-yb1-xb2c.google.com with SMTP id o80so38290608ybg.1
+        for <util-linux@vger.kernel.org>; Wed, 25 May 2022 13:41:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=igel-co-jp.20210112.gappssmtp.com; s=20210112;
-        h=date:message-id:to:subject:from:mime-version
+        d=gmail.com; s=20210112;
+        h=mime-version:from:date:message-id:subject:to:cc
          :content-transfer-encoding;
-        bh=4Hv3gZMoeQN3m9r2tBPNAex0xJy7+1oOOg1lffDt8rY=;
-        b=Hs+coShakd0qpy7TkGbE5PIKA7LDQs/rYK/6MiosVLziD9r3V+Sv4nN9zkrEn4t9y9
-         ZPrFp4UL2MELNR5W9zzh+UNXb43+cS1PZsqmCgSVxGwpRcO0+gFLaJK2QdGBYDO1gzZK
-         ZhwpXdm0liX4KgsyCX3kCsP4nWf17gulUciG3/wh/OSKZznzelj+s3bBW1RPEPCh69Yn
-         4pGkMZ5E9gc6DwgLFuvvqSFGca0zzojRDPPJq4u1MtmPcOjlFd3ecUf2KmEz8bGRxj3y
-         4urOCR8p4kuWznVkeW+aIApFFdwestw7awSy1nZBemPOD4i9ZRCjeV3KJ8Rs1wYjfpjB
-         8YzA==
+        bh=LDBqQh/PztHeiDiV9Pr0v62BTTaDnPQyU98FGi1REkw=;
+        b=CcrKKY8eLF55skKph2wn8fV4QqjrCqlWatlcJ0xsoHAtpnB7ttOBGuBaw3z8MV023J
+         6UrGjLfyyb3f1wcZoKmAQO+ru7nwT7MgCEwzUUAUZEnTSfTNSi6ZI5iNnh2UnbiSy0fz
+         RZPjDQr7Fz6TJiIDZWQFyqABu4DtsBm79dVkGZ2ev7a73wdegb6tVSDFI/HVMyuDy8OX
+         LYpGfxH6tjctf0ORqLeuVxdKrF4ptl7UhacTd1ows9Fj8u8SPxLVSLb+2EkF3rhtlNWe
+         f0OspiGL0+I5S8JaGl8NCySleetT2iPLOj6tkBo8A7gtC2819nx18kXYL0Q0SA+uTK+w
+         D5PA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:date:message-id:to:subject:from:mime-version
+        h=x-gm-message-state:mime-version:from:date:message-id:subject:to:cc
          :content-transfer-encoding;
-        bh=4Hv3gZMoeQN3m9r2tBPNAex0xJy7+1oOOg1lffDt8rY=;
-        b=rgu8ExLI8D4NEYo9Aw8/vw3wkL2MXwbuCPXYgGOWHvbHa2PWk0kufMqWdXYC+LwYeN
-         ABReUfdL9yJCpJkGTWGYDr+/eKRpm4RpivDXzvM6Y/jNq0b/nc6VFtRiLkHyt2P2ubEM
-         RSerzRFYdAi2IFw3RMqJ1MDwo7GkDYxmc+9NfTn1gx3NgAWNRFZCnW9w0PZQT0cvKKlJ
-         s1EmRdIEZUjrnzvVOAztVRIOv6QXCGCQOo9quDReYw4V0CZm0LZK6HL9O12ufLwEzWFK
-         o+b1ycgbnu5Hzxm5xc0R4njWyBI45JAshg4zLnNOEa8sxwUKtxokbkXPv52t9dnuUQfX
-         t1qg==
-X-Gm-Message-State: AOAM530bpptTPOdYgKAk/Elsmaxn3KpU35t0qviJW/s2d9fpyiNdQPka
-        I1gSjF3G0bHF5/Vx1+Qhl9MeY1SiuRZfEw==
-X-Google-Smtp-Source: ABdhPJxuTEpk1H7AKKvp4aBy32rK+ojOhgzVWwP++fbMCC4BLyOiGVy5ll+s+Rz7heLZTqTBUgngaQ==
-X-Received: by 2002:a92:cf01:0:b0:2cd:aeb6:b3f8 with SMTP id c1-20020a92cf01000000b002cdaeb6b3f8mr15411990ilo.265.1653449183973;
-        Tue, 24 May 2022 20:26:23 -0700 (PDT)
-Received: from localhost (napt.igel.co.jp. [219.106.231.132])
-        by smtp.gmail.com with ESMTPSA id o28-20020a02c6bc000000b0032ebda7c052sm2496758jan.128.2022.05.24.20.26.21
-        for <util-linux@vger.kernel.org>
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 24 May 2022 20:26:22 -0700 (PDT)
-Date:   Wed, 25 May 2022 12:23:16 +0900 (JST)
-Message-Id: <20220525.122316.1064747285110838277.hdk@igel.co.jp>
-To:     util-linux@vger.kernel.org
-Subject: [PATCH] loopdev: set block_size when using LOOP_CONFIGURE
-From:   Hideki EIRAKU <hdk@igel.co.jp>
-X-Mailer: Mew version 6.8 on Emacs 27.1
-Mime-Version: 1.0
-Content-Type: Text/Plain; charset=us-ascii
-Content-Transfer-Encoding: 7bit
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,
-        T_SCC_BODY_TEXT_LINE autolearn=ham autolearn_force=no version=3.4.6
+        bh=LDBqQh/PztHeiDiV9Pr0v62BTTaDnPQyU98FGi1REkw=;
+        b=jykwsL/odV6y+BWAqare5o9pWR5U1e9RksVYVME+se57PJ7poWDsI0IXWHZ8G8/584
+         iVVem41wE+t/kABeA6lSfwNe/lM0RtpWpk+OHLfwHQWnxoevWSonnZ5u2g1d/scsMwdN
+         N7JyqaLn1u7IF8DxX1RNAfr/0+/Rst+2i0qeqhKIP5DzeS9mJWQejmPoen9zcT6083tx
+         NjL2STQCRUP0JAy3yJUBTQWHXC5IN/zDf1pMo/oi9mw7OWLEavht1+117udKWCYev0g4
+         TlG3LJppJmCbTbGR4SoX2D+oNtKpdu0l/0oj+c2G2/MsNsOVcizlKkVuNQ8yg/En5HPq
+         rRmg==
+X-Gm-Message-State: AOAM533iFWZI/SZfQHdVUijE+YCx+RidwnPfZLgahaf8/aI4uBfusnzW
+        3WSE2YZaiRXiQVLLZrzsJ/02nYT4afhg591ZjJE=
+X-Google-Smtp-Source: ABdhPJxMSyhV0yvUOFZs06S3QCjmoMr96886q175FQ4AqIWs1J8LlEyZJ3+4uXzYgu2GoOi4+9Mm92kk99QoE7qZ9Is=
+X-Received: by 2002:a05:6902:52f:b0:655:371e:b088 with SMTP id
+ y15-20020a056902052f00b00655371eb088mr8206254ybs.60.1653511316907; Wed, 25
+ May 2022 13:41:56 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 2002:a5b:506:0:0:0:0:0 with HTTP; Wed, 25 May 2022 13:41:56 -0700 (PDT)
+From:   Deterin Falcao <falcaodeterin@gmail.com>
+Date:   Wed, 25 May 2022 22:41:56 +0200
+Message-ID: <CABCO4Z3ZsuRMCEx9iE7ytT04j86oQ7ecWWGwGsApVAtJTbGrsg@mail.gmail.com>
+Subject: Bitte kontaktaufnahme Erforderlich !!! Please Contact Required !!!
+To:     contact@firstdiamondbk.com
+Cc:     info@firstdiamondbk.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Spam-Status: No, score=0.6 required=5.0 tests=BAYES_50,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,
+        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE
+        autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-LOOP_CONFIGURE ioctl was introduced by commit
-d5fd456c88aba4fcf77d35fe38024a8d5c814686. Since the previous
-implementation set partscan flag but did not set block_size with the
-LOOP_CONFIGURE ioctl, an issue fixed by commit
-422f0e9f206a145c59a71333dad20d38cbbfc0c4 was reappeared. Setting
-block_size in the LOOP_CONFIGURE ioctl parameter fixes the issue.
+Guten Tag,
 
-Signed-off-by: Hideki EIRAKU <hdk@igel.co.jp>
----
- lib/loopdev.c | 7 ++-----
- 1 file changed, 2 insertions(+), 5 deletions(-)
+Ich habe mich nur gefragt, ob Sie meine vorherige E-Mail bekommen
 
-diff --git a/lib/loopdev.c b/lib/loopdev.c
-index 437411bbe..631a120c4 100644
---- a/lib/loopdev.c
-+++ b/lib/loopdev.c
-@@ -1385,6 +1385,8 @@ int loopcxt_setup_device(struct loopdev_cxt *lc)
- 	 * -- since Linux v5.8-rc1, commit 3448914e8cc550ba792d4ccc74471d1ca4293aae
- 	 */
- 	lc->config.fd = file_fd;
-+	if (lc->blocksize > 0)
-+		lc->config.block_size = lc->blocksize;
- 
- 	rc = repeat_on_eagain( ioctl(dev_fd, LOOP_CONFIGURE, &lc->config) );
- 	if (rc != 0) {
-@@ -1395,11 +1397,6 @@ int loopcxt_setup_device(struct loopdev_cxt *lc)
- 		}
- 		fallback = 1;
- 	} else {
--		if (lc->blocksize > 0
--			&& (rc = loopcxt_ioctl_blocksize(lc, lc->blocksize)) < 0) {
--			errsv = -rc;
--			goto err;
--		}
- 		DBG(SETUP, ul_debugobj(lc, "LOOP_CONFIGURE: OK"));
- 	}
- 
--- 
-2.30.2
+haben ?
 
+Ich habe versucht, Sie per E-Mail zu erreichen.
+
+Kommen Sie bitte schnell zu mir zur=C3=BCck, es ist sehr wichtig.
+
+Danke
+
+Falcao Deterin
+
+falcaodeterin@gmail.com
+
+
+
+
+
+
+
+
+----------------------------------
+
+
+
+
+Good Afternoon,
+
+I was just wondering if you got my Previous E-mail
+have ?
+
+I tried to reach you by E-mail.
+
+Please come back to me quickly, it is very Important.
+
+Thanks
+
+Falcao Deterin
+
+falcaodeterin@gmail.com
