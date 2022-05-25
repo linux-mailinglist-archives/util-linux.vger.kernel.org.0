@@ -2,67 +2,107 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 9927052C767
-	for <lists+util-linux@lfdr.de>; Thu, 19 May 2022 01:20:44 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id B78835335C8
+	for <lists+util-linux@lfdr.de>; Wed, 25 May 2022 05:26:51 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231146AbiERXUn (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Wed, 18 May 2022 19:20:43 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:45154 "EHLO
+        id S238471AbiEYD00 (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Tue, 24 May 2022 23:26:26 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:42134 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S230058AbiERXUn (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Wed, 18 May 2022 19:20:43 -0400
-Received: from mail-pj1-x102d.google.com (mail-pj1-x102d.google.com [IPv6:2607:f8b0:4864:20::102d])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id CF26946641
-        for <util-linux@vger.kernel.org>; Wed, 18 May 2022 16:20:41 -0700 (PDT)
-Received: by mail-pj1-x102d.google.com with SMTP id n10so3524403pjh.5
-        for <util-linux@vger.kernel.org>; Wed, 18 May 2022 16:20:41 -0700 (PDT)
+        with ESMTP id S235350AbiEYD00 (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Tue, 24 May 2022 23:26:26 -0400
+Received: from mail-il1-x129.google.com (mail-il1-x129.google.com [IPv6:2607:f8b0:4864:20::129])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 92D2F15A01
+        for <util-linux@vger.kernel.org>; Tue, 24 May 2022 20:26:24 -0700 (PDT)
+Received: by mail-il1-x129.google.com with SMTP id t13so6190746ilm.9
+        for <util-linux@vger.kernel.org>; Tue, 24 May 2022 20:26:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=mime-version:reply-to:from:date:message-id:subject:to;
-        bh=675CvuSp++zNLeIUZybBsP51nvc83dY+2bSGb3FYErQ=;
-        b=O/vu94gnge39QGrfD025m3Zo6Z127oOr8bPqNIxHwAhzN1SFa26A8YjsJHXdxlteuE
-         +dpItDtE2fkHVglQ0PJTJDRs/2aAz8aIvKc7m61TMVcj25IDtYwYDylMkgK627eiAWiJ
-         Y6h4kSUbSZhmF4lhLArhjeJsyZctmtsxn31LSqhW2TC094DTEtb+4o8QYWTUA8YkrA4D
-         UytdRf8EJT4KgCDagajolcucEpsJN72zvgapOiQQEInc/vGRzHtY7s8eUUKHBhnjlWil
-         3cwFe6pelmSHUOb5faUn1LyzuwBmdu9qUVKGqosk3waYN9yP53yZ6uxsWeqSAMT3Lgs2
-         LsaA==
+        d=igel-co-jp.20210112.gappssmtp.com; s=20210112;
+        h=date:message-id:to:subject:from:mime-version
+         :content-transfer-encoding;
+        bh=4Hv3gZMoeQN3m9r2tBPNAex0xJy7+1oOOg1lffDt8rY=;
+        b=Hs+coShakd0qpy7TkGbE5PIKA7LDQs/rYK/6MiosVLziD9r3V+Sv4nN9zkrEn4t9y9
+         ZPrFp4UL2MELNR5W9zzh+UNXb43+cS1PZsqmCgSVxGwpRcO0+gFLaJK2QdGBYDO1gzZK
+         ZhwpXdm0liX4KgsyCX3kCsP4nWf17gulUciG3/wh/OSKZznzelj+s3bBW1RPEPCh69Yn
+         4pGkMZ5E9gc6DwgLFuvvqSFGca0zzojRDPPJq4u1MtmPcOjlFd3ecUf2KmEz8bGRxj3y
+         4urOCR8p4kuWznVkeW+aIApFFdwestw7awSy1nZBemPOD4i9ZRCjeV3KJ8Rs1wYjfpjB
+         8YzA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
-         :subject:to;
-        bh=675CvuSp++zNLeIUZybBsP51nvc83dY+2bSGb3FYErQ=;
-        b=eQlHjM+OtVBSE1ig9L1ibaJb2pfeXlJHqLywK+nNzWAqFLiZ5at4FOQ6FhLkQkjhiI
-         Nb2yCcwSPkCtXpJE3bbqY4zFJlLvB4EOdkkRbCuSSTufhtpuQwo6xbjK2mdz0XI+a9pE
-         LK4FwSHsB2b/vT8wzaRUsSXIlYRMaqZejfVJq1hovjMfTGTeYGijqBcUywIMgzhxDFRk
-         vlM4OKP4wVIHGz+CMYeZV4NFEKsaedo/FH0Tz+2oWdpyq/wKFZhDXa1zCnIvgbDcLHDJ
-         /kDXWASrt0mozssXUY874EaFZM2o8THW/2hVTJQ+V42mKMs2RtMcDeCM/1beSc2KTN1/
-         DtgQ==
-X-Gm-Message-State: AOAM532TYlVQh37cJx90Vb1hA201Aaoi35w2xD9G2IDSJ/S2kMyMitc5
-        24Afbb69EtvNAeKk8GWXvnXNQP9ynZBUlqL07hE=
-X-Google-Smtp-Source: ABdhPJyGhkizYGoQHiRx/VowFi2xLrLfGPWOAbL/snGKFyu8yyQkVofAu1VwYWkEK9kfS2R4QWSBVENNKe8ofguxQu0=
-X-Received: by 2002:a17:903:234d:b0:161:994f:f850 with SMTP id
- c13-20020a170903234d00b00161994ff850mr1721957plh.47.1652916041377; Wed, 18
- May 2022 16:20:41 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 2002:a05:6a06:88d:b0:4ba:87bd:247f with HTTP; Wed, 18 May 2022
- 16:20:40 -0700 (PDT)
-Reply-To: tonywenn@asia.com
-From:   Tony Wen <board0455@gmail.com>
-Date:   Thu, 19 May 2022 07:20:40 +0800
-Message-ID: <CA+OyLeQKs9LZfrhpC70D-Mqe+6Vj=Typ7a75GEQwhuBOQwgqnw@mail.gmail.com>
-Subject: work
-To:     undisclosed-recipients:;
-Content-Type: text/plain; charset="UTF-8"
-X-Spam-Status: No, score=4.4 required=5.0 tests=BAYES_40,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_ENVFROM_END_DIGIT,
-        FREEMAIL_FROM,FREEMAIL_REPLYTO,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,
-        SPF_PASS,T_SCC_BODY_TEXT_LINE,UNDISC_FREEM autolearn=no
-        autolearn_force=no version=3.4.6
-X-Spam-Level: ****
+        h=x-gm-message-state:date:message-id:to:subject:from:mime-version
+         :content-transfer-encoding;
+        bh=4Hv3gZMoeQN3m9r2tBPNAex0xJy7+1oOOg1lffDt8rY=;
+        b=rgu8ExLI8D4NEYo9Aw8/vw3wkL2MXwbuCPXYgGOWHvbHa2PWk0kufMqWdXYC+LwYeN
+         ABReUfdL9yJCpJkGTWGYDr+/eKRpm4RpivDXzvM6Y/jNq0b/nc6VFtRiLkHyt2P2ubEM
+         RSerzRFYdAi2IFw3RMqJ1MDwo7GkDYxmc+9NfTn1gx3NgAWNRFZCnW9w0PZQT0cvKKlJ
+         s1EmRdIEZUjrnzvVOAztVRIOv6QXCGCQOo9quDReYw4V0CZm0LZK6HL9O12ufLwEzWFK
+         o+b1ycgbnu5Hzxm5xc0R4njWyBI45JAshg4zLnNOEa8sxwUKtxokbkXPv52t9dnuUQfX
+         t1qg==
+X-Gm-Message-State: AOAM530bpptTPOdYgKAk/Elsmaxn3KpU35t0qviJW/s2d9fpyiNdQPka
+        I1gSjF3G0bHF5/Vx1+Qhl9MeY1SiuRZfEw==
+X-Google-Smtp-Source: ABdhPJxuTEpk1H7AKKvp4aBy32rK+ojOhgzVWwP++fbMCC4BLyOiGVy5ll+s+Rz7heLZTqTBUgngaQ==
+X-Received: by 2002:a92:cf01:0:b0:2cd:aeb6:b3f8 with SMTP id c1-20020a92cf01000000b002cdaeb6b3f8mr15411990ilo.265.1653449183973;
+        Tue, 24 May 2022 20:26:23 -0700 (PDT)
+Received: from localhost (napt.igel.co.jp. [219.106.231.132])
+        by smtp.gmail.com with ESMTPSA id o28-20020a02c6bc000000b0032ebda7c052sm2496758jan.128.2022.05.24.20.26.21
+        for <util-linux@vger.kernel.org>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 24 May 2022 20:26:22 -0700 (PDT)
+Date:   Wed, 25 May 2022 12:23:16 +0900 (JST)
+Message-Id: <20220525.122316.1064747285110838277.hdk@igel.co.jp>
+To:     util-linux@vger.kernel.org
+Subject: [PATCH] loopdev: set block_size when using LOOP_CONFIGURE
+From:   Hideki EIRAKU <hdk@igel.co.jp>
+X-Mailer: Mew version 6.8 on Emacs 27.1
+Mime-Version: 1.0
+Content-Type: Text/Plain; charset=us-ascii
+Content-Transfer-Encoding: 7bit
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,
+        T_SCC_BODY_TEXT_LINE autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-Can you work with me?
+LOOP_CONFIGURE ioctl was introduced by commit
+d5fd456c88aba4fcf77d35fe38024a8d5c814686. Since the previous
+implementation set partscan flag but did not set block_size with the
+LOOP_CONFIGURE ioctl, an issue fixed by commit
+422f0e9f206a145c59a71333dad20d38cbbfc0c4 was reappeared. Setting
+block_size in the LOOP_CONFIGURE ioctl parameter fixes the issue.
+
+Signed-off-by: Hideki EIRAKU <hdk@igel.co.jp>
+---
+ lib/loopdev.c | 7 ++-----
+ 1 file changed, 2 insertions(+), 5 deletions(-)
+
+diff --git a/lib/loopdev.c b/lib/loopdev.c
+index 437411bbe..631a120c4 100644
+--- a/lib/loopdev.c
++++ b/lib/loopdev.c
+@@ -1385,6 +1385,8 @@ int loopcxt_setup_device(struct loopdev_cxt *lc)
+ 	 * -- since Linux v5.8-rc1, commit 3448914e8cc550ba792d4ccc74471d1ca4293aae
+ 	 */
+ 	lc->config.fd = file_fd;
++	if (lc->blocksize > 0)
++		lc->config.block_size = lc->blocksize;
+ 
+ 	rc = repeat_on_eagain( ioctl(dev_fd, LOOP_CONFIGURE, &lc->config) );
+ 	if (rc != 0) {
+@@ -1395,11 +1397,6 @@ int loopcxt_setup_device(struct loopdev_cxt *lc)
+ 		}
+ 		fallback = 1;
+ 	} else {
+-		if (lc->blocksize > 0
+-			&& (rc = loopcxt_ioctl_blocksize(lc, lc->blocksize)) < 0) {
+-			errsv = -rc;
+-			goto err;
+-		}
+ 		DBG(SETUP, ul_debugobj(lc, "LOOP_CONFIGURE: OK"));
+ 	}
+ 
+-- 
+2.30.2
+
