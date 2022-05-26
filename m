@@ -2,107 +2,71 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id B9EDD534523
-	for <lists+util-linux@lfdr.de>; Wed, 25 May 2022 22:41:59 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 1CCD7534B0B
+	for <lists+util-linux@lfdr.de>; Thu, 26 May 2022 09:59:46 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1345047AbiEYUl6 (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Wed, 25 May 2022 16:41:58 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:36094 "EHLO
+        id S237722AbiEZH7o (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Thu, 26 May 2022 03:59:44 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:42166 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S233959AbiEYUl6 (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Wed, 25 May 2022 16:41:58 -0400
-Received: from mail-yb1-xb2c.google.com (mail-yb1-xb2c.google.com [IPv6:2607:f8b0:4864:20::b2c])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 393D437ABD
-        for <util-linux@vger.kernel.org>; Wed, 25 May 2022 13:41:57 -0700 (PDT)
-Received: by mail-yb1-xb2c.google.com with SMTP id o80so38290608ybg.1
-        for <util-linux@vger.kernel.org>; Wed, 25 May 2022 13:41:57 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=mime-version:from:date:message-id:subject:to:cc
-         :content-transfer-encoding;
-        bh=LDBqQh/PztHeiDiV9Pr0v62BTTaDnPQyU98FGi1REkw=;
-        b=CcrKKY8eLF55skKph2wn8fV4QqjrCqlWatlcJ0xsoHAtpnB7ttOBGuBaw3z8MV023J
-         6UrGjLfyyb3f1wcZoKmAQO+ru7nwT7MgCEwzUUAUZEnTSfTNSi6ZI5iNnh2UnbiSy0fz
-         RZPjDQr7Fz6TJiIDZWQFyqABu4DtsBm79dVkGZ2ev7a73wdegb6tVSDFI/HVMyuDy8OX
-         LYpGfxH6tjctf0ORqLeuVxdKrF4ptl7UhacTd1ows9Fj8u8SPxLVSLb+2EkF3rhtlNWe
-         f0OspiGL0+I5S8JaGl8NCySleetT2iPLOj6tkBo8A7gtC2819nx18kXYL0Q0SA+uTK+w
-         D5PA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:from:date:message-id:subject:to:cc
-         :content-transfer-encoding;
-        bh=LDBqQh/PztHeiDiV9Pr0v62BTTaDnPQyU98FGi1REkw=;
-        b=jykwsL/odV6y+BWAqare5o9pWR5U1e9RksVYVME+se57PJ7poWDsI0IXWHZ8G8/584
-         iVVem41wE+t/kABeA6lSfwNe/lM0RtpWpk+OHLfwHQWnxoevWSonnZ5u2g1d/scsMwdN
-         N7JyqaLn1u7IF8DxX1RNAfr/0+/Rst+2i0qeqhKIP5DzeS9mJWQejmPoen9zcT6083tx
-         NjL2STQCRUP0JAy3yJUBTQWHXC5IN/zDf1pMo/oi9mw7OWLEavht1+117udKWCYev0g4
-         TlG3LJppJmCbTbGR4SoX2D+oNtKpdu0l/0oj+c2G2/MsNsOVcizlKkVuNQ8yg/En5HPq
-         rRmg==
-X-Gm-Message-State: AOAM533iFWZI/SZfQHdVUijE+YCx+RidwnPfZLgahaf8/aI4uBfusnzW
-        3WSE2YZaiRXiQVLLZrzsJ/02nYT4afhg591ZjJE=
-X-Google-Smtp-Source: ABdhPJxMSyhV0yvUOFZs06S3QCjmoMr96886q175FQ4AqIWs1J8LlEyZJ3+4uXzYgu2GoOi4+9Mm92kk99QoE7qZ9Is=
-X-Received: by 2002:a05:6902:52f:b0:655:371e:b088 with SMTP id
- y15-20020a056902052f00b00655371eb088mr8206254ybs.60.1653511316907; Wed, 25
- May 2022 13:41:56 -0700 (PDT)
+        with ESMTP id S231527AbiEZH7n (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Thu, 26 May 2022 03:59:43 -0400
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTP id 7145A31DC6
+        for <util-linux@vger.kernel.org>; Thu, 26 May 2022 00:59:42 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+        s=mimecast20190719; t=1653551981;
+        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+         in-reply-to:in-reply-to:references:references;
+        bh=2cEEMoaXD+u/ZxytDSSr/FJS1i79TZ2/2soZYGTXT5I=;
+        b=Vd0xjwxyUjZ+BIx2kIFsFrEtaWlTPDRpo+olsxmaX0LZHlEEVG6b1EduDSydL++2TvXDWU
+        9k+tv75d2cRljD1TbkMQYc2rhmctuDQD6nP6hQpF+o/5wTkVPYpdQtViAxpqh1Kvx9UzD1
+        d9x/xH5ggvd/0JX1Nz2AhMAnJMXkfvo=
+Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
+ [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ us-mta-263--1dyuSpUPmype350f05B9A-1; Thu, 26 May 2022 03:59:38 -0400
+X-MC-Unique: -1dyuSpUPmype350f05B9A-1
+Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.rdu2.redhat.com [10.11.54.3])
+        (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+        (No client certificate requested)
+        by mimecast-mx02.redhat.com (Postfix) with ESMTPS id DC11A185A79C;
+        Thu, 26 May 2022 07:59:37 +0000 (UTC)
+Received: from ws.net.home (unknown [10.36.112.6])
+        by smtp.corp.redhat.com (Postfix) with ESMTPS id 2C1511121315;
+        Thu, 26 May 2022 07:59:36 +0000 (UTC)
+Date:   Thu, 26 May 2022 09:59:32 +0200
+From:   Karel Zak <kzak@redhat.com>
+To:     Hideki EIRAKU <hdk@igel.co.jp>
+Cc:     util-linux@vger.kernel.org
+Subject: Re: [PATCH] loopdev: set block_size when using LOOP_CONFIGURE
+Message-ID: <20220526075932.xbupsigtr7z2fgt7@ws.net.home>
+References: <20220525.122316.1064747285110838277.hdk@igel.co.jp>
 MIME-Version: 1.0
-Received: by 2002:a5b:506:0:0:0:0:0 with HTTP; Wed, 25 May 2022 13:41:56 -0700 (PDT)
-From:   Deterin Falcao <falcaodeterin@gmail.com>
-Date:   Wed, 25 May 2022 22:41:56 +0200
-Message-ID: <CABCO4Z3ZsuRMCEx9iE7ytT04j86oQ7ecWWGwGsApVAtJTbGrsg@mail.gmail.com>
-Subject: Bitte kontaktaufnahme Erforderlich !!! Please Contact Required !!!
-To:     contact@firstdiamondbk.com
-Cc:     info@firstdiamondbk.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Spam-Status: No, score=0.6 required=5.0 tests=BAYES_50,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,
-        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE
-        autolearn=ham autolearn_force=no version=3.4.6
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20220525.122316.1064747285110838277.hdk@igel.co.jp>
+X-Scanned-By: MIMEDefang 2.78 on 10.11.54.3
+X-Spam-Status: No, score=-3.5 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_LOW,
+        SPF_HELO_NONE,SPF_NONE,T_SCC_BODY_TEXT_LINE autolearn=ham
+        autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-Guten Tag,
+On Wed, May 25, 2022 at 12:23:16PM +0900, Hideki EIRAKU wrote:
+>  lib/loopdev.c | 7 ++-----
+>  1 file changed, 2 insertions(+), 5 deletions(-)
 
-Ich habe mich nur gefragt, ob Sie meine vorherige E-Mail bekommen
+Applied, thanks.
 
-haben ?
+  Karel
 
-Ich habe versucht, Sie per E-Mail zu erreichen.
+-- 
+ Karel Zak  <kzak@redhat.com>
+ http://karelzak.blogspot.com
 
-Kommen Sie bitte schnell zu mir zur=C3=BCck, es ist sehr wichtig.
-
-Danke
-
-Falcao Deterin
-
-falcaodeterin@gmail.com
-
-
-
-
-
-
-
-
-----------------------------------
-
-
-
-
-Good Afternoon,
-
-I was just wondering if you got my Previous E-mail
-have ?
-
-I tried to reach you by E-mail.
-
-Please come back to me quickly, it is very Important.
-
-Thanks
-
-Falcao Deterin
-
-falcaodeterin@gmail.com
