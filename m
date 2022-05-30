@@ -2,74 +2,71 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 7AD53536304
-	for <lists+util-linux@lfdr.de>; Fri, 27 May 2022 14:54:47 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 1DC03537912
+	for <lists+util-linux@lfdr.de>; Mon, 30 May 2022 12:29:26 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1345453AbiE0Myq convert rfc822-to-8bit (ORCPT
-        <rfc822;lists+util-linux@lfdr.de>); Fri, 27 May 2022 08:54:46 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:38598 "EHLO
+        id S234277AbiE3KVj (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Mon, 30 May 2022 06:21:39 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:35066 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229627AbiE0Myp (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Fri, 27 May 2022 08:54:45 -0400
-X-Greylist: delayed 6109 seconds by postgrey-1.37 at lindbergh.monkeyblade.net; Fri, 27 May 2022 05:54:44 PDT
-Received: from mail.composit.net (mail.composit.net [195.49.185.119])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTP id C24C120BEE
-        for <util-linux@vger.kernel.org>; Fri, 27 May 2022 05:54:44 -0700 (PDT)
-Received: from mail.composit.net (localhost.localdomain [127.0.0.1])
-        by mail.composit.net (Proxmox) with ESMTP id BC7F8381FDA;
-        Fri, 27 May 2022 14:10:47 +0300 (MSK)
-Received: from mail.composit.net (mail.industrial-flow.com [192.168.101.14])
-        by mail.composit.net (Proxmox) with SMTP id 8CBE3393020;
-        Fri, 27 May 2022 14:10:47 +0300 (MSK)
-Received: from [192.168.1.105] (Unknown [197.234.219.23])
-        by mail.composit.net with ESMTPSA
-        (version=TLSv1 cipher=DHE-RSA-AES256-SHA bits=256)
-        ; Fri, 27 May 2022 14:10:48 +0300
-Message-ID: <9A0DADC6-3E94-4BD0-90AD-1D0ACEE221B8@mail.composit.net>
-Content-Type: text/plain; charset="iso-8859-1"
+        with ESMTP id S235216AbiE3KVe (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Mon, 30 May 2022 06:21:34 -0400
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTP id E3E742B1
+        for <util-linux@vger.kernel.org>; Mon, 30 May 2022 03:21:32 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+        s=mimecast20190719; t=1653906091;
+        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+         in-reply-to:in-reply-to:references:references;
+        bh=p1t9p9/ZK5fqGcfvJbd5ZoPsNvF42TT4qwuDCjRYREU=;
+        b=gFxsSllMu0JnU/squu17WPkXLw4eA3pWRzWbg1spTrX+Key3zEsPGegFomxuRH/U8SdMMD
+        cUnbAkWZ5ePuDnbPNtXuhV4cDs1RSpm7FN8Don/yWXoAXZ9nEfY86QtNBV/dJcKkfbKqKT
+        nJ780E+QEjJbjQ31RyxMKeSPv/Wx5lY=
+Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
+ [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ us-mta-635-1psdkVtrOC-DVMARYmzEuA-1; Mon, 30 May 2022 06:21:29 -0400
+X-MC-Unique: 1psdkVtrOC-DVMARYmzEuA-1
+Received: from smtp.corp.redhat.com (int-mx10.intmail.prod.int.rdu2.redhat.com [10.11.54.10])
+        (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+        (No client certificate requested)
+        by mimecast-mx02.redhat.com (Postfix) with ESMTPS id BFE08801228;
+        Mon, 30 May 2022 10:21:21 +0000 (UTC)
+Received: from ws.net.home (unknown [10.36.112.9])
+        by smtp.corp.redhat.com (Postfix) with ESMTPS id 4349F40F06B;
+        Mon, 30 May 2022 10:21:21 +0000 (UTC)
+Date:   Mon, 30 May 2022 12:21:18 +0200
+From:   Karel Zak <kzak@redhat.com>
+To:     Nathan Sharp <nwsharp@live.com>
+Cc:     util-linux@vger.kernel.org
+Subject: Re: [PATCH] pipesz: correct manpage issues
+Message-ID: <20220530102118.6kce2qbgu2wqvqxx@ws.net.home>
+References: <SN6PR04MB398339AA1E5BC7F8863D66DAC2D89@SN6PR04MB3983.namprd04.prod.outlook.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8BIT
-Content-Description: Mail message body
-Subject: Greetings From Ukraine.  
-To:     Recipients <heiss@dnet.it>
-From:   "Kostiantyn Chichkov" <heiss@dnet.it>
-Date:   Fri, 27 May 2022 12:09:20 +0100
-Reply-To: kostiantync@online.ee
-X-Spam-Status: Yes, score=5.1 required=5.0 tests=BAYES_50,
-        RCVD_IN_BL_SPAMCOP_NET,RCVD_IN_SBL,RCVD_IN_SORBS_WEB,
-        RCVD_IN_VALIDITY_RPBL,SPF_HELO_NONE,SPF_NONE,T_SCC_BODY_TEXT_LINE
-        autolearn=no autolearn_force=no version=3.4.6
-X-Spam-Report: *  1.3 RCVD_IN_BL_SPAMCOP_NET RBL: Received via a relay in
-        *      bl.spamcop.net
-        *      [Blocked - see <https://www.spamcop.net/bl.shtml?195.49.185.119>]
-        *  1.5 RCVD_IN_SORBS_WEB RBL: SORBS: sender is an abusable web server
-        *      [197.234.219.23 listed in dnsbl.sorbs.net]
-        *  0.8 BAYES_50 BODY: Bayes spam probability is 40 to 60%
-        *      [score: 0.5000]
-        *  0.1 RCVD_IN_SBL RBL: Received via a relay in Spamhaus SBL
-        *      [197.234.219.23 listed in zen.spamhaus.org]
-        *  0.0 SPF_HELO_NONE SPF: HELO does not publish an SPF Record
-        *  0.0 SPF_NONE SPF: sender does not publish an SPF Record
-        *  1.3 RCVD_IN_VALIDITY_RPBL RBL: Relay in Validity RPBL,
-        *      https://senderscore.org/blocklistlookup/
-        *      [195.49.185.119 listed in bl.score.senderscore.com]
-        * -0.0 T_SCC_BODY_TEXT_LINE No description available.
-X-Spam-Level: *****
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <SN6PR04MB398339AA1E5BC7F8863D66DAC2D89@SN6PR04MB3983.namprd04.prod.outlook.com>
+X-Scanned-By: MIMEDefang 2.85 on 10.11.54.10
+X-Spam-Status: No, score=-2.7 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_NONE,
+        SPF_HELO_NONE,SPF_NONE,T_SCC_BODY_TEXT_LINE autolearn=ham
+        autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-Good Morning,
+On Thu, May 26, 2022 at 08:59:44PM -0600, Nathan Sharp wrote:
+>  misc-utils/pipesz.1.adoc | 14 +++++++-------
+>  1 file changed, 7 insertions(+), 7 deletions(-)
 
-We are Kostiantyn Chychkov and Maryna Chudnovska from Ukraine, we need your service, we have gone through your profile and we will like to work with you on an important service that needs urgent attention due to the ongoing war in our country. Kindly acknowledge this inquiry as soon as possible for a detailed discussion about the service.
+Applied, thanks.
 
-Thank you.
+    Karel
 
-Yours expectantly,
-
-Kostiantyn Chichkov & Ms. Maryna Chudnovska,
-From Ukraine.
-
+-- 
+ Karel Zak  <kzak@redhat.com>
+ http://karelzak.blogspot.com
 
