@@ -2,86 +2,113 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 7023153C968
-	for <lists+util-linux@lfdr.de>; Fri,  3 Jun 2022 13:36:05 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 7E4CD53C98E
+	for <lists+util-linux@lfdr.de>; Fri,  3 Jun 2022 13:52:08 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S242789AbiFCLdk (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Fri, 3 Jun 2022 07:33:40 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:58574 "EHLO
+        id S242528AbiFCLty (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Fri, 3 Jun 2022 07:49:54 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:46826 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S234831AbiFCLdj (ORCPT
-        <rfc822;util-linux-ng@vger.kernel.org>);
-        Fri, 3 Jun 2022 07:33:39 -0400
-Received: from mail-wr1-x42d.google.com (mail-wr1-x42d.google.com [IPv6:2a00:1450:4864:20::42d])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 88C7511C31
-        for <util-linux-ng@vger.kernel.org>; Fri,  3 Jun 2022 04:33:36 -0700 (PDT)
-Received: by mail-wr1-x42d.google.com with SMTP id d14so1022906wra.10
-        for <util-linux-ng@vger.kernel.org>; Fri, 03 Jun 2022 04:33:36 -0700 (PDT)
+        with ESMTP id S241465AbiFCLtx (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Fri, 3 Jun 2022 07:49:53 -0400
+Received: from mail-ot1-x329.google.com (mail-ot1-x329.google.com [IPv6:2607:f8b0:4864:20::329])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 6964D3A183
+        for <util-linux@vger.kernel.org>; Fri,  3 Jun 2022 04:49:52 -0700 (PDT)
+Received: by mail-ot1-x329.google.com with SMTP id 61-20020a9d0bc3000000b0060b9bfcfe76so5340180oth.9
+        for <util-linux@vger.kernel.org>; Fri, 03 Jun 2022 04:49:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=mime-version:reply-to:from:date:message-id:subject:to;
-        bh=PaEzrm9U0WjJMxkE+zbw8yGRv0uhjcRl9sFl9vmbKpk=;
-        b=Qux+JHqNAUvUnK4Wn2y/Ifp2KOrK/Z/m1go6QLMjivoBsBrx4AuQoCSnsUSzqnhO/1
-         vtwmejx4kbci0uV4QojBpexWLoBUYhFw0QtdqJtD00Z52v2BrnuFeEEGNRVHylEo98cy
-         6cGBRa+he9ioNPxkLoctlgYNrWMWowlU3YbHs7AmzlbIekxULgS8sHtD1tkBjn43GEyM
-         IOxUtfg7UsTxxf2lyb97AtKfgr1as6faOcwZATJWASlCy2eud5uAFAgPtXtlVxBzraaz
-         7ex/sEGFII8BxnpH+1Fm892xA3MR+XaucCI3jzQs1G5tJz+u65+QuNuSMN5hcAxIrcKU
-         Q4gg==
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=JlcqGVJD/NmZW8rCf1iBvPbUnCGh6iQ2TyDUsLXCkew=;
+        b=Yl9C/I0XVDfaqHvTlkqPpAtOIgkDo7e4+vVX6LKtntDhkmlIkfpzq5p8s/dc3tq5Wi
+         uZlXD9OqniRUmypTqlUfpukC/6Z5kUup9IQv7LSAZq9OKEm5riIzw9cJjq7Sle1Tsdp3
+         W+ZE/xYf2o0RvlFajd9RllWiH6t3Qha9jk9hIzunNi8rKH4vZM84fa6isLIY80suC8ci
+         SMNVrB5SsHRtI4hu+R52i6TkSLI50qKHFWjEWDDpWeMYo+zk+2TEzkgzQ0eNKHuXdFig
+         +H6l+6w57MwOI01WWVSz2fbGbthAs7jN3jQcwRUfcY2o4kwRs+sp3Tj2sB20oMXfPayZ
+         3Hcw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
-         :subject:to;
-        bh=PaEzrm9U0WjJMxkE+zbw8yGRv0uhjcRl9sFl9vmbKpk=;
-        b=v81ctJg+fKuU5wqlQ+sRo0bHGBsYFB48rhMqYvr/FIB7uuSZJXflmhHXXiuaf6Vdgp
-         tUqvFDqwlKj0dvnIfaTLwIJQGgGSQl/AB+EmwDMegpUhs83sWmELnEkX9h9v5OmiqmmX
-         F7txa6dX1ZHlu29ALl5fOX90MdljaF9lgCrzrZbnoM3l3bPXRMe+/MQsbfBKvGNLEYTf
-         3aM6/eDnYyWy6v5Q68zgSk1c5W/hW05NEy5HJ8fuLDA8m96vh1niuVf0n7fzio51XKQi
-         rfgTpfDjm61sPSPuKun3vduWD73eZnNcE7doH1WL2s+ibilUXjWTmDv5OF/0brAIDFFJ
-         biYA==
-X-Gm-Message-State: AOAM532c9jkuT7ABfFKWbpaOR/F2NXmhAb3AwgRsfNV3bxYm0tauKdy4
-        elV+ABqOrZe6lImVN2JHWM6mWSdTx9TVMzl2d9A=
-X-Google-Smtp-Source: ABdhPJyrm4DtzYclJmDFQQaR4x8Xx1xrCH0VpXzIJhu8pTDhUDYoDyshj19dPqgWShuscfgpQQbQ/1H9qNc6p9erVjs=
-X-Received: by 2002:adf:fa52:0:b0:211:fdfb:92dc with SMTP id
- y18-20020adffa52000000b00211fdfb92dcmr7798940wrr.472.1654256014938; Fri, 03
- Jun 2022 04:33:34 -0700 (PDT)
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=JlcqGVJD/NmZW8rCf1iBvPbUnCGh6iQ2TyDUsLXCkew=;
+        b=k+ThSmDfSJeaSFs96mrCKswXsvB07JFIqJ6cxo/Sz4qxr2S56WR/AWsjCL7Igz6gyi
+         qe7VptMv0+kq/m+00YhV0WLwDrXL16ub3Tf7yXXA/TcRESzHF7IsH71L2YW2rL8niBV2
+         P65Pqr+pqJqDc4THZ8lU+CagGOK1pB7p1mN+BoB00ZaFAi/iq4MhcQGyYO/kjqNhBZsK
+         ooBBKdoSnXEbrzC3OaN1oeCVNc3P7nfd8i5/wXEvgb6hRM91vll0kn6WeGCu6IHAvMhn
+         RhuaxBAMPMxD3RfTIS9zeacMZmpowZL113A/H8afuCEC0YbpYn5qHzhM256GLXc1MQBI
+         4imw==
+X-Gm-Message-State: AOAM532tYamyHTNfMRU43lg00rc7sXRPTZOEsFYzqLfgC3OajEmTTH56
+        vM7mxSBYPNIM7VBKPj5DTrlH+hKszsB7B/beTb1fQI0Fowk=
+X-Google-Smtp-Source: ABdhPJyek5naaoFfse4VMRrdi07ty/LWQ6dmvOknwfTzNksgbA9dmZ5izZYoJlHqFoZYjJpmx+8C6bKOqyxWIZa2G+U=
+X-Received: by 2002:a9d:6044:0:b0:60a:ec88:a218 with SMTP id
+ v4-20020a9d6044000000b0060aec88a218mr3965561otj.72.1654256991710; Fri, 03 Jun
+ 2022 04:49:51 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 2002:a5d:64ed:0:0:0:0:0 with HTTP; Fri, 3 Jun 2022 04:33:34 -0700 (PDT)
-Reply-To: markwillima00@gmail.com
-From:   Mark <mariamabdul888@gmail.com>
-Date:   Fri, 3 Jun 2022 04:33:34 -0700
-Message-ID: <CAP9xyD2zfrXP-eo+axMijiKTe-Pc=p76RQaobsvN-LN5EJ1RwQ@mail.gmail.com>
-Subject: Re: Greetings!
-To:     undisclosed-recipients:;
+References: <20220412045930.236051-1-nwsharp@live.com> <SN6PR04MB398387B3E32DD916801C6F93C2ED9@SN6PR04MB3983.namprd04.prod.outlook.com>
+In-Reply-To: <SN6PR04MB398387B3E32DD916801C6F93C2ED9@SN6PR04MB3983.namprd04.prod.outlook.com>
+From:   Anatoly Pugachev <matorola@gmail.com>
+Date:   Fri, 3 Jun 2022 14:49:41 +0300
+Message-ID: <CADxRZqzipCFaFFAs-o=FDA_g=9NmrqzieXaYtWwbGCCXDeiM5g@mail.gmail.com>
+Subject: Re: [PATCH RFC 2/4] pipesz: add tests
+To:     Nathan Sharp <nwsharp@live.com>
+Cc:     util-linux <util-linux@vger.kernel.org>
 Content-Type: text/plain; charset="UTF-8"
-X-Spam-Status: No, score=4.9 required=5.0 tests=BAYES_50,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_ENVFROM_END_DIGIT,
-        FREEMAIL_FROM,FREEMAIL_REPLYTO,FREEMAIL_REPLYTO_END_DIGIT,
-        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE,
-        UNDISC_FREEM autolearn=no autolearn_force=no version=3.4.6
-X-Spam-Level: ****
+X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,
+        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE
+        autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-Hello,
+Nathan,
 
-Good day,
+at least 2 of those tests is not BE (big-endian) friendly:
 
-The HSBC Bank is a financial institution in United Kingdom. We
-promotes long-term,sustainable and broad-based economic growth in
-developing and emerging countries by providing financial support like
-loans and investment to large, small and
-medium-sized companies (SMEs) as well as fast-growing enterprises
-which in turn helps to create secure and permanent jobs and reduce
-poverty.
+mator@gcc203:~/util-linux.git/tests$ ./run.sh misc/pipesz
 
-If you need fund to promotes your business, project(Project Funding),
-Loan, planning, budgeting and expansion of your business(s) , do not
-hesitate to indicate your interest as we are here to serve you better
-by granting your request.
+-------------------- util-linux regression tests --------------------
+
+                    For development purpose only.
+                 Don't execute on production system!
+
+       kernel: 5.15.0-2-powerpc64
+
+      options: --srcdir=/home/mator/util-linux.git/tests/.. \
+               --builddir=/home/mator/util-linux.git/tests/..
+
+         misc: pipesz                         ...
+                : set-fd-bad                  ... OK
+                : set-fd                      ... OK
+                : set-file-bad                ... OK
+                : set-file                    ... OK
+                : get-fd-bad                  ... OK
+                : get-fd                      ... FAILED (misc/pipesz-get-fd)
+                : get-file-bad                ... OK
+                : get-file                    ... FAILED (misc/pipesz-get-file)
+                : pipe-max-size               ... OK
+                : exec                        ... OK
+           ... FAILED (2 from 10 sub-tests)
+
+---------------------------------------------------------------------
+  1 tests of 1 FAILED
+
+      misc/pipesz
+---------------------------------------------------------------------
+
+running on a sparc64 (gcc202) and on powerpc64 (gcc203) machines :
+
+gcc202:~/util-linux$ echo -n | ./pipesz --check --get --stdin
+fd 0    131072  0
+
+gcc203:~/util-linux.git$ echo -n | ./pipesz --check --get --stdin
+fd 0    1048576 0
 
 
-Thank you
-Mr:Mark
+So on x86_64 tests expect stdin file to be 64Kb:
+gcc202:~/util-linux$ cat tests/expected/misc/pipesz-get-file
+/dev/stdin      65536   0
+but on sparc64 it is 128Kb and on powerpc64 it is 1Mb...
