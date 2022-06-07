@@ -2,111 +2,141 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 833E853E7CE
-	for <lists+util-linux@lfdr.de>; Mon,  6 Jun 2022 19:07:58 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id DC02353FAA1
+	for <lists+util-linux@lfdr.de>; Tue,  7 Jun 2022 11:59:05 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S234391AbiFFKtq (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Mon, 6 Jun 2022 06:49:46 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:59014 "EHLO
+        id S236840AbiFGJ6z (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Tue, 7 Jun 2022 05:58:55 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:48072 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S234393AbiFFKtp (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Mon, 6 Jun 2022 06:49:45 -0400
-Received: from mail-pg1-x52d.google.com (mail-pg1-x52d.google.com [IPv6:2607:f8b0:4864:20::52d])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id F199722B05
-        for <util-linux@vger.kernel.org>; Mon,  6 Jun 2022 03:49:43 -0700 (PDT)
-Received: by mail-pg1-x52d.google.com with SMTP id r71so12633693pgr.0
-        for <util-linux@vger.kernel.org>; Mon, 06 Jun 2022 03:49:43 -0700 (PDT)
+        with ESMTP id S240498AbiFGJ6s (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Tue, 7 Jun 2022 05:58:48 -0400
+Received: from mail-lf1-x12e.google.com (mail-lf1-x12e.google.com [IPv6:2a00:1450:4864:20::12e])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id EE4A6EAD20
+        for <util-linux@vger.kernel.org>; Tue,  7 Jun 2022 02:58:40 -0700 (PDT)
+Received: by mail-lf1-x12e.google.com with SMTP id i29so10709271lfp.3
+        for <util-linux@vger.kernel.org>; Tue, 07 Jun 2022 02:58:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=bytedance-com.20210112.gappssmtp.com; s=20210112;
-        h=message-id:date:mime-version:user-agent:subject:content-language:to
-         :cc:references:from:in-reply-to:content-transfer-encoding;
-        bh=f3RufZDElZdFtpUwvub3VXkU1hKrVhZVrtnCfWj10ns=;
-        b=yonJ0pBleOTMcCiIyQI6WplGq0rm3vLSsl+GdHntki///WsNi7OoxsYMwZAbTpe24O
-         v5K+r8uZIk8p/YSJ6btFa8sMbtEW0MH6JZ2wjVeH1/wSpArG6GqTBPSKRKalRTWbYVr6
-         gI2hqUOPsygyC3Sqy/ES6FB40It5L5OQ+I2O9+G65TrpQF5pOMW2/6UPwGnHp6zPH3dz
-         22gddB3hKgiaBFnSxmcZM7PAjz/4nqBY5Fp/ZZk/EgkKoXkzO1gChXfcGUOS3JpT8leP
-         vqeN8usYz/Hbq7lzxq+JTsu5h3c5Q1sOQm+0RFzSXmT6Q0wisOmrnhscWB/PCVjRQNav
-         nVtg==
+        d=gmail.com; s=20210112;
+        h=mime-version:reply-to:from:date:message-id:subject:to
+         :content-transfer-encoding;
+        bh=p7cyveT4bvEtCVZfKnt9HMSBuDucwLXScRMPEQg6smQ=;
+        b=nfbQAU03r8kreNkupbdE6fG+5k4l7uQJJzQllDNFkb1+MW65CtgrIcDYp+uu1IQyUe
+         0fPi/ipf11mptMpqnmGQE2NqniE7zfG3CG86ppZqa34c4CbL+0Gwlj0ah+F+A1LNETrH
+         WJ5DmhrZtdJm6SzgNDQ8jsorgO8Qvf4dtJB2K+XFa6t8NpgmMXeOqM8cgemPYdTD17xc
+         0XqTnRkkTinYVwVZ/23AsqmJcIvW1htBK//elb4W7BEL9ffBrow5yXkzlipmTDv/uvxg
+         UN7t0RBzGQco6VFlcBreqvMZRCo1nOFx9px7ilwzx+HaoGIUniaTAMycE8eXVB9i2XrV
+         fvSw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:message-id:date:mime-version:user-agent:subject
-         :content-language:to:cc:references:from:in-reply-to
-         :content-transfer-encoding;
-        bh=f3RufZDElZdFtpUwvub3VXkU1hKrVhZVrtnCfWj10ns=;
-        b=ebj+sApyqOAT5VrzL7RxYSCNY0O+U2qy3zRMPniSw1kGEThnEF2fownihda/um+v4s
-         9iDOcna7SApAUrg3b7th0jKN+F966eTeYKUv8nK8GvAM5tfzjHArI1ZVnzYJ6WD60AHa
-         +EyRg2QwevO3C8b1s0dgVOv1gQwm52Hg5ucfT349o47gwrd/dhT0kgy8GIZ6pMh9q8vT
-         T6XCVsUWfKmusAMuUIZoKNkG3CJDpTJcvDiJuez21diDSCJSxYLS8VIU3thph0vXrNkC
-         Z+IUjhRaE5fislnYzDj6Otg0LGBEosk8dCtQaTiP9incdyOCOJLK8ncFpOW+RyZukFRl
-         oMbg==
-X-Gm-Message-State: AOAM531w1PuohD0sIqO/SC5ZDyTp8h2HR892Fdvjp2ktLgd0g/2P+Ix/
-        SxUvLtw3+qrHGhjeVVFLgekfG65TZ3BeLg==
-X-Google-Smtp-Source: ABdhPJwYKLVfj2wcNRNLlThoCMCJb+GnycNqIjw6467FBXbDH9LPMYdki1QO1leaBnl71oCYZXVzIw==
-X-Received: by 2002:a05:6a00:807:b0:51b:f4b5:db82 with SMTP id m7-20020a056a00080700b0051bf4b5db82mr11756599pfk.57.1654512583530;
-        Mon, 06 Jun 2022 03:49:43 -0700 (PDT)
-Received: from [10.76.15.169] ([61.120.150.70])
-        by smtp.gmail.com with ESMTPSA id g12-20020a17090a708c00b001cd4989ff42sm9779127pjk.9.2022.06.06.03.49.41
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 06 Jun 2022 03:49:42 -0700 (PDT)
-Message-ID: <be42364e-5acb-d4cb-432b-66138dff7c81@bytedance.com>
-Date:   Mon, 6 Jun 2022 18:45:04 +0800
+        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
+         :subject:to:content-transfer-encoding;
+        bh=p7cyveT4bvEtCVZfKnt9HMSBuDucwLXScRMPEQg6smQ=;
+        b=hM9ypCR2CGno/+O5D06IUgwBlQc2wBoSa8xHjTKx5CS26t1f79JbQV6f5v9sA2ZjAd
+         5xdnAnAqIfDZEFr018Tufg03jyeTFSu8nFbny4SjArUoIpETfoB7SKQhZaB/pxS8QlPo
+         +F3X8HHefZSlOUlnxnLJW4L2MCtl9XzubnHOuNfkmGDELK0NVbJa3deQbVXPyeuVpSX1
+         pFeZpuFGgKBkLRME/1mf34dc3p/6OIOvVMlj3zsn3YtTVsnZM+DIeIxVTc92MWAlCGpJ
+         4HfQ4pL/ikNLlY/B+0RKYVXXXFXtZDQ5sjIS3KAI01UOGD4SVQuJPHb4pmRH7487DD5t
+         xB1w==
+X-Gm-Message-State: AOAM5328m/KXEAQD4lQ9opdMI/+WQID7XLdtJjhMhwnWPAwrZYp3Hzsm
+        4BCBreTj9Pgvxg/SbEgBROQV7CM1hfy+Gv+q3/A=
+X-Google-Smtp-Source: ABdhPJzK9RBfH642YXTmJwkhyiOBnlEbH+sPpWzDQXc/7hXYxhXUvUvoYlttgONmqt6mYZ0QN2OlC8hK1Y9BuX6sBaQ=
+X-Received: by 2002:a05:6512:128d:b0:479:41ca:f07 with SMTP id
+ u13-20020a056512128d00b0047941ca0f07mr6714230lfs.308.1654595919055; Tue, 07
+ Jun 2022 02:58:39 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.9.1
-Subject: Re: Re: [PATCH 4/5] lsblk: introduce 'MQ' column
-Content-Language: en-US
-To:     Karel Zak <kzak@redhat.com>
-Cc:     util-linux@vger.kernel.org
-References: <20220603122402.3274789-1-pizhenwei@bytedance.com>
- <20220603122402.3274789-5-pizhenwei@bytedance.com>
- <20220606104117.lbv4tify3qjvp2t3@ws.net.home>
-From:   zhenwei pi <pizhenwei@bytedance.com>
-In-Reply-To: <20220606104117.lbv4tify3qjvp2t3@ws.net.home>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Spam-Status: No, score=-4.8 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,NICE_REPLY_A,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,
-        T_SCC_BODY_TEXT_LINE autolearn=ham autolearn_force=no version=3.4.6
+Received: by 2002:a05:6504:51d0:b0:1cf:9a7b:1066 with HTTP; Tue, 7 Jun 2022
+ 02:58:38 -0700 (PDT)
+Reply-To: robertbaileys_spende@aol.com
+From:   Robert Baileys <mrnazy58@gmail.com>
+Date:   Tue, 7 Jun 2022 11:58:38 +0200
+Message-ID: <CAKTXsV=tEdE+SxeXiewFm-fmasPcs+C+Tkc0La7rqv1SXjBhag@mail.gmail.com>
+Subject: 
+To:     undisclosed-recipients:;
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Spam-Status: Yes, score=6.7 required=5.0 tests=BAYES_50,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_ENVFROM_END_DIGIT,
+        FREEMAIL_FROM,FREEMAIL_REPLYTO,LOTS_OF_MONEY,MONEY_FREEMAIL_REPTO,
+        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE,
+        UNDISC_FREEM,UNDISC_MONEY autolearn=no autolearn_force=no version=3.4.6
+X-Spam-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
+        *      https://www.dnswl.org/, no trust
+        *      [2a00:1450:4864:20:0:0:0:12e listed in]
+        [list.dnswl.org]
+        *  0.8 BAYES_50 BODY: Bayes spam probability is 40 to 60%
+        *      [score: 0.5000]
+        * -0.0 SPF_PASS SPF: sender matches SPF record
+        *  0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends
+        *       in digit
+        *      [mrnazy58[at]gmail.com]
+        *  0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail
+        *      provider
+        *      [mrnazy58[at]gmail.com]
+        *  0.0 SPF_HELO_NONE SPF: HELO does not publish an SPF Record
+        * -0.1 DKIM_VALID_EF Message has a valid DKIM or DK signature from
+        *      envelope-from domain
+        * -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
+        *      author's domain
+        * -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+        *  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
+        *       valid
+        *  0.0 LOTS_OF_MONEY Huge... sums of money
+        * -0.0 T_SCC_BODY_TEXT_LINE No description available.
+        *  2.3 UNDISC_FREEM Undisclosed recipients + freemail reply-to
+        *  2.0 MONEY_FREEMAIL_REPTO Lots of money from someone using free
+        *      email?
+        *  1.0 FREEMAIL_REPLYTO Reply-To/From or Reply-To/body contain
+        *      different freemails
+        *  0.6 UNDISC_MONEY Undisclosed recipients + money/fraud signs
+X-Spam-Level: ******
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
+--=20
+Sehr geehrter Beg=C3=BCnstigter,
 
+Sie erhalten diese E-Mail von der Robert Baileys Foundation. Ich bin
+ein pensionierter Regierungsangestellter aus Harlem und ein Powerball
+Lotterie-Jackpot-Gewinner von 343,8 Millionen US-Dollar. Ich bin der
+gr=C3=B6=C3=9Fte Jackpot-Gewinner in der Geschichte der New York Lottery in
+Amerika. Ich habe diese Lotterie am 27. Oktober 2018 gewonnen und
+m=C3=B6chte Ihnen mitteilen, dass Google in Zusammenarbeit mit Microsoft
+f=C3=BCr eine zuf=C3=A4llige ''E-Mail-Adresse'' 3 Millionen Pfund ausgibt. =
+Ich
+glaube fest an "Geben w=C3=A4hrend des Lebens".
+Ich spende diese 3 Millionen Pfund an Sie, um auch
+Wohlt=C3=A4tigkeitsorganisationen und armen Menschen in Ihrer Gemeinde zu
+helfen, damit wir die Welt zu einem besseren Ort zum Leben machen
+k=C3=B6nnen. Um mehr Informationen in meinem Gewinn zu erhalten, k=C3=B6nne=
+n Sie
+die Website besuchen, also k=C3=B6nnen Sie skeptisch sein es .
+https://nypost.com/2018/11/14/meet-the-winner-of-the-biggest-lottery-jackpo=
+t-in-new-york-history/Sie
+Sie k=C3=B6nnen auch auf meinem YouTube nach weiteren Best=C3=A4tigungen su=
+chen:
+https://www.youtube.com/watch?v=3DH5vT18Ysavc
+ Ich hatte eine Idee, die sich nie ge=C3=A4ndert hat: dass Sie Ihr Verm=C3=
+=B6gen
+verwenden sollten, um Menschen zu helfen, und ich habe beschlossen,
+heimlich { 3000.000 =C2=A3} an ausgew=C3=A4hlte Menschen auf der ganzen Wel=
+t zu
+spenden, Menschen, die einen gro=C3=9Fen Einfluss auf die Gesellschaft
+hatten durch Verhalten. Nach Erhalt dieser E-Mail sollten Sie sich als
+gl=C3=BCckliche Person betrachten und daher berechtigt sein, ein
+Beg=C3=BCnstigter zu sein.
+Bitte beachten Sie, dass alle Antworten an
+(robertbaileys_spende@aol.com) gesendet werden sollten, und erhalten
+Sie weitere Informationen dar=C3=BCber, wie Sie diese Spende auf Ihr
+Bankkonto erhalten.
 
-On 6/6/22 18:41, Karel Zak wrote:
-> On Fri, Jun 03, 2022 at 08:24:01PM +0800, zhenwei pi wrote:
->> +static void process_mq(struct lsblk_device *dev, char **str)
->> +{
->> +	DIR *dir;
->> +	struct dirent *d;
->> +	unsigned int queues = 0;
->> +
->> +	DBG(DEV, ul_debugobj(dev, "%s: process mq", dev->name));
->> +
->> +	dir = ul_path_opendir(dev->sysfs, "mq");
->> +	if (!dir) {
->> +		*str = xstrdup("1");
->> +		DBG(DEV, ul_debugobj(dev, "%s: no mq supported, use a single queue", dev->name));
->> +		return;
->> +	}
->> +
->> +	while ((d = xreaddir(dir))) {
->> +		if (!strcmp(d->d_name, ".") || !strcmp(d->d_name, ".."))
->> +			continue;
-> 
->   xreaddir() filters "." and "..".
-> 
->   Anyway, there is a function ul_path_count_dirents() that does all the
->   work. I made the change in the code.
-> 
->      Karel
-> 
+KONTAKT-E-MAIL: robertbaileys_spende@aol.com
 
-Hi, Karel
-
-Thanks!
-
--- 
-zhenwei pi
+Gr=C3=BC=C3=9Fe,
+Robert Bailey
+* * * * * * * * * * * * * * * * * * * *
+Powerball-Jackpot-Gewinner
+E-Mail: robertbaileys_spende@aol.com
