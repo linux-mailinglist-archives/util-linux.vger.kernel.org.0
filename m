@@ -2,80 +2,79 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 5C57B54DF87
-	for <lists+util-linux@lfdr.de>; Thu, 16 Jun 2022 12:52:33 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id B8C2154FA35
+	for <lists+util-linux@lfdr.de>; Fri, 17 Jun 2022 17:26:30 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S230004AbiFPKwb (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Thu, 16 Jun 2022 06:52:31 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:39546 "EHLO
+        id S1382554AbiFQP01 (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Fri, 17 Jun 2022 11:26:27 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:54218 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S231206AbiFPKwa (ORCPT
-        <rfc822;util-linux-ng@vger.kernel.org>);
-        Thu, 16 Jun 2022 06:52:30 -0400
-Received: from mail-lf1-x12e.google.com (mail-lf1-x12e.google.com [IPv6:2a00:1450:4864:20::12e])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 924952E5
-        for <util-linux-ng@vger.kernel.org>; Thu, 16 Jun 2022 03:52:29 -0700 (PDT)
-Received: by mail-lf1-x12e.google.com with SMTP id h23so1617109lfe.4
-        for <util-linux-ng@vger.kernel.org>; Thu, 16 Jun 2022 03:52:29 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=mime-version:reply-to:from:date:message-id:subject:to
-         :content-transfer-encoding;
-        bh=lLG88JCPgF7Yhflf4FNi4GQedsSNMbwmPtgneUr9Mu0=;
-        b=Weq7HlCxoZfDkjXrC8ClJ6qJDCF6WGG5baotEvQe8Cxvxojy9vUStkRRaxPHTGOLsC
-         g7xCRVi9emnTdcJ1JnQYw1BnqA2tWntoA8p/R30yVt1Uhs6aJbA66QznZMcFLqL622FR
-         FoVkK7r5rfZiYPsVGvxksDVwgZ+fW4jQZWcNeSiSM/XATjvgdhajtuoyiD4Tjsuts/hb
-         LyONKqyl4fW5A9gKA+nHfdqQGVSmDxhEYMGrgBuiQzgPHZbE//AQWX9exdw8bwjM78zz
-         yzdvD/fJxaP0ETyqkVhheykcmvisK+83oBr2Pf38+++Vq+EeTxp4OjTctS5jqZM5o/eX
-         /hFw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
-         :subject:to:content-transfer-encoding;
-        bh=lLG88JCPgF7Yhflf4FNi4GQedsSNMbwmPtgneUr9Mu0=;
-        b=H3wc3535AVmMxem4p9+dyMe8lrbfKuPxkYsQ+Q4pYc9M+y7RRQ4uayzdn0ugknGtVO
-         4SWKpRhwGQ2C9SH3YN2awWO9uzugUInD2UR+hvIt6wXbLR9VfE4++LM+I/Vi9oI0C2Ha
-         floLyzDiqrRT4WNhPh9QJgOBh7rr8s6ZI0F/pklFSBEhtX4aXK4crU0lRKdzFY9l5F6r
-         d5Xx/4+2CgWXe7AtM4/SWoRQSFnlis4J/LxMflUnxcls+VPnHQC7HqB6W3h6IxUc9uAE
-         Qp4fFl6XX/HPY2a8Mlu47JjSMUoOGl/sUcgIK90wINkpcVDeey9OFUt5HgCi9/YDOhDy
-         Nb7Q==
-X-Gm-Message-State: AJIora8V4BP6qSAQXSCzrND1euVH8mAWckvGq4pHQw97vGZIFYqPSFTQ
-        k+B2PttxMu/q+ACSV6auPBKPbJcxwJ1ucOGonks=
-X-Google-Smtp-Source: AGRyM1uH1ieMCBqabwjzbFetqqyeLxo79OH0bYz/cprh7P3IDQAowWATdKFGkvf3qk3djC0X/oPKWttQTCYPUOOnQNQ=
-X-Received: by 2002:a05:6512:3448:b0:479:10f0:11c7 with SMTP id
- j8-20020a056512344800b0047910f011c7mr2312400lfr.521.1655376747481; Thu, 16
- Jun 2022 03:52:27 -0700 (PDT)
+        with ESMTP id S1382720AbiFQP01 (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Fri, 17 Jun 2022 11:26:27 -0400
+X-Greylist: delayed 523 seconds by postgrey-1.37 at lindbergh.monkeyblade.net; Fri, 17 Jun 2022 08:26:26 PDT
+Received: from sv220.xserver.jp (sv220.xserver.jp [202.226.39.121])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id C3A7E2AC78;
+        Fri, 17 Jun 2022 08:26:26 -0700 (PDT)
+X-Virus-Status: clean(F-Secure/fsigk_smtp/521/virusgw2.xserver.jp)
+Received: from webmail.xserver.ne.jp (webmail.xserver.ne.jp [210.188.201.183])
+        by sv220.xserver.jp (Postfix) with ESMTPA id 28A0F1201A300A;
+        Sat, 18 Jun 2022 00:17:23 +0900 (JST)
 MIME-Version: 1.0
-Received: by 2002:a05:6520:28c2:b0:1f3:cf5:e20d with HTTP; Thu, 16 Jun 2022
- 03:52:26 -0700 (PDT)
-Reply-To: clmloans9@gmail.com
-From:   MR ANTHONY EDWARD <bashirusman02021@gmail.com>
-Date:   Thu, 16 Jun 2022 11:52:26 +0100
-Message-ID: <CAGOBX5ajv0nG7EA17cVJb_MkKgWhBMkxu-c0H+6sf59Wkw7bFg@mail.gmail.com>
-Subject: DARLEHENSANGEBOT
+Content-Type: text/plain; charset=US-ASCII;
+ format=flowed
+Content-Transfer-Encoding: 7bit
+Date:   Fri, 17 Jun 2022 23:17:23 +0800
+From:   Steve Dibenedetto <y-kitsuya@bell-group.co.jp>
 To:     undisclosed-recipients:;
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Spam-Status: No, score=4.3 required=5.0 tests=BAYES_50,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_ENVFROM_END_DIGIT,
-        FREEMAIL_FROM,FREEMAIL_REPLYTO,FREEMAIL_REPLYTO_END_DIGIT,
-        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,T_HK_NAME_FM_MR_MRS,
-        T_SCC_BODY_TEXT_LINE,UNDISC_FREEM autolearn=no autolearn_force=no
-        version=3.4.6
-X-Spam-Level: ****
+Subject: THIS IS VERY CONFIDENTIAL
+Reply-To: stevedibenedetto17@gmail.com
+Mail-Reply-To: stevedibenedetto17@gmail.com
+Message-ID: <7a699e4cf287b2852d6b7488660663b4@bell-group.co.jp>
+X-Sender: y-kitsuya@bell-group.co.jp
+User-Agent: Roundcube Webmail/1.2.0
+X-Spam-Status: Yes, score=7.6 required=5.0 tests=BAYES_60,
+        FREEMAIL_FORGED_REPLYTO,FREEMAIL_REPLYTO_END_DIGIT,ODD_FREEM_REPTO,
+        SPF_HELO_PASS,SPF_SOFTFAIL,SUBJ_ALL_CAPS,T_SCC_BODY_TEXT_LINE
+        autolearn=no autolearn_force=no version=3.4.6
+X-Spam-Report: *  1.5 BAYES_60 BODY: Bayes spam probability is 60 to 80%
+        *      [score: 0.6764]
+        * -0.0 SPF_HELO_PASS SPF: HELO matches SPF record
+        *  0.7 SPF_SOFTFAIL SPF: sender does not match SPF record (softfail)
+        *  0.5 SUBJ_ALL_CAPS Subject is all capitals
+        *  0.2 FREEMAIL_REPLYTO_END_DIGIT Reply-To freemail username ends in
+        *      digit
+        *      [stevedibenedetto17[at]gmail.com]
+        * -0.0 T_SCC_BODY_TEXT_LINE No description available.
+        *  2.6 ODD_FREEM_REPTO Has unusual reply-to header
+        *  2.1 FREEMAIL_FORGED_REPLYTO Freemail in Reply-To, but not From
+X-Spam-Level: *******
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
---=20
-Ben=C3=B6tigen Sie ein Gesch=C3=A4ftsdarlehen oder ein Darlehen jeglicher A=
-rt?
-Wenn ja, kontaktieren Sie uns
 
-*Vollst=C3=A4ndiger Name:
-* Ben=C3=B6tigte Menge:
-*Leihdauer:
-*Mobiltelefon:
-*Land:
+
+-- 
+Hello,
+
+My name is Steve Dibenedetto.I apologize to have contacted you this way
+without a direct relationship. There is an opportunity to collaborate
+with me in the sourcing of some materials needed by our company for
+production of the different medicines we are researching.
+
+I'm aware that this might be totally outside your professional
+specialization, but it will be a great source for generating extra
+revenue. I  discovered a manufacturer who can supply us at a lower rate
+than our company's previous purchases.
+I will give you more specific details when/if I receive feedback from
+you showing interest.
+
+Warm Regards
+Steve Dibenedetto
+Production & Control Manager,
+Green Field Laboratories
+Gothic House, Barker Gate,
+Nottingham, NG1 1JU,
+United Kingdom.
