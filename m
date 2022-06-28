@@ -2,67 +2,86 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id BAD7455D72E
-	for <lists+util-linux@lfdr.de>; Tue, 28 Jun 2022 15:18:00 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 05DE155C9F9
+	for <lists+util-linux@lfdr.de>; Tue, 28 Jun 2022 14:57:44 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1344052AbiF1LwQ (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Tue, 28 Jun 2022 07:52:16 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:51680 "EHLO
+        id S1345403AbiF1MHg (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Tue, 28 Jun 2022 08:07:36 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:36640 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1344722AbiF1LwN (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Tue, 28 Jun 2022 07:52:13 -0400
-X-Greylist: delayed 9545 seconds by postgrey-1.37 at lindbergh.monkeyblade.net; Tue, 28 Jun 2022 04:52:08 PDT
-Received: from www2055.sakura.ne.jp (www2055.sakura.ne.jp [59.106.171.65])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTP id 718FE22B32
-        for <util-linux@vger.kernel.org>; Tue, 28 Jun 2022 04:52:08 -0700 (PDT)
-Received: from fsav114.sakura.ne.jp (fsav114.sakura.ne.jp [27.133.134.241])
-        by www2055.sakura.ne.jp (8.15.2/8.15.2) with ESMTP id 25S97oeT027116;
-        Tue, 28 Jun 2022 18:07:50 +0900 (JST)
-        (envelope-from 1955@kkden.co.jp)
-Received: from www2055.sakura.ne.jp (59.106.171.65)
- by fsav114.sakura.ne.jp (F-Secure/fsigk_smtp/550/fsav114.sakura.ne.jp);
- Tue, 28 Jun 2022 18:07:50 +0900 (JST)
-X-Virus-Status: clean(F-Secure/fsigk_smtp/550/fsav114.sakura.ne.jp)
-Received: from www2055.sakura.ne.jp (localhost [127.0.0.1])
-        by www2055.sakura.ne.jp (8.15.2/8.15.2) with ESMTP id 25S97mmb027087;
-        Tue, 28 Jun 2022 18:07:50 +0900 (JST)
-        (envelope-from 1955@kkden.co.jp)
-Received: (from kkden@localhost)
-        by www2055.sakura.ne.jp (8.15.2/8.15.2/Submit) id 25S97miq027086;
-        Tue, 28 Jun 2022 18:07:48 +0900 (JST)
-        (envelope-from 1955@kkden.co.jp)
-Message-Id: <202206280907.25S97miq027086@www2055.sakura.ne.jp>
-X-Authentication-Warning: www2055.sakura.ne.jp: kkden set sender to 1955@kkden.co.jp using -f
-Subject: THIS IS VERY CONFIDENTIAL
-From:   Steve Dibenedetto <1955@kkden.co.jp>
-To:     stevedibenedetto17@gmail.com
+        with ESMTP id S241606AbiF1MHf (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Tue, 28 Jun 2022 08:07:35 -0400
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTP id 9A01033360
+        for <util-linux@vger.kernel.org>; Tue, 28 Jun 2022 05:06:51 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+        s=mimecast20190719; t=1656417981;
+        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+         in-reply-to:in-reply-to:references:references;
+        bh=PztcW36yk5Vfh3GDkalVGzultiOVQLo9HUq2DKqfKFQ=;
+        b=JthxmZH/ZMVrFdG5TId9ibULhQfNC9eIKbdSIeyTWWmurvRUaofsDJPka3kDfGmd8S4XWG
+        UXL/7cPvpZ9qFpaFdl5ZmGdajxMA+60fpwvsL+Q1s8otuVOCZjtviXB11k+x4JdJy+x1kA
+        4hysxDg4og+ZO9Tmyvb+v0mp5FwItho=
+Received: from mimecast-mx02.redhat.com (mx3-rdu2.redhat.com
+ [66.187.233.73]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ us-mta-623-ijsgwjwzO-yBXd_wxxQVtQ-1; Tue, 28 Jun 2022 08:06:19 -0400
+X-MC-Unique: ijsgwjwzO-yBXd_wxxQVtQ-1
+Received: from smtp.corp.redhat.com (int-mx09.intmail.prod.int.rdu2.redhat.com [10.11.54.9])
+        (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+        (No client certificate requested)
+        by mimecast-mx02.redhat.com (Postfix) with ESMTPS id E36C93833286;
+        Tue, 28 Jun 2022 12:06:18 +0000 (UTC)
+Received: from ws.net.home (unknown [10.40.194.10])
+        by smtp.corp.redhat.com (Postfix) with ESMTPS id 68662492C3B;
+        Tue, 28 Jun 2022 12:06:18 +0000 (UTC)
+Date:   Tue, 28 Jun 2022 14:06:16 +0200
+From:   Karel Zak <kzak@redhat.com>
+To:     Michael Trapp <michael.trapp@sap.com>
+Cc:     util-linux@vger.kernel.org
+Subject: Re: [PATCH] Implement continuous clock handling for time based UUIDs
+Message-ID: <20220628120616.glrwy7iqfepgrwap@ws.net.home>
+References: <20220620151036.97706-1-michael.trapp@sap.com>
 MIME-Version: 1.0
-Date:   Tue, 28 Jun 2022 18:07:48 +0900
-Content-Type: text/plain; charset="ISO-2022-JP"
-Content-Transfer-Encoding: 7bit
-X-Spam-Status: No, score=1.3 required=5.0 tests=BAYES_50,SPF_HELO_NONE,
-        SPF_NONE,SUBJ_ALL_CAPS,T_SCC_BODY_TEXT_LINE autolearn=no
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20220620151036.97706-1-michael.trapp@sap.com>
+X-Scanned-By: MIMEDefang 2.85 on 10.11.54.9
+X-Spam-Status: No, score=-3.2 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_LOW,
+        SPF_HELO_NONE,SPF_NONE,T_SCC_BODY_TEXT_LINE autolearn=ham
         autolearn_force=no version=3.4.6
-X-Spam-Level: *
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
+On Mon, Jun 20, 2022 at 05:10:36PM +0200, Michael Trapp wrote:
+> In a uuidd setup, the daemon is a singleton and can maintain it's own
+> resources for time based UUID generation. This requires a dedicated
+> 'clock sequence range' but does not need any further lock/update of
+> the LIBUUID_CLOCK_FILE from uuidd. The range of available clock values
+> is extended by a continuous handling of the clock updates - instead of
+> updating the value to the current timestamp, it is incremented by
+> the number of requested UUIDs.
+> ---
+> 
+> Updated version
+>   cont clock handling needs to be activated with '-C' or '--cont-clock'.
+>   default value of max_clock_offset is 7200 seconds.
+>   custom value of max_clock_offset can be defined by optional argument.
+>   maximum value of max_clock_offest is 365 days.
 
-Hello,
+Looks good, thanks! I'll apply the patch later this week.
 
-My name is Steve Dibenedetto.
-I apologize to have contacted you this way without a direct relationship. There is an opportunity to collaborate with me in the sourcing of some materials needed by our company for production of the different medicines we are researching.
+BTW, by the reset interval is 7200 seconds? Why not 3600? :-)
 
-I'm aware that this might be totally outside your professional specialization, but it will be a great source for generating extra revenue. I  discovered a manufacturer who can supply us at a lower rate than our company's previous purchases.
-I will give you more specific details when/if I receive feedback from you showing interest.
+    Karel
 
-Warm Regards  
-Steve Dibenedetto
-Production & Control Manager,
-Green Field Laboratories
-Gothic House, Barker Gate,
-Nottingham, NG1 1JU,
-United Kingdom.
+
+-- 
+ Karel Zak  <kzak@redhat.com>
+ http://karelzak.blogspot.com
+
