@@ -2,87 +2,75 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 807B2575EC2
-	for <lists+util-linux@lfdr.de>; Fri, 15 Jul 2022 11:42:52 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 6A54B5763E5
+	for <lists+util-linux@lfdr.de>; Fri, 15 Jul 2022 16:55:30 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S230239AbiGOJk6 (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Fri, 15 Jul 2022 05:40:58 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:56334 "EHLO
+        id S229592AbiGOOz2 (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Fri, 15 Jul 2022 10:55:28 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:39938 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229872AbiGOJk5 (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Fri, 15 Jul 2022 05:40:57 -0400
-Received: from mail-lj1-x241.google.com (mail-lj1-x241.google.com [IPv6:2a00:1450:4864:20::241])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 87C9D491DC
-        for <util-linux@vger.kernel.org>; Fri, 15 Jul 2022 02:40:56 -0700 (PDT)
-Received: by mail-lj1-x241.google.com with SMTP id v15so1378084ljc.1
-        for <util-linux@vger.kernel.org>; Fri, 15 Jul 2022 02:40:56 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=mime-version:reply-to:from:date:message-id:subject:to;
-        bh=5/UmqluA7Jh4baRJC2F+0GGvQnHdiYOaoe5qnf0gA9c=;
-        b=hFsShPVB4oHotbC2gBEiSG24AqX0xKRyqtYNZZUJd0xeXG+U+cDlOz7+HCoUU7fBzD
-         aamqXiZzM5rXuCvvMqo0SpNcxa+RYpzHc7bUYMbBql5LJVZutiBRDwMYr6j7GfxlkYqm
-         7FLj2WK5RHKvwusvRAqKcAvueV63oOoxMZSZBLb/jkEYI85r/OO3b+kx8dA2keer0TmH
-         IG2LIIzRhZ+T8Xq1zxAm7flOhK2WcYF2epR6dUNBFiZMV4jTwNUP6yqzaEsa7d4WIkIJ
-         MYDmrOO7auyl+q8MtB0kgZ6IR4s2prH6l4KzutcT9YBjzJgknaWn1+qNZ7p4LRoVSXk7
-         Q9SQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
-         :subject:to;
-        bh=5/UmqluA7Jh4baRJC2F+0GGvQnHdiYOaoe5qnf0gA9c=;
-        b=2S2UjZ1oEEWIj2o3Uk7g+yJ42nMNCmpPEeoESTJC1xyHLktRQcT5RiPhkT3d+nOUiA
-         lZkv2X2XQkJjB0LIXFnwNYuAZKK0D69Y6QaS7neY/OdMLVaC7rFASe2AYVJC/xrpTjm9
-         pRYfn3xh9Anyf5Fb/yznw9HffRhv6FW3TnP5zuuKxaw0jvyrsBlhnk5eE5yrdB4qS/uZ
-         S7MG1QcfNxvYGo7sYHT+8865gwvtWnS+AVX0uMaxmrpIa3qS3axnf9x6ttJlXEVPTBTW
-         ag3+01giabZq0RPQzRdQqrtkYtoA5LZFo1Uzxw7lnnaBjpX0Vvj0vU00H7x2CtqbdxMd
-         dtcw==
-X-Gm-Message-State: AJIora8QxG1KSCmB6s2rVcXlAPZJ+pKdcgIPabDGbwKtPZ1G7Yf9cvSE
-        /8IK2DsW96TuUgd7Xu7j6CMKYcyR4MhMdigoXYE=
-X-Google-Smtp-Source: AGRyM1v5z2yrKcQeU6lcUpkwbPHFoUX/BdF8DMkkBnlEQb74v8mUPq/7r7ExEbJyteO7GuXd+909ry4W1J76js3r07w=
-X-Received: by 2002:a2e:be09:0:b0:25d:610d:7948 with SMTP id
- z9-20020a2ebe09000000b0025d610d7948mr6162344ljq.423.1657878054535; Fri, 15
- Jul 2022 02:40:54 -0700 (PDT)
+        with ESMTP id S229559AbiGOOz2 (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Fri, 15 Jul 2022 10:55:28 -0400
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTP id 86E01474DA
+        for <util-linux@vger.kernel.org>; Fri, 15 Jul 2022 07:55:27 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+        s=mimecast20190719; t=1657896926;
+        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+         to:to:cc:mime-version:mime-version:
+         content-transfer-encoding:content-transfer-encoding;
+        bh=Re+TN+bRsCsuIABLQAoEh29CoAPfrANC5gLV6nNXHVc=;
+        b=PRmDzzISPfH4wOJivYKBwoD8d0nufKdd/VhhL5FkbITIiZuLM6zkd07OBCbdiPnJqZwLl2
+        GfAk+5ugPGrqsVfr+EJylTjOjmiMB3w5VBlrR9vYVg6VbAOZAgQfaEAIa9LGSphl94r3m9
+        bpMPeVK3ud9IAK84o+0pEEbmmjfuyN4=
+Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
+ [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ us-mta-437-dfG6_MPvNxqrZ0d-3tegdw-1; Fri, 15 Jul 2022 10:55:17 -0400
+X-MC-Unique: dfG6_MPvNxqrZ0d-3tegdw-1
+Received: from smtp.corp.redhat.com (int-mx09.intmail.prod.int.rdu2.redhat.com [10.11.54.9])
+        (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+        (No client certificate requested)
+        by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 2276C802E5C
+        for <util-linux@vger.kernel.org>; Fri, 15 Jul 2022 14:55:17 +0000 (UTC)
+Received: from b.redhat.com (unknown [10.33.36.216])
+        by smtp.corp.redhat.com (Postfix) with ESMTPS id 327EC492C3B
+        for <util-linux@vger.kernel.org>; Fri, 15 Jul 2022 14:55:16 +0000 (UTC)
+From:   Andrew Price <anprice@redhat.com>
+To:     util-linux@vger.kernel.org
+Subject: [PATCH] uuid_copy: (man) Add missing parenthesis
+Date:   Fri, 15 Jul 2022 15:55:13 +0100
+Message-Id: <20220715145513.469044-1-anprice@redhat.com>
 MIME-Version: 1.0
-Received: by 2002:a05:6512:1282:0:0:0:0 with HTTP; Fri, 15 Jul 2022 02:40:53
- -0700 (PDT)
-Reply-To: westernunionagent303@gmail.com
-From:   WESTERN UNION AGENT <odetadejoseph@gmail.com>
-Date:   Fri, 15 Jul 2022 02:40:53 -0700
-Message-ID: <CAAe66sbArMPM10tpdMDrMYsDX6y-WXvNxwdGC0QOVAx2Hv3DSQ@mail.gmail.com>
-Subject: Dear E-mail Owner,
-To:     undisclosed-recipients:;
-Content-Type: text/plain; charset="UTF-8"
-X-Spam-Status: No, score=4.9 required=5.0 tests=BAYES_50,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,FREEMAIL_REPLYTO,
-        FREEMAIL_REPLYTO_END_DIGIT,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,
-        T_FILL_THIS_FORM_SHORT,UNDISC_FREEM autolearn=no autolearn_force=no
-        version=3.4.6
-X-Spam-Level: ****
+Content-Transfer-Encoding: 8bit
+X-Scanned-By: MIMEDefang 2.85 on 10.11.54.9
+X-Spam-Status: No, score=-3.4 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_LOW,
+        SPF_HELO_NONE,SPF_NONE autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-Dear E-mail Owner,
+Signed-off-by: Andrew Price <anprice@redhat.com>
+---
+ libuuid/man/uuid_copy.3.adoc | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-We have deposited the check of your fund ($1.500`000`00USD) through
-Western Union department after our finally meeting regarding your
-fund, All you will do is to contact Western Union director David Peters
-via E-mail:(westernunionagent303@gmail.com) He will give you
-direction on how you will be receiving the funds daily.Remember to
-send him your Full information to avoid wrong transfer such as,
+diff --git a/libuuid/man/uuid_copy.3.adoc b/libuuid/man/uuid_copy.3.adoc
+index b600a6368..fee40d6bf 100644
+--- a/libuuid/man/uuid_copy.3.adoc
++++ b/libuuid/man/uuid_copy.3.adoc
+@@ -46,7 +46,7 @@ uuid_copy - copy a UUID value
+ 
+ *#include <uuid.h>*
+ 
+-*void uuid_copy(uuid_t __dst__, uuid_t __src__;*
++*void uuid_copy(uuid_t __dst__, uuid_t __src__);*
+ 
+ == DESCRIPTION
+ 
+-- 
+2.36.1
 
-Receiver's Name_______________
-Address: ________________
-Country: _____________
-Phone Number: _____________
-
-Though, Mrs. Franklin Moore has sent $5000 in your name today so
-contact David Peters  soon as you receive this email and tell
-him to give you the Mtcn, sender name and question/answer to pick the
-$5000 Please let us know as soon as you received all your fund,
-
-Best Regards.
-WESTERN UNION AGENT
