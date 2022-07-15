@@ -2,97 +2,87 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id C4B15574743
-	for <lists+util-linux@lfdr.de>; Thu, 14 Jul 2022 10:38:22 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 807B2575EC2
+	for <lists+util-linux@lfdr.de>; Fri, 15 Jul 2022 11:42:52 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S237541AbiGNIiS (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Thu, 14 Jul 2022 04:38:18 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:60846 "EHLO
+        id S230239AbiGOJk6 (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Fri, 15 Jul 2022 05:40:58 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:56334 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S237477AbiGNIhh (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Thu, 14 Jul 2022 04:37:37 -0400
-Received: from mail-lj1-x22f.google.com (mail-lj1-x22f.google.com [IPv6:2a00:1450:4864:20::22f])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id B8CC0402D9
-        for <util-linux@vger.kernel.org>; Thu, 14 Jul 2022 01:37:26 -0700 (PDT)
-Received: by mail-lj1-x22f.google.com with SMTP id bx13so1355223ljb.1
-        for <util-linux@vger.kernel.org>; Thu, 14 Jul 2022 01:37:26 -0700 (PDT)
+        with ESMTP id S229872AbiGOJk5 (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Fri, 15 Jul 2022 05:40:57 -0400
+Received: from mail-lj1-x241.google.com (mail-lj1-x241.google.com [IPv6:2a00:1450:4864:20::241])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 87C9D491DC
+        for <util-linux@vger.kernel.org>; Fri, 15 Jul 2022 02:40:56 -0700 (PDT)
+Received: by mail-lj1-x241.google.com with SMTP id v15so1378084ljc.1
+        for <util-linux@vger.kernel.org>; Fri, 15 Jul 2022 02:40:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=mime-version:reply-to:from:date:message-id:subject:to;
-        bh=H3bGT1ZyGPu3PRQJlJHyQI9TvTjBPuNSyHjFOzNfiP0=;
-        b=J0C5tcFK8Bsw7pMq1nMAL6sdoStigBR9aFqZZ+Mv4XzX+F+kt7b7xx6EPFT88UhKpI
-         kBJg6m0pw05b7mYI7xFk3y27fB/wwT/6jCavLEbyVqHB+S37RGI5aNKsBEs4/0xD+4Gl
-         dnrOfeidZ2Bjx3SaNbFd4ktoUgdwr7Dcs2Tcvwa7nAAsnsUMCwiG45d7U0q6bXatl+2j
-         G/TCOWtyuktyu9a8WxRgq1M0J9ZJ9HxUuORsh15wLWXF5B7k7VM4JEubaWoOuGw+8Ew9
-         I+DOdJn7Y4FpWZylitfSNZ47/mK7zDNBUAYRHo/WR2q5KqGUnWDh8z7oQHLUAguP0jO6
-         e0Sw==
+        bh=5/UmqluA7Jh4baRJC2F+0GGvQnHdiYOaoe5qnf0gA9c=;
+        b=hFsShPVB4oHotbC2gBEiSG24AqX0xKRyqtYNZZUJd0xeXG+U+cDlOz7+HCoUU7fBzD
+         aamqXiZzM5rXuCvvMqo0SpNcxa+RYpzHc7bUYMbBql5LJVZutiBRDwMYr6j7GfxlkYqm
+         7FLj2WK5RHKvwusvRAqKcAvueV63oOoxMZSZBLb/jkEYI85r/OO3b+kx8dA2keer0TmH
+         IG2LIIzRhZ+T8Xq1zxAm7flOhK2WcYF2epR6dUNBFiZMV4jTwNUP6yqzaEsa7d4WIkIJ
+         MYDmrOO7auyl+q8MtB0kgZ6IR4s2prH6l4KzutcT9YBjzJgknaWn1+qNZ7p4LRoVSXk7
+         Q9SQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:mime-version:reply-to:from:date:message-id
          :subject:to;
-        bh=H3bGT1ZyGPu3PRQJlJHyQI9TvTjBPuNSyHjFOzNfiP0=;
-        b=HDm0HGCCw6tdH9o7FCufaQ/6hkjDsJf8b/2KOdotxNbZwlny5aXIWOlG5L1BcLAS84
-         Tbb8k1qnoSd7ruB6AJ2I4SIH+tLQ0vZSbZenSut4k6zsLLtJUzULODsyZ5ZwlpVLWcNQ
-         A4+FFp9bIUXyu38ATFWR/K18TATvqMkcIvPxsuJkNM5D3WX2ze2USo/C/CKXH7ZY7/gm
-         567GN/7/TJiPs3OySRsZuvKujSIaMG30sOuulSuvivywK5TVvMuGI7cKrHXwiKJTIWGT
-         fcG5XhdPXUWrlDWARTPcLKQXu/8H9t72a4ryEdkTyIpMwYWaMKnrbKJvp7ty3OFIQAUx
-         p7LQ==
-X-Gm-Message-State: AJIora8e9FlnwAC1rLoI07zLX5JpNd+MO9ZxUWL8VadpJid/Ouz0WHwL
-        xU1q9M/D+wpon2aftuFAnvcFrdqf7il8rw2mfxI=
-X-Google-Smtp-Source: AGRyM1thqq53eeYJvkH1/Ta7520q2hH8+3RnM5fZHteqImK/2lt+7hteHzuSn5oPP1dnqf4hz7D2JwjEVLBJgQKi7G0=
-X-Received: by 2002:a2e:a9a6:0:b0:25d:601a:d3d8 with SMTP id
- x38-20020a2ea9a6000000b0025d601ad3d8mr3886457ljq.141.1657787844550; Thu, 14
- Jul 2022 01:37:24 -0700 (PDT)
+        bh=5/UmqluA7Jh4baRJC2F+0GGvQnHdiYOaoe5qnf0gA9c=;
+        b=2S2UjZ1oEEWIj2o3Uk7g+yJ42nMNCmpPEeoESTJC1xyHLktRQcT5RiPhkT3d+nOUiA
+         lZkv2X2XQkJjB0LIXFnwNYuAZKK0D69Y6QaS7neY/OdMLVaC7rFASe2AYVJC/xrpTjm9
+         pRYfn3xh9Anyf5Fb/yznw9HffRhv6FW3TnP5zuuKxaw0jvyrsBlhnk5eE5yrdB4qS/uZ
+         S7MG1QcfNxvYGo7sYHT+8865gwvtWnS+AVX0uMaxmrpIa3qS3axnf9x6ttJlXEVPTBTW
+         ag3+01giabZq0RPQzRdQqrtkYtoA5LZFo1Uzxw7lnnaBjpX0Vvj0vU00H7x2CtqbdxMd
+         dtcw==
+X-Gm-Message-State: AJIora8QxG1KSCmB6s2rVcXlAPZJ+pKdcgIPabDGbwKtPZ1G7Yf9cvSE
+        /8IK2DsW96TuUgd7Xu7j6CMKYcyR4MhMdigoXYE=
+X-Google-Smtp-Source: AGRyM1v5z2yrKcQeU6lcUpkwbPHFoUX/BdF8DMkkBnlEQb74v8mUPq/7r7ExEbJyteO7GuXd+909ry4W1J76js3r07w=
+X-Received: by 2002:a2e:be09:0:b0:25d:610d:7948 with SMTP id
+ z9-20020a2ebe09000000b0025d610d7948mr6162344ljq.423.1657878054535; Fri, 15
+ Jul 2022 02:40:54 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 2002:a2e:9041:0:0:0:0:0 with HTTP; Thu, 14 Jul 2022 01:37:23
+Received: by 2002:a05:6512:1282:0:0:0:0 with HTTP; Fri, 15 Jul 2022 02:40:53
  -0700 (PDT)
-Reply-To: abdwabbomaddahm@gmail.com
-From:   Abdwabbo Maddah <abdwabbomaddah746@gmail.com>
-Date:   Thu, 14 Jul 2022 09:37:23 +0100
-Message-ID: <CAFC-3icziP-G6a5x=QJeR_a=JqSdmyHCh-wuJicCvAjow3knUA@mail.gmail.com>
-Subject: Get back to me... URGENT
+Reply-To: westernunionagent303@gmail.com
+From:   WESTERN UNION AGENT <odetadejoseph@gmail.com>
+Date:   Fri, 15 Jul 2022 02:40:53 -0700
+Message-ID: <CAAe66sbArMPM10tpdMDrMYsDX6y-WXvNxwdGC0QOVAx2Hv3DSQ@mail.gmail.com>
+Subject: Dear E-mail Owner,
 To:     undisclosed-recipients:;
 Content-Type: text/plain; charset="UTF-8"
-X-Spam-Status: Yes, score=5.0 required=5.0 tests=BAYES_50,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_ENVFROM_END_DIGIT,
-        FREEMAIL_FROM,FREEMAIL_REPLYTO,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,
-        SPF_PASS,T_SCC_BODY_TEXT_LINE,UNDISC_FREEM autolearn=no
-        autolearn_force=no version=3.4.6
-X-Spam-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
-        *      https://www.dnswl.org/, no trust
-        *      [2a00:1450:4864:20:0:0:0:22f listed in]
-        [list.dnswl.org]
-        *  0.8 BAYES_50 BODY: Bayes spam probability is 40 to 60%
-        *      [score: 0.4994]
-        *  0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail
-        *      provider
-        *      [abdwabbomaddah746[at]gmail.com]
-        *  0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends
-        *       in digit
-        *      [abdwabbomaddah746[at]gmail.com]
-        * -0.0 SPF_PASS SPF: sender matches SPF record
-        *  0.0 SPF_HELO_NONE SPF: HELO does not publish an SPF Record
-        * -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
-        *      author's domain
-        *  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
-        *       valid
-        * -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-        * -0.1 DKIM_VALID_EF Message has a valid DKIM or DK signature from
-        *      envelope-from domain
-        * -0.0 T_SCC_BODY_TEXT_LINE No description available.
-        *  3.2 UNDISC_FREEM Undisclosed recipients + freemail reply-to
-        *  1.0 FREEMAIL_REPLYTO Reply-To/From or Reply-To/body contain
-        *      different freemails
-X-Spam-Level: *****
+X-Spam-Status: No, score=4.9 required=5.0 tests=BAYES_50,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,FREEMAIL_REPLYTO,
+        FREEMAIL_REPLYTO_END_DIGIT,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,
+        T_FILL_THIS_FORM_SHORT,UNDISC_FREEM autolearn=no autolearn_force=no
+        version=3.4.6
+X-Spam-Level: ****
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
--- 
-Dear,
-I had sent you a mail but i don't think you received it that's why am
-writing you again.It is important you get back to me as soon as you
-can.
-Abd-Wabbo Maddah
+Dear E-mail Owner,
+
+We have deposited the check of your fund ($1.500`000`00USD) through
+Western Union department after our finally meeting regarding your
+fund, All you will do is to contact Western Union director David Peters
+via E-mail:(westernunionagent303@gmail.com) He will give you
+direction on how you will be receiving the funds daily.Remember to
+send him your Full information to avoid wrong transfer such as,
+
+Receiver's Name_______________
+Address: ________________
+Country: _____________
+Phone Number: _____________
+
+Though, Mrs. Franklin Moore has sent $5000 in your name today so
+contact David Peters  soon as you receive this email and tell
+him to give you the Mtcn, sender name and question/answer to pick the
+$5000 Please let us know as soon as you received all your fund,
+
+Best Regards.
+WESTERN UNION AGENT
