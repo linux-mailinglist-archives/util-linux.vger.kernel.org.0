@@ -2,106 +2,72 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 6E5D8578B75
-	for <lists+util-linux@lfdr.de>; Mon, 18 Jul 2022 22:03:19 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 899FB57B91A
+	for <lists+util-linux@lfdr.de>; Wed, 20 Jul 2022 17:02:28 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231248AbiGRUDS (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Mon, 18 Jul 2022 16:03:18 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:51438 "EHLO
+        id S229830AbiGTPCZ (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Wed, 20 Jul 2022 11:02:25 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:39934 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S233880AbiGRUDS (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Mon, 18 Jul 2022 16:03:18 -0400
-Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com [IPv6:2a00:1450:4864:20::629])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 47C43220C3
-        for <util-linux@vger.kernel.org>; Mon, 18 Jul 2022 13:03:17 -0700 (PDT)
-Received: by mail-ej1-x629.google.com with SMTP id sz17so23298454ejc.9
-        for <util-linux@vger.kernel.org>; Mon, 18 Jul 2022 13:03:17 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=mime-version:reply-to:from:date:message-id:subject:to;
-        bh=h0ZslgqQ94UM3iGDYCZGEx8ZwvbYHY5ZrQARiO/Kpbc=;
-        b=ZXIx/oiMn8nXHxEPtf5GpJDydMLWRRBP8E+HIfsHJ9xpQIcVuDhvaGMnzASvEweP2M
-         ujkB3bhqiQtkG4tnYRCUKHXO6jYa3G6oMKpP1wg/k4buweRvkQfbA7xkyGfWxP50mEYh
-         l6xjL4hh9e0bV21UOSOSoXm236ppF+uEiCQ+F9/JfRVlcAmIn2OI/QrCDdUGWyjTwxfd
-         kPG9uNcgPxAWrX/1GHCWhIb9wV2Vm9liZP+/fZZHhfJpYgKwtM4HhkjUdYvcCoPTr+rc
-         +Xhv8lMFjKFIsqsKNP7SAsiD/vmM0js4WsmNf4Sbq3E37klttDBGUYrficDgVr95LBCN
-         69Tg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
-         :subject:to;
-        bh=h0ZslgqQ94UM3iGDYCZGEx8ZwvbYHY5ZrQARiO/Kpbc=;
-        b=WN+L/0UIemzd5UjMpwwiHyZyHSMHeOwq5OgYxruFCbSUeeFppjLQ90xQRT/YBS/Wtd
-         BEnMdsZZqgGuC2AnqgeRlW+KZhv47+K4iby8inJioM2usK+Mkq0xb9hZTews3mUVlsCP
-         tiK8qcTYfLm9xs+TQPxsyYqdcdenCEnMgXATobqWFAnbVysTYUleoJTEQIHFin09Or64
-         uVC+UCsYvjd6EaEJwkScrjtXRTTX9aRQ4Hg4n3wZucHjbax8mhz6tx0jcYnA6wXC8Xiu
-         10EjMTg7VeKHWP9/ufFS77AX5+BG3ZyhZa4Q8abjVsUQOoRcnTcuaMQjkVQC4KAoUio8
-         dqFA==
-X-Gm-Message-State: AJIora/AnQ9eIRBDjf1+FmvWNWQuUvTOa09CobL7V1DAw+h9zyVv+26K
-        Me5xVPbP+yLNeoJtugDe4gsU0r9C9kKiLm2+U0s=
-X-Google-Smtp-Source: AGRyM1vBv/aPtRtu3kvw454qmHEBnh/FVLlfxZJHqdEcM1xQslJcgvbubLOlBFFk44CLSsMPvxoSToXOtKOsLC9x+EY=
-X-Received: by 2002:a17:906:9c82:b0:6df:baa2:9f75 with SMTP id
- fj2-20020a1709069c8200b006dfbaa29f75mr27117210ejc.762.1658174595180; Mon, 18
- Jul 2022 13:03:15 -0700 (PDT)
+        with ESMTP id S230149AbiGTPCZ (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Wed, 20 Jul 2022 11:02:25 -0400
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTP id A43C854049
+        for <util-linux@vger.kernel.org>; Wed, 20 Jul 2022 08:02:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+        s=mimecast20190719; t=1658329343;
+        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+         in-reply-to:in-reply-to:references:references;
+        bh=zvXSy0/H0sq6zOuIwNhV/qusQms81qIfJzIXhu6xfgk=;
+        b=NMB2NhSBuTg3Q2RhWnT8r7n8oQWuPmXTg8dPvLRJ+WLtolwBxdHW1E4joAKGudcKVkMGb+
+        4EydVgs+9w8os9FvZrz7uqQo4w/WB64n0kSgrvQzjWAh0MwCLcrgLs5YpPgCAoXotyU744
+        NX2ObiC625+7gBNkiXbWHOySsTkjk/Y=
+Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
+ [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ us-mta-360-dV_lTpMDP36B5KtyAxtvVg-1; Wed, 20 Jul 2022 11:02:16 -0400
+X-MC-Unique: dV_lTpMDP36B5KtyAxtvVg-1
+Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.rdu2.redhat.com [10.11.54.5])
+        (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+        (No client certificate requested)
+        by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 2B478804184;
+        Wed, 20 Jul 2022 15:02:16 +0000 (UTC)
+Received: from ws.net.home (unknown [10.40.193.170])
+        by smtp.corp.redhat.com (Postfix) with ESMTPS id A5B1618EA8;
+        Wed, 20 Jul 2022 15:02:15 +0000 (UTC)
+Date:   Wed, 20 Jul 2022 17:02:13 +0200
+From:   Karel Zak <kzak@redhat.com>
+To:     Andreas Schwab <schwab@suse.de>
+Cc:     util-linux@vger.kernel.org
+Subject: Re: <linux/fs.h> conflicts with <sys/mount.h>
+Message-ID: <20220720150213.4ac7iclhkwqhbdog@ws.net.home>
+References: <mvm35eyh7jm.fsf@suse.de>
 MIME-Version: 1.0
-Received: by 2002:a54:2f51:0:0:0:0:0 with HTTP; Mon, 18 Jul 2022 13:03:14
- -0700 (PDT)
-Reply-To: lilywilliam989@gmail.com
-From:   Lily William <kaboresalif1997@gmail.com>
-Date:   Mon, 18 Jul 2022 12:03:14 -0800
-Message-ID: <CANQG9PNa57a8wyGDcEP-TL8Mh4gEU1Q+9WBHYAOy11AtNKp+kA@mail.gmail.com>
-Subject: Hi Dear,
-To:     undisclosed-recipients:;
-Content-Type: text/plain; charset="UTF-8"
-X-Spam-Status: Yes, score=5.2 required=5.0 tests=BAYES_50,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_ENVFROM_END_DIGIT,
-        FREEMAIL_FROM,FREEMAIL_REPLYTO,FREEMAIL_REPLYTO_END_DIGIT,
-        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,UNDISC_FREEM autolearn=no
-        autolearn_force=no version=3.4.6
-X-Spam-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
-        *      https://www.dnswl.org/, no trust
-        *      [2a00:1450:4864:20:0:0:0:629 listed in]
-        [list.dnswl.org]
-        *  0.8 BAYES_50 BODY: Bayes spam probability is 40 to 60%
-        *      [score: 0.5000]
-        * -0.0 SPF_PASS SPF: sender matches SPF record
-        *  0.2 FREEMAIL_REPLYTO_END_DIGIT Reply-To freemail username ends in
-        *      digit
-        *      [lilywilliam989[at]gmail.com]
-        *  0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends
-        *       in digit
-        *      [kaboresalif1997[at]gmail.com]
-        *  0.0 SPF_HELO_NONE SPF: HELO does not publish an SPF Record
-        *  0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail
-        *      provider
-        *      [kaboresalif1997[at]gmail.com]
-        * -0.1 DKIM_VALID_EF Message has a valid DKIM or DK signature from
-        *      envelope-from domain
-        * -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
-        *      author's domain
-        * -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-        *  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
-        *       valid
-        *  3.1 UNDISC_FREEM Undisclosed recipients + freemail reply-to
-        *  1.0 FREEMAIL_REPLYTO Reply-To/From or Reply-To/body contain
-        *      different freemails
-X-Spam-Level: *****
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <mvm35eyh7jm.fsf@suse.de>
+X-Scanned-By: MIMEDefang 2.79 on 10.11.54.5
+X-Spam-Status: No, score=-2.8 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_NONE,
+        SPF_HELO_NONE,SPF_NONE autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-Hi Dear,
+On Mon, Jul 18, 2022 at 03:30:53PM +0200, Andreas Schwab wrote:
+> With the upcoming glibc 2.36, <linux/fs.h> conflicts with <sys/mount.h>:
 
-My name is Dr Lily William from the United States.I am a French and
-American nationality (dual) living in the U.S and sometimes in France
-for Work Purpose.
+It seems we do not need linux/fs.h (if usual sys/mount.h is available).
 
-I hope you consider my friend request. I will share some of my pics
-and more details about myself when I get your response.
+Fixed in master branch.
+https://github.com/util-linux/util-linux/commit/89c7c6ea6ef12722eac31c18b8fa6fbcf429525b
 
-Thanks
+    Karel
 
-With love
-Lily
+-- 
+ Karel Zak  <kzak@redhat.com>
+ http://karelzak.blogspot.com
+
