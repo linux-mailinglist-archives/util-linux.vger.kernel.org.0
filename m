@@ -2,77 +2,93 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 7EDF1587A40
-	for <lists+util-linux@lfdr.de>; Tue,  2 Aug 2022 12:03:15 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 6ADA4587A6D
+	for <lists+util-linux@lfdr.de>; Tue,  2 Aug 2022 12:14:33 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S232762AbiHBKDN (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Tue, 2 Aug 2022 06:03:13 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:46736 "EHLO
+        id S236548AbiHBKOb (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Tue, 2 Aug 2022 06:14:31 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:55006 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S232695AbiHBKDM (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Tue, 2 Aug 2022 06:03:12 -0400
-Received: from mail-wm1-x344.google.com (mail-wm1-x344.google.com [IPv6:2a00:1450:4864:20::344])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 010251836C
-        for <util-linux@vger.kernel.org>; Tue,  2 Aug 2022 03:03:11 -0700 (PDT)
-Received: by mail-wm1-x344.google.com with SMTP id 8-20020a05600c024800b003a2fe343db1so6744555wmj.1
-        for <util-linux@vger.kernel.org>; Tue, 02 Aug 2022 03:03:11 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=to:subject:message-id:date:from:reply-to:mime-version:from:to:cc;
-        bh=edeevZ54MxyNr2ONaDsC9jI+UtdZjrCL/LCuSFC70Ao=;
-        b=dbBggVxP7bEv3Z0Ysk0vmpz9+VrPJEqJwhw18ZlmNLMpzRHtEOfwxFoF/MLPYccbD2
-         XezIQLSjCjyrJvzt+iCFB+OgAD3JO+AXIxE4kW0lE/Ca1WaduJ/OXI8UT4mscfy9Xe5R
-         Ux5gsbWvMZPK8iCIaXPHJPKT0zxrU5jJ9yurIXdmaY3Azx/DatiU0fRwDcOJTqcdfMVH
-         QTgBaa3LM8H+4vpQjVGViVxkYOf1uWgjgdNT2aLwQsJa24eg2S1maxrQrcYPqUFgMtxc
-         bmmXIYRDlYZ1CgjvhsjXuHJT6aKsdt6VeUuoL9sXUjkeNKBQh4ixtJXiQsYorKCZtbLG
-         qgSA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=to:subject:message-id:date:from:reply-to:mime-version
-         :x-gm-message-state:from:to:cc;
-        bh=edeevZ54MxyNr2ONaDsC9jI+UtdZjrCL/LCuSFC70Ao=;
-        b=xU1EKg0PKylpryu5bbhfUfB8aIhPbPgx0ePZEWY36/9trCDk+/wAqG3f3u3k5YQEAr
-         7Hgo5cATZOuI59SkWx1xEb4CzdH3YWnaMAXCzyFmVg8Xvjz6mf5z1DqWjdCiU25r/CgR
-         c5aVxVHTUAAvId9/8ZaqR9aMvtNPUTz7K5QIa8cgSOQ5Fdb8VzDk9rPlRGONCZb0m7dr
-         6xlVl3HbJnHrU+CdHRIAgvOLt42K7/AU7QqaXehySeChn+SWsgbJXEsrLNdIiUdbPjJo
-         uWLhum1nmli+2GNHMeGb9lj5S9e1M4R1zRv0tqsU2RBDnJ7jSHDlWyQD5k3AvbKRtrfY
-         ANaA==
-X-Gm-Message-State: AJIora98UXVpV4Uyij3YzHAOtVRB4QrrgT+kdH7QbDPm1FTDm0OY3iFW
-        a+Nw6hQ7LKntGDBpq5/PVYWnjfd9RAVCSw4dqV4=
-X-Google-Smtp-Source: AGRyM1sKvs7FzPIcioRfodfQZqYh1hz7uMaemag+JTphwwTkjIJ313wvJhYyQFj6ZuLnjKEGRL6kgFqP4B9KWWRvG3Q=
-X-Received: by 2002:a05:600c:2287:b0:3a3:5333:8bce with SMTP id
- 7-20020a05600c228700b003a353338bcemr14130602wmf.153.1659434590394; Tue, 02
- Aug 2022 03:03:10 -0700 (PDT)
+        with ESMTP id S233452AbiHBKOb (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Tue, 2 Aug 2022 06:14:31 -0400
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTP id 6E3CD4C623
+        for <util-linux@vger.kernel.org>; Tue,  2 Aug 2022 03:14:30 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+        s=mimecast20190719; t=1659435269;
+        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+         in-reply-to:in-reply-to:references:references;
+        bh=467QACarcHZeNIUOysWcyfLlnJAZxt78jfOq61aVTVc=;
+        b=ZzWLxciYGUkhhtxzRuHQ+/Tr6dfkoJXUzbX5zPCPj3RWzcHBFpLk5cbCLBc6xN1ovzbA0Y
+        fcq3xahX+UXCfLgwJQgv4C2/vL0PhMot2v97ueLysdPXIBQjuO0qbdwcLNdPE53Qr7uKhX
+        CA+LlHzs6AE4xx0KlvUWgHUM/v8xjjw=
+Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
+ [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ us-mta-582-L7BhCGMOPv28_mXb0FM0zA-1; Tue, 02 Aug 2022 06:14:26 -0400
+X-MC-Unique: L7BhCGMOPv28_mXb0FM0zA-1
+Received: from smtp.corp.redhat.com (int-mx10.intmail.prod.int.rdu2.redhat.com [10.11.54.10])
+        (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+        (No client certificate requested)
+        by mimecast-mx02.redhat.com (Postfix) with ESMTPS id F37DC806003;
+        Tue,  2 Aug 2022 10:14:25 +0000 (UTC)
+Received: from ws.net.home (unknown [10.40.193.170])
+        by smtp.corp.redhat.com (Postfix) with ESMTPS id 78488492C3B;
+        Tue,  2 Aug 2022 10:14:25 +0000 (UTC)
+Date:   Tue, 2 Aug 2022 12:14:23 +0200
+From:   Karel Zak <kzak@redhat.com>
+To:     Chris Hofstaedtler <zeha@debian.org>
+Cc:     util-linux@vger.kernel.org
+Subject: Re: uuidd user / DynamicUser?
+Message-ID: <20220802101423.t7uwcfa5cbfs3og7@ws.net.home>
+References: <20220730145024.gndtik3c24ivlukt@zeha.at>
 MIME-Version: 1.0
-Received: by 2002:a05:600c:2848:0:0:0:0 with HTTP; Tue, 2 Aug 2022 03:03:09
- -0700 (PDT)
-Reply-To: mohammedsaeeda619@gmail.com
-From:   mohammed saeed <mahmod.varou@gmail.com>
-Date:   Tue, 2 Aug 2022 03:03:09 -0700
-Message-ID: <CACFs86Ens64YCpJ+t3JSnNTZjWepeNiOB1se1mqa=cPQrnTp8A@mail.gmail.com>
-Subject: Proposal
-To:     undisclosed-recipients:;
-Content-Type: text/plain; charset="UTF-8"
-X-Spam-Status: No, score=4.9 required=5.0 tests=BAYES_50,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,FREEMAIL_REPLYTO,
-        FREEMAIL_REPLYTO_END_DIGIT,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,
-        UNDISC_FREEM autolearn=no autolearn_force=no version=3.4.6
-X-Spam-Level: ****
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20220730145024.gndtik3c24ivlukt@zeha.at>
+X-Scanned-By: MIMEDefang 2.85 on 10.11.54.10
+X-Spam-Status: No, score=-2.7 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_NONE,
+        SPF_HELO_NONE,SPF_NONE autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-Salam alaikum,
+On Sat, Jul 30, 2022 at 04:50:24PM +0200, Chris Hofstaedtler wrote:
+> Hi,
+> 
+> Debian sets up a uuidd user, for uuidd to run as. We also set the
+> home directory for this user to /run/uuidd, which is on a tmpfs, so
+> not ideal.
+>
+> I was wondering what other distributions do for the home directory?
 
-I am the investment officer of UAE based investment company who are
-ready to fund projects outside UAE, in the form of debt finance. We
-grant loan to both Corporate and private entities at a low interest
-rate of 2% ROI per annum. The terms are very flexible and
-interesting.Kindly revert back if you have projects that needs funding
-for further discussion and negotiation.
+RHEL/Fedora spec file:
 
-Thanks
+getent group uuidd >/dev/null || groupadd -r uuidd
+getent passwd uuidd >/dev/null || \
+useradd -r -g uuidd -d /var/lib/libuuid -s /sbin/nologin \
+    -c "UUID generator helper daemon" uuidd
 
-investment officer
+So it uses /var/lib/libuuid as a home directory.
+
+> Also, is anyone using DynamicUser for uuidd.service?
+
+For Fedora and the next RHEL we plan to use 
+https://www.freedesktop.org/software/systemd/man/systemd-sysusers.html
+
+It means explicitly define uuidd user in sysusers.d. 
+
+I'm not sure if our users will be happy with DynamicUser as uuidd is
+critical for then and stability with minimal variability is expected
+in setup and runtime.
+
+    Karel
+
+-- 
+ Karel Zak  <kzak@redhat.com>
+ http://karelzak.blogspot.com
+
