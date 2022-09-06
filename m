@@ -2,70 +2,92 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id A5E645AE376
-	for <lists+util-linux@lfdr.de>; Tue,  6 Sep 2022 10:51:12 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 23B695AF100
+	for <lists+util-linux@lfdr.de>; Tue,  6 Sep 2022 18:48:28 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S239359AbiIFIuV (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Tue, 6 Sep 2022 04:50:21 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:39006 "EHLO
+        id S238324AbiIFQsA (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Tue, 6 Sep 2022 12:48:00 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:60336 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S239391AbiIFItb (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Tue, 6 Sep 2022 04:49:31 -0400
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id D4916BB7
-        for <util-linux@vger.kernel.org>; Tue,  6 Sep 2022 01:47:23 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-        s=mimecast20190719; t=1662454043;
-        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-         in-reply-to:in-reply-to:references:references;
-        bh=Qe1PKZz1BQJ8rKUq35gs8zYCB05t3GyypBuRWdy5New=;
-        b=cH1afM5UGJELn7WvigwIt9kfmHaxq8tTJ5Mw751vbSMksa1b/pxKXHAZ4zwFFvnDaGxrpY
-        m9lfYwPlWD6XovTXgf36IrFTtyHTt+iCszFcgp9wM2PypWIJCkVHWhqIiFHKCiXOh5Hse4
-        7/Sd49jJnrpPUx8Kr5iztNbt5rKetPU=
-Received: from mimecast-mx02.redhat.com (mx3-rdu2.redhat.com
- [66.187.233.73]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-240-znFIjm5FP_GMqJ_62wdrkg-1; Tue, 06 Sep 2022 04:47:19 -0400
-X-MC-Unique: znFIjm5FP_GMqJ_62wdrkg-1
-Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.rdu2.redhat.com [10.11.54.4])
-        (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
-        (No client certificate requested)
-        by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 8E396299E745;
-        Tue,  6 Sep 2022 08:47:19 +0000 (UTC)
-Received: from ws.net.home (unknown [10.40.192.179])
-        by smtp.corp.redhat.com (Postfix) with ESMTPS id 12DDC2026D64;
-        Tue,  6 Sep 2022 08:47:18 +0000 (UTC)
-Date:   Tue, 6 Sep 2022 10:47:16 +0200
-From:   Karel Zak <kzak@redhat.com>
-To:     Peter Ujfalusi <peter.ujfalusi@linux.intel.com>
-Cc:     util-linux@vger.kernel.org
+        with ESMTP id S233472AbiIFQre (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Tue, 6 Sep 2022 12:47:34 -0400
+Received: from mga18.intel.com (mga18.intel.com [134.134.136.126])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 1213E1174
+        for <util-linux@vger.kernel.org>; Tue,  6 Sep 2022 09:31:07 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1662481867; x=1694017867;
+  h=message-id:date:mime-version:subject:to:cc:references:
+   from:in-reply-to:content-transfer-encoding;
+  bh=abtml6zPnbNJgpcjqf0NQj2gVM9ZRL8DWFY03VFz2DI=;
+  b=Lck3QuwLb3zfHc69uppZc+ElnPyiUhNRZCCbK6/6Vev8pCNpPn8Owos2
+   nDQR9BhRyj2E90NTY18jg1ymC7oYRZ2dxzNKIjMgRzT6/ipspeA4487hE
+   FxrEc3k773vjjGwEWlenFmg1Wl5e6lY5ZLmxChx6Du7nd6brk6FJPMH4Z
+   Waqwk7j7s+xXKlSRhJijWVy33d9DQXAnJf0hjekXMZQoyYWa+X3MaF0/I
+   cBfcBlLbJQV3/vaVHM7/yMaK4m0CKzZJfjW4frh/H5vBizyOA/KoXBiLi
+   k08KrOqethlqYuh+YEW6lAl5up+tGexpbovS3oLt7et4qmKY5uzfNvLH9
+   g==;
+X-IronPort-AV: E=McAfee;i="6500,9779,10462"; a="279653978"
+X-IronPort-AV: E=Sophos;i="5.93,294,1654585200"; 
+   d="scan'208";a="279653978"
+Received: from fmsmga005.fm.intel.com ([10.253.24.32])
+  by orsmga106.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 06 Sep 2022 09:31:06 -0700
+X-IronPort-AV: E=Sophos;i="5.93,294,1654585200"; 
+   d="scan'208";a="942520462"
+Received: from cphenegh-mobl.ger.corp.intel.com (HELO [10.252.31.69]) ([10.252.31.69])
+  by fmsmga005-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 06 Sep 2022 09:31:05 -0700
+Message-ID: <849c4ca2-a1b7-7429-1b3c-fc135d9f4d72@linux.intel.com>
+Date:   Tue, 6 Sep 2022 19:31:07 +0300
+MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Firefox/102.0 Thunderbird/102.2.0
 Subject: Re: [PATCH] lib/timeutils: Add %s (seconds since the Epoch) to
  parse_timestamp()
-Message-ID: <20220906084716.4bgsdahoyjfaaksc@ws.net.home>
+To:     Karel Zak <kzak@redhat.com>
+Cc:     util-linux@vger.kernel.org
 References: <20220906070436.684-1-peter.ujfalusi@linux.intel.com>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20220906070436.684-1-peter.ujfalusi@linux.intel.com>
-X-Scanned-By: MIMEDefang 2.78 on 10.11.54.4
-X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_NONE,
-        SPF_HELO_NONE,SPF_NONE,T_SCC_BODY_TEXT_LINE autolearn=ham
-        autolearn_force=no version=3.4.6
+ <20220906084716.4bgsdahoyjfaaksc@ws.net.home>
+Content-Language: en-US
+From:   =?UTF-8?Q?P=c3=a9ter_Ujfalusi?= <peter.ujfalusi@linux.intel.com>
+In-Reply-To: <20220906084716.4bgsdahoyjfaaksc@ws.net.home>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-Spam-Status: No, score=-3.8 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_EF,NICE_REPLY_A,SPF_HELO_NONE,
+        SPF_NONE,T_SCC_BODY_TEXT_LINE autolearn=ham autolearn_force=no
+        version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-On Tue, Sep 06, 2022 at 10:04:36AM +0300, Peter Ujfalusi wrote:
->  lib/timeutils.c | 8 ++++++++
->  1 file changed, 8 insertions(+)
+Hi Karel,
 
-Applied, thanks.
+On 06/09/2022 11:47, Karel Zak wrote:
+> On Tue, Sep 06, 2022 at 10:04:36AM +0300, Peter Ujfalusi wrote:
+>>  lib/timeutils.c | 8 ++++++++
+>>  1 file changed, 8 insertions(+)
+> 
+> Applied, thanks.
+
+After some tinkering with a script where I needed this, would it make
+sense to change the way how one should be specifying seconds since the
+Epoch time to
+'@'<number>
+
+This would match how for example systemd.time requires it [1]
+
+Basically I (or anyone) can use dmesg instead of journalctl in a script
+with the same --since=@<timestamp> parameter.
+
+'date +%s' prints out just a number.
+
+If not, then I have made a rookie mistake with the patch, which should
+be fixed (discarding the seconds we got out from the timestamp).
+/me hides
+
+[1] https://www.man7.org/linux/man-pages/man7/systemd.time.7.html
 
 -- 
- Karel Zak  <kzak@redhat.com>
- http://karelzak.blogspot.com
-
+Péter
