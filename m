@@ -2,96 +2,127 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id DEF0A5AFA61
-	for <lists+util-linux@lfdr.de>; Wed,  7 Sep 2022 05:05:42 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id BA6E05AFBD7
+	for <lists+util-linux@lfdr.de>; Wed,  7 Sep 2022 07:41:44 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229446AbiIGDFk (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Tue, 6 Sep 2022 23:05:40 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:54048 "EHLO
+        id S229754AbiIGFln (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Wed, 7 Sep 2022 01:41:43 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:44858 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229523AbiIGDFi (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Tue, 6 Sep 2022 23:05:38 -0400
-Received: from mail-io1-xd2f.google.com (mail-io1-xd2f.google.com [IPv6:2607:f8b0:4864:20::d2f])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id B30B083072
-        for <util-linux@vger.kernel.org>; Tue,  6 Sep 2022 20:05:37 -0700 (PDT)
-Received: by mail-io1-xd2f.google.com with SMTP id 10so10512832iou.2
-        for <util-linux@vger.kernel.org>; Tue, 06 Sep 2022 20:05:37 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=to:subject:message-id:date:from:reply-to:mime-version:from:to:cc
-         :subject:date;
-        bh=A5xw1RXA7URkhZt0d4QwQray2K8PrBTb0YGQaP4ujfs=;
-        b=lhjvWFwB+2Q6tM5j90kv2H1bDSoU5YlMvVVe3E6YvEctLoOWLZTvm+StBPrDD6x/oe
-         EtOOt/7JyZdmOMuTccQATFyBq4xlSGODRgmIb7ZcJMlCgGdokx70gOvsU2se5MgyChEd
-         H4aLVOQ9BToEgzkps6dzLyHbYSLohhLT3S/WI8b6UAgruf4evzEu+Er0vFBdf+3KeoYr
-         HM11oP8GWYPKI05cFDjszMWZ8uytfeR8sB3K5OBW1pmC5pyZBA3O14uNojAONKQyLCht
-         RmUBzVJMQNhn06W34bvNNwn0Wdb7s5HBHpchfsskfGTojiofHyAOTKLtOZAzmAMbdO9q
-         va2w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=to:subject:message-id:date:from:reply-to:mime-version
-         :x-gm-message-state:from:to:cc:subject:date;
-        bh=A5xw1RXA7URkhZt0d4QwQray2K8PrBTb0YGQaP4ujfs=;
-        b=ztV2ARrb1AkRyMWfG9UEG3uGzuL1DFH9rQOKzWw134oV33XAwS48Idqj0ZHb8/Nd6l
-         MAAhcb3iDHM3E3qiDOQSCOuwpez4S4nC7vYZCl74gMO/g7yWBcpv0+iLV++AtiCOtei9
-         Ms22awn3qqDfrur0SzeCu1nOUNHBI75izi1T2tYcRKr7F2VS/FwUFAuPL7s2J2Ku0HTQ
-         g9RAN+i+bZGY/59A1pF1xJHKqkHyOMe/lqyQgbYNupBjbVaXYm8epNWZeuDXTYZfzf1W
-         0eEjHhp0c6qemmODWGqqOTCUbI/4S63KOlQs0FcXMly54OSfyvxIlY2+t2dN/C8Sp+qy
-         WDBQ==
-X-Gm-Message-State: ACgBeo3NrBF/+2E1LFXxLN1AeDaJql367U6oFfhdOrJzVfGQwwTvZeCw
-        WEwJ6Hf3/vu9WidC6kW/QxdxPqvc/S4he+tFfdc=
-X-Google-Smtp-Source: AA6agR7z+HljS3Kl4wQQpRboiBgpGPX78f6KKnn49HCx6mADljXceNuOFH85aTDxhv/mB7PVI6ZsJnrgV0njql7mlao=
-X-Received: by 2002:a05:6602:1593:b0:689:b4e7:7e21 with SMTP id
- e19-20020a056602159300b00689b4e77e21mr764274iow.151.1662519937151; Tue, 06
- Sep 2022 20:05:37 -0700 (PDT)
+        with ESMTP id S229543AbiIGFlm (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Wed, 7 Sep 2022 01:41:42 -0400
+Received: from mga03.intel.com (mga03.intel.com [134.134.136.65])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 2A1296E2D6
+        for <util-linux@vger.kernel.org>; Tue,  6 Sep 2022 22:41:41 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1662529301; x=1694065301;
+  h=from:to:cc:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=sDhjukleesK2yr7+drj/rTzzUPh1PTh//YFOPO6P1Ro=;
+  b=SbxBS+zsBwYPqvePWfTB5tDaraypwvYF4pit7UOHWk2iPHAIFCXEmZU2
+   To8d4f9iqyb91SOIt6CCUOEy5N9kpMKQCYtnIlHn+26atFQ+jddiI2NnH
+   bCSKSFTLEM0Y8l4h5z3Q3FS4SUe/DVl7qENswokijZ0Zns2R8g8MR8A6m
+   Ad/mvf3r5CJQUPl+d2kpXdfFIRn6Mq5Kn+jzTZ/LygYEHQTbxD42fazgZ
+   BMVKIOElVkyMj3X8T6C5NN4qmrZeNWDeqbZhUAVJYSgzYzq3ZKVdlsRCI
+   DkR9bstlvpp8J+/MNyjppKrgOKI0Kv5G5io3WAwysiE7OvFKRncw32doM
+   Q==;
+X-IronPort-AV: E=McAfee;i="6500,9779,10462"; a="298100693"
+X-IronPort-AV: E=Sophos;i="5.93,295,1654585200"; 
+   d="scan'208";a="298100693"
+Received: from fmsmga004.fm.intel.com ([10.253.24.48])
+  by orsmga103.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 06 Sep 2022 22:41:40 -0700
+X-IronPort-AV: E=Sophos;i="5.93,295,1654585200"; 
+   d="scan'208";a="682675880"
+Received: from asilke-mobl1.ger.corp.intel.com (HELO pujfalus-desk.ger.corp.intel.com) ([10.252.0.42])
+  by fmsmga004-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 06 Sep 2022 22:41:39 -0700
+From:   Peter Ujfalusi <peter.ujfalusi@linux.intel.com>
+To:     kzak@redhat.com
+Cc:     util-linux@vger.kernel.org, peter.ujfalusi@linux.intel.com
+Subject: [PATCH] lib/timeutils: Require '@' prefix for seconds since the Epoch timestamp
+Date:   Wed,  7 Sep 2022 08:41:41 +0300
+Message-Id: <20220907054141.15608-1-peter.ujfalusi@linux.intel.com>
+X-Mailer: git-send-email 2.37.3
 MIME-Version: 1.0
-Received: by 2002:a05:6e02:2141:0:0:0:0 with HTTP; Tue, 6 Sep 2022 20:05:36
- -0700 (PDT)
-Reply-To: morganwalter642@gmail.com
-From:   Morgan Walter <jessica.d.walter12@gmail.com>
-Date:   Wed, 7 Sep 2022 04:05:36 +0100
-Message-ID: <CAMtGy2puqkgEGcJDUw3C-mz-Rm-JqhyjmAO+nCg5SaS=P2fe6w@mail.gmail.com>
-Subject: Re:
-To:     undisclosed-recipients:;
-Content-Type: text/plain; charset="UTF-8"
-X-Spam-Status: Yes, score=5.2 required=5.0 tests=BAYES_50,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_ENVFROM_END_DIGIT,
-        FREEMAIL_FROM,FREEMAIL_REPLYTO,FREEMAIL_REPLYTO_END_DIGIT,
-        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE,
-        UNDISC_FREEM autolearn=no autolearn_force=no version=3.4.6
-X-Spam-Report: *  0.8 BAYES_50 BODY: Bayes spam probability is 40 to 60%
-        *      [score: 0.5000]
-        *  0.0 SPF_HELO_NONE SPF: HELO does not publish an SPF Record
-        * -0.0 SPF_PASS SPF: sender matches SPF record
-        *  0.2 FREEMAIL_REPLYTO_END_DIGIT Reply-To freemail username ends in
-        *      digit
-        *      [morganwalter642[at]gmail.com]
-        *  0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends
-        *       in digit
-        *      [jessica.d.walter12[at]gmail.com]
-        *  0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail
-        *      provider
-        *      [jessica.d.walter12[at]gmail.com]
-        * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
-        *      https://www.dnswl.org/, no trust
-        *      [2607:f8b0:4864:20:0:0:0:d2f listed in]
-        [list.dnswl.org]
-        * -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
-        *      author's domain
-        * -0.1 DKIM_VALID_EF Message has a valid DKIM or DK signature from
-        *      envelope-from domain
-        * -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-        *  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
-        *       valid
-        * -0.0 T_SCC_BODY_TEXT_LINE No description available.
-        *  3.1 UNDISC_FREEM Undisclosed recipients + freemail reply-to
-        *  1.0 FREEMAIL_REPLYTO Reply-To/From or Reply-To/body contain
-        *      different freemails
-X-Spam-Level: *****
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-Spam-Status: No, score=-4.3 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_EF,RCVD_IN_DNSWL_MED,SPF_HELO_NONE,
+        SPF_NONE,T_SCC_BODY_TEXT_LINE autolearn=ham autolearn_force=no
+        version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-I have been waiting to hear from you or don't you received my past E-mail?
+Since the seconds since the Epoch is just a number it might be better to
+require special prefix to indicate the intention that the user wants to
+interpret the number as seconds since the Epoch.
+
+Use the same '@' character as prefix as used by systemd.time to make it
+easier to integrate in scripts intended to be used on systems with or
+without systemd.
+
+Fix also the initial support which discarded the seconds from the converted
+timestamp.
+
+Signed-off-by: Peter Ujfalusi <peter.ujfalusi@linux.intel.com>
+---
+Hi Karel,
+
+I think this will be safer for the enduser. The original patch would interpret
+_any_ number not matching with the other supported formats interpreted as seconds
+since the Epoch, which might not something the user had in mind.
+
+Sorry for the oversight on my side...
+
+Kind regards,
+Péter
+
+ lib/timeutils.c | 14 ++++++--------
+ 1 file changed, 6 insertions(+), 8 deletions(-)
+
+diff --git a/lib/timeutils.c b/lib/timeutils.c
+index 6dda2e8deefb..4eaef9533ab2 100644
+--- a/lib/timeutils.c
++++ b/lib/timeutils.c
+@@ -181,7 +181,7 @@ int parse_timestamp(const char *t, usec_t *usec)
+ 	 *
+ 	 *   2012-09-22 16:34:22
+ 	 *   2012-09-22T16:34:22
+-	 *   1348331662		  (seconds since the Epoch (1970-01-01 00:00 UTC))
++	 *   @1348331662	  (seconds since the Epoch (1970-01-01 00:00 UTC))
+ 	 *   2012-09-22 16:34	  (seconds will be set to 0)
+ 	 *   2012-09-22		  (time will be set to 00:00:00)
+ 	 *   16:34:22		  (date will be set to today)
+@@ -233,7 +233,12 @@ int parse_timestamp(const char *t, usec_t *usec)
+ 			return r;
+ 
+ 		goto finish;
++	} else if (t[0] == '@') {
++		k = strptime(t + 1, "%s", &tm);
++		if (k && *k == 0)
++			goto finish;
+ 
++		return -EINVAL;
+ 	} else if (endswith(t, " ago")) {
+ 		char *z;
+ 
+@@ -326,13 +331,6 @@ int parse_timestamp(const char *t, usec_t *usec)
+ 		goto finish;
+ 	}
+ 
+-	tm = copy;
+-	k = strptime(t, "%s", &tm);
+-	if (k && *k == 0) {
+-		tm.tm_sec = 0;
+-		goto finish;
+-	}
+-
+ 	return -EINVAL;
+ 
+  finish:
+-- 
+2.37.3
+
