@@ -2,40 +2,60 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 64AB95B662F
-	for <lists+util-linux@lfdr.de>; Tue, 13 Sep 2022 05:36:29 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 56F735B6C5B
+	for <lists+util-linux@lfdr.de>; Tue, 13 Sep 2022 13:26:58 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229718AbiIMDg0 (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Mon, 12 Sep 2022 23:36:26 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:55298 "EHLO
+        id S231905AbiIML04 (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Tue, 13 Sep 2022 07:26:56 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:46850 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229500AbiIMDgY (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Mon, 12 Sep 2022 23:36:24 -0400
-X-Greylist: delayed 1417 seconds by postgrey-1.37 at lindbergh.monkeyblade.net; Mon, 12 Sep 2022 20:36:23 PDT
-Received: from mailgw.serverpool.net (mailgw.serverpool.net [185.82.85.243])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 084135464C
-        for <util-linux@vger.kernel.org>; Mon, 12 Sep 2022 20:36:22 -0700 (PDT)
-Received: from mailgw.serverpool.net (localhost.localdomain [127.0.0.1])
-        by mailgw.serverpool.net (Proxmox) with ESMTP id 25CA242D07;
-        Tue, 13 Sep 2022 05:12:21 +0200 (CEST)
-X-Virus-Scanned: Debian amavisd-new at web01.hosting.serverpool.net
+        with ESMTP id S231910AbiIML0y (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Tue, 13 Sep 2022 07:26:54 -0400
+Received: from mga03.intel.com (mga03.intel.com [134.134.136.65])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 356194D4C2
+        for <util-linux@vger.kernel.org>; Tue, 13 Sep 2022 04:26:54 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1663068414; x=1694604414;
+  h=message-id:date:mime-version:subject:to:cc:references:
+   from:in-reply-to:content-transfer-encoding;
+  bh=I8vRCtxj4jxQN2KTEJXV006kSoH3xaN1FVbhEItjC4s=;
+  b=HABxnJADhkK7o2hsv8oUHbxDHvT3zZphlB9J9HgeAWQveHv5HC7UBxZU
+   3/ouoTd5PP47CjAuEDw0cEJFhl0UwEfprgWkKP71gWbZiavsSvOU9EL8g
+   prnFwryD73Z/c3ta1JMZixfuBjkoMuCjQmbFgcySePWKqTRr3V87UROB+
+   Dzy9STCWPmyEvaGNHwLJ0tch8oc7lIK5gObv6m/QxPhTulHkEnE3CLP+a
+   HW1ecDL3wlfU4EACgrrj2yPIZIBmlLEmrDPHTXm+qxqvyHNTcUdY7RjrI
+   UD2CVDZQWioteRdkHb6ujQrdOYR5wZncOKPfEQrr9VTOyMo9xy1Pp8/XC
+   Q==;
+X-IronPort-AV: E=McAfee;i="6500,9779,10468"; a="299451054"
+X-IronPort-AV: E=Sophos;i="5.93,312,1654585200"; 
+   d="scan'208";a="299451054"
+Received: from orsmga006.jf.intel.com ([10.7.209.51])
+  by orsmga103.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 13 Sep 2022 04:26:53 -0700
+X-IronPort-AV: E=Sophos;i="5.93,312,1654585200"; 
+   d="scan'208";a="593901610"
+Received: from rreill2x-mobl.ger.corp.intel.com (HELO [10.252.15.189]) ([10.252.15.189])
+  by orsmga006-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 13 Sep 2022 04:26:52 -0700
+Message-ID: <b89d8afb-75fb-8917-cb13-dff5fc589ae7@linux.intel.com>
+Date:   Tue, 13 Sep 2022 14:26:58 +0300
 MIME-Version: 1.0
-Date:   Tue, 13 Sep 2022 03:37:44 +0200
-From:   Greg Hansmann <info@mkg-partner.de>
-To:     undisclosed-recipients:;
-Subject: THIS VERY CONFIDENTIAL
-Reply-To: greghans847@gmail.com
-User-Agent: Roundcube Webmail/1.4.11
-Message-ID: <040be44fb22b8362efcf406604ab95c2@mkg-partner.de>
-X-Sender: info@mkg-partner.de
-Content-Type: text/plain; charset=US-ASCII;
- format=flowed
-Content-Transfer-Encoding: 7bit
-X-Spam-Status: No, score=3.6 required=5.0 tests=BAYES_50,
-        FREEMAIL_FORGED_REPLYTO,FREEMAIL_REPLYTO_END_DIGIT,SPF_HELO_NONE,
-        SPF_NONE,SUBJ_ALL_CAPS,T_SCC_BODY_TEXT_LINE autolearn=no
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Firefox/102.0 Thunderbird/102.2.0
+Subject: Re: [PATCH] lib/timeutils: Require '@' prefix for seconds since the
+ Epoch timestamp
+To:     Karel Zak <kzak@redhat.com>
+Cc:     util-linux@vger.kernel.org
+References: <20220907054141.15608-1-peter.ujfalusi@linux.intel.com>
+ <20220912122337.nmoc7tpzuxes4ejj@ws.net.home>
+Content-Language: en-US
+From:   =?UTF-8?Q?P=c3=a9ter_Ujfalusi?= <peter.ujfalusi@linux.intel.com>
+In-Reply-To: <20220912122337.nmoc7tpzuxes4ejj@ws.net.home>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-Spam-Status: No, score=-4.9 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_EF,NICE_REPLY_A,RCVD_IN_DNSWL_MED,
+        SPF_HELO_NONE,SPF_NONE,T_SCC_BODY_TEXT_LINE autolearn=ham
         autolearn_force=no version=3.4.6
-X-Spam-Level: ***
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
@@ -44,26 +64,24 @@ X-Mailing-List: util-linux@vger.kernel.org
 
 
 
+On 12/09/2022 15:23, Karel Zak wrote:
+> On Wed, Sep 07, 2022 at 08:41:41AM +0300, Peter Ujfalusi wrote:
+>>  lib/timeutils.c | 14 ++++++--------
+>>  1 file changed, 6 insertions(+), 8 deletions(-)
+> 
+> Applied, let's use '@' prefix :-) Thanks.
+
+I will try to look at documenting the supported time formats within
+util-linux...
+
+My guess would be to add a new file:
+man-common/timestamp-formats.adoc
+
+and link it in dmesg for example?
+
+> 
+>     Karel
+> 
+
 -- 
-Hello,
-
-My name is Greg  Hansmann
-I apologize to have contacted you this way without a direct 
-relationship. There is an opportunity to collaborate with me in the 
-sourcing of some materials needed by our company for production of the 
-different medicines we are researching.
-
-I'm aware that this might be totally outside your professional 
-specialization, but it will be a great source for generating extra 
-revenue. I  discovered a manufacturer who can supply us at a lower rate 
-than our company's previous purchases. I will give you more specific 
-details when/if I receive feedback from you showing interest.
-
-Warm Regards
-Greg Hansmann
-Production & Control Manager,
-Green Field Laboratories
-Gothic House, Barker Gate,
-Nottingham, NG1 1JU,
-United Kingdom.
-
+Péter
