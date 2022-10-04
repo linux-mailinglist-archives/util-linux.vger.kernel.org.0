@@ -2,72 +2,180 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id D54C45E4EC8
-	for <lists+util-linux@lfdr.de>; Wed, 21 Sep 2022 20:21:51 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id ED4855F4BBF
+	for <lists+util-linux@lfdr.de>; Wed,  5 Oct 2022 00:19:45 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229555AbiIUSVl (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Wed, 21 Sep 2022 14:21:41 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:56492 "EHLO
+        id S231620AbiJDWTl (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Tue, 4 Oct 2022 18:19:41 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:50036 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229521AbiIUSVk (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Wed, 21 Sep 2022 14:21:40 -0400
-Received: from mail-wr1-x435.google.com (mail-wr1-x435.google.com [IPv6:2a00:1450:4864:20::435])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id A3830A0241
-        for <util-linux@vger.kernel.org>; Wed, 21 Sep 2022 11:21:39 -0700 (PDT)
-Received: by mail-wr1-x435.google.com with SMTP id bq9so11423014wrb.4
-        for <util-linux@vger.kernel.org>; Wed, 21 Sep 2022 11:21:39 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=to:subject:message-id:date:from:reply-to:mime-version:from:to:cc
-         :subject:date;
-        bh=hsNtyP1m1mH5wObxTYGTuOljgpTGR+1nxFrlVMFkJto=;
-        b=SG6L5fx5jt/18IPMJXJGAGOe61DqdgMHdrpmhNfKYl9i+qJCTRXNix+byOI6/ytDgT
-         XFZZkvfSOP55EZ2+9YCOPtGhdu18WePDU+QMZYaUU7wLREbFM1fykvUwYvZKEGylnfuI
-         j5WykVXiEJZ2DmhYEj/0eN1X2ugPphgK8oD1ObTUssfb4E2nJvSbaDrj/wWgiwPjxih7
-         x4PcbwEQ08AYbaKivfwFXf0We+vWK3iNE2E7SBOmvoYw2edFzsqU5vEZNrFJuYyFE7lS
-         o7+PeDxCZ5FoAXTn4HZzUgv52xGm+umCdRWKmIs4cK3K5gHxzTY+5YwBiPvQUya7m7uI
-         S0Ng==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=to:subject:message-id:date:from:reply-to:mime-version
-         :x-gm-message-state:from:to:cc:subject:date;
-        bh=hsNtyP1m1mH5wObxTYGTuOljgpTGR+1nxFrlVMFkJto=;
-        b=AKDawtk6kKXYS8H75TyylM093vzyb7KXjstXRkRAsFwQxb1JuNHRVyPswTzghpPypR
-         k9ZhCJ+Vj5lbm/3M8FhSnbU8vq38iiCjeefGb7f8ZBDAnCNiRAKC1/ggQWL1Gh/7Ybph
-         EEv5XlHzJ82pq2CRgI4QJk1lcN/ceIuZnQmMxuvzHjgHXsTINvaTkVFFbZeWOz5wRW8Y
-         rOTmPOVB0bo35LYgBocFx99REi0RB8UhLNLtIlxFmLY3r7jPL79HWYp3Ke1p5O7dcUq1
-         r2eD8OTHxuUnvgSl5m5H+Rqr/lDRc++hP6CfWF5jOJ8/SZZBRSPgMMeJWrIyF9en3Bo3
-         rZDA==
-X-Gm-Message-State: ACrzQf3BAKX2QQ/2y4hIgyoR4jFV7F1B/daI/LRzs0wgvhJ2ds+ADkDO
-        HdJeLbAJtvpoC7QipyZtWul9S3TGGk7BTIl5GlA=
-X-Google-Smtp-Source: AMsMyM7pLsMw+ELrB/mbcbxWPaBEMvHTFL8BnvZcN0Wt3Q2N60KuGMLCpqX6Zq3Nvrtt+HUFSEV1xlarqRzwHaQdpAA=
-X-Received: by 2002:adf:db03:0:b0:22a:dd80:4b45 with SMTP id
- s3-20020adfdb03000000b0022add804b45mr16642631wri.111.1663784498011; Wed, 21
- Sep 2022 11:21:38 -0700 (PDT)
+        with ESMTP id S231303AbiJDWSm (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Tue, 4 Oct 2022 18:18:42 -0400
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 3FCA369F55;
+        Tue,  4 Oct 2022 15:18:41 -0700 (PDT)
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        (No client certificate requested)
+        by dfw.source.kernel.org (Postfix) with ESMTPS id D029C614B2;
+        Tue,  4 Oct 2022 22:18:40 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 353ABC433D6;
+        Tue,  4 Oct 2022 22:18:40 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+        s=k20201202; t=1664921920;
+        bh=3OSNGb6eczbbTEHdSyw0AJmcW1Gd0forZ+L7hKDOImU=;
+        h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+        b=g96s3fHsBQiMBtHOiWUWkcF04ehUH4sAH28zokPRfYfJfiW+vupPchlaH2EO0P704
+         IYJbqbC86ttuyYpH4dKLCDVmY6NnkGSQ8VGGaz/AzsGnM9YiiH7IaD2o/7baYYCOU3
+         K8txGUWfwz7mcUr0xbZIBt4qmTdV9w3OlCmOY9zq4hd0p0k/QZQcwYUEP+ECI3gkU8
+         xnFLs7iR3XPoeKgYfU977ceRc6V/zXQhSaoy6gLyTOV4XvXhD4emLns2oSO/qh5K9e
+         PrV1U+3oMv0o/8ic7bQitPusSsuRG38ajwFhbtGYgpcENrRoPE4Yr1iiK5voX/7WEa
+         Fv2/Kj1Awfg8g==
+Date:   Tue, 4 Oct 2022 15:18:39 -0700
+From:   "Darrick J. Wong" <djwong@kernel.org>
+To:     Lukas Czerner <lczerner@redhat.com>
+Cc:     zhanchengbin <zhanchengbin1@huawei.com>,
+        Theodore Ts'o <tytso@mit.edu>, linux-ext4@vger.kernel.org,
+        liuzhiqiang26@huawei.com, linfeilong <linfeilong@huawei.com>,
+        kzak@redhat.com, util-linux@vger.kernel.org
+Subject: Re: [bug report] misc/fsck.c: Processes may kill other processes.
+Message-ID: <YzyxP8o7V7Q6xaS7@magnolia>
+References: <4ffe3143-fc53-7178-cf44-f3481eb96ae4@huawei.com>
+ <20220929112813.6aqtktwaff2m7fh2@fedora>
+ <470ea2ee-54fd-3dd5-2500-36fb82665c11@huawei.com>
+ <20220930072042.dwakvbnefctk2jyd@fedora>
 MIME-Version: 1.0
-Received: by 2002:a05:6000:1888:0:0:0:0 with HTTP; Wed, 21 Sep 2022 11:21:37
- -0700 (PDT)
-Reply-To: charlesjacksonjunior@outlook.com
-From:   =?UTF-8?Q?Fr=2E_Waldemar_Koz=C5=82owski?= 
-        <maureennenna71@gmail.com>
-Date:   Wed, 21 Sep 2022 21:21:37 +0300
-Message-ID: <CAN8cJPY7tTypsPtvGdik1mPi-nWDjELnVVNDJJu7-QP=Y+Hueg@mail.gmail.com>
-Subject: =?UTF-8?B?SGVyemxpY2hlIEdsw7xja3fDvG5zY2hl?=
-To:     undisclosed-recipients:;
-Content-Type: text/plain; charset="UTF-8"
-X-Spam-Status: No, score=4.8 required=5.0 tests=BAYES_50,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_ENVFROM_END_DIGIT,
-        FREEMAIL_FROM,FREEMAIL_REPLYTO,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,
-        SPF_PASS,UNDISC_FREEM autolearn=no autolearn_force=no version=3.4.6
-X-Spam-Level: ****
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20220930072042.dwakvbnefctk2jyd@fedora>
+X-Spam-Status: No, score=-7.1 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_HI,
+        SPF_HELO_NONE,SPF_PASS autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
--- 
-Gefeliciteerd, je bent gekozen voor een donatie van een miljoen
-dollar. Gelieve te reageren voor claims.
+[cc util-linux and karel zak]
 
-Bedankt
+TLDR: util-linux's fsck program has an interesting bug in it where if
+someone runs "fsck -N", it will set up a fsck_instance context for each
+filesystem with inst->pid = -1.  If someone sends the fsck process a
+SIGINT/SIGTERM before it finishes enumerating filesystems, it will try
+to kill all the fsck instances via "kill(inst->pid, ...);" which will
+terminate every process on the system.
+
+On Fri, Sep 30, 2022 at 09:20:42AM +0200, Lukas Czerner wrote:
+> On Fri, Sep 30, 2022 at 09:42:52AM +0800, zhanchengbin wrote:
+> > 
+> > 
+> > On 2022/9/29 19:28, Lukas Czerner wrote:
+> > > Hi,
+> > > 
+> > > indeed we'd like to avoid killing the instance that was not ran because
+> > > of noexecute. Can you try the following patch?
+> > > 
+> > > Thanks!
+> > > -Lukas
+> > 
+> > Yes, you're right, I think we can fix it in this way.
+> > 
+> > diff --git a/misc/fsck.c b/misc/fsck.c
+> > index 1f6ec7d9..91edbf17 100644
+> > --- a/misc/fsck.c
+> > +++ b/misc/fsck.c
+> > @@ -547,6 +547,8 @@ static int kill_all(int signum)
+> >         for (inst = instance_list; inst; inst = inst->next) {
+> >                 if (inst->flags & FLAG_DONE)
+> >                         continue;
+> > +               if (inst->pid == -1)
+> > +                       continue;
+> 
+> Yeah, that works as well although I find the "if (noexecute)" condition
+> more obvious. We can do both. Also rather than checking for -1 we can
+> check for <= 0 since anything other than real pid at this point is a bug.
+> 
+> Feel free to send a proper patch.
+
+I was about to ask why we even care about misc/fsck.c because it's
+clearly a weird old program that has been bitrotting for years and
+likely replaced by some other code in util-linux.  Then I thought I had
+better check util-linux, and...
+
+https://git.kernel.org/pub/scm/utils/util-linux/util-linux.git/tree/disk-utils/fsck.c
+
+/*
+ * fsck --- A generic, parallelizing front-end for the fsck program.
+ * It will automatically try to run fsck programs in parallel if the
+ * devices are on separate spindles.  It is based on the same ideas as
+ * the generic front end for fsck by David Engel and Fred van Kempen,
+ * but it has been completely rewritten from scratch to support
+ * parallel execution.
+ *
+ * Written by Theodore Ts'o, <tytso@mit.edu>
+
+LOL, it's the same source code, and I think it has the same bug, since
+"noexecute" mode sets pid = -1 at like 688:
+
+	/* Fork and execute the correct program. */
+	if (noexecute)
+		pid = -1;
+
+and then sets inst->pid = pid at line 703:
+
+	inst->pid = pid;
+
+and kill_all() passes that to kill() at line 733:
+
+	for (inst = instance_list; inst; inst = inst->next) {
+		if (inst->flags & FLAG_DONE)
+			continue;
+		kill(inst->pid, signum);
+		n++;
+	}
+
+From that I conclude that this is a real bug in util-linux, and we
+ought to be talking to them about this.  Evidently this has been broken
+since e2fsprogs commit 33922999 in January 1999, though it was only
+added to util-linux in commit 607c2a72952f in February 2009.
+
+--D
+
+> Thanks!
+> -Lukas
+> 
+> >                 kill(inst->pid, signum);
+> >                 n++;
+> >         }
+> > > 
+> > > 
+> > > diff --git a/misc/fsck.c b/misc/fsck.c
+> > > index 1f6ec7d9..8fae7730 100644
+> > > --- a/misc/fsck.c
+> > > +++ b/misc/fsck.c
+> > > @@ -497,9 +497,10 @@ static int execute(const char *type, const char *device, const char *mntpt,
+> > >   	}
+> > >   	/* Fork and execute the correct program. */
+> > > -	if (noexecute)
+> > > +	if (noexecute) {
+> > >   		pid = -1;
+> > > -	else if ((pid = fork()) < 0) {
+> > > +		inst->flags |= FLAG_DONE;
+> > > +	} else if ((pid = fork()) < 0) {
+> > >   		perror("fork");
+> > >   		free(inst);
+> > >   		return errno;
+> > > @@ -544,6 +545,9 @@ static int kill_all(int signum)
+> > >   	struct fsck_instance *inst;
+> > >   	int	n = 0;
+> > > +	if (noexecute)
+> > > +		return 0;
+> > > +
+> > >   	for (inst = instance_list; inst; inst = inst->next) {
+> > >   		if (inst->flags & FLAG_DONE)
+> > >   			continue;
+> > regards,
+> > Zhan Chengbin
+> > 
+> 
