@@ -2,101 +2,83 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 5EEF9605825
-	for <lists+util-linux@lfdr.de>; Thu, 20 Oct 2022 09:14:33 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id ECC4460EE12
+	for <lists+util-linux@lfdr.de>; Thu, 27 Oct 2022 04:48:50 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S230146AbiJTHOa (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Thu, 20 Oct 2022 03:14:30 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:54748 "EHLO
+        id S231164AbiJ0Css (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Wed, 26 Oct 2022 22:48:48 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:48078 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S230234AbiJTHOA (ORCPT
-        <rfc822;util-linux-ng@vger.kernel.org>);
-        Thu, 20 Oct 2022 03:14:00 -0400
-Received: from mail-ua1-x941.google.com (mail-ua1-x941.google.com [IPv6:2607:f8b0:4864:20::941])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 88417160ECC
-        for <util-linux-ng@vger.kernel.org>; Thu, 20 Oct 2022 00:13:30 -0700 (PDT)
-Received: by mail-ua1-x941.google.com with SMTP id p89so8494060uap.12
-        for <util-linux-ng@vger.kernel.org>; Thu, 20 Oct 2022 00:13:30 -0700 (PDT)
+        with ESMTP id S233352AbiJ0Csr (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Wed, 26 Oct 2022 22:48:47 -0400
+X-Greylist: delayed 902 seconds by postgrey-1.37 at lindbergh.monkeyblade.net; Wed, 26 Oct 2022 19:48:43 PDT
+Received: from symantec4.comsats.net.pk (symantec4.comsats.net.pk [203.124.41.30])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 43DF1E0709
+        for <util-linux@vger.kernel.org>; Wed, 26 Oct 2022 19:48:42 -0700 (PDT)
+X-AuditID: cb7c291e-7bdff700000061a5-d3-6359dbc25e5c
+Received: from iesco.comsatshosting.com (Unknown_Domain [210.56.28.12])
+        (using TLS with cipher ECDHE-RSA-AES256-SHA (256/256 bits))
+        (Client did not present a certificate)
+        by symantec4.comsats.net.pk (Symantec Messaging Gateway) with SMTP id 3C.7D.24997.2CBD9536; Thu, 27 Oct 2022 06:15:46 +0500 (PKT)
+DomainKey-Signature: a=rsa-sha1; c=nofws; q=dns;
+        d=iesco.com.pk; s=default;
+        h=received:content-type:mime-version:content-transfer-encoding
+          :content-description:subject:to:from:date:reply-to;
+        b=bT4flTflyIqv7A7catmp2Jpp0m/BHfE7EXI3Z0aZmnR5RgAdWD5vwnDtTlJZY4kZK
+          wcNGCxemC5MkdLaG0jJiJJ+d1G11fKijbxboaSgUTwpKMii6GhHzUXd4so01aF+1a
+          JwO3Qq2OQtKv8YaBD96WLhoxVqMSAAc7VphoEKWE0=
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=content-transfer-encoding:to:subject:message-id:date:from:reply-to
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=a4CD1Jx2td4vXeqpp1ZdpcL33TVkin8nuZwRyIV7nlo=;
-        b=PDBhu5A067JPR4az9mrDl6NtgF4BHu/4FmlImn6Up4MM3fpsv/U0arOOwaD8HAF8hN
-         LbpPo+gNWjl25aoj13MpcbG+Q6941M6azYwa/aHpUQVJhHQMOvJCYBgT3vzehHh7djkJ
-         4TuSKtDH/DRiVEzvQcDhZSM+Av4RsojB1v4XwEP75T8aYlTo/Mhtr9hPtGzrP3atyrPr
-         BgNp8Ua9uxqooFIPjzhd2PqJ0hH/Nx7AhZjnBDGmAguPmoj9l55xrk9ORfMkQgZ62NJe
-         Kjm5P+E2wFQblgsixif3o/aIy8Ac4Wt1F7gE47qzPj6s0HUzl3bp0jFZIFtTrP38rXiS
-         AYjg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=content-transfer-encoding:to:subject:message-id:date:from:reply-to
-         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=a4CD1Jx2td4vXeqpp1ZdpcL33TVkin8nuZwRyIV7nlo=;
-        b=Ojd0pGYo5okYyhxed6XteMnQo8x6ZuXizk8bJ+0yUPiKTcHi66/7XWSz+bt6EPrspz
-         2qclj1LGdpRpLhqOgi8wEoI5vMJbmJVSFh8eqjRLBJumN+GnGTRBKT1RneG7xHIcBjdZ
-         E6XMceXjHBX1nJAIl5hViYLKqgtiJ/au31UAv+QalKWHuz2p4ktVZhAs1sew3Agm0cUN
-         A92TkbUJm0DoTFsevbMUiz3xAum2cnBLeKNffdHMTyR9ONDnV+a588L/iJy/UYhBBjtL
-         s89FLWkRssLblLqJeCDVWPtgcraMftmag7usfYFssaG1JNKMzfN4V5+xEE7vCWeXF27n
-         mBAQ==
-X-Gm-Message-State: ACrzQf0M3hC68UoP20sWMbX6TledqdNGtipRtN597NpwTm41E/Vd0Cy4
-        +P+38MkYa17LKM91wyZbbukRmzhNtsSx0glqMkQ=
-X-Google-Smtp-Source: AMsMyM680IMcjy/gXhORqQ4d1Sz4n/J9502aWbGM9WsjWeMrI04ZbCvbMuBc+laiO/UcvTg672qhwd917RDIg56T7Zw=
-X-Received: by 2002:a9f:358c:0:b0:3e3:4963:3770 with SMTP id
- t12-20020a9f358c000000b003e349633770mr5797806uad.77.1666250008380; Thu, 20
- Oct 2022 00:13:28 -0700 (PDT)
+        d=iesco.com.pk; s=default;
+        h=reply-to:date:from:to:subject:content-description
+          :content-transfer-encoding:mime-version:content-type;
+        bh=wllpc/XfyZmsBCyizquF3lY9v5vVV2E17Wyv7qk2g2g=;
+        b=BnLSIxK23F+pPmBp0K4IkJXExK61ryJF0c2rPOODaT5HU8Bg8oPr2G/aqQF1U4Xs9
+          1yMuG8ShaYHY1T2iGO9dgclyL7tVwEcOrBy7ye8yYvAAcXUwVh2Hf3URPhebrW/nv
+          /cf35ZKrNI1rkUZfwSnP8piCEIE24erq/mH9680xY=
+Received: from [103.145.253.52] (UnknownHost [103.145.253.52]) by iesco.comsatshosting.com with SMTP;
+   Thu, 27 Oct 2022 06:06:16 +0500
+Message-ID: <3C.7D.24997.2CBD9536@symantec4.comsats.net.pk>
+Content-Type: text/plain; charset="iso-8859-1"
 MIME-Version: 1.0
-Received: by 2002:a67:f144:0:0:0:0:0 with HTTP; Thu, 20 Oct 2022 00:13:28
- -0700 (PDT)
-Reply-To: golsonfinancial@gmail.com
-From:   OLSON FINANCIAL GROUP <saifullahibashir289@gmail.com>
-Date:   Thu, 20 Oct 2022 00:13:28 -0700
-Message-ID: <CAMhAhR3ZbVDXd=WP+Aw2fzNmpgURLft3apyZO9CsgEDJM=hWFw@mail.gmail.com>
-Subject: 
-To:     undisclosed-recipients:;
-Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-X-Spam-Status: Yes, score=6.0 required=5.0 tests=BAYES_80,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_ENVFROM_END_DIGIT,
-        FREEMAIL_FROM,FREEMAIL_REPLYTO,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,
-        SPF_PASS,UNDISC_FREEM autolearn=no autolearn_force=no version=3.4.6
-X-Spam-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
-        *      https://www.dnswl.org/, no trust
-        *      [2607:f8b0:4864:20:0:0:0:941 listed in]
-        [list.dnswl.org]
-        *  2.0 BAYES_80 BODY: Bayes spam probability is 80 to 95%
-        *      [score: 0.8853]
-        *  0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail
-        *      provider
-        *      [saifullahibashir289[at]gmail.com]
-        *  0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends
-        *       in digit
-        *      [saifullahibashir289[at]gmail.com]
-        * -0.0 SPF_PASS SPF: sender matches SPF record
-        *  0.0 SPF_HELO_NONE SPF: HELO does not publish an SPF Record
-        * -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
-        *      author's domain
-        *  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
-        *       valid
-        * -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-        * -0.1 DKIM_VALID_EF Message has a valid DKIM or DK signature from
-        *      envelope-from domain
-        *  2.9 UNDISC_FREEM Undisclosed recipients + freemail reply-to
-        *  1.0 FREEMAIL_REPLYTO Reply-To/From or Reply-To/body contain
-        *      different freemails
-X-Spam-Level: *****
+Content-Description: Mail message body
+Subject: Compliment,
+To:     util-linux@vger.kernel.org
+From:   "Wahid Majrooh" <nms-ibs2@iesco.com.pk>
+Date:   Wed, 26 Oct 2022 18:35:46 -0700
+Reply-To: wfnngaf@gmail.com
+X-Brightmail-Tracker: H4sIAAAAAAAAA02TeUgUURzHezvjNuq+HMej12pC00GHWpGZUlR/lBkSHXiUBTWuo7vsJTuj
+        ZQcIhuCaR4dI20ERBh5UmGVEUixWmli2KJkJHWReQZFZ/VHae3u488+Px+f7ft/f8XgMxbXP
+        1TIGiyzaLIKJVwfRrqRoTZzz3QHdmsnu2KTLfafnbgWpky0xe0B20KZc0WQoEm2rNx8J0n+/
+        ep8uOAeOjfU0BJQAsx0EMohNQK+aO2ly5tgWFXpYm20HQQzNNlHoxky/igg0+5FCn7p3EoFj
+        ywH61/VDTQTIbkStH28AcqbYeDRQe8HLQ1HXxc+0h69CN69PUHbA4PMyNGWXCQ5jw9FYjd19
+        JZyNQfVtnutqNg41N35We+ouRQ0DtwI8zUUhV3M9XQNCHIpqDkU1h6Kaw1/tGqAbAZKKzQLe
+        mS4hXmc1S4IsxVtEOb7A2ALwBrtProh5AOpdghOwDOA1cH/iAR0XIBThLCdIY1R8BEyqwGhe
+        jjW3WC9I+sO2QpMo8eGw+SvGcBbnFJqMvBbueY1p2Cy1iEclkyjjJ3MCxFA4rWcgC6flCsXH
+        RZvVY+YEUQzNz4fpif0Cx+YLsmgUxQLR5lPzGIa9d6epF7DOhzhqaYvVIvIIqkgHoTYxXzyW
+        ZzDJvgTs1PkWK6xScbe3EDJnM3VcpFJQdqhiAp0gldHgNpOJA5QKBLNkyPf6hsG2EUw1Pur2
+        XAANpA3OB/1+L8AJ5s719naKueuOPW2PcXzf14vj1H37E4pzD6KdD9cTB5Y46Asts3NoI+Hz
+        27jdEIVASmqjYUUT5hEK7q/q+xfjYDt+0DC4eIK0jH+Nfw4OZhAY7IXuMRAsIy8X6mV+v3G8
+        EBV57iuZZCGyICsXcvB8JlmIl3oXkk4g54N+K20JKB39/cz4aPin5mnHHFNZP5+SlVW745Cm
+        2tTdUHcio8VVt69ytJEKXRL9K/hs8Bzj8LdT1365Xl7qrar8s2jktLkupTo2kpoOKCt9kz6U
+        dmqwpHVmQ1VbZfaHLbuWb1QnD87ba+7gipfYK//2GU5GWOt2j57ZVu46lNCVsm5q6NN0xxee
+        lvTC2pWUTRL+AwrC3glQBAAA
+X-Spam-Status: No, score=3.7 required=5.0 tests=BAYES_50,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FORGED_REPLYTO,
+        HK_RANDOM_REPLYTO,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS
+        autolearn=no autolearn_force=no version=3.4.6
+X-Spam-Level: ***
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
---=20
-Guten Tag, brauchen Sie heute dringend einen Kredit, um eine
-Geldanlage zu t=C3=A4tigen? Ein neues Unternehmen gr=C3=BCnden oder Rechnun=
-gen
-bezahlen? Und uns auf Wunsch in Raten zur=C3=BCckzahlen? Wir bieten Kredite
-zu einem sehr niedrigen Zinssatz von 2% an.
-F=C3=BCr weitere Informationen antworten Sie auf unsere E-Mail-Adresse:
-golsonfinancial@gmail.com..
+Compliment,
+
+It will be a pleasure to discuss an important issue with you on area of Inv=
+estment. My name is Wahid from Kabul
+
+
+Majrooh
+
