@@ -2,66 +2,73 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id C2CB36105DB
-	for <lists+util-linux@lfdr.de>; Fri, 28 Oct 2022 00:39:52 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id F026961D815
+	for <lists+util-linux@lfdr.de>; Sat,  5 Nov 2022 08:10:26 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S234664AbiJ0Wjv convert rfc822-to-8bit (ORCPT
-        <rfc822;lists+util-linux@lfdr.de>); Thu, 27 Oct 2022 18:39:51 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:45022 "EHLO
+        id S229479AbiKEHKY (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Sat, 5 Nov 2022 03:10:24 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:52586 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S234184AbiJ0Wju (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Thu, 27 Oct 2022 18:39:50 -0400
-X-Greylist: delayed 905 seconds by postgrey-1.37 at lindbergh.monkeyblade.net; Thu, 27 Oct 2022 15:39:45 PDT
-Received: from symantec13.comsats.net.pk (Symantec13.comsats.net.pk [203.124.41.78])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 59A631DF22
-        for <util-linux@vger.kernel.org>; Thu, 27 Oct 2022 15:39:41 -0700 (PDT)
-X-AuditID: cb7c294e-9d1ff70000000b0e-8b-635b44af3109
-Received: from host201505.comsatshosting.com (host201505.comsatshosting.com [210.56.11.66])
-        (using TLS with cipher ECDHE-RSA-AES256-SHA (256/256 bits))
-        (Client did not present a certificate)
-        by symantec13.comsats.net.pk (Symantec Messaging Gateway) with SMTP id B5.3E.02830.FA44B536; Fri, 28 Oct 2022 07:55:43 +0500 (PKT)
-Received: from [103.145.253.52] (UnknownHost [103.145.253.52]) by host201505.comsatshosting.com with SMTP;
-   Fri, 28 Oct 2022 03:27:57 +0500
-Message-ID: <B5.3E.02830.FA44B536@symantec13.comsats.net.pk>
-Content-Type: text/plain; charset="iso-8859-1"
+        with ESMTP id S229453AbiKEHKY (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Sat, 5 Nov 2022 03:10:24 -0400
+Received: from mail-pl1-x62d.google.com (mail-pl1-x62d.google.com [IPv6:2607:f8b0:4864:20::62d])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 7D71A2D1F1
+        for <util-linux@vger.kernel.org>; Sat,  5 Nov 2022 00:10:23 -0700 (PDT)
+Received: by mail-pl1-x62d.google.com with SMTP id u6so6771478plq.12
+        for <util-linux@vger.kernel.org>; Sat, 05 Nov 2022 00:10:23 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=content-transfer-encoding:to:subject:message-id:date:from:reply-to
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=c8XA1N0uaxkLO/wKHErNWHaSuu64k5Pjb5u9dmcZrOc=;
+        b=JDAy4Lfayovb04fyP9X1N5uElnIY2iE80nMgdLs5pqw+7yl8Uj5fZiRbP+HQT2WT2G
+         a5FeMSDXEQes5MEUGf3kTGpIAhMRpVrTpKlVccQImvMorS937nEqHkueCMi6I/TfkfES
+         2WOLxp/dbny+ekRhR60SSzpt7sC1rZAi1fytG69d9q05WQUReIJvRAs9jIQpzTLNq1JM
+         7N2aRb4RjP2S45aK9tTKE25YXfL+Vc/7EbDcGCymxR8NHVIfgiSG5l7Bhe/0+yjgDyUa
+         3B69UTgu6ZiUu5kY3U/uTdlHVATTeZ3+gzQs+CL3jxin3kK4aOhHZt6JKtBgcj0P3tBa
+         6ihg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=content-transfer-encoding:to:subject:message-id:date:from:reply-to
+         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=c8XA1N0uaxkLO/wKHErNWHaSuu64k5Pjb5u9dmcZrOc=;
+        b=xYVpY8wfcTMHyf29xTGDmB6SiUixqZUHS5LGw3AbhTIKhEeIsSv9rFaD5D5ASA2BE8
+         M9kYCctx6YqBNIHFyTvnc/iG4RiycXDA/+wA8UbBw/tBMVDgFoAz4PrzeLEjSL8dh391
+         O+OAEh+WEXaDRWBTRKxQCGyzdDEo6tyLsG53FM0PKp4lrKA9U8UiS9byrpNrpovWm8Os
+         bkOiu7SULT0VpN4h3qzE3W+uhIREIMxzsGmFNGcWku00b6CgL2xU48aXDqxWd1CdHGcq
+         t/17cuLINl1uyBqlqDTJUJaniUicCJh0MhRD0xwcDeyVN4PAAmwLOpyLl/0R5vY0DnUY
+         s0XQ==
+X-Gm-Message-State: ACrzQf2JfQ0A7mkSlJIVkebgcggrpFrP4Mu5u29I+J0DzORj+0QYZjdn
+        FS0gm/Wxu02DtNh+b/K56al+Wsdv7k2B1iqXxXQ=
+X-Google-Smtp-Source: AMsMyM6FpHCu1I9hrFckppahbMIb9TznfKa6HDPYReSVgx3vkyWPyLsNimmZgg+Z7hFUi+BMNescGGnukKDa7tIcHek=
+X-Received: by 2002:a17:902:d584:b0:186:f4bb:4e2b with SMTP id
+ k4-20020a170902d58400b00186f4bb4e2bmr39731238plh.80.1667632222889; Sat, 05
+ Nov 2022 00:10:22 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8BIT
-Content-Description: Mail message body
-Subject: Compliment,
-To:     util-linux@vger.kernel.org
-From:   "Wahid Majrooh" <whl@riazeda.com.pk>
-Date:   Thu, 27 Oct 2022 15:22:34 -0700
-Reply-To: whmjhaf@gmail.com
-X-Brightmail-Tracker: H4sIAAAAAAAAA02Ta0gUURTHvbOjXh+3ZsfXda0FByw1tawsA6mUCsFehJAoqOM6uovruuyM
-        jy0R0wjbSsQyUMKUWEntYW6pJGbulyixTK0WpAfRh9Q+FKEf8kt31l13vhwuv3PP+Z/zv1yo
-        Yh8EaqDBJAkWE2/kAoLpufSQrOTHxwp0exx96vQ7C5cDj4Lsv8PasyA/OKNUMBpqBMvuw8XB
-        +t/dI7S5HdQtzfT7N4JKGwiCmNmPP79Yp2wgGLLMKwo7Z1YC5QTLtAJ8bR3JZ8Rk4Pffp2j5
-        rGJSsKvjVsAGV+PXnT88fBfu611R2QAk5x141SbJOIwJx0ttNveVcEaL7aMb1wOYRNx030XJ
-        Z5qJw3db7AEbsjF44F4r3QZQl0KtS6HWpVDr8qn1AHoARIvWSp5Yo0vdl6KrqhR5SUwxCVKK
-        uWIYEKem6xNOj4HRecEJGAi4UKQfz9ex/nwNKXOCHEhxEYinCNpSUlVq1fOivshSbRRELhz5
-        gwIdizZxSbWxgtOgJIrQsE1qEmpFoyCRp3ECDFWkbMZ1npSV8tYLgqVqo5kTxECai0J5LR94
-        linnJaFCEMyCxZstg5B5NjQ4CxjncxI1tKnKJHAYJctaaotQLtSVGYySt4B04v+RkRllxj3e
-        dhR0hSQilQnlhBQMcoJsGErGfLhILiLRzFeKhnJP3zBk9SOKoV7q7hmNLsqQ9UJfvzfgEoBD
-        vRMTKuhwx+7WSRJnRuX4dWGWxNUR20sV695HE4WmZEcZuZG+2rS5jiYSZdrJMFsVCVlZsw3F
-        9hIeoeA+ce83WAbHybuGoSX35OST+NZhUe0KqQ/xQPc2GHXIF9Ue5uu3THyhiC/l7W5fJF5S
-        +jLRki/74qEeXxwyZL3Q10rTCPy5aL+RzF/vbp5sMhziG9biksJ7LB+1GX9uP0rITbPv3ZkW
-        f+J6Y+dTfk3KHUtdRWnN3xKP1L61qjsWNcW6U4WiC7bfQEMVn77AVOMB69W+hqxkbZKjcLA5
-        7+D00JO5+cmoEzAzkIs9F6etaSwb/3mmKL5/cokyL8/hnJX6UI4W9Xxqosoi8v8BJpzR2T8E
-        AAA=
-X-Spam-Status: No, score=3.6 required=5.0 tests=BAYES_50,
-        FREEMAIL_FORGED_REPLYTO,RCVD_IN_MSPIKE_H2,SPF_HELO_NONE,SPF_SOFTFAIL
-        autolearn=no autolearn_force=no version=3.4.6
-X-Spam-Level: ***
+Received: by 2002:a05:6a11:f584:b0:357:6350:d6dd with HTTP; Sat, 5 Nov 2022
+ 00:10:22 -0700 (PDT)
+Reply-To: stefanopessia755@hotmail.com
+From:   Stefano Pessina <abdiwalibucul@gmail.com>
+Date:   Sat, 5 Nov 2022 10:10:22 +0300
+Message-ID: <CALxMMKqvZKZrYwndSqmwjR5ZPLbe2vNsSMueY0o4ZHjFT5DmtA@mail.gmail.com>
+Subject: Geldspende
+To:     undisclosed-recipients:;
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Spam-Status: No, score=4.7 required=5.0 tests=BAYES_50,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,FREEMAIL_REPLYTO,
+        FREEMAIL_REPLYTO_END_DIGIT,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,
+        UNDISC_FREEM autolearn=no autolearn_force=no version=3.4.6
+X-Spam-Level: ****
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-Compliment,
-
-It will be a pleasure to discuss an important issue with you on area of Investment. My name is Wahid from Kabul
-
-
-Majrooh
-
+--=20
+Die Summe von 500.000,00 =E2=82=AC wurde Ihnen von STEFANO PESSINA gespende=
+t.
+Bitte kontaktieren Sie uns f=C3=BCr weitere Informationen =C3=BCber
+stefanopessia755@hotmail.com
