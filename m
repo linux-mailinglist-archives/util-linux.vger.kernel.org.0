@@ -2,291 +2,78 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id DAE8A637482
-	for <lists+util-linux@lfdr.de>; Thu, 24 Nov 2022 09:54:39 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id E2E8963960E
+	for <lists+util-linux@lfdr.de>; Sat, 26 Nov 2022 14:15:15 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229863AbiKXIyi (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Thu, 24 Nov 2022 03:54:38 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:56258 "EHLO
+        id S229485AbiKZNPN (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Sat, 26 Nov 2022 08:15:13 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:53084 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229852AbiKXIyb (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Thu, 24 Nov 2022 03:54:31 -0500
-Received: from smtp01.aussiebb.com.au (smtp01.aussiebb.com.au [121.200.0.92])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 77E73A1A3E
-        for <util-linux@vger.kernel.org>; Thu, 24 Nov 2022 00:54:29 -0800 (PST)
-Received: from localhost (localhost.localdomain [127.0.0.1])
-        by smtp01.aussiebb.com.au (Postfix) with ESMTP id 749E810039F
-        for <util-linux@vger.kernel.org>; Thu, 24 Nov 2022 19:54:21 +1100 (AEDT)
-X-Virus-Scanned: Debian amavisd-new at smtp01.aussiebb.com.au
-Received: from smtp01.aussiebb.com.au ([127.0.0.1])
-        by localhost (smtp01.aussiebb.com.au [127.0.0.1]) (amavisd-new, port 10024)
-        with ESMTP id ClDPLRmOSt3a for <util-linux@vger.kernel.org>;
-        Thu, 24 Nov 2022 19:54:21 +1100 (AEDT)
-Received: by smtp01.aussiebb.com.au (Postfix, from userid 116)
-        id 69866100297; Thu, 24 Nov 2022 19:54:21 +1100 (AEDT)
+        with ESMTP id S229464AbiKZNPN (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Sat, 26 Nov 2022 08:15:13 -0500
+Received: from mail-wm1-x344.google.com (mail-wm1-x344.google.com [IPv6:2a00:1450:4864:20::344])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 5A40F11A33
+        for <util-linux@vger.kernel.org>; Sat, 26 Nov 2022 05:15:12 -0800 (PST)
+Received: by mail-wm1-x344.google.com with SMTP id o30so5317493wms.2
+        for <util-linux@vger.kernel.org>; Sat, 26 Nov 2022 05:15:12 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=to:subject:message-id:date:from:reply-to:mime-version:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=8wlb4SYlCkKFrC3vDbrNKcnlsbFr9aWDknzVh2AdUFE=;
+        b=WXmPg++0oLXQwiB1Nrx9I+ztNKOqls4dkXLRpA0nGE65uU+O148txPVLZnl4+bo4Fm
+         C1Jgd1y4k3YB4RCcHlLWyCv1ixamCReGPgoUam6DwGb4v+m76P5/P3g7q0iZbIqGs6yq
+         3ZGGR33a59OhX5RYIiFTLhmaZYAM7cjRddi73JpSjtsKUcmyCY3bc689LQF+cj4X2YeW
+         m0SoU5Ht4HaGgbV/4KvqoZ/gugl1HZ7YuYLbu8BP66bCHZIHIe3VzvVv4MlKF9q32E3u
+         DTu5Fo3fyX4iw388Va3Vrzw942BmVj3Bs6wQAKJitNjzesRPDU0guZhfgy2tq34zUGsm
+         ufdA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=to:subject:message-id:date:from:reply-to:mime-version
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=8wlb4SYlCkKFrC3vDbrNKcnlsbFr9aWDknzVh2AdUFE=;
+        b=OZO3ugg9YN0Yez7yVJBUNLfTURHQIuvG5fpCG8M21/nFq8+t9jsGicqECCUe25/Fx0
+         tm6asZkcZwXM7G9dw79t4lTzdDgOijnHzhA4hdGNBDzHo43fnwUi/1QXx2YMLu+NopRR
+         HmBDSfByq/279Xne10q9K5q2ZV/14psC0drUpLt2nn6bhXwRwFB1ONRqlLc9SEuM7wt2
+         4IE3UrwX4jx08CL1g5OmSyNueY6pWXAF3W+O2uD26sAzTvU0imLbg2ilUH85g4fBIwOq
+         ladmyOslqv3ZrmC9r78Vm1Fv9OPEDeP/d2/J8VBZPvUsC61uqhCA9ZM/2YkT34CMlAzI
+         ToJw==
+X-Gm-Message-State: ANoB5pngK8pemJRgKXRN3Gkck1qeJOuvOm/HD5W0f6D55thSyM8SsSh+
+        JcfMd4xuYtUjTWxlfavSMf6vEm7ZWlEBXxXAK3o=
+X-Google-Smtp-Source: AA0mqf6G61sgV60oqglGXb4pa2oSm0F0AwWcancYsDt/yiFTql/KAMRVu/mYVmbcUL5XJqjTSObCOugU4JxpbTJimPY=
+X-Received: by 2002:a05:600c:3514:b0:3cf:a985:7692 with SMTP id
+ h20-20020a05600c351400b003cfa9857692mr25048685wmq.104.1669468510428; Sat, 26
+ Nov 2022 05:15:10 -0800 (PST)
+MIME-Version: 1.0
+Received: by 2002:adf:eb0b:0:0:0:0:0 with HTTP; Sat, 26 Nov 2022 05:15:09
+ -0800 (PST)
+Reply-To: ninacoulibaly03@hotmail.com
+From:   nina coulibaly <ninacou041@gmail.com>
+Date:   Sat, 26 Nov 2022 13:15:09 +0000
+Message-ID: <CANnT539caaq-LVw+fjMoOF_7NNECbsqh5MHH01GZCF8p+q1iOQ@mail.gmail.com>
+Subject: from nina coulibaly
+To:     undisclosed-recipients:;
+Content-Type: text/plain; charset="UTF-8"
+X-Spam-Status: No, score=4.9 required=5.0 tests=BAYES_50,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_ENVFROM_END_DIGIT,
+        FREEMAIL_FROM,FREEMAIL_REPLYTO,FREEMAIL_REPLYTO_END_DIGIT,
+        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,UNDISC_FREEM autolearn=no
+        autolearn_force=no version=3.4.6
+X-Spam-Level: ****
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,SPF_HELO_NONE,
-        SPF_NONE autolearn=ham autolearn_force=no version=3.4.6
-Received: from donald.themaw.net (180-150-90-198.b4965a.per.nbn.aussiebb.net [180.150.90.198])
-        by smtp01.aussiebb.com.au (Postfix) with ESMTP id 764A9100297;
-        Thu, 24 Nov 2022 19:54:19 +1100 (AEDT)
-Subject: [PATCH v2] libmount: use autofs mount hint to ignore autofs mount
- entries
-From:   Ian Kent <raven@themaw.net>
-To:     util-linux <util-linux@vger.kernel.org>
-Cc:     Karel Zak <kzak@redhat.com>, John Westerdale <jwesterd@redhat.com>,
-        fhirtz@redhat.com
-Date:   Thu, 24 Nov 2022 16:54:19 +0800
-Message-ID: <166928005898.283308.14145999397636040618.stgit@donald.themaw.net>
-User-Agent: StGit/1.4
-MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-Historically autofs mounts were not included in mount table listings.
-This is the case in other SysV autofs implementations and was also
-the case with Linux autofs.
+-- 
+Dear,
 
-But now that /etc/mtab is a symlink to the proc filesystem mount
-table the autofs mount entries appear in the mount table on Linux.
+I am interested to invest with you in your country with total trust
+and i hope you will give me total support, sincerity and commitment.
+Please get back to me as soon as possible so that i can give you my
+proposed details of funding and others.
 
-Prior to the symlinking of /etc/mtab mount table it was sufficient
-to call mount(2) and simply not update /etc/mtab to exclude autofs
-mounts from mount listings.
+Best Regards.
 
-Also, with this symlinking of /etc/mtab we have seen a shift in usage
-toward using the proc mount tables directly.
-
-But the autofs mount entries need to be retained when coming from the
-proc file system for applications that need them (such as systemd) so
-filtering out these entries within the kernel itself can't be done,
-it needs be done in user space.
-
-There are three reasons to omit the autofs mount entries.
-
-One is that certain types of auto-mounts have an autofs mount for every
-entry in their autofs mount map (autofs direct mounts) and these maps
-can be quite large. This leads to mount table listings containing a lot
-of unnecessary entries.
-
-Also, this difference in behaviour between autofs implementations can
-cause problems for applications that need to use the mount table and
-expect autofs entries aren't present.
-
-Lastly, there's very little that user space can do with autofs mount
-entries since this must be left to the autofs mount owner, typically
-the automount daemon. And it can also lead to attempts to access
-automount managed paths resulting in mounts being triggered when they
-aren't needed or mounts staying mounted for much longer thay they
-need to be.
-
-So the Linux autofs file system has been modified to accept a pseudo
-mount option of "ignore" (as is used in other OS implementations) so
-that user space utilities can use this as a hint to skip these autofs
-entries on reading the mount table.
-
-The Linux autofs automount daemon used getmntent(3) itself and has been
-modified to use the proc file system directly so that it isn't affected
-by the presence of the "ignore" mount option.
-
-The use of the "ignore" mount option is opt-in by autofs users and a
-configuration option has been added which defaults to not use the option
-so if there are applications that need these entries, other than autofs
-itself, they can be retained. Also, since this filtering is based on an
-added mount option earlier versions of Linux autofs and other autofs file
-system users will not use the option and so won't be affected by the change.
-
-Changes in v2:
-- make naming consistent with util-linux conventions.
-- make ignoring autofs mount entries the default since it will only
-  have an effect if it has been enabled in the autofs configuration.
-- drop patch to set ingore autofs mounts for mount(8) since it's now
-  default.
-
-Signed-off-by: Ian Kent <raven@themaw.net>
----
- libmount/src/context.c     |   24 ++++++++++++++++++++++++
- libmount/src/libmount.h.in |    2 ++
- libmount/src/libmount.sym  |    3 +++
- libmount/src/mountP.h      |    7 ++++++-
- libmount/src/tab_parse.c   |   34 ++++++++++++++++++++++++++++++++++
- 5 files changed, 69 insertions(+), 1 deletion(-)
-
-diff --git a/libmount/src/context.c b/libmount/src/context.c
-index d325ce430..a6d78953c 100644
---- a/libmount/src/context.c
-+++ b/libmount/src/context.c
-@@ -77,6 +77,8 @@ struct libmnt_context *mnt_new_context(void)
- 	/* if we're really root and aren't running setuid */
- 	cxt->restricted = (uid_t) 0 == ruid && ruid == euid ? 0 : 1;
- 
-+	cxt->noautofs = 1;
-+
- 	DBG(CXT, ul_debugobj(cxt, "----> allocate %s",
- 				cxt->restricted ? "[RESTRICTED]" : ""));
- 
-@@ -171,6 +173,7 @@ int mnt_reset_context(struct libmnt_context *cxt)
- 	cxt->mountdata = NULL;
- 	cxt->subdir = NULL;
- 	cxt->flags = MNT_FL_DEFAULT;
-+	cxt->noautofs = 1;
- 
- 	/* free additional mounts list */
- 	while (!list_empty(&cxt->addmounts)) {
-@@ -311,6 +314,8 @@ struct libmnt_context *mnt_copy_context(struct libmnt_context *o)
- 	n->table_fltrcb = o->table_fltrcb;
- 	n->table_fltrcb_data = o->table_fltrcb_data;
- 
-+	n->noautofs = o->noautofs;
-+
- 	return n;
- failed:
- 	mnt_free_context(n);
-@@ -1299,6 +1304,8 @@ int mnt_context_get_mountinfo(struct libmnt_context *cxt, struct libmnt_table **
- 			goto end;
- 		}
- 
-+		mnt_table_enable_noautofs(cxt->mountinfo, cxt->noautofs);
-+
- 		if (cxt->table_errcb)
- 			mnt_table_set_parser_errcb(cxt->mountinfo, cxt->table_errcb);
- 		if (cxt->table_fltrcb)
-@@ -2778,6 +2785,23 @@ int mnt_context_strerror(struct libmnt_context *cxt __attribute__((__unused__)),
- 	return 0;
- }
- 
-+/**
-+ * mnt_context_enable_noautofs:
-+ * @cxt: context
-+ * @ignore: ignore or don't ignore
-+ *
-+ * Enable/disable ignore autofs mount table entries on reading the
-+ * mount table. Only effective if the "ignore" mount option is being
-+ * used for autofs mounts (such as if automount(8) has been configured
-+ * to do so).
-+ */
-+int mnt_context_enable_noautofs(struct libmnt_context *cxt, int ignore)
-+{
-+	if (!cxt)
-+		return -EINVAL;
-+	cxt->noautofs = ignore ? 1 : 0;
-+	return 0;
-+}
- 
- int mnt_context_get_generic_excode(int rc, char *buf, size_t bufsz, const char *fmt, ...)
- {
-diff --git a/libmount/src/libmount.h.in b/libmount/src/libmount.h.in
-index 2fb641d03..8ca58a0b5 100644
---- a/libmount/src/libmount.h.in
-+++ b/libmount/src/libmount.h.in
-@@ -863,6 +863,8 @@ extern int mnt_context_strerror(struct libmnt_context *cxt, char *buf,
- 				size_t bufsiz)
- 				__ul_attribute__((deprecated));
- 
-+extern int mnt_context_enable_noautofs(struct libmnt_context *cxt, int ignore);
-+
- extern int mnt_context_get_excode(struct libmnt_context *cxt,
-                         int rc, char *buf, size_t bufsz);
- 
-diff --git a/libmount/src/libmount.sym b/libmount/src/libmount.sym
-index b99fc4cc2..e0df6db3b 100644
---- a/libmount/src/libmount.sym
-+++ b/libmount/src/libmount.sym
-@@ -371,4 +371,7 @@ MOUNT_2_39 {
- 	mnt_context_enable_onlyonce;
- 	mnt_context_is_lazy;
- 	mnt_context_get_mountinfo_userdata;
-+	mnt_context_enable_noautofs;
-+	mnt_table_enable_noautofs;
-+	mnt_table_is_noautofs;
- } MOUNT_2_38;
-diff --git a/libmount/src/mountP.h b/libmount/src/mountP.h
-index ffd9ba4fe..6f8f03a33 100644
---- a/libmount/src/mountP.h
-+++ b/libmount/src/mountP.h
-@@ -148,6 +148,9 @@ extern int __mnt_table_is_fs_mounted(	struct libmnt_table *tb,
- 					struct libmnt_fs *fstab_fs,
- 					const char *tgt_prefix);
- 
-+extern int mnt_table_enable_noautofs(struct libmnt_table *tb, int ignore);
-+extern int mnt_table_is_noautofs(struct libmnt_table *tb);
-+
- /*
-  * Generic iterator
-  */
-@@ -251,6 +254,7 @@ struct libmnt_table {
- 	int		(*fltrcb)(struct libmnt_fs *fs, void *data);
- 	void		*fltrcb_data;
- 
-+	int		noautofs;	/* ignore autofs mounts */
- 
- 	struct list_head	ents;	/* list of entries (libmnt_fs) */
- 	void		*userdata;
-@@ -357,7 +361,8 @@ struct libmnt_context
- 	struct libmnt_ns	ns_tgt;		/* target namespace */
- 	struct libmnt_ns	*ns_cur;	/* pointer to current namespace */
- 
--	unsigned int	enabled_textdomain : 1;		/* bindtextdomain() called */
-+	unsigned int	enabled_textdomain : 1;	/* bindtextdomain() called */
-+	unsigned int 	noautofs : 1;		/* ignore autofs mounts */
- };
- 
- /* flags */
-diff --git a/libmount/src/tab_parse.c b/libmount/src/tab_parse.c
-index 75f8e406b..6e3d5ef9f 100644
---- a/libmount/src/tab_parse.c
-+++ b/libmount/src/tab_parse.c
-@@ -762,6 +762,14 @@ int mnt_table_parse_stream(struct libmnt_table *tb, FILE *f, const char *filenam
- 		if (rc == 0 && tb->fltrcb && tb->fltrcb(fs, tb->fltrcb_data))
- 			rc = 1;	/* filtered out by callback... */
- 
-+		if (rc == 0 && mnt_table_is_noautofs(tb)) {
-+			const char *fstype = mnt_fs_get_fstype(fs);
-+
-+			if (fstype && strcmp(fstype, "autofs") == 0 &&
-+			    mnt_fs_get_option(fs, "ignore", NULL, NULL) == 0)
-+				rc = 1; /* Skip "ignore" autofs entry */
-+		}
-+
- 		/* add to the table */
- 		if (rc == 0) {
- 			rc = mnt_table_add_fs(tb, fs);
-@@ -1059,6 +1067,32 @@ int mnt_table_set_parser_fltrcb(struct libmnt_table *tb,
- 	return 0;
- }
- 
-+/*
-+ * mnt_table_enable_noautofs:
-+ * @tb: table
-+ * @ignore: ignore or don't ignore
-+ *
-+ * Enable/disable ignore autofs mount table entries on reading.
-+ */
-+int mnt_table_enable_noautofs(struct libmnt_table *tb, int ignore)
-+{
-+	if (!tb)
-+		return -EINVAL;
-+	tb->noautofs = ignore ? 1 : 0;
-+	return 0;
-+}
-+
-+/*
-+ * mnt_table_is_noautofs:
-+ * @tb: table
-+ *
-+ * Return the the enabled status of ignore autofs mount table entries.
-+ */
-+int mnt_table_is_noautofs(struct libmnt_table *tb)
-+{
-+	return tb ? tb->noautofs : 0;
-+}
-+
- /**
-  * mnt_table_parse_swaps:
-  * @tb: table
-
-
+Mrs Nina Coulibaly
