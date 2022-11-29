@@ -2,75 +2,69 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 4374963BDC4
-	for <lists+util-linux@lfdr.de>; Tue, 29 Nov 2022 11:17:16 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id EEC1763C933
+	for <lists+util-linux@lfdr.de>; Tue, 29 Nov 2022 21:22:08 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S232521AbiK2KRO (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Tue, 29 Nov 2022 05:17:14 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:41382 "EHLO
+        id S232988AbiK2UWH (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Tue, 29 Nov 2022 15:22:07 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:59692 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S232490AbiK2KRI (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Tue, 29 Nov 2022 05:17:08 -0500
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 3AB212A2
-        for <util-linux@vger.kernel.org>; Tue, 29 Nov 2022 02:16:07 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-        s=mimecast20190719; t=1669716967;
-        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-         in-reply-to:in-reply-to:references:references;
-        bh=qbL8kfYj96lLKD8QNCUo/c6iJ5LBKsa7xsrzFi1JBSM=;
-        b=QINxP5ghmCR/eV13lMTZJaRUT/e9ofC/BoHz3EppXIuRgWsn2sda7jnRCcda+NhZMatD9u
-        W3GW25TGwUIhL1j3Z85fsPOl7vHRuSQ7V0J8Xb78gqTYcgJlKBZWX2Lm6/UmKJlIQclGBK
-        aPbJ0twfT6F73zPYbTCXg3gT1azHttk=
-Received: from mimecast-mx02.redhat.com (mx3-rdu2.redhat.com
- [66.187.233.73]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-225-HQ26aTpYNs27awY1buo5OA-1; Tue, 29 Nov 2022 05:16:03 -0500
-X-MC-Unique: HQ26aTpYNs27awY1buo5OA-1
-Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.rdu2.redhat.com [10.11.54.3])
-        (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
-        (No client certificate requested)
-        by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 548C61C09C8D;
-        Tue, 29 Nov 2022 10:16:03 +0000 (UTC)
-Received: from ws.net.home (ovpn-193-199.brq.redhat.com [10.40.193.199])
-        by smtp.corp.redhat.com (Postfix) with ESMTPS id 8C26E1121314;
-        Tue, 29 Nov 2022 10:16:02 +0000 (UTC)
-Date:   Tue, 29 Nov 2022 11:16:00 +0100
-From:   Karel Zak <kzak@redhat.com>
-To:     Ian Kent <raven@themaw.net>
-Cc:     util-linux <util-linux@vger.kernel.org>,
-        John Westerdale <jwesterd@redhat.com>, fhirtz@redhat.com
-Subject: Re: [PATCH v2] libmount: use autofs mount hint to ignore autofs
- mount entries
-Message-ID: <20221129101600.bzxikojw7chglrjw@ws.net.home>
-References: <166928005898.283308.14145999397636040618.stgit@donald.themaw.net>
+        with ESMTP id S236248AbiK2UWD (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Tue, 29 Nov 2022 15:22:03 -0500
+Received: from mail-ej1-x641.google.com (mail-ej1-x641.google.com [IPv6:2a00:1450:4864:20::641])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 8CBC82662
+        for <util-linux@vger.kernel.org>; Tue, 29 Nov 2022 12:22:02 -0800 (PST)
+Received: by mail-ej1-x641.google.com with SMTP id b2so20280805eja.7
+        for <util-linux@vger.kernel.org>; Tue, 29 Nov 2022 12:22:02 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=to:subject:message-id:date:from:reply-to:mime-version:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=SzBlYeGeT15Xra75w9IZDBjQ7Da3XKSmRdlnDJDYrko=;
+        b=ecfM1Z0NmIokKe+284HhHgYbjCE5Jovv6Zrz4NpvcWTSn2UhCVFKlxHKbX7zHiSkE6
+         x/+JMxcNt8XFmBXjgb56RCI2iQ+OvZPmIqS4qhkNq/Hhwxb6lZikH98OaDyqgv16NZMi
+         8cUDqEXFcoCbMCf/C0l3NlsR/JS6g7Rr5QquuUojVr83WPnhB9gKY06JEzvWnbe40c27
+         LPQ4Xp1FVPqukGu5gND4V/K3svHgO42gkHmD9gzxHdLXyrc5mZtLQLF9k1ZQC27UuMcf
+         gWWmnvb+YrvnA6Hvq0jfrQaKqNSu+MGJZUocDQK7qo9tBHM50138Mzbei1dQ+aZPrNio
+         ZErg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=to:subject:message-id:date:from:reply-to:mime-version
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=SzBlYeGeT15Xra75w9IZDBjQ7Da3XKSmRdlnDJDYrko=;
+        b=cEmP/6Lh2LGGgMuXJi2wwLtHlMUZH4USUb6R1ac0OlPhauBrD9IT7tQ99THD6arAFh
+         oJ6zMUy2HWQwtoZQ1kIws0WIlGYZoeGuDl/YhTQFs7m9kqzUAi/amuVebhQlB31vqkc0
+         EsKX2xXmM/Ev3SSLgwt+VL+NKmXF+8Y6Xf4LnxicrDRf7gTkR/BtB26rh+PZ746kgOGJ
+         H5qFaMitmiMkliJ8Ml/Bm06pKQKbX5c1sRvp2xmnDelkXpwgfv/M59lW+fA8cksUIxgH
+         yzl11ZmvoiHlPFX5aX0vM52UVdcZaMuqYOtf63kVwv/EwGIyW/Sysi2NtoSNcYJHKjb0
+         o1HQ==
+X-Gm-Message-State: ANoB5pk6JWNFz5uNIo1FCBRrBKD4dvvL2sJ7AUSlh6YdG/PGOW8zVhys
+        JBWvUv2W+qmyIbEEMESTBPuWQ3snlchiU6WVuJ4=
+X-Google-Smtp-Source: AA0mqf6lTjPiBcS9mCbsKmYw1xdbupKmp7YMQLanUXgUwALrnXR/0XB2gDuNMJHwqoQfM5MXESkwF2TaKGA96Y4XeVE=
+X-Received: by 2002:a17:906:2cd3:b0:7bf:b675:ffdd with SMTP id
+ r19-20020a1709062cd300b007bfb675ffddmr10188720ejr.610.1669753320910; Tue, 29
+ Nov 2022 12:22:00 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <166928005898.283308.14145999397636040618.stgit@donald.themaw.net>
-X-Scanned-By: MIMEDefang 3.1 on 10.11.54.3
-X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_NONE,
-        RCVD_IN_MSPIKE_H2,SPF_HELO_NONE,SPF_NONE autolearn=ham
-        autolearn_force=no version=3.4.6
+Received: by 2002:a17:906:bfe7:b0:78c:cad3:6a2f with HTTP; Tue, 29 Nov 2022
+ 12:22:00 -0800 (PST)
+Reply-To: mr.abraham022@gmail.com
+From:   "Mr.Abraham" <chiogb003@gmail.com>
+Date:   Tue, 29 Nov 2022 20:22:00 +0000
+Message-ID: <CABa6GnnNP5fuHfrt6aDfshOLuNZeD_t++XM4Hvxwscr=qXOSBA@mail.gmail.com>
+Subject: hi
+To:     undisclosed-recipients:;
+Content-Type: text/plain; charset="UTF-8"
+X-Spam-Status: No, score=4.9 required=5.0 tests=BAYES_50,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_ENVFROM_END_DIGIT,
+        FREEMAIL_FROM,FREEMAIL_REPLYTO,FREEMAIL_REPLYTO_END_DIGIT,
+        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,T_HK_NAME_FM_MR_MRS,
+        UNDISC_FREEM autolearn=no autolearn_force=no version=3.4.6
+X-Spam-Level: ****
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-On Thu, Nov 24, 2022 at 04:54:19PM +0800, Ian Kent wrote:
->  libmount/src/context.c     |   24 ++++++++++++++++++++++++
->  libmount/src/libmount.h.in |    2 ++
->  libmount/src/libmount.sym  |    3 +++
->  libmount/src/mountP.h      |    7 ++++++-
->  libmount/src/tab_parse.c   |   34 ++++++++++++++++++++++++++++++++++
->  5 files changed, 69 insertions(+), 1 deletion(-)
-
-Applied, thanks!
-
--- 
- Karel Zak  <kzak@redhat.com>
- http://karelzak.blogspot.com
-
+My Greeting, Did you receive the letter i sent to you. Please answer me.
+Regard, Mr.Abraham
