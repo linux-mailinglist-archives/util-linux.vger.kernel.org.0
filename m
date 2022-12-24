@@ -2,127 +2,76 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id BBE8D64CFC7
-	for <lists+util-linux@lfdr.de>; Wed, 14 Dec 2022 19:54:59 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 9257465599D
+	for <lists+util-linux@lfdr.de>; Sat, 24 Dec 2022 10:21:30 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S238575AbiLNSy6 (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Wed, 14 Dec 2022 13:54:58 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:59710 "EHLO
+        id S229584AbiLXJV1 (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Sat, 24 Dec 2022 04:21:27 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:41570 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S238880AbiLNSys (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Wed, 14 Dec 2022 13:54:48 -0500
-Received: from mail-lf1-x129.google.com (mail-lf1-x129.google.com [IPv6:2a00:1450:4864:20::129])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 64E3828E2D
-        for <util-linux@vger.kernel.org>; Wed, 14 Dec 2022 10:54:47 -0800 (PST)
-Received: by mail-lf1-x129.google.com with SMTP id g7so12029400lfv.5
-        for <util-linux@vger.kernel.org>; Wed, 14 Dec 2022 10:54:47 -0800 (PST)
+        with ESMTP id S229445AbiLXJV0 (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Sat, 24 Dec 2022 04:21:26 -0500
+Received: from mail-lf1-x132.google.com (mail-lf1-x132.google.com [IPv6:2a00:1450:4864:20::132])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id CF544389D
+        for <util-linux@vger.kernel.org>; Sat, 24 Dec 2022 01:21:25 -0800 (PST)
+Received: by mail-lf1-x132.google.com with SMTP id 1so9908477lfz.4
+        for <util-linux@vger.kernel.org>; Sat, 24 Dec 2022 01:21:25 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=content-transfer-encoding:to:subject:message-id:date:from:reply-to
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=BRQm+z5zZvqAspvybGyHhPMRJtHnBkC47At9BzYrF4Y=;
-        b=P/kPvB6wncEw1S96HE4BbiZZN3VTIvaZnAww7BSjAe8sdHElNk+vBTQtlr1eS6SvA1
-         fvBZD5xzzKUUwbON8AnB9ZK42Y5ZPwgRjXCuv2yFuNye7IL9BJh7QnypD+SY+DuNPkt2
-         9SaJCYAlpMUMp5+URznydzxjUPRQfJVTgRk2U1HE9q5JmteaCV9IU9PbYnUEj/PgQ2yT
-         KClKVaj9EzQJ48p2dxR2xxDKSS1PA1t+5R0Ypm6OW/si2ABlp/YA5bR9czZ0bkjA95hq
-         idQU/7eblTT1Sro9pdZwGlS4G5ASHjJzFai+lMikjola79QYDKkDgouuvgQsZz7j46PC
-         TVJw==
+        h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+         :date:message-id:reply-to;
+        bh=pTCYA9g8ZoeYFZDn0yB/2WUtx7LggnssXWfP1zG6L+s=;
+        b=h4Nmj6HGCIAHFOgoMATPjOUE65+DNGCdNlZASDiNLZlbaS3gNkNwBh2xZmeEvzL7ke
+         zRhnCa4EpLrIyRdVnRY0ZRD9UHVKbUr4RzrlzjVoIZyiuFEKWq+9nIpQTQsgHEEEeH7D
+         V/bQRaTjhNP5kpGws9T8YrZHVfZjF2NO7RSQK+I0CBU8fu7l6eg+3dhuRxXSFT3v0tLu
+         2mUOWuvLtDu9AtvrZ2QJmfxykauh82tJ8Dt/K34vP5wwe+NcwMm8p2NRrdbaIPH6Clhy
+         t/GJ4dImcmoi7K49KO5vDoz5HF0GK2sflwWXQnfNoNK+4xkjb4kHwvxjjXylvjZWaChS
+         PM3A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=content-transfer-encoding:to:subject:message-id:date:from:reply-to
-         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=BRQm+z5zZvqAspvybGyHhPMRJtHnBkC47At9BzYrF4Y=;
-        b=fVgNHfEUm+vyA/2hkL2qm1kW+BI5u+6fcFqFHgAluy/2ciOxJwSZ+3QEO5jbLFblZA
-         GQ2hoPnOG5vDxRnherqSNodCTIF0gtF+5aXg7sp8NQ8UgKLOgmUW6wBb5k0K0FRmqBIX
-         BQ/tyov6wdxl4oB86elNls7Hh6j6Bqhd/Qwe9nh8kBPkY376QqND4q5DngAtfnaTRBzB
-         dBzA/pUQ5ys3FRWQhO96qRj1qIncrq4njUvwqT6PUs2TXbqjt6du1674UVDLGQHyRe4+
-         UAI8wKB7+TRaiiIvYZaw7vHLFTZVzwb8ykvUYfK2pBOx/WB31K2fRolQnqODu5tcrEGQ
-         UmNg==
-X-Gm-Message-State: ANoB5ploEsW60gcid5zvBy9iPQm27rZXrO/rq2/wbFf4sS3dtpbM85X1
-        o14JI7CDtFtUihYmxbtkg31/B7mKh3JfYpSc+vg=
-X-Google-Smtp-Source: AA0mqf4JYXLeMAcReiAfiHgzV/HXRPVprR0oUxHlKqvKOCIldgkzZkmRb2PcQWH2dJUKgwxj+MElAJrqKzBICiXKrDw=
-X-Received: by 2002:a05:6512:a93:b0:4a2:6337:872d with SMTP id
- m19-20020a0565120a9300b004a26337872dmr28385654lfu.35.1671044085695; Wed, 14
- Dec 2022 10:54:45 -0800 (PST)
+        h=to:subject:message-id:date:from:mime-version:x-gm-message-state
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=pTCYA9g8ZoeYFZDn0yB/2WUtx7LggnssXWfP1zG6L+s=;
+        b=3yQAonDOo388AYIcHzyD+8mfl6xo2hAtFl55+6qKs9r9ivygza43XrSLKWjufpZ5Vx
+         mnajlE7EOMDiTKpsYj+JkjcdcBRLBg0J23kunBi+iOM+l6Y71RPrejvIJcd9rvzUhzNy
+         RatAdP+a1ypQ6H5SKJhq6FZkIkogtBKYU6HEHLTuSUO+eD96RhcHwRL6oZmVkmZTwrPM
+         pPzdjH490HwY+jVfrGCr0SWE3XOgwlXz3uzoz4Lz6OdnjvL81/oS83G2rAiMnbj9E3ju
+         2omcAXLzE98fTDjvAWPIodEnmSqtcjwAi/J1E3kwN9BDvr4NkFdjHKiOphR29/NIks+5
+         IQ4A==
+X-Gm-Message-State: AFqh2kokMLLKpbOyvdtoLPHPnLzhMeQ2lRnC9zcomMPAbAmCruZH+g3t
+        fu/A6DCFUd4RlR7+pb4xLEYHLtvGWaiJ286G7LU=
+X-Google-Smtp-Source: AMrXdXvtZKh9ZcUZE79HZ9uGfXmhpV5TgM0tq5RmkvvMEW8m1lAFKwl1fpneb8asK3iOJHy/wWmsRJmID3VXWlqhtSI=
+X-Received: by 2002:a05:6512:3f07:b0:4ca:f873:7cf3 with SMTP id
+ y7-20020a0565123f0700b004caf8737cf3mr304094lfa.89.1671873683674; Sat, 24 Dec
+ 2022 01:21:23 -0800 (PST)
 MIME-Version: 1.0
-Received: by 2002:a05:6022:411:b0:33:613c:e973 with HTTP; Wed, 14 Dec 2022
- 10:54:45 -0800 (PST)
-Reply-To: illuminatilord1945@gmail.com
-From:   Illuminati Invitation <musarabiuinusa123@gmail.com>
-Date:   Wed, 14 Dec 2022 19:54:45 +0100
-Message-ID: <CALQYZvAD8sE_4hZ2YHN4TkBXYKQKPcFnsF3f67YqFr+v+2VSTw@mail.gmail.com>
-Subject: WILLKOMMEN BEI DER ILLUMINATI-GESELLSCHAFT
+Received: by 2002:a05:6504:a07:b0:20e:2d61:50d3 with HTTP; Sat, 24 Dec 2022
+ 01:21:22 -0800 (PST)
+From:   Koko Yovo <koyovo1959@gmail.com>
+Date:   Sat, 24 Dec 2022 09:21:22 +0000
+Message-ID: <CAPSYX0a3s+19yXacGa8S9oxm7HJb0-QH7KjkJ+82fSQ4krzUTA@mail.gmail.com>
+Subject: 
 To:     undisclosed-recipients:;
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Spam-Status: Yes, score=5.3 required=5.0 tests=BAYES_50,DKIM_SIGNED,
+X-Spam-Status: No, score=4.6 required=5.0 tests=BAYES_50,DKIM_SIGNED,
         DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_ENVFROM_END_DIGIT,
-        FREEMAIL_FROM,FREEMAIL_REPLYTO,FREEMAIL_REPLYTO_END_DIGIT,
-        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,SUBJ_ALL_CAPS,UNDISC_FREEM
-        autolearn=no autolearn_force=no version=3.4.6
-X-Spam-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
-        *      https://www.dnswl.org/, no trust
-        *      [2a00:1450:4864:20:0:0:0:129 listed in]
-        [list.dnswl.org]
-        *  0.8 BAYES_50 BODY: Bayes spam probability is 40 to 60%
-        *      [score: 0.5000]
-        *  0.0 SPF_HELO_NONE SPF: HELO does not publish an SPF Record
-        * -0.0 SPF_PASS SPF: sender matches SPF record
-        *  0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends
-        *       in digit
-        *      [musarabiuinusa123[at]gmail.com]
-        *  0.2 FREEMAIL_REPLYTO_END_DIGIT Reply-To freemail username ends in
-        *      digit
-        *      [illuminatilord1945[at]gmail.com]
-        *  0.5 SUBJ_ALL_CAPS Subject is all capitals
-        *  0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail
-        *      provider
-        *      [musarabiuinusa123[at]gmail.com]
-        *  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
-        *       valid
-        * -0.1 DKIM_VALID_EF Message has a valid DKIM or DK signature from
-        *      envelope-from domain
-        * -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
-        *      author's domain
-        * -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-        *  2.7 UNDISC_FREEM Undisclosed recipients + freemail reply-to
-        *  1.0 FREEMAIL_REPLYTO Reply-To/From or Reply-To/body contain
-        *      different freemails
-X-Spam-Level: *****
+        FREEMAIL_FROM,LOTS_OF_MONEY,NA_DOLLARS,RCVD_IN_DNSWL_NONE,
+        SPF_HELO_NONE,SPF_PASS,UNDISC_MONEY autolearn=no autolearn_force=no
+        version=3.4.6
+X-Spam-Level: ****
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
---=20
-EINLADUNG ZUR GRO=C3=9FEN ILLUMINATI-GESELLSCHAFT
-
-GL=C3=9CCKWUNSCH AN SIE....
-Du wurdest unter den Menschen ausgew=C3=A4hlt, denen diesen November die
-M=C3=B6glichkeit gegeben wurde, reich und beliebt zu werden, indem du dich
-den Gro=C3=9Fen ILLUMINATI anschlie=C3=9Ft.
-
-Treten Sie uns noch heute bei und verwirklichen Sie Ihre Tr=C3=A4ume und
-leben Sie ein besseres Leben. Es ist wichtig zu wissen, dass Sie daf=C3=BCr
-bezahlt werden, Mitglied zu werden. Sie verdienen monatlich ein
-Mitgliedsgehalt. Es sind keine Menschenopfer erforderlich, nur Ihre
-Loyalit=C3=A4t und Ihr Engagement. Nutzen Sie diese "GOLDENEN
-GELEGENHEITEN". Die Organisation macht Sie reich und ber=C3=BChmt in der
-Welt ...
-
-F=C3=9CLLEN SIE BITTE DIE FOLGENDEN DETAILS AUS UND SENDEN SIE JETZT ZUR=C3=
-=9CCK.....
-
-Ganze Namen:
-Land:
-Das Alter:
-Familienstand:
-Beruf:
-Monatliches Einkommen:
-Telefonnummer:
-
-Bitte senden Sie diese Informationen jetzt an die ILLUMINATI-E-Mail unten.
-
-E-Mail: illuminatilord1945@gmail.com
+Why are you silent I hope you are okay because this is two time now i
+sent to you this mail without hearing from you? Today i arrive back
+from my trip and you are silent over the mail i sent to you since last
+week please let me know the reason why you were silent i was imagine
+why you haven't response to me back  very important Please Dear I need
+ your honest trust and help? With my good intention  Can i trust you
+to transfer the Sum of $47.500.000.00 Million US Dollars, into your
+account in your country if possible get back to me for more details  i
+wait for your reply and Please Kindly let me know than to keep silent?
+Mr Koko Yovo.
