@@ -2,68 +2,152 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id EB595661170
-	for <lists+util-linux@lfdr.de>; Sat,  7 Jan 2023 20:56:31 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 6CF2A662C39
+	for <lists+util-linux@lfdr.de>; Mon,  9 Jan 2023 18:07:54 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S230230AbjAGT4a (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Sat, 7 Jan 2023 14:56:30 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:52066 "EHLO
+        id S235216AbjAIRHf (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Mon, 9 Jan 2023 12:07:35 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:56528 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S230517AbjAGT42 (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Sat, 7 Jan 2023 14:56:28 -0500
-Received: from aurora.tech (unknown [64.124.54.114])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTP id 3A15C3896
-        for <util-linux@vger.kernel.org>; Sat,  7 Jan 2023 11:56:24 -0800 (PST)
-Received: by aurora.tech (Postfix, from userid 1001)
-        id AB1441640183; Sat,  7 Jan 2023 11:47:23 -0800 (PST)
-From:   alison@she-devel.com
+        with ESMTP id S236742AbjAIRGp (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Mon, 9 Jan 2023 12:06:45 -0500
+Received: from cdw.me.uk (cdw.me.uk [91.203.57.136])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTP id 6C9B6101E4
+        for <util-linux@vger.kernel.org>; Mon,  9 Jan 2023 09:06:01 -0800 (PST)
+Received: from chris by delta.arachsys.com with local (Exim 4.80)
+        (envelope-from <chris@arachsys.com>)
+        id 1pEvay-0005rF-3w
+        for util-linux@vger.kernel.org; Mon, 09 Jan 2023 17:06:00 +0000
+Date:   Mon, 9 Jan 2023 17:06:00 +0000
+From:   Chris Webb <chris@arachsys.com>
 To:     util-linux@vger.kernel.org
-Cc:     kzak@redhat.com, achaiken@aurora.tech, alison@she-devel.com
-Subject: [PATCH 3/3] schedutils: better illustrate the usage of cpu-lists with taskset
-Date:   Sat,  7 Jan 2023 11:47:08 -0800
-Message-Id: <20230107194708.6878-4-alison@she-devel.com>
-X-Mailer: git-send-email 2.32.0
-In-Reply-To: <20230107194708.6878-1-alison@she-devel.com>
-References: <20230107194708.6878-1-alison@she-devel.com>
+Subject: [PATCH] unshare: support --map-users=inner:outer:count as well as
+ outer,inner,count
+Message-ID: <3b796e2247216e95068b50abf3af8e5d47736907.1673283788.git.chris@arachsys.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Spam-Status: No, score=0.7 required=5.0 tests=BAYES_00,
-        HEADER_FROM_DIFFERENT_DOMAINS,KHOP_HELO_FCRDNS,MAY_BE_FORGED,
-        PDS_RDNS_DYNAMIC_FP,RDNS_DYNAMIC,SPF_HELO_SOFTFAIL,SPF_SOFTFAIL
-        autolearn=no autolearn_force=no version=3.4.6
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,SPF_HELO_NONE,
+        SPF_PASS autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-From: Alison Chaiken <alison@she-devel.com>
+The argument ordering in /proc/self/[gu]id_map and mount -o X-mount.idmap
+is consistently inner:outer:count but unshare --map-users and --map-groups
+were originally defined to expect outer,inner,count instead.
 
-Provide a few examples of how to use the cpu-list variant of the taskset
-command.
+To reduce confusion caused by this mismatch, support a colon-separated
+inner:outer:count ordering as well as the original comma-separated
+outer,inner,count argument format. Although we accept both formats, only
+document the new one in the man page and usage text.
+
+Fixes: https://github.com/util-linux/util-linux/issues/1988
+Signed-off-by: Chris Webb <chris@arachsys.com>
 ---
- schedutils/taskset.1.adoc | 8 ++++++++
- 1 file changed, 8 insertions(+)
+ sys-utils/unshare.1.adoc |  4 ++--
+ sys-utils/unshare.c      | 50 +++++++++++++---------------------------
+ 2 files changed, 18 insertions(+), 36 deletions(-)
 
-diff --git a/schedutils/taskset.1.adoc b/schedutils/taskset.1.adoc
-index 9609e0c9c..56084fd3c 100644
---- a/schedutils/taskset.1.adoc
-+++ b/schedutils/taskset.1.adoc
-@@ -93,6 +93,14 @@ You can also retrieve the CPU affinity of an existing task{colon}::
- Or set it{colon}::
- *taskset -p* _mask pid_
+diff --git a/sys-utils/unshare.1.adoc b/sys-utils/unshare.1.adoc
+index 030e9a497..10f5d6c67 100644
+--- a/sys-utils/unshare.1.adoc
++++ b/sys-utils/unshare.1.adoc
+@@ -93,13 +93,13 @@ Just before running the program, mount the proc filesystem at _mountpoint_ (defa
+ **--map-user=**__uid|name__::
+ Run the program only after the current effective user ID has been mapped to _uid_. If this option is specified multiple times, the last occurrence takes precedence. This option implies *--user*.
  
-+//TRANSLATORS: Keep {colon} untranslated.
-+When a cpu-list is specified for an existing process, the 'p' and 'c' options must be grouped together{colon}::
-+*taskset -pc* _cpu-list pid_
-+
-+//TRANSLATORS: Keep {colon} untranslated.
-+The *--cpu-list* form is applicable only for launching new commands{colon}::
-+*taskset --cpu-list* _cpu-list command_
-+
- == PERMISSIONS
+-**--map-users=**__outeruid,inneruid,count__|**auto**::
++**--map-users=**__inneruid:outeruid:count__|**auto**::
+ Run the program only after the block of user IDs of size _count_ beginning at _outeruid_ has been mapped to the block of user IDs beginning at _inneruid_. This mapping is created with **newuidmap**(1). If the range of user IDs overlaps with the mapping specified by *--map-user*, then a "hole" will be removed from the mapping. This may result in the highest user ID of the mapping not being mapped. The special value *auto* will map the first block of user IDs owned by the effective user from _/etc/subuid_ to a block starting at user ID 0. If this option is specified multiple times, the last occurrence takes precedence. This option implies *--user*.
  
- A user can change the CPU affinity of a process belonging to the same user. A user must possess *CAP_SYS_NICE* to change the CPU affinity of a process belonging to another user. A user can retrieve the affinity mask of any process.
--- 
-2.32.0
-
+ **--map-group=**__gid|name__::
+ Run the program only after the current effective group ID has been mapped to _gid_. If this option is specified multiple times, the last occurrence takes precedence. This option implies *--setgroups=deny* and *--user*.
+ 
+-**--map-groups=**__outergid,innergid,count__|**auto**::
++**--map-groups=**__innergid:outergid:count__|**auto**::
+ Run the program only after the block of group IDs of size _count_ beginning at _outergid_ has been mapped to the block of group IDs beginning at _innergid_. This mapping is created with **newgidmap**(1). If the range of group IDs overlaps with the mapping specified by *--map-group*, then a "hole" will be removed from the mapping. This may result in the highest group ID of the mapping not being mapped. The special value *auto* will map the first block of user IDs owned by the effective user from _/etc/subgid_ to a block starting at group ID 0. If this option is specified multiple times, the last occurrence takes precedence. This option implies *--user*.
+ 
+ **--map-auto**::
+diff --git a/sys-utils/unshare.c b/sys-utils/unshare.c
+index 8313ee0a7..2aa239eff 100644
+--- a/sys-utils/unshare.c
++++ b/sys-utils/unshare.c
+@@ -375,49 +375,31 @@ struct map_range {
+ 
+ #define UID_BUFSIZ  sizeof(stringify_value(ULONG_MAX))
+ 
+-/**
+- * uint_to_id() - Convert a string into a user/group ID
+- * @name: The string representation of the ID
+- * @sz: The length of @name, without an (optional) nul-terminator
+- *
+- * This converts a (possibly not nul-terminated_ string into user or group ID.
+- * No name lookup is performed.
+- *
+- * Return: @name as a numeric ID
+- */
+-static int uint_to_id(const char *name, size_t sz)
+-{
+-	char buf[UID_BUFSIZ];
+-
+-	mem2strcpy(buf, name, sz, sizeof(buf));
+-	return strtoul_or_err(buf, _("could not parse ID"));
+-}
+-
+ /**
+  * get_map_range() - Parse a mapping range from a string
+- * @s: A string of the format outer,inner,count
++ * @s: A string of the format inner:outer:count or outer,inner,count
+  *
+- * Parse a string of the form outer,inner,count into a new mapping range.
++ * Parse a string of the form inner:outer:count or outer,inner,count into
++ * a new mapping range.
+  *
+  * Return: A new &struct map_range
+  */
+ static struct map_range *get_map_range(const char *s)
+ {
+-	int n, map[3];
++	int end;
+ 	struct map_range *ret;
+ 
+-	n = string_to_idarray(s, map, ARRAY_SIZE(map), uint_to_id);
+-	if (n < 0)
+-		errx(EXIT_FAILURE, _("too many elements for mapping '%s'"), s);
+-	if (n != ARRAY_SIZE(map))
+-		errx(EXIT_FAILURE, _("mapping '%s' contains only %d elements"),
+-		     s, n);
+-
+ 	ret = xmalloc(sizeof(*ret));
+-	ret->outer = map[0];
+-	ret->inner = map[1];
+-	ret->count = map[2];
+-	return ret;
++
++	if (sscanf(s, "%u:%u:%u%n", &ret->inner, &ret->outer, &ret->count,
++		   &end) >= 3 && !s[end])
++		return ret; /* inner:outer:count */
++
++	if (sscanf(s, "%u,%u,%u%n", &ret->outer, &ret->inner, &ret->count,
++		   &end) >= 3 && !s[end])
++		return ret; /* outer,inner,count */
++
++	errx(EXIT_FAILURE, _("invalid mapping '%s'"), s);
+ }
+ 
+ /**
+@@ -680,9 +662,9 @@ static void __attribute__((__noreturn__)) usage(void)
+ 	fputs(_(" -r, --map-root-user       map current user to root (implies --user)\n"), out);
+ 	fputs(_(" -c, --map-current-user    map current user to itself (implies --user)\n"), out);
+ 	fputs(_(" --map-auto                map users and groups automatically (implies --user)\n"), out);
+-	fputs(_(" --map-users=<outeruid>,<inneruid>,<count>\n"
++	fputs(_(" --map-users=<inneruid>:<outeruid>:<count>\n"
+ 		"                           map count users from outeruid to inneruid (implies --user)\n"), out);
+-	fputs(_(" --map-groups=<outergid>,<innergid>,<count>\n"
++	fputs(_(" --map-groups=<innergid>:<outergid>:<count>\n"
+ 		"                           map count groups from outergid to innergid (implies --user)\n"), out);
+ 	fputs(USAGE_SEPARATOR, out);
+ 	fputs(_(" --kill-child[=<signame>]  when dying, kill the forked child (implies --fork)\n"
