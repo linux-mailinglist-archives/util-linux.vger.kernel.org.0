@@ -2,85 +2,87 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 01EEA67ADBE
-	for <lists+util-linux@lfdr.de>; Wed, 25 Jan 2023 10:26:36 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 20EF2680AF5
+	for <lists+util-linux@lfdr.de>; Mon, 30 Jan 2023 11:35:15 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S235237AbjAYJ0d (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Wed, 25 Jan 2023 04:26:33 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:43576 "EHLO
+        id S236483AbjA3KfM (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Mon, 30 Jan 2023 05:35:12 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:60246 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S234540AbjAYJ0c (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Wed, 25 Jan 2023 04:26:32 -0500
-X-Greylist: delayed 557 seconds by postgrey-1.37 at lindbergh.monkeyblade.net; Wed, 25 Jan 2023 01:26:29 PST
-Received: from mail.crawnon.pl (mail.crawnon.pl [51.68.198.42])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 24140474DC
-        for <util-linux@vger.kernel.org>; Wed, 25 Jan 2023 01:26:29 -0800 (PST)
-Received: by mail.crawnon.pl (Postfix, from userid 1002)
-        id 1B859A4089; Wed, 25 Jan 2023 09:16:46 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=crawnon.pl; s=mail;
-        t=1674638229; bh=C5hX24svv/9/TME4wPCHfYjl17BCtmuxEd1i9B4zdYs=;
-        h=Date:From:To:Subject:From;
-        b=FPQQeV62HKs1xdjj64SLXS8zk7U6MtuRMp6St7NQoSSG9hjULElxGRcyC0D2GFm7g
-         nzmWA+Mv9ZhUxLdBHCKHjehibPaINh23P2MzprvE9oMqmvyBMftmVuW/sYaCqzWOdZ
-         BnH6jaXO4Wk6HAp6a/yyBiEcB0MDPLE3hnd86DspXAy2n4gYmLTDTUGifyT+m9o2Op
-         XXonZ1RY/Pj4NS102F5lroONytdmYAQvwaYF9Bhg8yIhj5nvezBFeZwOTkWi4HOicE
-         p0qsRhVaHSsmyRxD8u3AEgH/t5JrTgoebPWSVoWvIYgIRHr7TrVy022jjl37EHkTLF
-         6OP4vTUng36xg==
-Received: by mail.crawnon.pl for <util-linux@vger.kernel.org>; Wed, 25 Jan 2023 09:15:47 GMT
-Message-ID: <20230125074500-0.1.8r.ehqf.0.o39ru9lc7m@crawnon.pl>
-Date:   Wed, 25 Jan 2023 09:15:47 GMT
-From:   =?UTF-8?Q? "Miko=C5=82aj_Fiodorczyk" ?= 
-        <mikolaj.fiodorczyk@crawnon.pl>
-To:     <util-linux@vger.kernel.org>
-Subject: Fotowoltaika - nowe warunki
-X-Mailer: mail.crawnon.pl
-MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Spam-Status: Yes, score=6.5 required=5.0 tests=BAYES_50,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_SBL_CSS,SPF_HELO_NONE,
-        SPF_PASS,URIBL_CSS_A,URIBL_DBL_SPAM autolearn=no autolearn_force=no
-        version=3.4.6
-X-Spam-Report: *  2.5 URIBL_DBL_SPAM Contains a spam URL listed in the Spamhaus DBL
-        *      blocklist
-        *      [URIs: crawnon.pl]
-        *  3.3 RCVD_IN_SBL_CSS RBL: Received via a relay in Spamhaus SBL-CSS
-        *      [51.68.198.42 listed in zen.spamhaus.org]
-        *  0.8 BAYES_50 BODY: Bayes spam probability is 40 to 60%
-        *      [score: 0.4996]
-        *  0.1 URIBL_CSS_A Contains URL's A record listed in the Spamhaus CSS
-        *      blocklist
-        *      [URIs: crawnon.pl]
-        * -0.0 SPF_PASS SPF: sender matches SPF record
-        *  0.0 SPF_HELO_NONE SPF: HELO does not publish an SPF Record
-        * -0.1 DKIM_VALID_EF Message has a valid DKIM or DK signature from
-        *      envelope-from domain
-        * -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
-        *      author's domain
-        * -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-        *  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
-        *       valid
-X-Spam-Level: ******
+        with ESMTP id S236412AbjA3KfF (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Mon, 30 Jan 2023 05:35:05 -0500
+Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com [IPv6:2a00:1450:4864:20::632])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 1D3542705
+        for <util-linux@vger.kernel.org>; Mon, 30 Jan 2023 02:35:04 -0800 (PST)
+Received: by mail-ej1-x632.google.com with SMTP id ml19so6810295ejb.0
+        for <util-linux@vger.kernel.org>; Mon, 30 Jan 2023 02:35:04 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=googlemail.com; s=20210112;
+        h=message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=uut1M0x6IfDOP1/LkVWweuBYm4lLvDoAx45VLYsSDTU=;
+        b=GMT2a0f6NCc7UCoWNI4ahLn7GrS8JVj4TzhgZ61ICPdQ60KZKOjTsFzsVXegKOxoPo
+         puqvVWRF+yjbGn2PfzRNoix3QJRtNED9GatZrRKpWb1WjBogF7PT3VFZzxaM9jG/Ipsz
+         EqoDRCmZoIEpASwI06HRPQ0YbQBWEZIB/4/UAu7d8V4KzKcNxSkaBRVk+HDAly6WK85x
+         F3FxZAVkaqx6UEvvYi/mURiemobmlqTeykPRMrHUwAvOv90LAXHasI4mqjzLWA94zMNR
+         M6mu6sRmHdOaVcJPO41w6NFtbrDwXBTmF1F8LxVn5Fl+w1TF9i/WbuC+2VYVpqIO4ymk
+         aslg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=uut1M0x6IfDOP1/LkVWweuBYm4lLvDoAx45VLYsSDTU=;
+        b=khZpbyiZbkwkBN++WQ4eAIrZ0vMCW6cezyBi6p4a5FJGl2kK1MnSzxSa2ar7ZOO6nC
+         ob2oK5RmIvnUehtHXjx/fdKR9piCmRkBLXydrLzQbFqBfJN67MKvkAlAJLYfUnhrsqe+
+         uYSQ3MOCnJgTD8ZR6X2qwmL/uNiIlN0juhV60R5GUVdEHqyNTLgphTXQQucsGHTUaZuY
+         lS08t50RN7UrBHH2TXwW/RyoZroiUyjF4Sz8ZD8zYNErjcJkG5Smuz43lujXralCkleH
+         T+ppmfqmwtQH9Ye2Csw6nGb+IkuZL/2cX0KlaneWxKegINl2G9Pipilkbi/jwEH3PEFd
+         SkJQ==
+X-Gm-Message-State: AFqh2kr10UOm8R44w7nmXZYGCSKn0pXglY80FbsEZgQSvuiRITadZVRH
+        yunWUN8QKA36mWMGlBuJz8lWA5z26Go=
+X-Google-Smtp-Source: AMrXdXu8dupH09tgvFmkHExVDryfgs+opmbM4Li0inD5P9HuuW4dZSTcgd9JVI1J28nNaOPbKLwq/Q==
+X-Received: by 2002:a17:906:6843:b0:86c:a3ed:1442 with SMTP id a3-20020a170906684300b0086ca3ed1442mr51707228ejs.4.1675074902245;
+        Mon, 30 Jan 2023 02:35:02 -0800 (PST)
+Received: from development1.visionsystems.de (mail.visionsystems.de. [213.209.99.202])
+        by smtp.gmail.com with ESMTPSA id c20-20020aa7df14000000b00499b3d09bd2sm2182796edy.91.2023.01.30.02.35.01
+        (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+        Mon, 30 Jan 2023 02:35:01 -0800 (PST)
+From:   yegorslists@googlemail.com
+To:     util-linux@vger.kernel.org
+Cc:     kzak@redhat.com, Yegor Yefremov <yegorslists@googlemail.com>
+Subject: [PATCH] git: ignore m4/libtool.m4.orig
+Date:   Mon, 30 Jan 2023 11:34:53 +0100
+Message-Id: <20230130103453.1080-1-yegorslists@googlemail.com>
+X-Mailer: git-send-email 2.17.0
+X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,
+        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS autolearn=ham
+        autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-Dzie=C5=84 dobry,
+From: Yegor Yefremov <yegorslists@googlemail.com>
 
-chcia=C5=82bym poinformowa=C4=87, i=C5=BC mog=C4=85 Pa=C5=84stwo uzyska=C4=
-=87 dofinansowanie na systemy fotowoltaiczne w ramach nowej edycji progra=
-mu M=C3=B3j Pr=C4=85d.
+Signed-off-by: Yegor Yefremov <yegorslists@googlemail.com>
+---
+ .gitignore | 1 +
+ 1 file changed, 1 insertion(+)
 
-Program zapewnia 6000 z=C5=82 dofinansowania na instalacj=C4=99 paneli i =
-16 000 z=C5=82 na magazyn energii, ni=C5=BCsze cen pr=C4=85du i mo=C5=BCl=
-iwo=C5=9B=C4=87 odliczenia koszt=C3=B3w zwi=C4=85zanych z instalacj=C4=85=
- fotowoltaiki w ramach rozliczenia PIT (tzw. ulga termomodernizacyjna).
+diff --git a/.gitignore b/.gitignore
+index 68ed0d9a3..3e2164420 100644
+--- a/.gitignore
++++ b/.gitignore
+@@ -50,6 +50,7 @@ INSTALL
+ install-sh
+ libtool
+ m4/*.m4
++m4/libtool.m4.orig
+ Makefile
+ Makefile.in
+ missing
+-- 
+2.17.0
 
-Czy s=C4=85 Pa=C5=84stwo otwarci na wst=C4=99pn=C4=85 rozmow=C4=99 w tym =
-temacie?
-
-
-Pozdrawiam,
-Miko=C5=82aj Fiodorczyk
