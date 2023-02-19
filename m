@@ -2,73 +2,74 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 769B969A45C
-	for <lists+util-linux@lfdr.de>; Fri, 17 Feb 2023 04:30:21 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 384B069C17D
+	for <lists+util-linux@lfdr.de>; Sun, 19 Feb 2023 18:01:45 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229566AbjBQDaS (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Thu, 16 Feb 2023 22:30:18 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:45990 "EHLO
+        id S230261AbjBSRBn (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Sun, 19 Feb 2023 12:01:43 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:37994 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229492AbjBQDaS (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Thu, 16 Feb 2023 22:30:18 -0500
-X-Greylist: delayed 545 seconds by postgrey-1.37 at lindbergh.monkeyblade.net; Thu, 16 Feb 2023 19:30:16 PST
-Received: from web020.tremarin.net (tremarin.net [170.246.3.150])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 906CB4FC80
-        for <util-linux@vger.kernel.org>; Thu, 16 Feb 2023 19:30:16 -0800 (PST)
-Received: from localhost (localhost [127.0.0.1])
-        by web020.tremarin.net (Postfix) with ESMTP id 11A8F44A7F3;
-        Fri, 17 Feb 2023 00:20:36 -0300 (-03)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=tremarin.net; h=
-        reply-to:date:date:from:from:subject:subject:content-description
-        :content-transfer-encoding:mime-version:content-type
-        :content-type; s=default; t=1676604012; x=1678418413; bh=svZ5Xiu
-        Yx51bpSdoMfKeu95yZMfFN3Ro1GPMWSSBlVM=; b=PR3ltVz1njzGgo2nXgspJSZ
-        Iif2zSTxDsiCdwMiRPi2kIdJ7NjiBBTEDAAKqN5gDt4kQiBTPTiM+P9nyo3jSHq6
-        AvglC1Sb1VUARXQwtFR9WS3AxfvEf7C5unhf66giR2fIA2yqDwSphrP+osU6uLER
-        FwSKxLpE/rSMlrA5hwlQ=
-X-Virus-Scanned: Debian amavisd-new at web020.tremarin.net
-Received: from web020.tremarin.net ([127.0.0.1])
-        by localhost (web020.tremarin.net [127.0.0.1]) (amavisd-new, port 10026)
-        with LMTP id Bugo1MPW6Fbr; Fri, 17 Feb 2023 00:20:12 -0300 (-03)
-Received: from [192.168.1.33] (7.red-79-146-101.dynamicip.rima-tde.net [79.146.101.7])
-        (Authenticated sender: teste@tremarin.net)
-        by web020.tremarin.net (Postfix) with ESMTPA id AD248449FA6;
-        Thu, 16 Feb 2023 20:57:13 -0300 (-03)
-Content-Type: text/plain; charset="iso-8859-1"
+        with ESMTP id S230113AbjBSRBm (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Sun, 19 Feb 2023 12:01:42 -0500
+Received: from stravinsky.debian.org (stravinsky.debian.org [IPv6:2001:41b8:202:deb::311:108])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 0721F1258B
+        for <util-linux@vger.kernel.org>; Sun, 19 Feb 2023 09:01:23 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=debian.org;
+        s=smtpauto.stravinsky; h=X-Debian-User:In-Reply-To:Content-Type:MIME-Version:
+        References:Message-ID:Subject:Cc:To:From:Date:Reply-To:
+        Content-Transfer-Encoding:Content-ID:Content-Description;
+        bh=seVGxMHWs4Ic2Z/eawlW50AF7D/MvEhEDpR24GQX5WQ=; b=Kkw8LOqt6FlsH99UADkezA0Lo8
+        s2AGsX4Kib6MLdqyxcYr0GAtVWhERvYlRBGjhKslRDpc/wqgOmmA7V4CfuxpeZ2KuFyash4nmpJua
+        M/kuvNN9cBYAJE+4NCTkzLy115ITXkeptYf5Wu0kXI7cXLYYs0udlD1rQgs6uYSah+mdfQtrpOpJR
+        M09P/ilpCjSq3z0G8h60aCnL7f5+NBKcDzT7Jau/FHOm6YU27b5nZK8wwBV9A29wKFawpZQ5FrGP6
+        /n7R/lApDhLHmgXtIxoHfqFTJMxbieR9l+/bcZivpMZxs7eTtTnVvGYtSFG5/tU11YOt+ikFQxoGA
+        p7/F9Sfg==;
+Received: from authenticated user
+        by stravinsky.debian.org with esmtpsa (TLS1.3:ECDHE_X25519__RSA_PSS_RSAE_SHA256__AES_256_GCM:256)
+        (Exim 4.94.2)
+        (envelope-from <zeha@debian.org>)
+        id 1pTn3u-006673-GQ; Sun, 19 Feb 2023 17:01:19 +0000
+Date:   Sun, 19 Feb 2023 18:01:16 +0100
+From:   Chris Hofstaedtler <zeha@debian.org>
+To:     Michael Richardson <mcr@sandelman.ca>
+Cc:     util-linux@vger.kernel.org
+Subject: Re: uuid and RFC4122
+Message-ID: <20230219170116.q453di5cmknxn665@zeha.at>
+References: <14266.1676658860@localhost>
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Description: Mail message body
-Subject: I HAVE BEEN LOOKING FOR YOU ??
-To:     Recipients <teste@tremarin.net>
-From:   "Mrs. clara" <teste@tremarin.net>
-Date:   Fri, 17 Feb 2023 00:56:54 +0100
-Reply-To: clarajuanmanuel@yandex.com
-Message-Id: <20230217032037.11A8F44A7F3@web020.tremarin.net>
-X-Spam-Status: Yes, score=5.8 required=5.0 tests=BAYES_95,DKIM_INVALID,
-        DKIM_SIGNED,FREEMAIL_FORGED_REPLYTO,SPF_HELO_NONE,SPF_PASS,
-        SUBJ_ALL_CAPS,T_HK_NAME_MR_MRS autolearn=no autolearn_force=no
-        version=3.4.6
-X-Spam-Report: *  3.0 BAYES_95 BODY: Bayes spam probability is 95 to 99%
-        *      [score: 0.9702]
-        *  0.5 SUBJ_ALL_CAPS Subject is all capitals
-        *  0.0 SPF_HELO_NONE SPF: HELO does not publish an SPF Record
-        * -0.0 SPF_PASS SPF: sender matches SPF record
-        *  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
-        *       valid
-        *  0.0 T_HK_NAME_MR_MRS No description available.
-        *  0.1 DKIM_INVALID DKIM or DK signature exists, but is not valid
-        *  2.1 FREEMAIL_FORGED_REPLYTO Freemail in Reply-To, but not From
-X-Spam-Level: *****
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <14266.1676658860@localhost>
+X-Debian-User: zeha
+X-Spam-Status: No, score=-2.5 required=5.0 tests=BAYES_20,DKIMWL_WL_HIGH,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_MED,
+        SPF_HELO_NONE,SPF_NONE,UNPARSEABLE_RELAY autolearn=ham
+        autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-I have very important information for you. Reply and confirm this
-e-mail address is still valid so I can send you detailed information.
+Hello Michael,
 
-That needs your urgent attention.
+* Michael Richardson <mcr@sandelman.ca>:
+> Hi, thanks for your work on debian packages.
+> I'm contacting you wearing my IETF uuidrev WG co-chair on.
+> 
+> The https://datatracker.ietf.org/wg/uuidrev/documents/ WG was chartered to
+> update RFC4122 last summer, and we expect to start a WGLC on RFC4122bis in
+> the next few weeks.  This is just a heads up for now.
+> 
+> Some comments, even they are just "Looks Good to Me" from the util-linux
+> folks would be awesome.
 
-Mrs CLara Juan Emanuel
-Email: clarajuanmanuel@yandex.com
+Thanks for reaching out, but from the Debian side I think we have
+little to comment on (mostly for lack of expertise).
+
+I've CC:ed the upstream mailing list, in the hope that upstream
+util-linux folks have comments.
+
+Best,
+Chris
+
