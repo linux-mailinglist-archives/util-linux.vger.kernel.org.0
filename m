@@ -2,102 +2,88 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 9FFDD6A71EF
-	for <lists+util-linux@lfdr.de>; Wed,  1 Mar 2023 18:18:06 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 9D8E26A7268
+	for <lists+util-linux@lfdr.de>; Wed,  1 Mar 2023 18:55:35 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229694AbjCARSE (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Wed, 1 Mar 2023 12:18:04 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:45668 "EHLO
+        id S229533AbjCARzd (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Wed, 1 Mar 2023 12:55:33 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:52806 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229665AbjCARSE (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Wed, 1 Mar 2023 12:18:04 -0500
-Received: from smtp-out1.suse.de (smtp-out1.suse.de [IPv6:2001:67c:2178:6::1c])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 7B9537AA6
-        for <util-linux@vger.kernel.org>; Wed,  1 Mar 2023 09:18:02 -0800 (PST)
-Received: from relay2.suse.de (relay2.suse.de [149.44.160.134])
-        by smtp-out1.suse.de (Postfix) with ESMTP id 056C321AB0;
-        Wed,  1 Mar 2023 17:18:01 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
-        t=1677691081; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-         mime-version:mime-version:content-type:content-type:
-         content-transfer-encoding:content-transfer-encoding:
+        with ESMTP id S229486AbjCARzc (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Wed, 1 Mar 2023 12:55:32 -0500
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 692CE271A
+        for <util-linux@vger.kernel.org>; Wed,  1 Mar 2023 09:54:49 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+        s=mimecast20190719; t=1677693288;
+        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
          in-reply-to:in-reply-to:references:references;
-        bh=6vTF/UIjElEu2giULsFzFGZnciKx2nmwJtMdvdSK2KI=;
-        b=AOfFaAF9s4knt8nDcZo2SNNhv2oEgMKcohMlQLLsxpGMG+i5x1zCWTWyyX5Ta1LPi5KMbM
-        Lc2SVXejYCPvGdRWBZx61LJVfhm/r4IR+/Nm1KGeYPggOIfewlFwR2X0fp4GRf5u7Huv6m
-        Cgny5eF/8swltPrwaEWJ+XQAk0OVCG0=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
-        s=susede2_ed25519; t=1677691081;
-        h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-         mime-version:mime-version:content-type:content-type:
-         content-transfer-encoding:content-transfer-encoding:
-         in-reply-to:in-reply-to:references:references;
-        bh=6vTF/UIjElEu2giULsFzFGZnciKx2nmwJtMdvdSK2KI=;
-        b=rjSCce6ZuyliuC7hykHIE9NCMMkVsjXy5WTmF4pvC58SSen/gDMES4HcXKcwrHG0kVlENH
-        vNQnXIQ3x1H0XwCw==
-Received: from kitsune.suse.cz (kitsune.suse.cz [10.100.12.127])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        bh=tXCmMdVMkjejVR3Nw0Iau3zULAAO55nqiN1h4qGdUP4=;
+        b=C2E2i4oJUeNWG9esPkhpAS5JU0zHpHK05QFSNvSMgYRJOq0wAvWiepBFIMifOzzCqbIlJ1
+        eOIDcZ3IijZMOBcKNMRuJoA+ckRXFbIKBKnexbIuCKGSGIWx4C8AciuqlsWVO2QDjuGedQ
+        ymsMzIYruDWnMw12MW8Tle0ypXzvqs4=
+Received: from mimecast-mx02.redhat.com (mx3-rdu2.redhat.com
+ [66.187.233.73]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ us-mta-528-bvWtn_nUNW68nS1CL1BhYA-1; Wed, 01 Mar 2023 12:54:47 -0500
+X-MC-Unique: bvWtn_nUNW68nS1CL1BhYA-1
+Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.rdu2.redhat.com [10.11.54.4])
+        (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
         (No client certificate requested)
-        by relay2.suse.de (Postfix) with ESMTPS id C7E622C142;
-        Wed,  1 Mar 2023 17:18:00 +0000 (UTC)
-Date:   Wed, 1 Mar 2023 18:17:59 +0100
-From:   Michal =?iso-8859-1?Q?Such=E1nek?= <msuchanek@suse.de>
-To:     Theodore Ts'o <tytso@mit.edu>
-Cc:     Chris Hofstaedtler <zeha@debian.org>, util-linux@vger.kernel.org
+        by mimecast-mx02.redhat.com (Postfix) with ESMTPS id DF9DC2810C0F;
+        Wed,  1 Mar 2023 17:54:45 +0000 (UTC)
+Received: from ws.net.home (ovpn-192-20.brq.redhat.com [10.40.192.20])
+        by smtp.corp.redhat.com (Postfix) with ESMTPS id 62BDA2026D76;
+        Wed,  1 Mar 2023 17:54:45 +0000 (UTC)
+Date:   Wed, 1 Mar 2023 18:54:43 +0100
+From:   Karel Zak <kzak@redhat.com>
+To:     Michal Suchanek <msuchanek@suse.de>
+Cc:     util-linux@vger.kernel.org
 Subject: Re: [PATCH] libuuid: Move clock.txt to /run
-Message-ID: <20230301171759.GB19419@kitsune.suse.cz>
+Message-ID: <20230301175443.lpcx7up35eo5wwdg@ws.net.home>
 References: <20230301140957.21604-1-msuchanek@suse.de>
- <20230301141747.jpbvk4aieq3pdehh@zeha.at>
- <20230301142604.GA19419@kitsune.suse.cz>
- <Y/+CNZZwhbH/rGbX@mit.edu>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <Y/+CNZZwhbH/rGbX@mit.edu>
-User-Agent: Mutt/1.10.1 (2018-07-13)
-X-Spam-Status: No, score=-4.4 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_MED,SPF_HELO_NONE,
-        SPF_PASS autolearn=ham autolearn_force=no version=3.4.6
+In-Reply-To: <20230301140957.21604-1-msuchanek@suse.de>
+X-Scanned-By: MIMEDefang 3.1 on 10.11.54.4
+X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_NONE,
+        RCVD_IN_MSPIKE_H2,SPF_HELO_NONE,SPF_NONE autolearn=ham
+        autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-On Wed, Mar 01, 2023 at 11:49:57AM -0500, Theodore Ts'o wrote:
-> On Wed, Mar 01, 2023 at 03:26:04PM +0100, Michal Suchánek wrote:
-> > > Last time I asked about this file on this mailing list, I was
-> > > informed that clock.txt is supposed to survive reboots.
-> > > Moving it to /run (or any other tmpfs) would break this.
-> > 
-> > What's so valuable in it that it needs to survive?
-> > 
-> > I don't have it at all.
-> > 
-> > Also the code seems to re-synchronize with the real time clock from time
-> > to time which makes the content relevant only for limited periods of
-> > time.
-> 
-> The concern is if the system time goes backwards, this could result in
-> a duplicative UUID being returned.  This was especially a concern for
-> systems that were dual-booting with Windows, where Windows set the
-> real-time clock to localtime, and Linux set the real-time clock to
-> GMT, and so the real time clock on those systems had a tendency to
-> bound around a *lot*.
-> 
-> Using a random number generator for clock can help, but it's only 13
-> bits, so it's certainly not fool-proof.  Given that using a time-based
-> UUID leaks the MAC address of your ethernet port as well as when the
-> UUID was generated (which can be interesting when you're curious say,
-> when a Libreoffice doc was created), in general best practice is to
-> use the random UUID type, especially given that modern Linux systems
-> all have the getrandom(2) system call.  That gives you 58 bits of
-> entropy in the UUID, so that's probably the better way to go.
+On Wed, Mar 01, 2023 at 03:09:57PM +0100, Michal Suchanek wrote:
+> Some users complain that due to filesystem performance of writing the
+> clock.txt generating UUIDs is slow.
 
-That explains why I don't have a clock.txt file. I did not go out of my
-way to generate time-based uuids.
+XFS right? ;-)
 
-Thanks
+> uuidd would solve this but some distributions do not run it by default.
 
-Michal
+For some performance critical use-cases you will see this issue with
+uuidd too. The latest changes in the libuuid and uuidd solves this
+problem by continuous-clock where uuidd uses dedicated clock sequence
+range to avoid often state-file updates. 
+
+Numbers from Michael (author of the patch)
+
+ The classic setup delivered <430.000 uuid/sec on average.
+ The cont-clock setup delivered >6.800.000 uuid/sec on average.
+
+I hope we will have -rc1 with this change this week.
+
+Note that generate large number of time-based UUIDs without uuidd does
+not make sense.
+
+    Karel
+
+-- 
+ Karel Zak  <kzak@redhat.com>
+ http://karelzak.blogspot.com
+
