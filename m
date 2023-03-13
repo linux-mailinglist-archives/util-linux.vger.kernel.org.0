@@ -2,42 +2,45 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 0B1E66B6D33
-	for <lists+util-linux@lfdr.de>; Mon, 13 Mar 2023 02:50:09 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 56AB26B6D32
+	for <lists+util-linux@lfdr.de>; Mon, 13 Mar 2023 02:50:08 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229504AbjCMBuH (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        id S229704AbjCMBuH (ORCPT <rfc822;lists+util-linux@lfdr.de>);
         Sun, 12 Mar 2023 21:50:07 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:58556 "EHLO
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:58554 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229673AbjCMBuG (ORCPT
+        with ESMTP id S229504AbjCMBuG (ORCPT
         <rfc822;util-linux@vger.kernel.org>); Sun, 12 Mar 2023 21:50:06 -0400
+X-Greylist: delayed 421 seconds by postgrey-1.37 at lindbergh.monkeyblade.net; Sun, 12 Mar 2023 18:50:04 PDT
 Received: from smtp01.aussiebb.com.au (smtp01.aussiebb.com.au [IPv6:2403:5800:3:25::1001])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 649C9298D4
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 35D5C231CA
         for <util-linux@vger.kernel.org>; Sun, 12 Mar 2023 18:50:04 -0700 (PDT)
 Received: from localhost (localhost.localdomain [127.0.0.1])
-        by smtp01.aussiebb.com.au (Postfix) with ESMTP id 3ABAD100377
-        for <util-linux@vger.kernel.org>; Mon, 13 Mar 2023 12:42:58 +1100 (AEDT)
+        by smtp01.aussiebb.com.au (Postfix) with ESMTP id 7DD2A100265
+        for <util-linux@vger.kernel.org>; Mon, 13 Mar 2023 12:43:02 +1100 (AEDT)
 X-Virus-Scanned: Debian amavisd-new at smtp01.aussiebb.com.au
 Received: from smtp01.aussiebb.com.au ([127.0.0.1])
         by localhost (smtp01.aussiebb.com.au [127.0.0.1]) (amavisd-new, port 10024)
-        with ESMTP id cGCbdEBnd8pH for <util-linux@vger.kernel.org>;
-        Mon, 13 Mar 2023 12:42:58 +1100 (AEDT)
+        with ESMTP id GY8hAE57W0ce for <util-linux@vger.kernel.org>;
+        Mon, 13 Mar 2023 12:43:02 +1100 (AEDT)
 Received: by smtp01.aussiebb.com.au (Postfix, from userid 116)
-        id 2AEB8100381; Mon, 13 Mar 2023 12:42:58 +1100 (AEDT)
+        id 6DE1F100381; Mon, 13 Mar 2023 12:43:02 +1100 (AEDT)
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,SPF_HELO_NONE,
         SPF_NONE autolearn=ham autolearn_force=no version=3.4.6
 Received: from donald.themaw.net (180-150-90-198.b4965a.per.nbn.aussiebb.net [180.150.90.198])
-        by smtp01.aussiebb.com.au (Postfix) with ESMTP id 41331100330;
-        Mon, 13 Mar 2023 12:42:56 +1100 (AEDT)
-Subject: [PATCH 1/2] libmount: dont ignore autofs mounts by default
+        by smtp01.aussiebb.com.au (Postfix) with ESMTP id E791910024C;
+        Mon, 13 Mar 2023 12:43:01 +1100 (AEDT)
+Subject: [PATCH 2/2] mount: ignore autofs entries in mount listing
 From:   Ian Kent <raven@themaw.net>
 To:     util-linux <util-linux@vger.kernel.org>
 Cc:     fhirtz@redhat.com, John Westerdale <jwesterd@redhat.com>,
         Frank Sorenson <fsorenso@redhat.com>
-Date:   Mon, 13 Mar 2023 09:42:56 +0800
-Message-ID: <167867177635.35511.15003989525678735907.stgit@donald.themaw.net>
+Date:   Mon, 13 Mar 2023 09:43:02 +0800
+Message-ID: <167867178240.35511.8758222247656534818.stgit@donald.themaw.net>
+In-Reply-To: <167867177635.35511.15003989525678735907.stgit@donald.themaw.net>
+References: <167867177635.35511.15003989525678735907.stgit@donald.themaw.net>
 User-Agent: StGit/1.5
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
@@ -46,48 +49,32 @@ Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-Making libmount ingore autofs mounts by default can be a problem for
-systemd, I remember now what the problem was.
+Since we can't enable use of ignoring autofs mounts that have the
+"ignore" option present by default (systemd could get confused) it's
+necessary to enable it for individual applications.
 
-autofs multi-mounts can be nested (and often are, think of a tree of
-NFS exports) where there are autofs file system mounts within NFS
-mounts and together with autofs mount triggers.
+The mount utility is one applcation we need it for so enable it.
 
-In this case systemd needs to see all the mounts at shutdown when it
-is umounting the tree of mounts. We don't want to have to rely on
-modifications having been made to systemd for this to work properly
-so we can't make this the default behaviour in libmount.
-
-Fixes: 22147e08c987 (libmount: use autofs mount hint to ignore autofs mount entries)
 Signed-off-by: Ian Kent <raven@themaw.net>
 Cc: John Westerdale <jwesterd@redhat.com>
 Cc: Frank Hertz <fhirtz@redhat.com>
 Cc: Frank Sorenson <fsorenso@redhat.com>
 ---
- libmount/src/context.c |    4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ sys-utils/mount.c |    2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/libmount/src/context.c b/libmount/src/context.c
-index 8db6b6950..2df4716a7 100644
---- a/libmount/src/context.c
-+++ b/libmount/src/context.c
-@@ -75,7 +75,7 @@ struct libmnt_context *mnt_new_context(void)
- 	/* if we're really root and aren't running setuid */
- 	cxt->restricted = (uid_t) 0 == ruid && ruid == euid ? 0 : 1;
+diff --git a/sys-utils/mount.c b/sys-utils/mount.c
+index 6590272c7..dba6fcae9 100644
+--- a/sys-utils/mount.c
++++ b/sys-utils/mount.c
+@@ -124,6 +124,8 @@ static void print_all(struct libmnt_context *cxt, char *pattern, int show_label)
+ 	struct libmnt_fs *fs;
+ 	struct libmnt_cache *cache = NULL;
  
--	cxt->noautofs = 1;
-+	cxt->noautofs = 0;
++	mnt_context_enable_noautofs(cxt, 1);
++
+ 	if (mnt_context_get_mtab(cxt, &tb))
+ 		err(MNT_EX_SYSERR, _("failed to read mtab"));
  
- 	DBG(CXT, ul_debugobj(cxt, "----> allocate %s",
- 				cxt->restricted ? "[RESTRICTED]" : ""));
-@@ -164,7 +164,7 @@ int mnt_reset_context(struct libmnt_context *cxt)
- 	cxt->helper = NULL;
- 	cxt->mountdata = NULL;
- 	cxt->flags = MNT_FL_DEFAULT;
--	cxt->noautofs = 1;
-+	cxt->noautofs = 0;
- 	cxt->has_selinux_opt = 0;
- 
- 	cxt->map_linux = mnt_get_builtin_optmap(MNT_LINUX_MAP);
 
 
