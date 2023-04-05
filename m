@@ -2,93 +2,124 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 2E2FC6D7946
-	for <lists+util-linux@lfdr.de>; Wed,  5 Apr 2023 12:08:16 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 13DF56D7A16
+	for <lists+util-linux@lfdr.de>; Wed,  5 Apr 2023 12:44:06 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S237219AbjDEKIO (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Wed, 5 Apr 2023 06:08:14 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:55604 "EHLO
+        id S237514AbjDEKoB (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Wed, 5 Apr 2023 06:44:01 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:53074 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S237444AbjDEKIM (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Wed, 5 Apr 2023 06:08:12 -0400
-Received: from mail-pl1-x636.google.com (mail-pl1-x636.google.com [IPv6:2607:f8b0:4864:20::636])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id A7DEC3AA5
-        for <util-linux@vger.kernel.org>; Wed,  5 Apr 2023 03:08:10 -0700 (PDT)
-Received: by mail-pl1-x636.google.com with SMTP id z19so33962749plo.2
-        for <util-linux@vger.kernel.org>; Wed, 05 Apr 2023 03:08:10 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=bytedance.com; s=google; t=1680689290;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=ZlKuoNFIbf1OVKBr5MB5QWK9RSyh/B3dzSZBr5mFX3A=;
-        b=RaDVgnnBNpLY9uZKM7IBBcGlyn1Je6EJOk2vssuClH0wLjhvAiC4guIktw+BOr0AYi
-         Oh3/2EqsWcczvPWAeZ21HEEN9uZyb0LHTIackXKTSc4Uc8jcJbThDB2Zt26C8Adf8mJd
-         xuQLsOmf1PB/d3Q1jNRmhLuoQZEc2wLm8VN/brOna5GWBb0YVntyQ8KEtZ/4Ox9Es7S9
-         S/m/3veRvsmEtyyq09VhLFXfwmlXXdGVcBA869QDVVW8JWlRjZB+4IGlH97F5b8sdAuw
-         tGxtq4VfWSH0aogzxMv1qJu2zgIPTk9ItRAiWOd5d1Ljsndau8TZ4XZ5Qh+GCt34uZag
-         Y5cA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112; t=1680689290;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=ZlKuoNFIbf1OVKBr5MB5QWK9RSyh/B3dzSZBr5mFX3A=;
-        b=5RWm5ALQAKZzryrmeVonJmLAP3n1SKlrnTQ+8SdEpyEBIdfhLtfru4LnPNZEpojF7F
-         Zvs+Rd1555AWB6VffxXzWNmfw4hpdCHUjpg2YZNAc6rfHsUIZ/iw/+SpmU84cEaOGH1n
-         TRvKJz0EMFjHyrsXLjzwH+E518gJQJfdl6KHhbu9wRRjCRAimC22Nw9QdE+MWsk4+oln
-         jUOwgPro0mNvUNCGprPIYctlB2/p926EhwF+GJewe3QXL5OmmjI/J0rPByf70WKRku7Q
-         RGhw86sNy8KsMOeeFVBvXiivkgtstvy83HyJe5r3RYg/O4M45FIodbXN1e7SYfOktAhI
-         53jQ==
-X-Gm-Message-State: AAQBX9fq+lDEhJEFNelWzY+MpyJ5FleVVy1BJxDzKufgQfekwB9pa2La
-        c6Lib2uH0nyWT1ZDGBiwQ4eeIaZQXhyNcKsSrooQ1g==
-X-Google-Smtp-Source: AKy350bVhlq3kXnR5zAV7kW1Rs17yS+CDRIfFROuHYCScRvTbxR1ixHF8/l9bqqlSUMSvEOsUj7oWQ==
-X-Received: by 2002:a05:6a20:7511:b0:d9:199a:c719 with SMTP id r17-20020a056a20751100b000d9199ac719mr4809457pzd.37.1680689290124;
-        Wed, 05 Apr 2023 03:08:10 -0700 (PDT)
-Received: from always-T480.www.tendawifi.com ([139.177.225.241])
-        by smtp.gmail.com with ESMTPSA id 18-20020aa79212000000b0062db34242aesm10300379pfo.167.2023.04.05.03.08.08
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 05 Apr 2023 03:08:09 -0700 (PDT)
-From:   zhenwei pi <pizhenwei@bytedance.com>
-To:     kzak@redhat.com
-Cc:     util-linux@vger.kernel.org, zhenwei pi <pizhenwei@bytedance.com>
-Subject: [PATCH 1/1] docs: add blkpr in AUTHORS file
-Date:   Wed,  5 Apr 2023 18:08:01 +0800
-Message-Id: <20230405100801.10295-2-pizhenwei@bytedance.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20230405100801.10295-1-pizhenwei@bytedance.com>
-References: <20230405100801.10295-1-pizhenwei@bytedance.com>
+        with ESMTP id S237200AbjDEKoA (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Wed, 5 Apr 2023 06:44:00 -0400
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id C290E19B2
+        for <util-linux@vger.kernel.org>; Wed,  5 Apr 2023 03:43:17 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+        s=mimecast20190719; t=1680691397;
+        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+         in-reply-to:in-reply-to:references:references;
+        bh=cF9WzmOT7u+BD/B9xotIbjKcKrqwT5fc0lJ95Lm2sFY=;
+        b=eUdBQ2Wydh23IagMKrk57rNHQuU2zWrtgiEloos6ImLKZl2cZDcKIwgWy1ibGIcu6wgQX6
+        mNsuOu7q9jUCYnKPWY/ESFKj5fveiX6cS8x2ErppHBqqBBtBzXPgi2PFuoC3AxzV7c1i0A
+        ZzFC5IusYV0RAm5R8/oQF+wa7U3Ll20=
+Received: from mimecast-mx02.redhat.com (mx3-rdu2.redhat.com
+ [66.187.233.73]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ us-mta-486-KlF7fmzmM8CVHfihiNqG0Q-1; Wed, 05 Apr 2023 06:43:15 -0400
+X-MC-Unique: KlF7fmzmM8CVHfihiNqG0Q-1
+Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.rdu2.redhat.com [10.11.54.5])
+        (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+        (No client certificate requested)
+        by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 78BD01C27D86;
+        Wed,  5 Apr 2023 10:43:15 +0000 (UTC)
+Received: from ws.net.home (ovpn-192-2.brq.redhat.com [10.40.192.2])
+        by smtp.corp.redhat.com (Postfix) with ESMTPS id F0B6918EC7;
+        Wed,  5 Apr 2023 10:43:14 +0000 (UTC)
+Date:   Wed, 5 Apr 2023 12:43:12 +0200
+From:   Karel Zak <kzak@redhat.com>
+To:     Akihiko Odaki <akihiko.odaki@daynix.com>
+Cc:     util-linux@vger.kernel.org
+Subject: Re: [PATCH] lscpu: Decouple cputype and topology
+Message-ID: <20230405104312.lz23yp3zafcygkpr@ws.net.home>
+References: <20230405061238.11888-1-akihiko.odaki@daynix.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Spam-Status: No, score=-0.2 required=5.0 tests=DKIM_SIGNED,DKIM_VALID,
-        DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS
-        autolearn=unavailable autolearn_force=no version=3.4.6
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20230405061238.11888-1-akihiko.odaki@daynix.com>
+X-Scanned-By: MIMEDefang 3.1 on 10.11.54.5
+X-Spam-Status: No, score=-0.2 required=5.0 tests=DKIMWL_WL_HIGH,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_NONE,
+        RCVD_IN_MSPIKE_H2,SPF_HELO_NONE,SPF_NONE autolearn=unavailable
+        autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-blkpr command was added in the v2.39 development window, add this in
-AUTHORS file.
+On Wed, Apr 05, 2023 at 03:12:38PM +0900, Akihiko Odaki wrote:
+w we can merge
+> Before this change, lscpu_cputype held topology information.
 
-Signed-off-by: zhenwei pi <pizhenwei@bytedance.com>
----
- AUTHORS | 1 +
- 1 file changed, 1 insertion(+)
+I do not understand why this is a problem. The topology (number of
+threads, cores, etc.) is specific to the type of CPU, right?
 
-diff --git a/AUTHORS b/AUTHORS
-index 98808f18e..ae3229af9 100644
---- a/AUTHORS
-+++ b/AUTHORS
-@@ -15,6 +15,7 @@ PAST MAINTAINERS:
- AUTHORS (merged projects & commands):
- 
-       blkdiscard:      Lukas Czerner <lczerner@redhat.com>
-+      blkpr:           zhenwei pi <pizhenwei@bytedance.com>
-       blkzone:         Shaun Tancheff <shaun@tancheff.com>
-                        Damien Le Moal <damien.lemoal@wdc.com>
-       fallocate:       Eric Sandeen <sandeen@redhat.com>
+I guess the sibling maps in kernel describes this.
+
+> This
+> design is incompatible with heterogenous configurations where there are
+> several CPU types.
+
+This design has been motivated by heterogenous systems :-)
+
+  Model name:           Cortex-A53
+    Model:              4
+    Thread(s) per core: 1
+    Core(s) per socket: 4
+    Socket(s):          1
+  Model name:           Cortex-A72
+    Model:              2
+    Thread(s) per core: 1
+    Core(s) per socket: 2
+    Socket(s):          1
+
+How we can display "Core(s) per socket" if we will not differentiate
+between the types?
+
+> One problem is that logical IDs of e.g. clusters overlap across
+> different CPU types. For example, consider a
+> 1-socket/2-cluster/1-core/1-thread system. One of the clusters has
+> "P-cores", and the other has "E-cores". P-cores and E-cores have
+> different CPU types. Before this change,
+> "lscpu -p=CPU,Core,Cluster,Socket" output something like the following
+> for the system:
+> 0,0,0,0
+> 1,0,0,0
+> 
+> Note that lscpu assigns the same core/cluster ID for the two CPUs
+> although they are actually in different cores and clusters.
+> 
+> To fix the inconsistency and ambiguity of such IDs, move the topology
+> information from lscpu_cputype to lscpu_cxt. For the earlier example,
+> the output will change as follows:
+> 0,0,0,0
+> 1,1,1,0
+
+Then we need to fix _this output_, but not ignore cputypes for whole
+lscpu.
+
+> This also changes how the topology is described in the summary which
+> lscpu prints when it is executed with no arguments. Before this change,
+> the topology information was associated with CPU types, but the
+> topology information is shown in a separate section now.
+
+I don't like it. We had this output before lscpu rewrite and was pretty
+confusing for users.
+
+    Karel
+
 -- 
-2.25.1
+ Karel Zak  <kzak@redhat.com>
+ http://karelzak.blogspot.com
 
