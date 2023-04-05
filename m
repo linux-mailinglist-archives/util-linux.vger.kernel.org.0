@@ -2,42 +2,63 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id CC6D06D7625
-	for <lists+util-linux@lfdr.de>; Wed,  5 Apr 2023 10:02:41 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id B356E6D7949
+	for <lists+util-linux@lfdr.de>; Wed,  5 Apr 2023 12:08:32 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S237231AbjDEICk (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Wed, 5 Apr 2023 04:02:40 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:41668 "EHLO
+        id S237249AbjDEKIb (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Wed, 5 Apr 2023 06:08:31 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:55546 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S237296AbjDEICj (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Wed, 5 Apr 2023 04:02:39 -0400
-Received: from mail.craftsplex.pl (mail.craftsplex.pl [162.19.155.126])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id BB9EC3ABC
-        for <util-linux@vger.kernel.org>; Wed,  5 Apr 2023 01:02:31 -0700 (PDT)
-Received: by mail.craftsplex.pl (Postfix, from userid 1002)
-        id 077B123ADE; Wed,  5 Apr 2023 08:00:55 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=craftsplex.pl;
-        s=mail; t=1680681684;
-        bh=PcMncQpBfIZCnTOfZJY5G1G+gaLn4c9QPfFvoXrE4rA=;
-        h=Date:From:To:Subject:From;
-        b=QX/07/k/CFKLRrPY+fyvhcZC4v4CxWgrjZh/2S3pF56DhSbbD8a4UEbT6w5+pTVvu
-         PuZFGdoBt2EawJYp5KWlOxg1krG47xUEaic4pya1UthF1yT8ne9GYGuwL6WAIL4XA/
-         F3AwzXlLE1/0v3tHRUiPLM9yXusDnra8eVqn7bbfdXsqzKrpxdBlpmR3B78dROEPc7
-         Z61nl8RUVaC7dXk3lMOQjZWEaHzP4IuobMIZx3RLWCUZoj6iZiBd63Vnjag25kHv4+
-         26XkQjacZrmfTpJZnKvllRfd3ru5MAK+jpvxgNYJ150FX5dkDkUY2dGVhyXfSx2+Pw
-         1x5S1/mdS52yQ==
-Received: by mail.craftsplex.pl for <util-linux@vger.kernel.org>; Wed,  5 Apr 2023 08:00:25 GMT
-Message-ID: <20230405064500-0.1.5d.moif.0.v5jhipreai@craftsplex.pl>
-Date:   Wed,  5 Apr 2023 08:00:25 GMT
-From:   "Kamil Tralewski" <kamil.tralewski@craftsplex.pl>
-To:     <util-linux@vger.kernel.org>
-Subject: =?UTF-8?Q?S=C5=82owa_kluczowe_do_wypozycjonowania?=
-X-Mailer: mail.craftsplex.pl
+        with ESMTP id S237343AbjDEKIa (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Wed, 5 Apr 2023 06:08:30 -0400
+Received: from mail-pj1-x102f.google.com (mail-pj1-x102f.google.com [IPv6:2607:f8b0:4864:20::102f])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 2C7E63ABD
+        for <util-linux@vger.kernel.org>; Wed,  5 Apr 2023 03:08:08 -0700 (PDT)
+Received: by mail-pj1-x102f.google.com with SMTP id f6-20020a17090ac28600b0023b9bf9eb63so36738692pjt.5
+        for <util-linux@vger.kernel.org>; Wed, 05 Apr 2023 03:08:08 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=bytedance.com; s=google; t=1680689287;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=ul1Njc0fj9ws0NCsfYT49UcBU1JA1P8pjVHrh4obsNM=;
+        b=izADiynWAqr7YK3SjV/erSqyRbHFLUiflrogt/+BnGeN+kDdNmpzTp9y5Y728nLSf1
+         65Wu1ABWw0pJZQLdbd1SeRdrfxh+4ZvfKduCQD+VJXPvUHITsMvS4G5nFcZUUkIIPOJU
+         3xDMlyClr3SuL2gi4grgVJN/F3EtgxpR32C6ES1V628hTOpdDwnOZAkqZQuNcb3zz5kx
+         lh4tBTq/5hT9ElhtUpXoeDhta1SMD6UIcdauFcTpI9JvT/mGtJcD7L+rEMCJfcsJdIcj
+         LDT9NfgL9u+K0WZja1C5Q8cm2iDeHDl7MJ1eYsbuVOjvWBQrlegzdog4CN1fc1JpkSkp
+         CVRw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112; t=1680689287;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=ul1Njc0fj9ws0NCsfYT49UcBU1JA1P8pjVHrh4obsNM=;
+        b=ovhu1HoE6psR6JQpo3wMkHIM3uIKcpqSjwgmNb2d9BcKzeYcxuYwNFY24tijW5BVzu
+         PNljFAt0CX8dIGQ1BwlcP/BytnqmryIM3FdxK21guBBFVVkM7d3M7wHXQcJaKLZA+8TQ
+         9Es38m3Y/lNOXHAGa7fd/1Oz238enXrimcqnYp55E2lIS7KxKyMM4XntXZXAZwiWz1N0
+         mLJlmmYyhVndZIIyOBPrNmJ1URuoElI1m2VF/UvgUDUJ+OMWoq3yZdLEoi6lPsj0q+M+
+         1gPZN3hkoMZvrMT2LA+lKB26uldUCYSgH/QiYWzM5LyKxJ8G4dEA9GRXrCqjBfOjPNxj
+         vowQ==
+X-Gm-Message-State: AAQBX9eMQLRbjmybtZgTrMp7QSLXBeSSEi5Yf0DE8nybLt2y8VLzcTAO
+        GW1NmT4PWEEd5T4s2F2+DmgG2HddHHprp3dirvKd2g==
+X-Google-Smtp-Source: AKy350bv/yqAz8KgCzuji620ld45NfqmvXk/+HT9JFzK53wnf/IQDRHP0PojnpoJFeSE+g6LfN9BaA==
+X-Received: by 2002:a05:6a20:2921:b0:dd:ee39:5e90 with SMTP id t33-20020a056a20292100b000ddee395e90mr4652698pzf.23.1680689287620;
+        Wed, 05 Apr 2023 03:08:07 -0700 (PDT)
+Received: from always-T480.www.tendawifi.com ([139.177.225.241])
+        by smtp.gmail.com with ESMTPSA id 18-20020aa79212000000b0062db34242aesm10300379pfo.167.2023.04.05.03.08.05
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 05 Apr 2023 03:08:07 -0700 (PDT)
+From:   zhenwei pi <pizhenwei@bytedance.com>
+To:     kzak@redhat.com
+Cc:     util-linux@vger.kernel.org, zhenwei pi <pizhenwei@bytedance.com>
+Subject: [PATCH 0/1] add blkpr in AUTHORS file
+Date:   Wed,  5 Apr 2023 18:08:00 +0800
+Message-Id: <20230405100801.10295-1-pizhenwei@bytedance.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 X-Spam-Status: No, score=-0.2 required=5.0 tests=DKIM_SIGNED,DKIM_VALID,
-        DKIM_VALID_AU,DKIM_VALID_EF,SPF_HELO_NONE,SPF_PASS
+        DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS
         autolearn=unavailable autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
@@ -45,18 +66,17 @@ Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-Dzie=C5=84 dobry,
+Hi, Karel
 
-zapozna=C5=82em si=C4=99 z Pa=C5=84stwa ofert=C4=85 i z przyjemno=C5=9Bci=
-=C4=85 przyznaj=C4=99, =C5=BCe przyci=C4=85ga uwag=C4=99 i zach=C4=99ca d=
-o dalszych rozm=C3=B3w.=20
+I noticed that you announced the v2.39-rcX, and I find the lack of
+blkpr entry in AUTHORS.
 
-Pomy=C5=9Bla=C5=82em, =C5=BCe mo=C5=BCe m=C3=B3g=C5=82bym mie=C4=87 sw=C3=
-=B3j wk=C5=82ad w Pa=C5=84stwa rozw=C3=B3j i pom=C3=B3c dotrze=C4=87 z t=C4=
-=85 ofert=C4=85 do wi=C4=99kszego grona odbiorc=C3=B3w. Pozycjonuj=C4=99 =
-strony www, dzi=C4=99ki czemu generuj=C4=85 =C5=9Bwietny ruch w sieci.
+zhenwei pi (1):
+  docs: add blkpr in AUTHORS file
 
-Mo=C5=BCemy porozmawia=C4=87 w najbli=C5=BCszym czasie?
+ AUTHORS | 1 +
+ 1 file changed, 1 insertion(+)
 
-Pozdrawiam
-Kamil Tralewski
+-- 
+2.25.1
+
