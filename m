@@ -2,15 +2,16 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 448E86DD194
+	by mail.lfdr.de (Postfix) with ESMTP id 12A096DD193
 	for <lists+util-linux@lfdr.de>; Tue, 11 Apr 2023 07:24:26 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229693AbjDKFYZ convert rfc822-to-8bit (ORCPT
+        id S229694AbjDKFYZ convert rfc822-to-8bit (ORCPT
         <rfc822;lists+util-linux@lfdr.de>); Tue, 11 Apr 2023 01:24:25 -0400
 Received: from lindbergh.monkeyblade.net ([23.128.96.19]:40900 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
         with ESMTP id S229624AbjDKFYY (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Tue, 11 Apr 2023 01:24:24 -0400
+        <rfc822;util-linux-ng@vger.kernel.org>);
+        Tue, 11 Apr 2023 01:24:24 -0400
 X-Greylist: delayed 25846 seconds by postgrey-1.37 at lindbergh.monkeyblade.net; Mon, 10 Apr 2023 22:24:22 PDT
 Received: from zimbra-dc.paul-scerri.ch (dc.paul-scerri.ch [62.220.130.141])
         by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 7FDF12118;
