@@ -2,57 +2,75 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 12A096DD193
-	for <lists+util-linux@lfdr.de>; Tue, 11 Apr 2023 07:24:26 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 908F76DD876
+	for <lists+util-linux@lfdr.de>; Tue, 11 Apr 2023 12:58:24 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229694AbjDKFYZ convert rfc822-to-8bit (ORCPT
-        <rfc822;lists+util-linux@lfdr.de>); Tue, 11 Apr 2023 01:24:25 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:40900 "EHLO
+        id S229574AbjDKK6X (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Tue, 11 Apr 2023 06:58:23 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:49416 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229624AbjDKFYY (ORCPT
-        <rfc822;util-linux-ng@vger.kernel.org>);
-        Tue, 11 Apr 2023 01:24:24 -0400
-X-Greylist: delayed 25846 seconds by postgrey-1.37 at lindbergh.monkeyblade.net; Mon, 10 Apr 2023 22:24:22 PDT
-Received: from zimbra-dc.paul-scerri.ch (dc.paul-scerri.ch [62.220.130.141])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 7FDF12118;
-        Mon, 10 Apr 2023 22:24:22 -0700 (PDT)
-Received: from localhost (localhost [127.0.0.1])
-        by zimbra-dc.paul-scerri.ch (Postfix) with ESMTP id F211B597A66;
-        Mon, 10 Apr 2023 22:14:27 +0200 (CEST)
-Received: from zimbra-dc.paul-scerri.ch ([127.0.0.1])
-        by localhost (zimbra-dc.paul-scerri.ch [127.0.0.1]) (amavisd-new, port 10032)
-        with ESMTP id OUNtKHQi8CvC; Mon, 10 Apr 2023 22:14:27 +0200 (CEST)
-Received: from localhost (localhost [127.0.0.1])
-        by zimbra-dc.paul-scerri.ch (Postfix) with ESMTP id 393736000CE;
-        Mon, 10 Apr 2023 22:06:18 +0200 (CEST)
-X-Virus-Scanned: amavisd-new at zimbra-dc.paul-scerri.ch
-Received: from zimbra-dc.paul-scerri.ch ([127.0.0.1])
-        by localhost (zimbra-dc.paul-scerri.ch [127.0.0.1]) (amavisd-new, port 10026)
-        with ESMTP id lSs_edlHcdEI; Mon, 10 Apr 2023 22:06:18 +0200 (CEST)
-Received: from [185.169.4.108] (unknown [185.169.4.108])
-        by zimbra-dc.paul-scerri.ch (Postfix) with ESMTPSA id 1E8D85C2DBD;
-        Mon, 10 Apr 2023 21:57:29 +0200 (CEST)
-Content-Type: text/plain; charset="utf-8"
+        with ESMTP id S229654AbjDKK6Q (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Tue, 11 Apr 2023 06:58:16 -0400
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id EE6501982
+        for <util-linux@vger.kernel.org>; Tue, 11 Apr 2023 03:57:31 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+        s=mimecast20190719; t=1681210651;
+        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+         content-transfer-encoding:content-transfer-encoding:
+         in-reply-to:in-reply-to:references:references;
+        bh=ybJ1YwKXVzZ4IwIZ9kCc7Ntrt5ZwqJU5Qp2xmvvJZuc=;
+        b=V6Tv26os0VQd28CeSpZ5KfLQqzVTKxE/7FPc3a+mhRTs9di0YCL4A3bVV8YjbAy5IGrCfQ
+        elb3DiLS1fqxjvhvgFaE7/+voVXWt9DPqe9CATWuTcDG6pLP9fNq4XQNw9zCPZzNRccnDt
+        orZYX0r6sgqsUNCNHC/AVWWX0MlnWnE=
+Received: from mimecast-mx02.redhat.com (mx3-rdu2.redhat.com
+ [66.187.233.73]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ us-mta-643-HDkpQSXyMkWhDCIF_gwgng-1; Tue, 11 Apr 2023 06:57:26 -0400
+X-MC-Unique: HDkpQSXyMkWhDCIF_gwgng-1
+Received: from smtp.corp.redhat.com (int-mx10.intmail.prod.int.rdu2.redhat.com [10.11.54.10])
+        (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+        (No client certificate requested)
+        by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 5CD67384D021;
+        Tue, 11 Apr 2023 10:57:26 +0000 (UTC)
+Received: from ws.net.home (ovpn-192-11.brq.redhat.com [10.40.192.11])
+        by smtp.corp.redhat.com (Postfix) with ESMTPS id D5460492B03;
+        Tue, 11 Apr 2023 10:57:25 +0000 (UTC)
+Date:   Tue, 11 Apr 2023 12:57:23 +0200
+From:   Karel Zak <kzak@redhat.com>
+To:     =?utf-8?B?0L3QsNCx?= <nabijaczleweli@nabijaczleweli.xyz>
+Cc:     util-linux@vger.kernel.org
+Subject: Re: [PATCH] Fix mmap/ioctl(3p) references in manual
+Message-ID: <20230411105723.3unfkgtwsqzlve6y@ws.net.home>
+References: <xirr7enxyybsuyjjroo3v452yjio3b3bfw4hdmctzhundq4wgg@ymt5yxyrni3q>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8BIT
-Content-Description: Mail message body
-Subject: Re
-To:     Recipients <wiki@paul-scerri.ch>
-From:   "Maria-Elisabeth Schaeffler" <wiki@paul-scerri.ch>
-Date:   Mon, 10 Apr 2023 12:57:27 -0700
-Reply-To: mariaelisabeths457@gmail.com
-Message-Id: <20230410195730.1E8D85C2DBD@zimbra-dc.paul-scerri.ch>
-X-Spam-Status: No, score=2.8 required=5.0 tests=FREEMAIL_FORGED_REPLYTO,
-        FREEMAIL_REPLYTO_END_DIGIT,SPF_HELO_NONE,SPF_PASS autolearn=no
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <xirr7enxyybsuyjjroo3v452yjio3b3bfw4hdmctzhundq4wgg@ymt5yxyrni3q>
+X-Scanned-By: MIMEDefang 3.1 on 10.11.54.10
+X-Spam-Status: No, score=-0.2 required=5.0 tests=DKIMWL_WL_HIGH,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_NONE,
+        RCVD_IN_MSPIKE_H2,SPF_HELO_NONE,SPF_NONE autolearn=unavailable
         autolearn_force=no version=3.4.6
-X-Spam-Level: **
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-Your email account has been selected for a donation of €1,700,000. Please contact for more information.
+On Fri, Apr 07, 2023 at 04:48:06PM +0200, наб wrote:
+> mmap(3p) is passable, inasmuch as it does actually describe mmap(2).
+> 
+> ioctl(3p), on the other hand, describes XSI STREAMS, which bear no
+> relation to ioctl(2) under Linux, much less ioctl_console(2).
+> 
+> Both live in the non-free manpages-posix-dev.
 
-Mrs Maria Elisabeth Schaeffler
-CEO SCHAEFFLER.
+Applied, thanks.
+
+-- 
+ Karel Zak  <kzak@redhat.com>
+ http://karelzak.blogspot.com
+
