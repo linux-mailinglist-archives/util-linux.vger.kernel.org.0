@@ -2,66 +2,77 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 25E5B6E1EA2
-	for <lists+util-linux@lfdr.de>; Fri, 14 Apr 2023 10:44:54 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id D5BD76E5DC5
+	for <lists+util-linux@lfdr.de>; Tue, 18 Apr 2023 11:44:17 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229547AbjDNIow (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Fri, 14 Apr 2023 04:44:52 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:54766 "EHLO
+        id S229710AbjDRJoL (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Tue, 18 Apr 2023 05:44:11 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:44216 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229611AbjDNIov (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Fri, 14 Apr 2023 04:44:51 -0400
-X-Greylist: delayed 498 seconds by postgrey-1.37 at lindbergh.monkeyblade.net; Fri, 14 Apr 2023 01:44:25 PDT
-Received: from mail.wellgood.pl (mail.wellgood.pl [217.61.106.98])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 9B5CDA262
-        for <util-linux@vger.kernel.org>; Fri, 14 Apr 2023 01:44:25 -0700 (PDT)
-Received: by mail.wellgood.pl (Postfix, from userid 1001)
-        id E1DE3846CB; Fri, 14 Apr 2023 09:35:39 +0100 (BST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=wellgood.pl; s=mail;
-        t=1681461347; bh=UtcbU9UA93mmNmHDpTZ9gIpeOZkP8tqjxYsgDXJpvt4=;
-        h=Date:From:To:Subject:From;
-        b=V+cQl4OssWc4QD6tvU7RZzHbwGwgfqwCx1CKvHMOjoK/4MjY/bwPaq63yifTUS7fr
-         DSQHuiBOhOLW/EnPUhERFs5usHij5zu5em7S20G+cy99z8QV88gwHjUaGpTfNUEDx9
-         De63a99j9+Mkp0NPv/t1gKYDhQrg6ceGrA8aRN284wUBx0teAfU1VQn4E06ptgJhEp
-         FrF5sTfSJIeLg8o96NZ3xD4e9xB61tbSzb/kpaHg5DRfYO+rOG4eG8TqDFZaWb8w8B
-         Vw7LGzGdOo46E7m22ilhLvwyxg4UTcCyGhc2+EDXXYxub+D4at27eB8/gokljdYbgV
-         1EZFVNIG99u+g==
-Received: by mail.wellgood.pl for <util-linux@vger.kernel.org>; Fri, 14 Apr 2023 08:35:31 GMT
-Message-ID: <20230414090028-0.1.53.29ch0.0.7hdrhfc5ka@wellgood.pl>
-Date:   Fri, 14 Apr 2023 08:35:31 GMT
-From:   =?UTF-8?Q? "Przemys=C5=82aw_Polak" ?= 
-        <przemyslaw.polak@wellgood.pl>
-To:     <util-linux@vger.kernel.org>
-Subject: Pozycjonowanie- informacja 
-X-Mailer: mail.wellgood.pl
+        with ESMTP id S229726AbjDRJoD (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Tue, 18 Apr 2023 05:44:03 -0400
+Received: from mail-ej1-x644.google.com (mail-ej1-x644.google.com [IPv6:2a00:1450:4864:20::644])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id CEEC12133
+        for <util-linux@vger.kernel.org>; Tue, 18 Apr 2023 02:44:01 -0700 (PDT)
+Received: by mail-ej1-x644.google.com with SMTP id q23so62086539ejz.3
+        for <util-linux@vger.kernel.org>; Tue, 18 Apr 2023 02:44:01 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20221208; t=1681811040; x=1684403040;
+        h=to:subject:message-id:date:from:reply-to:mime-version:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=oDVdWICwavrWQ8UAVYhe8ynFXsBBW1vVQ7W08zgiq24=;
+        b=nOIu2xcHa2i1x8B0ttfcWRm0LhOZMFhJKU1sxVRHHZdspkiFLw9SXjH8+JU9exhE/J
+         xltV/cU0ibaTynlnS5cO1eFkZiWmcScIQQZCt0C0lYKTOb4LZEcXPGNFy0FZQhXsXXH6
+         /Lekpy7g0iE11qmBvHOu14Esd6U9uaz+Wi06DwdgYpDfxoGiO2rRFhAKYbO6jYWzd+3D
+         BrHMfh1rJPpUavmdnXZh9Mw5L7HjEPYtYvb77Xaf2wkl06rwVJQnbWDKIUUzPnED1s1Q
+         Jtdh/6dh3BUKM3LFuuw+dUPdm91EcoueKie5R6PWszxO0gEuBgzZP1GsKia0tPq1PuTr
+         j6MQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20221208; t=1681811040; x=1684403040;
+        h=to:subject:message-id:date:from:reply-to:mime-version
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=oDVdWICwavrWQ8UAVYhe8ynFXsBBW1vVQ7W08zgiq24=;
+        b=k7X/6xJX/5baZAcR362kjWi1nFplRj0JZPiedrE40pYfHH6zVD8pf6pkJsH5lfa3is
+         aG6WUzw2uQAwatWtU4vcwLavf7rbFWc3XR+SlJujPanVA2liAMgrnXq/tMnt96rJ47Yl
+         gFDFmPEsAIRlQ1fFP6SEFUX1VBRLD/Dc6YvMwiiaYd150kdhH1uI7lPrHHirg0UtvqsB
+         1WytIKq7pz175XEBNZR1kQmdROJE4O12u494nbaw51gBVs8mpI3gfX8aYbK9SUKfK+eo
+         Hgn54RK+78fI69rnD/wpe8aO10bpmF87I/yNS+ZMf/RlmGPhILlbR67nvFaWHTeSMb98
+         L1Lg==
+X-Gm-Message-State: AAQBX9d+XSwfJ8+DDkEVpHDNx3DSZHGONM3JLjNDIm7lXJqerVnRqnBT
+        6P6K8YMjwg5Y5qAfM7pXkDMiWKF9epwGD+GHgsY=
+X-Google-Smtp-Source: AKy350b5AeXI8mi0N9uY5w/zOkgj4PDeF9mQmt4KeucFLQoSPROMhOz+2tFOcb1ShseuTfMRQTVc1G6qdrh+S5FiCqc=
+X-Received: by 2002:a17:906:298b:b0:94e:fdd:9319 with SMTP id
+ x11-20020a170906298b00b0094e0fdd9319mr5206744eje.15.1681811039986; Tue, 18
+ Apr 2023 02:43:59 -0700 (PDT)
 MIME-Version: 1.0
+Received: by 2002:a54:2f8b:0:b0:20b:a745:6168 with HTTP; Tue, 18 Apr 2023
+ 02:43:58 -0700 (PDT)
+Reply-To: ninacoulibaly03@hotmail.com
+From:   nina coulibaly <ninacoulibaly330@gmail.com>
+Date:   Tue, 18 Apr 2023 02:43:58 -0700
+Message-ID: <CAJiCSoATv52Sv_9DYo5+q1_N8f41LktRXk8VSxSf035RgbV_vg@mail.gmail.com>
+Subject: from nina coulibaly
+To:     undisclosed-recipients:;
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,SPF_HELO_NONE,SPF_PASS,
-        T_SCC_BODY_TEXT_LINE autolearn=ham autolearn_force=no version=3.4.6
+X-Spam-Status: No, score=2.4 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_ENVFROM_END_DIGIT,
+        FREEMAIL_FROM,FREEMAIL_REPLYTO,FREEMAIL_REPLYTO_END_DIGIT,
+        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE,
+        UNDISC_FREEM autolearn=no autolearn_force=no version=3.4.6
+X-Spam-Level: **
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-Dzie=C5=84 dobry,=20
+Dear,
 
-jaki=C5=9B czas temu zg=C5=82osi=C5=82a si=C4=99 do nas firma, kt=C3=B3re=
-j strona internetowa nie pozycjonowa=C5=82a si=C4=99 wysoko w wyszukiwarc=
-e Google.=20
+I am interested to invest with you in your country with total trust
+and i hope you will give me total support, sincerity and commitment.
+Please get back to me as soon as possible so that i can give you my
+proposed details of funding and others.
 
-Na podstawie wykonanego przez nas audytu SEO zoptymalizowali=C5=9Bmy tre=C5=
-=9Bci na stronie pod k=C4=85tem wcze=C5=9Bniej opracowanych s=C5=82=C3=B3=
-w kluczowych. Nasz wewn=C4=99trzny system codziennie analizuje prawid=C5=82=
-owe dzia=C5=82anie witryny.  Dzi=C4=99ki indywidualnej strategii, firma z=
-dobywa coraz wi=C4=99cej Klient=C3=B3w. =20
+Best Regards.
 
-Czy chcieliby Pa=C5=84stwo zwi=C4=99kszy=C4=87 liczb=C4=99 os=C3=B3b odwi=
-edzaj=C4=85cych stron=C4=99 internetow=C4=85 firmy? M=C3=B3g=C5=82bym prz=
-edstawi=C4=87 ofert=C4=99?=20
-
-
-Pozdrawiam
-Przemys=C5=82aw Polak
+Mrs Nina Coulibaly
