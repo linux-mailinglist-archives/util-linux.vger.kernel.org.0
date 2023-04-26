@@ -2,129 +2,74 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id E13F76EFAAE
-	for <lists+util-linux@lfdr.de>; Wed, 26 Apr 2023 21:11:02 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 718696EFB02
+	for <lists+util-linux@lfdr.de>; Wed, 26 Apr 2023 21:23:31 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S239340AbjDZTLA (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Wed, 26 Apr 2023 15:11:00 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:43186 "EHLO
+        id S239381AbjDZTX3 (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Wed, 26 Apr 2023 15:23:29 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:53060 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S230491AbjDZTK7 (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Wed, 26 Apr 2023 15:10:59 -0400
-Received: from mail-yb1-xb30.google.com (mail-yb1-xb30.google.com [IPv6:2607:f8b0:4864:20::b30])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 41A8549C9
-        for <util-linux@vger.kernel.org>; Wed, 26 Apr 2023 12:10:50 -0700 (PDT)
-Received: by mail-yb1-xb30.google.com with SMTP id 3f1490d57ef6-b95c3b869dcso545322276.1
-        for <util-linux@vger.kernel.org>; Wed, 26 Apr 2023 12:10:50 -0700 (PDT)
+        with ESMTP id S239298AbjDZTX0 (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Wed, 26 Apr 2023 15:23:26 -0400
+Received: from mail-qv1-xf42.google.com (mail-qv1-xf42.google.com [IPv6:2607:f8b0:4864:20::f42])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 409803591
+        for <util-linux@vger.kernel.org>; Wed, 26 Apr 2023 12:23:10 -0700 (PDT)
+Received: by mail-qv1-xf42.google.com with SMTP id 6a1803df08f44-5ef4d902708so72129546d6.2
+        for <util-linux@vger.kernel.org>; Wed, 26 Apr 2023 12:23:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1682536249; x=1685128249;
-        h=content-transfer-encoding:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=QzL2jDw5Ei31Amzu/mrjX2f0sIR/BZGNeFOlcPY+j5w=;
-        b=hxN7cAFoQhhxr6pANC+hPq2lJFpiPBzmYVU20HU58WtRt3Q+G1G89AO0ZjvoxI+b9J
-         R85Npq2XGAyOboeQELrjTQIL0ltEQ8k8YEA9XkNjHZ83pnPTBf/98ki7hGp3L+UiF6rN
-         zHN0pMLPDuVF/XhlEMxhp/e65qY4/R2UaTpOhE9oXXrb6qu5lTrtu49J11NbR5uh6X7S
-         5eqvT38zKZ2ezV1ksaEZQSkuZ7GG33YOI3GJYFV6ST8RF8YUAGqPCczQy1t9P/U8eLs5
-         pmU4xRBHoK4jJD2IM5qZ/ka/tFI3lZQ2XU3CdRtK0RsqRLpB7XdrC6Z0qHUE0aaae/uo
-         vI4g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1682536249; x=1685128249;
-        h=content-transfer-encoding:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+        d=gmail.com; s=20221208; t=1682536989; x=1685128989;
+        h=to:subject:message-id:date:from:reply-to:mime-version:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=QzL2jDw5Ei31Amzu/mrjX2f0sIR/BZGNeFOlcPY+j5w=;
-        b=CUHky1T9JPXOSyLM6DI/tYtOlmM17eJxicgpnE2Ykq0HEmPmMryOM3ohHI1EQfmDQR
-         S+eVPJnCRaD9qoF2fWRHhqP0EVLhKwP2zztP0b7ebOaAM5tTzR3+I6gmuiZGmz7LKwAB
-         bhCCb/1opeQdSSKogp5hR+7zooArgJyLW2qTscZjxr+9nGiXsYn84uwe9Avvv2MJbxR1
-         6id8XLaGLvjRy/wTrzcaqIovb5Zmbs1GGKOAkcE4dPjg/FCFFcgNnuTyHZWRq/VW/wco
-         8j+c8sFVXKttYW1IDc5e6tEzTDb8ysmpDrYoUj5xmrsQju1sa2Vi6wsffkUVPg+aFAzO
-         5rbw==
-X-Gm-Message-State: AC+VfDwhwWkZ9nWrGjGxonBC4xEvCWk7dhQFXR2GaAOLGlmZLZOTNpRP
-        VUFAxiCU7rBkjNekBcy4GLqtjBLd41DhP8+BUFooL5d8mwM=
-X-Google-Smtp-Source: ACHHUZ5Lj46jUOUaJjh1OKfs/L5/WWcryRxGWEvu3IOhFZ1560flR6DZD3NR6hNcZmnLkscifDWWKMeWQXqmCJyfSiU=
-X-Received: by 2002:a0d:d948:0:b0:541:6b00:f68d with SMTP id
- b69-20020a0dd948000000b005416b00f68dmr2469815ywe.16.1682536249371; Wed, 26
- Apr 2023 12:10:49 -0700 (PDT)
+        bh=JL3yT3Q33W5/BCQtgOVvz2cK4S2v0dqNTi6RS5aes9g=;
+        b=QxUX4L8+js4Dnk4OWFUB7UDLlXo2Pmdbs8OBz5kHzxC1qzH0xigqYHwNv9LTaJQ5rn
+         32Z6ROHrq+BYRdmZEFhOcfaGV8pd1HZ+BvBBlF+U4j6PZUOOIk2FEYbeU3aqu/WnvEhv
+         UEUWZdgV/Mbzef2Nmgp2EaS5d+Fl3TVcNpuIsX4dw+U1TSr60mN3OyDSeSi8rmFWit9Z
+         LxsxG1X21ZacNWX5/d6zpDxlohhzFHAmgoPbQWQ3KvsTceV4BAe0HSH3O7ixNddOcFP/
+         x0cqpZZv120Q7SrdX5dtr7WFZmViN96a+nRDU8x+KDvvwXohR3ahHOH3KmBv8+9imch9
+         JBBg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20221208; t=1682536989; x=1685128989;
+        h=to:subject:message-id:date:from:reply-to:mime-version
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=JL3yT3Q33W5/BCQtgOVvz2cK4S2v0dqNTi6RS5aes9g=;
+        b=K6u/MJ3G8HG8if7WWGcJ9KR76Nq9gLfuI1P+hD9zeR1t6/zHEQuMyrWP56H2zfz+es
+         HQZAikZy8+NUbV72A/TI/uyvzMR87vfDcCU1aQdmk9s1w5o09N/wnT8fUxkTmEu7MqO+
+         wTWiFQUfigILn/nChldHWj3oHJWqaPIPrBRRgzpC8nMLXe6dyEkSK6RGdhOqooFXTnCy
+         +jdmlyXLuB+W4DcZrNcElBAz20eYYOJ6ENnihbgXdN6DxZBmVMCejgBV8hqNJcgYTNsE
+         lhQhRppGzTpMlTap7ZMVQKzgG2lXYZH0s3P+yJNGrkdpgyTks6SIRrzpVpNPRcmqOuDY
+         0z5g==
+X-Gm-Message-State: AAQBX9dJ+Jif1azE4l112nv/cO17NNK9YRxSMTc4KqBjdQZCO2g4Qu7A
+        york9/+Q5wCPMUey/zzcusy4aEo1ifTF8Mf1xVU=
+X-Google-Smtp-Source: AKy350ZsuyKYxvUnklLTKglhluk/efU2zDAqV13wzJM5gVajIrmA/6IT67x+HI7IoN0YSgIaaSaU3QH/IO77HFlxmwE=
+X-Received: by 2002:a05:6214:29c3:b0:606:5103:9c98 with SMTP id
+ gh3-20020a05621429c300b0060651039c98mr26661560qvb.34.1682536989273; Wed, 26
+ Apr 2023 12:23:09 -0700 (PDT)
 MIME-Version: 1.0
-References: <CAHi0vA9nvmh7qiWX2oWbOcanCesk2M9dS0Goef6772emz=uy4g@mail.gmail.com>
- <20230426102806.7w33zaheh3feuohg@ws.net.home>
-In-Reply-To: <20230426102806.7w33zaheh3feuohg@ws.net.home>
-From:   =?UTF-8?Q?Mario_Bl=C3=A4ttermann?= <mario.blaettermann@gmail.com>
-Date:   Wed, 26 Apr 2023 21:10:38 +0200
-Message-ID: <CAHi0vA9PyvgD6ij3cR6fQyfZPeKAFB-YHy=XRkLZwE6OLYe5cg@mail.gmail.com>
-Subject: Re: util-linux v2.39 with translated man pages by default?
-To:     util-linux@vger.kernel.org
+Received: by 2002:a0c:de0e:0:b0:5f3:e327:2951 with HTTP; Wed, 26 Apr 2023
+ 12:23:08 -0700 (PDT)
+Reply-To: klassoumark@gmail.com
+From:   Mark Klassou <thdtymmark@gmail.com>
+Date:   Wed, 26 Apr 2023 19:23:08 +0000
+Message-ID: <CAHx9+fmQ5YyOX59f-M6k32Ct=Hjt0f-dJLyYj9rLPXP8ESbKUA@mail.gmail.com>
+Subject: Re
+To:     undisclosed-recipients:;
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,
-        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE
-        autolearn=ham autolearn_force=no version=3.4.6
+X-Spam-Status: No, score=4.5 required=5.0 tests=BAYES_50,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,FREEMAIL_REPLYTO,
+        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE,
+        UNDISC_FREEM autolearn=no autolearn_force=no version=3.4.6
+X-Spam-Level: ****
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-Hello Karel,
+Good Morning,
 
-Am Mi., 26. Apr. 2023 um 12:28 Uhr schrieb Karel Zak <kzak@redhat.com>:
->
-> On Wed, Apr 19, 2023 at 08:24:47PM +0200, Mario Bl=C3=A4ttermann wrote:
-> > Hello,
-> >
-> > when I run ./configure (without any option) on the current Git content,=
- I get:
-> >
-> >         Manual pages:              yes
-> >         Manual pages translated:   no
-> >
-> > This means, creating and installing the translated man pages is still
-> > not enabled by default. What may we expect for v2.39? If this remains
->
-> Good point. I have enabled it:
->  https://github.com/util-linux/util-linux/commit/9acfc349e0ea68a92baf818c=
-c659121f40ab9c04
->
-Thanks.
+I was only wondering if you got my previous email? I have been trying
+to reach you by email. Kindly get back to me swiftly, it is very
+important.
 
-> but as in other cases, the default is "check", and the result depends on
-> if you have "po4a" installed, and if not installed, you will see a
-> warning
->
->     configure: WARNING: po4a not found; not building translated man pages
->
-> but ./configure will success.
->
-
-This is OK so far.
-
-> > disabled, no downstream packager will notice it, and the effort of the
-> > translators (6 languages, more than 500 translated *.adoc files) was
-> > for the trashscan.
->
-> I need to think about how to push it to Fedora/RHEL; I'll probably
-> create a sub-package with the translations, one for all or per
-> language. Is there any good practice for man pages?
->
-
-Please have a look at procps-ng. It ships *both* UI and man page
-translations in a subpackage named procps-ng-l10n. This would be an
-acceptable solution: Users who need translated user interfaces, should
-also get the corresponding translated man pages. But this shouldn't be
-treated as the "usual" way for command line tools. For example,
-psmisc, dos2unix or wcd ship the translated man pages in the base
-package.
-
-On the other hand, have a look at Gnome packages. The help files (in
-/usr/share/help/$LANG) reside in the base package; I haven't found any
-separate packages for the localized user docs. Besides the above
-approach with outsourcing all i18n-related files in a "-i18n"
-subpackage, you could test how much bigger the packages become when
-you ship the translated man pages along with their English originals
-in the same package. I think the growth is acceptable, given the
-nowadays' hard disk capacities.
-
-Best Regards,
-Mario
+Yours faithfully
+Mark Klassou.
