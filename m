@@ -2,112 +2,112 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 77ABC6FCA61
-	for <lists+util-linux@lfdr.de>; Tue,  9 May 2023 17:40:00 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 9E68F6FE41F
+	for <lists+util-linux@lfdr.de>; Wed, 10 May 2023 20:43:04 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S235733AbjEIPj7 (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Tue, 9 May 2023 11:39:59 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:53364 "EHLO
+        id S235830AbjEJSnC (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Wed, 10 May 2023 14:43:02 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:40694 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S235635AbjEIPj6 (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Tue, 9 May 2023 11:39:58 -0400
-Received: from mail-yb1-xb42.google.com (mail-yb1-xb42.google.com [IPv6:2607:f8b0:4864:20::b42])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id EC6084692
-        for <util-linux@vger.kernel.org>; Tue,  9 May 2023 08:39:49 -0700 (PDT)
-Received: by mail-yb1-xb42.google.com with SMTP id 3f1490d57ef6-b9e27684b53so5318601276.0
-        for <util-linux@vger.kernel.org>; Tue, 09 May 2023 08:39:49 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1683646789; x=1686238789;
-        h=to:subject:message-id:date:from:reply-to:mime-version:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=9MgH2yk3oKPfzsyrz/5pM854nV5ZPzia2UxJXZBDwzc=;
-        b=QaEN08EJqLr0/UMlbkE24hM3NLqjQH7uqdM95WqMCdgIFSQFL05c2oqUbmAANpIgjr
-         tHdyyy57YL2TfNhLVMtS26cNaHuh//c8X47C7aAMINkUxDn12sDTozYP9USbOBeQ1kHq
-         kExB3k5m7bKM0sX1cv0NpuQXXSzZZienNtAVyZ9h5EILXDuVVhfn80XMecQKIl3Ygg0X
-         aVD3OHKxbZ4qrq/c7C9LtVkQsItQoihqrXq0bW4Yx5q2GV/XEthqh7PpRMM26nJPvIR3
-         sHyDQf2d40TMIXCvKWvIXzpSJMRqWA34nmmyh/7C6yxkKAR0GjoQm20XxADrncTJ6Yw3
-         HNIA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1683646789; x=1686238789;
-        h=to:subject:message-id:date:from:reply-to:mime-version
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=9MgH2yk3oKPfzsyrz/5pM854nV5ZPzia2UxJXZBDwzc=;
-        b=WeSV6WhLlwWcmJrpd7eyZwT2DRCwT+HrvI7fCQ7CQwUSrik7C/xw9R5tNIBN3qX57A
-         GwurCkSgdIWfV0UnWa2vtxze4iycuGgTb/bmxriKHpcflHrD+dy31ykgyNYt+H4YJ8SH
-         ZdelhZEiyqVWNoA+EnXilTmHmqrDfnke/hC9NmjjdwzcF6nNUX4DOktRglBVWJKXAxJ7
-         8aCE2XjjUuCtvZgeXBDUhQr1zZndAps4982RdUnkf87JfE9Kw/GAzQRYsAh/UUh/veqd
-         JaqbDBshZ89M+YCCDiXmSAJTGZztp2VVphxx/yIXsRjRYEmL4kEQlVfAtcz6Lk2HrjOE
-         0mJw==
-X-Gm-Message-State: AC+VfDwz61o6E21a8GHDHyqAdNvj16aQL3io6TMT+mtZiwgCkqHOsdLW
-        nATxHoDtyisM1mHIPObeFQ3ePU4Cna5M9MDcsYU=
-X-Google-Smtp-Source: ACHHUZ6XV1yL9Tmg6qLl/T7xQg4b946brms43wo/HYDpBpmSh30OLEyq3+LO5S/OGUnFCuQLmLZFkg3+rWxgbZ1ubSU=
-X-Received: by 2002:a25:a1c1:0:b0:b9d:dde8:2a5a with SMTP id
- a59-20020a25a1c1000000b00b9ddde82a5amr15196955ybi.49.1683646788794; Tue, 09
- May 2023 08:39:48 -0700 (PDT)
+        with ESMTP id S229461AbjEJSnC (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Wed, 10 May 2023 14:43:02 -0400
+X-Greylist: delayed 554 seconds by postgrey-1.37 at lindbergh.monkeyblade.net; Wed, 10 May 2023 11:43:00 PDT
+Received: from tuna.sandelman.ca (tuna.sandelman.ca [IPv6:2607:f0b0:f:3:216:3eff:fe7c:d1f3])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 939C1114
+        for <util-linux@vger.kernel.org>; Wed, 10 May 2023 11:43:00 -0700 (PDT)
+Received: from localhost (localhost [127.0.0.1])
+        by tuna.sandelman.ca (Postfix) with ESMTP id D8C4F3898E;
+        Wed, 10 May 2023 14:52:31 -0400 (EDT)
+Received: from tuna.sandelman.ca ([127.0.0.1])
+        by localhost (localhost [127.0.0.1]) (amavisd-new, port 10024)
+        with LMTP id izgPzHSsubOJ; Wed, 10 May 2023 14:52:31 -0400 (EDT)
+Received: from sandelman.ca (unknown [IPv6:2607:f0b0:f:2:40a:34ff:fe10:f571])
+        by tuna.sandelman.ca (Postfix) with ESMTP id 0EEFC3898D;
+        Wed, 10 May 2023 14:52:31 -0400 (EDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sandelman.ca;
+        s=mail; t=1683744751;
+        bh=XeNaWW3VGLqqC3NIauL/Oz2S8i0lRKWklggKO4ohIpk=;
+        h=From:to:Subject:In-Reply-To:References:Date:From;
+        b=Gcc8s59wL+05Se9yx0I66c1KvvyjKO87a/iqOfwbCRUncjOhpm8lkxEfa772ptjVt
+         11YiLXjJP5r5Btf97yrtyiPucpCUczK20ae8XsvF5mroGpbErPbWENuIpCt1UBPNse
+         6R/eRx1CP5DXeKzqGoGbF0bzr3cfAjc//hz6edy3A1n4y7arTRqlGzoMBDbr5GegqJ
+         jb0lFGwtJWbPT9Yh7tp/y5L8mdeelWhddSDcy7t2dPVrz/R428tU4vahS5Cq2QhwqV
+         a3GQy3YcYIfqUNHI3KJLvy8sBP8Fu7rt50O0JCAxxd/zjWWva4r12dfYvEk02A9SQE
+         NDMEh0rTVefUg==
+Received: from localhost (localhost [IPv6:::1])
+        by sandelman.ca (Postfix) with ESMTP id BFE2BEF;
+        Wed, 10 May 2023 14:33:43 -0400 (EDT)
+From:   Michael Richardson <mcr@sandelman.ca>
+to:     "Theodore Ts'o" <tytso@mit.edu>,
+        Chris Hofstaedtler <zeha@debian.org>,
+        util-linux@vger.kernel.org, Karel Zak <kzak@redhat.com>
+Subject: Re: uuid and RFC4122
+In-Reply-To: <23699.1676924882@localhost>
+References: <14266.1676658860@localhost> <20230219170116.q453di5cmknxn665@zeha.at> <Y/LPN7pf6x75Xm9H@mit.edu> <23699.1676924882@localhost>
+X-Mailer: MH-E 8.6+git; nmh 1.7+dev; GNU Emacs 27.1
+X-Face: $\n1pF)h^`}$H>Hk{L"x@)JS7<%Az}5RyS@k9X%29-lHB$Ti.V>2bi.~ehC0;<'$9xN5Ub#
+ z!G,p`nR&p7Fz@^UXIn156S8.~^@MJ*mMsD7=QFeq%AL4m<nPbLgmtKK-5dC@#:k
 MIME-Version: 1.0
-Received: by 2002:a05:7108:7186:b0:304:b9a1:abc8 with HTTP; Tue, 9 May 2023
- 08:39:47 -0700 (PDT)
-Reply-To: rhsheikhalhamed@gmail.com
-From:   Abu Dhabi Investment Authority <uyeg.rhrt@gmail.com>
-Date:   Tue, 9 May 2023 16:39:47 +0100
-Message-ID: <CAJEdw9X7y3e56VewgwZytEZ3TY_iLgWv3fqDREo=bhC=5oVMFQ@mail.gmail.com>
-Subject: Salam Alaikum /ADIA LOAN OFFER
-To:     undisclosed-recipients:;
-Content-Type: text/plain; charset="UTF-8"
-X-Spam-Status: Yes, score=6.4 required=5.0 tests=BAYES_50,DEAR_SOMETHING,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,
-        FREEMAIL_REPLYTO,RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,
-        T_SCC_BODY_TEXT_LINE,UNDISC_FREEM autolearn=no autolearn_force=no
-        version=3.4.6
-X-Spam-Report: * -0.0 RCVD_IN_DNSWL_NONE RBL: Sender listed at
-        *      https://www.dnswl.org/, no trust
-        *      [2607:f8b0:4864:20:0:0:0:b42 listed in]
-        [list.dnswl.org]
-        *  0.8 BAYES_50 BODY: Bayes spam probability is 40 to 60%
-        *      [score: 0.5000]
-        *  0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail
-        *      provider
-        *      [uyeg.rhrt[at]gmail.com]
-        * -0.0 SPF_PASS SPF: sender matches SPF record
-        *  0.0 SPF_HELO_NONE SPF: HELO does not publish an SPF Record
-        *  2.0 DEAR_SOMETHING BODY: Contains 'Dear (something)'
-        * -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
-        *      author's domain
-        *  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
-        *       valid
-        * -0.1 DKIM_VALID_EF Message has a valid DKIM or DK signature from
-        *      envelope-from domain
-        * -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-        * -0.0 T_SCC_BODY_TEXT_LINE No description available.
-        *  2.8 UNDISC_FREEM Undisclosed recipients + freemail reply-to
-        *  1.0 FREEMAIL_REPLYTO Reply-To/From or Reply-To/body contain
-        *      different freemails
-X-Spam-Level: ******
+Content-Type: multipart/signed; boundary="=-=-=";
+        micalg=pgp-sha512; protocol="application/pgp-signature"
+Date:   Wed, 10 May 2023 14:33:43 -0400
+Message-ID: <5866.1683743623@localhost>
+X-Spam-Status: No, score=-4.4 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_MED,SPF_HELO_NONE,
+        SPF_PASS,T_SCC_BODY_TEXT_LINE,URIBL_BLOCKED autolearn=ham
+        autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-Dear Sir/Madam,
-
-We are a United Arab Emirates based investment company known as Abu
-Dhabi Investment Authority working on expanding its portfolio globally
-and financing projects.
-
-We are offering Corporate and Personal Loan at 3.5% Interest Rate for
-a duration of 5 to 10 years.
-
-Contact us on Email: rhsheikhalhamed@gmail.com ,for more information
-and proceeding!
-
-We also give 2% commission to consultants and brokers who introduce
-project owners for finance or other opportunities.
+--=-=-=
+Content-Type: text/plain
 
 
-Yours truly,
-Mahmoud Al Hamoud
-(Personal Assistant)
-Abu Dhabi Investment Authority
-211 Corniche, PO Box 3600
-Abu Dhabi,United Arab Emirates
+Hello again!
+
+Michael Richardson <mcr@sandelman.ca> wrote:
+    > Hi, thanks for your work on debian packages.  I'm contacting you
+    > wearing my IETF uuidrev WG co-chair on.
+
+    > The https://datatracker.ietf.org/wg/uuidrev/documents/ WG was chartered
+    > to update RFC4122 last summer, and we expect to start a WGLC on
+    > RFC4122bis in the next few weeks.  This is just a heads up for now.
+
+We have started the WGLC today.
+It goes until June 9th.  The document is still open for comments,
+particularly of an editorial nature.
+Did something confuse you? our fault, let us know.
+
+We included a way to do SHA-2 based uuids into the v8 namespace based uuids,
+which we think is future proof, and won't burn version numbers the way that
+MD5 and SHA1 derived uuids did.
+
+You may find this diff to be useful:
+
+https://author-tools.ietf.org/iddiff?url1=draft-ietf-uuidrev-rfc4122bis-01&url2=draft-ietf-uuidrev-rfc4122bis-03&difftype=--html
+
+Your comments to uuidrev@ietf.org, or to https://github.com/ietf-wg-uuidrev/rfc4122bis/issues
+(or even send a PR)
+
+
+
+
+
+--=-=-=
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQFFBAEBCgAvFiEEbsyLEzg/qUTA43uogItw+93Q3WUFAmRb44cRHG1jckBzYW5k
+ZWxtYW4uY2EACgkQgItw+93Q3WXlYgf7B7HxcYWe46EmfPq1GwUTHaHngHnq7nj/
+TeTxUjKbgGZnKzrxyXyKNVmD4UcrVvEQAWwFg/nkI4aLChcIgxRqLlB2eoOO38Li
+HXyRMJ7TtXmVNKObuIfSI0neo/4G8rPNP4aua4qtz8MInYbCmTT7gfI9xIObx2/h
+F9ljf17RjXUUiQo42vdazfFHfvUUtG18CpY6YT/7jSfw2eML1MImiKaZpmvHAqrD
+ksqWd6w4pgQO3evbd4tSUb15wzLpLieP1WTas9xNX0TD6cNCxxalQRllsbtpZ12R
+HRo1SmFeHDCDv+Ccl4Nqd1efwhHmaZ5CCKC5eOjios8fkVADZE3Oig==
+=00iD
+-----END PGP SIGNATURE-----
+--=-=-=--
