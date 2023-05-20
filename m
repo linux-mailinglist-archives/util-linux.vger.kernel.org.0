@@ -2,77 +2,137 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id C8F2170A6BF
-	for <lists+util-linux@lfdr.de>; Sat, 20 May 2023 11:36:02 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id B0C1870A8D1
+	for <lists+util-linux@lfdr.de>; Sat, 20 May 2023 17:23:15 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231327AbjETJgB (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Sat, 20 May 2023 05:36:01 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:44114 "EHLO
+        id S231344AbjETPXN (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Sat, 20 May 2023 11:23:13 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:33684 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S231356AbjETJf7 (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Sat, 20 May 2023 05:35:59 -0400
-Received: from mail-yw1-x1136.google.com (mail-yw1-x1136.google.com [IPv6:2607:f8b0:4864:20::1136])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id D8DDDE56
-        for <util-linux@vger.kernel.org>; Sat, 20 May 2023 02:35:57 -0700 (PDT)
-Received: by mail-yw1-x1136.google.com with SMTP id 00721157ae682-56190515833so26779767b3.0
-        for <util-linux@vger.kernel.org>; Sat, 20 May 2023 02:35:57 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1684575357; x=1687167357;
-        h=to:subject:message-id:date:from:reply-to:mime-version:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=oDVdWICwavrWQ8UAVYhe8ynFXsBBW1vVQ7W08zgiq24=;
-        b=MFMY/Uu8AKE6p5lD43lQIWBsYrUsoinnH8JwKWCwTJHaTTziIwDAzyB7R+RJl/PALC
-         c2SjukhCXFTt8rlEToiaBrSJOo/OyL9v3ucyGEtHo10yiyVoTLnLbyWfnbBSfSJiJhSx
-         vaRD4VV5J+uLk8nYqBsuLjDSvu8AbbX8O4DZceiCHiw4rDEtIA772AzV4cVY1e+FDST7
-         f5u1rCePXy4zqtXYe1CQEdzt9skEF906Zf6LvnW1O9Y+yy7k3VHLYIozWLTQmithJJ9r
-         pdk4w9MlUc0eDkXGcZjO7fXzmVx/oPlvKxZcnDLEf6EJiEYowZ4MbzeQ8mq53H0Gx2Z0
-         NjOw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1684575357; x=1687167357;
-        h=to:subject:message-id:date:from:reply-to:mime-version
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=oDVdWICwavrWQ8UAVYhe8ynFXsBBW1vVQ7W08zgiq24=;
-        b=WQfPwD2qSVrrp34OjGGKzTG0KfgBAlXi3CZJP/sTLlHdUuO9UpVU+5SQ7qEtgEo+Go
-         gA8V1AZoYAS5ydPf5BHEPGSI7zgHZhQkpG5CDZd14r0vuChgVmzM6d59dUhzWgQX2Hxy
-         XOIMoRxg/15zpUqVMCUJYSt0g8LHEILAiWvEjaD0hfbmCkSxj9DQHXS9mRvy9mkeyuxg
-         NJX79nDYrtFljSZk48e+habIgGM6kmW2tnKBq6hRY8lwDq+72Nt8kKVLUC1BD2ionvFM
-         HgD+tsBJ3jQK1d2TAO3WgecprwEY8zajhnQyHbmkdmqId0BZ0nopDTnNF0qG2MQ6L27p
-         0JmQ==
-X-Gm-Message-State: AC+VfDwvbMdLF8mOnJryUZdOFNkJHmdLA/Trvby4/O3tGwv8JV1eexld
-        QtfE9Gq0wpzlEMZP4MDX61ENELKBPRmKdBo11+c=
-X-Google-Smtp-Source: ACHHUZ4JRRxzmlKE6PnG2zwlxil1pgJRiPkIExpSnGpU6z99j4Q0uxyQTl9BhUksl3xlEyiuH8KuqFtbjRyMz/DV+3k=
-X-Received: by 2002:a81:1bc8:0:b0:55a:776e:95f3 with SMTP id
- b191-20020a811bc8000000b0055a776e95f3mr4600086ywb.25.1684575356788; Sat, 20
- May 2023 02:35:56 -0700 (PDT)
+        with ESMTP id S229662AbjETPXN (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Sat, 20 May 2023 11:23:13 -0400
+Received: from yamato.tf-network.de (mailstorage3.tf-network.de [IPv6:2001:4ba0:ffa0:1b::d2:221])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 2FB66FE
+        for <util-linux@vger.kernel.org>; Sat, 20 May 2023 08:23:11 -0700 (PDT)
+Received: from amavis3.tf-network.de ([IPv6:2001:4ba0:ffa0:1b::d1:221])
+        by yamato.tf-network.de (Postfix) with ESMTP id 4QNnXX5wWCz444r
+        for <util-linux@vger.kernel.org>; Sat, 20 May 2023 17:23:08 +0200 (CEST)
+X-Virus-Scanned: amavisd-new at amavis3.tf-network.de
+Received: from smtp.tf-network.de ([93.186.202.221])
+        by amavis3.tf-network.de ([IPv6:2001:4ba0:ffa0:1b::d1:221]) (amavisd-new, port 10024)
+        with LMTP id WMoQUytg9dXr for <util-linux@vger.kernel.org>;
+        Sat, 20 May 2023 17:23:08 +0200 (CEST)
+Received: from [IPV6:2a0a:a547:20fc:0:b5ee:c596:4ec3:ad6e] (2a0a-a547-20fc-0-b5ee-c596-4ec3-ad6e.ipv6dyn.netcologne.de [IPv6:2a0a:a547:20fc:0:b5ee:c596:4ec3:ad6e])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+        (No client certificate requested)
+        by securesmtp.tf-network.de (Postfix) with ESMTPSA id 4QNnXX23yqz442N
+        for <util-linux@vger.kernel.org>; Sat, 20 May 2023 17:23:08 +0200 (CEST)
+Message-ID: <03db6ada-02ee-48a1-a2dd-47335e70a681@whissi.de>
+Date:   Sat, 20 May 2023 17:23:05 +0200
 MIME-Version: 1.0
-Received: by 2002:a05:7108:3acc:b0:2fb:68dc:b886 with HTTP; Sat, 20 May 2023
- 02:35:56 -0700 (PDT)
-Reply-To: ninacoulibaly03@hotmail.com
-From:   nina coulibaly <ninacoulibaly332@gmail.com>
-Date:   Sat, 20 May 2023 02:35:56 -0700
-Message-ID: <CAGYF=X50yCtcwmhih52hapMpwGWqP+yJHWxPCZWW5sVPK=zL5g@mail.gmail.com>
-Subject: from nina coulibaly
-To:     undisclosed-recipients:;
-Content-Type: text/plain; charset="UTF-8"
-X-Spam-Status: No, score=4.8 required=5.0 tests=BAYES_50,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_ENVFROM_END_DIGIT,
-        FREEMAIL_FROM,FREEMAIL_REPLYTO,FREEMAIL_REPLYTO_END_DIGIT,
-        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE,
-        UNDISC_FREEM autolearn=no autolearn_force=no version=3.4.6
-X-Spam-Level: ****
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
+ Thunderbird/102.11.0
+Subject: Re: util-linux 2.39 doesn't work with <linux-5.12: mount(2) system
+ call failed: Function not implemented
+Content-Language: en-US
+To:     util-linux@vger.kernel.org
+References: <af9fcbe9-15fc-0ce2-1fa6-2239f740a1c9@whissi.de>
+ <09636701-1136-4174-a453-5076ef0328f6@t-8ch.de>
+From:   Thomas Deutschmann <whissi@whissi.de>
+In-Reply-To: <09636701-1136-4174-a453-5076ef0328f6@t-8ch.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Spam-Status: No, score=-3.5 required=5.0 tests=BAYES_00,KHOP_HELO_FCRDNS,
+        NICE_REPLY_A,SPF_HELO_NONE,SPF_NONE,T_SCC_BODY_TEXT_LINE autolearn=ham
+        autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-Dear,
+Hi Thomas :)
 
-I am interested to invest with you in your country with total trust
-and i hope you will give me total support, sincerity and commitment.
-Please get back to me as soon as possible so that i can give you my
-proposed details of funding and others.
+On 2023-05-20 06:51, Thomas Weißschuh wrote:
+> Could you test the fix proposed in
+> https://github.com/util-linux/util-linux/pull/2248 ?
+> 
+> (For testing on a real system you only need the changes to
+> libmount/src/hook_mount.c, ignore the testing stuff)
 
-Best Regards.
+This is addressing the reported
 
-Mrs Nina Coulibaly
+   mount --make-slave /proc
+
+issue. I.e. in strace you will see your added call to 
+mount_setattr_is_supported() which will fail because it is not supported 
+but afterwards it will try old syscall:
+
+> getuid()                                = 0
+> geteuid()                               = 0
+> open_tree(AT_FDCWD, "/", OPEN_TREE_CLOEXEC) = 3
+> mount_setattr(-1, NULL, 0, NULL, 0)     = -1 ENOSYS (Function not implemented)
+> getuid()                                = 0
+> geteuid()                               = 0
+> getgid()                                = 0
+> getegid()                               = 0
+> prctl(PR_GET_DUMPABLE)                  = 1 (SUID_DUMP_USER)
+> newfstatat(AT_FDCWD, "/run/mount/utab", 0x7ffdfabad380, AT_SYMLINK_NOFOLLOW) = -1 ENOENT (No such file or directory)
+> mkdir("/run/mount", 0755)               = -1 EEXIST (File exists)
+> newfstatat(AT_FDCWD, "/run/mount/utab", 0x7ffdfabad270, 0) = -1 ENOENT (No such file or directory)
+> newfstatat(AT_FDCWD, "/run/mount", {st_mode=S_IFDIR|0755, st_size=40, ...}, 0) = 0
+> geteuid()                               = 0
+> getegid()                               = 0
+> getuid()                                = 0
+> getgid()                                = 0
+> access("/run/mount", R_OK|W_OK)         = 0
+> mount("none", "/", NULL, MS_SLAVE, NULL) = 0
+> close(3)                                = 0
+
+However, I noticed additional problems. Remounts for example are still 
+not working but no error is shown:
+
+> ~ # findmnt /
+> TARGET  SOURCE    FSTYPE OPTIONS
+> /       /dev/dm-0 ext4   ro,relatime,stripe=32650
+> ~ # mount -o remount,rw /
+> ~ # findmnt /
+> TARGET   SOURCE    FSTYPE OPTIONS
+> /        /dev/dm-0 ext4   ro,relatime,stripe=32650
+
+I don't see a fallback in strace:
+
+ > [...]
+> open_tree(AT_FDCWD, "/", OPEN_TREE_CLOEXEC) = 3
+> mount_setattr(-1, NULL, 0, NULL, 0)     = -1 ENOSYS (Function not implemented)
+> getuid()                                = 0
+> geteuid()                               = 0
+> getgid()                                = 0
+> getegid()                               = 0
+> prctl(PR_GET_DUMPABLE)                  = 1 (SUID_DUMP_USER)
+> newfstatat(AT_FDCWD, "/run/mount/utab", 0x7ffe4fe7c590, AT_SYMLINK_NOFOLLOW) = -1 ENOENT (No such file or directory)
+> mkdir("/run/mount", 0755)               = -1 EEXIST (File exists)
+> newfstatat(AT_FDCWD, "/run/mount/utab", 0x7ffe4fe7c480, 0) = -1 ENOENT (No such file or directory)
+> newfstatat(AT_FDCWD, "/run/mount", {st_mode=S_IFDIR|0755, st_size=40, ...}, 0) = 0
+> geteuid()                               = 0
+> getegid()                               = 0
+> getuid()                                = 0
+> getgid()                                = 0
+> access("/run/mount", R_OK|W_OK)         = 0
+> fspick(3, "", FSPICK_NO_AUTOMOUNT|FSPICK_EMPTY_PATH) = 4
+> fsconfig(4, FSCONFIG_SET_FLAG, "rw", NULL, 0) = 0
+> fsconfig(4, FSCONFIG_CMD_RECONFIGURE, NULL, NULL, 0) = 0
+> close(4)                                = 0
+> close(3)                                = 0
+> dup(1)                                  = 3
+> close(3)                                = 0
+> dup(2)                                  = 3
+> close(3)                                = 0
+> exit_group(0)                           = ?
+> +++ exited with 0 +++
+
+
+
+-- 
+Regards,
+Thomas
