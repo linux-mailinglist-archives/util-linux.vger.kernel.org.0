@@ -2,77 +2,89 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 3BD8F72E233
-	for <lists+util-linux@lfdr.de>; Tue, 13 Jun 2023 13:51:48 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 0770672F68F
+	for <lists+util-linux@lfdr.de>; Wed, 14 Jun 2023 09:40:26 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S240868AbjFMLvX (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Tue, 13 Jun 2023 07:51:23 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:43604 "EHLO
+        id S238535AbjFNHkW (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Wed, 14 Jun 2023 03:40:22 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:54364 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S242294AbjFMLvM (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Tue, 13 Jun 2023 07:51:12 -0400
-Received: from mail-wr1-x42a.google.com (mail-wr1-x42a.google.com [IPv6:2a00:1450:4864:20::42a])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id C6FE6BA
-        for <util-linux@vger.kernel.org>; Tue, 13 Jun 2023 04:50:46 -0700 (PDT)
-Received: by mail-wr1-x42a.google.com with SMTP id ffacd0b85a97d-30c4c1fd511so4951535f8f.1
-        for <util-linux@vger.kernel.org>; Tue, 13 Jun 2023 04:50:46 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1686657045; x=1689249045;
-        h=to:subject:message-id:date:from:reply-to:mime-version:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=oDVdWICwavrWQ8UAVYhe8ynFXsBBW1vVQ7W08zgiq24=;
-        b=IguuuSxjA7LI/W6tgB/uQMDBDdLlB3UH5dyAdCbx5+UHEeAWGtmHou24cX7ikDoeef
-         peBbMNPXCWO8hzVJcQK9whSwxVB+ID9VW9tl4fmsQyXvUNbXc3tssJrpH/zs1syGQoQ+
-         uiKsdcRK8Zm3IyVsT4xpKEXah8+9xDK0/NAPtlEYdmboqJyJqGVyCTh8i7u1mYeUEgp/
-         wKd1RMRvvL74SdvzAMEeZxztzbrZNy1nuX7+k/kpouGks/ppWN2BmLaLiWz+9VmFXUOv
-         EetFWJ1vhTxf2uyhE1/+iaKhDCoufKOezZi8AjYTjk9XKPLkuIkJH7N1e5V7DXFEi+ST
-         3sQg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1686657045; x=1689249045;
-        h=to:subject:message-id:date:from:reply-to:mime-version
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=oDVdWICwavrWQ8UAVYhe8ynFXsBBW1vVQ7W08zgiq24=;
-        b=d1gpf1LnpZ+8p7DNDJ1EZMigE2RA3AwZDW41nkNldBAeloh2QDHKa1NtPS3oqnOOKi
-         qBwHTu8kw1dWHuO0XrQiAWbP9Q5rhj1UyazAVmTBpPLFrxIVrxEXcQ3eOGqdtSniU10h
-         MptOBXCNjZx4A5IErDz55k3K74UZcmD6wgkwZpKnqvjsDfKs9pjSb+npmmFTYHxUnY60
-         9rhsHuQiZDdoHFHlsTX39XXpD1z4ZbfVRbAecUYvAOddfKrEF0A5jLScITfhJizq5seS
-         x2emPovhABKPJ4GoYOiDc0I+ZCWsvk7EteM0+uQ3s8qAIjkCbJdqaHGMDWUCAgYC+Xhq
-         PD6A==
-X-Gm-Message-State: AC+VfDxz2MBlrMOAvaR1ZWzjfXiT9WCCmDnJI0rsP+08w9pXZR7ZJQWm
-        5vf5hXUpHw0ClN/9cnXkrX3ie8ckQBP5KrwZNB0=
-X-Google-Smtp-Source: ACHHUZ7fZlABHMgJib4Kdd8EhHJgu8QI/LEfFkhe2koR6Lh8iUdEb2N2lBbizydhfLXEp5z0QbG3T1FoNj1uyvnGpT8=
-X-Received: by 2002:adf:ee4d:0:b0:30f:bfa0:920b with SMTP id
- w13-20020adfee4d000000b0030fbfa0920bmr4951975wro.36.1686657045022; Tue, 13
- Jun 2023 04:50:45 -0700 (PDT)
+        with ESMTP id S235492AbjFNHkU (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Wed, 14 Jun 2023 03:40:20 -0400
+X-Greylist: delayed 531 seconds by postgrey-1.37 at lindbergh.monkeyblade.net; Wed, 14 Jun 2023 00:40:17 PDT
+Received: from mail.startuplaunchpadpro.pl (mail.startuplaunchpadpro.pl [217.61.112.231])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id C1CB8119
+        for <util-linux@vger.kernel.org>; Wed, 14 Jun 2023 00:40:17 -0700 (PDT)
+Received: by mail.startuplaunchpadpro.pl (Postfix, from userid 1002)
+        id 5E86A845B9; Wed, 14 Jun 2023 09:30:30 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+        d=startuplaunchpadpro.pl; s=mail; t=1686727847;
+        bh=oZTeICgx2X9EeHQQOCJSHYKJVJOCiOs1n/VaxwVhO9Y=;
+        h=Date:From:To:Subject:From;
+        b=oKOY9m6Q9DGzDfHaQCNatfBAD0dPZ3CYA1ZaTg/FRsDFspFGvrFPZkfdk7g9/v8/e
+         f6rUrRTcRdigy1g7iA4nGSwXbV42ikohzjZZI1h3HmF+3Fa8auGagy463Ihvdm5eB8
+         r7K0c2+CoV2eE5Mc7SNVZ7e/NCzAjtWVEJu7gsSnBfbVScadaBEPh4yZcXFB0vPAP/
+         dMDEC+uNQhUHNMo9W0q4Bbq4BvsY/SZwaDrNLM8Bst9ItdNNyBWmdMlqnU6HRfGtuS
+         wBEGXLK98TLy7faUGB+30dhtZAD0RvKd7B3MOERSaDkfMU+H4NARmA72fwyQg4EBqH
+         AwvKLXdv1sJWw==
+Received: by mail.startuplaunchpadpro.pl for <util-linux@vger.kernel.org>; Wed, 14 Jun 2023 07:30:21 GMT
+Message-ID: <20230614084500-0.1.q.8hpc.0.h1itrcfaca@startuplaunchpadpro.pl>
+Date:   Wed, 14 Jun 2023 07:30:21 GMT
+From:   "Marcin Wojciechowski" <marcin.wojciechowski@startuplaunchpadpro.pl>
+To:     <util-linux@vger.kernel.org>
+Subject: =?UTF-8?Q?Prosz=C4=99_o_kontakt?=
+X-Mailer: mail.startuplaunchpadpro.pl
 MIME-Version: 1.0
-Received: by 2002:adf:f64c:0:b0:30f:bbed:3522 with HTTP; Tue, 13 Jun 2023
- 04:50:44 -0700 (PDT)
-Reply-To: ninacoulibaly03@hotmail.com
-From:   nina coulibaly <ninacou041@gmail.com>
-Date:   Tue, 13 Jun 2023 11:50:44 +0000
-Message-ID: <CANnT539CgR-Pt=BxFPPwGb18heaFSnbCNRE4MjgZcU35=8s9_Q@mail.gmail.com>
-Subject: from nina coulibaly
-To:     undisclosed-recipients:;
 Content-Type: text/plain; charset="UTF-8"
-X-Spam-Status: No, score=4.8 required=5.0 tests=BAYES_50,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_ENVFROM_END_DIGIT,
-        FREEMAIL_FROM,FREEMAIL_REPLYTO,FREEMAIL_REPLYTO_END_DIGIT,
-        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE,
-        UNDISC_FREEM autolearn=no autolearn_force=no version=3.4.6
-X-Spam-Level: ****
+Content-Transfer-Encoding: quoted-printable
+X-Spam-Status: Yes, score=6.5 required=5.0 tests=BAYES_50,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_SBL_CSS,SPF_HELO_NONE,
+        SPF_PASS,T_SCC_BODY_TEXT_LINE,URIBL_BLOCKED,URIBL_CSS_A,URIBL_DBL_SPAM
+        autolearn=no autolearn_force=no version=3.4.6
+X-Spam-Report: *  2.5 URIBL_DBL_SPAM Contains a spam URL listed in the Spamhaus DBL
+        *      blocklist
+        *      [URIs: startuplaunchpadpro.pl]
+        *  3.3 RCVD_IN_SBL_CSS RBL: Received via a relay in Spamhaus SBL-CSS
+        *      [217.61.112.231 listed in zen.spamhaus.org]
+        *  0.8 BAYES_50 BODY: Bayes spam probability is 40 to 60%
+        *      [score: 0.4216]
+        *  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was
+        *      blocked.  See
+        *      http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
+        *      for more information.
+        *      [URIs: startuplaunchpadpro.pl]
+        *  0.1 URIBL_CSS_A Contains URL's A record listed in the Spamhaus CSS
+        *      blocklist
+        *      [URIs: startuplaunchpadpro.pl]
+        * -0.0 SPF_PASS SPF: sender matches SPF record
+        *  0.0 SPF_HELO_NONE SPF: HELO does not publish an SPF Record
+        * -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+        * -0.1 DKIM_VALID_EF Message has a valid DKIM or DK signature from
+        *      envelope-from domain
+        *  0.1 DKIM_SIGNED Message has a DKIM or DK signature, not necessarily
+        *       valid
+        * -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from
+        *      author's domain
+        * -0.0 T_SCC_BODY_TEXT_LINE No description available.
+X-Spam-Level: ******
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-Dear,
+Dzie=C5=84 dobry,
 
-I am interested to invest with you in your country with total trust
-and i hope you will give me total support, sincerity and commitment.
-Please get back to me as soon as possible so that i can give you my
-proposed details of funding and others.
+Czy jest mo=C5=BCliwo=C5=9B=C4=87 nawi=C4=85zania wsp=C3=B3=C5=82pracy z =
+Pa=C5=84stwem?
 
-Best Regards.
+Z ch=C4=99ci=C4=85 porozmawiam z osob=C4=85 zajmuj=C4=85c=C4=85 si=C4=99 =
+dzia=C5=82aniami zwi=C4=85zanymi ze sprzeda=C5=BC=C4=85.
 
-Mrs Nina Coulibaly
+Pomagamy skutecznie pozyskiwa=C4=87 nowych klient=C3=B3w.
+
+Zapraszam do kontaktu.
+
+
+Pozdrawiam
+Marcin Wojciechowski
