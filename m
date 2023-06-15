@@ -2,15 +2,16 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id B75217314B0
-	for <lists+util-linux@lfdr.de>; Thu, 15 Jun 2023 11:57:41 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 87C6C7314AF
+	for <lists+util-linux@lfdr.de>; Thu, 15 Jun 2023 11:57:36 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S244295AbjFOJ5k (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Thu, 15 Jun 2023 05:57:40 -0400
+        id S239432AbjFOJ5e (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Thu, 15 Jun 2023 05:57:34 -0400
 Received: from lindbergh.monkeyblade.net ([23.128.96.19]:53674 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
         with ESMTP id S238214AbjFOJ5c (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Thu, 15 Jun 2023 05:57:32 -0400
+        <rfc822;util-linux-ng@vger.kernel.org>);
+        Thu, 15 Jun 2023 05:57:32 -0400
 X-Greylist: delayed 14564 seconds by postgrey-1.37 at lindbergh.monkeyblade.net; Thu, 15 Jun 2023 02:57:31 PDT
 Received: from mail.sitirkam.com (mail.aurorateknoglobal.com [103.126.10.58])
         by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 9B87F1A3;
