@@ -2,99 +2,74 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 779BA73DE5F
-	for <lists+util-linux@lfdr.de>; Mon, 26 Jun 2023 14:02:34 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 40FE173F7B2
+	for <lists+util-linux@lfdr.de>; Tue, 27 Jun 2023 10:46:49 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229633AbjFZMCd (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Mon, 26 Jun 2023 08:02:33 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:45698 "EHLO
+        id S229702AbjF0Iqq (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Tue, 27 Jun 2023 04:46:46 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:49048 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229572AbjFZMCd (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Mon, 26 Jun 2023 08:02:33 -0400
-Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com [IPv6:2a00:1450:4864:20::630])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 192741B7
-        for <util-linux@vger.kernel.org>; Mon, 26 Jun 2023 05:02:32 -0700 (PDT)
-Received: by mail-ej1-x630.google.com with SMTP id a640c23a62f3a-988883b0d8fso456812866b.1
-        for <util-linux@vger.kernel.org>; Mon, 26 Jun 2023 05:02:32 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1687780950; x=1690372950;
-        h=content-transfer-encoding:in-reply-to:from:references:cc:to
-         :content-language:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=adh/yMdQAMmzIpgpb2pC8tE3VyluwB1GZiAEqDR22Vw=;
-        b=ladN+56U4fnT9+lfI8kCtYX7iY/7esbR/+hK6FPybHcbB100XkcHJ4hhA6OXEOAUpt
-         WzjF8ftiwvYXyVnCtVQM7L6YP4jLybVHIKnA2/PzkJREsOPVBIgxKjTs+zNFXUbhD+Lx
-         VLAgpdxcsS+OoO2me7PTMhSaUQFS2NOAfdapxQg70tZSU0oCq44e4iJ9mGAuOEnb1Hw5
-         7JyWz1IaRZb9EPRfrWDcEw9DQO3NdPJpMBn3CIDiAl+0JWLNAup8SyGYFhdAe3q2t5nF
-         UHXyV9Zs5mcEEkfVxXPMFA8s4MP5HAxasbzCg/9m5zltwopriJ/1nFqwx/DKdCCkomA4
-         d2HQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1687780950; x=1690372950;
-        h=content-transfer-encoding:in-reply-to:from:references:cc:to
-         :content-language:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=adh/yMdQAMmzIpgpb2pC8tE3VyluwB1GZiAEqDR22Vw=;
-        b=fxJh23HN3IBZmhQNnxaK/ieA5kDS0ub4AUrxOw6wyPeXGjHvBW5OL4r8Qp1rC+OaZx
-         Ic0icExTUl/+9+WRH0UX8Lb/PWrR5ijV/YogDVoJOph5T5uUodzedO5inOPc0q2uLJCG
-         TpN0J1r8qdrflh6jPHA6HL7rdS9tjkjsTrV0bvR5KqIU53PjvH0ObsKNIeeOA/h/OjkQ
-         BhoBanieAG2XYAJUvGcqbKqznjdNjWTcobWHrhQR9qbUYAcbHJJIwkQa9InTKs1Cy73a
-         5R7u9/V9CBQORPm4XiUi6UT84HTs2vHhai5c0jyXEKrkW00XcgrSH9fNqr/pYABLCZtq
-         eQMA==
-X-Gm-Message-State: AC+VfDwnTYmTTphSg/Lt+IJLFLihsXDYVTpMlm9DHt6Ng7skdTWb9MIo
-        9cNZmPmOXUaNuYP9Os49TbY=
-X-Google-Smtp-Source: ACHHUZ56sSkfkt1fj/YAA6NhuGPCWQggAhd3qX/2KgqdubDW4GhEqLO6i8OF64lUrBBBiC+leQU1wQ==
-X-Received: by 2002:a17:907:3d94:b0:98c:d733:bf03 with SMTP id he20-20020a1709073d9400b0098cd733bf03mr14065825ejc.43.1687780950345;
-        Mon, 26 Jun 2023 05:02:30 -0700 (PDT)
-Received: from ?IPV6:2a00:6020:4892:c500:9efa:24ee:3324:f753? ([2a00:6020:4892:c500:9efa:24ee:3324:f753])
-        by smtp.gmail.com with ESMTPSA id h14-20020a17090634ce00b0098238141deasm3217450ejb.90.2023.06.26.05.02.29
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 26 Jun 2023 05:02:29 -0700 (PDT)
-Message-ID: <f4333bbc-5903-8729-5b88-04c1178fd418@gmail.com>
-Date:   Mon, 26 Jun 2023 14:02:29 +0200
+        with ESMTP id S229931AbjF0Iqp (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Tue, 27 Jun 2023 04:46:45 -0400
+X-Greylist: delayed 3414 seconds by postgrey-1.37 at lindbergh.monkeyblade.net; Tue, 27 Jun 2023 01:46:43 PDT
+Received: from relay.strateg.ua (relay.strateg.ua [135.181.5.166])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id E1BEDB8
+        for <util-linux@vger.kernel.org>; Tue, 27 Jun 2023 01:46:43 -0700 (PDT)
+Received: from smtp.strateg.ua (unknown [10.34.12.32])
+        by relay.strateg.ua (Postfix) with ESMTPS id 34BE78C6334
+        for <util-linux@vger.kernel.org>; Tue, 27 Jun 2023 09:13:24 +0200 (CEST)
+Received: from email-system.local (localhost [127.0.0.1])
+        by email-system.local (Postfix) with ESMTP id 4Qqwsv3WXSz840xH
+        for <util-linux@vger.kernel.org>; Tue, 27 Jun 2023 10:13:23 +0300 (EEST)
+Authentication-Results: email-system.local (amavisd-new); dkim=pass
+        reason="pass (just generated, assumed good)" header.d=sudohodstvo.org
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=sudohodstvo.org;
+         h=reply-to:date:date:from:from:to:subject:subject
+        :content-description:content-transfer-encoding:mime-version
+        :content-type:content-type; s=dkim; t=1687850003; x=1688714004;
+         bh=QEt13M/0YYdXf13j4/vg7b+uUw6K1/1SAoHmEDPE/qU=; b=cXSONSY6z90+
+        SbbVRXXP4/G5db7g5uuhI6dirVO1vY7PiR+1T2H0dGVJfaDSnzF5Xh8FXZL8ApCI
+        Gmks4Sfi+YddPnNR1jUpv1DrPRlof/bPPiLNYr02EowXvxtkuRpZaUgO1QCPffZz
+        Io0t9EFYoaMgh5B7ELUDj7WVfpcqTjc=
+X-Virus-Scanned: amavisd-new at email-system.local
+Received: from smtp.strateg.ua ([127.0.0.1])
+        by email-system.local (email-system.local [127.0.0.1]) (amavisd-new, port 10026)
+        with ESMTP id h9XkPZi11y2g for <util-linux@vger.kernel.org>;
+        Tue, 27 Jun 2023 10:13:23 +0300 (EEST)
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+        (Authenticated sender: kostetskaya.t@sudohodstvo.org)
+        by email-system.local (Postfix) with ESMTPSA id 4Qqn5Z6Bzzz841hp;
+        Tue, 27 Jun 2023 04:22:58 +0300 (EEST)
+Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.12.0
-Subject: Re: [PATCH] cfdisk, fix behavior after writing changes
-Content-Language: en-US
-To:     Karel Zak <kzak@redhat.com>
-Cc:     util-linux@vger.kernel.org, 927041@bugs.debian.org
-References: <CAJed8sMYhw9iYSBN5XqdJiJkiqrciT+yudDBZBRhN8pnfc6CaA@mail.gmail.com>
- <20230626113052.gzluriz2qsqmjk4a@ws.net.home>
-From:   Florian Zimmermann <florian.zimmermann@gmail.com>
-In-Reply-To: <20230626113052.gzluriz2qsqmjk4a@ws.net.home>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Spam-Status: No, score=-2.2 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,NICE_REPLY_A,
-        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE
-        autolearn=ham autolearn_force=no version=3.4.6
+Content-Transfer-Encoding: quoted-printable
+Content-Description: Mail message body
+Subject: Re: 
+To:     Recipients <kostetskaya.t@sudohodstvo.org>
+From:   MacKenzie Scott <kostetskaya.t@sudohodstvo.org>
+Date:   Tue, 27 Jun 2023 09:22:56 +0800
+Reply-To: h.amer@azzouni.sa
+Message-Id: <4Qqwsv3WXSz840xH@email-system.local>
+X-Spam-Status: No, score=0.2 required=5.0 tests=BAYES_40,DKIM_INVALID,
+        DKIM_SIGNED,RCVD_IN_MSPIKE_BL,RCVD_IN_MSPIKE_L4,SPF_HELO_NONE,SPF_PASS,
+        T_SCC_BODY_TEXT_LINE,URIBL_BLOCKED autolearn=no autolearn_force=no
+        version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-On 6/26/23 13:30, Karel Zak wrote:
-> On Sun, Jun 25, 2023 at 01:31:33PM +0200, Florian Zimmermann wrote:
->> diff --git a/disk-utils/cfdisk.c b/disk-utils/cfdisk.c
->> index 2e29421d7..a05a50f3e 100644
->> --- a/disk-utils/cfdisk.c
->> +++ b/disk-utils/cfdisk.c
->> @@ -2530,6 +2530,7 @@ static int main_menu_action(struct cfdisk *cf, int key)
->>                          else
->>                                  fdisk_reread_partition_table(cf->cxt);
->>                          info = _("The partition table has been altered.");
->> +                      ui_menu_goto(cf, 2); /* after writing reset
->> next action to Quit by default */
->>                  }
-> 
-> It seems that 'Quit' does not have to be the second item in the menu in
-> all cases. I have applied a little bit different version of  the patch:
-> https://github.com/util-linux/util-linux/commit/b0d4d093796c3a3776b155e4ec7e2aa7cb09677d
-> 
->   Thanks!
+Ahoj,
 
-Thanks, your modified patch is more generic and better indeed.
-CCing debian bug folks.
+Jsem Mackenzie Scott b=C3=BDval=C3=A1 man=C5=BEelka zakladatele a gener=C3=
+=A1ln=C3=ADho reditele Amazonu, daruji 4 miliardy dolaru charitativn=C3=ADm=
+ organizac=C3=ADm, jednotlivcum a vysok=C3=BDm =C5=A1kol=C3=A1m po cel=C3=
+=A9m svete od Scottovy nadace, abych poskytla okam=C5=BEitou podporu lidem,=
+ kter=C3=AD ekonomicky trp=C3=AD pandemi=C3=AD COVID-19 a v=C3=A1m' jsem je=
+dn=C3=ADm ze =C5=A1tastn=C3=BDch v=C3=BDhercu, m=C3=A1m pro v=C3=A1s darova=
+c=C3=AD grant v hodnote 100 800 000,00 dolaru, v pr=C3=ADpade z=C3=A1jmu me=
+ mu=C5=BEete kontaktovat pro v=C3=ADce informac=C3=AD.
 
-Florian
+S pozdravem
+MacKenzie Scottov=C3=A1.
