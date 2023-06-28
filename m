@@ -2,192 +2,68 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 91ADC73FC38
-	for <lists+util-linux@lfdr.de>; Tue, 27 Jun 2023 14:54:32 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 87A2B740DB9
+	for <lists+util-linux@lfdr.de>; Wed, 28 Jun 2023 11:51:48 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229950AbjF0Myb (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Tue, 27 Jun 2023 08:54:31 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:49806 "EHLO
+        id S231866AbjF1JsX (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Wed, 28 Jun 2023 05:48:23 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:50832 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229881AbjF0Myb (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Tue, 27 Jun 2023 08:54:31 -0400
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 96ED9270F
-        for <util-linux@vger.kernel.org>; Tue, 27 Jun 2023 05:53:48 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-        s=mimecast20190719; t=1687870427;
-        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-         to:to:cc:mime-version:mime-version:content-type:content-type:
-         content-transfer-encoding:content-transfer-encoding;
-        bh=oiS2ZLd5xTYzw9V7aNrU2pwdMi8VnXjBD6gkjizwpN8=;
-        b=KN5TDLaP7gbVDos5IpwbUO/Pm3hpDkgcDLLUgN6IPT0t9Doiyxdg1nXrCUd4HnBUDoMYSd
-        pRVoKqNpfDDCr68+MroRZ7+PStj5y9635rsaETMV7q76wVuERZULyrHt0PbZDSTC+MYPyx
-        o6cXZN0am2qcm/p3HP3w2lu3bNhVAzE=
-Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
- [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-590-ttLT2izKN-ejuW7POps_HQ-1; Tue, 27 Jun 2023 08:53:44 -0400
-X-MC-Unique: ttLT2izKN-ejuW7POps_HQ-1
-Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.rdu2.redhat.com [10.11.54.8])
-        (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
-        (No client certificate requested)
-        by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 18C828C80E9;
-        Tue, 27 Jun 2023 12:53:44 +0000 (UTC)
-Received: from ws.net.home (unknown [10.45.225.186])
-        by smtp.corp.redhat.com (Postfix) with ESMTPS id 7F228C00049;
-        Tue, 27 Jun 2023 12:53:43 +0000 (UTC)
-Date:   Tue, 27 Jun 2023 14:53:41 +0200
-From:   Karel Zak <kzak@redhat.com>
-To:     linux-kernel@vger.kernel.org, linux-fsdevel@vger.kernel.org,
-        util-linux@vger.kernel.org
-Subject: [ANNOUNCE] util-linux v2.39.1
-Message-ID: <20230627125341.uohy47xdqllxiisz@ws.net.home>
+        with ESMTP id S235588AbjF1JfS (ORCPT
+        <rfc822;util-linux-ng@vger.kernel.org>);
+        Wed, 28 Jun 2023 05:35:18 -0400
+Received: from mail-lf1-x12a.google.com (mail-lf1-x12a.google.com [IPv6:2a00:1450:4864:20::12a])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 85F2B3C0B
+        for <util-linux-ng@vger.kernel.org>; Wed, 28 Jun 2023 02:32:52 -0700 (PDT)
+Received: by mail-lf1-x12a.google.com with SMTP id 2adb3069b0e04-4f4b2bc1565so8000220e87.2
+        for <util-linux-ng@vger.kernel.org>; Wed, 28 Jun 2023 02:32:52 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20221208; t=1687944770; x=1690536770;
+        h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+         :date:message-id:reply-to;
+        bh=Mjkc+uj5f5KqdyTaMDkUa5q+MStotsoQ5Oq44MmQKTQ=;
+        b=XQN9hvARN9WX/AvoZG+NcmzgtZkobTG2l8Ymyz0wvEMAnwZUOxVY3RxqhySi2sCqYC
+         u+YYy6VKSBzangOIOcJyY8hotAM00eVUQKTdxx9UT217npuZJZHsv2qGto7+ECgdY/Rx
+         pxN5I0KLrtl0pP92DIsTFFNzf9YQVJujfnA5xYxc8M3znMWSwusE8DiGRAmr5yunsC1B
+         mCYUiMttWB21ogu8ZKBgatJuVYDXUn+i0C0Q3fm7ifkgBUdNJKaA1FExcpOwkHWpoJw7
+         0cGuKXfp02PuKvGeggKGgTpWGkWoZWzK936Viam7oROKwzcRr+2B5BRpA/j0vpsYZNpK
+         K0mA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20221208; t=1687944770; x=1690536770;
+        h=to:subject:message-id:date:from:mime-version:x-gm-message-state
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=Mjkc+uj5f5KqdyTaMDkUa5q+MStotsoQ5Oq44MmQKTQ=;
+        b=IFpkZLabnKygMGQr9By6pOgdFj94WxBsK6F66SstkcS80uJmSxR/LtranLXTGII0hT
+         Ybof/UjeJQye97cMRz9o8mLievWhwN2qqWIauN0ICaw72F/WEhHp3m9X+KSpD6qy3oni
+         39/77xOdW4P9PngL6CjD446jLoLrI8hbDRzVEmslLHfC/sdfCu7JYznHxheB/9jwSX6G
+         WIo5YJch2y1NY6yc8utJbAAzoravpYJT5dcBG99ZHDpDh01Xzk/eysIb+HL7sfYhfIlS
+         1+fH8sb8YpvYaLeaCNQi+c6hkgDV1zJsnzMlDuI6kPgaN6Ye9x/PmokB5OkW8bNcvJBy
+         gPBQ==
+X-Gm-Message-State: AC+VfDyvOxBGTFTCmXSK/KozQ/qeoRLX63+G+T3PbTNP151sDynSyRNH
+        1iqkh56jqXniRrGqDF6Pc1DET1TGcHzSic9y2K+vjshc
+X-Google-Smtp-Source: ACHHUZ6HzjJq8J+r3TU2kMSl/IrWU6x5k4wnaWZhNpV44h0OHyAQAY8ijWpxEwfQ3cXkavtA+PKiXIhFDycxOfCsfEo=
+X-Received: by 2002:a05:6512:3e0e:b0:4fb:393:26c3 with SMTP id
+ i14-20020a0565123e0e00b004fb039326c3mr7783727lfv.15.1687944770551; Wed, 28
+ Jun 2023 02:32:50 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-X-Scanned-By: MIMEDefang 3.1 on 10.11.54.8
-X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_NONE,
-        RCVD_IN_MSPIKE_H5,RCVD_IN_MSPIKE_WL,SPF_HELO_NONE,SPF_NONE,
-        T_SCC_BODY_TEXT_LINE,URIBL_BLOCKED autolearn=unavailable
-        autolearn_force=no version=3.4.6
+Received: by 2002:ab2:3942:0:b0:1cb:a865:d652 with HTTP; Wed, 28 Jun 2023
+ 02:32:50 -0700 (PDT)
+From:   Prestige Cafe Resto <prestigecaferesto@gmail.com>
+Date:   Wed, 28 Jun 2023 09:32:50 +0000
+Message-ID: <CAEg1bBPRtWEm-21QFUMTgaCth=uu_6DujT1_fNDcyFZbG0C-9Q@mail.gmail.com>
+Subject: sqelch lebensmittel
+To:     util linux ng <util-linux-ng@vger.kernel.org>,
+        Wii Mii <w2863626240052192@wii.com>
+Content-Type: text/plain; charset="UTF-8"
+X-Spam-Status: No, score=0.6 required=5.0 tests=BAYES_50,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,
+        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,TVD_SPACE_RATIO,
+        T_SCC_BODY_TEXT_LINE,URIBL_BLOCKED autolearn=ham autolearn_force=no
+        version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-
-The util-linux stable release v2.39.1 is available at
-    
-  http://www.kernel.org/pub/linux/utils/util-linux/v2.39/
-    
-Feedback and bug reports, as always, are welcomed.
-    
-  Karel
-
-
-
-util-linux v2.39.1 Release Notes
-================================
-
-The main objective of this maintenance release is to address bugs in libmount and
-resolve the regression that occurred due to the v2.39 rewrite for the new kernel
-mount interface.
-
-The meson build system has also been enhanced.
-
-
-Changes between v2.39 and v2.39.1
----------------------------------
-
-blkzone:
-   - don't take address of struct blk_zone  [Thomas Weißschuh]
-build-sys:
-   - add --disable-waitpid  [Frantisek Sumsal]
-   - don't call pkg-config --static if unnecessary  [Karel Zak]
-   - fix typo in waitpid check  [Thomas Weißschuh]
-   - only pass --failure-level if supported  [Thomas Weißschuh]
-cal:
-   - fix error message for bad -c argument  [Jakub Wilk]
-   - fix long option name for -c  [Jakub Wilk]
-ci:
-   - prevent prompts during installation  [Thomas Weißschuh]
-dmesg:
-   - make kmsg read() buffer big enough for kernel  [anteater]
-docs:
-   - update AUTHORS file  [Karel Zak]
-enosys:
-   - add support for MIPS, PowerPC and ARC  [Thomas Weißschuh]
-   - add support for loongarch  [Thomas Weißschuh]
-   - add support for sparc  [Thomas Weißschuh]
-   - split audit arch detection into dedicated header  [Thomas Weißschuh]
-hardlink:
-   - (man) add missing comma  [Jakub Wilk]
-lib:
-   - remove pager.c from libcommon  [Karel Zak]
-lib/ include/:
-   - cleanup license headers  [Karel Zak]
-lib/color-names:
-   - fix license header  [Karel Zak]
-lib/loopdev:
-   - consistently return error values from loopcxt_find_unused()  [Thomas Weißschuh]
-   - document function return values  [Thomas Weißschuh]
-lib/strutils:
-   - fix typo  [Jakub Wilk]
-libblkid:
-   - (bcache) also calculate checksum over journal buckets  [Thomas Weißschuh]
-   - (bcache) extend superblock definition  [Thomas Weißschuh]
-   - jfs - avoid undefined shift  [Milan Broz]
-libmount:
-   - (optlist) correctly detect ro status  [Thomas Weißschuh]
-   - always ignore user=<name>  [Karel Zak]
-   - check for availability of mount_setattr  [Thomas Weißschuh]
-   - cleanup enosys returns from mount hoop  [Karel Zak]
-   - don't call hooks after mount.<type> helper  [Karel Zak]
-   - don't call mount.<type> helper with usernames  [Karel Zak]
-   - don't pass option "defaults" to helper  [Thomas Weißschuh]
-   - fix options prepend/insert and merging  [Karel Zak]
-   - fix sync options between context and fs structs  [Karel Zak]
-   - introduce LIBMOUNT_FORCE_MOUNT2={always,never,auto}  [Karel Zak]
-libsmartcols:
-   - (samples)  fix format truncation warning  [Thomas Weißschuh]
-logger:
-   - initialize socket credentials contol union  [Karel Zak]
-losetup:
-   - deduplicate find_unused() logic  [Thomas Weißschuh]
-lsfd:
-   - (filter) weakly support ARRAY_STRING and ARRAY_NUMBER json types  [Masatake YAMATO]
-   - (tests) fix typo  [Thomas Weißschuh]
-   - use ARRAY_STRING for ENDPOINTS column in JSON output mode  [Masatake YAMATO]
-meson:
-   - add conditionalization for test progs  [Zbigniew Jędrzejewski-Szmek]
-   - check for _NL_TIME_WEEK_1STDAY in langinfo.h  [Christian Hesse]
-   - conditionalize waitpid  [Zbigniew Jędrzejewski-Szmek]
-   - implement HAVE_PTY  [Zbigniew Jędrzejewski-Szmek]
-   - include bash-completion for newgrp  [Christian Hesse]
-   - include bash-completion for write  [Christian Hesse]
-   - install chfn setuid  [Christian Hesse]
-   - install chsh setuid  [Christian Hesse]
-   - install mount setuid  [Christian Hesse]
-   - install newgrp setuid  [Christian Hesse]
-   - install su setuid  [Christian Hesse]
-   - install symlink for vigr man page  [Christian Hesse]
-   - install umount setuid  [Christian Hesse]
-   - install wall setgid  [Christian Hesse]
-   - install write setgid  [Christian Hesse]
-   - require 0.57  [Thomas Weißschuh]
-mkfs.minix:
-   - handle 64bit time on 32bit system  [Thomas Weißschuh]
-po:
-   - merge changes  [Karel Zak]
-   - update hr.po (from translationproject.org)  [Božidar Putanec]
-po-man:
-   - add ko.po (from translationproject.org)  [Seong-ho Cho]
-   - add ro.po (from translationproject.org)  [Remus-Gabriel Chelu]
-   - merge changes  [Karel Zak]
-   - update uk.po (from translationproject.org)  [Yuri Chornoivan]
-sfdisk:
-   - add hint about duplicate UUIDs when use dump  [Karel Zak]
-test_enosys:
-   - fix build on old kernels  [Thomas Weißschuh]
-test_uuidd:
-   - make pthread_t formatting more robust  [Thomas Weißschuh]
-tests:
-   - (lsfd) add a case for verifying ENDPOINTS column output in JSON mode  [Masatake YAMATO]
-   - (run.sh) detect builddir from working directory  [Thomas Weißschuh]
-   - backport mount_setattr test  [Karel Zak]
-   - backport special mount script  [Karel Zak]
-   - fix update special mount test output  [Karel Zak]
-tools:
-   - (asciidoctor) explicitly require extensions module  [Thomas Weißschuh]
-unshare:
-   - fix error message for unexpected time offsets  [Thomas Weißschuh]
-waitpid:
-   - only build when pidfd_open is available  [Thomas Weißschuh]
-
--- 
- Karel Zak  <kzak@redhat.com>
- http://karelzak.blogspot.com
-
+https://exactlychoppedeagle.tumblr.com/#==gYBd1VVJUUvxkcL9yaulGbuAHch5yctNTOl9yL6MHc0RHa
