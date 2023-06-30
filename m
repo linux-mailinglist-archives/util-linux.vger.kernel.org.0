@@ -2,68 +2,76 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 87A2B740DB9
-	for <lists+util-linux@lfdr.de>; Wed, 28 Jun 2023 11:51:48 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 5A7D17445E9
+	for <lists+util-linux@lfdr.de>; Sat,  1 Jul 2023 03:42:53 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231866AbjF1JsX (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Wed, 28 Jun 2023 05:48:23 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:50832 "EHLO
+        id S229527AbjGABmu (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Fri, 30 Jun 2023 21:42:50 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:34272 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S235588AbjF1JfS (ORCPT
-        <rfc822;util-linux-ng@vger.kernel.org>);
-        Wed, 28 Jun 2023 05:35:18 -0400
-Received: from mail-lf1-x12a.google.com (mail-lf1-x12a.google.com [IPv6:2a00:1450:4864:20::12a])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 85F2B3C0B
-        for <util-linux-ng@vger.kernel.org>; Wed, 28 Jun 2023 02:32:52 -0700 (PDT)
-Received: by mail-lf1-x12a.google.com with SMTP id 2adb3069b0e04-4f4b2bc1565so8000220e87.2
-        for <util-linux-ng@vger.kernel.org>; Wed, 28 Jun 2023 02:32:52 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1687944770; x=1690536770;
-        h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
-         :date:message-id:reply-to;
-        bh=Mjkc+uj5f5KqdyTaMDkUa5q+MStotsoQ5Oq44MmQKTQ=;
-        b=XQN9hvARN9WX/AvoZG+NcmzgtZkobTG2l8Ymyz0wvEMAnwZUOxVY3RxqhySi2sCqYC
-         u+YYy6VKSBzangOIOcJyY8hotAM00eVUQKTdxx9UT217npuZJZHsv2qGto7+ECgdY/Rx
-         pxN5I0KLrtl0pP92DIsTFFNzf9YQVJujfnA5xYxc8M3znMWSwusE8DiGRAmr5yunsC1B
-         mCYUiMttWB21ogu8ZKBgatJuVYDXUn+i0C0Q3fm7ifkgBUdNJKaA1FExcpOwkHWpoJw7
-         0cGuKXfp02PuKvGeggKGgTpWGkWoZWzK936Viam7oROKwzcRr+2B5BRpA/j0vpsYZNpK
-         K0mA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1687944770; x=1690536770;
-        h=to:subject:message-id:date:from:mime-version:x-gm-message-state
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=Mjkc+uj5f5KqdyTaMDkUa5q+MStotsoQ5Oq44MmQKTQ=;
-        b=IFpkZLabnKygMGQr9By6pOgdFj94WxBsK6F66SstkcS80uJmSxR/LtranLXTGII0hT
-         Ybof/UjeJQye97cMRz9o8mLievWhwN2qqWIauN0ICaw72F/WEhHp3m9X+KSpD6qy3oni
-         39/77xOdW4P9PngL6CjD446jLoLrI8hbDRzVEmslLHfC/sdfCu7JYznHxheB/9jwSX6G
-         WIo5YJch2y1NY6yc8utJbAAzoravpYJT5dcBG99ZHDpDh01Xzk/eysIb+HL7sfYhfIlS
-         1+fH8sb8YpvYaLeaCNQi+c6hkgDV1zJsnzMlDuI6kPgaN6Ye9x/PmokB5OkW8bNcvJBy
-         gPBQ==
-X-Gm-Message-State: AC+VfDyvOxBGTFTCmXSK/KozQ/qeoRLX63+G+T3PbTNP151sDynSyRNH
-        1iqkh56jqXniRrGqDF6Pc1DET1TGcHzSic9y2K+vjshc
-X-Google-Smtp-Source: ACHHUZ6HzjJq8J+r3TU2kMSl/IrWU6x5k4wnaWZhNpV44h0OHyAQAY8ijWpxEwfQ3cXkavtA+PKiXIhFDycxOfCsfEo=
-X-Received: by 2002:a05:6512:3e0e:b0:4fb:393:26c3 with SMTP id
- i14-20020a0565123e0e00b004fb039326c3mr7783727lfv.15.1687944770551; Wed, 28
- Jun 2023 02:32:50 -0700 (PDT)
+        with ESMTP id S229447AbjGABmt (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Fri, 30 Jun 2023 21:42:49 -0400
+Received: from mail.saee.gov.ua (mail.saee.gov.ua [176.104.1.250])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id DFC2F3C3F
+        for <util-linux@vger.kernel.org>; Fri, 30 Jun 2023 18:42:47 -0700 (PDT)
+Received: from localhost (localhost [127.0.0.1])
+        by mail.saee.gov.ua (Postfix) with ESMTP id 38C5F225EEB;
+        Sat,  1 Jul 2023 02:51:06 +0300 (EEST)
+Received: from mail.saee.gov.ua ([127.0.0.1])
+        by localhost (mail.saee.gov.ua [127.0.0.1]) (amavisd-new, port 10032)
+        with ESMTP id ozA5gvdo2cUn; Sat,  1 Jul 2023 02:51:05 +0300 (EEST)
+Received: from localhost (localhost [127.0.0.1])
+        by mail.saee.gov.ua (Postfix) with ESMTP id B4CC4226699;
+        Sat,  1 Jul 2023 02:51:03 +0300 (EEST)
+DKIM-Filter: OpenDKIM Filter v2.10.3 mail.saee.gov.ua B4CC4226699
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=saee.gov.ua;
+        s=E2317EBC-4A8C-11E7-92B2-EEDC296942EF; t=1688169063;
+        bh=0CeCVoI+Ioqg/NCnuT8BFuXq1hsDZmDLrskGQLfDR/0=;
+        h=MIME-Version:To:From:Date:Message-Id;
+        b=hhQBjpt3c751dEXpNbwirNkP7lUhG7hbOJFu0qFa8IhXI1ImUjobUlZDpPQ27zgE5
+         /cWaEGT2V7zQNOntR5MPgYxcugfBDz4PH9qo/kM3NiL3fHKdXZX5kFmMUSuIKV+M7Y
+         MtxtSrrIXng5SuDfs4FOb7aW7hchl5987dKNpbfw2hQovDCsZ2IW/Vw+OBQGJP39jM
+         T+fJEI/j3wpIkM+zqTHuuyQQnNLBkJYAZUKfJsiUonLcuH/6ALNMC4EO/Adt0L91X3
+         BLiDKZ1zJuGxSEiRoB4qCr+u/C008gQmOIMTmzJ1BwbSvUpShx3XnW2NyDtRV76kvR
+         /yeh2VQFSu/Qw==
+X-Virus-Scanned: amavisd-new at saee.gov.ua
+Received: from mail.saee.gov.ua ([127.0.0.1])
+        by localhost (mail.saee.gov.ua [127.0.0.1]) (amavisd-new, port 10026)
+        with ESMTP id 9gU9G3XbpsNf; Sat,  1 Jul 2023 02:51:03 +0300 (EEST)
+Received: from [192.168.1.33] (216-131-89-15.ams.as54203.net [216.131.89.15])
+        by mail.saee.gov.ua (Postfix) with ESMTPSA id 01665223045;
+        Sat,  1 Jul 2023 02:51:00 +0300 (EEST)
+Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
-Received: by 2002:ab2:3942:0:b0:1cb:a865:d652 with HTTP; Wed, 28 Jun 2023
- 02:32:50 -0700 (PDT)
-From:   Prestige Cafe Resto <prestigecaferesto@gmail.com>
-Date:   Wed, 28 Jun 2023 09:32:50 +0000
-Message-ID: <CAEg1bBPRtWEm-21QFUMTgaCth=uu_6DujT1_fNDcyFZbG0C-9Q@mail.gmail.com>
-Subject: sqelch lebensmittel
-To:     util linux ng <util-linux-ng@vger.kernel.org>,
-        Wii Mii <w2863626240052192@wii.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Content-Description: Mail message body
+Subject: Re:
+To:     Recipients <pressa@saee.gov.ua>
+From:   MacKenzie Scott <pressa@saee.gov.ua>
+Date:   Sat, 01 Jul 2023 07:50:59 +0800
+Reply-To: rf@workermachines.com
+Message-Id: <20230630235101.01665223045@mail.saee.gov.ua>
 X-Spam-Status: No, score=0.6 required=5.0 tests=BAYES_50,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,
-        RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SPF_PASS,TVD_SPACE_RATIO,
-        T_SCC_BODY_TEXT_LINE,URIBL_BLOCKED autolearn=ham autolearn_force=no
-        version=3.4.6
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_MSPIKE_BL,
+        RCVD_IN_MSPIKE_L4,SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE,
+        URIBL_BLOCKED autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-https://exactlychoppedeagle.tumblr.com/#==gYBd1VVJUUvxkcL9yaulGbuAHch5yctNTOl9yL6MHc0RHa
+Czesc,
+                          =
+
+Nazywam sie MacKenzie Scott Byla zona dyrektora generalnego i zalozyciela A=
+mazon. Przekazalem 14 miliard=C3=B3w dolar=C3=B3w organizacjom charytatywny=
+m, osobom fizycznym i uczelniom na calym swiecie z fundacji Scotta, aby zap=
+ewnic natychmiastowe wsparcie ludziom cierpiacym ekonomicznie z powodu pand=
+emii COVID-19, a Ty=E2=80=9D jestes jednym ze szczesliwych zwyciezc=C3=B3w,=
+ mam dla ciebie dotacje w wysokosci 100 800 000,00 dolar=C3=B3w, mozesz sko=
+ntaktowac sie ze mna, aby uzyskac wiecej informacji, jesli jestes zainteres=
+owany.
+
+Pozdrowienia,
+MacKenzie Scotta.
