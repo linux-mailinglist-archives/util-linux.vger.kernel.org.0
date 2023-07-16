@@ -2,63 +2,63 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 452C0753375
-	for <lists+util-linux@lfdr.de>; Fri, 14 Jul 2023 09:47:06 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id AF3E4755014
+	for <lists+util-linux@lfdr.de>; Sun, 16 Jul 2023 19:32:11 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S235061AbjGNHrD (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Fri, 14 Jul 2023 03:47:03 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:42900 "EHLO
+        id S229515AbjGPRcJ (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Sun, 16 Jul 2023 13:32:09 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:60254 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S235126AbjGNHrB (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Fri, 14 Jul 2023 03:47:01 -0400
-Received: from mail.commercesolutions.pl (unknown [162.19.155.126])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 598E530C4
-        for <util-linux@vger.kernel.org>; Fri, 14 Jul 2023 00:46:58 -0700 (PDT)
-Received: by mail.commercesolutions.pl (Postfix, from userid 1002)
-        id 3CA182544D; Fri, 14 Jul 2023 07:46:13 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=commercesolutions.pl;
-        s=mail; t=1689320816;
-        bh=PcMncQpBfIZCnTOfZJY5G1G+gaLn4c9QPfFvoXrE4rA=;
-        h=Date:From:To:Subject:From;
-        b=nRtQ7DOMD1ljducypzTDtJSBjb88015dyRuZvesRIax1zLwkWPJeSlZutxjiZ8XQc
-         tg0OOM3mwDrhcFpfNbPMP2Uk2Wp01gM/99JnUnGlQr+6IaGuEbqYGmuLdyzX8/G8wI
-         ApUVuJhG1fvKZGZxYWTdqJjrlOjqvfv8+Xm58OUCdzZxlVl/JVEw5a7JlfYRzNAnRH
-         e2DGkRgrCl0IHygBW8kkXz++OWq75jzfPBaZh+/2h/2NcUiYdytOB0yLop5JI5BOQH
-         no2iBd34ig0w1nN4D45lvgGuGqn5tMt6ZcjT/my4eizfQah6hTxNQGvjynFo/8ycwr
-         wBExV1S7CwT6g==
-Received: by commercesolutions.pl for <util-linux@vger.kernel.org>; Fri, 14 Jul 2023 07:45:34 GMT
-Message-ID: <20230714064500-0.1.7d.19dy2.0.1q2k0qof39@commercesolutions.pl>
-Date:   Fri, 14 Jul 2023 07:45:34 GMT
-From:   "Kamil Tralewski" <kamil.tralewski@commercesolutions.pl>
-To:     <util-linux@vger.kernel.org>
-Subject: =?UTF-8?Q?S=C5=82owa_kluczowe_do_wypozycjonowania?=
-X-Mailer: mail.commercesolutions.pl
+        with ESMTP id S229471AbjGPRcI (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Sun, 16 Jul 2023 13:32:08 -0400
+Received: from mail.manjaro.org (mail.manjaro.org [IPv6:2a01:4f8:c0c:51f3::1])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 1A19A116
+        for <util-linux@vger.kernel.org>; Sun, 16 Jul 2023 10:32:07 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Spam-Status: No, score=4.2 required=5.0 tests=BAYES_00,DKIM_INVALID,
-        DKIM_SIGNED,RCVD_IN_DNSWL_BLOCKED,RCVD_IN_SBL_CSS,SPF_HELO_NONE,
-        SPF_PASS,T_SCC_BODY_TEXT_LINE,URIBL_BLOCKED,URIBL_CSS_A,URIBL_DBL_SPAM
-        autolearn=no autolearn_force=no version=3.4.6
-X-Spam-Level: ****
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=manjaro.org; s=2021;
+        t=1689528723;
+        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+         to:to:cc:mime-version:mime-version:content-type:content-type:
+         content-transfer-encoding:content-transfer-encoding;
+        bh=rFI7SUWWkXzEjd24ByE3/l1yZ9KwddQiCAcEguxo5nM=;
+        b=EEOarYlbxnUqjjhNqU6h9VLZzuduWPLUGfGOcG2vPjotwjsvf1AeVUR2j5IG2pHW5MLfYq
+        8poPxz2qK5r+vwV6UgCEr/4yjZ1sr4pYojGKhkTRCkVPgC0zI+TyhShwefzl+wsvulJFAn
+        qcsCqL/bbUbRE7m+LQ/6Q7o+S4pM4jxmWu/X9bmU/Ifl2POQYKXneX7TT5/+8z3k5n15bp
+        MBFigBd5EJswRT735KhiEvgPxd+qU2PYyGYcEEP/6/jgMHIguoxcAaH10JjgtOX9jLzM6+
+        RbYXAjHE5tWW7ajWDhCNXAJnrqmkNqg+L34tS+oMQFvB2UjLm6N8NK9cOw0S3Q==
+Date:   Sun, 16 Jul 2023 19:32:03 +0200
+From:   Dragan Simic <dsimic@manjaro.org>
+To:     util-linux@vger.kernel.org
+Subject: [RFC] Alternative color configuration for dmesg
+Message-ID: <e6370090700c26776e2ce6444a05a2d2@manjaro.org>
+X-Sender: dsimic@manjaro.org
+Content-Type: text/plain; charset=US-ASCII;
+ format=flowed
+Content-Transfer-Encoding: 7bit
+Authentication-Results: ORIGINATING;
+        auth=pass smtp.auth=dsimic@manjaro.org smtp.mailfrom=dsimic@manjaro.org
+X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,SPF_HELO_NONE,SPF_PASS,
+        T_SCC_BODY_TEXT_LINE autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-Dzie=C5=84 dobry,
+Hello,
 
-zapozna=C5=82em si=C4=99 z Pa=C5=84stwa ofert=C4=85 i z przyjemno=C5=9Bci=
-=C4=85 przyznaj=C4=99, =C5=BCe przyci=C4=85ga uwag=C4=99 i zach=C4=99ca d=
-o dalszych rozm=C3=B3w.=20
+I'd like to implement support for an additional, alternative way for the 
+color configuration in the dmesg utility.  It would use an environment 
+variable to store the color configuration, in a way rather similar to 
+what grep(1) does using the GREP_COLORS environment variable.
 
-Pomy=C5=9Bla=C5=82em, =C5=BCe mo=C5=BCe m=C3=B3g=C5=82bym mie=C4=87 sw=C3=
-=B3j wk=C5=82ad w Pa=C5=84stwa rozw=C3=B3j i pom=C3=B3c dotrze=C4=87 z t=C4=
-=85 ofert=C4=85 do wi=C4=99kszego grona odbiorc=C3=B3w. Pozycjonuj=C4=99 =
-strony www, dzi=C4=99ki czemu generuj=C4=85 =C5=9Bwietny ruch w sieci.
+The rationale behind this new feature is the ability to have everything 
+contained in one's ~/.bashrc, for example, with no need for additional 
+configuration files, which makes setting up, using and keeping multiple 
+machines in sync much easier.  Of course, the current way of using 
+configuration files to store the color configuration for dmesg would 
+remain untouched, so everyone would be free to make a choice.
 
-Mo=C5=BCemy porozmawia=C4=87 w najbli=C5=BCszym czasie?
-
-Pozdrawiam
-Kamil Tralewski
+Would you, please, accept a patch that implements the above-described 
+new feature?
