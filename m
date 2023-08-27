@@ -2,67 +2,87 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id AF4DF7869AE
-	for <lists+util-linux@lfdr.de>; Thu, 24 Aug 2023 10:11:03 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 1375F78A38F
+	for <lists+util-linux@lfdr.de>; Mon, 28 Aug 2023 01:57:27 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S234774AbjHXIKa (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Thu, 24 Aug 2023 04:10:30 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:50392 "EHLO
+        id S229515AbjH0X4w (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Sun, 27 Aug 2023 19:56:52 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:58710 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S240517AbjHXIKO (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Thu, 24 Aug 2023 04:10:14 -0400
-X-Greylist: delayed 634 seconds by postgrey-1.37 at lindbergh.monkeyblade.net; Thu, 24 Aug 2023 01:09:48 PDT
-Received: from mail.balmore.pl (mail.balmore.pl [89.40.118.14])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id D75251739
-        for <util-linux@vger.kernel.org>; Thu, 24 Aug 2023 01:09:48 -0700 (PDT)
-Received: by mail.balmore.pl (Postfix, from userid 1001)
-        id 1A4C483E45; Thu, 24 Aug 2023 08:56:25 +0100 (BST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=balmore.pl; s=mail;
-        t=1692863817; bh=dwoca0X6C9VXklO/zRgFQCPapTk5LFz4tKaENdvy6Po=;
-        h=Date:From:To:Subject:From;
-        b=AoZ69mTMxYQBVotbhrzT5x9fFxUJA2S6aZJvbCU8jzxEpmt+w8Zg/Elerom+XAILk
-         sA24Gv8Uhf9HYil62kkd1vJ2iAdnnM/QGw0BzXjvaA9ncmyaATF1aXtQxABMls27P+
-         untuflzClU+6BIwIHQOY8ZfXZsZDV0NAPd0du8Fm6ibJYNQEOxf7gS7XR3It15Qy12
-         56jR+y6fHcYFp2q4DwDycItGfZa0cwpfn83RZPKlnoI/qeltxMvtiAuEVy9xMeqfRk
-         RYRsTq/xPxHr0P2xyNIgXS7UqxaI/Y2gnyhpFx+SRr0P5hb1jykVppggCfdwSgmNaW
-         FjohNRlbv4vig==
-Received: by mail.balmore.pl for <util-linux@vger.kernel.org>; Thu, 24 Aug 2023 07:55:29 GMT
-Message-ID: <20230824074501-0.1.56.bh7q.0.blph4fbkmb@balmore.pl>
-Date:   Thu, 24 Aug 2023 07:55:29 GMT
-From:   =?UTF-8?Q? "Rados=C5=82aw_Grabowski" ?= 
-        <radoslaw.grabowski@balmore.pl>
-To:     <util-linux@vger.kernel.org>
-Subject: W sprawie samochodu
-X-Mailer: mail.balmore.pl
+        with ESMTP id S229764AbjH0X4U (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Sun, 27 Aug 2023 19:56:20 -0400
+Received: from mail-qk1-x729.google.com (mail-qk1-x729.google.com [IPv6:2607:f8b0:4864:20::729])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id BD22FF5
+        for <util-linux@vger.kernel.org>; Sun, 27 Aug 2023 16:56:18 -0700 (PDT)
+Received: by mail-qk1-x729.google.com with SMTP id af79cd13be357-76d93cf8e13so183179285a.2
+        for <util-linux@vger.kernel.org>; Sun, 27 Aug 2023 16:56:18 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20221208; t=1693180578; x=1693785378;
+        h=content-transfer-encoding:subject:to:from:content-language
+         :user-agent:mime-version:date:message-id:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=IsseYA3Cp2Cn4mud3y7IkJWkxirYaxtgHQDA9QL4wFU=;
+        b=fww6fHJJ0qbsHyubwARlmXKysqKooWxWfQmKf6d5Z++V3Ee0CnrWae03PyD/OeFPoL
+         /zal9/wlDCHL3/UNu9fhQR0ht2C4E/AFvYLb1IGgsfr5txUzlZEYLa5nlthTRgyCLWLk
+         fkX6HeluCRo46jSrapDG7jUn7LB7nqxmg4Qsg+r6I03I5gTnt52tTNch0bSOFhMU3Vz9
+         dZA5/xojUQYL3u/Cc99OSqXY0w+MFTXKOnixp0u0P3elvJAQxNTVdPU10zyu+abjFXzl
+         3neJ9OcLjiRyQUnI+Hko4AsW7YIKY/xo3ubMTviybwslaJ1o30NQ0XnkIwTtZ1C/Qx3+
+         J7DA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20221208; t=1693180578; x=1693785378;
+        h=content-transfer-encoding:subject:to:from:content-language
+         :user-agent:mime-version:date:message-id:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to;
+        bh=IsseYA3Cp2Cn4mud3y7IkJWkxirYaxtgHQDA9QL4wFU=;
+        b=l9Kf9YSaGXoR4KP4pBzLNzQmIM0txpbpekffsJfj0TtgIem5KH2Mt3I7b0qEfrSCiw
+         kiYXOAqhziDg7fU+Vl98AwBjPGbZOzCH2G4VwhXY5CCF9fBmBPdOYxCxa48qzI5J+myo
+         KD0MVdeB2GL6wapX/75JGkh1jlSzRM+0B8c+tUJC8ovyVSoHDFbR5Bw/75TXVYe8yESg
+         lVRtVnur/QVmaXq9/c+1OHH+AeEXFp9YKx7WW0C0nDyk2PJ7H78x6Nzpyp+25R89EseC
+         f/D+BBzMfUibG7JQ7lgit9NsyFbdHhBt3DQt0dLJG1mvxsC08wkotIEodwHMeol4tg8f
+         hLWA==
+X-Gm-Message-State: AOJu0YwNcbOaKmt4bka7CEdyvxvAOT4XhyH7yg/PWGMEpqmmUeJLjRwL
+        X3hzy1yLGoMatK25UiiteuOqWsKKnaByHg==
+X-Google-Smtp-Source: AGHT+IHifhokaqnLC1VMrBigd1OKhLNfHQ+2Fo0QJquQ2QOGO+H+svs0QKR4ull69UqNUaB/sV3KhA==
+X-Received: by 2002:a0c:e409:0:b0:64f:6d8d:f65f with SMTP id o9-20020a0ce409000000b0064f6d8df65fmr11948072qvl.51.1693180577736;
+        Sun, 27 Aug 2023 16:56:17 -0700 (PDT)
+Received: from [192.168.21.81] (c-67-168-188-36.hsd1.wa.comcast.net. [67.168.188.36])
+        by smtp.gmail.com with ESMTPSA id s2-20020a0ce302000000b0064c71d67362sm2185884qvl.118.2023.08.27.16.56.16
+        for <util-linux@vger.kernel.org>
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Sun, 27 Aug 2023 16:56:17 -0700 (PDT)
+Message-ID: <97a0149d-8e08-46d7-a2c9-7aa27defb55d@gmail.com>
+Date:   Sun, 27 Aug 2023 16:56:15 -0700
 MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Spam-Status: No, score=-2.1 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_BLOCKED,
-        SPF_HELO_NONE,SPF_PASS autolearn=ham autolearn_force=no version=3.4.6
+User-Agent: Mozilla Thunderbird
+Content-Language: en-US
+From:   Tony Rodriguez <unixpro1970@gmail.com>
+To:     util-linux@vger.kernel.org
+Subject: Help: Trying to obtain KNAME and PKNAME via <blkid.h> and
+ partititons.c
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Spam-Status: No, score=-1.8 required=5.0 tests=BAYES_00,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_ENVFROM_END_DIGIT,
+        FREEMAIL_FROM,RCVD_IN_DNSWL_BLOCKED,SPF_HELO_NONE,SPF_PASS
+        autolearn=ham autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-Dzie=C5=84 dobry,
+Hello blkid team,
 
-chcieliby=C5=9Bmy zapewni=C4=87 Pa=C5=84stwu kompleksowe rozwi=C4=85zania=
-, je=C5=9Bli chodzi o system monitoringu GPS.
+Please help.   Compiled the example blkid partitions.c (iink id below) 
+which works well for obtaining the UUID.  However, I also would like to 
+obtain KNAME and PKNAME for each fstab entry.   When I attempt to modify 
+the partitions.c code code, I am unable to obtain KNAME and PKNAME.
 
-Precyzyjne monitorowanie pojazd=C3=B3w na mapach cyfrowych, =C5=9Bledzeni=
-e ich parametr=C3=B3w eksploatacyjnych w czasie rzeczywistym oraz kontrol=
-a paliwa to kluczowe funkcjonalno=C5=9Bci naszego systemu.=20
+How can I obtain KNAME and PKNAME by modifying the following 
+partitions.c example.  lsblk.c does it, but requires functions that 
+don't appear to part of <blkid.h> and I am sure what to do?
 
-Organizowanie pracy pracownik=C3=B3w jest dzi=C4=99ki temu prostsze i bar=
-dziej efektywne, a oszcz=C4=99dno=C5=9Bci i optymalizacja w zakresie pono=
-szonych koszt=C3=B3w, maj=C4=85 dla ka=C5=BCdego przedsi=C4=99biorcy ogro=
-mne znaczenie.
+https://github.com/util-linux/util-linux/blob/master/libblkid/samples/partitions.c
 
-Dopasujemy nasz=C4=85 ofert=C4=99 do Pa=C5=84stwa oczekiwa=C5=84 i potrze=
-b organizacji. Czy mogliby=C5=9Bmy porozmawia=C4=87 o naszej propozycji?
-
-
-Pozdrawiam
-Rados=C5=82aw Grabowski
+Thanks,
+Tony
