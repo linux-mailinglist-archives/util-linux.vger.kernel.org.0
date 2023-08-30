@@ -2,87 +2,63 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 1375F78A38F
-	for <lists+util-linux@lfdr.de>; Mon, 28 Aug 2023 01:57:27 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id BB86478DC41
+	for <lists+util-linux@lfdr.de>; Wed, 30 Aug 2023 20:48:20 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229515AbjH0X4w (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Sun, 27 Aug 2023 19:56:52 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:58710 "EHLO
+        id S239733AbjH3SoE (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Wed, 30 Aug 2023 14:44:04 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:39764 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229764AbjH0X4U (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Sun, 27 Aug 2023 19:56:20 -0400
-Received: from mail-qk1-x729.google.com (mail-qk1-x729.google.com [IPv6:2607:f8b0:4864:20::729])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id BD22FF5
-        for <util-linux@vger.kernel.org>; Sun, 27 Aug 2023 16:56:18 -0700 (PDT)
-Received: by mail-qk1-x729.google.com with SMTP id af79cd13be357-76d93cf8e13so183179285a.2
-        for <util-linux@vger.kernel.org>; Sun, 27 Aug 2023 16:56:18 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1693180578; x=1693785378;
-        h=content-transfer-encoding:subject:to:from:content-language
-         :user-agent:mime-version:date:message-id:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=IsseYA3Cp2Cn4mud3y7IkJWkxirYaxtgHQDA9QL4wFU=;
-        b=fww6fHJJ0qbsHyubwARlmXKysqKooWxWfQmKf6d5Z++V3Ee0CnrWae03PyD/OeFPoL
-         /zal9/wlDCHL3/UNu9fhQR0ht2C4E/AFvYLb1IGgsfr5txUzlZEYLa5nlthTRgyCLWLk
-         fkX6HeluCRo46jSrapDG7jUn7LB7nqxmg4Qsg+r6I03I5gTnt52tTNch0bSOFhMU3Vz9
-         dZA5/xojUQYL3u/Cc99OSqXY0w+MFTXKOnixp0u0P3elvJAQxNTVdPU10zyu+abjFXzl
-         3neJ9OcLjiRyQUnI+Hko4AsW7YIKY/xo3ubMTviybwslaJ1o30NQ0XnkIwTtZ1C/Qx3+
-         J7DA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1693180578; x=1693785378;
-        h=content-transfer-encoding:subject:to:from:content-language
-         :user-agent:mime-version:date:message-id:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=IsseYA3Cp2Cn4mud3y7IkJWkxirYaxtgHQDA9QL4wFU=;
-        b=l9Kf9YSaGXoR4KP4pBzLNzQmIM0txpbpekffsJfj0TtgIem5KH2Mt3I7b0qEfrSCiw
-         kiYXOAqhziDg7fU+Vl98AwBjPGbZOzCH2G4VwhXY5CCF9fBmBPdOYxCxa48qzI5J+myo
-         KD0MVdeB2GL6wapX/75JGkh1jlSzRM+0B8c+tUJC8ovyVSoHDFbR5Bw/75TXVYe8yESg
-         lVRtVnur/QVmaXq9/c+1OHH+AeEXFp9YKx7WW0C0nDyk2PJ7H78x6Nzpyp+25R89EseC
-         f/D+BBzMfUibG7JQ7lgit9NsyFbdHhBt3DQt0dLJG1mvxsC08wkotIEodwHMeol4tg8f
-         hLWA==
-X-Gm-Message-State: AOJu0YwNcbOaKmt4bka7CEdyvxvAOT4XhyH7yg/PWGMEpqmmUeJLjRwL
-        X3hzy1yLGoMatK25UiiteuOqWsKKnaByHg==
-X-Google-Smtp-Source: AGHT+IHifhokaqnLC1VMrBigd1OKhLNfHQ+2Fo0QJquQ2QOGO+H+svs0QKR4ull69UqNUaB/sV3KhA==
-X-Received: by 2002:a0c:e409:0:b0:64f:6d8d:f65f with SMTP id o9-20020a0ce409000000b0064f6d8df65fmr11948072qvl.51.1693180577736;
-        Sun, 27 Aug 2023 16:56:17 -0700 (PDT)
-Received: from [192.168.21.81] (c-67-168-188-36.hsd1.wa.comcast.net. [67.168.188.36])
-        by smtp.gmail.com with ESMTPSA id s2-20020a0ce302000000b0064c71d67362sm2185884qvl.118.2023.08.27.16.56.16
-        for <util-linux@vger.kernel.org>
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Sun, 27 Aug 2023 16:56:17 -0700 (PDT)
-Message-ID: <97a0149d-8e08-46d7-a2c9-7aa27defb55d@gmail.com>
-Date:   Sun, 27 Aug 2023 16:56:15 -0700
+        with ESMTP id S242310AbjH3H4K (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Wed, 30 Aug 2023 03:56:10 -0400
+Received: from mail.commercesolutions.pl (unknown [162.19.155.126])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 3DF9F193
+        for <util-linux@vger.kernel.org>; Wed, 30 Aug 2023 00:56:04 -0700 (PDT)
+Received: by mail.commercesolutions.pl (Postfix, from userid 1002)
+        id 7096C241C4; Wed, 30 Aug 2023 07:55:56 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=commercesolutions.pl;
+        s=mail; t=1693382162;
+        bh=PcMncQpBfIZCnTOfZJY5G1G+gaLn4c9QPfFvoXrE4rA=;
+        h=Date:From:To:Subject:From;
+        b=i/pWr28PBUI3Z0SbP4VtaLiWGV+YlSa1+fT+gF9zANlaBO3ptDDknTZ//1vo77LUj
+         hzHBbmAy+Cer1FWfE93RzDSgEyS4bcip5pgo5dE3R5lA40hJINz7X9aFRuiTdK9tZ+
+         hZjt9XBzaR1CfbM7qRBniHYQCsxb+ir6gLaqiU5YWBLc9rJJtb7ZBi6kzGl7N1p6XD
+         +3PuzNOnlA9cPr5nW7fT8BdZb+KioutIcuL+XY9mOCX6QMYu+3v7TyKRJBWvpkyWMV
+         zhh550N9vbMhHqbkj9hn35w7vRjMAtGX5XTdiElfyT8owTzpgxIDHw+tqA5Vaga94U
+         Gyme4jWZ7Tl4Q==
+Received: by mail.commercesolutions.pl for <util-linux@vger.kernel.org>; Wed, 30 Aug 2023 07:55:40 GMT
+Message-ID: <20230830064500-0.1.8c.1j7gt.0.bogq3lmyet@commercesolutions.pl>
+Date:   Wed, 30 Aug 2023 07:55:40 GMT
+From:   "Kamil Tralewski" <kamil.tralewski@commercesolutions.pl>
+To:     <util-linux@vger.kernel.org>
+Subject: =?UTF-8?Q?S=C5=82owa_kluczowe_do_wypozycjonowania?=
+X-Mailer: mail.commercesolutions.pl
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Content-Language: en-US
-From:   Tony Rodriguez <unixpro1970@gmail.com>
-To:     util-linux@vger.kernel.org
-Subject: Help: Trying to obtain KNAME and PKNAME via <blkid.h> and
- partititons.c
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Spam-Status: No, score=-1.8 required=5.0 tests=BAYES_00,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_ENVFROM_END_DIGIT,
-        FREEMAIL_FROM,RCVD_IN_DNSWL_BLOCKED,SPF_HELO_NONE,SPF_PASS
-        autolearn=ham autolearn_force=no version=3.4.6
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Spam-Status: No, score=4.2 required=5.0 tests=BAYES_00,DKIM_INVALID,
+        DKIM_SIGNED,RCVD_IN_DNSWL_BLOCKED,RCVD_IN_SBL_CSS,SPF_HELO_NONE,
+        SPF_PASS,URIBL_CSS_A,URIBL_DBL_SPAM autolearn=no autolearn_force=no
+        version=3.4.6
+X-Spam-Level: ****
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-Hello blkid team,
+Dzie=C5=84 dobry,
 
-Please help.   Compiled the example blkid partitions.c (iink id below) 
-which works well for obtaining the UUID.  However, I also would like to 
-obtain KNAME and PKNAME for each fstab entry.   When I attempt to modify 
-the partitions.c code code, I am unable to obtain KNAME and PKNAME.
+zapozna=C5=82em si=C4=99 z Pa=C5=84stwa ofert=C4=85 i z przyjemno=C5=9Bci=
+=C4=85 przyznaj=C4=99, =C5=BCe przyci=C4=85ga uwag=C4=99 i zach=C4=99ca d=
+o dalszych rozm=C3=B3w.=20
 
-How can I obtain KNAME and PKNAME by modifying the following 
-partitions.c example.  lsblk.c does it, but requires functions that 
-don't appear to part of <blkid.h> and I am sure what to do?
+Pomy=C5=9Bla=C5=82em, =C5=BCe mo=C5=BCe m=C3=B3g=C5=82bym mie=C4=87 sw=C3=
+=B3j wk=C5=82ad w Pa=C5=84stwa rozw=C3=B3j i pom=C3=B3c dotrze=C4=87 z t=C4=
+=85 ofert=C4=85 do wi=C4=99kszego grona odbiorc=C3=B3w. Pozycjonuj=C4=99 =
+strony www, dzi=C4=99ki czemu generuj=C4=85 =C5=9Bwietny ruch w sieci.
 
-https://github.com/util-linux/util-linux/blob/master/libblkid/samples/partitions.c
+Mo=C5=BCemy porozmawia=C4=87 w najbli=C5=BCszym czasie?
 
-Thanks,
-Tony
+Pozdrawiam
+Kamil Tralewski
