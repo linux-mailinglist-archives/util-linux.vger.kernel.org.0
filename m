@@ -2,110 +2,61 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 175DB7C672D
-	for <lists+util-linux@lfdr.de>; Thu, 12 Oct 2023 09:57:28 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 63EDE7C6817
+	for <lists+util-linux@lfdr.de>; Thu, 12 Oct 2023 10:54:20 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1347096AbjJLHXL (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Thu, 12 Oct 2023 03:23:11 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:58374 "EHLO
+        id S232644AbjJLIMo (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Thu, 12 Oct 2023 04:12:44 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:56680 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1343583AbjJLHXK (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Thu, 12 Oct 2023 03:23:10 -0400
-Received: from JPN01-OS0-obe.outbound.protection.outlook.com (mail-os0jpn01olkn2095.outbound.protection.outlook.com [40.92.98.95])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 5BBDF90
-        for <util-linux@vger.kernel.org>; Thu, 12 Oct 2023 00:23:09 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=iIbr/0xuPz6ZpPgzzHufi7XLMKYxdueFiwXKR/3cTP/Qb97Lccg0vfH19FtwPUgKPL1OlJIgjU4hutpsN6B8IYZAc5JIIVGJCpq5ETIFl45aFB5PKXsxfIGA+dnRkPi8B0pMbKoN3RRVgcYH5DQmRauzmLoUIb10S9NoCzu2MVKqaKZTJL5npcS9FBspJnfY+L0vXJK2qj/uZDZ+4wICO+uzYz861F2hkt6Bf8YAQJd6HXzAgP5LiQ6VFzrI5g2NYB1nz54MU0fi8pi6EXwOW5T/1S7cMZocuzOj9FGlSJYK3/2BFXQSQq8TvEOOjnjurUZoRRDt7KwIZzjij0LxjQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=tj6+RhINqI2G4almNAEtBxni6Rx6HEckJh1OmuAPXbo=;
- b=iYqSr0gJ/6ZfL2fKn8Lr7RKzBm04wS0I+45HSXe+Z9VmIV9mkJXDek/KgchZ3h6tlA8poBMWPVuRECIw6QSpbJsdAqVljO/axDFFtiMotiQktFJyn9tg9mZN1B7/Ma6xXda+23jd+0wvzIhA4myB4eDHGfwBfZDWAS9k1JNH9oHU9YUiKZ+GhEGl6xVSJurvKw1K9U3re2oEzY8xsD3T9azF/fW3p4v4Htw4Nmd8O6AJyL0G9RyuY9URVt1icqSGO8VXmAZMxfHAYRC0rtNS/r6duaTIYB4o+VWZzkGrTJT9gBwzBvogXM7Q1PHJT7CARwMW8P8zJMl5eVb3uRsVDw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
- dkim=none; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=outlook.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=tj6+RhINqI2G4almNAEtBxni6Rx6HEckJh1OmuAPXbo=;
- b=rccYTiZF/KcLh+AFJ2iQZEqFCRsT/XDCdg8x4ekUm4fJ4Ap0JEFUMYhDepYT1rZtqx0P58/AVdGP/zrRchdXoU/Y0kVAgoO6VHhUcscUPOIx/yy/EgByyhNj/zlecCPMO9Llmso9mc++KcA/dYboNxYVaRZwViTf7ReTbOk+lH6ejFDI+hxAla5Nbv78KtoMRJsEbd6fvTGMlVaeHQrfLbF3a0TsWNM/hz/QJBgQihVeqiPSOV5ynmRAoTBL3y0iUY1nYxFMYgoybLPu3dWPzxMGA+gtnyjuWEn5KS/7SSVuQ8JFdk4AIVnXMrca3XZSbU2Vqq+vod3RsO1p1IXDSw==
-Received: from TYCPR01MB9507.jpnprd01.prod.outlook.com (2603:1096:400:195::9)
- by OS0PR01MB5300.jpnprd01.prod.outlook.com (2603:1096:604:a3::12) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6863.45; Thu, 12 Oct
- 2023 07:23:04 +0000
-Received: from TYCPR01MB9507.jpnprd01.prod.outlook.com
- ([fe80::3e75:99d4:dac4:beb]) by TYCPR01MB9507.jpnprd01.prod.outlook.com
- ([fe80::3e75:99d4:dac4:beb%6]) with mapi id 15.20.6863.043; Thu, 12 Oct 2023
- 07:23:04 +0000
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
-Content-Description: Mail message body
-Subject: Re: Empowerment Grant
-To:     Recipients <bigfootdelivery@outlook.com>
-From:   "IN FO" <bigfootdelivery@outlook.com>
-Date:   Thu, 12 Oct 2023 12:52:40 +0530
-Reply-To: info@imf-grant.org
-X-TMN:  [euIyfXolVEPknQn8uI8a5r+xZ5s8pvJg]
-X-ClientProxiedBy: VI1P190CA0049.EURP190.PROD.OUTLOOK.COM
- (2603:10a6:800:1bb::7) To TYCPR01MB9507.jpnprd01.prod.outlook.com
- (2603:1096:400:195::9)
-Message-ID: <TYCPR01MB950795A170A581CAD05DC6A3BED3A@TYCPR01MB9507.jpnprd01.prod.outlook.com>
+        with ESMTP id S234125AbjJLIMn (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Thu, 12 Oct 2023 04:12:43 -0400
+Received: from mail.commercesolutions.pl (unknown [162.19.155.126])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id DFA1691
+        for <util-linux@vger.kernel.org>; Thu, 12 Oct 2023 01:12:39 -0700 (PDT)
+Received: by mail.commercesolutions.pl (Postfix, from userid 1002)
+        id E713824D4D; Thu, 12 Oct 2023 08:11:07 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=commercesolutions.pl;
+        s=mail; t=1697098284;
+        bh=PcMncQpBfIZCnTOfZJY5G1G+gaLn4c9QPfFvoXrE4rA=;
+        h=Date:From:To:Subject:From;
+        b=jnG5ZNyGy06i1uiEjC4qrt0yogbhfBzMPTr7GbbeLpZJadrAm2gsN3SvS4YG/3W2e
+         oL31QNcVS0yLHYQPJc0gbWBXiUoNLIb+q/5ZSN1MPv5FSTjLXcFWZsQcCoA8c8Vjmv
+         1L4A1JG0G/PYRyokEe7DotGZHHYlGExH1Uc8uq15+fjId3JXuM2IaNCUV3zNSPa8Xj
+         sOXaWj3h75c5r1ycmSqv+QH4EwFUZbaua9xvQlwlSO+7AA3H7785m8UFxHMC8X8blz
+         QruBe5wyyfoSordERYwsXQwpIclSA/FiucLyih9aNfksUvVXPaDoG6MA2oSNuM6Fpo
+         diZeijZ4HCokg==
+Received: by mail.commercesolutions.pl for <util-linux@vger.kernel.org>; Thu, 12 Oct 2023 08:10:52 GMT
+Message-ID: <20231012064500-0.1.99.1ti71.0.589eligw5n@commercesolutions.pl>
+Date:   Thu, 12 Oct 2023 08:10:52 GMT
+From:   "Kamil Tralewski" <kamil.tralewski@commercesolutions.pl>
+To:     <util-linux@vger.kernel.org>
+Subject: =?UTF-8?Q?S=C5=82owa_kluczowe_do_wypozycjonowania?=
+X-Mailer: mail.commercesolutions.pl
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: TYCPR01MB9507:EE_|OS0PR01MB5300:EE_
-X-MS-Office365-Filtering-Correlation-Id: e26f206d-7f3d-4ed3-2095-08dbcaf411ca
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 8PS2PjkwBhZVDrfQ5ouGMexoUFcSP7En58i7zxbRkpi5yj10GdKdXbJzuFOuxIgu9Igh7eauPotwIhtRHrnIjOkOl9ZcTUUaRcspj7opM73Wcu6vq7XiRIhwZvRN2ZHBwbBes07LnYuNvnV9hZUegXIwaDYHEYUfUIeGcB0savy8Zyn5qOavCQDp3i5lM9XJlc6jVNcBFX1wP2ksYsz2gaoxl9NXx8RiX2ZOGeke2EI+hE/V88xZhFBzNE7hHAjy8A4DFbvygVM+Bj3SmKwn9PgAMIumYop2HGnO2eKSkUbli3B36Y6uTNSlFgLSw/I4axjGz4uSCsHWKm1neZLM7RSlpPuHs3oMO5sc0zSVamjv9I3TX9AhIMmkMiT752Bh6O3DACRKjIcX+hw1DArzxgNLIUIQfJTrBtHn2mbnfntjk6fp8L4VTB7Ie+hEND5bLqGGlH3HIoUV6qt+gSrqwMWGK+X8qek5eAqQgXiZNG1DR6CQWnUNdEvWjnE8JyoURcm9zqC4rlT4iT52a0hArBv5Q3+tJ8uiEHP84x0HVfmxh3jpGtdgTVu0ZuNur1UizkBa6tCse/0H2onmP1G+4jRjPOdm9qLS0lvEwTYNH+OhWcktyjYtwo0Arq5v6lsT
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?iso-8859-1?Q?Vf3tanvZb82gVxuxx/XV7thQ57y7ix5f1UoFt2ENrO1bgX/uqEdWVtI1Pg?=
- =?iso-8859-1?Q?u01/QZegKutwevz87a5+EbJBLBftbYPZwWavD8KuBbErZk9//YVVgmL46u?=
- =?iso-8859-1?Q?iCiictNW6OhK4tnQI9qDFewdkWNYoBBXr4UFmS3679v+gk/ywB8uxqQyjy?=
- =?iso-8859-1?Q?vT9NacGjo33RpVWzLOTMCTEx6c06G6qTWMXqHJS24vWBXlpb0XLmAw56g6?=
- =?iso-8859-1?Q?DRdkDp4S9E53IbSqktDq1/0LuZL26RBma3TjNFIZG0oO//4n3ZPw/L7vvp?=
- =?iso-8859-1?Q?VDlBiyPmH410oRQxWWkJuPa1DluG9UKEEP08EsC3ruBY6RwXpGj9NGtO2F?=
- =?iso-8859-1?Q?0ahguReWraOsn8UGblXtCvImGR2PZ7taAFenePHa2t6Kg0VsCN6VsZm7Xx?=
- =?iso-8859-1?Q?r/bmTzuQuCHdr5gkrXIKqbJVk5A4Gp/col3y1KBcENKh+vkIOC8rLOf21Q?=
- =?iso-8859-1?Q?7rm6SN4QcVuH5OpcrHWPSmu9Az3l2hylk0GMISuVkvjU+gQWgdWaK6acj9?=
- =?iso-8859-1?Q?m8lL253MxVBbsdByQMjqTabMdAer+gjQeGRRxaePVOjX/sf0+vbaCNJBDr?=
- =?iso-8859-1?Q?B652VGWpXXdVKSOe2ROfsrF9WaRfR6w9HS3j1sFG6pxPBIjITygiVmIN5+?=
- =?iso-8859-1?Q?F8t8FlrP7qRhMofN/Vg2zdH4wMJI4BREgeJpK/YgKrXaB+xh21ReduHh3s?=
- =?iso-8859-1?Q?UPrI7HEq/lx8ljS8bH+4LnkiDrwMAnL521ecw4r6ault4fFuBxLvRwFkt1?=
- =?iso-8859-1?Q?l12/cX+XbBws5atVx08UFS163m3NHSokyuWRuRd9sVJfa1cjTDIfmG10LL?=
- =?iso-8859-1?Q?sEl27CGVugwbtl+SfNYaRXN60+YvXTqPljvy927cT4hyyyks/wTMo64p5x?=
- =?iso-8859-1?Q?rMP6QuZiP/ukKr74Sw6mC6tf8pUReTHu2Rp7H9/nXB2qdyMnIzS+YdfJ2W?=
- =?iso-8859-1?Q?ze9D2DFBPokDlBeztl0dE9PYPS9Yp2Hj9jBmG+JBxdeWPda/4a19znZanK?=
- =?iso-8859-1?Q?t1x8pn3Cr3bVsiX3tcV8iXQj0ohvpyD8oj8/o+UwQStdR20au8ZedFDxD5?=
- =?iso-8859-1?Q?9tvZ10h1Hxj+vcBNKMCuKrO6g61OdldFWhVbTl2ql21gJfz8dNqHkl6iev?=
- =?iso-8859-1?Q?1EeBPDZR9g4wn/W+wgENm651C+KGNt7RHCliAmEwakLxCA/+RJTxVNXejb?=
- =?iso-8859-1?Q?hBs6j92quimCpTt2+LrQqhDBqV/pUNPfldLfasSuDL/KMwwub0v1wEWBpo?=
- =?iso-8859-1?Q?pEiTKrrJkZP6FMkwAuZtxRpDGqsmXq5pdNUhVbhwo=3D?=
-X-OriginatorOrg: outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: e26f206d-7f3d-4ed3-2095-08dbcaf411ca
-X-MS-Exchange-CrossTenant-AuthSource: TYCPR01MB9507.jpnprd01.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Oct 2023 07:23:04.0801
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
-X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg: 00000000-0000-0000-0000-000000000000
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: OS0PR01MB5300
-X-Spam-Status: No, score=-0.2 required=5.0 tests=BAYES_20,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM,
-        RCVD_IN_DNSWL_NONE,RCVD_IN_MSPIKE_H2,SPF_HELO_PASS,SPF_PASS
-        autolearn=ham autolearn_force=no version=3.4.6
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Spam-Status: No, score=-1.7 required=5.0 tests=BAYES_00,DKIM_INVALID,
+        DKIM_SIGNED,RCVD_IN_DNSWL_BLOCKED,SPF_HELO_NONE,SPF_PASS autolearn=no
+        autolearn_force=no version=3.4.6
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
- =20
-Final Notice:=20
+Dzie=C5=84 dobry,
 
-Congratulations!!! You are among the 50 beneficiaries of 2023 IMF-UN-World =
-Bank Grant. Reconfirm if this email id is active for more details
+zapozna=C5=82em si=C4=99 z Pa=C5=84stwa ofert=C4=85 i z przyjemno=C5=9Bci=
+=C4=85 przyznaj=C4=99, =C5=BCe przyci=C4=85ga uwag=C4=99 i zach=C4=99ca d=
+o dalszych rozm=C3=B3w.=20
 
-Regards,
-Mrs. Oliva Pathe
-Communication Secretary
+Pomy=C5=9Bla=C5=82em, =C5=BCe mo=C5=BCe m=C3=B3g=C5=82bym mie=C4=87 sw=C3=
+=B3j wk=C5=82ad w Pa=C5=84stwa rozw=C3=B3j i pom=C3=B3c dotrze=C4=87 z t=C4=
+=85 ofert=C4=85 do wi=C4=99kszego grona odbiorc=C3=B3w. Pozycjonuj=C4=99 =
+strony www, dzi=C4=99ki czemu generuj=C4=85 =C5=9Bwietny ruch w sieci.
+
+Mo=C5=BCemy porozmawia=C4=87 w najbli=C5=BCszym czasie?
+
+Pozdrawiam
+Kamil Tralewski
