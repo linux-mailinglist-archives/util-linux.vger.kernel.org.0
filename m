@@ -2,91 +2,81 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 871CF7CEE2E
-	for <lists+util-linux@lfdr.de>; Thu, 19 Oct 2023 04:45:34 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id B49EE7D481C
+	for <lists+util-linux@lfdr.de>; Tue, 24 Oct 2023 09:12:52 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S232153AbjJSCpd convert rfc822-to-8bit (ORCPT
-        <rfc822;lists+util-linux@lfdr.de>); Wed, 18 Oct 2023 22:45:33 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:37082 "EHLO
+        id S232499AbjJXHMw (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Tue, 24 Oct 2023 03:12:52 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:39186 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229632AbjJSCpb (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Wed, 18 Oct 2023 22:45:31 -0400
-X-Greylist: delayed 1043 seconds by postgrey-1.37 at lindbergh.monkeyblade.net; Wed, 18 Oct 2023 19:45:27 PDT
-Received: from es.pcb.gov.my (es.pcb.gov.my [202.75.7.35])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTP id 60FAA132
-        for <util-linux@vger.kernel.org>; Wed, 18 Oct 2023 19:45:27 -0700 (PDT)
-X-ASG-Debug-ID: 1697682432-1488a916612a9d6000f-4SocVm
-Received: from mail.pcb.gov.my (EXCHANGE01.BPA.pcb.gov.my [10.28.173.47]) by es.pcb.gov.my with ESMTP id xJDFHmhol2esh2lX for <util-linux@vger.kernel.org>; Thu, 19 Oct 2023 10:27:21 +0800 (+08)
-X-Barracuda-Envelope-From: herdayu@pcb.gov.my
-Received: from [93.95.27.199] (93.95.27.199) by EXCHANGE01.BPA.pcb.gov.my
- (10.28.173.47) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.721.2; Thu, 19 Oct 2023
- 10:04:02 +0800
-Reply-To: <alicewalt63@gmail.com>
-X-Barracuda-Effective-Source-IP: UNKNOWN[93.95.27.199]
-X-Barracuda-Apparent-Source-IP: 93.95.27.199
-From:   Alice Walton <herdayu@pcb.gov.my>
-To:     <util-linux@vger.kernel.org>
-Subject: RE: TQ20T23
-Date:   Wed, 18 Oct 2023 19:03:38 -0700
-X-ASG-Orig-Subj: RE: TQ20T23
-Message-ID: <20231018190338.906DC81CB863F9AD@pcb.gov.my>
+        with ESMTP id S232576AbjJXHMv (ORCPT
+        <rfc822;util-linux-ng@vger.kernel.org>);
+        Tue, 24 Oct 2023 03:12:51 -0400
+X-Greylist: delayed 30817 seconds by postgrey-1.37 at lindbergh.monkeyblade.net; Tue, 24 Oct 2023 00:12:44 PDT
+Received: from mail.tehinnovacii.ru (mail.tehinnovacii.ru [185.221.212.125])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id E06C2118
+        for <util-linux-ng@vger.kernel.org>; Tue, 24 Oct 2023 00:12:44 -0700 (PDT)
+Received: from localhost (localhost [127.0.0.1])
+        by mail.tehinnovacii.ru (Postfix) with ESMTP id 0150E848764C5;
+        Mon, 23 Oct 2023 23:45:28 +0300 (MSK)
+Received: from mail.tehinnovacii.ru ([127.0.0.1])
+        by localhost (mail.tehinnovacii.ru [127.0.0.1]) (amavisd-new, port 10032)
+        with ESMTP id Al-vFR_Kd4T9; Mon, 23 Oct 2023 23:45:27 +0300 (MSK)
+Received: from localhost (localhost [127.0.0.1])
+        by mail.tehinnovacii.ru (Postfix) with ESMTP id 111598454F7A7;
+        Mon, 23 Oct 2023 23:45:25 +0300 (MSK)
+DKIM-Filter: OpenDKIM Filter v2.10.3 mail.tehinnovacii.ru 111598454F7A7
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=tehinnovacii.ru;
+        s=mail; t=1698093925;
+        bh=Ws5TcS6EV4V7aiUY6u9eol5cuGGKUQT0mSrLKF+Le3s=;
+        h=MIME-Version:To:From:Date:Message-Id;
+        b=PE/4b4Y4d5XZjI0pWurtcHUH5KmReSWdZN2VcBd8NPjGkqZnacht7FMOiztPbh9FZ
+         VLdRrUs+Ql8J69yjiak5a8TI2NU6pAGAq+gZ84JzKWyT5j57uEL3Rgr4YkLzWhpahg
+         GTuJF4g5elMd4Hif8NCYhfCTkY5B8f1DXwfvUaSMeaPEfMFe3HTB6e8sX7amVGcGo/
+         ByfXf2leabQ4AN3Z+X5A+84ZyQIUuo+SPPWC3qJtYr9KplmGLrx5msM9O+0ERAb83x
+         XJDEwCXsd0fBEWNTrjB52R8AET6Z9LslxYXDQ38btpgkOQ1prAlpRBK2tSCTJXL5fp
+         0EuCY/iXkpYDA==
+Received: from mail.tehinnovacii.ru ([127.0.0.1])
+        by localhost (mail.tehinnovacii.ru [127.0.0.1]) (amavisd-new, port 10026)
+        with ESMTP id fKXBqPLfM3MA; Mon, 23 Oct 2023 23:45:25 +0300 (MSK)
+Received: from DESKTOP-0AG4O9B.lan (unknown [41.157.248.166])
+        by mail.tehinnovacii.ru (Postfix) with ESMTPSA id 763958454F802;
+        Mon, 23 Oct 2023 23:45:13 +0300 (MSK)
+Content-Type: text/plain; charset="iso-8859-1"
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8BIT
-X-ClientProxiedBy: EXCHANGE01.BPA.pcb.gov.my (10.28.173.47) To
- EXCHANGE01.BPA.pcb.gov.my (10.28.173.47)
-X-Barracuda-Connect: EXCHANGE01.BPA.pcb.gov.my[10.28.173.47]
-X-Barracuda-Start-Time: 1697682439
-X-Barracuda-URL: https://10.28.173.25:443/cgi-mod/mark.cgi
-X-Barracuda-License: Expired
-X-Virus-Scanned: by bsmtpd at pcb.gov.my
-X-Barracuda-Scan-Msg-Size: 566
-X-Barracuda-BRTS-Status: 1
-X-Spam-Status: Yes, score=6.4 required=5.0 tests=BAYES_50,
-        FREEMAIL_FORGED_REPLYTO,FREEMAIL_REPLYTO_END_DIGIT,LOTS_OF_MONEY,
-        MONEY_FREEMAIL_REPTO,RCVD_IN_DNSWL_BLOCKED,RCVD_IN_SBL,SPF_HELO_NONE,
-        SPF_SOFTFAIL autolearn=no autolearn_force=no version=3.4.6
-X-Spam-Report: *  0.1 RCVD_IN_SBL RBL: Received via a relay in Spamhaus SBL
-        *      [93.95.27.199 listed in zen.spamhaus.org]
-        *  0.8 BAYES_50 BODY: Bayes spam probability is 40 to 60%
-        *      [score: 0.5000]
-        *  0.0 RCVD_IN_DNSWL_BLOCKED RBL: ADMINISTRATOR NOTICE: The query to
-        *      DNSWL was blocked.  See
-        *      http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
-        *      for more information.
-        *      [202.75.7.35 listed in list.dnswl.org]
-        *  0.7 SPF_SOFTFAIL SPF: sender does not match SPF record (softfail)
-        *  0.0 SPF_HELO_NONE SPF: HELO does not publish an SPF Record
-        *  0.2 FREEMAIL_REPLYTO_END_DIGIT Reply-To freemail username ends in
-        *      digit
-        *      [alicewalt63[at]gmail.com]
-        *  0.0 LOTS_OF_MONEY Huge... sums of money
-        *  2.5 MONEY_FREEMAIL_REPTO Lots of money from someone using free
-        *      email?
-        *  2.1 FREEMAIL_FORGED_REPLYTO Freemail in Reply-To, but not From
-X-Spam-Level: ******
+Content-Transfer-Encoding: quoted-printable
+Content-Description: Mail message body
+Subject: Brauchen Sie einen Kredit?
+To:     Recipients <zp@tehinnovacii.ru>
+From:   Georg Johannes Proksch <zp@tehinnovacii.ru>
+Date:   Mon, 23 Oct 2023 13:44:12 -0700
+Reply-To: kreditschufadeutsch0@gmail.com
+Message-Id: <20231023204514.763958454F802@mail.tehinnovacii.ru>
+X-Spam-Status: No, score=4.3 required=5.0 tests=BAYES_50,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FORGED_REPLYTO,
+        FREEMAIL_REPLYTO_END_DIGIT,RCVD_IN_BL_SPAMCOP_NET,SPF_HELO_NONE,
+        SPF_PASS autolearn=no autolearn_force=no version=3.4.6
+X-Spam-Level: ****
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-čestitke
+Brauchen Sie einen Kredit?
+Tr=E4umen Sie davon, ein Unternehmen zu gr=FCnden?
+Sie ben=F6tigen Geld f=FCr Ihre Gesch=E4ftsidee, ben=F6tigen aber eine gro=
+=DFe Finanzierung?
+Besitzen Sie ein Unternehmen und m=F6chten expandieren?
 
-      Vaš e-poštni naslov je prejel 5.000.000,00 USD v programu 
-podpore humanitarnih donacij Alice Walton 2023. Pišite nam za več 
-podrobnosti o tem, kako lahko zahtevate svoj donacijski sklad
- 
-Hvala in Bog blagoslovi
-Fundacija Alice Walton
-=====================================================
+Wir bieten Gesch=E4ftskredite, Privatkredite, Projektkredite und Autokredit=
+e mit einem Zinssatz von 2 % an.
 
-Congratulation
+Vollst=E4ndiger Name:
+Kreditbetrag:
+Kreditlaufzeit:
+Land:
+Telefonnummer:
 
-     Your email has won $5,000,000.00 USD by Alice Walton 2023 
-humanitarian donation support program. Contact us for more 
-details on how you can claim your donation fund
- 
-Thanks And God Bless
-Alice Walton Foundation
+Herr Georg Johannes Proksch
+Kreditberater/Berater
