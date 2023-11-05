@@ -2,95 +2,81 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id 341717E0DD4
-	for <lists+util-linux@lfdr.de>; Sat,  4 Nov 2023 05:52:07 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id EF8A97E1705
+	for <lists+util-linux@lfdr.de>; Sun,  5 Nov 2023 22:59:37 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229585AbjKDEwE (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Sat, 4 Nov 2023 00:52:04 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:49772 "EHLO
+        id S229786AbjKEV7i (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Sun, 5 Nov 2023 16:59:38 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:58456 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229509AbjKDEwD (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Sat, 4 Nov 2023 00:52:03 -0400
-Received: from tarta.nabijaczleweli.xyz (tarta.nabijaczleweli.xyz [139.28.40.42])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 1684C123
-        for <util-linux@vger.kernel.org>; Fri,  3 Nov 2023 21:51:58 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=nabijaczleweli.xyz;
-        s=202305; t=1699073515;
-        bh=40Lzc1MBqcFjmtyd4N1wtrTovDKOZgJE400r4XMDYK4=;
-        h=Date:From:To:Subject:From;
-        b=o8TtORhXg7a6KaOpQ83dYx6Glb/6ayW32Kcs7BTeUuSr7V/TG35UDB0b3JFsF5hK3
-         2KovA9kwk4CunLEScUAvcH0i5U4QtbpVNw1g2jkbopGlBM59Oo8rshm8UNLJze2Hkf
-         aZYPxj8hpELBeEf7GDnT0pHXXh7kN87QmkvXZWKF0WwjUA7NzAfYTR1uyRTn5B/GA9
-         yNkVOt8Xlok7mhRx56tpDoVcvN05gbPImkpsEC1FIoJ851p/DeJjL5i9QQ5diRToK6
-         WRpznSmyd+ugaD9e78MswjzV6OKQzNiMlYOZZb+r0jB13mXDSN+9YQTQWCiIfagO3c
-         zkQIcr8MxkRGA==
-Received: from tarta.nabijaczleweli.xyz (unknown [192.168.1.250])
-        by tarta.nabijaczleweli.xyz (Postfix) with ESMTPSA id 37D3611214
-        for <util-linux@vger.kernel.org>; Sat,  4 Nov 2023 05:51:55 +0100 (CET)
-Date:   Sat, 4 Nov 2023 05:51:55 +0100
-From:   =?utf-8?B?0L3QsNCx?= <nabijaczleweli@nabijaczleweli.xyz>
-To:     util-linux@vger.kernel.org
-Subject: [PATCH] fstrim.8: -v doesn't take an argument
-Message-ID: <kvjsrwxmn5rtxniy5jdceoo4s2l4fqfyarz5jdifsip75ydhlf@tarta.nabijaczleweli.xyz>
+        with ESMTP id S229689AbjKEV7i (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Sun, 5 Nov 2023 16:59:38 -0500
+X-Greylist: delayed 5122 seconds by postgrey-1.37 at lindbergh.monkeyblade.net; Sun, 05 Nov 2023 13:59:35 PST
+Received: from SMTP-HCRC-200.brggroup.vn (unknown [42.112.212.144])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id A50B4CF
+        for <util-linux@vger.kernel.org>; Sun,  5 Nov 2023 13:59:35 -0800 (PST)
+Received: from SMTP-HCRC-200.brggroup.vn (localhost [127.0.0.1])
+        by SMTP-HCRC-200.brggroup.vn (SMTP-CTTV) with ESMTP id 6390119B8B;
+        Mon,  6 Nov 2023 01:58:28 +0700 (+07)
+Received: from zimbra.hcrc.vn (unknown [192.168.200.66])
+        (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+        (No client certificate requested)
+        by SMTP-HCRC-200.brggroup.vn (SMTP-CTTV) with ESMTPS id 5CF8B19C16;
+        Mon,  6 Nov 2023 01:58:28 +0700 (+07)
+Received: from localhost (localhost [127.0.0.1])
+        by zimbra.hcrc.vn (Postfix) with ESMTP id EEDD61B8204A;
+        Mon,  6 Nov 2023 01:58:29 +0700 (+07)
+Received: from zimbra.hcrc.vn ([127.0.0.1])
+        by localhost (zimbra.hcrc.vn [127.0.0.1]) (amavisd-new, port 10032)
+        with ESMTP id 1RoK9RYbE8cH; Mon,  6 Nov 2023 01:58:29 +0700 (+07)
+Received: from localhost (localhost [127.0.0.1])
+        by zimbra.hcrc.vn (Postfix) with ESMTP id BF0BD1B8203A;
+        Mon,  6 Nov 2023 01:58:29 +0700 (+07)
+DKIM-Filter: OpenDKIM Filter v2.10.3 zimbra.hcrc.vn BF0BD1B8203A
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=hcrc.vn;
+        s=64D43D38-C7D6-11ED-8EFE-0027945F1BFA; t=1699210709;
+        bh=WOZURJ77pkiMUL2pPLC14ifVPRvyTQIBEQmxuN1ezAA=;
+        h=MIME-Version:To:From:Date:Message-Id;
+        b=ejyG3TqczV28r+WM6NvNK3bPbrUQST2ZKSqiVCOBx8D/J0cjlJUr7IGq5Ylx26/gK
+         NLodu5yhyBrAia8+7e25a1CPgYgrcMwnlVOr8xJTK1o2QEyn/FY2EMyva8BDykJW8U
+         CJSTnr0j1q5yzCwJHtG3UAEooaCjhBZB63zRRaN6gwx9vgOn/c4aaOPi6xEgkJ4wzl
+         nWWiiTzabjyKqBDtNx7K9hYrnwA3gMQYf2qgPfxpcXZlQZo0yymZveIDiqmsa/PrPc
+         Bb6mERhs1oIrdyhliNDhE6EHXwsDMbPV4iBZJ6GGdO9Qd71RbG0WrdCpxaDRLdrI7D
+         1xY+xumWfY/nA==
+X-Virus-Scanned: amavisd-new at hcrc.vn
+Received: from zimbra.hcrc.vn ([127.0.0.1])
+        by localhost (zimbra.hcrc.vn [127.0.0.1]) (amavisd-new, port 10026)
+        with ESMTP id NCL_k7Dqx9Eg; Mon,  6 Nov 2023 01:58:29 +0700 (+07)
+Received: from [192.168.1.152] (unknown [51.179.100.52])
+        by zimbra.hcrc.vn (Postfix) with ESMTPSA id 615711B824EE;
+        Mon,  6 Nov 2023 01:58:23 +0700 (+07)
+Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
-        protocol="application/pgp-signature"; boundary="or4h4etbeqwsw5n2"
-Content-Disposition: inline
-User-Agent: NeoMutt/20231103
-X-Spam-Status: No, score=0.6 required=5.0 tests=BAYES_50,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,RCVD_IN_DNSWL_BLOCKED,
-        SPF_HELO_PASS,SPF_PASS,T_SCC_BODY_TEXT_LINE,URIBL_BLOCKED
-        autolearn=ham autolearn_force=no version=3.4.6
+Content-Transfer-Encoding: quoted-printable
+Content-Description: Mail message body
+Subject: =?utf-8?b?4oKsIDEwMC4wMDAuMDAwPw==?=
+To:     Recipients <ch.31hamnghi@hcrc.vn>
+From:   ch.31hamnghi@hcrc.vn
+Date:   Sun, 05 Nov 2023 19:58:12 +0100
+Reply-To: joliushk@gmail.com
+Message-Id: <20231105185823.615711B824EE@zimbra.hcrc.vn>
+X-Spam-Status: No, score=2.7 required=5.0 tests=BAYES_50,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FORGED_REPLYTO,
+        RCVD_IN_DNSWL_BLOCKED,SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE,
+        URIBL_BLOCKED autolearn=no autolearn_force=no version=3.4.6
+X-Spam-Level: **
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
+Goededag,
+Ik ben mevrouw Joanna Liu en een medewerker van Citi Bank Hong Kong.
+Kan ik =E2=82=AC 100.000.000 aan u overmaken? Kan ik je vertrouwen
 
---or4h4etbeqwsw5n2
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
 
----
-Based on 2.38.1.
+Ik wacht op jullie reacties
+Met vriendelijke groeten
+mevrouw Joanna Liu
 
-diff '--color=3Dauto' -u -r util-linux-2.38.1.old/sys-utils/fstrim.8.adoc u=
-til-linux-2.38.1/sys-utils/fstrim.8.adoc
---- util-linux-2.38.1.old/sys-utils/fstrim.8.adoc	2022-05-11 10:13:11.12353=
-0407 +0200
-+++ util-linux-2.38.1/sys-utils/fstrim.8.adoc	2023-11-04 05:49:02.371888189=
- +0100
-@@ -12,7 +12,7 @@
-=20
- =3D=3D SYNOPSIS
-=20
--*fstrim* [*-Aa*] [*-o* _offset_] [*-l* _length_] [*-m* _minimum-size_] [*-=
-v* _mountpoint_]
-+*fstrim* [*-Aa*] [*-o* _offset_] [*-l* _length_] [*-m* _minimum-size_] [*-=
-v*] _mountpoint_
-=20
- =3D=3D DESCRIPTION
-
---or4h4etbeqwsw5n2
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCgAdFiEEfWlHToQCjFzAxEFjvP0LAY0mWPEFAmVFzecACgkQvP0LAY0m
-WPHiGg/+JP6mUtLRq41Qwk9WEtnVSi+SWEzXLUEix6KhX37ZhQrQeYxX//1mFo6E
-4HqYjKY5rTy+rD++FU3WUjwgjWRA5S1qSusrRG1ljRGO5GkpshG1ENGL98QQ+n0w
-iO2pEkpSR7S1RIaVl2CQjfmCjMop93zeYov7hJ67SlzCzumOfNihs89f6lyfkrDM
-yYaSUGpkjONQOkDgUB1nxRrO5SMqag8aFb41v2r5py0zulwAXSQ3EECwZzKeTVc/
-tK4WMJ1SqlR1+SIkN/2XiIRZ22x3Nk6r+6lnSa+SOGQ+oONC/qzMsKow+hV/IZ8r
-/s9IHz6/+FZSup3eUqa+E85c/cJntynOkN2ZOVLi9rKuDH5Tzhc/GGqIpX/bRwfD
-s+7BYY7kbWulPZDud9JMqxft8SkUrVY1vcqMaOXF64Nk82g62ACC5S2Fc6aFi4B/
-okKvblrdBFUuou4aR84XLTAqjiaIInt7r3QuNUsc0sH4bzcHtNGBMoBLcwtEwNJ/
-pNTHd++OsBEtm6SrmGzLd+nTc1LWSWGvKtqNxUgyJWJ93mgYM6LBIWqww1lTRmrP
-S9nRqHUnEvQri1eQWE3iO6+skUcu1ivWtiIqD0d8U6dHch+xjkxEU+lAseJOy5nM
-7uKm9rG2lwygDi3APtET/PnoBukRo5A7slKtiLhy8wudvw2Rv9k=
-=PJD2
------END PGP SIGNATURE-----
-
---or4h4etbeqwsw5n2--
