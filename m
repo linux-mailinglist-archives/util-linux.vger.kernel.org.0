@@ -2,81 +2,171 @@ Return-Path: <util-linux-owner@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from out1.vger.email (out1.vger.email [IPv6:2620:137:e000::1:20])
-	by mail.lfdr.de (Postfix) with ESMTP id EF8A97E1705
-	for <lists+util-linux@lfdr.de>; Sun,  5 Nov 2023 22:59:37 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 0B73B7E31E1
+	for <lists+util-linux@lfdr.de>; Tue,  7 Nov 2023 01:01:59 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229786AbjKEV7i (ORCPT <rfc822;lists+util-linux@lfdr.de>);
-        Sun, 5 Nov 2023 16:59:38 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:58456 "EHLO
+        id S233227AbjKGAB7 (ORCPT <rfc822;lists+util-linux@lfdr.de>);
+        Mon, 6 Nov 2023 19:01:59 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:34724 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229689AbjKEV7i (ORCPT
-        <rfc822;util-linux@vger.kernel.org>); Sun, 5 Nov 2023 16:59:38 -0500
-X-Greylist: delayed 5122 seconds by postgrey-1.37 at lindbergh.monkeyblade.net; Sun, 05 Nov 2023 13:59:35 PST
-Received: from SMTP-HCRC-200.brggroup.vn (unknown [42.112.212.144])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id A50B4CF
-        for <util-linux@vger.kernel.org>; Sun,  5 Nov 2023 13:59:35 -0800 (PST)
-Received: from SMTP-HCRC-200.brggroup.vn (localhost [127.0.0.1])
-        by SMTP-HCRC-200.brggroup.vn (SMTP-CTTV) with ESMTP id 6390119B8B;
-        Mon,  6 Nov 2023 01:58:28 +0700 (+07)
-Received: from zimbra.hcrc.vn (unknown [192.168.200.66])
-        (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
-        (No client certificate requested)
-        by SMTP-HCRC-200.brggroup.vn (SMTP-CTTV) with ESMTPS id 5CF8B19C16;
-        Mon,  6 Nov 2023 01:58:28 +0700 (+07)
-Received: from localhost (localhost [127.0.0.1])
-        by zimbra.hcrc.vn (Postfix) with ESMTP id EEDD61B8204A;
-        Mon,  6 Nov 2023 01:58:29 +0700 (+07)
-Received: from zimbra.hcrc.vn ([127.0.0.1])
-        by localhost (zimbra.hcrc.vn [127.0.0.1]) (amavisd-new, port 10032)
-        with ESMTP id 1RoK9RYbE8cH; Mon,  6 Nov 2023 01:58:29 +0700 (+07)
-Received: from localhost (localhost [127.0.0.1])
-        by zimbra.hcrc.vn (Postfix) with ESMTP id BF0BD1B8203A;
-        Mon,  6 Nov 2023 01:58:29 +0700 (+07)
-DKIM-Filter: OpenDKIM Filter v2.10.3 zimbra.hcrc.vn BF0BD1B8203A
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=hcrc.vn;
-        s=64D43D38-C7D6-11ED-8EFE-0027945F1BFA; t=1699210709;
-        bh=WOZURJ77pkiMUL2pPLC14ifVPRvyTQIBEQmxuN1ezAA=;
-        h=MIME-Version:To:From:Date:Message-Id;
-        b=ejyG3TqczV28r+WM6NvNK3bPbrUQST2ZKSqiVCOBx8D/J0cjlJUr7IGq5Ylx26/gK
-         NLodu5yhyBrAia8+7e25a1CPgYgrcMwnlVOr8xJTK1o2QEyn/FY2EMyva8BDykJW8U
-         CJSTnr0j1q5yzCwJHtG3UAEooaCjhBZB63zRRaN6gwx9vgOn/c4aaOPi6xEgkJ4wzl
-         nWWiiTzabjyKqBDtNx7K9hYrnwA3gMQYf2qgPfxpcXZlQZo0yymZveIDiqmsa/PrPc
-         Bb6mERhs1oIrdyhliNDhE6EHXwsDMbPV4iBZJ6GGdO9Qd71RbG0WrdCpxaDRLdrI7D
-         1xY+xumWfY/nA==
-X-Virus-Scanned: amavisd-new at hcrc.vn
-Received: from zimbra.hcrc.vn ([127.0.0.1])
-        by localhost (zimbra.hcrc.vn [127.0.0.1]) (amavisd-new, port 10026)
-        with ESMTP id NCL_k7Dqx9Eg; Mon,  6 Nov 2023 01:58:29 +0700 (+07)
-Received: from [192.168.1.152] (unknown [51.179.100.52])
-        by zimbra.hcrc.vn (Postfix) with ESMTPSA id 615711B824EE;
-        Mon,  6 Nov 2023 01:58:23 +0700 (+07)
-Content-Type: text/plain; charset="utf-8"
+        with ESMTP id S233065AbjKGAB7 (ORCPT
+        <rfc822;util-linux@vger.kernel.org>); Mon, 6 Nov 2023 19:01:59 -0500
+Received: from pl1.haspere.com (pl1.haspere.com [209.177.156.123])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 0F432BD
+        for <util-linux@vger.kernel.org>; Mon,  6 Nov 2023 16:01:55 -0800 (PST)
+Received: from roomba.dyweni.com (localhost [127.0.0.1])
+        by pl1.haspere.com (Postfix) with ESMTP id 3CDEA2B46E;
+        Mon,  6 Nov 2023 18:01:55 -0600 (CST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Description: Mail message body
-Subject: =?utf-8?b?4oKsIDEwMC4wMDAuMDAwPw==?=
-To:     Recipients <ch.31hamnghi@hcrc.vn>
-From:   ch.31hamnghi@hcrc.vn
-Date:   Sun, 05 Nov 2023 19:58:12 +0100
-Reply-To: joliushk@gmail.com
-Message-Id: <20231105185823.615711B824EE@zimbra.hcrc.vn>
-X-Spam-Status: No, score=2.7 required=5.0 tests=BAYES_50,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FORGED_REPLYTO,
-        RCVD_IN_DNSWL_BLOCKED,SPF_HELO_NONE,SPF_PASS,T_SCC_BODY_TEXT_LINE,
-        URIBL_BLOCKED autolearn=no autolearn_force=no version=3.4.6
-X-Spam-Level: **
+Date:   Mon, 06 Nov 2023 18:01:55 -0600
+From:   Dyweni - Util-Linux <DDh8rwTFp32E@dyweni.com>
+To:     util-linux@vger.kernel.org
+Subject: Re: Unexpected interaction between script and screen
+Reply-To: DDh8rwTFp32E@dyweni.com
+Mail-Reply-To: DDh8rwTFp32E@dyweni.com
+In-Reply-To: <b6a590f6024faea4c2b738a70774bc47@dyweni.com>
+References: <b6a590f6024faea4c2b738a70774bc47@dyweni.com>
+Message-ID: <7a796ba6caa03ceca594dec9add67fe8@dyweni.com>
+X-Sender: DDh8rwTFp32E@dyweni.com
+Content-Type: text/plain; charset=US-ASCII;
+ format=flowed
+Content-Transfer-Encoding: 7bit
+X-Spam-Status: No, score=1.1 required=5.0 tests=BAYES_00,HK_RANDOM_ENVFROM,
+        HK_RANDOM_FROM,HK_RANDOM_REPLYTO,RCVD_IN_DNSWL_BLOCKED,SPF_HELO_NONE,
+        SPF_NONE,T_SCC_BODY_TEXT_LINE autolearn=no autolearn_force=no
+        version=3.4.6
+X-Spam-Level: *
 X-Spam-Checker-Version: SpamAssassin 3.4.6 (2021-04-09) on
         lindbergh.monkeyblade.net
 Precedence: bulk
 List-ID: <util-linux.vger.kernel.org>
 X-Mailing-List: util-linux@vger.kernel.org
 
-Goededag,
-Ik ben mevrouw Joanna Liu en een medewerker van Citi Bank Hong Kong.
-Kan ik =E2=82=AC 100.000.000 aan u overmaken? Kan ik je vertrouwen
+Hi,
+
+Is there any idea on resolving this issue?  What would be the best
+way to prevent a session running inside screen from being
+unexpectedly ended by script when the ssh connection to the server
+is lost?
+
+I'd like to find the best approach before coding a solution.  The
+ideas I've had include:
+* simply skipping sending the EOF to the child
+* killing the child
+* enabling the bash option that requires pressing CTRL-D more than
+   once to exit (which seems ugly to me)
+* researching for some other solution I'm not aware of yet
+
+Please advise,
+Dyweni
 
 
-Ik wacht op jullie reacties
-Met vriendelijke groeten
-mevrouw Joanna Liu
-
+On 2023-10-10 16:16, Dyweni - Util-Linux wrote:
+> Hi All,
+> 
+> I'm running into an issue with the interaction between 'script' and
+> 'screen' whereby the active/focused session inside 'screen' is
+> unexpectedly terminated when the SSH connection is lost.  See below for
+> examples of this without running script, with script and one screen
+> session, and with script and multiple screen sessions).
+> 
+> I'm using 'script' to log/record all activity and is started
+> automatically via a bashrc script.
+> 
+> I've tracked the problem down to 'ul_pty_proxy_master()' where it calls
+> 'ul_pty_write_eof_to_child()' which sends CTRL-D to the child.  This
+> in-turn gets passed through 'screen' to the inner 'script' and child
+> processes.  The real immediate child (the bash shell that started
+> 'screen') is never closed.
+> 
+> What can be done so that outer 'script' and associated processes are
+> terminated/cleaned up, while leaving the screen server and all of it's
+> sessions unaffected?  Maybe add an option to 'script' so that it kills
+> the immediate child process instead of sending CTRL-D to it?
+> 
+> Thank you!
+> 
+> 
+> ====> Using normal ssh/screen <====
+> 
+> -- before ssh connection loss --
+> 24469  \_ sshd: root@pts/3
+> 24474  |   \_ -bash
+> 24482  |       \_ screen
+> 24483  |           \_ SCREEN
+> 24484  |               \_ -/bin/bash
+> 
+> -- after ssh connection loss --
+> 24483 SCREEN
+> 24484  \_ -/bin/bash
+> 
+> -- actuan/expected result --
+> The session running inside screen stays running and the session that
+> started screen is properly terminated/cleaned up.
+> 
+> 
+> ====> Using ssh/script/screen/script (With one screen session) <====
+> 
+> -- before ssh connection loss --
+> 25180  \_ sshd: root@pts/1
+> 25183  |   \_ -bash
+> 25191  |       \_ script -f 25183.3119.log
+> 25192  |           \_ bash -i
+> 25206  |               \_ screen
+> 25207  |                   \_ SCREEN
+> 25208  |                       \_ -/bin/bash
+> 25217  |                           \_ script -f 25208.26983.log
+> 25218  |                               \_ bash -i
+> 
+> -- after ssh connection loss --
+> 25191 script -f 25183.3119.log
+> 25192  \_ bash -i
+> 
+> -- actual result --
+> The session running inside screen is shutdown, sshd and screen (both 
+> the
+> client [pid 25206] and the server [pid 25207]) are terminated, but the
+> outer script remains running.
+> 
+> -- expected result --
+> The session that started screen (the sshd process, the immediate child
+> script, and the screen client [pid 25206]) should have been terminated/
+> cleaned up, leaving the screen server [pid 25207] and all sessions
+> intact.
+> 
+> 
+> 
+> ====> Using ssh/script/screen/script (With two screen sessions) <====
+> 
+> -- before ssh connection loss --
+> 25907  |   \_ -bash
+> 25915  |       \_ script -f 25907.11974.log
+> 25916  |           \_ bash -i
+> 25930  |               \_ screen
+> 25931  |                   \_ SCREEN
+> 25932  |                       \_ -/bin/bash
+> 25940  |                       |   \_ script -f 25932.2808.log
+> 25941  |                       |       \_ bash -i
+> 25953  |                       \_ -/bin/bash
+> 25961  |                           \_ script -f 25953.19131.log
+> 25962  |                               \_ bash -i
+> 
+> -- after ssh connection loss --
+> 25915 script -f 25907.11974.log
+> 25916  \_ bash -i
+> 25930      \_ screen
+> 25931          \_ SCREEN
+> 25932              \_ -/bin/bash
+> 25940                  \_ script -f 25932.2808.log
+> 25941                      \_ bash -i
+> 
+> -- actual result --
+> The active session running inside screen is shutdown but screen remains
+> running due to the other sessions which were running.  The sshd process
+> is terminated but the outer script remains running.
+> 
+> -- expected result --
+> The session that started screen (the sshd process, the immediate child
+> script, and the screen client [pid 25930]) should have been terminated/
+> cleaned up, leaving the screen server [pid 25931] and all sessions
+> intact.
