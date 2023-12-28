@@ -1,73 +1,72 @@
-Return-Path: <util-linux+bounces-42-lists+util-linux=lfdr.de@vger.kernel.org>
+Return-Path: <util-linux+bounces-43-lists+util-linux=lfdr.de@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 926C78174DE
-	for <lists+util-linux@lfdr.de>; Mon, 18 Dec 2023 16:11:41 +0100 (CET)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
+	by mail.lfdr.de (Postfix) with ESMTPS id C907581FB33
+	for <lists+util-linux@lfdr.de>; Thu, 28 Dec 2023 21:31:55 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 9C9201C22242
-	for <lists+util-linux@lfdr.de>; Mon, 18 Dec 2023 15:11:40 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 0D6601F21D12
+	for <lists+util-linux@lfdr.de>; Thu, 28 Dec 2023 20:31:55 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0957729411;
-	Mon, 18 Dec 2023 15:11:36 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id F173B10787;
+	Thu, 28 Dec 2023 20:31:49 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=arista.com header.i=@arista.com header.b="0zioWm0v"
+	dkim=pass (2048-bit key) header.d=arista.com header.i=@arista.com header.b="VLnQEglE"
 X-Original-To: util-linux@vger.kernel.org
 Received: from mail-yw1-f225.google.com (mail-yw1-f225.google.com [209.85.128.225])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CB6EB200C0
-	for <util-linux@vger.kernel.org>; Mon, 18 Dec 2023 15:11:31 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E9F0F10780
+	for <util-linux@vger.kernel.org>; Thu, 28 Dec 2023 20:31:45 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=arista.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=arista.com
-Received: by mail-yw1-f225.google.com with SMTP id 00721157ae682-5e465506c0bso24216447b3.0
-        for <util-linux@vger.kernel.org>; Mon, 18 Dec 2023 07:11:31 -0800 (PST)
+Received: by mail-yw1-f225.google.com with SMTP id 00721157ae682-5e840338607so40952377b3.2
+        for <util-linux@vger.kernel.org>; Thu, 28 Dec 2023 12:31:45 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1702912290; x=1703517090;
+        d=1e100.net; s=20230601; t=1703795505; x=1704400305;
         h=content-transfer-encoding:message-id:date:subject:cc:to:from
          :dkim-signature:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=T5yHbno1C03xa7+Flwvccs1mpBW980U28LGumG5pwo0=;
-        b=uih4pOwIVqqB10PQqGpClo9lMIQE1EB9yBTWKWeFHCxZGwO/qtushi6H6vQ4AVcXIX
-         t2g/CoXgp8GhNqZs5vLYIrIcQfVBUHWrfmdscbjjC/n2yByl+WyERd37iyAAriF179qj
-         RIibZwJolEuWEDxrniJfu27HBUeJPF/Jw+hIL2z2Qm7pzP9iPAMZX6euxCHYTYDLVIZz
-         RN2Xn1NUXgRegwT5c/AsoO2uprvoPYH6RMDFK4WcM28NIYJvusQSBd9Q6dOfikTFwAU9
-         wcnlqEkIxwLLD/8bnTbDXhnTI47O3UHuEPHHFT/UuaXNXVhmczYZz4v/nIwLhrfUslDP
-         YH1A==
-X-Gm-Message-State: AOJu0YyeCHVSfsUozKKmXQEyiL2KSaaLIEvqHiEXfKwM0d6UKVdvpmrv
-	pOpEiQCBfERQVvAll9KlU4sxrLcobJ3rSDQUsiOfZHmsLFa/Lk7+OUb4
-X-Google-Smtp-Source: AGHT+IGMa99sTEbl6o1ndjm7Z84+8htGUcCC8j1GpZrL8PS1/QBs5XCgaXYrBguUhXbsSvKOl65Hmzb0cYg6
-X-Received: by 2002:a81:7c06:0:b0:5e2:4fc3:7d51 with SMTP id x6-20020a817c06000000b005e24fc37d51mr7652017ywc.47.1702912290603;
-        Mon, 18 Dec 2023 07:11:30 -0800 (PST)
+        bh=L43PRA2YGTdiYobZmQXNCbNyQHtqt6MKu+2j4Wc8lqU=;
+        b=DJLmCn1nAFhNVErAtSYQdCbTKH9Wm9Dts08xkT63XsXOsUZyVpcK62GTRTEnjWa9zG
+         7B5K490VIBMQhJOBMm8eUdAgNDb0Rnq3qQxsVY5Z+lp8YdUG3gtr/N0lx9/+vV69c+pZ
+         5KaHqRwUfkLjhNih8wnd+MVFBvE2M549/FyI338OP8IFyQ/lWMWdkqM75cpyWA862SAi
+         HWc3RRUm63nKtwAi2iV6sbFQCvv4/0Q9mmQns9lmjYwrZ9WPrn9q1OQ5rQVvTKHka+Q9
+         5qPjwcksbTuQjaT5Rxl3qn4zV4x55kuthpIAECjaCwv2tUtI+JQVVi0fgCMtCxO+OvBb
+         nw9g==
+X-Gm-Message-State: AOJu0YznhHer8tfPRdZt8M194m4Y82K4WGrVne2Q0kDgSs8tZTQYC1zQ
+	sXY6uApNrifHyRz2ZdHXMB1dRUvNOr8OF7HFLA619t2CkZty8GINb9E=
+X-Google-Smtp-Source: AGHT+IFRdWIZBtW79Tw9LMF7tplmXD3r4NzslAe3vuGwNfjsuze2wrPK3f07cMIGv25FOzohOnRe8iCJkR42
+X-Received: by 2002:a81:7382:0:b0:5de:9129:42fb with SMTP id o124-20020a817382000000b005de912942fbmr4403185ywc.71.1703795504661;
+        Thu, 28 Dec 2023 12:31:44 -0800 (PST)
 Received: from smtp.aristanetworks.com ([74.123.28.25])
-        by smtp-relay.gmail.com with ESMTPS id y5-20020a0def05000000b005cb40c5ec51sm2592449ywe.2.2023.12.18.07.11.30
-        for <util-linux@vger.kernel.org>
+        by smtp-relay.gmail.com with ESMTPS id u7-20020a816007000000b005eb0506df39sm982710ywb.62.2023.12.28.12.31.44
         (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
-        Mon, 18 Dec 2023 07:11:30 -0800 (PST)
+        Thu, 28 Dec 2023 12:31:44 -0800 (PST)
 X-Relaying-Domain: arista.com
 X-SMTP-Authentication: Allow-List-permitted
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arista.com;
-	s=Arista-A; t=1702912289;
-	bh=T5yHbno1C03xa7+Flwvccs1mpBW980U28LGumG5pwo0=;
+	s=Arista-A; t=1703795503;
+	bh=L43PRA2YGTdiYobZmQXNCbNyQHtqt6MKu+2j4Wc8lqU=;
 	h=From:To:Cc:Subject:Date:From;
-	b=0zioWm0vUH+iX2kuvl6F4RKC99g1p+zKNQ1UNDwhubtip+/0jG6hXQ1M62BaMYDbC
-	 UfqT5MlaeWebRomUscMOgJHaRa5dnfhx3lNTz4w9LGFhw1pqaDtPHGDvhZ4EfXTwQd
-	 PHa6th26M/pC/zcbZtZ6eedEcUenoM4AXRt40LJIO6eIHKjOOVcpsDQ4vEMo65IWlj
-	 rEKf1MaMR/MN4EZWt5WFRMK0SUR2wZkdm4JBDi6lSQeiNFs9mcwP5lgv1FXbO2rXdN
-	 Rmriovzoypr1gnsOsJ70lFYkvKwqTJQLaX7WjvIun/18X7kyd+ddskxaz7K4daC5Od
-	 lylonwxFbjjBg==
+	b=VLnQEglEXwMbFwjjOGa4D97GXoBmvxcWkNvWqk6wHA7/VYSudCJUCXslUi7WWSsn3
+	 k3SPJ/xpFLLNkdn6k76QgrxOyC5LGOLkmMlg0IgI81mYRgrYPPId8RuSWV6tUURzeF
+	 tOlEREsUM67XbRvt1BqV1oBgcIUe4b/RAGYQkyqLRbpOqg8ugKqte3839Xqs5x47kD
+	 6M1+Qx9kxIFPyDv2b1UAgQPzkxxYk48t776eJt/HMRgP4K53lO/+u8yQOtkFps/IVA
+	 NQvtOsfzuwT7NnSXcVjcEefptvmwyJHZJGWFO7E4rfv1gnKBz1kDAKAKY4aTLfLABQ
+	 qOkFIlgYb0asg==
 X-SMTP-Authentication: Allow-List-permitted
 X-SMTP-Authentication: Allow-List-permitted
 Received: from us113.sjc.aristanetworks.com (us113.sjc.aristanetworks.com [10.242.240.8])
-	by smtp.aristanetworks.com (Postfix) with ESMTP id DDAA0400F82;
-	Mon, 18 Dec 2023 07:11:29 -0800 (PST)
+	by smtp.aristanetworks.com (Postfix) with ESMTP id BF158402056;
+	Thu, 28 Dec 2023 12:31:43 -0800 (PST)
 X-SMTP-Authentication: Allow-List-permitted
 X-SMTP-Authentication: Allow-List-permitted
 X-SMTP-Authentication: Allow-List-permitted
 Received: by us113.sjc.aristanetworks.com (Postfix, from userid 10383)
-	id D191DB840D5E; Mon, 18 Dec 2023 07:11:29 -0800 (PST)
+	id B189EB840854; Thu, 28 Dec 2023 12:31:43 -0800 (PST)
 X-SMTP-Authentication: Allow-List-permitted
 X-SMTP-Authentication: Allow-List-permitted
 X-SMTP-Authentication: Allow-List-permitted
@@ -80,7 +79,8 @@ X-SMTP-Authentication: Allow-List-permitted
 X-SMTP-Authentication: Allow-List-permitted
 X-SMTP-Authentication: Allow-List-permitted
 Cc: colona@arista.com,
-	echron@arista.com
+	echron@arista.com,
+	echron@gmail.com
 X-SMTP-Authentication: Allow-List-permitted
 X-SMTP-Authentication: Allow-List-permitted
 X-SMTP-Authentication: Allow-List-permitted
@@ -88,11 +88,11 @@ Subject: [PATCH] util-linux/sys-utils dmesg add PRINTK_CALLER support
 X-SMTP-Authentication: Allow-List-permitted
 X-SMTP-Authentication: Allow-List-permitted
 X-SMTP-Authentication: Allow-List-permitted
-Date: Mon, 18 Dec 2023 07:11:27 -0800
+Date: Thu, 28 Dec 2023 12:31:40 -0800
 X-SMTP-Authentication: Allow-List-permitted
 X-SMTP-Authentication: Allow-List-permitted
 X-SMTP-Authentication: Allow-List-permitted
-Message-ID: <20231218151127.32052-1-echron@arista.com>
+Message-ID: <20231228203140.5930-1-echron@arista.com>
 X-SMTP-Authentication: Allow-List-permitted
 Content-Transfer-Encoding: 8bit
 Precedence: bulk
@@ -114,6 +114,8 @@ Revision: #3 on 2023/12/12 Use of sizeof for cidbuf and limit search
                            for caller_id to dmesg prefix to msg text
 Revision: #4 on 2023/12/15 Ensure SYSLOG and kmsg inputs have
                            caller_id_size set appropriately
+Revision: #5 on 2023/12/24 Make caller_id width consistent with
+                           makedumpfile
 
 Add support to standard dmesg command for the optional Linux Kernel
 debug CONFIG option PRINTK_CALLER which adds an optional dmesg field
@@ -230,7 +232,7 @@ Signed-off-by: Ivan Delalande <colona@arista.com>
 Signed-off-by: Edward Chron <echron@arista.com>
 ---
  include/pathnames.h                           |   3 +
- sys-utils/dmesg.c                             | 124 +++-
+ sys-utils/dmesg.c                             | 128 ++++-
  .../expected/dmesg/colors-kmsg-printk-caller  |  22 +
  .../dmesg/console-levels-kmsg-printk-caller   |  45 ++
  .../expected/dmesg/decode-kmsg-printk-caller  |  22 +
@@ -254,7 +256,7 @@ Signed-off-by: Edward Chron <echron@arista.com>
  tests/ts/dmesg/kmsg-input-printk-caller       | Bin 0 -> 2187 bytes
  tests/ts/dmesg/limit-kmsg-printk-caller       |  29 +
  tests/ts/dmesg/newlines-kmsg-printk-caller    | Bin 0 -> 152 bytes
- 25 files changed, 1466 insertions(+), 2 deletions(-)
+ 25 files changed, 1469 insertions(+), 3 deletions(-)
  create mode 100644 tests/expected/dmesg/colors-kmsg-printk-caller
  create mode 100644 tests/expected/dmesg/console-levels-kmsg-printk-caller
  create mode 100644 tests/expected/dmesg/decode-kmsg-printk-caller
@@ -292,7 +294,7 @@ index caf0e63d4..81fa405f6 100644
 +
  #endif /* PATHNAMES_H */
 diff --git a/sys-utils/dmesg.c b/sys-utils/dmesg.c
-index 77728b419..520cfbf04 100644
+index 77728b419..e27966b05 100644
 --- a/sys-utils/dmesg.c
 +++ b/sys-utils/dmesg.c
 @@ -13,7 +13,9 @@
@@ -319,7 +321,7 @@ index 77728b419..520cfbf04 100644
  
 +#define PID_CHARS_MAX sizeof(stringify_value(LONG_MAX))
 +#define PID_CHARS_DEFAULT sizeof(stringify_value(INT_MAX))
-+#define SYSLOG_DEFAULT_CALLER_ID_CHARS sizeof(stringify_value(SHRT_MAX))
++#define SYSLOG_DEFAULT_CALLER_ID_CHARS sizeof(stringify_value(SHRT_MAX))-1
 +#define DMESG_CALLER_PREFIX "caller="
 +#define DMESG_CALLER_PREFIXSZ (sizeof(DMESG_CALLER_PREFIX)-1)
 +
@@ -396,7 +398,7 @@ index 77728b419..520cfbf04 100644
  /*
   * Reads messages from regular file by mmap
   */
-@@ -624,11 +675,13 @@ static ssize_t process_buffer(struct dmesg_control *ctl, char **buf)
+@@ -624,6 +675,8 @@ static ssize_t process_buffer(struct dmesg_control *ctl, char **buf)
  			ctl->bufsize = get_syslog_buffer_size();
  
  		n = read_syslog_buffer(ctl, buf);
@@ -405,12 +407,6 @@ index 77728b419..520cfbf04 100644
  		break;
  	case DMESG_METHOD_KMSG:
  		if (ctl->filename)
- 			n = process_kmsg_file(ctl, buf);
--		else
-+		else 
- 			/*
- 			 * Since kernel 3.5.0
- 			 */
 @@ -728,6 +781,39 @@ static const char *skip_item(const char *begin, const char *end, const char *sep
  	return begin;
  }
@@ -451,10 +447,12 @@ index 77728b419..520cfbf04 100644
  /*
   * Parses one record from syslog(2) buffer
   */
-@@ -795,6 +881,18 @@ static int get_next_syslog_record(struct dmesg_control *ctl,
+@@ -795,8 +881,22 @@ static int get_next_syslog_record(struct dmesg_control *ctl,
  				begin++;
  		}
  
+-		rec->mesg = begin;
+-		rec->mesg_size = end - begin;
 +		if (*begin == '[' && (*(begin + 1) == ' ' ||
 +			(*(begin + 1) == 'T' || *(begin + 1) == 'C'))) {
 +			const char *start = begin + 1;
@@ -465,12 +463,16 @@ index 77728b419..520cfbf04 100644
 +			id_size = begin - start;
 +			if (id_size < sizeof(rec->caller_id))
 +				xstrncpy(rec->caller_id, start, id_size);
++			rec->mesg = begin + 1;
++			rec->mesg_size = end - begin - 1;
++		} else {
++			rec->mesg = begin;
++			rec->mesg_size = end - begin;
 +		}
-+
- 		rec->mesg = begin;
- 		rec->mesg_size = end - begin;
  
-@@ -1101,6 +1199,19 @@ full_output:
+ 		/* Don't count \n from the last message to the message size */
+ 		if (*end != '\n' && *(end - 1) == '\n')
+@@ -1101,6 +1201,19 @@ full_output:
  			color_disable();
  	}
  
@@ -481,7 +483,7 @@ index 77728b419..520cfbf04 100644
 +			char cidbuf[PID_CHARS_MAX+3] = {'\0'};
 +
 +			sprintf(cidbuf, "[%*s] ",
-+				(char)ctl->caller_id_size - 1, rec->caller_id);
++				(char)ctl->caller_id_size, rec->caller_id);
 +			ctl->indent += strnlen(cidbuf, sizeof(cidbuf));
 +			fputs(cidbuf, stdout);
 +		}
@@ -490,7 +492,7 @@ index 77728b419..520cfbf04 100644
  	/*
  	 * A kernel message may contain several lines of output, separated
  	 * by '\n'.  If the timestamp and decode outputs are forced then each
-@@ -1284,7 +1395,10 @@ static int parse_kmsg_record(struct dmesg_control *ctl,
+@@ -1284,7 +1397,10 @@ static int parse_kmsg_record(struct dmesg_control *ctl,
  		goto mesg;
  
  	/* D) optional fields (ignore) */
@@ -502,7 +504,7 @@ index 77728b419..520cfbf04 100644
  
  mesg:
  	/* E) message text */
-@@ -1336,6 +1450,9 @@ static int process_kmsg(struct dmesg_control *ctl)
+@@ -1336,6 +1452,9 @@ static int process_kmsg(struct dmesg_control *ctl)
  	if (ctl->method != DMESG_METHOD_KMSG || ctl->kmsg < 0)
  		return -1;
  
@@ -512,7 +514,7 @@ index 77728b419..520cfbf04 100644
  	/*
  	 * The very first read() call is done in kmsg_init() where we test
  	 * /dev/kmsg usability. The return code from the initial read() is
-@@ -1446,6 +1563,7 @@ int main(int argc, char *argv[])
+@@ -1446,6 +1565,7 @@ int main(int argc, char *argv[])
  		.kmsg = -1,
  		.time_fmt = DMESG_TIMEFTM_TIME,
  		.indent = 0,
@@ -520,7 +522,7 @@ index 77728b419..520cfbf04 100644
  	};
  	int colormode = UL_COLORMODE_UNDEF;
  	enum {
-@@ -1538,10 +1656,12 @@ int main(int argc, char *argv[])
+@@ -1538,10 +1658,12 @@ int main(int argc, char *argv[])
  		case 'F':
  			ctl.filename = optarg;
  			ctl.method = DMESG_METHOD_MMAP;
