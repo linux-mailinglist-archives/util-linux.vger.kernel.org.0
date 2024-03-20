@@ -1,54 +1,65 @@
-Return-Path: <util-linux+bounces-124-lists+util-linux=lfdr.de@vger.kernel.org>
+Return-Path: <util-linux+bounces-126-lists+util-linux=lfdr.de@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
-	by mail.lfdr.de (Postfix) with ESMTPS id 081EF8819BE
-	for <lists+util-linux@lfdr.de>; Wed, 20 Mar 2024 23:59:04 +0100 (CET)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id B269A881A49
+	for <lists+util-linux@lfdr.de>; Thu, 21 Mar 2024 00:56:44 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 739CF1F21B5B
-	for <lists+util-linux@lfdr.de>; Wed, 20 Mar 2024 22:59:03 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id DC15A1C20D01
+	for <lists+util-linux@lfdr.de>; Wed, 20 Mar 2024 23:56:43 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0C1E385944;
-	Wed, 20 Mar 2024 22:58:57 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id A68B586248;
+	Wed, 20 Mar 2024 23:56:36 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=bernhard-voelker.de header.i=mail@bernhard-voelker.de header.b="dI6Dn/h5"
+	dkim=pass (2048-bit key) header.d=cs.ucla.edu header.i=@cs.ucla.edu header.b="Po+694Xu"
 X-Original-To: util-linux@vger.kernel.org
-Received: from mout.kundenserver.de (mout.kundenserver.de [217.72.192.74])
+Received: from mail.cs.ucla.edu (mail.cs.ucla.edu [131.179.128.66])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E4B8B1E87E
-	for <util-linux@vger.kernel.org>; Wed, 20 Mar 2024 22:58:53 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=217.72.192.74
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0D0C186146
+	for <util-linux@vger.kernel.org>; Wed, 20 Mar 2024 23:56:34 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=131.179.128.66
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1710975536; cv=none; b=oUOz55Ib+D+JtAjeZdyyCdgu3dEpg3lX5j0nOYfGtqIWIYpUcibTnXL4wX+FvxgYEt0+tgvm5A9KtooU4n3nw7DsmzJxSq1ooWQCLyZ36TlnPxGro2HDCKZ2PZRpM+SDcSjsfuDktHGodLkX48Snyxv3/ENshebTsaVXZc1Z2h8=
+	t=1710978996; cv=none; b=XIehaKK9VTHRlltXGhwYVbIvR8Jn2JNGkOxz+8k81G2uXt8HmxNtJzpT6lu6wpQoMcCo6Nsnm9GaCD8kpverS9joI9yRj9tlS6+gUMCBQQidZBy8IvJ1kbQW8yPFnqyDhGFXFmARCathngTUYLZ8eFbRHqgJxuLvLBTvwZ2g/sM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1710975536; c=relaxed/simple;
-	bh=DcP2D2ym17rPURGx6hYP3SGWqxRpdOyffuX2l+ziXEc=;
+	s=arc-20240116; t=1710978996; c=relaxed/simple;
+	bh=7Ejnsqt5cbD7nALWFGibyGvjSB+9YXKlZdDJ0FN8dP4=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=p/1M/IDSdt3Ndz0QQ1ErSANi8OJBzVdYyWSG4kEOro13Eye1aGbmpUY534nfN0HjE4JbOnJBLL/pRyPsHEV9yKVP1RkJtCmG6IPjYBf14M9IVCTHc4f4C/2xIZislxbHFxQZKWljFJA8ktEBisD4nyrHcjLyLaJAOt9oNnN46QU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=bernhard-voelker.de; spf=pass smtp.mailfrom=bernhard-voelker.de; dkim=pass (2048-bit key) header.d=bernhard-voelker.de header.i=mail@bernhard-voelker.de header.b=dI6Dn/h5; arc=none smtp.client-ip=217.72.192.74
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=bernhard-voelker.de
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bernhard-voelker.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=bernhard-voelker.de; s=s1-ionos; t=1710975528; x=1711580328;
-	i=mail@bernhard-voelker.de;
-	bh=jsyJTLQUd61oOlFwsqStZDqw45pazUxe4EIgIKYBZe4=;
-	h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:
-	 In-Reply-To;
-	b=dI6Dn/h54cNMgXfDFtZigVB01QAqFHYLB/8hmP4xK7vCrE5TvNOYkJF4u7rqqGEq
-	 FRW5uqpNh3nt/nj54+04+5c7eC1IiWWYlOiMjBQP+ZdRga7mC9AEWu67izAwIJXFc
-	 txOIDx0Y1zIjYBtjkDDY/nImZ6Tt03sksKj9IYwMwtHn/yLxgq1cKQizRWFlhMKcL
-	 GDBZ0VT/mab42r95H63EgenBlnFLWi8850aJbri/oXN3iyGRb7YtQnvf0BIDRS+3V
-	 o7UWPhXXKqvuzprHareoX0+H0y5pHPyLORccGfOwMt+V8Mq0h7E2VGs01sJEzjcx2
-	 YukAIJkolMPp5V0OZQ==
-X-UI-Sender-Class: 55c96926-9e95-11ee-ae09-1f7a4046a0f6
-Received: from [192.168.101.10] ([91.49.76.118]) by mrelayeu.kundenserver.de
- (mreue106 [212.227.15.183]) with ESMTPSA (Nemesis) id
- 1MrPVJ-1r158u2ByJ-00oZ9M; Wed, 20 Mar 2024 23:53:07 +0100
-Message-ID: <dcf073d9-a60b-429d-b9e2-40f6069e2641@bernhard-voelker.de>
-Date: Wed, 20 Mar 2024 23:53:05 +0100
+	 In-Reply-To:Content-Type; b=DQanePX4yyIaqqOkTGk6x1tvDfm9PCeslbQs9DakTHrH2wkFttAU59ec0ylPBYtaHnjrhextwX5ZZbK6Wf7TZI/3OAui04NjodlrBkRfAMRsmyccf/Yolrw7sV4SPZ5DcZ3pZqahNEB1bk0fSj7oOGM2iTsAXgVoLqKh6wKdj44=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=cs.ucla.edu; spf=pass smtp.mailfrom=cs.ucla.edu; dkim=pass (2048-bit key) header.d=cs.ucla.edu header.i=@cs.ucla.edu header.b=Po+694Xu; arc=none smtp.client-ip=131.179.128.66
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=cs.ucla.edu
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=cs.ucla.edu
+Received: from localhost (localhost [127.0.0.1])
+	by mail.cs.ucla.edu (Postfix) with ESMTP id 372AF3C0140A0;
+	Wed, 20 Mar 2024 16:56:34 -0700 (PDT)
+Received: from mail.cs.ucla.edu ([127.0.0.1])
+ by localhost (mail.cs.ucla.edu [127.0.0.1]) (amavis, port 10032) with ESMTP
+ id aabSwXU3zZT9; Wed, 20 Mar 2024 16:56:33 -0700 (PDT)
+Received: from localhost (localhost [127.0.0.1])
+	by mail.cs.ucla.edu (Postfix) with ESMTP id C87573C0140A4;
+	Wed, 20 Mar 2024 16:56:33 -0700 (PDT)
+DKIM-Filter: OpenDKIM Filter v2.10.3 mail.cs.ucla.edu C87573C0140A4
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cs.ucla.edu;
+	s=9D0B346E-2AEB-11ED-9476-E14B719DCE6C; t=1710978993;
+	bh=D5qLNRZIIU2ePWcIgK6Jz5FhdW88fwgXCaBV5/aPmLI=;
+	h=Message-ID:Date:MIME-Version:To:From;
+	b=Po+694Xu1lP1w83lYBqJXPBv5O0emUu/O9C0xkrpJqnszXABY3vlONTHImmCHX2x6
+	 wFINGIRnBQs5qhsxcz39BVm2I0JOSGGoiKnLzbAUj2ltuTrBwxj7PT5AybhdWJvii1
+	 dkQ0cemnONYfLoXriQ4YJxZ4n23KQbRI1dJZ5yqA7RF1rqpQqD1JU8Z69ArhX5S8xs
+	 BLFpLKuFg7spoSVD/idVqoRGzAdRjty6xUlDs+9FHZJQ5K58i/caJlQMSb4n1uVFgR
+	 igRFbDBhgUD9bzNsIqO6O1DAdfq+BKF+NIRS7n78xrZ62kH7WhZ22poXzEBP93GuCJ
+	 hjFGYaPPokRxA==
+X-Virus-Scanned: amavis at mail.cs.ucla.edu
+Received: from mail.cs.ucla.edu ([127.0.0.1])
+ by localhost (mail.cs.ucla.edu [127.0.0.1]) (amavis, port 10026) with ESMTP
+ id unVHSK5E99S9; Wed, 20 Mar 2024 16:56:33 -0700 (PDT)
+Received: from [131.179.64.200] (Penguin.CS.UCLA.EDU [131.179.64.200])
+	by mail.cs.ucla.edu (Postfix) with ESMTPSA id 9B8163C0140A0;
+	Wed, 20 Mar 2024 16:56:33 -0700 (PDT)
+Message-ID: <e1269c19-c2b9-45ac-b683-47a473326662@cs.ucla.edu>
+Date: Wed, 20 Mar 2024 16:56:32 -0700
 Precedence: bulk
 X-Mailing-List: util-linux@vger.kernel.org
 List-Id: <util-linux.vger.kernel.org>
@@ -59,10 +70,10 @@ User-Agent: Mozilla Thunderbird
 Subject: Re: bug#69532: mv's new -x option should be made orthogonal to
  -t/-T/default
 Content-Language: en-US
-To: Paul Eggert <eggert@cs.ucla.edu>, =?UTF-8?Q?P=C3=A1draig_Brady?=
- <P@draigBrady.com>
-Cc: 69532@debbugs.gnu.org, util-linux <util-linux@vger.kernel.org>,
- Dominique Martinet <asmadeus@codewreck.org>, Petr Malat <oss@malat.biz>,
+To: Bernhard Voelker <mail@bernhard-voelker.de>,
+ =?UTF-8?Q?P=C3=A1draig_Brady?= <P@draigBrady.com>
+Cc: Petr Malat <oss@malat.biz>, util-linux <util-linux@vger.kernel.org>,
+ Dominique Martinet <asmadeus@codewreck.org>, 69532@debbugs.gnu.org,
  Karel Zak <kzak@redhat.com>, Rob Landley <rob@landley.net>
 References: <10c814a7-cb68-4fb4-ad8d-f88f286fb0b1@cs.ucla.edu>
  <58281f96-f9c6-4567-e3c9-c6a6cfa6ce27@draigBrady.com>
@@ -72,141 +83,103 @@ References: <10c814a7-cb68-4fb4-ad8d-f88f286fb0b1@cs.ucla.edu>
  <c5622a1c-b59e-4eb3-9d81-111acc1fbddc@cs.ucla.edu>
  <11c9a6a2-c73d-4b99-b071-48e7eab2fd19@bernhard-voelker.de>
  <4356f3eb-544e-4ce9-b9ea-374cd01663d5@cs.ucla.edu>
-From: Bernhard Voelker <mail@bernhard-voelker.de>
-In-Reply-To: <4356f3eb-544e-4ce9-b9ea-374cd01663d5@cs.ucla.edu>
+ <dcf073d9-a60b-429d-b9e2-40f6069e2641@bernhard-voelker.de>
+From: Paul Eggert <eggert@cs.ucla.edu>
+Organization: UCLA Computer Science Department
+In-Reply-To: <dcf073d9-a60b-429d-b9e2-40f6069e2641@bernhard-voelker.de>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:AUw4Pt2ulRQRdoCBo0gUeiPJ4PBLHNJaxRQMmpj2TPJOzGkvU/b
- eyJoC2BR3XCrkoiapi6+Q6OhbfWPbwgmFEUp0qiLCMP2zmkDPb9xEuD92yJcAhPGVGBsWrz
- KrS9PpmeBmLrm1MvboaAUBKK7JQOEVQhrFIiEG+LSBFrSu9xgTRy7ch/KgSyvwR7fEgwIsg
- eG7lHzhnEyUFsCvLaW1vg==
-X-Spam-Flag: NO
-UI-OutboundReport: notjunk:1;M01:P0:rsAw3F6Rk5I=;2QgIvTLlcAy+xmyOYobbBRvd1LO
- 1i6vtppCjTz7TH25FO54amYyGd9ss5KCd5ktyvtZaHskhEjmcZ5eLcce+9s2/WgWnS53MO/Yi
- JRXmZtE4oLK1+xJc8wV5LqD3HSl5oNXwgFdrp/cFYY5lyK0YTUbDNyDmcYOjT3ZcgrjYSGv9f
- KGlj4Y2zyn/wdooCd4vPBZlJIZKseoXHrZevdw20yEheLwJvEwTjeTzwFkl4eOebC9eHcMJTo
- PpbjufXLtfT0q03NVpsYys8msmJiUmv6CANQMXNXKN50/tztASf1t/nLg3EWshZpdLJ4mhpfq
- l27uClgCTDteRceU3TA2PlnH1Z12A5Pn/gtDJRy622JNvH4KwrcQS0LuR/zqiF4hodS0m8BDW
- inJwvztdMt+LoHQpIAlRO8Cy0e4ktc6spZyx+jbiJRV8eEFhHnVPnW+VrMvgo44IDzBwUDHTN
- sh1ajr8ufw8ussRG9y2s/riO+QC+cRJzv/ch888tODpZZVOzfWaxkvAgbRS4I2GqGp3hNcCcj
- aP4Wp4gwzM8UwX+VwnNpYv1NprLwIFw6SJJ6LCMV8mHBSXUWeYcSKLF/MhrDC2hAtxHykcJ+j
- NnR0bR74eBozj1nbC1L2NXfr5zEiLOcZEgq2HgNPADDjb7eQXX2nwG1xx/cEN4g0MNMn4DKe0
- KFMN9571t0IoWycw0eospIXadQ0nGxtOCnZYgjcOwneKysSPzLuVRtU6KxN2BKd7klXzzcDFv
- 6wfSlzbIIbzg/9WGpm/C9EoI3jXnBdhotmf/oU6LapZ9f/jpKLcTCQ=
 
-On 3/20/24 21:56, Paul Eggert wrote:
-> On 3/20/24 12:43, Bernhard Voelker wrote:
->
->> This stems from the fact that although mv(1) is a userland frontend
->> for renameat(2), the user interface is different:
->> while renameat(2) deals exactly with 2 operands, mv(1) has always
->> been able to work on more arguments.
->
-> Yes, that's mv's original sin, which we cannot realistically change now.
+On 3/20/24 15:53, Bernhard Voelker wrote:
 
-I wouldn't go that far that it was a sin.  It's useful and people got
-used to it without having to think about it.
+>  =C2=A0 $ echo 1 > a
+>  =C2=A0 $ mkdir d
+>  =C2=A0 $ echo 2 > d/a
+>  =C2=A0 $ src/mv -v --exchange a a a d
+>  =C2=A0 renamed 'a' -> 'd/a'
+>  =C2=A0 renamed 'a' -> 'd/a'
+>  =C2=A0 renamed 'a' -> 'd/a'
+>  =C2=A0 $ cat a
+>  =C2=A0 2
+>  =C2=A0 $ src/mv -v --exchange a a a d
+>  =C2=A0 renamed 'a' -> 'd/a'
+>  =C2=A0 renamed 'a' -> 'd/a'
+>  =C2=A0 renamed 'a' -> 'd/a'
+>  =C2=A0 $ cat a
+>  =C2=A0 1
+>  =C2=A0 $ src/mv -v --exchange a a a a d
+>  =C2=A0 renamed 'a' -> 'd/a'
+>  =C2=A0 renamed 'a' -> 'd/a'
+>  =C2=A0 renamed 'a' -> 'd/a'
+>  =C2=A0 renamed 'a' -> 'd/a'
+>  =C2=A0 $ cat a
+>  =C2=A0 1
 
->> I have the gut feeling that we didn't think through all cases,
->> and that some might be surprising, e.g.:
->>
->>   =C2=A0 $ mkdir d; echo 1 > a; echo 2 > d/a
->>   =C2=A0 $ src/mv --exchange a a a a d/a
->>
->> versus
->>
->>   =C2=A0 $ src/mv --exchange a a a a d/a
->
-> I don't understand the word "versus" here, as the two examples look the
-> same to me.
+Yes, that's the expected behavior for this contrived case. Just as one=20
+would get odd behavior if one did the same thing without --exchange.
 
-sorry, I messed the example up.
 
-   $ echo 1 > a
+> I remember some implementation where mv(1) really was just a rename(2),
+> which failed when crossing file systems.  Was it some HP-UX or Solaris =
+mv(1)?
+
+I doubt it. Even 7th Edition 'mv' (1979) fell back on 'cp' when the link=20
+syscall failed (this was before 'rename' existed).
+
+
+> My point is that "exchange" is a different functionality.
+
+Yes, but it's closely related. Arguably --backup is also a different=20
+functionality too (and arguably --exchange is simply an alternative=20
+backup scheme!) but 'mv' has --backup.
+
+
+> - How large is the useful overlap with the existing code of mv(1)?
+>  =C2=A0 Not much: no traditional rename nor copy.
+
+I don't follow this point. The code change was fairly small, which=20
+indicates there was a lot of overlap with existing functionality.
+
+
+> - How large is the useful overlap with the existing options/modes of mv=
+(1)?
+>  =C2=A0 - exchange contradicts --backup,
+
+That could be fixed for regular files, if there's a need, by backing up=20
+the destination via 'link' before exchanging. For directories it's=20
+admittedly a problem, but that's also the case for plain 'mv' (or for=20
+'cp' or 'ln', for that matter) so there's not much new here.
+
+
+>  =C2=A0 - exchange is not useful together with options working with a r=
+egular
+>  =C2=A0=C2=A0=C2=A0 rename of copy, at least: --update, -Z, -n.
+
+It should work with --update and -Z. -n of course is logically=20
+incompatible, but this not the only set of logically incompatible=20
+options (e.g., -t vs -T).
+
+
+>  =C2=A0 - not sure if exchange works well together with -f.
+
+What problems do you see there?
+
+
+
+> why does exchange not work to exchange a regular with a=20
+> directory file?
+
+It works. I don't see a problem there.
+
+   $ touch a
    $ mkdir d
-   $ echo 2 > d/a
-   $ src/mv -v --exchange a a a d
-   renamed 'a' -> 'd/a'
-   renamed 'a' -> 'd/a'
-   renamed 'a' -> 'd/a'
-   $ cat a
-   2
-   $ src/mv -v --exchange a a a d
-   renamed 'a' -> 'd/a'
-   renamed 'a' -> 'd/a'
-   renamed 'a' -> 'd/a'
-   $ cat a
-   1
-   $ src/mv -v --exchange a a a a d
-   renamed 'a' -> 'd/a'
-   renamed 'a' -> 'd/a'
-   renamed 'a' -> 'd/a'
-   renamed 'a' -> 'd/a'
-   $ cat a
-   1
+   $ ./mv -T --exchange a d
+   $ ls -ld a d
+   drwxr-xr-x. 2 eggert eggert 4096 Mar 20 16:52 a
+   -rw-r--r--. 1 eggert eggert    0 Mar 20 16:52 d
 
-I remember some implementation where mv(1) really was just a rename(2),
-which failed when crossing file systems.  Was it some HP-UX or Solaris mv(=
-1)?
-mv(1) has learned to copy+delete over time, which is what people would
-expect from a "move".
 
-My point is that "exchange" is a different functionality.
-It's well somehow belonging and related to what renameat(2) is doing in th=
-e kernel,
-and therefore it comes in handy that we can simply call it with an additio=
-nal flag.
-Yet it's IMO a different operation.  I bet there had been discussions whet=
-her
-to create a new syscall, but apparently it was easier to put it with a fla=
-g
-into an existing one.  Fine for the kernel.
+> Finally, the test cases are very sparse:
 
-On userland OTOH, we have broader choice.
-Karel did his choice in util-linux for exch(1), and coreutils could expose
-the same functionality.
-
-For other feature requests, we were much more reluctant in coreutils ... f=
-or
-good reasons: feature bloat, maintainability, etc.
-
-So I'm asking myself what is different this time?
-- The feature already exists -> util-linux.
-- Okay, we're using the same syscall, renameat(2) -> it's tempting.
-- How large is the useful overlap with the existing code of mv(1)?
-   Not much: no traditional rename nor copy.
-- How large is the useful overlap with the existing options/modes of mv(1)=
-?
-   - exchange contradicts --backup,
-   - exchange is not useful together with options working with a regular
-     rename of copy, at least: --update, -Z, -n.
-   - not sure if exchange works well together with -f.
-
-I'm currently only 20:80 for adding it to mv(1).
-The functionality is cool, but do we need to press it into mv(1) with so m=
-any
-incompatibilities just because it's requiring renameat(2) we already use?
-Maybe to consider: One tool for one thing ... means another tool for anoth=
-er thing.
-
-Again, I have the gut feeling that we've missed some cases to think about.
-And once the feature would be in ...
-
-Furthermore, why does exchange not work to exchange a regular with a direc=
-tory file?
-We've all learned that everything's a file, so it cannot be explained to u=
-sers that
-exchanging a regular file with a directory doesn't work.
-
-Finally, the test cases are very sparse: no cases with different owners, d=
-ifferent
-directory permissions, different file types (if we know already f<->d does=
-n't work),
-triggering races, etc.
-
-I don't really want to object to add it, but I find it quite odd as of tod=
-ay.
-
-Have a nice day,
-Berny
+Feel free to add some. :-)
 
