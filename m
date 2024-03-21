@@ -1,92 +1,69 @@
-Return-Path: <util-linux+bounces-125-lists+util-linux=lfdr.de@vger.kernel.org>
+Return-Path: <util-linux+bounces-127-lists+util-linux=lfdr.de@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id F197B881A48
-	for <lists+util-linux@lfdr.de>; Thu, 21 Mar 2024 00:54:34 +0100 (CET)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 315DF8862AA
+	for <lists+util-linux@lfdr.de>; Thu, 21 Mar 2024 22:46:04 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id A46592830B3
-	for <lists+util-linux@lfdr.de>; Wed, 20 Mar 2024 23:54:33 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 5B2781C2199C
+	for <lists+util-linux@lfdr.de>; Thu, 21 Mar 2024 21:46:03 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id D1C482BAEF;
-	Wed, 20 Mar 2024 23:54:29 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 271C1133402;
+	Thu, 21 Mar 2024 21:45:59 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=landley-net.20230601.gappssmtp.com header.i=@landley-net.20230601.gappssmtp.com header.b="3Yo5PWmX"
+	dkim=pass (2048-bit key) header.d=bernhard-voelker.de header.i=mail@bernhard-voelker.de header.b="ktaZYLbw"
 X-Original-To: util-linux@vger.kernel.org
-Received: from mail-il1-f173.google.com (mail-il1-f173.google.com [209.85.166.173])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mout.kundenserver.de (mout.kundenserver.de [212.227.17.13])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DD2231E522
-	for <util-linux@vger.kernel.org>; Wed, 20 Mar 2024 23:54:27 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.166.173
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 27264135418
+	for <util-linux@vger.kernel.org>; Thu, 21 Mar 2024 21:45:55 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=212.227.17.13
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1710978869; cv=none; b=qs/yVlczzr+Rjn9npapvAWcH/2tLbspW3JL2P4Xw0YQg7K4E8wxh4dP/4pGAlTNc5D+Dfk3tFonREP0xiJnxlugaPTc74mtfz/genzp5bLHT3CR0XDYBYXZbcXYZ79g/Wy6J0xlWcuZwhminY7cgZymiPRJapUeDfSCjpV7riks=
+	t=1711057558; cv=none; b=SHfzhFWxSzJG0dV97EzK3UqlkAFy/MA1fwdbZ3DQ+BbdoPGZ5Q2blbqAUSrAn969PgXQR5Y3iG3hAv4e7IGxmuFJyi3r1P0DydJNvt/IaO8BmRtWANYBwXhxjp1SqpopQpMoSzzfGLO0UMoqMaeRcS9DZ41IfYsEUsQx0jF+Upc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1710978869; c=relaxed/simple;
-	bh=33CkICONktN+IgyIs0wLjya/FvBK9rbciU7WLtiKewk=;
+	s=arc-20240116; t=1711057558; c=relaxed/simple;
+	bh=uWo1b4kW/LA1IG2krpRkmW8jCBdrHFuSe9nGSxFrfSU=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=CuO5sIV0qxKqU74/H1EI+leGRmbvSB4Fi0sCWfEviU6W/sJwOXxRzlzXT1u4bdojl+U5yEY/RrqKPnxd+oP/9vu5xbT5Wp3WLqZYc+ZL7h0jPqoffbxMVVbymYsar4QisCz+XODkl8Uhz4cptwvOp8IBVcqyIcU4T5y6B7vao4I=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=landley.net; spf=none smtp.mailfrom=landley.net; dkim=pass (2048-bit key) header.d=landley-net.20230601.gappssmtp.com header.i=@landley-net.20230601.gappssmtp.com header.b=3Yo5PWmX; arc=none smtp.client-ip=209.85.166.173
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=landley.net
-Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=landley.net
-Received: by mail-il1-f173.google.com with SMTP id e9e14a558f8ab-3662feb90a8so2700835ab.3
-        for <util-linux@vger.kernel.org>; Wed, 20 Mar 2024 16:54:27 -0700 (PDT)
+	 In-Reply-To:Content-Type; b=IQ8tIDV3jeGjELDUxyFmy5in/kAydWbd1K5FRCRlKAfRWF/VQls+3Gwtxu5BS18YoLua7TQt2BGvHlcYyKcnhIyVuATH0IKthOYkSjYnH8N+/paerd8vXBPvFXevTdzrJ81JrzSGEEWuqyBVmH5KoVGVlkvlonrqqUWpD6dgKzI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=bernhard-voelker.de; spf=pass smtp.mailfrom=bernhard-voelker.de; dkim=pass (2048-bit key) header.d=bernhard-voelker.de header.i=mail@bernhard-voelker.de header.b=ktaZYLbw; arc=none smtp.client-ip=212.227.17.13
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=bernhard-voelker.de
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bernhard-voelker.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=landley-net.20230601.gappssmtp.com; s=20230601; t=1710978867; x=1711583667; darn=vger.kernel.org;
-        h=content-transfer-encoding:in-reply-to:from:references:cc:to
-         :content-language:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=3NzsgalDpt3X/u2NbkXOKZFM5qtBMcfLV7J3km0Lm5k=;
-        b=3Yo5PWmXb2/fKNytPfrZi2NiOfXp9W6k6pWPRMg5793s/FMJGQoyflmmlDA7Toi5In
-         YPEYtmN/pnK2/3Vvs0INjps9vOepQNqD2nEqBKxm/FaY7ZtU/cGzjn3FL9dAzIiPcEMx
-         BI0z17ESCV2I78mX99WSsiBKK+cuTv2Tx3475ZJupC0eMTrAxptRSHEN/V1ja9xPz/Jc
-         FE48fh+R4V9ql9pdmL+HVFBUnIAEFBIoBaYguhhCyZv+4jQ9CzaR5YC0bKMgC7/yA4ev
-         r4QBVkBE8qEM8MwXgdlCcNCc0sPhONyWgGh1e+/wLd6fCZY9Sh1qk3T0LXFifMv+hMZI
-         19QA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1710978867; x=1711583667;
-        h=content-transfer-encoding:in-reply-to:from:references:cc:to
-         :content-language:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=3NzsgalDpt3X/u2NbkXOKZFM5qtBMcfLV7J3km0Lm5k=;
-        b=DL81aBrvtM/NLKlQMBJ3IAA34y0YtrTIzQssNeLZW94w/63YD9OM721Jij4/YCjP9J
-         Y4G5FYAeqdzLeoaddle6XCO0nu0TkD1pL8AEQYpI7gz9plygmoEs0smMkMlC9I3zM1qt
-         L2kNA7jEseUj1v+VWJDgXd92cEUeSBvpvDTVfmoxXJw/nKRZnG+PFenD1LnWnHoEogt2
-         LX8SKJGtFNxhjZKDA5GIGQv1/tr0V80qqS//QXIriM+QhYKkafzd5PaF2Pjndd2E7+yK
-         faN+LIiVX+ciZh13uqKt+6O3SdvWPqbj+gX46SUjydBse6HxZixl46Zp3HKaSLtvQgLM
-         IYgw==
-X-Forwarded-Encrypted: i=1; AJvYcCVpI4QYO9sxX/BcrA4PdJJdh68GhQK+sQO882D8pqqh/xry2btRGIqYhQTHj7X0B8CSTlEnmZG2YxwADIoSmGDAsoMTn7yKtEZhIA==
-X-Gm-Message-State: AOJu0YxyLMJV2eISTcj1MkpDHKWYtf2XOqrsmmT8t3GwNnL42PLw8Rw5
-	kYpzNBGIlrU0vouu9rkw5DkCJwcR1ovcc/9XAdKNKRqiVeTYzCBEZB+cl/lvRxEFpdECkrOIimi
-	i
-X-Google-Smtp-Source: AGHT+IF/5aNP6ZYnIyWJ827jffp8nmmuZOe0YE/YtulkKLljl8gLYWjzLnB4Gm3/IsEb6ueG9ZRlag==
-X-Received: by 2002:a92:dd89:0:b0:367:82b5:555d with SMTP id g9-20020a92dd89000000b0036782b5555dmr394628iln.8.1710978866972;
-        Wed, 20 Mar 2024 16:54:26 -0700 (PDT)
-Received: from [172.16.32.83] ([198.232.126.202])
-        by smtp.gmail.com with ESMTPSA id p17-20020a92c611000000b0036697c6315asm3400016ilm.87.2024.03.20.16.54.26
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 20 Mar 2024 16:54:26 -0700 (PDT)
-Message-ID: <5fb89ff4-74fc-7391-5dde-f6ad24132b34@landley.net>
-Date: Wed, 20 Mar 2024 19:03:09 -0500
+	d=bernhard-voelker.de; s=s1-ionos; t=1711057526; x=1711662326;
+	i=mail@bernhard-voelker.de;
+	bh=ATx4+0ICmBNQwgurRPS4yT+RJF+a071y5R+BTVUa4/c=;
+	h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:
+	 In-Reply-To;
+	b=ktaZYLbw4QxyxU2tie4Tnhg26wuH7/CE30y8ZozfoSB350M6YsD8Qn7JhLzEQhSD
+	 I82rDhL2/l2bDCygZNX6OXOiMKbJPxl+30tRwPjaqYG8/c/fzlviQGiQ12TaRgCap
+	 gM7w9axhP/dhRO11klQcsaw7NbLrenSvJnfRp2sCMOKdv4A+a41AI7lghp+nVJ5dp
+	 m0v1cmtNShH64m5X7mGfllg9m5vpnAqLh4eZpQ7o0U2fEq3+q8o8Pr9iMz3LF1P3g
+	 XOWIviH7Bt+UhnoU/DB7vO0RlTZwMlZ8OBRPxs2V2o10ASHWHNFl3lLacpWFTkFbg
+	 hmNlKL0k6mKfUquJhg==
+X-UI-Sender-Class: 55c96926-9e95-11ee-ae09-1f7a4046a0f6
+Received: from [192.168.101.10] ([91.49.76.118]) by mrelayeu.kundenserver.de
+ (mreue108 [212.227.15.183]) with ESMTPSA (Nemesis) id
+ 1M7JrG-1rfjeU0Ypw-007oE3; Thu, 21 Mar 2024 22:45:26 +0100
+Message-ID: <d6530404-4fc7-40d0-be99-cb37426be32d@bernhard-voelker.de>
+Date: Thu, 21 Mar 2024 22:45:24 +0100
 Precedence: bulk
 X-Mailing-List: util-linux@vger.kernel.org
 List-Id: <util-linux.vger.kernel.org>
 List-Subscribe: <mailto:util-linux+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:util-linux+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.10.0
+User-Agent: Mozilla Thunderbird
 Subject: Re: bug#69532: mv's new -x option should be made orthogonal to
  -t/-T/default
 Content-Language: en-US
-To: Bernhard Voelker <mail@bernhard-voelker.de>,
- Paul Eggert <eggert@cs.ucla.edu>, =?UTF-8?Q?P=c3=a1draig_Brady?=
+To: Paul Eggert <eggert@cs.ucla.edu>, =?UTF-8?Q?P=C3=A1draig_Brady?=
  <P@draigBrady.com>
-Cc: Petr Malat <oss@malat.biz>, util-linux <util-linux@vger.kernel.org>,
- Dominique Martinet <asmadeus@codewreck.org>, 69532@debbugs.gnu.org,
- Karel Zak <kzak@redhat.com>
+Cc: 69532@debbugs.gnu.org, util-linux <util-linux@vger.kernel.org>,
+ Dominique Martinet <asmadeus@codewreck.org>, Petr Malat <oss@malat.biz>,
+ Karel Zak <kzak@redhat.com>, Rob Landley <rob@landley.net>
 References: <10c814a7-cb68-4fb4-ad8d-f88f286fb0b1@cs.ucla.edu>
  <58281f96-f9c6-4567-e3c9-c6a6cfa6ce27@draigBrady.com>
  <ZeZqzB4-OzHYfFeQ@codewreck.org>
@@ -94,39 +71,84 @@ References: <10c814a7-cb68-4fb4-ad8d-f88f286fb0b1@cs.ucla.edu>
  <636f1247-0de0-2f32-cb04-f6952b6807aa@draigBrady.com>
  <c5622a1c-b59e-4eb3-9d81-111acc1fbddc@cs.ucla.edu>
  <11c9a6a2-c73d-4b99-b071-48e7eab2fd19@bernhard-voelker.de>
-From: Rob Landley <rob@landley.net>
-In-Reply-To: <11c9a6a2-c73d-4b99-b071-48e7eab2fd19@bernhard-voelker.de>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+ <4356f3eb-544e-4ce9-b9ea-374cd01663d5@cs.ucla.edu>
+ <dcf073d9-a60b-429d-b9e2-40f6069e2641@bernhard-voelker.de>
+ <e1269c19-c2b9-45ac-b683-47a473326662@cs.ucla.edu>
+From: Bernhard Voelker <mail@bernhard-voelker.de>
+In-Reply-To: <e1269c19-c2b9-45ac-b683-47a473326662@cs.ucla.edu>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:OD3B9/ctLfwk8eitD6WCbD0eW3ZvcFj4GeiqkuMY7gqQfZLYh5r
+ fAUsNA4xXmE2SIR/H0TiiQ2Cp8MU9EZHBKrY592iCKfrx7XqmVMc7C7zrBtqukCbthGiedf
+ oWfAMMTUwBypkxsX1luiBC5VjYrJNxe7ja93yDb4vDP4itA4/g9qs1XliiJ8sFn6JwjY1Wi
+ CEutdZVzlLHLUd5E98Rww==
+X-Spam-Flag: NO
+UI-OutboundReport: notjunk:1;M01:P0:Tpspq5xNKl0=;+stEOdDku/VufBtlYDtEIJUgjIA
+ Kp+JXnSe6bO7tWugfabAWT6PZIo2jdeCgWbZwH/Qec+AjY+uXOVfhepw1x7zakL/Sgw9JAOOa
+ enq6b5q9LKpsvNqBwBDfXYB1SP+FYa874TUXm8N9ieIJULESZfa0sXCDSGLVSpS9+ZuMlvMwq
+ Mh4+A1ohcm1Eh2t3OGSyvAqX5CVnBtD43q+Rt3bVL+Nza98rGUf+SbiNurbf/MM+Vhk9vThSs
+ ScPhDMDqljOKGuXxnCjs8J7nnGr1TsbIf/FoZTiCenBWfxK2kGqAc0yQSYTugt7NrgPYUBIxH
+ sXrbw179XOVsSgqRtU6BqHPZsVN5bra0Z2mCERUsBhqses2LrGbImj/+Wcqm5we47ruMCqtlH
+ neFDNlDeki8t0UufbDjQ7UoSvWkvOSDPWo8/+xyn29R1p1evLicE0lIQS7CYIlO3/LRtLUWCG
+ eoaS9gi/OGsN4UUBif4jIM86Lmhd6h5TJoA+J4SC+s2qcLFGb5yUaLqskWR6tqwe+kcUJCKoQ
+ WmuHwMw2bEA9iKROF1SBhBF7BesO+CQUiiy8UtY724nsJxXmwfaGbNQkV5Kd2u9wTrJlP2P46
+ CNZnptQdW/K5BOFa8qsXOXIZM3fH/7Ma1TQSqdiSMBoaFGS9sCJBUDzhnOHdQHVFVzGHGmgoZ
+ 5fL0b2EIzZvlGGiQKloeSu8bE9lJST1eMWjQeUpguC9og5+NROUnDRp6VTLxxfWAE2k0i1ni3
+ gcI36SrjWPx8C4L2gfjdZBNpoIm8xgqbxelNq0/oWMWJuAkshplfzg=
 
-On 3/20/24 14:43, Bernhard Voelker wrote:
-> On 3/17/24 07:10, Paul Eggert wrote:
-> Now, extending "exchange" to more arguments is confusing and the
-> use is not intuitive:
->    mv -v --exchange  a b c d
+On 3/21/24 00:56, Paul Eggert wrote:
+> On 3/20/24 15:53, Bernhard Voelker wrote:
+> Yes, that's the expected behavior for this contrived case. Just as one
+> would get odd behavior if one did the same thing without --exchange.
 
-It's also pointless. An atomic exchange on more than 2 files ISN'T ATOMIC.
-That's why I didn't do it.
+There's another which is not consistent with/without --exchange:
 
-You already had "mv -T" requiring exactly two arguments, so thinking mv -x has
-cooties because it works the same way is just weird.
+   $ src/mv -v a a
+   src/mv: 'a' and 'a' are the same file
 
-> I have the gut feeling that we didn't think through all cases,
+   $ src/mv -v --exchange a a
+   renamed 'a' -> 'a'
 
-Sounds like. Having mv modify its source directory during recursive descent is
-creepy.
+RENAME_EXCHANGE is allowed (but useless?) for 1 file.
 
-Toybox implemented:
+BTW: shouldn't the -v diagnostic better say "exchanged 'a' <-> 'a'"
+because that's what happened?
 
--x	Atomically exchange source/dest (--swap)
+>>   =C2=A0 - not sure if exchange works well together with -f.
+>
+> What problems do you see there?
 
-Which behaves like:
+it's up to the tests to proof that.
 
-  $ ./mv -x one two
-  $ ./mv -x one two three
-  mv: -x needs 2 args
+>> why does exchange not work to exchange a regular with a
+>> directory file?
+>
+> It works. I don't see a problem there.
+>
+>     $ touch a
+>     $ mkdir d
+>     $ ./mv -T --exchange a d
+>     $ ls -ld a d
+>     drwxr-xr-x. 2 eggert eggert 4096 Mar 20 16:52 a
+>     -rw-r--r--. 1 eggert eggert    0 Mar 20 16:52 d
 
-My change from this discussion was adding the "--swap" synonym you wanted.
+indeed, it works.  It seems my test was wrong, sorry.
 
-Rob
+>> Finally, the test cases are very sparse:
+>
+> Feel free to add some. :-)
+
+Unfortunately, I cannot currently spend as much time as I'd love to.
+
+It seems that -i is skipped:
+
+   $ src/mv -iv --exchange a b
+   renamed 'a' -> 'b'
+
+As far as I know Padraig would like to do the next release very soon,
+so I would recommend to not hurrying this one into it, and instead
+ironing all out after the release.
+
+Have a nice day,
+Berny
 
