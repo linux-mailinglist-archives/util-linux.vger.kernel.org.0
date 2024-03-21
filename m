@@ -1,80 +1,92 @@
-Return-Path: <util-linux+bounces-126-lists+util-linux=lfdr.de@vger.kernel.org>
+Return-Path: <util-linux+bounces-125-lists+util-linux=lfdr.de@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id B269A881A49
-	for <lists+util-linux@lfdr.de>; Thu, 21 Mar 2024 00:56:44 +0100 (CET)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
+	by mail.lfdr.de (Postfix) with ESMTPS id F197B881A48
+	for <lists+util-linux@lfdr.de>; Thu, 21 Mar 2024 00:54:34 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id DC15A1C20D01
-	for <lists+util-linux@lfdr.de>; Wed, 20 Mar 2024 23:56:43 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id A46592830B3
+	for <lists+util-linux@lfdr.de>; Wed, 20 Mar 2024 23:54:33 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id A68B586248;
-	Wed, 20 Mar 2024 23:56:36 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id D1C482BAEF;
+	Wed, 20 Mar 2024 23:54:29 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=cs.ucla.edu header.i=@cs.ucla.edu header.b="Po+694Xu"
+	dkim=pass (2048-bit key) header.d=landley-net.20230601.gappssmtp.com header.i=@landley-net.20230601.gappssmtp.com header.b="3Yo5PWmX"
 X-Original-To: util-linux@vger.kernel.org
-Received: from mail.cs.ucla.edu (mail.cs.ucla.edu [131.179.128.66])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-il1-f173.google.com (mail-il1-f173.google.com [209.85.166.173])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0D0C186146
-	for <util-linux@vger.kernel.org>; Wed, 20 Mar 2024 23:56:34 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=131.179.128.66
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DD2231E522
+	for <util-linux@vger.kernel.org>; Wed, 20 Mar 2024 23:54:27 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.166.173
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1710978996; cv=none; b=XIehaKK9VTHRlltXGhwYVbIvR8Jn2JNGkOxz+8k81G2uXt8HmxNtJzpT6lu6wpQoMcCo6Nsnm9GaCD8kpverS9joI9yRj9tlS6+gUMCBQQidZBy8IvJ1kbQW8yPFnqyDhGFXFmARCathngTUYLZ8eFbRHqgJxuLvLBTvwZ2g/sM=
+	t=1710978869; cv=none; b=qs/yVlczzr+Rjn9npapvAWcH/2tLbspW3JL2P4Xw0YQg7K4E8wxh4dP/4pGAlTNc5D+Dfk3tFonREP0xiJnxlugaPTc74mtfz/genzp5bLHT3CR0XDYBYXZbcXYZ79g/Wy6J0xlWcuZwhminY7cgZymiPRJapUeDfSCjpV7riks=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1710978996; c=relaxed/simple;
-	bh=7Ejnsqt5cbD7nALWFGibyGvjSB+9YXKlZdDJ0FN8dP4=;
+	s=arc-20240116; t=1710978869; c=relaxed/simple;
+	bh=33CkICONktN+IgyIs0wLjya/FvBK9rbciU7WLtiKewk=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=DQanePX4yyIaqqOkTGk6x1tvDfm9PCeslbQs9DakTHrH2wkFttAU59ec0ylPBYtaHnjrhextwX5ZZbK6Wf7TZI/3OAui04NjodlrBkRfAMRsmyccf/Yolrw7sV4SPZ5DcZ3pZqahNEB1bk0fSj7oOGM2iTsAXgVoLqKh6wKdj44=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=cs.ucla.edu; spf=pass smtp.mailfrom=cs.ucla.edu; dkim=pass (2048-bit key) header.d=cs.ucla.edu header.i=@cs.ucla.edu header.b=Po+694Xu; arc=none smtp.client-ip=131.179.128.66
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=cs.ucla.edu
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=cs.ucla.edu
-Received: from localhost (localhost [127.0.0.1])
-	by mail.cs.ucla.edu (Postfix) with ESMTP id 372AF3C0140A0;
-	Wed, 20 Mar 2024 16:56:34 -0700 (PDT)
-Received: from mail.cs.ucla.edu ([127.0.0.1])
- by localhost (mail.cs.ucla.edu [127.0.0.1]) (amavis, port 10032) with ESMTP
- id aabSwXU3zZT9; Wed, 20 Mar 2024 16:56:33 -0700 (PDT)
-Received: from localhost (localhost [127.0.0.1])
-	by mail.cs.ucla.edu (Postfix) with ESMTP id C87573C0140A4;
-	Wed, 20 Mar 2024 16:56:33 -0700 (PDT)
-DKIM-Filter: OpenDKIM Filter v2.10.3 mail.cs.ucla.edu C87573C0140A4
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cs.ucla.edu;
-	s=9D0B346E-2AEB-11ED-9476-E14B719DCE6C; t=1710978993;
-	bh=D5qLNRZIIU2ePWcIgK6Jz5FhdW88fwgXCaBV5/aPmLI=;
-	h=Message-ID:Date:MIME-Version:To:From;
-	b=Po+694Xu1lP1w83lYBqJXPBv5O0emUu/O9C0xkrpJqnszXABY3vlONTHImmCHX2x6
-	 wFINGIRnBQs5qhsxcz39BVm2I0JOSGGoiKnLzbAUj2ltuTrBwxj7PT5AybhdWJvii1
-	 dkQ0cemnONYfLoXriQ4YJxZ4n23KQbRI1dJZ5yqA7RF1rqpQqD1JU8Z69ArhX5S8xs
-	 BLFpLKuFg7spoSVD/idVqoRGzAdRjty6xUlDs+9FHZJQ5K58i/caJlQMSb4n1uVFgR
-	 igRFbDBhgUD9bzNsIqO6O1DAdfq+BKF+NIRS7n78xrZ62kH7WhZ22poXzEBP93GuCJ
-	 hjFGYaPPokRxA==
-X-Virus-Scanned: amavis at mail.cs.ucla.edu
-Received: from mail.cs.ucla.edu ([127.0.0.1])
- by localhost (mail.cs.ucla.edu [127.0.0.1]) (amavis, port 10026) with ESMTP
- id unVHSK5E99S9; Wed, 20 Mar 2024 16:56:33 -0700 (PDT)
-Received: from [131.179.64.200] (Penguin.CS.UCLA.EDU [131.179.64.200])
-	by mail.cs.ucla.edu (Postfix) with ESMTPSA id 9B8163C0140A0;
-	Wed, 20 Mar 2024 16:56:33 -0700 (PDT)
-Message-ID: <e1269c19-c2b9-45ac-b683-47a473326662@cs.ucla.edu>
-Date: Wed, 20 Mar 2024 16:56:32 -0700
+	 In-Reply-To:Content-Type; b=CuO5sIV0qxKqU74/H1EI+leGRmbvSB4Fi0sCWfEviU6W/sJwOXxRzlzXT1u4bdojl+U5yEY/RrqKPnxd+oP/9vu5xbT5Wp3WLqZYc+ZL7h0jPqoffbxMVVbymYsar4QisCz+XODkl8Uhz4cptwvOp8IBVcqyIcU4T5y6B7vao4I=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=landley.net; spf=none smtp.mailfrom=landley.net; dkim=pass (2048-bit key) header.d=landley-net.20230601.gappssmtp.com header.i=@landley-net.20230601.gappssmtp.com header.b=3Yo5PWmX; arc=none smtp.client-ip=209.85.166.173
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=landley.net
+Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=landley.net
+Received: by mail-il1-f173.google.com with SMTP id e9e14a558f8ab-3662feb90a8so2700835ab.3
+        for <util-linux@vger.kernel.org>; Wed, 20 Mar 2024 16:54:27 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=landley-net.20230601.gappssmtp.com; s=20230601; t=1710978867; x=1711583667; darn=vger.kernel.org;
+        h=content-transfer-encoding:in-reply-to:from:references:cc:to
+         :content-language:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=3NzsgalDpt3X/u2NbkXOKZFM5qtBMcfLV7J3km0Lm5k=;
+        b=3Yo5PWmXb2/fKNytPfrZi2NiOfXp9W6k6pWPRMg5793s/FMJGQoyflmmlDA7Toi5In
+         YPEYtmN/pnK2/3Vvs0INjps9vOepQNqD2nEqBKxm/FaY7ZtU/cGzjn3FL9dAzIiPcEMx
+         BI0z17ESCV2I78mX99WSsiBKK+cuTv2Tx3475ZJupC0eMTrAxptRSHEN/V1ja9xPz/Jc
+         FE48fh+R4V9ql9pdmL+HVFBUnIAEFBIoBaYguhhCyZv+4jQ9CzaR5YC0bKMgC7/yA4ev
+         r4QBVkBE8qEM8MwXgdlCcNCc0sPhONyWgGh1e+/wLd6fCZY9Sh1qk3T0LXFifMv+hMZI
+         19QA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1710978867; x=1711583667;
+        h=content-transfer-encoding:in-reply-to:from:references:cc:to
+         :content-language:subject:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=3NzsgalDpt3X/u2NbkXOKZFM5qtBMcfLV7J3km0Lm5k=;
+        b=DL81aBrvtM/NLKlQMBJ3IAA34y0YtrTIzQssNeLZW94w/63YD9OM721Jij4/YCjP9J
+         Y4G5FYAeqdzLeoaddle6XCO0nu0TkD1pL8AEQYpI7gz9plygmoEs0smMkMlC9I3zM1qt
+         L2kNA7jEseUj1v+VWJDgXd92cEUeSBvpvDTVfmoxXJw/nKRZnG+PFenD1LnWnHoEogt2
+         LX8SKJGtFNxhjZKDA5GIGQv1/tr0V80qqS//QXIriM+QhYKkafzd5PaF2Pjndd2E7+yK
+         faN+LIiVX+ciZh13uqKt+6O3SdvWPqbj+gX46SUjydBse6HxZixl46Zp3HKaSLtvQgLM
+         IYgw==
+X-Forwarded-Encrypted: i=1; AJvYcCVpI4QYO9sxX/BcrA4PdJJdh68GhQK+sQO882D8pqqh/xry2btRGIqYhQTHj7X0B8CSTlEnmZG2YxwADIoSmGDAsoMTn7yKtEZhIA==
+X-Gm-Message-State: AOJu0YxyLMJV2eISTcj1MkpDHKWYtf2XOqrsmmT8t3GwNnL42PLw8Rw5
+	kYpzNBGIlrU0vouu9rkw5DkCJwcR1ovcc/9XAdKNKRqiVeTYzCBEZB+cl/lvRxEFpdECkrOIimi
+	i
+X-Google-Smtp-Source: AGHT+IF/5aNP6ZYnIyWJ827jffp8nmmuZOe0YE/YtulkKLljl8gLYWjzLnB4Gm3/IsEb6ueG9ZRlag==
+X-Received: by 2002:a92:dd89:0:b0:367:82b5:555d with SMTP id g9-20020a92dd89000000b0036782b5555dmr394628iln.8.1710978866972;
+        Wed, 20 Mar 2024 16:54:26 -0700 (PDT)
+Received: from [172.16.32.83] ([198.232.126.202])
+        by smtp.gmail.com with ESMTPSA id p17-20020a92c611000000b0036697c6315asm3400016ilm.87.2024.03.20.16.54.26
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Wed, 20 Mar 2024 16:54:26 -0700 (PDT)
+Message-ID: <5fb89ff4-74fc-7391-5dde-f6ad24132b34@landley.net>
+Date: Wed, 20 Mar 2024 19:03:09 -0500
 Precedence: bulk
 X-Mailing-List: util-linux@vger.kernel.org
 List-Id: <util-linux.vger.kernel.org>
 List-Subscribe: <mailto:util-linux+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:util-linux+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.10.0
 Subject: Re: bug#69532: mv's new -x option should be made orthogonal to
  -t/-T/default
 Content-Language: en-US
 To: Bernhard Voelker <mail@bernhard-voelker.de>,
- =?UTF-8?Q?P=C3=A1draig_Brady?= <P@draigBrady.com>
+ Paul Eggert <eggert@cs.ucla.edu>, =?UTF-8?Q?P=c3=a1draig_Brady?=
+ <P@draigBrady.com>
 Cc: Petr Malat <oss@malat.biz>, util-linux <util-linux@vger.kernel.org>,
  Dominique Martinet <asmadeus@codewreck.org>, 69532@debbugs.gnu.org,
- Karel Zak <kzak@redhat.com>, Rob Landley <rob@landley.net>
+ Karel Zak <kzak@redhat.com>
 References: <10c814a7-cb68-4fb4-ad8d-f88f286fb0b1@cs.ucla.edu>
  <58281f96-f9c6-4567-e3c9-c6a6cfa6ce27@draigBrady.com>
  <ZeZqzB4-OzHYfFeQ@codewreck.org>
@@ -82,104 +94,39 @@ References: <10c814a7-cb68-4fb4-ad8d-f88f286fb0b1@cs.ucla.edu>
  <636f1247-0de0-2f32-cb04-f6952b6807aa@draigBrady.com>
  <c5622a1c-b59e-4eb3-9d81-111acc1fbddc@cs.ucla.edu>
  <11c9a6a2-c73d-4b99-b071-48e7eab2fd19@bernhard-voelker.de>
- <4356f3eb-544e-4ce9-b9ea-374cd01663d5@cs.ucla.edu>
- <dcf073d9-a60b-429d-b9e2-40f6069e2641@bernhard-voelker.de>
-From: Paul Eggert <eggert@cs.ucla.edu>
-Organization: UCLA Computer Science Department
-In-Reply-To: <dcf073d9-a60b-429d-b9e2-40f6069e2641@bernhard-voelker.de>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
+From: Rob Landley <rob@landley.net>
+In-Reply-To: <11c9a6a2-c73d-4b99-b071-48e7eab2fd19@bernhard-voelker.de>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On 3/20/24 15:53, Bernhard Voelker wrote:
+On 3/20/24 14:43, Bernhard Voelker wrote:
+> On 3/17/24 07:10, Paul Eggert wrote:
+> Now, extending "exchange" to more arguments is confusing and the
+> use is not intuitive:
+>    mv -v --exchange  a b c d
 
->  =C2=A0 $ echo 1 > a
->  =C2=A0 $ mkdir d
->  =C2=A0 $ echo 2 > d/a
->  =C2=A0 $ src/mv -v --exchange a a a d
->  =C2=A0 renamed 'a' -> 'd/a'
->  =C2=A0 renamed 'a' -> 'd/a'
->  =C2=A0 renamed 'a' -> 'd/a'
->  =C2=A0 $ cat a
->  =C2=A0 2
->  =C2=A0 $ src/mv -v --exchange a a a d
->  =C2=A0 renamed 'a' -> 'd/a'
->  =C2=A0 renamed 'a' -> 'd/a'
->  =C2=A0 renamed 'a' -> 'd/a'
->  =C2=A0 $ cat a
->  =C2=A0 1
->  =C2=A0 $ src/mv -v --exchange a a a a d
->  =C2=A0 renamed 'a' -> 'd/a'
->  =C2=A0 renamed 'a' -> 'd/a'
->  =C2=A0 renamed 'a' -> 'd/a'
->  =C2=A0 renamed 'a' -> 'd/a'
->  =C2=A0 $ cat a
->  =C2=A0 1
+It's also pointless. An atomic exchange on more than 2 files ISN'T ATOMIC.
+That's why I didn't do it.
 
-Yes, that's the expected behavior for this contrived case. Just as one=20
-would get odd behavior if one did the same thing without --exchange.
+You already had "mv -T" requiring exactly two arguments, so thinking mv -x has
+cooties because it works the same way is just weird.
 
+> I have the gut feeling that we didn't think through all cases,
 
-> I remember some implementation where mv(1) really was just a rename(2),
-> which failed when crossing file systems.  Was it some HP-UX or Solaris =
-mv(1)?
+Sounds like. Having mv modify its source directory during recursive descent is
+creepy.
 
-I doubt it. Even 7th Edition 'mv' (1979) fell back on 'cp' when the link=20
-syscall failed (this was before 'rename' existed).
+Toybox implemented:
 
+-x	Atomically exchange source/dest (--swap)
 
-> My point is that "exchange" is a different functionality.
+Which behaves like:
 
-Yes, but it's closely related. Arguably --backup is also a different=20
-functionality too (and arguably --exchange is simply an alternative=20
-backup scheme!) but 'mv' has --backup.
+  $ ./mv -x one two
+  $ ./mv -x one two three
+  mv: -x needs 2 args
 
+My change from this discussion was adding the "--swap" synonym you wanted.
 
-> - How large is the useful overlap with the existing code of mv(1)?
->  =C2=A0 Not much: no traditional rename nor copy.
-
-I don't follow this point. The code change was fairly small, which=20
-indicates there was a lot of overlap with existing functionality.
-
-
-> - How large is the useful overlap with the existing options/modes of mv=
-(1)?
->  =C2=A0 - exchange contradicts --backup,
-
-That could be fixed for regular files, if there's a need, by backing up=20
-the destination via 'link' before exchanging. For directories it's=20
-admittedly a problem, but that's also the case for plain 'mv' (or for=20
-'cp' or 'ln', for that matter) so there's not much new here.
-
-
->  =C2=A0 - exchange is not useful together with options working with a r=
-egular
->  =C2=A0=C2=A0=C2=A0 rename of copy, at least: --update, -Z, -n.
-
-It should work with --update and -Z. -n of course is logically=20
-incompatible, but this not the only set of logically incompatible=20
-options (e.g., -t vs -T).
-
-
->  =C2=A0 - not sure if exchange works well together with -f.
-
-What problems do you see there?
-
-
-
-> why does exchange not work to exchange a regular with a=20
-> directory file?
-
-It works. I don't see a problem there.
-
-   $ touch a
-   $ mkdir d
-   $ ./mv -T --exchange a d
-   $ ls -ld a d
-   drwxr-xr-x. 2 eggert eggert 4096 Mar 20 16:52 a
-   -rw-r--r--. 1 eggert eggert    0 Mar 20 16:52 d
-
-
-> Finally, the test cases are very sparse:
-
-Feel free to add some. :-)
+Rob
 
