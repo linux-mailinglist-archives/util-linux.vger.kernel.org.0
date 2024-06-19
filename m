@@ -1,137 +1,128 @@
-Return-Path: <util-linux+bounces-265-lists+util-linux=lfdr.de@vger.kernel.org>
+Return-Path: <util-linux+bounces-267-lists+util-linux=lfdr.de@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2267F90CAF1
-	for <lists+util-linux@lfdr.de>; Tue, 18 Jun 2024 14:04:00 +0200 (CEST)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 8508E90E568
+	for <lists+util-linux@lfdr.de>; Wed, 19 Jun 2024 10:20:46 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 343DA1C23B06
-	for <lists+util-linux@lfdr.de>; Tue, 18 Jun 2024 12:03:59 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 1F92C281622
+	for <lists+util-linux@lfdr.de>; Wed, 19 Jun 2024 08:20:45 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 398B915572F;
-	Tue, 18 Jun 2024 11:58:24 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="X+8+yk9W"
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3011F7E774;
+	Wed, 19 Jun 2024 08:20:03 +0000 (UTC)
 X-Original-To: util-linux@vger.kernel.org
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+Received: from mout.kundenserver.de (mout.kundenserver.de [212.227.17.13])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7A03A155344
-	for <util-linux@vger.kernel.org>; Tue, 18 Jun 2024 11:58:22 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=170.10.129.124
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 97CC67E0EA
+	for <util-linux@vger.kernel.org>; Wed, 19 Jun 2024 08:20:00 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=212.227.17.13
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1718711904; cv=none; b=CagDFRlR0p2Tt2IXCSbTK4ARZNe6xOPyxjw14IFJVpzuVci3nSmB8SxlUR6XThWoSikseMDvy28wUGgiI4MG+cSzS3qNGQBdTGICPrQfb0Eqfvu93LK0FLxFh6dsLuJ3o30J7uF8fWE5flCkhFTqiqt0Qd0s5QBDs+AZLdHZPPk=
+	t=1718785203; cv=none; b=NTdOuqzHzETLBnP3x64OVDvXxNduC5WAsjwSTF0ESaCt8u0kOPWxz9/cBcOVfjuAcq2RkiHSa0/h4qe6ftkzcOiTQXnGOsC4MpQdJZw/vsN9z3HSvGOEBZoy43HDzcW8Gg6NY+u/yWP0XnDP4c1ZGznWa3aqw+b7rLxC3EcR/rQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1718711904; c=relaxed/simple;
-	bh=PW66zmGctSB4So00sUWxMQyo5aegXn0eYvIL6obe6c8=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=sHM36m6DbHFO9bUFTtI/VFqrpVUXbGR2voUR0+Fd6TrkC5Oz/H+MF+ueHZO9Bl7lDewWk63kxtzzAaIr4VI+0WuHx3G6GWBiaH1wUYgyBAoIz+5DW5yMK8TJYn8cpPVhAF1Jc1+QlSTf9Jr1hZjOfjY7Aak422BYz0SgSMOzyQs=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=X+8+yk9W; arc=none smtp.client-ip=170.10.129.124
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=redhat.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redhat.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1718711901;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=RC2XLw+8XOzzSpF0jkwQZgEUDkitySo+9Ga9bhUsCZM=;
-	b=X+8+yk9Wx7zDmdPJgy/Mrpxm10O/3wpSFL96c7s2oj2ec5VHXftWVr/9ywcE+SQTniLoGE
-	WqZ3T8FcgiEns9CcZu5kPL0oMus7bxMgqhHQCy9eNbNygKVmDxs41ea8EZrXkl6m9Rlii0
-	sseqoKjpyqqT94omlVCguipbOJjAdKM=
-Received: from mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
- relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-59-VXGPqSJ0Mzm9dVRHl6EkZw-1; Tue,
- 18 Jun 2024 07:58:18 -0400
-X-MC-Unique: VXGPqSJ0Mzm9dVRHl6EkZw-1
-Received: from mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com (mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.17])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS id 53AEA195606A;
-	Tue, 18 Jun 2024 11:58:17 +0000 (UTC)
-Received: from ws.net.home (unknown [10.45.225.185])
-	by mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS id 49D511956048;
-	Tue, 18 Jun 2024 11:58:16 +0000 (UTC)
-Date: Tue, 18 Jun 2024 13:58:13 +0200
-From: Karel Zak <kzak@redhat.com>
-To: Laurent Vivier <laurent@vivier.eu>
-Cc: util-linux@vger.kernel.org
-Subject: Re: [PATCH v2 2/2] unshare: load binfmt_misc interpreter
-Message-ID: <20240618115813.eyy5mwy25ig76wzc@ws.net.home>
-References: <20240611084314.183913-1-laurent@vivier.eu>
- <20240611084314.183913-3-laurent@vivier.eu>
- <20240618095151.2vidavjn47xgbxf4@ws.net.home>
- <e875d06e-a0c5-47c3-b368-06f398e676ab@vivier.eu>
+	s=arc-20240116; t=1718785203; c=relaxed/simple;
+	bh=Jx2EVBeZB18zwZDplLplUDUBBBslw8efkhsIuDi8dVk=;
+	h=From:To:Cc:Subject:Date:Message-ID:Content-Type:MIME-Version; b=Yfu+qRPThlIHz5qODwgLaGzCPZjIw5tPqMLNXJYoVPjA8k6LFxpzqM1ivBZ9Gb4s1ceuRj4mGfrxZyWOSgLPVHR7T+KVxqq3PeQa7KKSXxb2dNoimy8K++h3GfLhIz6k/IWr4TIK6UtVPjy8uWFRSmeMAbl34cTNkhnZoiEM/hk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=vivier.eu; spf=pass smtp.mailfrom=vivier.eu; arc=none smtp.client-ip=212.227.17.13
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=vivier.eu
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=vivier.eu
+Received: from quad ([82.64.211.94]) by mrelayeu.kundenserver.de (mreue106
+ [212.227.15.183]) with ESMTPSA (Nemesis) id 1N3sNa-1sSbxA2JF2-00wmQp; Wed, 19
+ Jun 2024 10:19:52 +0200
+From: Laurent Vivier <laurent@vivier.eu>
+To: util-linux@vger.kernel.org
+Cc: Laurent Vivier <laurent@vivier.eu>
+Subject: [PATCH v3 0/2] unshare: manage binfmt_misc mounts
+Date: Wed, 19 Jun 2024 10:19:49 +0200
+Message-ID: <20240619081951.656640-1-laurent@vivier.eu>
+X-Mailer: git-send-email 2.45.2
+Content-Type: text/plain; charset="utf-8"
 Precedence: bulk
 X-Mailing-List: util-linux@vger.kernel.org
 List-Id: <util-linux.vger.kernel.org>
 List-Subscribe: <mailto:util-linux+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:util-linux+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <e875d06e-a0c5-47c3-b368-06f398e676ab@vivier.eu>
-X-Scanned-By: MIMEDefang 3.0 on 10.30.177.17
+X-Provags-ID: V03:K1:ya8GBOjTRH8lKd6TzNM3v05mLl2kQ780WFosOMGARGRLqPfJ0tn
+ HZnSTktvAIeFBKdf/+hQGiZtCsNEaN2CN4NvanflIb5/U4yJPrReDsOElohWg+8a/BWj1wL
+ dUqksiBpF91oJhufNURKpbomsskbcPtwG/k3/owwrQ0wLXq0K0NeIuzLuTfMohUXft6osab
+ oIoNgNq3Z8E0Ee4oIoSAg==
+X-Spam-Flag: NO
+UI-OutboundReport: notjunk:1;M01:P0:WK4UoldBbNs=;Fc2J3cG7NZ7YpHZuPcqfkYCptdD
+ YGemzJe87chnlabsMMLJ8/jrnZwZ6omXtyUvA7Qv8MZBIM3LhBQU7nN0J0k/ImkmVPB7j12Cq
+ 6wePe79LEHvEP/rQVhoVTUwr+Lu3M2Vj8YtaBDoDxXk6Dl2GYN2A/cg+2xYQGSM6tYS1J2DbO
+ Z9N05wv635ZpodbBl3xMUKW8Y9fUs0J0zdF0dw1Ds0JfCnEfkCucoyFMCNp5IMbpYHEbIrkWm
+ nAn6gGT03CC+6hetESNb8WvXYxXxKtj8cZlAuRlEgrbRiy2Fo67t4f/L4jZj90Co+1IzKY2gb
+ WCFOTP43UFCebN82EFkB/KT7h+ioDderMDvubs8Gow2xJ2Z2O0jr0m0KJAR/C3USnziC1PGbA
+ 9iEQpNzXv0zXIGw5jbKh8MVzoGbmz7TbKgc+/GXZBpax66x5H1fiM0b5KTHeW1NnLJJbs2oX/
+ wKImTKdnHXr8GiBLVIYUtIa7lTHI87Ys/IODT6Y+X4ylzGb0/8TeDfpIW1g9q+P9AMIAa7WvQ
+ aHSPqkXcMFLSz0zVxBIUkPKqD2KvVjCUYbsogngsYHATLdS7azeg/W+doeFpZhEAkVKM77RU8
+ yXCThKaRiLQ8tT5a1nj5ZH1+GaMegt8sYM5D5H8NF4mU/VtX9ynFIUJBQ7YTo9J7imgzI+nMo
+ 87z0COKV0stLuSvpwHkcYZtW8TNgCiBWPaD0/mvU+pBUrXHJfp9BFoAIPd07fsegaHF7iBezC
+ AaZli1KC/VEUe8xgDaZr1S4PLK+/WfUHeptWoch19w6oZwkUk2dZt4=
 
-On Tue, Jun 18, 2024 at 12:13:50PM +0200, Laurent Vivier wrote:
-> Le 18/06/2024 à 11:51, Karel Zak a écrit :
-> > 
-> >   Hi Laurent,
-> > 
-> 
-> Hi Karel,
-> 
-> > On Tue, Jun 11, 2024 at 10:43:14AM +0200, Laurent Vivier wrote:
-> > > +*-l*, **--load-interp=**__file__::
-> > > +Load binfmt_misc definition in the namespace (implies *--mount-binfmt*).
-> > 
-> > Is it actually a file, or does the argument have a more complex
-> > format? If there is something more that it should be described here.
-> > It fine describe in the man page more about the interpreters.
-> 
-> Your right the format here is not actually a file, but it defines how to use
-> the file provided in the parameter as an interpreter.
-> 
-> We provide here what we will write in /proc/sys/fs/binfmt_misc/register and
-> the format is described in
-> https://www.kernel.org/doc/Documentation/admin-guide/binfmt-misc.rst:
-> 
-> "To actually register a new binary type, you have to set up a string looking
-> like ``:name:type:offset:magic:mask:interpreter:flags``
+Since linux v6.7 and
+commit 21ca59b365c0 ("binfmt_misc: enable sandboxed mounts"),
+binfmt_misc can be mountable in a non-initial user namespace by
+a non privileged user.
 
- I guess we can use something like:
+Extend unshare to manage it:
 
- -l*, **--load-interp=**string
+- add --mount-binfmt[=<dir>] to mount binfmt_misc filesystem, this
+  results in clearing inherited interpreters from the previous namespace
 
- Load binfmt_misc definition in the namespace. The __string__ argument
- is ``:name:type:offset:magic:mask:interpreter:flags``. For more
- details about new binary type registration see
- https://www.kernel.org/doc/Documentation/admin-guide/binfmt-misc.rst.
+- add -l, --load-interp <file> to load a binfmt_misc interpreter at startup.
 
+  The interpreter is loaded from the initial fileystem if the 'F' flags is
+  provided, otherwise from inside the new namespace
+  This makes possible to start a chroot of another architecture without
+  being root.
 
-> > As an uneducated reader, I am confused by the flags. Where is the 'F'
-> > flag? Perhaps you could provide more explanation to make it easier for
-> > readers to understand.
-> 
-> I think this option should be used by educated user that is aware of binfmt_misc format.
-> 
-> Do you want I copy a part of the binfmt_misc documentation in the unshare documentation?
+For instance:
 
-It's probably overkill copy all the text.
+  With 'F' flag, load the interpreter from the initial namespace:
 
-> I'll update the man page accordingly.
+    $ /bin/qemu-m68k-static --version
+    qemu-m68k version 8.2.2 (qemu-8.2.2-1.fc40)
+    Copyright (c) 2003-2023 Fabrice Bellard and the QEMU Project developers
+    $ unshare --map-root-user --fork --pid --load-interp=":qemu-m68k:M::\\x7fELF\\x01\\x02\\x01\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x02\\x00\\x04:\\xff\\xff\\xff\\xff\\xff\\xff\\xfe\\x00\\xff\\xff\\xff\\xff\\xff\\xff\\xff\\xff\\xff\\xfe\\xff\\xff:/bin/qemu-m68k-static:OCF" --root=chroot/m68k/sid
+    # QEMU_VERSION= ls
+    qemu-m68k version 8.2.2 (qemu-8.2.2-1.fc40)
+    Copyright (c) 2003-2023 Fabrice Bellard and the QEMU Project developers
+    # /qemu-m68k  --version
+    qemu-m68k version 8.0.50 (v8.0.0-340-gb1cff5e2da95)
+    Copyright (c) 2003-2022 Fabrice Bellard and the QEMU Project developers
 
-Thanks!
+  Without 'F' flag, from inside the namespace:
 
-    Karel
+    $ unshare --map-root-user --fork --pid --load-interp=":qemu-m68k:M::\\x7fELF\\x01\\x02\\x01\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x02\\x00\\x04:\\xff\\xff\\xff\\xff\\xff\\xff\\xfe\\x00\\xff\\xff\\xff\\xff\\xff\\xff\\xff\\xff\\xff\\xfe\\xff\\xff:/qemu-m68k:OC" --root=chroot/m68k/sid
+    # QEMU_VERSION= ls
+    qemu-m68k version 8.0.50 (v8.0.0-340-gb1cff5e2da95)
+    Copyright (c) 2003-2022 Fabrice Bellard and the QEMU Project developers
+    # /qemu-m68k  --version
+    qemu-m68k version 8.0.50 (v8.0.0-340-gb1cff5e2da95)
+    Copyright (c) 2003-2022 Fabrice Bellard and the QEMU Project developers
+
+v3:
+  - update man page
+  - load interpreter before the chroot only if there is the a chroot
+
+v2:
+  - use <binfmt_mnt>/register rather than _PATH_PROC_BINFMT_MISC_REGISTER to load the interpreter
+
+Laurent Vivier (2):
+  unshare: mount binfmt_misc
+  unshare: load binfmt_misc interpreter
+
+ include/pathnames.h      |  1 +
+ sys-utils/unshare.1.adoc | 21 ++++++++++++
+ sys-utils/unshare.c      | 71 +++++++++++++++++++++++++++++++++++++++-
+ 3 files changed, 92 insertions(+), 1 deletion(-)
 
 -- 
- Karel Zak  <kzak@redhat.com>
- http://karelzak.blogspot.com
+2.45.2
 
 
