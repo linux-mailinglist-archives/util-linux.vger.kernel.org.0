@@ -1,165 +1,111 @@
-Return-Path: <util-linux+bounces-311-lists+util-linux=lfdr.de@vger.kernel.org>
+Return-Path: <util-linux+bounces-315-lists+util-linux=lfdr.de@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
-	by mail.lfdr.de (Postfix) with ESMTPS id B95549A537A
-	for <lists+util-linux@lfdr.de>; Sun, 20 Oct 2024 12:30:16 +0200 (CEST)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id F0CF69B38FF
+	for <lists+util-linux@lfdr.de>; Mon, 28 Oct 2024 19:20:52 +0100 (CET)
 Received: from smtp.subspace.kernel.org (wormhole.subspace.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id 489C71F21A7F
-	for <lists+util-linux@lfdr.de>; Sun, 20 Oct 2024 10:30:16 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 2DE291C2235F
+	for <lists+util-linux@lfdr.de>; Mon, 28 Oct 2024 18:20:52 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 1566B12F38B;
-	Sun, 20 Oct 2024 10:30:12 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id E98A51DF26E;
+	Mon, 28 Oct 2024 18:20:48 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=ibm.com header.i=@ibm.com header.b="nwVcrRxR"
+	dkim=pass (2048-bit key) header.d=nabijaczleweli.xyz header.i=@nabijaczleweli.xyz header.b="FuMJDj1L"
 X-Original-To: util-linux@vger.kernel.org
-Received: from mx0b-001b2d01.pphosted.com (mx0b-001b2d01.pphosted.com [148.163.158.5])
+Received: from tarta.nabijaczleweli.xyz (tarta.nabijaczleweli.xyz [139.28.40.42])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 77E1018E028
-	for <util-linux@vger.kernel.org>; Sun, 20 Oct 2024 10:30:09 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=148.163.158.5
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A12CF155A52
+	for <util-linux@vger.kernel.org>; Mon, 28 Oct 2024 18:20:46 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=139.28.40.42
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1729420211; cv=none; b=IBiP/Red2wKMJlym4AS5zqO6hzdWoA32bcTfAWHb4dP6Fg0QNsvgj1e/Sfmr9wk5MWOQMPm8NzJAbjibTCrXhqrUZDkyb4cgR3xdJCjGW18CfjCejgMtMo7H3ORFU73uejMMkEqr7hPxIe5JdlIRtTY7/CxNdY0a/K24i5PkZmQ=
+	t=1730139648; cv=none; b=DsgWEBRaF/biEhCVabGY510xNZ+bJWbbwKEocGFwXuZq+KPRCUbp40KTUnKZ/CTu3VlXiZ3BzWI3lXSPs7GIrzqcbtdYRRSHvxJXGm3eizabttJ4nM/S4MegtbBPvGRJKyc2O/E6+MmwRrEAiEdQ+q6liUNGYUHOHK2e2Ie0tUk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1729420211; c=relaxed/simple;
-	bh=6LE16H26sTC7ppOSYAoi+Zg1v0r3Oz45OghIFSnltJA=;
-	h=Message-ID:Date:MIME-Version:Subject:To:References:Cc:From:
-	 In-Reply-To:Content-Type; b=MfJilV+gNzmw1gsLwnK1zXp2H0Mb41GUSBxYFpwSuAyTg246kN6Yum8OEfKP35M0SAwN4d3K+Zmi5qA0hBHVqikyPfIOPHnWP5VWg6Sq3DM5QbwzgXLBIdWH2QTzDDT0Q+RGwRQrp1ePvRtP+SgWJTcNO8HiCDyPn4MEVwpK1jY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.vnet.ibm.com; spf=none smtp.mailfrom=linux.vnet.ibm.com; dkim=pass (2048-bit key) header.d=ibm.com header.i=@ibm.com header.b=nwVcrRxR; arc=none smtp.client-ip=148.163.158.5
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.vnet.ibm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=linux.vnet.ibm.com
-Received: from pps.filterd (m0356516.ppops.net [127.0.0.1])
-	by mx0a-001b2d01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 49K8tcmO027842
-	for <util-linux@vger.kernel.org>; Sun, 20 Oct 2024 10:30:08 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com; h=cc
-	:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=pp1; bh=uOYuix
-	2RT0j+JO5TX1Hs+sJVZeoR92Xv7ZkEnTqh/DI=; b=nwVcrRxRsDUQU/2C/cv4hm
-	jozTQeOWefoelnzwT4XpGpTSLlMimk2AzelvWG9GOPeJVxOqhQ6HIAoZWZEvnpO8
-	6Ml45PIF+kQBTBvu6VPYF/lhWkK+ln/1T8+G/dHBb70FrF6xHhvn8ecpaYzuGgco
-	NXaa9UA3OFOqzHpFj32SP4ItbyMwzOqOHX2hzjpPi6V255xyAlsfL/DdQ+vGrYzi
-	Xopgv7X27z63m7uAmiUfQMc+osT2ijqJ+bLpcM4aXI2xvY1ROSq36KrJV+uC8P+K
-	+SAohDQyyISMKB+1dvB/XAqmQ1WC+/3MZpSBQHDjF7F61LEy7ZGaxe/MkL1pJOaA
-	==
-Received: from ppma23.wdc07v.mail.ibm.com (5d.69.3da9.ip4.static.sl-reverse.com [169.61.105.93])
-	by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 42c5fsm5a2-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
-	for <util-linux@vger.kernel.org>; Sun, 20 Oct 2024 10:30:07 +0000 (GMT)
-Received: from pps.filterd (ppma23.wdc07v.mail.ibm.com [127.0.0.1])
-	by ppma23.wdc07v.mail.ibm.com (8.18.1.2/8.18.1.2) with ESMTP id 49K7t6X1029153
-	for <util-linux@vger.kernel.org>; Sun, 20 Oct 2024 10:30:07 GMT
-Received: from smtprelay03.wdc07v.mail.ibm.com ([172.16.1.70])
-	by ppma23.wdc07v.mail.ibm.com (PPS) with ESMTPS id 42crkjs9bq-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
-	for <util-linux@vger.kernel.org>; Sun, 20 Oct 2024 10:30:07 +0000
-Received: from smtpav02.dal12v.mail.ibm.com (smtpav02.dal12v.mail.ibm.com [10.241.53.101])
-	by smtprelay03.wdc07v.mail.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id 49KAU69i6554118
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
-	Sun, 20 Oct 2024 10:30:06 GMT
-Received: from smtpav02.dal12v.mail.ibm.com (unknown [127.0.0.1])
-	by IMSVA (Postfix) with ESMTP id 0330058051;
-	Sun, 20 Oct 2024 10:30:06 +0000 (GMT)
-Received: from smtpav02.dal12v.mail.ibm.com (unknown [127.0.0.1])
-	by IMSVA (Postfix) with ESMTP id A5B2E5805A;
-	Sun, 20 Oct 2024 10:30:04 +0000 (GMT)
-Received: from [9.43.92.46] (unknown [9.43.92.46])
-	by smtpav02.dal12v.mail.ibm.com (Postfix) with ESMTP;
-	Sun, 20 Oct 2024 10:30:04 +0000 (GMT)
-Message-ID: <5d52951c-82e6-435b-bb9b-1870b2a3d1ca@linux.vnet.ibm.com>
-Date: Sun, 20 Oct 2024 16:00:03 +0530
+	s=arc-20240116; t=1730139648; c=relaxed/simple;
+	bh=gDygnQyTO/WZZ3iw3xkpH5MGYB9Gntw7gq9AfqPADPI=;
+	h=Date:From:To:Subject:Message-ID:MIME-Version:Content-Type:
+	 Content-Disposition; b=RSVbYm8HESBVsNy7Oczd/9MCXxssOWA0s/6JQMoZBfhdL4Tm4kU7E95umCdOxmVwxMml/p7xUaRIWQa56YUMMduJ2ecUfYRQx1no1xeyZFvZFP33eczakJvtkLqb+NuulIJkfW4mVKU02cdIvRHpLZnsUnYzRXy9IHr0nzs9ir4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=nabijaczleweli.xyz; spf=pass smtp.mailfrom=nabijaczleweli.xyz; dkim=pass (2048-bit key) header.d=nabijaczleweli.xyz header.i=@nabijaczleweli.xyz header.b=FuMJDj1L; arc=none smtp.client-ip=139.28.40.42
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=nabijaczleweli.xyz
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=nabijaczleweli.xyz
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=nabijaczleweli.xyz;
+	s=202405; t=1730139555;
+	bh=gDygnQyTO/WZZ3iw3xkpH5MGYB9Gntw7gq9AfqPADPI=;
+	h=Date:From:To:Subject:From;
+	b=FuMJDj1LBhB/yNlTkfMZjZnHnMUY/T7dMDlK9uZc1eJPKg82LdFFsRn+iB4Rvd3RB
+	 REEiML5I9pCS1Ye8KwXMkuq1QnHQlBqLEIIHkKP5TIxAkO6jKH8LwUZJStqpoB+qNZ
+	 ThxPjXZt1kbWKzLIsTlWYioYtd1nYlb0umxVcpJ59EPTcOyBZpK0Tt5WBZtYasUjZI
+	 DJwhU3SG6ROaXvTYNS6iXCV/b8FDM60NP5kWTEJMyNxxeyOSGhMihG5rqPjcQQct9w
+	 VpLfUEK9UyV5F3xWlQW/6ilm+0Gn46ZzNB2Dkst5FN8fZx968yuI8KVNhh6SaFakgx
+	 G8fZicR3X8oFg==
+Received: from tarta.nabijaczleweli.xyz (unknown [192.168.1.250])
+	by tarta.nabijaczleweli.xyz (Postfix) with ESMTPSA id 328A65B88
+	for <util-linux@vger.kernel.org>; Mon, 28 Oct 2024 19:19:15 +0100 (CET)
+Date: Mon, 28 Oct 2024 19:19:14 +0100
+From: =?utf-8?B?0L3QsNCx?= <nabijaczleweli@nabijaczleweli.xyz>
+To: util-linux@vger.kernel.org
+Subject: [PATCH 1/4] hardlink.1: directory|file is mandatory
+Message-ID: <5acde6a911f086ab8d2314c5b76eb76075140941.1730139540.git.nabijaczleweli@nabijaczleweli.xyz>
 Precedence: bulk
 X-Mailing-List: util-linux@vger.kernel.org
 List-Id: <util-linux.vger.kernel.org>
 List-Subscribe: <mailto:util-linux+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:util-linux+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] lscpu: fix incorrect number of sockets during hotplug
-To: util-linux@vger.kernel.org
-References: <20241018104335.3481856-1-anjalik@linux.ibm.com>
-Content-Language: en-US
-Cc: Anjali K <anjalik@linux.ibm.com>,
-        Anushree Mathur <anushree.mathur@linux.ibm.com>
-From: Anushree Mathur <anushree.mathur@linux.vnet.ibm.com>
-In-Reply-To: <20241018104335.3481856-1-anjalik@linux.ibm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-TM-AS-GCONF: 00
-X-Proofpoint-GUID: olnREwdapQetmbWSnKK_pJsx0garg4HY
-X-Proofpoint-ORIG-GUID: olnREwdapQetmbWSnKK_pJsx0garg4HY
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1051,Hydra:6.0.680,FMLib:17.12.62.30
- definitions=2024-10-15_01,2024-10-11_01,2024-09-30_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 suspectscore=0
- impostorscore=0 clxscore=1011 mlxscore=0 malwarescore=0 bulkscore=0
- lowpriorityscore=0 adultscore=0 phishscore=0 priorityscore=1501
- spamscore=0 mlxlogscore=855 classifier=spam adjust=0 reason=mlx
- scancount=1 engine=8.19.0-2409260000 definitions=main-2410200069
-
-Hi,
-I have verified the patch and it works fine!Here is my analysis:
-
-LSCPU O/P on my system without enabling and disabling cpus
-
-Architecture:             ppc64le
-   Byte Order:             Little Endian
-CPU(s):                   384
-   On-line CPU(s) list:    0-383
-Model name:               POWER10 (raw), altivec supported
-   Model:                  2.0 (pvr 0080 0200)
-   Thread(s) per core:     8
-   Core(s) per socket:     12
-   Socket(s):              4
-   Physical sockets:       2
-   Physical chips:         2
-   Physical cores/chip:    12
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="phomdravpvjehjtp"
+Content-Disposition: inline
+User-Agent: NeoMutt/20231221-2-4202cf-dirty
 
 
+--phomdravpvjehjtp
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Before applying the patch
-While repeatedly onlining/offlining cpus on my system , saw that socket 
-number is higher. It doesn't happen if i do online/offline of cpu single 
-time.
+---
+ misc-utils/hardlink.1.adoc | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Architecture:             ppc64le
-   Byte Order:             Little Endian
-CPU(s):                   384
-   On-line CPU(s) list:    0-3,5-7,9,11-15,17-383
-   Off-line CPU(s) list:   4,8,10,16
-Model name:               POWER10 (raw), altivec supported
-   Model:                  2.0 (pvr 0080 0200)
-   Thread(s) per core:     8
-   Core(s) per socket:     9
-   Socket(s):              5
-   Physical sockets:       2
-   Physical chips:         2
-   Physical cores/chip:    12
+diff --git a/misc-utils/hardlink.1.adoc b/misc-utils/hardlink.1.adoc
+index d11045941..b6f07ba70 100644
+--- a/misc-utils/hardlink.1.adoc
++++ b/misc-utils/hardlink.1.adoc
+@@ -18,7 +18,7 @@
+=20
+ =3D=3D SYNOPSIS
+=20
+-*hardlink* [options] [_directory_|_file_]...
++*hardlink* [options] _directory_|_file_...
+=20
+ =3D=3D DESCRIPTION
+=20
+--=20
+2.39.2
 
 
+--phomdravpvjehjtp
+Content-Type: application/pgp-signature; name="signature.asc"
 
-After applying the patch :
-Tried the same scenario again to online and offline the cpus in a loop 
-continuously and it didn't show any wrong topology:
+-----BEGIN PGP SIGNATURE-----
 
-Architecture:             ppc64le
-   Byte Order:             Little Endian
-CPU(s):                   384
-   On-line CPU(s) list:    0-3,5-7,9,11-15,17-383
-   Off-line CPU(s) list:   4,8,10,16
-Model name:               POWER10 (raw), altivec supported
-   Model:                  2.0 (pvr 0080 0200)
-   Thread(s) per core:     8
-   Core(s) per socket:     12
-   Socket(s):              4
-   Physical sockets:       2
-   Physical chips:         2
-   Physical cores/chip:    12
+iQIzBAABCgAdFiEEfWlHToQCjFzAxEFjvP0LAY0mWPEFAmcf1aIACgkQvP0LAY0m
+WPFDRw/+KOtSvou2r6DW6fSwBtOxiJh929Ar7/3rFZJFrggsqxh+Hh2+uryD2N8+
+ysblxhuNYQPA85+go6QKeA3RLPbSIv2YpatlPDadSI+byyQoXkpeh0FBTdlSGQY7
+YVrXXbfDfZIl5orjD5kOVbakjv0p0cT9z1qf7eBp2kSH3NJ7B/MmhD7Jya+LdxPo
+MYm6bt68Tf2yFSieoDQv+hOv5f62U6+XBOqHogAl6ChXOpWDyjikJQWaXI80dh8d
+HRzWcqPJ7zPD0IOxuoMeVT44V8wx617hin6NRlsEQnMW7C2zdYjKriekTlcDI/bb
+9kfFksQ0aUKvh9zt5pxlVG1goHP/ovNxxgIo0dbLEXmnNAjSilxQw5H+duMFlbqU
+dnFHMIGWCl0/r4KnvG+Gbo1JZU8E/O6qhVrzrQOdi2zbJD7bhBV/zg0jt4KBD23y
+c7IjF8hydmrEzFznPhmtCYixXbBIja/GriBQyw5mVZ6G4KuaWH19NKtj/KZpaq5O
+hmu3MadWHgkUO5QQmbzkh1xTFNK7k4TfWYbdkFko1EhXJEc2JETqJr34y8ZEzDQY
+gbP58U093bfEZUeb4IAgL5CU3sFzhCVtQ+4b2JQBwRrsqILOPIHZkFjy8X2QHzOw
+w/UL7szkJfLmdfsVwxvcnx7fnnFsQEcWAkwgNpbm2GVLnu6gOeM=
+=RmeO
+-----END PGP SIGNATURE-----
 
-Tested-by: Anushree Mathur <anushree.mathur@linux.vnet.ibm.com>
-
-Thanks,
-Anushree Mathur
+--phomdravpvjehjtp--
 
