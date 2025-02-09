@@ -1,62 +1,62 @@
-Return-Path: <util-linux+bounces-456-lists+util-linux=lfdr.de@vger.kernel.org>
+Return-Path: <util-linux+bounces-458-lists+util-linux=lfdr.de@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id 049BEA2DBA3
-	for <lists+util-linux@lfdr.de>; Sun,  9 Feb 2025 09:25:08 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 52DF7A2DBA5
+	for <lists+util-linux@lfdr.de>; Sun,  9 Feb 2025 09:25:19 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id EB9473A434C
-	for <lists+util-linux@lfdr.de>; Sun,  9 Feb 2025 08:24:58 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 44D6C3A438B
+	for <lists+util-linux@lfdr.de>; Sun,  9 Feb 2025 08:25:10 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id CA76A137742;
-	Sun,  9 Feb 2025 08:25:03 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id D897E13213E;
+	Sun,  9 Feb 2025 08:25:14 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=telfort.nl header.i=@telfort.nl header.b="gwZjR5GS"
+	dkim=pass (1024-bit key) header.d=telfort.nl header.i=@telfort.nl header.b="CcAyPiXj"
 X-Original-To: util-linux@vger.kernel.org
-Received: from ewsoutbound.kpnmail.nl (ewsoutbound.kpnmail.nl [195.121.94.169])
+Received: from ewsoutbound.kpnmail.nl (ewsoutbound.kpnmail.nl [195.121.94.167])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8AB441DA3D
-	for <util-linux@vger.kernel.org>; Sun,  9 Feb 2025 08:25:01 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=195.121.94.169
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DDD266FBF
+	for <util-linux@vger.kernel.org>; Sun,  9 Feb 2025 08:25:12 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=195.121.94.167
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1739089503; cv=none; b=FDu4ieJrjOCfCslG3oi3o2fwI387ygpKGnyFiJjNE3TaIzg2f467mjrsXbLPLJazo1W2QfZf3F7YXyR5VA+M16GmsfpZwmvyNS4QiFFOk/IwsKPDRDbenHICXW2U1ccKuSIjU4p8lhLUvsNv7XNWeChh3H52I92gbSOoucTadio=
+	t=1739089514; cv=none; b=UXApwloHVNa9JGclMhjyyNQsi79N2H2vBZlgu19i0K4bFfATFPht3Z9EnAp6eSIw9aB0WE/81RyPFRwe49M4wiODvyLquvlUHniFVJyBa+CY1p4nNSK038hjoM+6CWRChB60m1msYUe3viPhtr61HDnhZRVcFsbwdJTJqUiYU5Q=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1739089503; c=relaxed/simple;
-	bh=/snqCWpD+ELZn8oFaxZOPAiTG+4oc91rz1HMIGL9XWI=;
+	s=arc-20240116; t=1739089514; c=relaxed/simple;
+	bh=RDx2cnRpfyYwWloTivoH4haxjU1re0QYWpE+9Cha+0E=;
 	h=From:To:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=NcScUMKQeO4aqzEUz34C5OA5jSQbHyzJ4W+RcjvxUaJYFGH0iQDlOWMnvW0/1/5VPSl0mfJsUk3lwhDddJp4iOHbyfTIZEr2rtGOvVkOiXsILY3j52ya3zehtbUT0yUlDZ2UzXNXR8jpZLDnEHzPZU5/dbcOj1U3ZMpX8z6b1bM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=telfort.nl; spf=pass smtp.mailfrom=telfort.nl; dkim=pass (1024-bit key) header.d=telfort.nl header.i=@telfort.nl header.b=gwZjR5GS; arc=none smtp.client-ip=195.121.94.169
+	 MIME-Version; b=o4RyaBgM74hAzBmCzhWTo54O1LkfKiklyLzXDhwIYk87LAq2RXgkC6PUTu4AbBh3AWfEo7gQWggEORvp+aAFol4lPjSlZF20rRCzNYEj7NiP3T5LRHOlTdWD1GRaGaYlDWki5/lvfQtJ6wFDwekR8OwAN9UEZimw4nXQFZRSuqQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=telfort.nl; spf=pass smtp.mailfrom=telfort.nl; dkim=pass (1024-bit key) header.d=telfort.nl header.i=@telfort.nl header.b=CcAyPiXj; arc=none smtp.client-ip=195.121.94.167
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=telfort.nl
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=telfort.nl
-X-KPN-MessageId: 9b0aa66f-e6bf-11ef-aff5-005056abad63
-Received: from smtp.kpnmail.nl (unknown [10.31.155.39])
+X-KPN-MessageId: ae42b942-e6bf-11ef-87ce-005056abbe64
+Received: from smtp.kpnmail.nl (unknown [10.31.155.38])
 	by ewsoutbound.so.kpn.org (Halon) with ESMTPS
-	id 9b0aa66f-e6bf-11ef-aff5-005056abad63;
-	Sun, 09 Feb 2025 09:26:48 +0100 (CET)
+	id ae42b942-e6bf-11ef-87ce-005056abbe64;
+	Sun, 09 Feb 2025 09:27:20 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=telfort.nl; s=telfort01;
 	h=mime-version:message-id:date:subject:to:from;
-	bh=IPJdq1sgI6NzmS+zSqP7LG/afMarXbLOfegYgDqeGKk=;
-	b=gwZjR5GS9JH5GpkVEPTAD3mEzdyZVYCFxJEshh7DUIzTZu2rNqZJxx5D4fxQhImtnxUdXx4UEpmN9
-	 rIAbdLx9HzVwkNGVB+WLl6AXWcHhV9prVQSrvct2qP/6EsPhGB6RGPAe9x3lxHHjEPZnkWg3WyB8wp
-	 eV0lo7HpYPuYmw+A=
-X-KPN-MID: 33|IzSa1uwmdTznAOqw+Ac6zNZFuEOGSzlPlaWGiaFNy90KMFXw90jxP+ksjYKS1lj
- QPV0IwEU407IflX+t52yKBTM9WNykpDgzWfROoGC7JhA=
+	bh=bc0EHIIUZth4MsJATOioaByLfY03OgYtO0TRKKzqJYM=;
+	b=CcAyPiXjUmqUUphR03Rjw+Ot7+Yuz9bTzcREl+1G2JCi7dI9DzKKSyY1m19pQs/qlUaXZew4gK3aq
+	 YgsTgcoFYhEd6ua4BXUhQTWEDUK2DoqOfBKKCAgoREil5wzH+IDz/siiAdTolNzqbCdB35Nilory86
+	 hVjnn+oZpLcyKywY=
+X-KPN-MID: 33|uzKWxYI1T4u7CyrXAU68q0HgQDHk9/Fxx8GymkM/2VbRW59clqmydIKauNX6PLJ
+ XUSn2Eb0m1uAoLn3/K07E0AUKaNKQF+xLTWjHeRj4UHU=
 X-KPN-VerifiedSender: Yes
-X-CMASSUN: 33|iWDUGwp9QNzyPYS4Bsbi1UORFGLt/dlcUljbZysbd+szifwKQW98iFqwi3X5OI2
- cyPp5OoKdfvfzk1ny8ncoxg==
+X-CMASSUN: 33|zYtHNovroIALX4HupddstvlhTfgZclLFjhkcjI1nb1rM9LWHb4FTZucW0pv2fbf
+ Ud1VbBSEcBWd7TWfEZISrHw==
 Received: from localhost (77-163-176-192.fixed.kpn.net [77.163.176.192])
 	by smtp.kpnmail.nl (Halon) with ESMTPSA
-	id 5a331bcf-e6bf-11ef-99a4-005056ab7447;
-	Sun, 09 Feb 2025 09:24:59 +0100 (CET)
+	id 60d092d9-e6bf-11ef-a31b-005056abf0db;
+	Sun, 09 Feb 2025 09:25:11 +0100 (CET)
 From: Benno Schulenberg <bensberg@telfort.nl>
 To: util-linux@vger.kernel.org
-Subject: [PATCH 07/14] unshare: don't mark "|" and ":" as part of the placeholders
-Date: Sun,  9 Feb 2025 09:23:23 +0100
-Message-ID: <20250209082330.4235-7-bensberg@telfort.nl>
+Subject: [PATCH 08/14] textual: give seven error messages the same form as two others
+Date: Sun,  9 Feb 2025 09:23:24 +0100
+Message-ID: <20250209082330.4235-8-bensberg@telfort.nl>
 X-Mailer: git-send-email 2.48.1
 In-Reply-To: <20250209082330.4235-1-bensberg@telfort.nl>
 References: <20250209082330.4235-1-bensberg@telfort.nl>
@@ -68,65 +68,76 @@ List-Unsubscribe: <mailto:util-linux+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-The "|" is a meta-character, and should thus be left unmarked, while
-the ":" (in the argument of --map-users/--map-groups) is a literal,
-and should therefore be marked in bold.
-
-Also, add the new 'subids' literal value for the above two options.
-
-And in the bargain tweak a comment.
+The form with the parentheses is easier for translators: it indicates
+that the preceding text is not a translatable word.
 
 Signed-off-by: Benno Schulenberg <bensberg@telfort.nl>
 ---
- sys-utils/unshare.1.adoc | 12 ++++++------
- sys-utils/unshare.c      |  2 +-
- 2 files changed, 7 insertions(+), 7 deletions(-)
+ login-utils/newgrp.c | 6 +++---
+ sys-utils/nsenter.c  | 4 ++--
+ sys-utils/unshare.c  | 4 ++--
+ 3 files changed, 7 insertions(+), 7 deletions(-)
 
-diff --git a/sys-utils/unshare.1.adoc b/sys-utils/unshare.1.adoc
-index c6973f938..2bcc193ff 100644
---- a/sys-utils/unshare.1.adoc
-+++ b/sys-utils/unshare.1.adoc
-@@ -93,21 +93,21 @@ Just before running the program, mount the proc filesystem at _mountpoint_ (defa
- *--mount-binfmt*[**=**__mountpoint__]::
- Just before running the program, mount the binfmt_misc filesystem at _mountpoint_ (default is /proc/sys/fs/binfmt_misc).  It also implies creating a new mount namespace since the binfmt_misc mount would otherwise mess up existing programs on the system.  The new binfmt_misc filesystem is explicitly mounted as private (with *MS_PRIVATE*|*MS_REC*).
+diff --git a/login-utils/newgrp.c b/login-utils/newgrp.c
+index b9b620ed7..ba3777b36 100644
+--- a/login-utils/newgrp.c
++++ b/login-utils/newgrp.c
+@@ -219,7 +219,7 @@ int main(int argc, char *argv[])
  
--*--map-user* __uid|name__::
-+*--map-user* __uid__|__name__::
- Run the program only after the current effective user ID has been mapped to _uid_. If this option is specified multiple times, the last occurrence takes precedence. This option implies *--user*.
+ 	if (argc <= optind) {
+ 		if (setgid(pw_entry->pw_gid) < 0)
+-			err(EXIT_FAILURE, _("setgid failed"));
++			err(EXIT_FAILURE, _("setgid() failed"));
+ 	} else {
+ 		errno = 0;
+ 		if (!(gr_entry = getgrnam(argv[optind++]))) {
+@@ -231,11 +231,11 @@ int main(int argc, char *argv[])
+ 		if (!allow_setgid(pw_entry, gr_entry))
+ 			errx(EXIT_FAILURE, _("permission denied"));
+ 		if (setgid(gr_entry->gr_gid) < 0)
+-			err(EXIT_FAILURE, _("setgid failed"));
++			err(EXIT_FAILURE, _("setgid() failed"));
+ 	}
  
--*--map-users* __inneruid:outeruid:count__|**auto**|**all**::
-+*--map-users* __inneruid__**:**__outeruid__**:**__count__|**auto**|**subids**|**all**::
- Run the program only after the block of user IDs of size _count_ beginning at _outeruid_ has been mapped to the block of user IDs beginning at _inneruid_. This mapping is created with **newuidmap**(1) if *unshare* was run unprivileged. If the range of user IDs overlaps with the mapping specified by *--map-user*, then a "hole" will be removed from the mapping. This may result in the highest user ID of the mapping not being mapped. Use *--map-users* multiple times to map more than one block of user IDs. The special value *auto* will map the first block of user IDs owned by the effective user from _/etc/subuid_ to a block starting at user ID 0. The special value *subids* will identity map the same block. The special value *all* will create a pass-through map for every user ID available in the parent namespace. This option implies *--user*.
- +
--Before util-linux version 2.39, this option expected a comma-separated argument of the form _outeruid,inneruid,count_ but that format is now deprecated for consistency with the ordering used in _/proc/[pid]/uid_map_ and the _X-mount.idmap_ mount option.
-+Before util-linux version 2.39, this option expected a comma-separated argument of the form _outeruid_**,**_inneruid_**,**_count_ but that format is now deprecated for consistency with the ordering used in _/proc/[pid]/uid_map_ and the _X-mount.idmap_ mount option.
+ 	if (setuid(getuid()) < 0)
+-		err(EXIT_FAILURE, _("setuid failed"));
++		err(EXIT_FAILURE, _("setuid() failed"));
  
--*--map-group* __gid|name__::
-+*--map-group* __gid__|__name__::
- Run the program only after the current effective group ID has been mapped to _gid_. If this option is specified multiple times, the last occurrence takes precedence. This option implies *--setgroups=deny* and *--user*.
+ 	fflush(NULL);
+ 	shell = (pw_entry->pw_shell && *pw_entry->pw_shell ?
+diff --git a/sys-utils/nsenter.c b/sys-utils/nsenter.c
+index 66ce4b324..214893d1a 100644
+--- a/sys-utils/nsenter.c
++++ b/sys-utils/nsenter.c
+@@ -836,9 +836,9 @@ int main(int argc, char *argv[])
+ 		if (force_gid && setgroups(0, NULL) != 0 && setgroups_nerrs)	/* drop supplementary groups */
+ 			err(EXIT_FAILURE, _("setgroups failed"));
+ 		if (force_gid && setgid(gid) < 0)		/* change GID */
+-			err(EXIT_FAILURE, _("setgid failed"));
++			err(EXIT_FAILURE, _("setgid() failed"));
+ 		if (force_uid && setuid(uid) < 0)		/* change UID */
+-			err(EXIT_FAILURE, _("setuid failed"));
++			err(EXIT_FAILURE, _("setuid() failed"));
+ 	}
  
--*--map-groups* __innergid:outergid:count__|**auto**|**all**::
-+*--map-groups* __innergid__**:**__outergid__**:**__count__|**auto**|**subids**|**all**::
- Run the program only after the block of group IDs of size _count_ beginning at _outergid_ has been mapped to the block of group IDs beginning at _innergid_. This mapping is created with **newgidmap**(1) if *unshare* was run unprivileged. If the range of group IDs overlaps with the mapping specified by *--map-group*, then a "hole" will be removed from the mapping. This may result in the highest group ID of the mapping not being mapped. Use *--map-groups* multiple times to map more than one block of group IDs. The special value *auto* will map the first block of user IDs owned by the effective user from _/etc/subgid_ to a block starting at group ID 0. The special value *subids* will identity map the same block. The special value *all* will create a pass-through map for every group ID available in the parent namespace. This option implies *--user*.
- +
--Before util-linux version 2.39, this option expected a comma-separated argument of the form _outergid,innergid,count_ but that format is now deprecated for consistency with the ordering used in _/proc/[pid]/gid_map_ and the _X-mount.idmap_ mount option.
-+Before util-linux version 2.39, this option expected a comma-separated argument of the form _outergid_**,**_innergid_**,**_count_ but that format is now deprecated for consistency with the ordering used in _/proc/[pid]/gid_map_ and the _X-mount.idmap_ mount option.
- 
- *--map-auto*::
- Map the first block of user IDs owned by the effective user from _/etc/subuid_ to a block starting at user ID 0. In the same manner, also map the first block of group IDs owned by the effective group from _/etc/subgid_ to a block starting at group ID 0. This option is intended to handle the common case where the first block of subordinate user and group IDs can map the whole user and group ID space. This option is equivalent to specifying *--map-users=auto* and *--map-groups=auto*.
+ 	if (keepcaps && (namespaces & CLONE_NEWUSER))
 diff --git a/sys-utils/unshare.c b/sys-utils/unshare.c
-index 9b87acd67..4d078e4d5 100644
+index 4d078e4d5..b6c2f8b45 100644
 --- a/sys-utils/unshare.c
 +++ b/sys-utils/unshare.c
-@@ -413,7 +413,7 @@ static struct map_range get_map_range(const char *s)
-  * @filename: The file to look up the range from. This should be either
-  *            ``/etc/subuid`` or ``/etc/subgid``.
-  * @uid: The uid of the user whose range we should look up.
-- * @identity: (boolean) If true identity map the range, otherwise map to 0
-+ * @identity: (boolean) If true, identity map the range, otherwise map to 0.
-  *
-  * This finds the first subid range matching @uid in @filename.
-  */
+@@ -1270,10 +1270,10 @@ int main(int argc, char *argv[])
+ 		if (setgroups(0, NULL) != 0)	/* drop supplementary groups */
+ 			err(EXIT_FAILURE, _("setgroups failed"));
+ 		if (setgid(gid) < 0)		/* change GID */
+-			err(EXIT_FAILURE, _("setgid failed"));
++			err(EXIT_FAILURE, _("setgid() failed"));
+ 	}
+ 	if (force_uid && setuid(uid) < 0)	/* change UID */
+-		err(EXIT_FAILURE, _("setuid failed"));
++		err(EXIT_FAILURE, _("setuid() failed"));
+ 
+ 	if (keepcaps && (unshare_flags & CLONE_NEWUSER))
+ 		cap_permitted_to_ambient();
 -- 
 2.48.1
 
