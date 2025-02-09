@@ -1,101 +1,89 @@
-Return-Path: <util-linux+bounces-450-lists+util-linux=lfdr.de@vger.kernel.org>
+Return-Path: <util-linux+bounces-455-lists+util-linux=lfdr.de@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
-Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [IPv6:2604:1380:40f1:3f00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 074C9A2AEA3
-	for <lists+util-linux@lfdr.de>; Thu,  6 Feb 2025 18:14:31 +0100 (CET)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
+	by mail.lfdr.de (Postfix) with ESMTPS id EDA36A2DBA2
+	for <lists+util-linux@lfdr.de>; Sun,  9 Feb 2025 09:24:58 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id 244557A3DA4
-	for <lists+util-linux@lfdr.de>; Thu,  6 Feb 2025 17:13:33 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 3697418861D5
+	for <lists+util-linux@lfdr.de>; Sun,  9 Feb 2025 08:25:04 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7569B239576;
-	Thu,  6 Feb 2025 17:14:19 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4AEFD13213E;
+	Sun,  9 Feb 2025 08:24:55 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=debian.org header.i=@debian.org header.b="o8wJxKnU"
+	dkim=pass (1024-bit key) header.d=telfort.nl header.i=@telfort.nl header.b="whLGLfCh"
 X-Original-To: util-linux@vger.kernel.org
-Received: from stravinsky.debian.org (stravinsky.debian.org [82.195.75.108])
+Received: from ewsoutbound.kpnmail.nl (ewsoutbound.kpnmail.nl [195.121.94.167])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8BD4F239577
-	for <util-linux@vger.kernel.org>; Thu,  6 Feb 2025 17:14:15 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=82.195.75.108
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 213536FBF
+	for <util-linux@vger.kernel.org>; Sun,  9 Feb 2025 08:24:53 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=195.121.94.167
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1738862059; cv=none; b=ir1IcWebjN3oqOeKtCA0JUYE+8uH3ewN0dJ6Tx/QZQp+yXFigpbCGEihd/Cus1/KymhwudbNTFsmk0yLQlR6Fn//vAXHJ9qCLKZvAO7/wwP9ph/lZe3+ZUDKrkOVavAH0NZX9VBCMzCutpMOOrLMo351JW4z3n+9uaZ7vU4QuXo=
+	t=1739089495; cv=none; b=hXPPnhSviFfsyCjZl4kNA0mPZh8/FACwjbhSHwBv0bymEikdVlPYRX1AtNAEy2VHsnAcz1FuZZ5Pta4qFQ1qwXim4ayE7KYlOxtT3Vxbw/iSgHSQlXxYB0ftCsEVJwY7bTHRxi1sepmTgL0Vo7SCg3iRHU4nyXIq2EbrXsSYzLc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1738862059; c=relaxed/simple;
-	bh=Ytm3h7UGtst43LZZftYDUTsyKjuBuzyAn/bvEMMiZ4Y=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=WdGJ3n5fRVDggmV0qFf4nwsfO1cSNGLA+VKcUPxGwViBnw8uy1SsC9YE9p1UQBrerXsmk+EXRrop4ehyIvn21k9oDZwFnDWKN9hUzlfOJmlaEFL5oEA8PvsXrfn0iF3sU3BBQBCZMe8rIs6W5amhdA3OYiSph7Epn+fCHhSAoZw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=debian.org; spf=none smtp.mailfrom=debian.org; dkim=pass (2048-bit key) header.d=debian.org header.i=@debian.org header.b=o8wJxKnU; arc=none smtp.client-ip=82.195.75.108
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=debian.org
-Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=debian.org
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=debian.org;
-	s=smtpauto.stravinsky; h=X-Debian-User:In-Reply-To:Content-Type:MIME-Version:
-	References:Message-ID:Subject:Cc:To:From:Date:Reply-To:
-	Content-Transfer-Encoding:Content-ID:Content-Description;
-	bh=zlK8+LU0+w6zQjOKP/VAHbyTINOcHQEnD4Rd5p8N/2M=; b=o8wJxKnUFbfUehwJL1drX7+3jn
-	oU0PrqTPmuWnziksoa9Bb/5fDjvq5ENBQG/5J28kd6z5a29RIl4in4r8cUesAPiNnZDIICdBpoObc
-	ZudwjGGYHNgg112IhgvzE+Y4BcH4wmtodoqBj67U9wNxLkMVALmSWO298PB7NtWZi+1l19ArrZz+d
-	6u71XZy3Ynjz0LNUfRisLSVoine3HH3CC3mtbs/LAYgwAdMQRcYEWIBSJViz+Ccp+gM+VUbEuHzpd
-	Fg/TZ7cZiDsP/999Iof3+R91n10KmRBua3AbJenC9EtGHDO9AaHZkZuiilR1byNIwiYIkIK+fZoXp
-	KvqzqjIg==;
-Received: from authenticated user
-	by stravinsky.debian.org with esmtpsa (TLS1.3:ECDHE_X25519__RSA_PSS_RSAE_SHA256__AES_256_GCM:256)
-	(Exim 4.94.2)
-	(envelope-from <zeha@debian.org>)
-	id 1tg5S4-002u0l-21; Thu, 06 Feb 2025 17:14:08 +0000
-Date: Thu, 6 Feb 2025 18:14:06 +0100
-From: Chris Hofstaedtler <zeha@debian.org>
-To: Karel Zak <kzak@redhat.com>
-Cc: util-linux@vger.kernel.org
-Subject: Re: v2.40.3 plan
-Message-ID: <i6vtlijvb4u6osfrnm7bple7vd3x2htbsrs5ejyt3ixeyeyibz@rsbrbvhncawx>
-References: <4wnkdjqtwlx5pjeknj7wqmk5bgftoyzpqijqguekcepcdyrgmn@pofpabk4awvg>
- <ezn7omtjktebuobk6jmfxy3s6t6whoiiqcm62faqocnamybvtk@dsvj5df6qj76>
- <7duwc3kj5anayedj2irumtdz7t3vpdxfr5qu2t2pa644qnoqym@7er3y4jnov3b>
+	s=arc-20240116; t=1739089495; c=relaxed/simple;
+	bh=5jFOB1Rikrr4EhRsQc06SK1T683INSCjWC2QdonxCjw=;
+	h=From:To:Subject:Date:Message-ID:MIME-Version; b=c3A0DEgXWxnM49bOlB8Z9juNP4+njZrXwnu93W041wNZS7/tF/HHauyRn6xLWSJJ70nliLJDtdG3CKLHvV2GHIwrZttlFHImByPtpSwcyakXJgGiZHI3VAzVjF16EXm7i8RbWTlJyHBWrjjXSGarXVvcsZWGjp5I0gvkUUFXQu0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=telfort.nl; spf=pass smtp.mailfrom=telfort.nl; dkim=pass (1024-bit key) header.d=telfort.nl header.i=@telfort.nl header.b=whLGLfCh; arc=none smtp.client-ip=195.121.94.167
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=telfort.nl
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=telfort.nl
+X-KPN-MessageId: 7a7e9665-e6bf-11ef-87ce-005056abbe64
+Received: from smtp.kpnmail.nl (unknown [10.31.155.39])
+	by ewsoutbound.so.kpn.org (Halon) with ESMTPS
+	id 7a7e9665-e6bf-11ef-87ce-005056abbe64;
+	Sun, 09 Feb 2025 09:25:54 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=telfort.nl; s=telfort01;
+	h=mime-version:message-id:date:subject:to:from;
+	bh=4HdB6goi526Gq1HkUkGc45EZyDQXDeaUd6pJImqw4mk=;
+	b=whLGLfChFnLX8MN80GQLg6LMtCBFUJk69Z9+6cSlDxLS6RYSh+tY/M3oHHcf56mLYTjfIQ11w3xge
+	 njrGQmFtlSvfwfMhtw9LUTt6kK61XLCciXoCH8RNJ/y/nlXfPjBq1Pot/2q9zfD2VlpNx0pB+n8aPp
+	 JC1yF1HSUFBT4r6A=
+X-KPN-MID: 33|lk5+oTczgxvzShTQMz/3WA2vBmzr1laOfECtHHMKztPSvA0y8DyWJbJNhP6g0cb
+ EehA+u6pCjK49Zp5WyklAA0apwIOikOWE69jcYsSGQdQ=
+X-KPN-VerifiedSender: Yes
+X-CMASSUN: 33|O2TvT6rgJFoTP4OfTj6ObQpGXSCkwF+JCtf+MdFb4+wIQjHpKtrwXtuS2MMmUJs
+ kGF0SMfJ6nLMoQKC44ruFvg==
+Received: from localhost (77-163-176-192.fixed.kpn.net [77.163.176.192])
+	by smtp.kpnmail.nl (Halon) with ESMTPSA
+	id 2d10d4a4-e6bf-11ef-99a4-005056ab7447;
+	Sun, 09 Feb 2025 09:23:44 +0100 (CET)
+From: Benno Schulenberg <bensberg@telfort.nl>
+To: util-linux@vger.kernel.org
+Subject: [PATCH 01/14] setpriv: make message for failing PR_GET_PDEATHSIG the same as the other
+Date: Sun,  9 Feb 2025 09:23:17 +0100
+Message-ID: <20250209082330.4235-1-bensberg@telfort.nl>
+X-Mailer: git-send-email 2.48.1
 Precedence: bulk
 X-Mailing-List: util-linux@vger.kernel.org
 List-Id: <util-linux.vger.kernel.org>
 List-Subscribe: <mailto:util-linux+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:util-linux+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-In-Reply-To: <7duwc3kj5anayedj2irumtdz7t3vpdxfr5qu2t2pa644qnoqym@7er3y4jnov3b>
-X-Debian-User: zeha
+Content-Transfer-Encoding: 8bit
 
-* Karel Zak <kzak@redhat.com> [250206 16:15]:
-> On Thu, Feb 06, 2025 at 12:51:41AM GMT, Chris Hofstaedtler wrote:
-> > * Karel Zak <kzak@redhat.com> [700101 01:00]:
-> > > The next release, v2.41-rc1, is expected to be released at the end of
-> > > December or in January.
-> > 
-> > I guess this got a bit delayed :-)
-> 
-> Yes, I had a 14-day vacation in December.
+Signed-off-by: Benno Schulenberg <bensberg@telfort.nl>
+---
+ sys-utils/setpriv.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Hope it was good and relaxing!
-
-> > Do you think 2.41 final will show up before 2025-03-07? Then I could
-> > still put it into Debian trixie.
-> 
-> This date seems like a challenge. I'm not sure, but I'll give it a
-> try:
-> 
->   rc1   2025-02-10
->   rc2   2025-02-24
->   final 2025-03-05
-> 
->  We will see ... :-)
-
-Much appreciated.
-
-If it doesn't work out, we'll just have 2.40.x.  Not a big deal.
-
-Thanks!
-
-Chris
+diff --git a/sys-utils/setpriv.c b/sys-utils/setpriv.c
+index 43d72f64c..daa3ab366 100644
+--- a/sys-utils/setpriv.c
++++ b/sys-utils/setpriv.c
+@@ -329,7 +329,7 @@ static void dump_pdeathsig(void)
+ 	int pdeathsig;
+ 
+ 	if (prctl(PR_GET_PDEATHSIG, &pdeathsig) != 0) {
+-		warn(_("get pdeathsig failed"));
++		warn(_("failed to get parent death signal"));
+ 		return;
+ 	}
+ 
+-- 
+2.48.1
 
 
