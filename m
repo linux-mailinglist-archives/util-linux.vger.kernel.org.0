@@ -1,124 +1,128 @@
-Return-Path: <util-linux+bounces-493-lists+util-linux=lfdr.de@vger.kernel.org>
+Return-Path: <util-linux+bounces-496-lists+util-linux=lfdr.de@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
-	by mail.lfdr.de (Postfix) with ESMTPS id E1453A41FF6
-	for <lists+util-linux@lfdr.de>; Mon, 24 Feb 2025 14:10:14 +0100 (CET)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
+	by mail.lfdr.de (Postfix) with ESMTPS id D7B65A42C29
+	for <lists+util-linux@lfdr.de>; Mon, 24 Feb 2025 19:59:48 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id CEDDB18986DB
-	for <lists+util-linux@lfdr.de>; Mon, 24 Feb 2025 13:10:05 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 9547016D58C
+	for <lists+util-linux@lfdr.de>; Mon, 24 Feb 2025 18:59:21 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0BF5023BD04;
-	Mon, 24 Feb 2025 13:09:56 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id C2518262D03;
+	Mon, 24 Feb 2025 18:59:19 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=telfort.nl header.i=@telfort.nl header.b="fEGjauI8"
+	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="L/8v1Pfr"
 X-Original-To: util-linux@vger.kernel.org
-Received: from ewsoutbound.kpnmail.nl (ewsoutbound.kpnmail.nl [195.121.94.168])
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 85CDD802
-	for <util-linux@vger.kernel.org>; Mon, 24 Feb 2025 13:09:53 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=195.121.94.168
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DF001144304
+	for <util-linux@vger.kernel.org>; Mon, 24 Feb 2025 18:59:17 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=170.10.133.124
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1740402595; cv=none; b=KK3DD0F08FlZw3r/DYnZDFvxaiT9oJ42ViKVbFHp7yu1LWlX445uEXifpa3pA8Et8p4dGLvxTu6Ib3v8F/Hb3GzIlIUeZrAcHWovWBH7GwBGBV1pi5mh9hi0ehyyWqZ2OBGjFsZ24J7MNMzuA3ZMCUPJRT/zJcOGMUCwI3WVRGk=
+	t=1740423559; cv=none; b=OQDiI4KpQBnsfJn5MoWwoqYBvyxoVTIEiVqh9+X8jWXlIvZXRKveuu+69j6S6s3+TzCPz1H1SbL7tUexZC6R3oS/t5y51XL+TcgFSV9csWrhPL8PcC4rGNh1X1iWN2kdRyUoQ4pRnmui1tS9ECA7rTG6NQMIeGK4ZwSDjy6EFJc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1740402595; c=relaxed/simple;
-	bh=+8LMHBL6u91pnc0ZhOwuyNSvS32aL6hOMYZDcWxPYwk=;
-	h=From:To:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=XgLrGb7Dd/w7dRTlYXYbyGT43NnFSCAV2dQZg1LO3wXt62WGPOqsIzpIkOxo0K+g4Hiq1nzrOl3AF/RwxLKBxyBjjmDBKWYI378bv+Jfux1bhehD88GF2aAw8lUxLWDGIljIW2U+a1rK9HmgKmAQwd0QoW6ocNVAo+bOHCagV1g=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=telfort.nl; spf=pass smtp.mailfrom=telfort.nl; dkim=pass (1024-bit key) header.d=telfort.nl header.i=@telfort.nl header.b=fEGjauI8; arc=none smtp.client-ip=195.121.94.168
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=telfort.nl
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=telfort.nl
-X-KPN-MessageId: a869afd6-f2b0-11ef-86c8-005056aba152
-Received: from smtp.kpnmail.nl (unknown [10.31.155.38])
-	by ewsoutbound.so.kpn.org (Halon) with ESMTPS
-	id a869afd6-f2b0-11ef-86c8-005056aba152;
-	Mon, 24 Feb 2025 14:10:02 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=telfort.nl; s=telfort01;
-	h=mime-version:message-id:date:subject:to:from;
-	bh=Ui+r0tXOI2UUEKLEyWW01AcP0VsDbn8tg4uH+oPpcPA=;
-	b=fEGjauI8y2wok6fy/nNiOuD2xi9wlWm3xz6er6ENC3v3yx0o1OwGrd/ANh4oQoRQXSfmoltwMWSm0
-	 GfguKqxRDQadcV+9l2qd0R7YN9qZxVAVe8a9cSxEGX86fcYRPsfOisAHGT+HYrQEqq1hNsbXIPE7zw
-	 vWo52f/hu1iwwwaA=
-X-KPN-MID: 33|R3kyWpXZ1+v20hyQZe5JlvhxOZT3guERuPhdHdZvsO927NmZ9Nn0fX2Xjcn0TMM
- ElM/kKh8yvy0KA19mlbaJcJhjfD1kb5z6puTb8pxUOGw=
-X-KPN-VerifiedSender: Yes
-X-CMASSUN: 33|zdhAoPiPNMNN/ADSgN20ao/Y3Nd/lunhGk3TkVlJMmFke0Wo7WZCcet5gWgMiz6
- bT15Kck926yZ+Dzx3HDLBCA==
-Received: from localhost (77-163-176-192.fixed.kpn.net [77.163.176.192])
-	by smtp.kpnmail.nl (Halon) with ESMTPSA
-	id a1edf524-f2b0-11ef-9583-005056abf0db;
-	Mon, 24 Feb 2025 14:09:51 +0100 (CET)
-From: Benno Schulenberg <bensberg@telfort.nl>
-To: util-linux@vger.kernel.org
-Subject: [PATCH 6/6] scriptlive: improve some descriptions, markup, and grammar in the manpage
-Date: Mon, 24 Feb 2025 14:08:40 +0100
-Message-ID: <20250224130840.25770-6-bensberg@telfort.nl>
-X-Mailer: git-send-email 2.48.1
-In-Reply-To: <20250224130840.25770-1-bensberg@telfort.nl>
-References: <20250224130840.25770-1-bensberg@telfort.nl>
+	s=arc-20240116; t=1740423559; c=relaxed/simple;
+	bh=xhGupZpFuktmNrgxASMXf4BUjwQJbyrMuausFIlPNLY=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=uxVR/zhu/QUouqvMHdAABOMVR+OCuQFhGvzWTquvOZMoHXocwZLtqVfegc62Twu0kb4/rHzozDse49UNfwuIMkE+pZ6RtdT98IXqghOUKWp4CtL3s0WP+Y/BPiCa1DL/DdQWL9hoOCoNJpRajD+idL3P9uxcurosx2ZvBzCzFyA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=L/8v1Pfr; arc=none smtp.client-ip=170.10.133.124
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=redhat.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redhat.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1740423556;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references;
+	bh=3YoSh/t1Sjcx9ooPRJ993Aa4xfN3JD+TY8MMIOC1BMg=;
+	b=L/8v1PfrKwleeTNOhb8Yd7/XfxDk/J1rcCB4fnrWu8mQBsQJIdxPT5x4EHW5nMBXevRO4m
+	Y8IjzsoYSWRrocf6dVXkCDB3uuahkARJDH0ZLCqU+UG7Pw/C+U0NvkNb/ru5UltMqhZNOm
+	MBijQCjdbRdSGIIW2PWCXldohu73vgc=
+Received: from mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
+ relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-130-AD_5PJdPP-ubJ2k2n0Bm1Q-1; Mon,
+ 24 Feb 2025 13:59:13 -0500
+X-MC-Unique: AD_5PJdPP-ubJ2k2n0Bm1Q-1
+X-Mimecast-MFC-AGG-ID: AD_5PJdPP-ubJ2k2n0Bm1Q_1740423551
+Received: from mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com (mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.17])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS id AD9A61800879;
+	Mon, 24 Feb 2025 18:59:11 +0000 (UTC)
+Received: from ws.net.home (unknown [10.45.225.247])
+	by mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS id 3773319560A3;
+	Mon, 24 Feb 2025 18:59:09 +0000 (UTC)
+Date: Mon, 24 Feb 2025 19:59:06 +0100
+From: Karel Zak <kzak@redhat.com>
+To: Chris Hofstaedtler <zeha@debian.org>
+Cc: 1098694-quiet@bugs.debian.org, Florian Bach <Leseratte10@vodafone.de>, 
+	util-linux@vger.kernel.org
+Subject: Re: Bug#1098694: Crash in agetty due to invalid strncmp call in
+ Trixie
+Message-ID: <2tlkt7g2blnq3gigedhwgnrt5w7n6k5zyr3dvpadyrl2bn5p2d@v6rhkcmaeryo>
+References: <5534c6e1-b819-4aaa-a8c1-fa22852e327b@vodafone.de>
+ <tzuam3pqfrm6g7t4hwwapmpxxux75bf4vxd42qb6iode2hqnnx@ve4h5lyd3yp6>
+ <bee22700-d1e4-42a2-9fe6-9ba9d2e64538@vodafone.de>
+ <5534c6e1-b819-4aaa-a8c1-fa22852e327b@vodafone.de>
+ <4ewlrlhq7eskooeb5h7v4p5qv6r3nvm2ubmuo5546lo5yxsrta@pr2horn2sxog>
+ <b5ikwzm4qjyxazwnck736kqdihgjmyjbsfuikfwntaece7fmmu@oxxt7prt45jz>
 Precedence: bulk
 X-Mailing-List: util-linux@vger.kernel.org
 List-Id: <util-linux.vger.kernel.org>
 List-Subscribe: <mailto:util-linux+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:util-linux+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <b5ikwzm4qjyxazwnck736kqdihgjmyjbsfuikfwntaece7fmmu@oxxt7prt45jz>
+X-Scanned-By: MIMEDefang 3.0 on 10.30.177.17
 
-Signed-off-by: Benno Schulenberg <bensberg@telfort.nl>
----
- term-utils/scriptlive.1.adoc | 21 +++++++++++++++------
- 1 file changed, 15 insertions(+), 6 deletions(-)
+On Sun, Feb 23, 2025 at 09:13:39PM GMT, Chris Hofstaedtler wrote:
+> * Chris Hofstaedtler <zeha@debian.org> [250223 20:06]:
+> > > [..] After I sent this bug report yesterday, I also found out that
+> > > someone has reported what I believe is the same bug to
+> > > upstream a while ago ( https://github.com/util-linux/util-linux/issues/3304
+> > > ) but so far nobody has commented on that report.
+> > 
+> > Yeah, this seems like the same issue.
+> 
+> Below is a patch that works, but certainly feels dirty:
+> 
+> 
+> From: Chris Hofstaedtler <zeha@debian.org>
+> Date: Sun, 23 Feb 2025 20:10:05 +0100
+> Subject: agetty: restore op->tty if getting the tty name fails
+> 
+> Signed-off-by: Chris Hofstaedtler <zeha@debian.org>
+> ---
+>  term-utils/agetty.c | 2 ++
+>  1 file changed, 2 insertions(+)
+> 
+> diff --git a/term-utils/agetty.c b/term-utils/agetty.c
+> index a382313..e65c985 100644
+> --- a/term-utils/agetty.c
+> +++ b/term-utils/agetty.c
+> @@ -929,9 +929,11 @@ static void parse_args(int argc, char **argv, struct options *op)
+>  	/* resolve the tty path in case it was provided as stdin */
+>  	if (strcmp(op->tty, "-") == 0) {
+>  		op->tty_is_stdin = 1;
+> +		const char* tty_orig = op->tty;
+>  		int fd = get_terminal_name(NULL, &op->tty, NULL);
+>  		if (fd < 0) {
+>  			log_warn(_("could not get terminal name: %d"), fd);
+> +			op->tty = tty_orig;
+>  		}
 
-diff --git a/term-utils/scriptlive.1.adoc b/term-utils/scriptlive.1.adoc
-index 58aeb4ce1..10e299875 100644
---- a/term-utils/scriptlive.1.adoc
-+++ b/term-utils/scriptlive.1.adoc
-@@ -21,9 +21,14 @@ This program re-runs a typescript, using stdin typescript and timing information
- 
- The *session is executed* in a newly created pseudoterminal with the user's $SHELL (or defaults to _/bin/bash_).
- 
--*Be careful!* Do not forget that the typescript may contains arbitrary commands. It is recommended to use *"scriptreplay --stream in --log-in typescript"* (or with *--log-io* instead of *--log-in*) to verify the typescript before it is executed by *scriptlive*.
-+*Be careful!* The typescript may contain arbitrary commands. It is
-+recommended to use *"scriptreplay --stream in --log-in typescript"*
-+(or with *--log-io* instead of *--log-in*) to verify the typescript
-+before it is executed with *scriptlive*.
- 
--The timing information is what *script*(1) outputs to file specified by *--log-timing*. The typescript has to contain stdin information and it is what script1 outputs to file specified by *--log-in* or *--log-io*.
-+The timing information is what *script*(1) outputs to the file specified by
-+*--log-timing*. The typescript has to contain stdin information, and is what
-+*script*(1) outputs to the file specified by *--log-in* or *--log-io*.
- 
- == OPTIONS
- 
-@@ -34,15 +39,19 @@ File containing *script*'s terminal input.
- File containing *script*'s terminal output and input.
- 
- *-E*, *--echo* _when_::
--This option controls the *ECHO* flag for the slave end of the session's pseudoterminal. The supported modes are _always_, _never_, or _auto_.
-+This option controls the *ECHO* flag for the slave end of the session's
-+pseudoterminal. The supported modes are *always*, *never*, and *auto*.
- +
--The default is _auto_ -- in this case, *ECHO* enabled; this default behavior is subject to change.
-+The default is *auto* -- in which case *ECHO* is enabled. This default
-+behavior is subject to change.
- 
- *-t*, *--timing* _file_::
--File containing *script*'s timing output. This option overrides old-style arguments.
-+File containing *script*'s timing output.
-+This option replaces the _timingfile_ positional argument.
- 
- *-T*, *--log-timing* _file_::
--Aliased to *-t*, maintained for compatibility with *script*(1) command-line options.
-+An alias for *-t*; maintained for compatibility with the *script*(1)
-+command-line options.
- 
- *-d*, *--divisor* _number_::
- Speed up the replay displaying this _number_ of times. The argument is a floating-point number. It's called divisor because it divides the timings by this factor. This option overrides old-style arguments.
+ Oh, I have implemented something like this https://github.com/util-linux/util-linux/pull/3425
+
+    Karel
+
 -- 
-2.48.1
+ Karel Zak  <kzak@redhat.com>
+ http://karelzak.blogspot.com
 
 
