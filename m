@@ -1,63 +1,62 @@
-Return-Path: <util-linux+bounces-495-lists+util-linux=lfdr.de@vger.kernel.org>
+Return-Path: <util-linux+bounces-490-lists+util-linux=lfdr.de@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
-Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
-	by mail.lfdr.de (Postfix) with ESMTPS id DB2B7A41FF8
-	for <lists+util-linux@lfdr.de>; Mon, 24 Feb 2025 14:10:19 +0100 (CET)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
+	by mail.lfdr.de (Postfix) with ESMTPS id 3C296A41FED
+	for <lists+util-linux@lfdr.de>; Mon, 24 Feb 2025 14:09:40 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by am.mirrors.kernel.org (Postfix) with ESMTPS id D8A1E1898159
-	for <lists+util-linux@lfdr.de>; Mon, 24 Feb 2025 13:10:20 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 8CAEA18985E3
+	for <lists+util-linux@lfdr.de>; Mon, 24 Feb 2025 13:09:34 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9D85723BCEC;
-	Mon, 24 Feb 2025 13:10:11 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id E0BB323BCE5;
+	Mon, 24 Feb 2025 13:09:18 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=telfort.nl header.i=@telfort.nl header.b="GDn4vGco"
+	dkim=pass (1024-bit key) header.d=telfort.nl header.i=@telfort.nl header.b="PVU90qCz"
 X-Original-To: util-linux@vger.kernel.org
-Received: from ewsoutbound.kpnmail.nl (ewsoutbound.kpnmail.nl [195.121.94.168])
+Received: from ewsoutbound.kpnmail.nl (ewsoutbound.kpnmail.nl [195.121.94.167])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C6DFB23373E
-	for <util-linux@vger.kernel.org>; Mon, 24 Feb 2025 13:10:09 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=195.121.94.168
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5864C802
+	for <util-linux@vger.kernel.org>; Mon, 24 Feb 2025 13:09:15 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=195.121.94.167
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1740402611; cv=none; b=AsjhTA5Afib/q5MDxd3PE2y930FILbjrCXvzOp4/0I0pvwTDJBnxGhyMNM+TK/I4Fayrt39SR+sTbD+7rYuyrgV55u4mM0YmjB6F9jQG/rhvB2BgNozeauxg2yK0T/GOXv+1atL14z9t4EGJ3VDOrpZW6wsL8Xex1/6BzLNURMY=
+	t=1740402558; cv=none; b=baPjKSknbhPNpVgzAu3/g0yqXVu2t58rVGTPj2PB7yTszpyKw7HDubUb4CpgiKw+6wjcA84Ty/G4m0KvJMzuyt4VKrgCFoTPYmtg+JGOPEJRZyfK+sgMrk1IGZzsPb5ntef3Qgslm7lOWP5KAYONZCsmQuaav3Y/5yCKFjPS22g=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1740402611; c=relaxed/simple;
-	bh=UZUoxOqk6Ns7taJwRwWTaxLdyG1Lb5TLQjulgYoDiG0=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=UwEe4nHMK/63ik9RPVzFsUQuHxAFBhk3sOCCfSKlOoSs3ug5CSvuuwVzRmQpGAu9zXm7sld/q+JXjlcyF1dGFVFEAltfeqVD6vl0xyKFZg3x0Yryy2xMlaetpd7mOYAWGUdBOK2oTcBj0k/cgeSJO9HlMWw+Iigacp8GRGCr99Y=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=telfort.nl; spf=pass smtp.mailfrom=telfort.nl; dkim=pass (1024-bit key) header.d=telfort.nl header.i=@telfort.nl header.b=GDn4vGco; arc=none smtp.client-ip=195.121.94.168
+	s=arc-20240116; t=1740402558; c=relaxed/simple;
+	bh=Afh9ZxbsjI/JJXzNbbP1YUw6Eb4boi3BUxCXpWlX7Ms=;
+	h=From:To:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version; b=VDwS1TBx+lr9QsYrSe9VgpE3FAxLQuMCIPsPUyhCY4OyqNY/EX1tKzg7sZq4pR8evojIcU+gw6sExmz+SJndSG1695DzL/NZJwXgWkZ292d2byWfkFuDyRZbc8kX7l2Wps0RTMoP++17P4zcRcbGBkNnz2U+OqY0Z1jgKPx7GhE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=telfort.nl; spf=pass smtp.mailfrom=telfort.nl; dkim=pass (1024-bit key) header.d=telfort.nl header.i=@telfort.nl header.b=PVU90qCz; arc=none smtp.client-ip=195.121.94.167
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=telfort.nl
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=telfort.nl
-X-KPN-MessageId: 8a3821b1-f2b0-11ef-86c8-005056aba152
+X-KPN-MessageId: 9004d504-f2b0-11ef-b99e-005056abbe64
 Received: from smtp.kpnmail.nl (unknown [10.31.155.40])
 	by ewsoutbound.so.kpn.org (Halon) with ESMTPS
-	id 8a3821b1-f2b0-11ef-86c8-005056aba152;
-	Mon, 24 Feb 2025 14:09:11 +0100 (CET)
+	id 9004d504-f2b0-11ef-b99e-005056abbe64;
+	Mon, 24 Feb 2025 14:09:21 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=telfort.nl; s=telfort01;
 	h=mime-version:message-id:date:subject:to:from;
-	bh=o9fcnirN7C1YviVtuZohLqH9C3403cqlNKVS7L0bTkk=;
-	b=GDn4vGcop810wk0J+5UH2ngZwVOU4l5N9NbrH+7rv9YnB7ooM7T64e+DU7bmN7sOPl4BM0Knfwii4
-	 dOPuSP7PIEUAlbQ1bAZA3psMw9M1BgI9PYAxNMg59KPbhlpt4Z/4LzF0Ea15Ep2E/ttrK1HusGZFgX
-	 OgpcaO3O+39gMvBg=
-X-KPN-MID: 33|KOhL3lwN0nU1B91k3vHuqTl4LmvcFUYHYaDONfbPPCoAqTDGUDeG/hVDCN1vPlc
- x/wGlfZYWkh5/6K8DECuivM1nWsOZtA1KhFIg+obRfRA=
+	bh=uD4DcFWpXEtpMZWNqYUFGXFMdJhU+Ji3BupbWG/E90E=;
+	b=PVU90qCziL079lnaPT2VLUyJxMtIKiD/+B2NNix7b4nToTjoHw8Z26ZU3NYTpaUNhhWYi7ZrVuJ/s
+	 IyhclkiG+RR+iXf2uGlP0vlg0YDVG/wMCkfhp8b7vzZAkvoR0LL82vit/3+/a4za6YL/ZJ7NG9WvPO
+	 YWR9sHN4HjjB39rk=
+X-KPN-MID: 33|celd092NuOJUqjV168qrqJgw5vSPl+DLBeTRvNZrduaNaxJm43EVmVYRpfe8Wdv
+ v+J3xY8WCIXKEideCsrnVFX1eTljbXV1y4/XNnl9HAvI=
 X-KPN-VerifiedSender: Yes
-X-CMASSUN: 33|rKDOZsx6kuob0wGHaqd5i8yzqN03K/FIR6HfgS+0MiY/vhPmIMMXRdLDr/xh6LJ
- 0gs25rZ8E2cMVMINqOR80tA==
+X-CMASSUN: 33|2uhXJ2I+JTyJp/GU6nhmKcqq9X3F9hWoUwjb62211gEeuDD7fnwUQe3Q8F8a8ja
+ YB4mgypjxj9MdaM6rMbYdoQ==
 Received: from localhost (77-163-176-192.fixed.kpn.net [77.163.176.192])
 	by smtp.kpnmail.nl (Halon) with ESMTPSA
-	id 83bb2da9-f2b0-11ef-849d-005056ab7584;
-	Mon, 24 Feb 2025 14:09:01 +0100 (CET)
+	id 8b42d7a3-f2b0-11ef-849d-005056ab7584;
+	Mon, 24 Feb 2025 14:09:13 +0100 (CET)
 From: Benno Schulenberg <bensberg@telfort.nl>
 To: util-linux@vger.kernel.org
-Cc: Jonathan Ketchker <jonathan@ketchker.com>
-Subject: [PATCH 2/6] scriptreplay: make Up/Down keys use a percentage instead of fixed amount
-Date: Mon, 24 Feb 2025 14:08:36 +0100
-Message-ID: <20250224130840.25770-2-bensberg@telfort.nl>
+Subject: [PATCH 3/6] scriptreplay: reduce two usage synopses to one, and drop the -t from it
+Date: Mon, 24 Feb 2025 14:08:37 +0100
+Message-ID: <20250224130840.25770-3-bensberg@telfort.nl>
 X-Mailer: git-send-email 2.48.1
 In-Reply-To: <20250224130840.25770-1-bensberg@telfort.nl>
 References: <20250224130840.25770-1-bensberg@telfort.nl>
@@ -69,43 +68,59 @@ List-Unsubscribe: <mailto:util-linux+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Using a fixed 0.1 amount made each subsequent Down-arrow key slow things
-down _more_, and each subsequent Up-arrow key speed things up _less_.
-It's nicer when each subsequent keystroke has the same relative effect.
+Those two synopses still did not express several possible forms:
+
+    scriptreplay -m.1 timings
+    scriptreplay typescript -t timings -m.1
+    ...
+
+So, instead of trying to cover all possibilities, just give the
+basic form of the command, which is clearest and most helpful.
 
 Signed-off-by: Benno Schulenberg <bensberg@telfort.nl>
 ---
- term-utils/scriptreplay.c | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
+ term-utils/scriptreplay.1.adoc | 2 +-
+ term-utils/scriptreplay.c      | 7 +++----
+ 2 files changed, 4 insertions(+), 5 deletions(-)
 
+diff --git a/term-utils/scriptreplay.1.adoc b/term-utils/scriptreplay.1.adoc
+index acfde6ca8..7665d28f8 100644
+--- a/term-utils/scriptreplay.1.adoc
++++ b/term-utils/scriptreplay.1.adoc
+@@ -13,7 +13,7 @@ scriptreplay - play back typescripts, using timing information
+ 
+ == SYNOPSIS
+ 
+-*scriptreplay* [options] [*-t*] _timingfile_ [_typescript_ [_divisor_]]
++*scriptreplay* [options] _timingfile_ [_typescript_ [_divisor_]]
+ 
+ == DESCRIPTION
+ 
 diff --git a/term-utils/scriptreplay.c b/term-utils/scriptreplay.c
-index 0e1444ca1..5751e1b52 100644
+index 5751e1b52..7e1eec7db 100644
 --- a/term-utils/scriptreplay.c
 +++ b/term-utils/scriptreplay.c
-@@ -76,8 +76,8 @@ usage(void)
- 	fputs(USAGE_SEPARATOR, out);
- 	fputs(_("Key bindings:\n"), out);
- 	fputs(_(" space        toggles between pause and play\n"), out);
--	fputs(_(" up-arrow     increases the time divisor with 0.1\n"), out);
--	fputs(_(" down-arrow   decreases the time divisor with 0.1\n"), out);
-+	fputs(_(" up-arrow     increases playback speed with ten percent\n"), out);
-+	fputs(_(" down-arrow   decreases playback speed with ten percent\n"), out);
+@@ -47,10 +47,7 @@ usage(void)
+ 	FILE *out = stdout;
+ 	fputs(USAGE_HEADER, out);
+ 	fprintf(out,
+-	      _(" %s [options]\n"),
+-	      program_invocation_short_name);
+-	fprintf(out,
+-	      _(" %s [-t] <timingfile> [<typescript> [<divisor>]]\n"),
++	      _(" %s [options] <timingfile> [<typescript> [<divisor>]]\n"),
+ 	      program_invocation_short_name);
  
- 	fprintf(out, USAGE_MAN_TAIL("scriptreplay(1)"));
- 	exit(EXIT_SUCCESS);
-@@ -343,10 +343,10 @@ main(int argc, char *argv[])
- 			if (ch == '[') {
- 				ch = fgetc(stdin);
- 				if (ch == 'A') { /* Up arrow */
--					divi += 0.1;
-+					divi *= 1.1;
- 					replay_set_delay_div(setup, divi);
- 				} else if (ch == 'B') { /* Down arrow */
--					divi -= 0.1;
-+					divi *= 0.9;
- 					if (divi < 0.1)
- 						divi = 0.1;
- 					replay_set_delay_div(setup, divi);
+ 	fputs(USAGE_SEPARATOR, out);
+@@ -71,6 +68,8 @@ usage(void)
+ 	fputs(_(" -m, --maxdelay <num>    wait at most this many seconds between updates\n"), out);
+ 	fputs(_(" -x, --stream <name>     stream type (out, in, signal or info)\n"), out);
+ 	fputs(_(" -c, --cr-mode <type>    CR char mode (auto, never, always)\n"), out);
++
++	fputs(USAGE_SEPARATOR, out);
+ 	fprintf(out, USAGE_HELP_OPTIONS(25));
+ 
+ 	fputs(USAGE_SEPARATOR, out);
 -- 
 2.48.1
 
