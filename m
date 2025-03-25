@@ -1,108 +1,110 @@
-Return-Path: <util-linux+bounces-578-lists+util-linux=lfdr.de@vger.kernel.org>
+Return-Path: <util-linux+bounces-586-lists+util-linux=lfdr.de@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id A2D4FA6DC97
-	for <lists+util-linux@lfdr.de>; Mon, 24 Mar 2025 15:08:16 +0100 (CET)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
+	by mail.lfdr.de (Postfix) with ESMTPS id 85330A6EDFA
+	for <lists+util-linux@lfdr.de>; Tue, 25 Mar 2025 11:44:29 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id D6EAF3A95CC
-	for <lists+util-linux@lfdr.de>; Mon, 24 Mar 2025 14:07:55 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 1654016812B
+	for <lists+util-linux@lfdr.de>; Tue, 25 Mar 2025 10:44:29 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 652F025F789;
-	Mon, 24 Mar 2025 14:08:05 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id D86D21EB5D4;
+	Tue, 25 Mar 2025 10:44:25 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="Ko7Kjssg"
+	dkim=pass (1024-bit key) header.d=telfort.nl header.i=@telfort.nl header.b="cz4dpuVl"
 X-Original-To: util-linux@vger.kernel.org
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+Received: from ewsoutbound.kpnmail.nl (ewsoutbound.kpnmail.nl [195.121.94.167])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 70F051EDA31
-	for <util-linux@vger.kernel.org>; Mon, 24 Mar 2025 14:08:03 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=170.10.133.124
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1D607433A8
+	for <util-linux@vger.kernel.org>; Tue, 25 Mar 2025 10:44:23 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=195.121.94.167
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1742825285; cv=none; b=ikzq2vtrieNEE+r5zWZqgnix2/0y8c2s+TI/YWyu3Yge/2HPFSXYplPar+vhsfOYhJlkPLhKrTr+1yYreivZ5v+dwwtBPby4EE9iOCO9NKr+zp5naCb7bpzZxZRx5+v5jjtT4kIUBLZv5F4fbq4ngo46XPRBLORUg0MZDs0gAjo=
+	t=1742899465; cv=none; b=bEJg/+jhG0SNFrKiRyieA2+YU6OEgmRcPewEIevt3ldttQ9wTe01F2HSBaGTtaNVLGuB7OcNU9RckmrbNssFQXPO0oPVlL470oME6/dEQXtZaLpz3/HejywrinIWaW3O7/TqLUQfrcK1GJyopINq0b8zU2au2X+jW29zN1bUJwo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1742825285; c=relaxed/simple;
-	bh=sUsvt1iC3zGTSjuG5xVnMIn0Y6NiL6QxtFdqTliUxQg=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=KOQYQsohYM3z2scDOIXW9paxACLr2q3VGKozUSpopveYNYMD5ej9C9UXwjINjaHw5SVLSjoeEJcldmAJhAJI3x7HP3XLGyKirtGtWW1gWGmwTfYcHg7GwfxIEWSQ6sH4JkaCXfFpCiQjqks3W65wfWufTnDlsy5wjEDfAm993CY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=Ko7Kjssg; arc=none smtp.client-ip=170.10.133.124
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redhat.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1742825282;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=S+BzvvRqkh+SH6vpsd0Od545wUtrN3Y5Ei83l1b68mU=;
-	b=Ko7KjssgX8/ntznjfKof9a9ELDCy1468pSccFuSl5e3BYBB4wvUuqRxgqZ+75CRCYKN7b9
-	k2djO0LZgoz5wC2aGU+qA4xxV3+TseDflPgxz5KibD+NBPGXqAXorjqhzdi+GvO2qD1znW
-	XrNwUidE/mTC4wANBpIa15/kuHstiic=
-Received: from mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
- relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-376-o0liejXmNUq-J1J9MgLc_Q-1; Mon,
- 24 Mar 2025 10:07:56 -0400
-X-MC-Unique: o0liejXmNUq-J1J9MgLc_Q-1
-X-Mimecast-MFC-AGG-ID: o0liejXmNUq-J1J9MgLc_Q_1742825275
-Received: from mx-prod-int-02.mail-002.prod.us-west-2.aws.redhat.com (mx-prod-int-02.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.15])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS id B09CE180899B;
-	Mon, 24 Mar 2025 14:07:55 +0000 (UTC)
-Received: from ws.net.home (unknown [10.45.224.198])
-	by mx-prod-int-02.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS id 73AD41956095;
-	Mon, 24 Mar 2025 14:07:54 +0000 (UTC)
-Date: Mon, 24 Mar 2025 15:07:50 +0100
-From: Karel Zak <kzak@redhat.com>
-To: Rasmus Villemoes <ravi@prevas.dk>
-Cc: util-linux@vger.kernel.org, J William Piggott <elseifthen@gmx.com>
-Subject: Re: [PATCH] Revert "hwclock-rtc.c: try the 'new' rtc class first"
-Message-ID: <4cmotj2ocggd47627b4he7zs345dqi6zii7hfokvwscc43pwo7@sy4cmplnxk7d>
-References: <20250319132859.455264-1-ravi@prevas.dk>
- <jrtzgsznv7iazsiqrym7czmu3xabxttg5slojilaohsrpa7yat@pdihi2dmiynq>
+	s=arc-20240116; t=1742899465; c=relaxed/simple;
+	bh=+/GPmL4AogkcRgmvFYPtjGH5h26n28y69q0WyZM1Mwo=;
+	h=From:To:Subject:Date:Message-ID:MIME-Version; b=OUv04eo3B62uVLTY88mPxhvzxlU71RcPoteV+1hbOqSHeFDNrmv2n/VjIzSo64IeTG/lNpyZPmDWD6tiaZ/Bl/cjGfYCOkDNcGIcSyq4Iy8kSIQSViLyy0OjcdU2pY7muFqqWYKywOQaWXB1G1C9hlvjAViVtkVLz+mtsYVtUKI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=telfort.nl; spf=pass smtp.mailfrom=telfort.nl; dkim=pass (1024-bit key) header.d=telfort.nl header.i=@telfort.nl header.b=cz4dpuVl; arc=none smtp.client-ip=195.121.94.167
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=telfort.nl
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=telfort.nl
+X-KPN-MessageId: 0fcb9fac-0966-11f0-b99f-005056abbe64
+Received: from smtp.kpnmail.nl (unknown [10.31.155.39])
+	by ewsoutbound.so.kpn.org (Halon) with ESMTPS
+	id 0fcb9fac-0966-11f0-b99f-005056abbe64;
+	Tue, 25 Mar 2025 11:44:00 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=telfort.nl; s=telfort01;
+	h=mime-version:message-id:date:subject:to:from;
+	bh=IbgcxHy/GVWWSDiGib8CWo4rgp2iD0OLAVWOKt4RwT8=;
+	b=cz4dpuVln+I98u96GDZ3TBOWWNOmnY1BIs9+V9haoVGLgpr3I2h7Kky4ATowuMcnc/bnNv29cdpwm
+	 QrEru6sCBicwIp0wG43R8erOWJ+1dx/uq0yqcV4o1Nfek6R/APd7EHIY1aRvwnTBKJBjolPPFFd/iI
+	 MDXF9Xc6yX/ZV7Z4=
+X-KPN-MID: 33|rmZ/fEtzEHBJc/oXGBnbIbyaLRW1zDSd8d6eiSa6K7mEiDx/4Q1OSVI7S65Qi+b
+ jB4brKmyMpGnoF2nXzNz/BRmlB/QVIwXDt9xs7pbcfho=
+X-KPN-VerifiedSender: Yes
+X-CMASSUN: 33|XqhIQaSFst5QFfsMf6AkZhMZ4rmsSYBfywkyL5Wh2GDbjZChc4SppmcRMy/E01r
+ ksEvDlKz3AJ9tZ1p1PYZ54A==
+Received: from localhost (77-163-176-192.fixed.kpn.net [77.163.176.192])
+	by smtp.kpnmail.nl (Halon) with ESMTPSA
+	id f4cfa0a1-0965-11f0-9bed-005056ab7447;
+	Tue, 25 Mar 2025 11:43:15 +0100 (CET)
+From: Benno Schulenberg <bensberg@telfort.nl>
+To: util-linux@vger.kernel.org
+Subject: [PATCH 01/11] ipcrm: move a constant argument in order to gettextize the message
+Date: Tue, 25 Mar 2025 11:42:55 +0100
+Message-ID: <20250325104305.23980-1-bensberg@telfort.nl>
+X-Mailer: git-send-email 2.48.1
 Precedence: bulk
 X-Mailing-List: util-linux@vger.kernel.org
 List-Id: <util-linux.vger.kernel.org>
 List-Subscribe: <mailto:util-linux+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:util-linux+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <jrtzgsznv7iazsiqrym7czmu3xabxttg5slojilaohsrpa7yat@pdihi2dmiynq>
-X-Scanned-By: MIMEDefang 3.0 on 10.30.177.15
+Content-Transfer-Encoding: 8bit
 
-On Mon, Mar 24, 2025 at 03:04:45PM +0100, Karel Zak wrote:
-> 
-> Sorry, I somehow missed the PR on GitHub :-(
-> 
-> On Wed, Mar 19, 2025 at 02:28:59PM +0100, Rasmus Villemoes wrote:
-> > This (effectively) reverts commit
-> > 1811900a91be856e794005511eac7859adb8e383.
-> > 
-> > There was no real motivation given, and it certainly makes the default
-> > behaviour of hwclock on current linux systems counter-intuitive: udev
-> > has a standard rule so that whichever rtc device is designated as the
-> > CONFIG_RTC_HCTOSYS_DEVICE one in the kernel configuration also becomes
-> > the target of the /dev/rtc symlink. People may have some other way of
-> > setting that symlink, but regardless, that must be considered the
-> > primary or default rtc for the system.
-> 
-> I agree that after 8 years, it's probably fine to use the /dev/rtc
-> symlink as the first option and assume that udevd has done its job
-> correctly. The current situation is somewhat messy.
-> 
-> Let's CC: William who is author of the original patch.
+Signed-off-by: Benno Schulenberg <bensberg@telfort.nl>
+---
+ sys-utils/ipcrm.c | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
-Forgot the CC, fixed now,
-
-    Karel
-
+diff --git a/sys-utils/ipcrm.c b/sys-utils/ipcrm.c
+index 11adf2f80..ceb101187 100644
+--- a/sys-utils/ipcrm.c
++++ b/sys-utils/ipcrm.c
+@@ -173,7 +173,7 @@ static int deprecated_main(int argc, char **argv)
+ 	return 1;
+ }
+ 
+-static unsigned long strtokey(const char *str, const char *errmesg)
++static unsigned long strtokey(const char *str)
+ {
+ 	unsigned long num;
+ 	char *end = NULL;
+@@ -190,9 +190,9 @@ static unsigned long strtokey(const char *str, const char *errmesg)
+ 	return num;
+  err:
+ 	if (errno)
+-		err(EXIT_FAILURE, "%s: '%s'", errmesg, str);
++		err(EXIT_FAILURE, _("failed to parse argument: '%s'"), str);
+ 	else
+-		errx(EXIT_FAILURE, "%s: '%s'", errmesg, str);
++		errx(EXIT_FAILURE, _("failed to parse argument: '%s'"), str);
+ 	return 0;
+ }
+ 
+@@ -200,7 +200,7 @@ static int key_to_id(type_id type, char *s)
+ {
+ 	int id;
+ 	/* keys are in hex or decimal */
+-	key_t key = strtokey(s, "failed to parse argument");
++	key_t key = strtokey(s);
+ 	if (key == IPC_PRIVATE) {
+ 		warnx(_("illegal key (%s)"), s);
+ 		return -1;
 -- 
- Karel Zak  <kzak@redhat.com>
- http://karelzak.blogspot.com
+2.48.1
 
 
