@@ -1,62 +1,65 @@
-Return-Path: <util-linux+bounces-586-lists+util-linux=lfdr.de@vger.kernel.org>
+Return-Path: <util-linux+bounces-579-lists+util-linux=lfdr.de@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
-	by mail.lfdr.de (Postfix) with ESMTPS id 85330A6EDFA
-	for <lists+util-linux@lfdr.de>; Tue, 25 Mar 2025 11:44:29 +0100 (CET)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 968A1A6EDF2
+	for <lists+util-linux@lfdr.de>; Tue, 25 Mar 2025 11:43:40 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 1654016812B
-	for <lists+util-linux@lfdr.de>; Tue, 25 Mar 2025 10:44:29 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id B95C4161D98
+	for <lists+util-linux@lfdr.de>; Tue, 25 Mar 2025 10:43:37 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id D86D21EB5D4;
-	Tue, 25 Mar 2025 10:44:25 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0991B254863;
+	Tue, 25 Mar 2025 10:43:35 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=telfort.nl header.i=@telfort.nl header.b="cz4dpuVl"
+	dkim=pass (1024-bit key) header.d=telfort.nl header.i=@telfort.nl header.b="rsRgf7tY"
 X-Original-To: util-linux@vger.kernel.org
-Received: from ewsoutbound.kpnmail.nl (ewsoutbound.kpnmail.nl [195.121.94.167])
+Received: from ewsoutbound.kpnmail.nl (ewsoutbound.kpnmail.nl [195.121.94.170])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1D607433A8
-	for <util-linux@vger.kernel.org>; Tue, 25 Mar 2025 10:44:23 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=195.121.94.167
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 51B88254869
+	for <util-linux@vger.kernel.org>; Tue, 25 Mar 2025 10:43:30 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=195.121.94.170
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1742899465; cv=none; b=bEJg/+jhG0SNFrKiRyieA2+YU6OEgmRcPewEIevt3ldttQ9wTe01F2HSBaGTtaNVLGuB7OcNU9RckmrbNssFQXPO0oPVlL470oME6/dEQXtZaLpz3/HejywrinIWaW3O7/TqLUQfrcK1GJyopINq0b8zU2au2X+jW29zN1bUJwo=
+	t=1742899414; cv=none; b=WOar5CeWIKzZi7nYh4sWqcB+fHx51ek8O5lrnXqttlAJqeLHXNphLaxoRmtEk9BcLhOSCPBHu7BjQ3RIaGM9+pASvdFKnyAskDNEDD2rsJRYB2PdJ7VyObJzq74TUj2f+TzNIno5feW9hhw4BqhCIBW2rXdSZ6bMMF8WibaF95g=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1742899465; c=relaxed/simple;
-	bh=+/GPmL4AogkcRgmvFYPtjGH5h26n28y69q0WyZM1Mwo=;
-	h=From:To:Subject:Date:Message-ID:MIME-Version; b=OUv04eo3B62uVLTY88mPxhvzxlU71RcPoteV+1hbOqSHeFDNrmv2n/VjIzSo64IeTG/lNpyZPmDWD6tiaZ/Bl/cjGfYCOkDNcGIcSyq4Iy8kSIQSViLyy0OjcdU2pY7muFqqWYKywOQaWXB1G1C9hlvjAViVtkVLz+mtsYVtUKI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=telfort.nl; spf=pass smtp.mailfrom=telfort.nl; dkim=pass (1024-bit key) header.d=telfort.nl header.i=@telfort.nl header.b=cz4dpuVl; arc=none smtp.client-ip=195.121.94.167
+	s=arc-20240116; t=1742899414; c=relaxed/simple;
+	bh=6GASSVf0WdHcTkzYd1EN3lmSlSEsFDkabIxCTbrBbYo=;
+	h=From:To:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version; b=W0KCkRuu8wQ2ckTFvX0/KeOyNq4A/FDwzXW/+HpzUc6fbSi3wyu+gb7xAxbaA/gv07+6Ts/dM48WjCg73yckbKOXJ+RXO9wthEOgOyinADtqgkLW1jqZYe0cUqsmNXtUMT7x9MjPqYWVcAheHSCqnk1rGFy6MuJK2sisv7i70Pk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=telfort.nl; spf=pass smtp.mailfrom=telfort.nl; dkim=pass (1024-bit key) header.d=telfort.nl header.i=@telfort.nl header.b=rsRgf7tY; arc=none smtp.client-ip=195.121.94.170
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=telfort.nl
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=telfort.nl
-X-KPN-MessageId: 0fcb9fac-0966-11f0-b99f-005056abbe64
-Received: from smtp.kpnmail.nl (unknown [10.31.155.39])
+X-KPN-MessageId: 053771ff-0966-11f0-bc28-005056ab378f
+Received: from smtp.kpnmail.nl (unknown [10.31.155.40])
 	by ewsoutbound.so.kpn.org (Halon) with ESMTPS
-	id 0fcb9fac-0966-11f0-b99f-005056abbe64;
-	Tue, 25 Mar 2025 11:44:00 +0100 (CET)
+	id 053771ff-0966-11f0-bc28-005056ab378f;
+	Tue, 25 Mar 2025 11:43:42 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=telfort.nl; s=telfort01;
 	h=mime-version:message-id:date:subject:to:from;
-	bh=IbgcxHy/GVWWSDiGib8CWo4rgp2iD0OLAVWOKt4RwT8=;
-	b=cz4dpuVln+I98u96GDZ3TBOWWNOmnY1BIs9+V9haoVGLgpr3I2h7Kky4ATowuMcnc/bnNv29cdpwm
-	 QrEru6sCBicwIp0wG43R8erOWJ+1dx/uq0yqcV4o1Nfek6R/APd7EHIY1aRvwnTBKJBjolPPFFd/iI
-	 MDXF9Xc6yX/ZV7Z4=
-X-KPN-MID: 33|rmZ/fEtzEHBJc/oXGBnbIbyaLRW1zDSd8d6eiSa6K7mEiDx/4Q1OSVI7S65Qi+b
- jB4brKmyMpGnoF2nXzNz/BRmlB/QVIwXDt9xs7pbcfho=
+	bh=1EWnFgm1mCMzLKaCrS9UrDDsEItV0b13V0cyitTog3o=;
+	b=rsRgf7tYr1w8Oqapo5vZkNOBqe2TGYu8sf6Ubj7cXIjG2fclpXRbN6lk4+2TYDiuGoM0hTwolvIkW
+	 Ba3+GXD0PssVfxKa6j+nptYzi9NcswckgW+/92k4REWi8efmRQZOc600qdXCG8BSGq9K6yYa2kXzsz
+	 Sd1TxE/1BS8EVmi4=
+X-KPN-MID: 33|jVnYq7Pmlpw2a8C4BnkxhcKJIRpoOdrF2kUSynP5Opdva0pjpkNF6wg2CfwyHxZ
+ 3TppxU/l3JQMyAj4zHmMgpvJMNb5WMTAhlKD4gTE7jao=
 X-KPN-VerifiedSender: Yes
-X-CMASSUN: 33|XqhIQaSFst5QFfsMf6AkZhMZ4rmsSYBfywkyL5Wh2GDbjZChc4SppmcRMy/E01r
- ksEvDlKz3AJ9tZ1p1PYZ54A==
+X-CMASSUN: 33|8iNU185UjVbDuWdMyUSoYvD17ZgHu6EgiPTAjHOGHOlknqdipg8z4S3jPNwGsxK
+ SKMczVY9rJp5sXzYCivoQIA==
 Received: from localhost (77-163-176-192.fixed.kpn.net [77.163.176.192])
 	by smtp.kpnmail.nl (Halon) with ESMTPSA
-	id f4cfa0a1-0965-11f0-9bed-005056ab7447;
-	Tue, 25 Mar 2025 11:43:15 +0100 (CET)
+	id f93f86b8-0965-11f0-8503-005056ab7584;
+	Tue, 25 Mar 2025 11:43:22 +0100 (CET)
 From: Benno Schulenberg <bensberg@telfort.nl>
 To: util-linux@vger.kernel.org
-Subject: [PATCH 01/11] ipcrm: move a constant argument in order to gettextize the message
-Date: Tue, 25 Mar 2025 11:42:55 +0100
-Message-ID: <20250325104305.23980-1-bensberg@telfort.nl>
+Subject: [PATCH 02/11] ipcrm: in usage text, use two lines when option+arguments is very long
+Date: Tue, 25 Mar 2025 11:42:56 +0100
+Message-ID: <20250325104305.23980-2-bensberg@telfort.nl>
 X-Mailer: git-send-email 2.48.1
+In-Reply-To: <20250325104305.23980-1-bensberg@telfort.nl>
+References: <20250325104305.23980-1-bensberg@telfort.nl>
 Precedence: bulk
 X-Mailing-List: util-linux@vger.kernel.org
 List-Id: <util-linux.vger.kernel.org>
@@ -65,45 +68,47 @@ List-Unsubscribe: <mailto:util-linux+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
+Also, do not use tabs in the usage text, and keep it within 80 columns.
+
 Signed-off-by: Benno Schulenberg <bensberg@telfort.nl>
 ---
- sys-utils/ipcrm.c | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
+ sys-utils/ipcrm.c | 23 ++++++++++++-----------
+ 1 file changed, 12 insertions(+), 11 deletions(-)
 
 diff --git a/sys-utils/ipcrm.c b/sys-utils/ipcrm.c
-index 11adf2f80..ceb101187 100644
+index ceb101187..8ddb104f4 100644
 --- a/sys-utils/ipcrm.c
 +++ b/sys-utils/ipcrm.c
-@@ -173,7 +173,7 @@ static int deprecated_main(int argc, char **argv)
- 	return 1;
- }
+@@ -56,17 +56,18 @@ static void __attribute__((__noreturn__)) usage(void)
+ 	fputs(_("Remove certain IPC resources.\n"), out);
  
--static unsigned long strtokey(const char *str, const char *errmesg)
-+static unsigned long strtokey(const char *str)
- {
- 	unsigned long num;
- 	char *end = NULL;
-@@ -190,9 +190,9 @@ static unsigned long strtokey(const char *str, const char *errmesg)
- 	return num;
-  err:
- 	if (errno)
--		err(EXIT_FAILURE, "%s: '%s'", errmesg, str);
-+		err(EXIT_FAILURE, _("failed to parse argument: '%s'"), str);
- 	else
--		errx(EXIT_FAILURE, "%s: '%s'", errmesg, str);
-+		errx(EXIT_FAILURE, _("failed to parse argument: '%s'"), str);
- 	return 0;
- }
+ 	fputs(USAGE_OPTIONS, out);
+-	fputs(_(" -m, --shmem-id <id>        				remove shared memory segment by id\n"), out);
+-	fputs(_(" -M, --shmem-key <key>      				remove shared memory segment by key\n"), out);
+-	fputs(_("     --posix-shmem <name>   				remove POSIX shared memory segment by name\n"), out);
+-	fputs(_(" -q, --queue-id <id>        				remove message queue by id\n"), out);
+-	fputs(_(" -Q, --queue-key <key>      				remove message queue by key\n"), out);
+-	fputs(_("     --posix-mqueue <name>  				remove POSIX message queue by name\n"), out);
+-	fputs(_(" -s, --semaphore-id <id>    				remove semaphore by id\n"), out);
+-	fputs(_(" -S, --semaphore-key <key>  				remove semaphore by key\n"), out);
+-	fputs(_("     --posix-semaphore <name> 				remove POSIX semaphore by name\n"), out);
+-	fputs(_(" -a, --all[=shm|pshm|msg|pmsg|sem|psem]	remove all (in the specified category)\n"), out);
+-	fputs(_(" -v, --verbose              				explain what is being done\n"), out);
++	fputs(_(" -m, --shmem-id <id>           remove shared memory segment by id\n"), out);
++	fputs(_(" -M, --shmem-key <key>         remove shared memory segment by key\n"), out);
++	fputs(_("     --posix-shmem <name>      remove POSIX shared memory segment by name\n"), out);
++	fputs(_(" -q, --queue-id <id>           remove message queue by id\n"), out);
++	fputs(_(" -Q, --queue-key <key>         remove message queue by key\n"), out);
++	fputs(_("     --posix-mqueue <name>     remove POSIX message queue by name\n"), out);
++	fputs(_(" -s, --semaphore-id <id>       remove semaphore by id\n"), out);
++	fputs(_(" -S, --semaphore-key <key>     remove semaphore by key\n"), out);
++	fputs(_("     --posix-semaphore <name>  remove POSIX semaphore by name\n"), out);
++	fputs(_(" -a, --all[=shm|pshm|msg|pmsg|sem|psem]\n"
++	        "                               remove all (in the specified category)\n"), out);
++	fputs(_(" -v, --verbose                 explain what is being done\n"), out);
  
-@@ -200,7 +200,7 @@ static int key_to_id(type_id type, char *s)
- {
- 	int id;
- 	/* keys are in hex or decimal */
--	key_t key = strtokey(s, "failed to parse argument");
-+	key_t key = strtokey(s);
- 	if (key == IPC_PRIVATE) {
- 		warnx(_("illegal key (%s)"), s);
- 		return -1;
+ 	fputs(USAGE_SEPARATOR, out);
+ 	fprintf(out, USAGE_HELP_OPTIONS(28));
 -- 
 2.48.1
 
