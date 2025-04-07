@@ -1,62 +1,65 @@
-Return-Path: <util-linux+bounces-630-lists+util-linux=lfdr.de@vger.kernel.org>
+Return-Path: <util-linux+bounces-632-lists+util-linux=lfdr.de@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6AC10A7E442
-	for <lists+util-linux@lfdr.de>; Mon,  7 Apr 2025 17:27:28 +0200 (CEST)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 260ABA7E423
+	for <lists+util-linux@lfdr.de>; Mon,  7 Apr 2025 17:24:57 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 5949A3BE04F
-	for <lists+util-linux@lfdr.de>; Mon,  7 Apr 2025 15:17:20 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 28AE74249BD
+	for <lists+util-linux@lfdr.de>; Mon,  7 Apr 2025 15:17:23 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 359D61F8BAA;
-	Mon,  7 Apr 2025 15:16:22 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id C18F51F8AF8;
+	Mon,  7 Apr 2025 15:16:28 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=telfort.nl header.i=@telfort.nl header.b="ayAhXHH0"
+	dkim=pass (1024-bit key) header.d=telfort.nl header.i=@telfort.nl header.b="ejmt4n9/"
 X-Original-To: util-linux@vger.kernel.org
 Received: from ewsoutbound.kpnmail.nl (ewsoutbound.kpnmail.nl [195.121.94.167])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3498E1F892E
-	for <util-linux@vger.kernel.org>; Mon,  7 Apr 2025 15:16:20 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B388B1F4E49
+	for <util-linux@vger.kernel.org>; Mon,  7 Apr 2025 15:16:26 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=195.121.94.167
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1744038982; cv=none; b=scmyc6PKbkZ5hk4hlA2Qvq1MSsBig4zrZRNu7VbIOoXHfOO+QbGDzwBkNkeS7bGh4lWoOLtQzvlJrhs3HLh108WzI9nec+JSMu71rlKI5gQ93h7dTLeoY+kS5CaMHB9rgDbgyT79MRZwEpu4efPeS6Tpy05E3/qATNZ8HbLp89s=
+	t=1744038988; cv=none; b=EIf/IaU3l/ZvTYYiGxrAmOcGxk7XvBJlFfjbvCRSPMfZNvr7fdtqHfprlacQ68919kjyMUH97wLhJ/WjXoz4H2ICbQnKWunuvrN2yQh6RPtGErNuB3+HEaL4QlAJQfRj+9WuNJdo++y82qKCcACyHbLOMvuEj2RdpNOim1BtsX8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1744038982; c=relaxed/simple;
-	bh=rCzAsiOwuBjtigFeVqQmCNFFKqPYydxPymv3jPQr7uw=;
-	h=From:To:Subject:Date:Message-ID:MIME-Version; b=HFObebpEVtjlr7iKIFfZ6S75EGU6+5LlmAtXdUUuOU2fRIV8ooBl9k6uSq6/iUHZaDDhIo6YT4BAO37jTSoOnzCeEluVwPYP9Il5yI3sK0uhFnhsRsSUNPw76Tf98e6h7nxTBjEFnWoXtO5K+L3VC2DgT9rKu5AwV9c+xfk23zM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=telfort.nl; spf=pass smtp.mailfrom=telfort.nl; dkim=pass (1024-bit key) header.d=telfort.nl header.i=@telfort.nl header.b=ayAhXHH0; arc=none smtp.client-ip=195.121.94.167
+	s=arc-20240116; t=1744038988; c=relaxed/simple;
+	bh=CxC1qbuxlJD3PLPwDBex1lHyjwC/u5s0ua8xTHa3mhc=;
+	h=From:To:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version; b=VvpTzn4cTwYCV4/0lF7Gst75WMyD7OxdIyZXpgJ7sx5bcZxwn3egp4w17F7aZflOnsfzzzfNnQ2K/lfsESGCUB0n8Ea+DdvctcGmpTAFS09kLtApLCibMkj6cu0ylGFZZwQqVCp7+DnpH8LzvpD5pirW8B97cknCRUz4BzygQvo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=telfort.nl; spf=pass smtp.mailfrom=telfort.nl; dkim=pass (1024-bit key) header.d=telfort.nl header.i=@telfort.nl header.b=ejmt4n9/; arc=none smtp.client-ip=195.121.94.167
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=telfort.nl
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=telfort.nl
-X-KPN-MessageId: 38e7dc10-13c3-11f0-b9a0-005056abbe64
+X-KPN-MessageId: 3d32ff8c-13c3-11f0-b9a0-005056abbe64
 Received: from smtp.kpnmail.nl (unknown [10.31.155.40])
 	by ewsoutbound.so.kpn.org (Halon) with ESMTPS
-	id 38e7dc10-13c3-11f0-b9a0-005056abbe64;
-	Mon, 07 Apr 2025 17:16:04 +0200 (CEST)
+	id 3d32ff8c-13c3-11f0-b9a0-005056abbe64;
+	Mon, 07 Apr 2025 17:16:11 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=telfort.nl; s=telfort01;
 	h=mime-version:message-id:date:subject:to:from;
-	bh=0aOv98u6+wpzGFWpGHt/lCCth153mvID+/g4F9IojPk=;
-	b=ayAhXHH0iLDQ0vMM56o8f2W7/k/9SI5/HKgHGi8IYCsyTWSjK9HF6KK5Bqm50+Eo9j+ZmvdrBGSif
-	 NXUTgzaJ+pZhfmmT1/5n/JvfdiySWZH3U2o683IPSWrWZhAHISSVBEbOPlil1FxqWkLPOtMPer+pzF
-	 zoT4TtgJkLcsyiIY=
-X-KPN-MID: 33|1UI/JlsmqmwiK7wMfCfBzhqu9WFBxsToIF25ZerJQu4jaS7MGA07Wu0lTCsvMy3
- 4Wn35DU+ZU6SuuHKeCIlGtgUm/lwkTBC0dRHsGMxNx6Y=
+	bh=Rmy3x6hab2z3EkQvD+Q525tnaala0mjcsemN27yvkuc=;
+	b=ejmt4n9/t0Ji6wGrPRAEkAZE6LFKHQGZhqamXzSbKaTd2dA/zYxFi9hb1SzbzUhQP0ZI3HAXsYNKk
+	 GjC+WBUcvZyyd2UdY/byojAEVm9rU1rkEGXBVuG/0s1Klb3xtRn+UeNMDcAhLTong+LwFHjFJjbTJt
+	 4Meisao713GRoLPA=
+X-KPN-MID: 33|4Yo5PTS+qlbWxbITDa4FRMv12FSU4iKMcfq53WCAPVuZL66QSvywdxyQ/08LB3t
+ LFXr/S1uX9galTF+cV5sKLPe47Dyz+jWxBw7OEklbtn4=
 X-KPN-VerifiedSender: Yes
-X-CMASSUN: 33|Rl92V5mtaNP2aPH1+XezViNxhmTLhZrpRRo3rnpQ5y4Gt/wFYilrMV9nDcXiP9L
- wtovkQM5lKxkzawdYulDuGQ==
+X-CMASSUN: 33|aaGoX/Crtf/Fn53c8+3XHhf4/iQFBsVcO+19A128lRWsZ3XambU2FnmzX4pK5Ba
+ gjclNEDObguD8x9/ElxlHVQ==
 Received: from localhost (77-163-176-192.fixed.kpn.net [77.163.176.192])
 	by smtp.kpnmail.nl (Halon) with ESMTPSA
-	id 18f318b0-13c3-11f0-852c-005056ab7584;
-	Mon, 07 Apr 2025 17:15:10 +0200 (CEST)
+	id 1d42c227-13c3-11f0-852c-005056ab7584;
+	Mon, 07 Apr 2025 17:15:18 +0200 (CEST)
 From: Benno Schulenberg <bensberg@telfort.nl>
 To: util-linux@vger.kernel.org
-Subject: [PATCH 1/8] setarch: (man) remove a synopsis line that mistakenly mentions `arch`
-Date: Mon,  7 Apr 2025 17:14:32 +0200
-Message-ID: <20250407151503.23394-1-bensberg@telfort.nl>
+Subject: [PATCH 2/8] choom: (man) add the missing SYNOPSIS section header, and improve wording
+Date: Mon,  7 Apr 2025 17:14:33 +0200
+Message-ID: <20250407151503.23394-2-bensberg@telfort.nl>
 X-Mailer: git-send-email 2.48.1
+In-Reply-To: <20250407151503.23394-1-bensberg@telfort.nl>
+References: <20250407151503.23394-1-bensberg@telfort.nl>
 Precedence: bulk
 X-Mailing-List: util-linux@vger.kernel.org
 List-Id: <util-linux.vger.kernel.org>
@@ -65,75 +68,35 @@ List-Unsubscribe: <mailto:util-linux+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Bug existed since commit 0554182555 from seven years ago.
-
-Also, correct the markup for --show and --pid, improve the wording,
-and reduce redundancy by reshuffling the --pid option.
-
 Signed-off-by: Benno Schulenberg <bensberg@telfort.nl>
 ---
- sys-utils/setarch.8.adoc | 22 +++++++++-------------
- 1 file changed, 9 insertions(+), 13 deletions(-)
+ sys-utils/choom.1.adoc | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
 
-diff --git a/sys-utils/setarch.8.adoc b/sys-utils/setarch.8.adoc
-index 1d8c390b3..7ad710dff 100644
---- a/sys-utils/setarch.8.adoc
-+++ b/sys-utils/setarch.8.adoc
-@@ -16,8 +16,6 @@ setarch - change reported architecture in new program environment and/or set per
+diff --git a/sys-utils/choom.1.adoc b/sys-utils/choom.1.adoc
+index 51d43e7b9..b699e967d 100644
+--- a/sys-utils/choom.1.adoc
++++ b/sys-utils/choom.1.adoc
+@@ -8,7 +8,9 @@
  
- *setarch* *--list*|*-h*|*-V*
+ == NAME
  
--*arch* [options] [_program_ [_argument_...]]
--
+-choom - display and adjust OOM-killer score.
++choom - display or adjust OOM-killer score
++
++== SYNOPSIS
+ 
+ *choom* *-p* _PID_
+ 
+@@ -18,7 +20,7 @@ choom - display and adjust OOM-killer score.
+ 
  == DESCRIPTION
  
- *setarch* modifies execution domains and process personality flags.
-@@ -31,28 +29,26 @@ Since version 2.33 the _arch_ command line argument is optional and *setarch* ma
- *--list*::
- List the architectures that *setarch* knows about. Whether *setarch* can actually set each of these architectures depends on the running kernel.
+-The *choom* command displays and adjusts Out-Of-Memory killer score setting.
++The *choom* command displays or adjusts the Out-Of-Memory killer score setting.
  
--*--show[=personality]*::
-+*--show*[**=**_personality_]::
- Show the currently active personality and flags.
--If the *personality* argument is provided, it is shown instead of the current one.
--*personality* is a hexadecimal number with values was described in *sys/personality.h*.
--+
--If *--pid=pid* option is provided, show them of the specifies process.
-+If the _personality_ argument is provided, that personality is shown instead of the current one.
-+_personality_ is a hexadecimal number whose possible values are described in *sys/personality.h*.
-+
-+*-p*, **--pid=**_pid_::
-+When used with *--show*, show the personality and flags of the specified process.
+ == OPTIONS
  
- *--uname-2.6*::
--Causes the _program_ to see a kernel version number beginning with 2.6. Turns on *UNAME26*.
-+Causes the specified _program_ to see a kernel version number beginning with 2.6. Turns on *UNAME26*.
- 
- *-v*, *--verbose*::
- Be verbose.
- 
- *-3*, *--3gb*::
--Specifies _program_ should use a maximum of 3GB of address space. Supported on x86. Turns on *ADDR_LIMIT_3GB*.
-+The specified _program_ should use a maximum of 3GB of address space. Supported on x86. Turns on *ADDR_LIMIT_3GB*.
- 
- *--4gb*::
- This option has no effect. It is retained for backward compatibility only, and may be removed in future releases.
- 
--*-p*, *--pid=pid*::
--With *--show* option, show the currently active personality and flags of the specifies process.
--
- *-B*, *--32bit*::
- Limit the address space to 32 bits to emulate hardware. Supported on ARM and Alpha. Turns on *ADDR_LIMIT_32BIT*.
- 
-@@ -82,7 +78,7 @@ SVr4 bug emulation that will set *mmap*(2) page zero as read-only. Use when _pro
- 
- include::man-common/help-version.adoc[]
- 
--== EXAMPLE
-+== EXAMPLES
- 
- ....
- setarch --addr-no-randomize mytestprog
 -- 
 2.48.1
 
