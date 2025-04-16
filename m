@@ -1,131 +1,88 @@
-Return-Path: <util-linux+bounces-644-lists+util-linux=lfdr.de@vger.kernel.org>
+Return-Path: <util-linux+bounces-648-lists+util-linux=lfdr.de@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id F32B3A87C26
-	for <lists+util-linux@lfdr.de>; Mon, 14 Apr 2025 11:46:46 +0200 (CEST)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 9D80FA8B396
+	for <lists+util-linux@lfdr.de>; Wed, 16 Apr 2025 10:25:28 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id BC1633AFB6C
-	for <lists+util-linux@lfdr.de>; Mon, 14 Apr 2025 09:46:30 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 831635A485E
+	for <lists+util-linux@lfdr.de>; Wed, 16 Apr 2025 08:24:04 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 42401257AFA;
-	Mon, 14 Apr 2025 09:46:42 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id D35582376F8;
+	Wed, 16 Apr 2025 08:22:22 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=telfort.nl header.i=@telfort.nl header.b="kxx0MRs7"
+	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="MkED5zLg"
 X-Original-To: util-linux@vger.kernel.org
-Received: from ewsoutbound.kpnmail.nl (ewsoutbound.kpnmail.nl [195.121.94.168])
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BB467F9FE
-	for <util-linux@vger.kernel.org>; Mon, 14 Apr 2025 09:46:39 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=195.121.94.168
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 04559205E00
+	for <util-linux@vger.kernel.org>; Wed, 16 Apr 2025 08:22:20 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=170.10.129.124
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1744624002; cv=none; b=ktvikMCn2/aG2sy+pldG8uDNdt25ZKHt1y6plyvfH/YRVxe595/kVrrPix7kk0RfJ4CaUaSbZzxBd1iCvQO9vNQx4yr2cAAu9HTvY0df86FgyMa+uuAU7l/BkRd4UL1+ZfNRbr0KfYYJwmW8W95bZ76rqTnuOc4GaxZIDZewOhU=
+	t=1744791742; cv=none; b=otcuBlKr5pDzSZzeGEXxW/fA/njJTA/RthTVaOTSMonVPRt5H4RGgZeUpvlFDTAHEK7nNtPaISCXGMDOKIitfcPxJ+huQZaFzp0SpJNbJios8ES7leo4Tl7R+H0JC3sTSMhcDyYlQNGDLGm35IMrxPtepzcmLR7LACYy5iZPoH4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1744624002; c=relaxed/simple;
-	bh=PsVs/qpVw8eSbckoMwovX9FGRZqlJgOtPCMhRs5fF18=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=BsxpZy+qrwyeFn/GPaqFbPxsNHgucqA6DFG3HAe6XGO9qwAuqSLldVWlJlNwhgXz35U1vX0PxwBrBqyM/8mvhmmF5NIg1uhdlnCUw0toq+3h5/MWeWHu6+8eSl6NZa3o6owBbd91KD3RCexyZsSsD8k7lbEsSsBul/vtEDM5ZxE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=telfort.nl; spf=pass smtp.mailfrom=telfort.nl; dkim=pass (1024-bit key) header.d=telfort.nl header.i=@telfort.nl header.b=kxx0MRs7; arc=none smtp.client-ip=195.121.94.168
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=telfort.nl
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=telfort.nl
-X-KPN-MessageId: 6e2b3764-1915-11f0-86cb-005056aba152
-Received: from smtp.kpnmail.nl (unknown [10.31.155.40])
-	by ewsoutbound.so.kpn.org (Halon) with ESMTPS
-	id 6e2b3764-1915-11f0-86cb-005056aba152;
-	Mon, 14 Apr 2025 11:47:08 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=telfort.nl; s=telfort01;
-	h=mime-version:message-id:date:subject:to:from;
-	bh=LaQ859JPerH5nuMTUD39UTvueYxSXp0HNFhqR6B4QGY=;
-	b=kxx0MRs78uyevPAgHBVu/1LS4iWQ6hyfm4jmFJc1WVdukuwPBq1xrceDcFfu4FWXWodlN+ppquUJS
-	 MTrPB/6GQBx8JoJfRhNP3gBy/tJviEm1R8pU/21671E1aIh5sHK+baHvJG+05dz+2fue47eyQB3LYx
-	 zfZEXWQkgp7JMdPY=
-X-KPN-MID: 33|Sm2wJJPflblRzW56hqxxmRWitNLk7mic039p+RhS7z86ZNO/dvS9fSbwNUATnw8
- lrd071okbo/2p7C5Wa0y16Q==
-X-KPN-VerifiedSender: Yes
-X-CMASSUN: 33|ZL/f+4pLA5NJr96z/hY19uG4bgG3INRT5puQPGdXrk3jD+dCTY3Vf3bGWcr1oHi
- c/1HM5pKH/cl44F3vCCN8RA==
-Received: from localhost (77-163-176-192.fixed.kpn.net [77.163.176.192])
-	by smtp.kpnmail.nl (Halon) with ESMTPSA
-	id 5c23d40e-1915-11f0-853e-005056ab7584;
-	Mon, 14 Apr 2025 11:46:38 +0200 (CEST)
-From: Benno Schulenberg <bensberg@telfort.nl>
-To: util-linux@vger.kernel.org
-Cc: Stefan Schubert <schubi@suse.de>
-Subject: [PATCH 8/8] lastlog2: besides -v, recognize also the standard -V for --version
-Date: Mon, 14 Apr 2025 11:45:34 +0200
-Message-ID: <20250414094534.9504-8-bensberg@telfort.nl>
-X-Mailer: git-send-email 2.48.1
-In-Reply-To: <20250414094534.9504-1-bensberg@telfort.nl>
-References: <20250414094534.9504-1-bensberg@telfort.nl>
+	s=arc-20240116; t=1744791742; c=relaxed/simple;
+	bh=sa7MLg+45ssrq7n6goT3JYddqP/1jP0tBbM3OV4Jq4g=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=ibQv1XlM2c6cFsv84jv1WezVonMCl1sla2+2kesTf0SlKH00NCkyPS6cbLOHSPr63baZ/WvxWyRZBP17HH1/mEH9N2Xvb12/IeOREg0XA5gG3koWgAWHyrM6D9IX6RA+1A+r4/0vnbzn6lHlnC9jYnmilBoag2Oo7EoKsvr6ikI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=MkED5zLg; arc=none smtp.client-ip=170.10.129.124
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redhat.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1744791739;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references;
+	bh=OjcjolA7dEPmNPpJ3tp5HO7AzbWANq8jh3vWiEKXXgY=;
+	b=MkED5zLgpqkuKvGQie0emt1EaXaHedJy1dnb36yRCsyMa7IJD9z5K0kzR7D/nhR2tdyoCa
+	Qk3wWKqKvqNN/zN5ARQ5R8f6nIMpkgVf5jdG47bb7YGOZbcPNxbXdEP/isCvbdB9ccbmX0
+	ZnxCPRXiW+vKh0bTtpiH4p4Qb21r5tM=
+Received: from mx-prod-mc-02.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
+ relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-201-U9-mc6OoOQG0uIkddu5JXQ-1; Wed,
+ 16 Apr 2025 04:22:16 -0400
+X-MC-Unique: U9-mc6OoOQG0uIkddu5JXQ-1
+X-Mimecast-MFC-AGG-ID: U9-mc6OoOQG0uIkddu5JXQ_1744791734
+Received: from mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com (mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.111])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by mx-prod-mc-02.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS id 8645D19560A2;
+	Wed, 16 Apr 2025 08:22:14 +0000 (UTC)
+Received: from ws.net.home (unknown [10.45.226.130])
+	by mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS id 627C2180045B;
+	Wed, 16 Apr 2025 08:22:12 +0000 (UTC)
+Date: Wed, 16 Apr 2025 10:22:09 +0200
+From: Karel Zak <kzak@redhat.com>
+To: Benno Schulenberg <bensberg@telfort.nl>
+Cc: util-linux@vger.kernel.org
+Subject: Re: [PATCH] setarch: (man) correct the markup of the synopsis and of
+ two options
+Message-ID: <2ujt7563btksspjmsbysohezbt4eq5pmmnruijxnd47mu3vede@erx6yybw6gud>
+References: <20250409093635.6973-1-bensberg@telfort.nl>
 Precedence: bulk
 X-Mailing-List: util-linux@vger.kernel.org
 List-Id: <util-linux.vger.kernel.org>
 List-Subscribe: <mailto:util-linux+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:util-linux+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20250409093635.6973-1-bensberg@telfort.nl>
+X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.111
 
-The --help text already proclaimed that -V would work.
+On Wed, Apr 09, 2025 at 11:36:35AM +0200, Benno Schulenberg wrote:
+>  sys-utils/setarch.8.adoc | 37 +++++++++++++++++++------------------
+>  1 file changed, 19 insertions(+), 18 deletions(-)
 
-CC: Stefan Schubert <schubi@suse.de>
-Signed-off-by: Benno Schulenberg <bensberg@telfort.nl>
----
- misc-utils/lastlog2.8.adoc | 6 +-----
- misc-utils/lastlog2.c      | 5 +++--
- 2 files changed, 4 insertions(+), 7 deletions(-)
+Applied, thanks!
 
-diff --git a/misc-utils/lastlog2.8.adoc b/misc-utils/lastlog2.8.adoc
-index e14e6b9cc..8a4b604ae 100644
---- a/misc-utils/lastlog2.8.adoc
-+++ b/misc-utils/lastlog2.8.adoc
-@@ -70,11 +70,7 @@ Print only last-login records more recent than _days_.
- *-u*, *--user* _login_::
- Print (or modify) the last-login record of the user _login_.
- 
--*-h*, *--help*::
--Display help text and exit.
--
--*-v*, *--version*::
--Display version and exit.
-+include::man-common/help-version.adoc[]
- 
- == FILES
- 
-diff --git a/misc-utils/lastlog2.c b/misc-utils/lastlog2.c
-index 91ba699cf..e973b5461 100644
---- a/misc-utils/lastlog2.c
-+++ b/misc-utils/lastlog2.c
-@@ -147,7 +147,7 @@ int main(int argc, char **argv)
- 		{"set",      no_argument,       NULL, 'S'},
- 		{"time",     required_argument, NULL, 't'},
- 		{"user",     required_argument, NULL, 'u'},
--		{"version",  no_argument,       NULL, 'v'},
-+		{"version",  no_argument,       NULL, 'V'},
- 		{NULL, 0, NULL, '\0'}
- 	};
- 	char *error = NULL;
-@@ -163,7 +163,7 @@ int main(int argc, char **argv)
- 
- 	int c;
- 
--	while ((c = getopt_long(argc, argv, "ab:Cd:hi:r:sSt:u:v", longopts, NULL)) != -1) {
-+	while ((c = getopt_long(argc, argv, "ab:Cd:hi:r:sSt:u:vV", longopts, NULL)) != -1) {
- 		switch (c) {
- 		case 'a': /* active; print lastlog excluding '**Never logged in**' users */
- 			aflg = 1;
-@@ -214,6 +214,7 @@ int main(int argc, char **argv)
- 			uflg = 1;
- 			user = optarg;
- 			break;
-+		case 'V':
- 		case 'v': /* version; Print version number and exit */
- 			print_version(EXIT_SUCCESS);
- 			break;
 -- 
-2.48.1
+ Karel Zak  <kzak@redhat.com>
+ http://karelzak.blogspot.com
 
 
