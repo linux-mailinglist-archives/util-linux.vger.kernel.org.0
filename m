@@ -1,62 +1,62 @@
-Return-Path: <util-linux+bounces-667-lists+util-linux=lfdr.de@vger.kernel.org>
+Return-Path: <util-linux+bounces-662-lists+util-linux=lfdr.de@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id A4B55A9A887
-	for <lists+util-linux@lfdr.de>; Thu, 24 Apr 2025 11:43:07 +0200 (CEST)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
+	by mail.lfdr.de (Postfix) with ESMTPS id 07688A9A856
+	for <lists+util-linux@lfdr.de>; Thu, 24 Apr 2025 11:40:08 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id CB580920203
-	for <lists+util-linux@lfdr.de>; Thu, 24 Apr 2025 09:41:36 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 304CF1B84323
+	for <lists+util-linux@lfdr.de>; Thu, 24 Apr 2025 09:40:19 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0880025487C;
-	Thu, 24 Apr 2025 09:34:09 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 66122225407;
+	Thu, 24 Apr 2025 09:33:12 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=telfort.nl header.i=@telfort.nl header.b="ZuX4TnJ5"
+	dkim=pass (1024-bit key) header.d=telfort.nl header.i=@telfort.nl header.b="C+qG3fqo"
 X-Original-To: util-linux@vger.kernel.org
-Received: from ewsoutbound.kpnmail.nl (ewsoutbound.kpnmail.nl [195.121.94.168])
+Received: from ewsoutbound.kpnmail.nl (ewsoutbound.kpnmail.nl [195.121.94.170])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1CE3D231A32
-	for <util-linux@vger.kernel.org>; Thu, 24 Apr 2025 09:34:06 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=195.121.94.168
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A4CB719F40B
+	for <util-linux@vger.kernel.org>; Thu, 24 Apr 2025 09:33:07 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=195.121.94.170
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1745487248; cv=none; b=j+AaKvFSdZIrOVJMcAve9pPULc0XChTQl22fhncNZg7VmnT+P0nMXBJapWeXKxXyGiJHZ4c2BVO31p1ckSj2OAGrtBDRbzNdhAViyYcMa6pazwq7KgDdf49J5MYs6tTmsTSsovMfh1+NAd0cRkcw947UxxEO/DbxsJ31dnmSgaA=
+	t=1745487191; cv=none; b=mvaXGOMbVXgmZm9pVoUWrdfnuMnpERKJwgRDmKEeXKBB+j9LJ5mfwJAQ6y9KjWu6fcw8+ItNS8qZerl/8OvuhC/yWou+9gyupSWvriJX8yuMYc3CJz6+JIBLoCZms0VsGy2wcTSSlTVyuU3i+dDy99mUeI1JWFIilpP2c8oYc3Q=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1745487248; c=relaxed/simple;
-	bh=sOxsVRBpABUqknkFJl2fdnE1P3BlXGsAJJ88dQ3CV3c=;
+	s=arc-20240116; t=1745487191; c=relaxed/simple;
+	bh=vyrONDnmpkN8llgiDWNqo8ChBdSNRFGLzg5LsYkNNxg=;
 	h=From:To:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=Vo268Log/k6KbQpGCnYhgUJUmEip5BxJRYOxtHw3JU+fbYTXWfNgMXHj19E5Z/cf0jHX1dd4s47GK9QNDvrZl8RYxNo3gJ5ookI+ikJnBKHC4/F+I4Dg1EGU40Iz06mi1cXQfRTlnglsdBI+IswsFMqXU4fO7rRlUjFJ6FLC43w=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=telfort.nl; spf=pass smtp.mailfrom=telfort.nl; dkim=pass (1024-bit key) header.d=telfort.nl header.i=@telfort.nl header.b=ZuX4TnJ5; arc=none smtp.client-ip=195.121.94.168
+	 MIME-Version; b=izBnrP1nXCkQNToR58CjuKXUsrT1VenYU3na6EeduaVBblj6XaP69OTYvBBFVpo3pu23yPuEThbCyZRmQ1ud/EHJ2a0osF9sV3FdyhfUwWUqG2NldI6yYVsNg1mcRapMVWVeR1C1DdzT2d2nOwnaCb1F5X/Ml6CusgjNUvzqD98=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=telfort.nl; spf=pass smtp.mailfrom=telfort.nl; dkim=pass (1024-bit key) header.d=telfort.nl header.i=@telfort.nl header.b=C+qG3fqo; arc=none smtp.client-ip=195.121.94.170
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=telfort.nl
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=telfort.nl
-X-KPN-MessageId: 3498917a-20ef-11f0-86cc-005056aba152
-Received: from smtp.kpnmail.nl (unknown [10.31.155.38])
+X-KPN-MessageId: 394aef52-20ef-11f0-bc2a-005056ab378f
+Received: from smtp.kpnmail.nl (unknown [10.31.155.40])
 	by ewsoutbound.so.kpn.org (Halon) with ESMTPS
-	id 3498917a-20ef-11f0-86cc-005056aba152;
-	Thu, 24 Apr 2025 11:33:40 +0200 (CEST)
+	id 394aef52-20ef-11f0-bc2a-005056ab378f;
+	Thu, 24 Apr 2025 11:33:47 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=telfort.nl; s=telfort01;
 	h=mime-version:message-id:date:subject:to:from;
-	bh=+hrjj1Gi3tYJezf7y8BLxzGVjt+7hIqAWuEjvzpt2ZE=;
-	b=ZuX4TnJ5jAfGFpxyizqFYKJxQLgOyz92CMX8wSmx3YvgPv1RzqKtQQB+x+UXRZZdQQBrGXcw7wrV9
-	 7B9U3DfL/Uv7ef0K4dOe8J1W2U4/zYad/Igbba8dXDw5V6kSXIOj7HdQ16+1+YxNGUZEspCzsWZIZe
-	 /wDwkiN1zX0UZdrw=
-X-KPN-MID: 33|Xe/G/IFpyWzH1vZ8lvkU4BYMVhoLhlffkKnmg7D/qMf/SPkVjjMk/f3KdwT7gl2
- 5zKf2sN9w5T/LugdlqepU3kQsj4jNP/QQTRPhC7pP+qg=
+	bh=u4Shi05I+ssoGgeWqZ1qbgxLt2DLqdmY/vdb4ZY21I4=;
+	b=C+qG3fqobkiXs+gEEhbadnvUXRNOb0JQ49BWhtieBLWmHfgAYn99kvyuSqW9mhAY1MZSokWHkBb3H
+	 55q/kKWxRcohaEkj7ah0hRNKA9cD5ln4Fbyk1E/c0TUZ55a/wQ4f7+hY4JrXsVQpTFVWJzI9EC8dth
+	 RMSLB4tiBUP8BTQ8=
+X-KPN-MID: 33|pnPWy3dXQDI/lM4rrjelSxVcJSuaQwRhMIzqsaLFxqJb8FgY9EFy+DQ4e8HqJsV
+ C1eeGM2tWaV5h86XtUGQZek2Yqa1imd0iYkCm2/YblxU=
 X-KPN-VerifiedSender: Yes
-X-CMASSUN: 33|1fAwhKR5uzK4E+oOq+eB22AOFjzVFUs4BEYHw+FPdkUYOGrEMUoGoITBYGGelHd
- oKvnpk3qnpNM5t+NWY/Pisg==
+X-CMASSUN: 33|o0T6HgZSXh094d87PPOpdvIgRtkgDBZIjuqWBhEdNoP70p+J29sAcY5IrQruhLK
+ Kmzbc8gGL92LjnFUxy8JWqA==
 Received: from localhost (77-163-176-192.fixed.kpn.net [77.163.176.192])
 	by smtp.kpnmail.nl (Halon) with ESMTPSA
-	id 1b4a607e-20ef-11f0-95a4-005056abf0db;
-	Thu, 24 Apr 2025 11:32:57 +0200 (CEST)
+	id 1faf24e2-20ef-11f0-855b-005056ab7584;
+	Thu, 24 Apr 2025 11:33:05 +0200 (CEST)
 From: Benno Schulenberg <bensberg@telfort.nl>
 To: util-linux@vger.kernel.org
-Subject: [PATCH 2/7] irqtop: make the wording of an error message identical to that of another
-Date: Thu, 24 Apr 2025 11:32:32 +0200
-Message-ID: <20250424093237.6432-2-bensberg@telfort.nl>
+Subject: [PATCH 3/7] lsfd: improve grammar, and use angular brackets around placeholder word
+Date: Thu, 24 Apr 2025 11:32:33 +0200
+Message-ID: <20250424093237.6432-3-bensberg@telfort.nl>
 X-Mailer: git-send-email 2.48.1
 In-Reply-To: <20250424093237.6432-1-bensberg@telfort.nl>
 References: <20250424093237.6432-1-bensberg@telfort.nl>
@@ -68,26 +68,37 @@ List-Unsubscribe: <mailto:util-linux+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-(Besides: the original looked like a statement, not like an error message.)
+Also, use dots instead of "(s)" to indicate possible multiple arguments,
+and don't use "<when>" when the possible arguments differ from "always",
+"never", "auto".
 
 Signed-off-by: Benno Schulenberg <bensberg@telfort.nl>
 ---
- sys-utils/irqtop.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ lsfd-cmd/lsfd.c | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/sys-utils/irqtop.c b/sys-utils/irqtop.c
-index 3dbd030e0..a42ece070 100644
---- a/sys-utils/irqtop.c
-+++ b/sys-utils/irqtop.c
-@@ -465,7 +465,7 @@ int main(int argc, char **argv)
- 	if (!ctl.batch) {
- 		is_tty = isatty(STDIN_FILENO);
- 		if (is_tty && tcgetattr(STDIN_FILENO, &saved_tty) == -1)
--			fputs(_("terminal setting retrieval"), stdout);
-+			fputs(_("failed to get terminal attributes"), stdout);
+diff --git a/lsfd-cmd/lsfd.c b/lsfd-cmd/lsfd.c
+index 2eb53935c..3610de8dd 100644
+--- a/lsfd-cmd/lsfd.c
++++ b/lsfd-cmd/lsfd.c
+@@ -2190,14 +2190,14 @@ static void __attribute__((__noreturn__)) usage(void)
+ 	fputs(_(" -o, --output <list>          output columns (see --list-columns)\n"), out);
+ 	fputs(_(" -r, --raw                    use raw output format\n"), out);
+ 	fputs(_(" -u, --notruncate             don't truncate text in columns\n"), out);
+-	fputs(_(" -p, --pid  <pid(s)>          collect information only specified processes\n"), out);
++	fputs(_(" -p, --pid <pid>...           collect information only for specified processes\n"), out);
+ 	fputs(_(" -i[4|6], --inet[=4|=6]       list only IPv4 and/or IPv6 sockets\n"), out);
+ 	fputs(_(" -Q, --filter <expr>          apply display filter\n"), out);
+ 	fputs(_("     --debug-filter           dump the internal data structure of filter and exit\n"), out);
+ 	fputs(_(" -C, --counter <name>:<expr>  define custom counter for --summary output\n"), out);
+ 	fputs(_("     --dump-counters          dump counter definitions\n"), out);
+-	fputs(_("     --hyperlink[=mode]       print paths as terminal hyperlinks (always, never, or auto)\n"), out);
+-	fputs(_("     --summary[=<when>]       print summary information (only, append, or never)\n"), out);
++	fputs(_("     --hyperlink[=<when>]     print paths as terminal hyperlinks (always|never|auto)\n"), out);
++	fputs(_("     --summary[=<mode>]       print summary information (append|only|never)\n"), out);
+ 	fputs(_("     --_drop-privilege        (testing purpose) do setuid(1) just after starting\n"), out);
  
- 		ctl.win = initscr();
- 		get_terminal_dimension(&ctl.cols, &ctl.rows);
+ 	fputs(USAGE_SEPARATOR, out);
 -- 
 2.48.1
 
