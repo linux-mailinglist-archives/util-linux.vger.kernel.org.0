@@ -1,167 +1,92 @@
-Return-Path: <util-linux+bounces-661-lists+util-linux=lfdr.de@vger.kernel.org>
+Return-Path: <util-linux+bounces-666-lists+util-linux=lfdr.de@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [147.75.199.223])
-	by mail.lfdr.de (Postfix) with ESMTPS id 95C33A94901
-	for <lists+util-linux@lfdr.de>; Sun, 20 Apr 2025 21:25:08 +0200 (CEST)
+Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 4953AA9A86D
+	for <lists+util-linux@lfdr.de>; Thu, 24 Apr 2025 11:41:32 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id B86DC170578
-	for <lists+util-linux@lfdr.de>; Sun, 20 Apr 2025 19:25:08 +0000 (UTC)
+	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 904304619F3
+	for <lists+util-linux@lfdr.de>; Thu, 24 Apr 2025 09:41:32 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 523D52116EB;
-	Sun, 20 Apr 2025 19:25:04 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 46E4A25394E;
+	Thu, 24 Apr 2025 09:34:01 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=suse.cz header.i=@suse.cz header.b="R0q/7Nvn";
-	dkim=permerror (0-bit key) header.d=suse.cz header.i=@suse.cz header.b="Loyjen0x";
-	dkim=pass (1024-bit key) header.d=suse.cz header.i=@suse.cz header.b="XF4KvIjH";
-	dkim=permerror (0-bit key) header.d=suse.cz header.i=@suse.cz header.b="bscv3kul"
+	dkim=pass (1024-bit key) header.d=telfort.nl header.i=@telfort.nl header.b="vr8IBQ4Y"
 X-Original-To: util-linux@vger.kernel.org
-Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.223.130])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from ewsoutbound.kpnmail.nl (ewsoutbound.kpnmail.nl [195.121.94.170])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 39124262A6
-	for <util-linux@vger.kernel.org>; Sun, 20 Apr 2025 19:25:01 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=195.135.223.130
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1E32822FF55
+	for <util-linux@vger.kernel.org>; Thu, 24 Apr 2025 09:33:59 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=195.121.94.170
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1745177104; cv=none; b=Xx4vGoE914/g73GTRdzJPKp0j9pjLneYwHZ9AjT2sUIQX1wi+xDWP2YSzjAmJ8aqDt2ubFy8CIeDhOx16nUB3o9I2X4GjdEiD58xwfnifsURVEyo1aioXCYNoIE8Dup7etn1v4R7uHfBTUIKNWU+PZXHn6phpEQ7pUz0kmiKjyw=
+	t=1745487241; cv=none; b=jcPvruoldOF8fg4wO/SollWroKWePB4zssbLJNISCnZaaDP3B4c1fPs7WVxVG3T4AEhqalzU62Nnu3I8YCKiajUZwOrLbKCIM433+vVX+sIznoNxCQ0UpgUiP/DjbaYCIVkbDkfp1HD6kY1xIk9ZDCGH7JMferxfzEptdwJ5Wo8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1745177104; c=relaxed/simple;
-	bh=e5lDOZX5uoLolL7NqLRoW4+3H42zBQBtVUs0L9kxC/E=;
-	h=Message-ID:Date:MIME-Version:To:From:Subject:Content-Type; b=Wtr3L8FtDe/LL2DGUf40vAtqYr3Vh3CZ4NIM1xoEofrWZNmtH483JmsZ4FFH/y9yhx7nkB0nAj9CdA06YHQSX/DXzGM2gerBqWGWHpeX/N8fGl4RfOOdD3lWGPDH1p472MJn2sN6Q775NDNeXy3EjxhGGl3PzzWmpc+uGy/oj/w=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=suse.cz; spf=pass smtp.mailfrom=suse.cz; dkim=pass (1024-bit key) header.d=suse.cz header.i=@suse.cz header.b=R0q/7Nvn; dkim=permerror (0-bit key) header.d=suse.cz header.i=@suse.cz header.b=Loyjen0x; dkim=pass (1024-bit key) header.d=suse.cz header.i=@suse.cz header.b=XF4KvIjH; dkim=permerror (0-bit key) header.d=suse.cz header.i=@suse.cz header.b=bscv3kul; arc=none smtp.client-ip=195.135.223.130
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=suse.cz
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=suse.cz
-Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org [IPv6:2a07:de40:b281:104:10:150:64:97])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
-	(No client certificate requested)
-	by smtp-out1.suse.de (Postfix) with ESMTPS id EB5B0211CD
-	for <util-linux@vger.kernel.org>; Sun, 20 Apr 2025 19:24:59 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.cz; s=susede2_rsa;
-	t=1745177100; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding;
-	bh=UuiXbSlt22E4x2xJ7lxfmhrQQOHc4qW8PyLZS3JTEYk=;
-	b=R0q/7NvnrMKHlngoASmaJdH1UmPtW7IUq0DkMs31Ml1NUF0Q+IrsAYOlaaYsJVQEAE10jP
-	cBAsHhRCfbBFmN8J5Zsz7/7eSEduXdB9Le/7sCyEP7rJkV2Cy4PwibafGPyGGNRCNL5/5j
-	pKt8CYhfy56OHo2yoD9FayeqL9PaETw=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.cz;
-	s=susede2_ed25519; t=1745177100;
-	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding;
-	bh=UuiXbSlt22E4x2xJ7lxfmhrQQOHc4qW8PyLZS3JTEYk=;
-	b=Loyjen0xIcdZVeh9iZaBgCsU4yvTU9i8tLSLVo2ArgJxspv5Ei0tgNnxUbVND2CKIDX1US
-	P4Ok+pUNjGmnLVAA==
-Authentication-Results: smtp-out1.suse.de;
-	dkim=pass header.d=suse.cz header.s=susede2_rsa header.b=XF4KvIjH;
-	dkim=pass header.d=suse.cz header.s=susede2_ed25519 header.b=bscv3kul
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.cz; s=susede2_rsa;
-	t=1745177099; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding;
-	bh=UuiXbSlt22E4x2xJ7lxfmhrQQOHc4qW8PyLZS3JTEYk=;
-	b=XF4KvIjHjc4VxStRZUDNCzTb2W/+x/yRGA2BBYPytzSyuDN9BAtGmy+GHww63eW7gkF6BN
-	2StdnGU3VDjKXrtAZEmPrgJX5ldemrZsGPutrwWChOhsuqnUv5T+wNX4zu+oy6yG7PGn7h
-	MIGdtCu1heoQpxpLraWk/UgDH9aHm1k=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.cz;
-	s=susede2_ed25519; t=1745177099;
-	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding;
-	bh=UuiXbSlt22E4x2xJ7lxfmhrQQOHc4qW8PyLZS3JTEYk=;
-	b=bscv3kul6dJPXtnnh5omUeyJtUKYV5Q2N2xktWKKPukk9MYWVTfcZIrYyTEsDuijudS7F6
-	1+0oT7UzmEm1NIBQ==
-Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
-	(No client certificate requested)
-	by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id CDF9F13A6A
-	for <util-linux@vger.kernel.org>; Sun, 20 Apr 2025 19:24:59 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
-	by imap1.dmz-prg2.suse.org with ESMTPSA
-	id rz1xLwtKBWgQMQAAD6G6ig
-	(envelope-from <sbrabec@suse.cz>)
-	for <util-linux@vger.kernel.org>; Sun, 20 Apr 2025 19:24:59 +0000
-Message-ID: <ddfd6167-e88f-4505-8768-a9d8e1d5cc92@suse.cz>
-Date: Sun, 20 Apr 2025 21:24:43 +0200
+	s=arc-20240116; t=1745487241; c=relaxed/simple;
+	bh=S35Zdk08B0V0w5s90qhxHX8zidulfngPT8l/ielbJFI=;
+	h=From:To:Subject:Date:Message-ID:MIME-Version; b=SUHB2ugO4NN4a/YQi0TZIJl0jAbNnLN/cPyT4Ux/SSR20eUuZXMCDjhPj8nI91rVVXUTpQ1XFAJk/PUGxxk/i++cPJHz4w7W//MmYgLd/7d5ZxAkx/3LeAGZaNiNCSpNOaX6vD5Dq2KZs3jwp+zST4/AMdZALFiBNTmKHainGX8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=telfort.nl; spf=pass smtp.mailfrom=telfort.nl; dkim=pass (1024-bit key) header.d=telfort.nl header.i=@telfort.nl header.b=vr8IBQ4Y; arc=none smtp.client-ip=195.121.94.170
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=telfort.nl
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=telfort.nl
+X-KPN-MessageId: 3078bd7b-20ef-11f0-bc2a-005056ab378f
+Received: from smtp.kpnmail.nl (unknown [10.31.155.40])
+	by ewsoutbound.so.kpn.org (Halon) with ESMTPS
+	id 3078bd7b-20ef-11f0-bc2a-005056ab378f;
+	Thu, 24 Apr 2025 11:33:33 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=telfort.nl; s=telfort01;
+	h=mime-version:message-id:date:subject:to:from;
+	bh=dqea+P/FbL074CIVdQGFxKVGSao9a2c06dQSzOC9vmg=;
+	b=vr8IBQ4YnhaHURg+Yyoh4s6OP9n2xb3fY7BcnlE+BHG6J56fKFB/J5KfZtcxL/gkE/fhA+woxkUKr
+	 0qoROEF1wPJK7x1TR/EFBulErTYTZYMBXwzVsYHSSm+H7Oc/A4L7tLfHo+Z5kvF278yicp2EuWRwa/
+	 lFPlBV02wMtNUM1I=
+X-KPN-MID: 33|LtzOc29q0KWmBxalhje4LE8YqDWXZwpH4I//RYIEhdCEtkJSJM+f722AP11jKU6
+ IMMx4r/omaVUFUzC6neZtPPgcN+3pqkQ86DKngjVdibc=
+X-KPN-VerifiedSender: Yes
+X-CMASSUN: 33|IZN8ORspS2QfAHrL2nm5fr9GAOuZH1DQpry3h6HhEJ96AhmXU4bdV3fCY0HhHS0
+ j3kCeAvoXOzMR4VqFx3QC9g==
+Received: from localhost (77-163-176-192.fixed.kpn.net [77.163.176.192])
+	by smtp.kpnmail.nl (Halon) with ESMTPSA
+	id 16d8f904-20ef-11f0-855b-005056ab7584;
+	Thu, 24 Apr 2025 11:32:50 +0200 (CEST)
+From: Benno Schulenberg <bensberg@telfort.nl>
+To: util-linux@vger.kernel.org
+Subject: [PATCH 1/7] unshare: make the wording of a message identical to that of three others
+Date: Thu, 24 Apr 2025 11:32:31 +0200
+Message-ID: <20250424093237.6432-1-bensberg@telfort.nl>
+X-Mailer: git-send-email 2.48.1
 Precedence: bulk
 X-Mailing-List: util-linux@vger.kernel.org
 List-Id: <util-linux.vger.kernel.org>
 List-Subscribe: <mailto:util-linux+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:util-linux+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-To: util-linux@vger.kernel.org
-Content-Language: en-US
-From: Stanislav Brabec <sbrabec@suse.cz>
-Subject: util-linux-2.41 breaks static build of btrfs-progs
-Organization: SUSE Linux, s. r. o.
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-Rspamd-Queue-Id: EB5B0211CD
-X-Spam-Score: -4.51
-X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-4.51 / 50.00];
-	BAYES_HAM(-3.00)[99.99%];
-	NEURAL_HAM_LONG(-1.00)[-1.000];
-	R_DKIM_ALLOW(-0.20)[suse.cz:s=susede2_rsa,suse.cz:s=susede2_ed25519];
-	NEURAL_HAM_SHORT(-0.20)[-0.994];
-	MIME_GOOD(-0.10)[text/plain];
-	MX_GOOD(-0.01)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[suse.com:email];
-	RCVD_TLS_ALL(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	RCPT_COUNT_ONE(0.00)[1];
-	FUZZY_BLOCKED(0.00)[rspamd.com];
-	MIME_TRACE(0.00)[0:+];
-	HAS_ORG_HEADER(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
-	DKIM_SIGNED(0.00)[suse.cz:s=susede2_rsa,suse.cz:s=susede2_ed25519];
-	DNSWL_BLOCKED(0.00)[2a07:de40:b281:106:10:150:64:167:received];
-	FROM_EQ_ENVFROM(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	ARC_NA(0.00)[];
-	RCVD_COUNT_TWO(0.00)[2];
-	TO_MATCH_ENVRCPT_ALL(0.00)[];
-	TO_DN_NONE(0.00)[];
-	PREVIOUSLY_DELIVERED(0.00)[util-linux@vger.kernel.org];
-	DKIM_TRACE(0.00)[suse.cz:+]
-X-Rspamd-Server: rspamd1.dmz-prg2.suse.org
-X-Spam-Flag: NO
-X-Spam-Level: 
 
-Static build of btrfs-progs fails with util-linux-2.41 with a simple 
-problem:
-Symbol parse_range becomes visible in libblkid.a, breaking parse-utils.c 
-in btrfs-progs, using the same symbol.
+That is: spare translators having to translate different strings that
+mean the exact same thing.
 
-The question is:
-Should be this fixed by util-linux by prefixing of ul_ to all symbols 
-that are not declared as static?
-Or should it be fixed by btrfs-progs?
-Or could there be applied any type of symbol hiding in the static library?
+Signed-off-by: Benno Schulenberg <bensberg@telfort.nl>
+---
+ sys-utils/unshare.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-/usr/lib64/gcc/x86_64-suse-linux/14/../../../../x86_64-suse-linux/bin/ld: 
-/usr/lib64/gcc/x86_64-suse-linux/14/../../../../lib64/libblkid.a(libcommon_la-strutils.o): 
-in function `parse_range':
-[   29s] 
-/home/abuild/rpmbuild/BUILD/util-linux-2.41-build/util-linux-2.41/lib/strutils.c:867: 
-multiple definition of `parse_range'; common/parse-utils.static.o 
-(symbol from plugin):(.text+0x0): first defined here
-
+diff --git a/sys-utils/unshare.c b/sys-utils/unshare.c
+index 05db627be..fe140a0c7 100644
+--- a/sys-utils/unshare.c
++++ b/sys-utils/unshare.c
+@@ -1241,7 +1241,7 @@ int main(int argc, char *argv[])
+ 		newdir = newdir ?: "/";
+ 	}
+ 	if (newdir && chdir(newdir))
+-		err(EXIT_FAILURE, _("cannot chdir to '%s'"), newdir);
++		err(EXIT_FAILURE, _("cannot change directory to %s"), newdir);
+ 
+ 	if (procmnt) {
+ 		/* When not changing root and using the default propagation flags
 -- 
-Best Regards / S pozdravem,
-
-Stanislav Brabec
-software developer
----------------------------------------------------------------------
-SUSE LINUX, s. r. o.                         e-mail: sbrabec@suse.com
-Křižíkova 148/34 (Corso IIa)                    tel: +420 284 084 060
-186 00 Praha 8-Karlín                          fax:  +420 284 084 001
-Czech Republic                                    http://www.suse.cz/
-PGP: 830B 40D5 9E05 35D8 5E27 6FA3 717C 209F A04F CD76
+2.48.1
 
 
