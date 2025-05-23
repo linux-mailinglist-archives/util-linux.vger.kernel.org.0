@@ -1,62 +1,62 @@
-Return-Path: <util-linux+bounces-703-lists+util-linux=lfdr.de@vger.kernel.org>
+Return-Path: <util-linux+bounces-706-lists+util-linux=lfdr.de@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 636D0AC2251
-	for <lists+util-linux@lfdr.de>; Fri, 23 May 2025 14:04:35 +0200 (CEST)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
+	by mail.lfdr.de (Postfix) with ESMTPS id CE904AC2256
+	for <lists+util-linux@lfdr.de>; Fri, 23 May 2025 14:05:48 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 1DC4E540372
-	for <lists+util-linux@lfdr.de>; Fri, 23 May 2025 12:04:36 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id E65FCA21AF1
+	for <lists+util-linux@lfdr.de>; Fri, 23 May 2025 12:05:27 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3FD8C227EB9;
-	Fri, 23 May 2025 12:04:31 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6D360229B32;
+	Fri, 23 May 2025 12:05:44 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=telfort.nl header.i=@telfort.nl header.b="pKg014F2"
+	dkim=pass (1024-bit key) header.d=telfort.nl header.i=@telfort.nl header.b="Y3+BaaZP"
 X-Original-To: util-linux@vger.kernel.org
-Received: from ewsoutbound.kpnmail.nl (ewsoutbound.kpnmail.nl [195.121.94.168])
+Received: from ewsoutbound.kpnmail.nl (ewsoutbound.kpnmail.nl [195.121.94.170])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 70B672036ED
-	for <util-linux@vger.kernel.org>; Fri, 23 May 2025 12:04:26 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=195.121.94.168
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C51D62036ED
+	for <util-linux@vger.kernel.org>; Fri, 23 May 2025 12:05:41 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=195.121.94.170
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1748001870; cv=none; b=F7bvbUPnjicEDLWJOHU4B+rszZc4B6tjT6pup/VGZ6DCURtoruG9hCxaNxuhmdKobJA8oyXlHSPOigN5iDDgD2wfHk1ztkjdOpwpNTX2Wvtq+eReJR3cQ/4rGBPjDFVuBlNK6Sam1vDOoPZ0RgQb0RUzvjcFl7p9P/3e/pHs95A=
+	t=1748001944; cv=none; b=HzZJ8oHfS5wExXbTIdFkHwkV4CzKDM/TkSoqwhiDliLIQBhem1tKhDxrnw2UG+2Fi3OaksCvtjrnS+HLjKCoZo5NDPxsLwGbfIeUlWkMhSUFQJ2tUGD/qNOM5eDTJA1imFe7mHVOmpq2kDFpUJLmmQlwF/xe+4YxPrhqhyenANE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1748001870; c=relaxed/simple;
-	bh=QNtovGrLjp8xQQYzH82S3r9c3liR2ewduteQGyJhWdA=;
+	s=arc-20240116; t=1748001944; c=relaxed/simple;
+	bh=Oxu/hb7+psNVGi5H0kPO0pOPMVedRzdBLRJR1cOQCBk=;
 	h=From:To:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=JIPL8rI44gcD3SjkixDFrXwIMyNYEYGWSiHVQ84M9Sr0C7j1HeGXvkDTlv8q1neR/RhPOV25BtWjJligXlyvjWtmEzhOGUaQXmwnSPdGe66rboXxIYSQM/ClfXt9NCXq4f63RmyLTUHvm2+/lJoyG3H9NsD6LCDTgh7tch7h+Rk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=telfort.nl; spf=pass smtp.mailfrom=telfort.nl; dkim=pass (1024-bit key) header.d=telfort.nl header.i=@telfort.nl header.b=pKg014F2; arc=none smtp.client-ip=195.121.94.168
+	 MIME-Version; b=FEXFizg0ByoZVxlzF6RvQRJVFI1ncabvBpL7GJiDnp5E57fQyP3QG+uvgigKvzxyIDsQM9kgpb/f362d/wrDEaV0bcVEQyFJbYre3wEHbIe+7OZQKFcG33HrATgP1XY4NUfvbhHtmXBI8az5sovZKlir7SSmVL/tx8ulzMmHSMQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=telfort.nl; spf=pass smtp.mailfrom=telfort.nl; dkim=pass (1024-bit key) header.d=telfort.nl header.i=@telfort.nl header.b=Y3+BaaZP; arc=none smtp.client-ip=195.121.94.170
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=telfort.nl
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=telfort.nl
-X-KPN-MessageId: 32e64091-37ce-11f0-86ce-005056aba152
+X-KPN-MessageId: 38db6039-37ce-11f0-bc2b-005056ab378f
 Received: from smtp.kpnmail.nl (unknown [10.31.155.40])
 	by ewsoutbound.so.kpn.org (Halon) with ESMTPS
-	id 32e64091-37ce-11f0-86ce-005056aba152;
-	Fri, 23 May 2025 14:05:20 +0200 (CEST)
+	id 38db6039-37ce-11f0-bc2b-005056ab378f;
+	Fri, 23 May 2025 14:05:30 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=telfort.nl; s=telfort01;
 	h=mime-version:message-id:date:subject:to:from;
-	bh=tNdQEhnLhTMM4Mzmv9qRr+WdTbBkBlgkfilozySuBus=;
-	b=pKg014F2f7G321eYWhPfTCPGH4fC6UNLSrzmZHkxPwGb4xer1Qo0LGqTEGD1lTCyqWXzwL1qtrrmx
-	 aYw6aqY1rhdkt5qZphLi8/inko+jwu8TDAai0QMfpxclggPuubrRfHQXVTQEuuTsYP4eZA1hxupcbT
-	 ehE6hiK6eSJX9Wgo=
-X-KPN-MID: 33|RqZrt4vIUYKcIMkhdSy0a7v6Hdymh0UwEDEzNBjq8YWxgjt1G5vxquxbb13RgMe
- AyYC7d18fvuIrJ8R3m2AOt0dvnbC3/T4Hs2ZpHUuzR2o=
+	bh=yiHfyxdLJen0jPBdWdwxtS5s7vBwVtFLs2PHptfisug=;
+	b=Y3+BaaZPxR94NB4Ao8+TLvDKuKfL9WqVPJYIr+YmVhwxfpHBiTfmrnxvSaEN0/H/8K/8P5BoIP1mj
+	 LvNd7DiTT06/voARaEbA6BwWquY6vjCTI8ydRfSQNjUHsbMQ1yocYyrWwkqYxBVzUttLTMjZWIDtLL
+	 yqnp/SFhpCaZK2Eo=
+X-KPN-MID: 33|/u7nEU7hGblyPhsCIsgXTFhXCrmCKfXi8E8ksfMBbolDPEbxAYQRg0O2cU0Nk4w
+ tc1NszQtWWz4lvHUPCtSR0CjD+Y5ktsZiAsJ9hgkZdq8=
 X-KPN-VerifiedSender: Yes
-X-CMASSUN: 33|HlVvBGceGWyGEYWQUf3S4KzFkXaSutd1E88n0YqBHzeWkb9BEH9sNjR/ZQwpB00
- dz1xUyNiMlRyYE3ZtEZhgaw==
+X-CMASSUN: 33|Mj+/v0uzQX9bjb2bbFTvcZMfqSrqyzlA11lryW90A+2VukoXW+s5qjdVNmSBiLF
+ AEDbaAgtqclqwrIc1cjoywg==
 Received: from localhost (77-163-176-192.fixed.kpn.net [77.163.176.192])
 	by smtp.kpnmail.nl (Halon) with ESMTPSA
-	id 1134adf2-37ce-11f0-8584-005056ab7584;
-	Fri, 23 May 2025 14:04:24 +0200 (CEST)
+	id 166ce1c7-37ce-11f0-8584-005056ab7584;
+	Fri, 23 May 2025 14:04:32 +0200 (CEST)
 From: Benno Schulenberg <bensberg@telfort.nl>
 To: util-linux@vger.kernel.org
-Subject: [PATCH 2/4] hardlink: (usage) remove mistaken period from two option descriptions
-Date: Fri, 23 May 2025 14:04:05 +0200
-Message-ID: <20250523120407.75188-2-bensberg@telfort.nl>
+Subject: [PATCH 3/4] hardlink: (usage) improve the descriptions of three options
+Date: Fri, 23 May 2025 14:04:06 +0200
+Message-ID: <20250523120407.75188-3-bensberg@telfort.nl>
 X-Mailer: git-send-email 2.48.1
 In-Reply-To: <20250523120407.75188-1-bensberg@telfort.nl>
 References: <20250523120407.75188-1-bensberg@telfort.nl>
@@ -68,26 +68,39 @@ List-Unsubscribe: <mailto:util-linux+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
+The first description was too wordy for a --help text, the second
+was vague and seemed to imply that it should be combined with the
+preceding option, and the third failed to mention that it doesn't
+actually link anything.
+
+(Note: the choice for -m for --maximize and -M for --minimize is
+unfortunate, as most people would guess the opposite, especially
+since -s is used for --minimum-size and -S for --maximum-size.)
+
 Signed-off-by: Benno Schulenberg <bensberg@telfort.nl>
 ---
- misc-utils/hardlink.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ misc-utils/hardlink.c | 7 +++----
+ 1 file changed, 3 insertions(+), 4 deletions(-)
 
 diff --git a/misc-utils/hardlink.c b/misc-utils/hardlink.c
-index 85d25ca22..7f2ff8046 100644
+index 7f2ff8046..5365e5370 100644
 --- a/misc-utils/hardlink.c
 +++ b/misc-utils/hardlink.c
-@@ -1210,8 +1210,8 @@ static void __attribute__((__noreturn__)) usage(void)
- 	fputs(_(" -p, --ignore-mode          ignore changes of file mode\n"), out);
- 	fputs(_(" -q, --quiet                quiet mode - don't print anything\n"), out);
- 	fputs(_(" -r, --cache-size <size>    memory limit for cached file content data\n"), out);
--	fputs(_(" -s, --minimum-size <size>  minimum size for files.\n"), out);
--	fputs(_(" -S, --maximum-size <size>  maximum size for files.\n"), out);
-+	fputs(_(" -s, --minimum-size <size>  minimum size for files\n"), out);
-+	fputs(_(" -S, --maximum-size <size>  maximum size for files\n"), out);
- 	fputs(_(" -t, --ignore-time          ignore timestamps (when testing for equality)\n"), out);
- 	fputs(_(" -v, --verbose              verbose output (repeat for more verbosity)\n"), out);
- 	fputs(_(" -x, --exclude <regex>      regular expression to exclude files\n"), out);
+@@ -1195,11 +1195,10 @@ static void __attribute__((__noreturn__)) usage(void)
+ 	fputs(_(" -d, --respect-dir          directory names have to be identical\n"), out);
+ 	fputs(_(" -f, --respect-name         filenames have to be identical\n"), out);
+ 	fputs(_(" -i, --include <regex>      regular expression to include files/dirs\n"), out);
+-	fputs(_(" -m, --maximize             maximize the hardlink count, remove the file with\n"
+-	        "                              lowest hardlink count\n"), out);
+-	fputs(_(" -M, --minimize             reverse the meaning of -m\n"), out);
++	fputs(_(" -m, --maximize             keep the file with the most links\n"), out);
++	fputs(_(" -M, --minimize             keep the file with the fewest links\n"), out);
+ 	fputs(_(" -n, --dry-run              don't actually link anything\n"), out);
+-	fputs(_(" -l, --list-duplicates      print every group of duplicate files\n"), out);
++	fputs(_(" -l, --list-duplicates      just list paths of duplicates, don't link them\n"), out);
+ 	fputs(_(" -z, --zero                 delimit output with NULs instead of newlines\n"), out);
+ 	fputs(_(" -o, --ignore-owner         ignore owner changes\n"), out);
+ 	fputs(_(" -F, --prioritize-trees     files found in the earliest specified top-level\n"
 -- 
 2.48.1
 
