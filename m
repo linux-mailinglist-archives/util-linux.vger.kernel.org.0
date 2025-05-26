@@ -1,234 +1,124 @@
-Return-Path: <util-linux+bounces-704-lists+util-linux=lfdr.de@vger.kernel.org>
+Return-Path: <util-linux+bounces-707-lists+util-linux=lfdr.de@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [139.178.88.99])
-	by mail.lfdr.de (Postfix) with ESMTPS id CD6B7AC2254
-	for <lists+util-linux@lfdr.de>; Fri, 23 May 2025 14:05:01 +0200 (CEST)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
+	by mail.lfdr.de (Postfix) with ESMTPS id 9BF15AC3D10
+	for <lists+util-linux@lfdr.de>; Mon, 26 May 2025 11:38:47 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 54446A41D08
-	for <lists+util-linux@lfdr.de>; Fri, 23 May 2025 12:04:40 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 46B1D1888A86
+	for <lists+util-linux@lfdr.de>; Mon, 26 May 2025 09:39:01 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id B36442036ED;
-	Fri, 23 May 2025 12:04:45 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8D49D1F099C;
+	Mon, 26 May 2025 09:38:34 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=telfort.nl header.i=@telfort.nl header.b="Du6yY69m"
+	dkim=pass (2048-bit key) header.d=bytedance.com header.i=@bytedance.com header.b="OGW6u5Aq"
 X-Original-To: util-linux@vger.kernel.org
-Received: from ewsoutbound.kpnmail.nl (ewsoutbound.kpnmail.nl [195.121.94.170])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pg1-f174.google.com (mail-pg1-f174.google.com [209.85.215.174])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4DC76239585
-	for <util-linux@vger.kernel.org>; Fri, 23 May 2025 12:04:42 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=195.121.94.170
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 92FA11F09A1
+	for <util-linux@vger.kernel.org>; Mon, 26 May 2025 09:38:32 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.215.174
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1748001885; cv=none; b=DshHeCnZltj+GVZz357S8Fi70KaR+Rd8NYPuKHTQu1ZY0spAiVmgOIJDECWzOacw2lTY7WmRm5txRxkpPH39q73DqGUCsAMhdQhQXHFr77AhM5vgTi81KSyUg5nMpGzebZ+A/hzkSfI3ktit3GgHVir7agQA5V2pwhz5JPm8/hM=
+	t=1748252314; cv=none; b=Dx2UU0ZPUbxznEoP1+8w19QDVq2vHr7F5HZeASuJR97SIkMF33qcRTmaYYhVRzgQA2UmWAzRo6SI+rN3YYK1vmlixGDQ4/OGzPiO5W2h8+eN/fBqzn0kDE8T8iPXc5qGHPpMSM63MjRoo4NtcrS0c4dscZs3IiPLIjWEeDB5wwg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1748001885; c=relaxed/simple;
-	bh=N1eXWLCh6HuQQQlWonvlIUxebV1q2iSsgqagKBHVO3c=;
-	h=From:To:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=Vr9yM2TS1V2bywv5EJmW28cAJibRCPLEqb1ue/LFvJLEDHGg1dqshwk7gkKBORUbXZ21tNlJzOYlckG7CX6fOthyoduUDYdGBSt4UzIn9fP+gOIGobIsIOv62oo1uliyDwpiXkm5XD+zZpxvvLf70acqjN8jUMfXZdGUIFzSU1o=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=telfort.nl; spf=pass smtp.mailfrom=telfort.nl; dkim=pass (1024-bit key) header.d=telfort.nl header.i=@telfort.nl header.b=Du6yY69m; arc=none smtp.client-ip=195.121.94.170
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=telfort.nl
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=telfort.nl
-X-KPN-MessageId: 3df7e833-37ce-11f0-bc2b-005056ab378f
-Received: from smtp.kpnmail.nl (unknown [10.31.155.37])
-	by ewsoutbound.so.kpn.org (Halon) with ESMTPS
-	id 3df7e833-37ce-11f0-bc2b-005056ab378f;
-	Fri, 23 May 2025 14:05:39 +0200 (CEST)
+	s=arc-20240116; t=1748252314; c=relaxed/simple;
+	bh=EOzQGVPFZ6icnnqSdLEQqDGAl56OqVEkKBD0LEMAYyM=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type; b=Aqu5ud3V04uaTSTx/N5xl5mlVLbbjaV0Mh9JNfFcD+WsmHf62nBJIvptvlytXPuI+Cp/9YM940+AuCrPndfYK4hptBOxwogOpm7915OF8PQu+ppiiUkm2Gi/q1HA6cNgsIXXaWwfvQpGYp54juK0VogtzLFRzdFwMmaBrzDHs14=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=bytedance.com; spf=pass smtp.mailfrom=bytedance.com; dkim=pass (2048-bit key) header.d=bytedance.com header.i=@bytedance.com header.b=OGW6u5Aq; arc=none smtp.client-ip=209.85.215.174
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=bytedance.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bytedance.com
+Received: by mail-pg1-f174.google.com with SMTP id 41be03b00d2f7-b2c377d8982so469809a12.3
+        for <util-linux@vger.kernel.org>; Mon, 26 May 2025 02:38:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=telfort.nl; s=telfort01;
-	h=mime-version:message-id:date:subject:to:from;
-	bh=XzWlifeLJ9xlr5NGSAZehsEFNCDnuLV8mxoLHBCCJoI=;
-	b=Du6yY69mzuQR2m0tR10qucsNbQisb93kxNVEsj8vgHYueM3iV7JIotkDdmFlMzdFYGInjRXlU8uZ7
-	 o12ufeywvfe3cVrP8GQwPyuztMTDKDJy3Ka8VEerE0CnsLKY4PnpKVIJmk1yrtW+5J6qk1nBFosIGZ
-	 iFP9BNZwMWWFG3bs=
-X-KPN-MID: 33|yvvucndCEbX100URUErR9DW6JtFawFZaK2w6pux2nnH5hRszHAzPJavnkFhMEXo
- hBwWI8uIJ5qGI8P9dukjYXRvLx4ove+nEoeK5YN7B56s=
-X-KPN-VerifiedSender: Yes
-X-CMASSUN: 33|Igloby7bmW311oPQ672no4bFPzo+FTRH8DRVcCmei6RBIgFwcIEO1XJpasfzRJF
- ZXhVBKe6UQ1TLP+O7wxh/sg==
-Received: from localhost (77-163-176-192.fixed.kpn.net [77.163.176.192])
-	by smtp.kpnmail.nl (Halon) with ESMTPSA
-	id 1b86e727-37ce-11f0-9bd3-005056ab1411;
-	Fri, 23 May 2025 14:04:41 +0200 (CEST)
-From: Benno Schulenberg <bensberg@telfort.nl>
+        d=bytedance.com; s=google; t=1748252311; x=1748857111; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=d20ogDY48KWL7MgG2HWAVRtGf3dYt1vl/Riq3mc+U6M=;
+        b=OGW6u5Aq+GTSFdL4OSrnupfgmqM3iGp/W+2MkeAuqbX0CS3LoazD/lheERlgZFP1GN
+         BPpNi6oaUv1Pr7P8Ga8XxDQyhizzAdb+xizb3/TNxduL2DfxzXqEmh4ljuPy890cHcAF
+         Gyp5HqabjvodWitwuiKm9IBOeKehRLDi9Mie+Ek5RMrFy+uVfkjzXKI2aIwqfCBLZo+L
+         TZ2JXwwyIq3YabFE5XfY0+MFo+KyL40TJtW2bvNNeU8ewQmOZMlwQmrj9OhfjiqZAu//
+         XfPfYPopHTp+zh+Qvqxedi3aJ3xX0Bpk6/C6sYB5z4Dt2BAf7rrqi/y+9+Q/zUE8zwmN
+         UAoA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1748252311; x=1748857111;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=d20ogDY48KWL7MgG2HWAVRtGf3dYt1vl/Riq3mc+U6M=;
+        b=BeszupzgdgqBn8eCNCVEeEGtifRAZQBoideEfKO0Y4aSTpQMh6YmUxC16HHq0DTaNH
+         iJlOoPhVYy5UVQ+r3RmRgk4ttHsHr3Wy/gbadb29/2Uzlk5VZzXvlgpffFBtDv6KnYed
+         GUw1F4gv7hQ6EUviDxXqCKGAD9ecVrfk3lA3w9lKtXvwIK3y3+cKcHXvDdxkCH5wxAsb
+         cvKRYxcN6uAsT14YMHVjosh9ZGq+IbydBLAOE3VCJMV75xr05+QaHshAKJg47V+fDlYo
+         +xSwJvPv9cjoz1FefUxCficBvuZCjsPEYZZEISNmmNbUdC4Ek5qo5ZswONPPGLcHZRHm
+         O7rQ==
+X-Gm-Message-State: AOJu0Yx6qqUFpANggNIYJ1563oeuBs53bqOKZyILXnMWb23jR7lzdJML
+	/5z1F1XjzlbjIuc3m2jrdx8fnq4maeQ8H6uraEkApLx0MLO5DuT6Dp39Y9EJp0lIU3ou1pg+c/M
+	DhsH4
+X-Gm-Gg: ASbGncupir5ib70nkqlQk3lyI0HCpxJwjnGcI7p/QMjI8sXrlYtYTOzVJ5WknQUKSJq
+	iun+AIYO/WWX+5vOcUHfUxThWuyYxPKW8wB2FtY/LMAHjnpFV5uZICKvUNx2G24+AAom/m8+b6d
+	IC+RMCoNm1/Df5oeIWxqoeFZ2VrvWEJWayljYsEhW0Vio4eJSkQKFBZOgYXycwqkqac/QoKWD8n
+	W5xIQV+1kfYiMcWRK4L+ts1YDkqn/Z2K+g/VWh3GjCGPwpiHKcxfyQZmnM9F1zBJQn3MXtfv7Gk
+	hbcuKY3HU41ijyYH38p11jWsgSz+X01IEeog24IIKxiOxmkk4M65Ogj54t1F+uHDluwGwUvo4w=
+	=
+X-Google-Smtp-Source: AGHT+IEfPYKZ8iproPXMcEcAUe9IRKDgK0K700KcFWvYaN7hyL2eQ3OUSHEs0jj6z1nR8GrZoz1o3A==
+X-Received: by 2002:a17:902:f611:b0:234:883:c9dc with SMTP id d9443c01a7336-23414f490c8mr142627515ad.4.1748252311591;
+        Mon, 26 May 2025 02:38:31 -0700 (PDT)
+Received: from always-zbook.bytedance.net ([61.213.176.5])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2347ee700fcsm5882725ad.14.2025.05.26.02.38.29
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 26 May 2025 02:38:31 -0700 (PDT)
+From: zhenwei pi <pizhenwei@bytedance.com>
 To: util-linux@vger.kernel.org
-Subject: [PATCH 4/4] hardlink: (man,usage) sort the options mostly alphabetically
-Date: Fri, 23 May 2025 14:04:07 +0200
-Message-ID: <20250523120407.75188-4-bensberg@telfort.nl>
-X-Mailer: git-send-email 2.48.1
-In-Reply-To: <20250523120407.75188-1-bensberg@telfort.nl>
-References: <20250523120407.75188-1-bensberg@telfort.nl>
+Cc: kzak@redhat.com,
+	zhenwei pi <pizhenwei@bytedance.com>
+Subject: [PATCH] AUTHORS: update Zhenwei Pi email
+Date: Mon, 26 May 2025 17:37:57 +0800
+Message-ID: <20250526093817.951024-1-pizhenwei@bytedance.com>
+X-Mailer: git-send-email 2.43.0
 Precedence: bulk
 X-Mailing-List: util-linux@vger.kernel.org
 List-Id: <util-linux.vger.kernel.org>
 List-Subscribe: <mailto:util-linux+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:util-linux+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Also, improve some markup and wording and grammar.
+I will be leaving ByteDance so updating my email in AUTHORS to my
+personal email.
 
-Signed-off-by: Benno Schulenberg <bensberg@telfort.nl>
+Signed-off-by: zhenwei pi <pizhenwei@bytedance.com>
 ---
- misc-utils/hardlink.1.adoc | 55 +++++++++++++++++++-------------------
- misc-utils/hardlink.c      | 22 +++++++--------
- 2 files changed, 39 insertions(+), 38 deletions(-)
+ AUTHORS | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/misc-utils/hardlink.1.adoc b/misc-utils/hardlink.1.adoc
-index e09572f6c..5788014d2 100644
---- a/misc-utils/hardlink.1.adoc
-+++ b/misc-utils/hardlink.1.adoc
-@@ -65,21 +65,21 @@ For example, *hardlink foo/ bar/* will link files in bar/ to equal files in the
- *-i*, *--include* _regex_::
- A regular expression to include files. If the option *--exclude* has been given, this option re-includes files which would otherwise be excluded. If the option is used without *--exclude*, only files matched by the pattern are included.
+diff --git a/AUTHORS b/AUTHORS
+index ad9ae703b..df9a88567 100644
+--- a/AUTHORS
++++ b/AUTHORS
+@@ -15,7 +15,7 @@ PAST MAINTAINERS:
+ AUTHORS (merged projects & commands):
  
-+*-l*, *--list-duplicates*::
-+Don't link anything, but list the absolute path of every duplicate file, one per line, preceded by a unique 16-byte discriminator and a tab.
-+
- *-m*, *--maximize*::
- Among equal files, keep the file with the highest link count.
- 
- *-M*, *--minimize*::
- Among equal files, keep the file with the lowest link count.
- 
-+*--mount*::
-+Do not traverse directories on different filesystems (remain within the same filesystem).
-+
- *-n*, *--dry-run*::
- Do not act, just print what would happen.
- 
--*-l*, *--list-duplicates*::
--Don't link anything, but list the absolute path of every duplicate file, one per line, preceded by a unique 16-byte discriminator and a tab.
--
--*-z*, *--zero*::
--Separate lines with a NUL instead of a newline in *-l* mode.
--
- *-o*, *--ignore-owner*::
- Link and compare files even if their owner information (user and group) differs. Results may be unpredictable.
- 
-@@ -98,6 +98,22 @@ file content block (see *--io-size*), these checksums are cached for the next co
- size is important for large files or a large sets of files of the same size. The default is
- 10MiB.
- 
-+*--reflink*[**=**_when_]::
-+Create copy-on-write clones (aka reflinks) rather than hardlinks. The reflinked files
-+share only on-disk data, but the file mode and owner can be different. It's recommended
-+to use this option together with the *--ignore-owner* and *--ignore-mode* options.
-+This option implies *--skip-reflinks* to ignore already cloned files.
-++
-+The optional argument _when_ can be *never*, *always*, or *auto*. If the _when_ argument
-+is omitted, it defaults to *auto*, which means that *hardlink* checks the filesystem type
-+and uses reflinks on BTRFS and XFS only, and falls back to hardlinks when creating a
-+reflink is impossible.
-+The argument *always* disables filesystem-type detection and the fallback to hardlinks,
-+which means that only reflinks are allowed.
-+
-+*--skip-reflinks*::
-+Ignore already cloned files. This option may be used without *--reflink* when creating classic hardlinks.
-+
- *-s*, *--minimum-size* _size_::
- The minimum size to consider. By default this is 1, so empty files will not be linked. The _size_ argument may be followed by the multiplicative suffixes KiB (=1024), MiB (=1024*1024), and so on for GiB, TiB, PiB, EiB, ZiB and YiB (the "iB" is optional, e.g., "K" has the same meaning as "KiB").
- 
-@@ -116,33 +132,18 @@ A regular expression that excludes files from being compared and linked. This op
- *--exclude-subtree* _regex_::
- A regular expression that excludes entire directories from being compared and linked. This option can also be used multiple times.
- 
--*--mount*::
--Do not traverse directories on different filesystems (remain within the same filesystem).
--
- *-X*, *--respect-xattrs*::
- Only try to link files with the same extended attributes.
- 
- *-y*, *--method* _name_::
- Set the file content comparison method. The currently supported methods are
--sha256, sha1, crc32c and memcmp. The default is sha256, or memcmp if Linux
--Crypto API is not available. The methods based on checksums are implemented in
--zero-copy way, in this case file contents are not copied to the userspace and all
--calculation is done in kernel.
-+*sha256*, *sha1*, *crc32c*, and *memcmp*. The default is *sha256*, or *memcmp* if the
-+Linux Crypto API is not available. The methods based on checksums are implemented in
-+a zero-copy way, which means that file contents are not copied to userspace and all
-+calculation is done in the kernel.
- 
--*--reflink*[**=**_when_]::
--Create copy-on-write clones (aka reflinks) rather than hardlinks. The reflinked files
--share only on-disk data, but the file mode and owner can be different. It's recommended
--to use it with *--ignore-owner* and *--ignore-mode* options. This option implies
--*--skip-reflinks* to ignore already cloned files.
--+
--The optional argument _when_ can be *never*, *always*, or *auto*. If the _when_ argument
--is omitted, it defaults to *auto*, in this case, *hardlink* checks filesystem type and
--uses reflinks on BTRFS and XFS only, and fallback to hardlinks when creating reflink is impossible.
--The argument *always* disables filesystem type detection and fallback to hardlinks, in this case,
--only reflinks are allowed.
--
--*--skip-reflinks*::
--Ignore already cloned files. This option may be used without *--reflink* when creating classic hardlinks.
-+*-z*, *--zero*::
-+Separate lines with a NUL byte instead of a newline (for *-l*).
- 
- include::man-common/help-version.adoc[]
- 
-diff --git a/misc-utils/hardlink.c b/misc-utils/hardlink.c
-index 5365e5370..cd28fe018 100644
---- a/misc-utils/hardlink.c
-+++ b/misc-utils/hardlink.c
-@@ -1191,24 +1191,28 @@ static void __attribute__((__noreturn__)) usage(void)
- 	fputs(USAGE_OPTIONS, out);
- 	fputs(_(" -c, --content              compare only file contents, same as -pot\n"), out);
- 	fputs(_(" -b, --io-size <size>       I/O buffer size for file reading\n"
--	        "                              (speedup, using more RAM)\n"), out);
-+		"                              (speedup, using more RAM)\n"), out);
- 	fputs(_(" -d, --respect-dir          directory names have to be identical\n"), out);
- 	fputs(_(" -f, --respect-name         filenames have to be identical\n"), out);
-+	fputs(_(" -F, --prioritize-trees     files found in the earliest specified top-level\n"
-+		"                              directory have higher priority (but this has\n"
-+		"                              lower precedence than --maximize/--minimize)\n"), out);
- 	fputs(_(" -i, --include <regex>      regular expression to include files/dirs\n"), out);
-+	fputs(_(" -l, --list-duplicates      just list paths of duplicates, don't link them\n"), out);
- 	fputs(_(" -m, --maximize             keep the file with the most links\n"), out);
- 	fputs(_(" -M, --minimize             keep the file with the fewest links\n"), out);
-+	fputs(_("     --mount                stay within the same filesystem\n"), out);
- 	fputs(_(" -n, --dry-run              don't actually link anything\n"), out);
--	fputs(_(" -l, --list-duplicates      just list paths of duplicates, don't link them\n"), out);
--	fputs(_(" -z, --zero                 delimit output with NULs instead of newlines\n"), out);
- 	fputs(_(" -o, --ignore-owner         ignore owner changes\n"), out);
--	fputs(_(" -F, --prioritize-trees     files found in the earliest specified top-level\n"
--                "                              directory have higher priority (lower precedence\n"
--		"                              than minimize/maximize)\n"), out);
- 	fputs(_(" -O, --keep-oldest          keep the oldest file of multiple equal files\n"
- 		"                              (lower precedence than minimize/maximize)\n"), out);
- 	fputs(_(" -p, --ignore-mode          ignore changes of file mode\n"), out);
- 	fputs(_(" -q, --quiet                quiet mode - don't print anything\n"), out);
- 	fputs(_(" -r, --cache-size <size>    memory limit for cached file content data\n"), out);
-+#ifdef USE_REFLINK
-+	fputs(_("     --reflink[=<when>]     create clone/CoW copies (auto, always, never)\n"), out);
-+	fputs(_("     --skip-reflinks        skip already cloned files (enabled on --reflink)\n"), out);
-+#endif
- 	fputs(_(" -s, --minimum-size <size>  minimum size for files\n"), out);
- 	fputs(_(" -S, --maximum-size <size>  maximum size for files\n"), out);
- 	fputs(_(" -t, --ignore-time          ignore timestamps (when testing for equality)\n"), out);
-@@ -1217,16 +1221,12 @@ static void __attribute__((__noreturn__)) usage(void)
- #ifdef USE_SKIP_SUBTREE
- 	fputs(_("     --exclude-subtree <regex>  regular expression to exclude directories\n"), out);
- #endif
--	fputs(_("     --mount                stay within the same filesystem\n"), out);
- #ifdef USE_XATTR
- 	fputs(_(" -X, --respect-xattrs       respect extended attributes\n"), out);
- #endif
- 	fputs(_(" -y, --method <name>        file content comparison method\n"), out);
-+	fputs(_(" -z, --zero                 delimit output with NULs instead of newlines\n"), out);
- 
--#ifdef USE_REFLINK
--	fputs(_("     --reflink[=<when>]     create clone/CoW copies (auto, always, never)\n"), out);
--	fputs(_("     --skip-reflinks        skip already cloned files (enabled on --reflink)\n"), out);
--#endif
- 	fputs(USAGE_SEPARATOR, out);
- 	fprintf(out, USAGE_HELP_OPTIONS(28));
- 	fprintf(out, USAGE_MAN_TAIL("hardlink(1)"));
+       blkdiscard:      Lukas Czerner <lczerner@redhat.com>
+-      blkpr:           zhenwei pi <pizhenwei@bytedance.com>
++      blkpr:           zhenwei pi <zhenwei.pi@linux.dev>
+       blkzone:         Shaun Tancheff <shaun@tancheff.com>
+                        Damien Le Moal <damien.lemoal@wdc.com>
+       enosys:          Thomas Weißschuh <thomas@t-8ch.de>
+@@ -33,7 +33,7 @@ AUTHORS (merged projects & commands):
+       hardlink:        Jakub Jelinek <jakub@redhat.com>
+       hwclock:         Bryan Henderson <bryanh@giraffe-data.com>
+       ipcmk:           Hayden James <hayden.james@gmail.com>
+-      irqtop/lsirq:    Zhenwei Pi <pizhenwei@bytedance.com>
++      irqtop/lsirq:    Zhenwei Pi <zhenwei.pi@linux.dev>
+                        Sami Kerola <kerolasa@iki.fi>
+       last/lastb:      [merged from sysvinit]
+                        Miquel van Smoorenburg <miquels@cistron.nl>
 -- 
-2.48.1
+2.43.0
 
 
