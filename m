@@ -1,62 +1,62 @@
-Return-Path: <util-linux+bounces-711-lists+util-linux=lfdr.de@vger.kernel.org>
+Return-Path: <util-linux+bounces-713-lists+util-linux=lfdr.de@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
-Received: from sy.mirrors.kernel.org (sy.mirrors.kernel.org [147.75.48.161])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9309BAC661D
-	for <lists+util-linux@lfdr.de>; Wed, 28 May 2025 11:37:35 +0200 (CEST)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
+	by mail.lfdr.de (Postfix) with ESMTPS id 2AF68AC6620
+	for <lists+util-linux@lfdr.de>; Wed, 28 May 2025 11:38:42 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sy.mirrors.kernel.org (Postfix) with ESMTPS id D426F7B1422
-	for <lists+util-linux@lfdr.de>; Wed, 28 May 2025 09:36:16 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id EEDEE1BA5418
+	for <lists+util-linux@lfdr.de>; Wed, 28 May 2025 09:38:55 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id A98E427814C;
-	Wed, 28 May 2025 09:37:29 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 676132777F3;
+	Wed, 28 May 2025 09:38:38 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=telfort.nl header.i=@telfort.nl header.b="grgjre2e"
+	dkim=pass (1024-bit key) header.d=telfort.nl header.i=@telfort.nl header.b="KMrLqfWC"
 X-Original-To: util-linux@vger.kernel.org
-Received: from ewsoutbound.kpnmail.nl (ewsoutbound.kpnmail.nl [195.121.94.170])
+Received: from ewsoutbound.kpnmail.nl (ewsoutbound.kpnmail.nl [195.121.94.167])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 61277202C3A
-	for <util-linux@vger.kernel.org>; Wed, 28 May 2025 09:37:26 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=195.121.94.170
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 185C6242D98
+	for <util-linux@vger.kernel.org>; Wed, 28 May 2025 09:38:35 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=195.121.94.167
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1748425049; cv=none; b=G/gIbKqwj3uMrG90Lx3v6OFHTK7UGvWbrkWLVLxBfsDpBhKG+ubeNdTPzAhFmG0wBDmM53nxxPEA6ONaOpFwe0kEsTDPBS5nD+Ig8Q6liAYrUzyKdHbzsKY8R5HVD6venlXhhJdVExrC5QeX929hAOuY/1DhZzz0BrzlKklksPE=
+	t=1748425118; cv=none; b=p/lbGhXDqcQs0G7Q2BX+EBlWslcrxRvxq7MLSzkuTZU83q493Jb+3DeajnqQE/QpGsgS1NtqxkpTU9dP9Fu1Oq05vk70rW0PXfqcykUXmyD49uQ8Q2aKGSnQNJfP3cBA5varQ+2uZXKRrW7/qwvhp6Oga2iyu7rRwqAxD90feSY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1748425049; c=relaxed/simple;
-	bh=cOVeljJKT0wR15R8RMBIyMcZyqU6F8LYvf7BePfJPK8=;
+	s=arc-20240116; t=1748425118; c=relaxed/simple;
+	bh=eQHg61nl5e2VN1QClEtGtf2XfDFY6jm2mtyBaSxmMhk=;
 	h=From:To:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=ViXOUDv890HFpkJp9n/0w272Uud4UCjTNetDuYjMB6Y8W3AJMMAFqIJ/uoHeGxDPhSjgJZQYlRI0XKcrsrBQ0vZXqovqdklp3GGGLILy4IlanfexUbaazN4CRnpZxFugee0iGzDUcfnSnpMpgOOq5liTgE91s8Slj2aM6cnYMg8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=telfort.nl; spf=pass smtp.mailfrom=telfort.nl; dkim=pass (1024-bit key) header.d=telfort.nl header.i=@telfort.nl header.b=grgjre2e; arc=none smtp.client-ip=195.121.94.170
+	 MIME-Version; b=T3p9ioF3uezOlGwbqGR7r47fTN3sXvqtri7FfxPklEktJYpIeCllWk4ZBbtlj3kGkvsxxej5wunnvMpSFCV9cRmojn//3zemWIGupmYeX88dAqK7PWFtSVvPe811JRM9AW+R/9UamEhfI4/M8ptbTJMRJzCEDyjqr+vFfyxI2LM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=telfort.nl; spf=pass smtp.mailfrom=telfort.nl; dkim=pass (1024-bit key) header.d=telfort.nl header.i=@telfort.nl header.b=KMrLqfWC; arc=none smtp.client-ip=195.121.94.167
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=telfort.nl
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=telfort.nl
-X-KPN-MessageId: 7ae37984-3ba7-11f0-bc2b-005056ab378f
-Received: from smtp.kpnmail.nl (unknown [10.31.155.39])
+X-KPN-MessageId: 835b4d04-3ba7-11f0-b9a1-005056abbe64
+Received: from smtp.kpnmail.nl (unknown [10.31.155.40])
 	by ewsoutbound.so.kpn.org (Halon) with ESMTPS
-	id 7ae37984-3ba7-11f0-bc2b-005056ab378f;
-	Wed, 28 May 2025 11:38:15 +0200 (CEST)
+	id 835b4d04-3ba7-11f0-b9a1-005056abbe64;
+	Wed, 28 May 2025 11:38:29 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=telfort.nl; s=telfort01;
 	h=mime-version:message-id:date:subject:to:from;
-	bh=BDEe4/LKQrodGp9jBD7/9t0SPscx/iei5bKrOq3wRog=;
-	b=grgjre2eCKyhJDUKHPH1F2FqMyTo5ba3z2H2fWIydh0hTvbqghCxxpkNgHMisD7zczDalY+pznmEo
-	 W4OT8bzfekM7eQImU1VTdsO5GNsAkOSBT0dg5m2BD1OooguX2A/4wfdsU2nwgHyNlRBAhoQE7yoLct
-	 sklNudL3iWshxQRM=
-X-KPN-MID: 33|rakK81DtZCad5BBAXQ2lYlb2ozd7UHJkrDx+Mh9BJVQit4MfTi+Icg5xSx5YbpZ
- pBmNoTRmxs5rok+kH31AzarvbJ9EwJVdoauNJr4KfU9E=
+	bh=Lc8fzFGQpgKO9/Bp6V3W2nmQL+edYnBR7hRIPTgkDcM=;
+	b=KMrLqfWC+QPBHq5AN/rg37N80oNdjc1f93s1cFy4kA7UTMJbROuHB4/tS6GWw+rNev+2o4leNWh3d
+	 bMnbK4J/dYnhPnSYTWxRdZkWMjSy5Aa8+pC/REPju8hwgUu1rW/mAoBxt+15cPUfaflahYNHmrPceU
+	 oP7PIBMnJ9JNClho=
+X-KPN-MID: 33|2nfSsDJASm5cl+QTy4QS0eOSo1HBevgQmLPSrsqzLhvrIQJZ+pDnhxmJ7TSxlTU
+ wY5e+4AKbU6jT7bv/MhBEQVxfq1xCr7g/qPf3ZX0clvw=
 X-KPN-VerifiedSender: Yes
-X-CMASSUN: 33|q8tJEZurF+VThvAzAFkDMysI2cLq/tNQdu34lFNSlmmaKMIC2jrhOAFXqAilTqo
- FriBd0SyRZmLnHPqcznH+0g==
+X-CMASSUN: 33|CR7FiwuRWVib+rzyfA0DgrYnL/4Y+Gn4B+i5rXChnb3vKGrT5wvJDPZLGROA4j+
+ QKrmzyoH3ZcL4wlVrbcCZSw==
 Received: from localhost (77-163-176-192.fixed.kpn.net [77.163.176.192])
 	by smtp.kpnmail.nl (Halon) with ESMTPSA
-	id 59133378-3ba7-11f0-9c4a-005056ab7447;
-	Wed, 28 May 2025 11:37:19 +0200 (CEST)
+	id 5d871eb7-3ba7-11f0-858f-005056ab7584;
+	Wed, 28 May 2025 11:37:26 +0200 (CEST)
 From: Benno Schulenberg <bensberg@telfort.nl>
 To: util-linux@vger.kernel.org
-Subject: [PATCH 2/4] lib/strutils: call gettext() only when argument of --hyperlink is invalid
-Date: Wed, 28 May 2025 11:37:02 +0200
-Message-ID: <20250528093704.8896-2-bensberg@telfort.nl>
+Subject: [PATCH 3/4] colrm: make two error messages actually say that something is wrong
+Date: Wed, 28 May 2025 11:37:03 +0200
+Message-ID: <20250528093704.8896-3-bensberg@telfort.nl>
 X-Mailer: git-send-email 2.48.1
 In-Reply-To: <20250528093704.8896-1-bensberg@telfort.nl>
 References: <20250528093704.8896-1-bensberg@telfort.nl>
@@ -70,90 +70,25 @@ Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Benno Schulenberg <bensberg@telfort.nl>
 ---
- include/strutils.h   | 2 +-
- lib/strutils.c       | 4 ++--
- lsfd-cmd/lsfd.c      | 3 +--
- misc-utils/findmnt.c | 3 +--
- misc-utils/lsblk.c   | 3 +--
- 5 files changed, 6 insertions(+), 9 deletions(-)
+ text-utils/colrm.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/include/strutils.h b/include/strutils.h
-index a81fdea89..70f97f0c8 100644
---- a/include/strutils.h
-+++ b/include/strutils.h
-@@ -59,7 +59,7 @@ extern void strtotimespec_or_err(const char *str, struct timespec *ts,
- 		const char *errmesg);
- extern time_t strtotime_or_err(const char *str, const char *errmesg);
+diff --git a/text-utils/colrm.c b/text-utils/colrm.c
+index b1370ac81..dd36d1827 100644
+--- a/text-utils/colrm.c
++++ b/text-utils/colrm.c
+@@ -180,9 +180,9 @@ int main(int argc, char **argv)
+ 		}
  
--extern bool hyperlinkwanted_or_err(const char *mode, const char *errmesg);
-+extern bool hyperlinkwanted(const char *mode);
+ 	if (argc > 1)
+-		first = strtoul_or_err(*++argv, _("first argument"));
++		first = strtoul_or_err(*++argv, _("invalid first argument"));
+ 	if (argc > 2)
+-		last = strtoul_or_err(*++argv, _("second argument"));
++		last = strtoul_or_err(*++argv, _("invalid second argument"));
  
- extern int isdigit_strend(const char *str, const char **end);
- #define isdigit_string(_s)	isdigit_strend(_s, NULL)
-diff --git a/lib/strutils.c b/lib/strutils.c
-index af538207a..64fefa878 100644
---- a/lib/strutils.c
-+++ b/lib/strutils.c
-@@ -524,7 +524,7 @@ time_t strtotime_or_err(const char *str, const char *errmesg)
- 	return (time_t) user_input;
- }
- 
--bool hyperlinkwanted_or_err(const char *mode, const char *errmesg)
-+bool hyperlinkwanted(const char *mode)
- {
- 	if (mode && strcmp(mode, "never") == 0)
- 		return false;
-@@ -535,7 +535,7 @@ bool hyperlinkwanted_or_err(const char *mode, const char *errmesg)
- 	if (!mode || strcmp(mode, "auto") == 0)
- 		return isatty(STDOUT_FILENO) ? true : false;
- 
--	errx(EXIT_FAILURE, "%s: '%s'", errmesg, mode);
-+	errx(EXIT_FAILURE, _("invalid argument of --hyperlink: %s"), mode);
- }
- 
- /*
-diff --git a/lsfd-cmd/lsfd.c b/lsfd-cmd/lsfd.c
-index d05a09396..ffaca8c31 100644
---- a/lsfd-cmd/lsfd.c
-+++ b/lsfd-cmd/lsfd.c
-@@ -2648,8 +2648,7 @@ int main(int argc, char *argv[])
- 				err(EXIT_FAILURE, _("failed to drop privilege"));
- 			break;
- 		case OPT_HYPERLINK:
--			if (hyperlinkwanted_or_err(optarg,
--					_("invalid hyperlink argument")))
-+			if (hyperlinkwanted(optarg))
- 				ctl.uri = xgethosturi(NULL);
- 			break;
- 		case 'V':
-diff --git a/misc-utils/findmnt.c b/misc-utils/findmnt.c
-index 130ac1b13..1211bfa07 100644
---- a/misc-utils/findmnt.c
-+++ b/misc-utils/findmnt.c
-@@ -2026,8 +2026,7 @@ int main(int argc, char *argv[])
- 			findmnt.flags |= FL_SHADOWED;
- 			break;
- 		case FINDMNT_OPT_HYPERLINK:
--			if (hyperlinkwanted_or_err(optarg,
--					_("invalid hyperlink argument")))
-+			if (hyperlinkwanted(optarg))
- 				findmnt.uri = xgethosturi(NULL);
- 			break;
- 		case FINDMNT_OPT_ID:
-diff --git a/misc-utils/lsblk.c b/misc-utils/lsblk.c
-index a65f5e4e6..da44bd631 100644
---- a/misc-utils/lsblk.c
-+++ b/misc-utils/lsblk.c
-@@ -2678,8 +2678,7 @@ int main(int argc, char *argv[])
- 				errtryhelp(EXIT_FAILURE);
- 			break;
- 		case OPT_HYPERLINK:
--			if (hyperlinkwanted_or_err(optarg,
--					_("invalid hyperlink argument")))
-+			if (hyperlinkwanted(optarg))
- 				lsblk->uri = xgethosturi(NULL);
- 			break;
- 		case 'H':
+ 	while (process_input(first, last))
+ 		;
 -- 
 2.48.1
 
