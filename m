@@ -1,132 +1,188 @@
-Return-Path: <util-linux+bounces-750-lists+util-linux=lfdr.de@vger.kernel.org>
+Return-Path: <util-linux+bounces-753-lists+util-linux=lfdr.de@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id C11C2AE2BD4
-	for <lists+util-linux@lfdr.de>; Sat, 21 Jun 2025 21:51:14 +0200 (CEST)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [147.75.80.249])
+	by mail.lfdr.de (Postfix) with ESMTPS id 4801BAE2BDB
+	for <lists+util-linux@lfdr.de>; Sat, 21 Jun 2025 21:51:59 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 19E243BA227
-	for <lists+util-linux@lfdr.de>; Sat, 21 Jun 2025 19:50:50 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id C3BBD189A556
+	for <lists+util-linux@lfdr.de>; Sat, 21 Jun 2025 19:52:14 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id EDE291C75E2;
-	Sat, 21 Jun 2025 19:51:09 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0DA98271450;
+	Sat, 21 Jun 2025 19:51:34 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=ibm.com header.i=@ibm.com header.b="PTz0+sud"
+	dkim=pass (2048-bit key) header.d=ibm.com header.i=@ibm.com header.b="ofe23Ikl"
 X-Original-To: util-linux@vger.kernel.org
 Received: from mx0a-001b2d01.pphosted.com (mx0a-001b2d01.pphosted.com [148.163.156.1])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 417EA7E1
-	for <util-linux@vger.kernel.org>; Sat, 21 Jun 2025 19:51:08 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5FC8E1B414E
+	for <util-linux@vger.kernel.org>; Sat, 21 Jun 2025 19:51:32 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=148.163.156.1
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1750535469; cv=none; b=o7vza67qukris1Wcmdb+1GTHguHJtxI+LarEOsg+unaoblApMGmsppLwM9lqFt2WlsVSvnYavpzV7oEyGAi7Lir3S3s3Ks1fD67UVT1yKQFdP13s7vvkiSuOuS0Jdyc1w4VfIu/edUOCDu7xPGIDYVPI/eypMkyQdlj9q/tNJAg=
+	t=1750535493; cv=none; b=pavHxZTqIljV/iy2lFZuWtFE/H2yXGedSBA+i0E6X/sYpIQkgDk+JwS7A7NgiDf8wpFc1O57jVoS3qJMY/qIINS6xH9gmY24LuU5QYSsik7IE9YaKLMvcyodza9PDQ91RGBCtcO1ez+5GtBsSjGNw5mh6U3zJ26hJf8Si0nb1uA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1750535469; c=relaxed/simple;
-	bh=EYtJTR32rFPSZ597+86W/Yk8kXlzcV2aVVBAI0ToLrw=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type; b=rTLzk90ZsabyYLcWJxOfHJ6P9gvYQbbByWMzYA9CI3eo38uCsv6nayYDkcx4D1kgwmL5T2zy/umC7azK8VnoiIi2KxN/tUzwrXioQ+jOXteODV4QOUsCcqn3IWmcm3haq3VPpYWIvAGcEwOy8bztM7DotL+mxWg47Kbp47fLqcM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.ibm.com; spf=pass smtp.mailfrom=linux.ibm.com; dkim=pass (2048-bit key) header.d=ibm.com header.i=@ibm.com header.b=PTz0+sud; arc=none smtp.client-ip=148.163.156.1
+	s=arc-20240116; t=1750535493; c=relaxed/simple;
+	bh=tuO/PseznMqx44dE6/BkZXRXZfqy6ysvnzmyqaBAd/s=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version; b=eSJNXoYVU2kYoJb6C1MPx5s6eRpzPzwrVPOXgMvxvWndJnsxpx/EOyCH0aobrLpepSRjeiZ4WfxjrBcDeCJ2sZ1Hd34TOOW/pMW2vS0Oh7wElL19INQpItDb8w8xj2Cqic1WMmopIco2a/kDcQyoDt4xa1h965g0ZXfUXTv6M0k=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.ibm.com; spf=pass smtp.mailfrom=linux.ibm.com; dkim=pass (2048-bit key) header.d=ibm.com header.i=@ibm.com header.b=ofe23Ikl; arc=none smtp.client-ip=148.163.156.1
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.ibm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.ibm.com
 Received: from pps.filterd (m0360083.ppops.net [127.0.0.1])
-	by mx0a-001b2d01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 55L9svHJ007576;
-	Sat, 21 Jun 2025 19:51:00 GMT
+	by mx0a-001b2d01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 55LJj2QL021581;
+	Sat, 21 Jun 2025 19:51:06 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com; h=cc
-	:content-transfer-encoding:content-type:date:from:message-id
-	:mime-version:subject:to; s=pp1; bh=O1XzOSwETy2MxsP3Z2gpTd3w1Ber
-	9n57IG8n+5GALZ0=; b=PTz0+sudspopz9QtChfZahWwsIG/Exw77GGYtNOJxwfS
-	TgKPlzkkIbUeKmicHdrWTdYIqzaUYLgiKP3RzQiQ7D3O4f3UYP5I64dz1Oz80GWC
-	BAJ/AmP+KoEWkanrs8p4MapXi7cxxb+00v4QIveJTSuNOI2Re+r6faNReXVPfS1H
-	DGQxEOKpP9d2FL1dQI8aMWrXeErw3TRaGyCFlLyQMeA2IxbSp9RU2Y1DV5uqLKsV
-	zR0o1Pystma3IrgydeB3OyohaEcb1TjEKxLLkAV1AZkR17TJC/4xC82/nUtAhW24
-	s8xtUyiAKiM1j1uT5TWbq24r3d0RoWkox07x/nIFNw==
-Received: from ppma21.wdc07v.mail.ibm.com (5b.69.3da9.ip4.static.sl-reverse.com [169.61.105.91])
-	by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 47dm8hth9q-1
+	:content-transfer-encoding:date:from:in-reply-to:message-id
+	:mime-version:references:subject:to; s=pp1; bh=CWs6LgLmKW4aulYFy
+	eT4v7c2IW0ub7RBVYMh7mSj8vo=; b=ofe23IklmePcq2/fRQDPR18k5er0ZQxAS
+	6rRGt2OD5wKio8k+liUEAGjxyCdaEPWnghgHzK/ewxox3C74FDdfMI0FV2ebp2vZ
+	h0uOGT5q0jeTT3M/CEVCgvH+YZkpG1xw/gxvdFJS7yzAlW/bJpCVMDNdfvCDAb+/
+	upJteqBlQ1EQV0Xz+A+nRwg9eQ4tMYK8iKX4mNMp3Ih56xgEhTqha+cq5DpooXkt
+	k5yxzGICF3LkS+Q8oByULWHGHrkqGvJ7CsnNYlueDvk5LCo1kpl1xmDsADZFza91
+	CM3ppiBBMvVmHBVYtM+qpd0QQ5fv/aaocLsSRfAMi8kD0jidXytkw==
+Received: from ppma22.wdc07v.mail.ibm.com (5c.69.3da9.ip4.static.sl-reverse.com [169.61.105.92])
+	by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 47dm8hth9v-1
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Sat, 21 Jun 2025 19:51:00 +0000 (GMT)
-Received: from pps.filterd (ppma21.wdc07v.mail.ibm.com [127.0.0.1])
-	by ppma21.wdc07v.mail.ibm.com (8.18.1.2/8.18.1.2) with ESMTP id 55LJR86D010013;
-	Sat, 21 Jun 2025 19:50:58 GMT
+	Sat, 21 Jun 2025 19:51:06 +0000 (GMT)
+Received: from pps.filterd (ppma22.wdc07v.mail.ibm.com [127.0.0.1])
+	by ppma22.wdc07v.mail.ibm.com (8.18.1.2/8.18.1.2) with ESMTP id 55LJV9Nt016436;
+	Sat, 21 Jun 2025 19:51:05 GMT
 Received: from smtprelay04.fra02v.mail.ibm.com ([9.218.2.228])
-	by ppma21.wdc07v.mail.ibm.com (PPS) with ESMTPS id 47dnmjtn3t-1
+	by ppma22.wdc07v.mail.ibm.com (PPS) with ESMTPS id 47dnmttnk6-1
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Sat, 21 Jun 2025 19:50:58 +0000
+	Sat, 21 Jun 2025 19:51:05 +0000
 Received: from smtpav02.fra02v.mail.ibm.com (smtpav02.fra02v.mail.ibm.com [10.20.54.101])
-	by smtprelay04.fra02v.mail.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id 55LJougV16974098
+	by smtprelay04.fra02v.mail.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id 55LJp3Tw18284828
 	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
-	Sat, 21 Jun 2025 19:50:57 GMT
+	Sat, 21 Jun 2025 19:51:03 GMT
 Received: from smtpav02.fra02v.mail.ibm.com (unknown [127.0.0.1])
-	by IMSVA (Postfix) with ESMTP id E0EA62004B;
-	Sat, 21 Jun 2025 19:50:56 +0000 (GMT)
+	by IMSVA (Postfix) with ESMTP id 32CF92004B;
+	Sat, 21 Jun 2025 19:51:03 +0000 (GMT)
 Received: from smtpav02.fra02v.mail.ibm.com (unknown [127.0.0.1])
-	by IMSVA (Postfix) with ESMTP id 606F920043;
-	Sat, 21 Jun 2025 19:50:53 +0000 (GMT)
+	by IMSVA (Postfix) with ESMTP id D503820043;
+	Sat, 21 Jun 2025 19:50:59 +0000 (GMT)
 Received: from li-fdfde5cc-27d0-11b2-a85c-e224154bf6d4.ibm.com.com (unknown [9.43.73.245])
 	by smtpav02.fra02v.mail.ibm.com (Postfix) with ESMTP;
-	Sat, 21 Jun 2025 19:50:52 +0000 (GMT)
+	Sat, 21 Jun 2025 19:50:59 +0000 (GMT)
 From: Madadi Vineeth Reddy <vineethr@linux.ibm.com>
 To: util-linux@vger.kernel.org, Karel Zak <kzak@redhat.com>,
         Benno Schulenberg <bensberg@telfort.nl>
 Cc: Madadi Vineeth Reddy <vineethr@linux.ibm.com>
-Subject: [PATCH v4 0/3] chrt: Improve argument handling and allow optional priority
-Date: Sun, 22 Jun 2025 01:20:45 +0530
-Message-ID: <20250621195048.24900-1-vineethr@linux.ibm.com>
+Subject: [PATCH v4 1/3] chrt: Make minor cleanups in chrt
+Date: Sun, 22 Jun 2025 01:20:46 +0530
+Message-ID: <20250621195048.24900-2-vineethr@linux.ibm.com>
 X-Mailer: git-send-email 2.49.0
+In-Reply-To: <20250621195048.24900-1-vineethr@linux.ibm.com>
+References: <20250621195048.24900-1-vineethr@linux.ibm.com>
 Precedence: bulk
 X-Mailing-List: util-linux@vger.kernel.org
 List-Id: <util-linux.vger.kernel.org>
 List-Subscribe: <mailto:util-linux+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:util-linux+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-TM-AS-GCONF: 00
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwNjIxMDEyNiBTYWx0ZWRfXxNbVyjXzdwrf zlOsIJp4NeS2BstlZMIiTkJV2TP8ESHEiBAllIkrvaC1TlIgmKWuvvp1MTPlDNuxZJXJ1XcEFut bJPa7wdZ6ZLGYGue5cQ6TkkAt0VgeCeQEWozy4piFtcdq63IlqS6kPp2pkWvGxU6OoXue06rZmr
- 1C6GUUSeQ0sJag6W3+4soMNAAdzS5EZq0SgJ/Nr5ta0L3Zo9NLizeb0kAkbzFnDcfFSyB98zY3B X+ZYkPGD/FUnlJlrVleyDbA0hZZ1SOV5zD5i+mQLfo4I3WdJWiThyncWPBLLvEqDJtLPLGsuhXM 9ldE0sXRupg2o7KKdqLzI3KaOTdMIg0ArznfBfKNRT8sYI5Zhq/LvKn6EeUJJTu8adyoM21W8Uw
- vyQj2Cm8RVhswna61vP61IObVbI5Sj7knc0OEasP13Ajj0+yH+J6FLAOhQZR7MHH7XIJYL75
-X-Proofpoint-GUID: jAiRahjNTDhPCFkii9ykiWjwIeiNvCFe
-X-Proofpoint-ORIG-GUID: jAiRahjNTDhPCFkii9ykiWjwIeiNvCFe
-X-Authority-Analysis: v=2.4 cv=combk04i c=1 sm=1 tr=0 ts=68570d24 cx=c_pps a=GFwsV6G8L6GxiO2Y/PsHdQ==:117 a=GFwsV6G8L6GxiO2Y/PsHdQ==:17 a=IkcTkHD0fZMA:10 a=6IFa9wvqVegA:10 a=svS2YZ0C6T2P7Q9mctUA:9 a=QEXdDO2ut3YA:10
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwNjIxMDEyNiBTYWx0ZWRfX8eMT7ujmTD46 m5OaIcacKBorN+gYU++2hguTDd1RnnmQtw44jgkLpAENlc63TFz0Px6LDA4dtszhfLr5eOT3TsC gdslKJjHPSgmAUvUbZOxK1UXnlTfbDC/Ovzk0NR7j0ux1jv/4HKB1pkY0NEpBIIjx30nPCPCduF
+ uKtBesyaNSDAwgoKBE2sbbbDVfflcAzlrwmPNG2qQF87PIKSiFcXThZICJGVENqysisuMOS2AP7 rWJPchPRETS1k8UOkKHZqAJ1HBUvyMvhQu0irl8lTPEt31YIXo0UWq0Kkc1nVSy5lQgkRc9NskU y2pJ2WeNGSrlOqw7C68PCps8m4wk6e7iQFihMzyMHWM2Ib4jlzhw1+FfX/PSomq6eHQsbWz6vjt
+ qkm1yOGevSXhlHexnpjJ+jR0vrR9mL18jElSnEwdkbWJMuofI1xC01YgxGQ67PGrvHY0UMKo
+X-Proofpoint-GUID: tA515pyoJAHxMbhUh6PEvwNaB8vHwrqu
+X-Proofpoint-ORIG-GUID: tA515pyoJAHxMbhUh6PEvwNaB8vHwrqu
+X-Authority-Analysis: v=2.4 cv=combk04i c=1 sm=1 tr=0 ts=68570d2a cx=c_pps a=5BHTudwdYE3Te8bg5FgnPg==:117 a=5BHTudwdYE3Te8bg5FgnPg==:17 a=6IFa9wvqVegA:10 a=VnNF1IyMAAAA:8 a=CWI5U3P8YdA1OMGJAVAA:9
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.0.736,FMLib:17.12.80.40
  definitions=2025-06-21_06,2025-06-20_01,2025-03-28_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 priorityscore=1501
- malwarescore=0 spamscore=0 adultscore=0 mlxlogscore=971 clxscore=1015
+ malwarescore=0 spamscore=0 adultscore=0 mlxlogscore=999 clxscore=1015
  impostorscore=0 suspectscore=0 mlxscore=0 phishscore=0 lowpriorityscore=0
  bulkscore=0 classifier=spam authscore=0 authtc=n/a authcc= route=outbound
  adjust=0 reason=mlx scancount=1 engine=8.19.0-2505280000
  definitions=main-2506210126
 
-This series improves the usability and correctness of the chrt tool:
+Minor changes such as fixing an incorrect comment and aligning
+the closing brace of an if condition in main() were made, along
+with making the usage of --pid consistent across files instead
+of -p, although -p still works, for better readability.
 
-- Minor cleanups such as indentation fixes and correcting comment.
-- Fixes an issue where specifying a policy without a priority would
-  misleadingly print current settings
-- Makes the priority argument optional for scheduling policies that
-  ignore it, simplifying usage for tuning parameters like --sched-runtime
+No functional change is intended.
 
-Changes in v4:
-- Rectified my mistake of not giving proper space in a comment in v3
+Signed-off-by: Madadi Vineeth Reddy <vineethr@linux.ibm.com>
+---
+ schedutils/chrt.1.adoc | 10 +++++-----
+ schedutils/chrt.c      |  6 +++---
+ 2 files changed, 8 insertions(+), 8 deletions(-)
 
-Changes in v3: 
-- Made --pid consistent throughout (Karel Zak)
-- Change get policy to not have policy options (Karel Zak and Benno Schulenberg)
-
-Changes in v2:
-- Updated the man page to reflect the optional priority behavior (Karel Zak)
-- Renamed variable to 'need_prio' (Karel Zak)
-
-Madadi Vineeth Reddy (3):
-  chrt: Make minor cleanups in chrt
-  chrt: Only display current settings when no policy is specified
-  chrt: Make priority optional for policies that don't use it
-
- schedutils/chrt.1.adoc | 24 +++++++++++++----------
- schedutils/chrt.c      | 43 +++++++++++++++++++++++++++++++++---------
- 2 files changed, 48 insertions(+), 19 deletions(-)
-
+diff --git a/schedutils/chrt.1.adoc b/schedutils/chrt.1.adoc
+index 77add535d..36cdcc5fe 100644
+--- a/schedutils/chrt.1.adoc
++++ b/schedutils/chrt.1.adoc
+@@ -40,7 +40,7 @@ chrt - manipulate the real-time attributes of a process
+ 
+ *chrt* [options] _priority command argument_ ...
+ 
+-*chrt* [options] *-p* [_priority_] _PID_
++*chrt* [options] *--pid* [_priority_] _PID_
+ 
+ == DESCRIPTION
+ 
+@@ -117,20 +117,20 @@ ____
+ //TRANSLATORS: Keep {colon} untranslated
+ You can also retrieve the real-time attributes of an existing task{colon}::
+ ____
+-*chrt -p* _PID_
++*chrt --pid* _PID_
+ ____
+ //TRANSLATORS: Keep {colon} untranslated
+ Or set them{colon}::
+ ____
+-*chrt -r -p* _priority PID_
++*chrt -r --pid* _priority PID_
+ ____
+ This, for example, sets real-time scheduling to priority _30_ for the process _PID_ with the *SCHED_RR* (round-robin) class{colon}::
+ ____
+-*chrt -r -p 30* _PID_
++*chrt -r --pid 30* _PID_
+ ____
+ Reset priorities to default for a process{colon}::
+ ____
+-*chrt -o -p 0* _PID_
++*chrt -o --pid 0* _PID_
+ ____
+ See *sched*(7) for a detailed discussion of the different scheduler classes and how they interact.
+ 
+diff --git a/schedutils/chrt.c b/schedutils/chrt.c
+index cf99935dc..8fe748f43 100644
+--- a/schedutils/chrt.c
++++ b/schedutils/chrt.c
+@@ -64,7 +64,7 @@ static void __attribute__((__noreturn__)) usage(void)
+ 	" chrt [options] --pid <priority> <pid>\n"), out);
+ 	fputs(USAGE_SEPARATOR, out);
+ 	fputs(_("Get policy:\n"
+-	" chrt [options] -p <pid>\n"), out);
++	" chrt [options] --pid <pid>\n"), out);
+ 
+ 	fputs(USAGE_SEPARATOR, out);
+ 	fputs(_("Policy options:\n"), out);
+@@ -341,7 +341,7 @@ static int set_sched_one(struct chrt_ctl *ctl, pid_t pid)
+ 	return set_sched_one_by_setscheduler(ctl, pid);
+ }
+ 
+-#else /* !HAVE_SCHED_SETATTR */
++#else /* HAVE_SCHED_SETATTR */
+ static int set_sched_one(struct chrt_ctl *ctl, pid_t pid)
+ {
+ 	struct sched_attr sa = { .size = sizeof(struct sched_attr) };
+@@ -499,7 +499,7 @@ int main(int argc, char **argv)
+ 	    ((ctl->pid == -1) && argc - optind < 2)) {
+ 		warnx(_("bad usage"));
+ 		errtryhelp(EXIT_FAILURE);
+-}
++	}
+ 
+ 	if ((ctl->pid > -1) && (ctl->verbose || argc - optind == 1)) {
+ 		show_sched_info(ctl);
 -- 
 2.49.0
 
