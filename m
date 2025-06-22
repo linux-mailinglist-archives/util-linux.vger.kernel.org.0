@@ -1,59 +1,58 @@
-Return-Path: <util-linux+bounces-756-lists+util-linux=lfdr.de@vger.kernel.org>
+Return-Path: <util-linux+bounces-757-lists+util-linux=lfdr.de@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
-Received: from ny.mirrors.kernel.org (ny.mirrors.kernel.org [IPv6:2604:1380:45d1:ec00::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 06F45AE2F4E
-	for <lists+util-linux@lfdr.de>; Sun, 22 Jun 2025 12:15:57 +0200 (CEST)
+Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
+	by mail.lfdr.de (Postfix) with ESMTPS id 9C5EEAE2F66
+	for <lists+util-linux@lfdr.de>; Sun, 22 Jun 2025 12:36:33 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ny.mirrors.kernel.org (Postfix) with ESMTPS id 8C333171CC7
-	for <lists+util-linux@lfdr.de>; Sun, 22 Jun 2025 10:15:57 +0000 (UTC)
+	by sv.mirrors.kernel.org (Postfix) with ESMTPS id D726A3B0FA1
+	for <lists+util-linux@lfdr.de>; Sun, 22 Jun 2025 10:36:08 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id AE3E318CC13;
-	Sun, 22 Jun 2025 10:15:52 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3DBDD1C84CF;
+	Sun, 22 Jun 2025 10:36:29 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=gouders.net header.i=@gouders.net header.b="O6ti8sbJ"
+	dkim=pass (1024-bit key) header.d=gouders.net header.i=@gouders.net header.b="GqdWl+iN"
 X-Original-To: util-linux@vger.kernel.org
 Received: from mx10.gouders.net (mx10.gouders.net [202.61.206.94])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 082E917736
-	for <util-linux@vger.kernel.org>; Sun, 22 Jun 2025 10:15:47 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 82DB5167DB7
+	for <util-linux@vger.kernel.org>; Sun, 22 Jun 2025 10:36:24 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=202.61.206.94
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1750587352; cv=none; b=FMK82jq54HkRjelqcQLsdGMmgELTJfuDEpcN/xiGhiasIVZMBM2r7n9QflpkMXyWMCb1HHbq4uCvS7wVa+u4Jf4SiJ9s9UGB4RcEGLL6msQ3MTaI/nomnu25u9uOZ//zHv6MHUlUV5KwEzOAWwkgI1DkBoNbL0x5XtJBZ4MCp6c=
+	t=1750588588; cv=none; b=M7YxyVCppOTC/QON+M1XtdmqZ+SKa6DnvE6OGFbGM2MifRoxDRHG2UMRmNZXDkxEEkpZDWeZ9RgRxp6sZDHsXKzfv89NRNxzoTDfSrHNqrWqIc0s9Ez8l9Vio5Ndr0tIB3OXd3RY7Yk3iEdDraM3FjiSSxrd28BaJoLibHE3JvE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1750587352; c=relaxed/simple;
-	bh=R91m7vrDhOZaWWyosswcioNBx+rQpQ5No1HgZzm8RTA=;
+	s=arc-20240116; t=1750588588; c=relaxed/simple;
+	bh=Hxe/6yNvT02j36wC5bSR/rErPMCarkBGnaHcWadxuzU=;
 	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
-	 MIME-Version:Content-Type; b=trvWQD3W0ASBoIdBB5bcI7TDz5VsXuaoK8WAF7ya9XlIit6qfBNg5oEusiHKp+zEGk20NptqvTrkuObm63ponfPFYEUgZc2xANJvZpdv3sgC2v6z4i/OXiXiCuVfE5UBip4Gjsms2yaheKjEKp3etFJwj1peuBIVBhFTnOKlSjo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=gouders.net; spf=pass smtp.mailfrom=gouders.net; dkim=pass (1024-bit key) header.d=gouders.net header.i=@gouders.net header.b=O6ti8sbJ; arc=none smtp.client-ip=202.61.206.94
+	 MIME-Version:Content-Type; b=VCTPa8pwgQuvoiiWGr0/eRyYGF5Si2dmWg8wYOSo7KcBiqyLv9b9LeJavEH7bdybE8v3ARyGq4FjFSxLToPESC0qtiTGaNvNdxQIySqNpMezu0CTWFBZnyQN8IRIyRiyfrtCqwLrqOvOvH8iKZUZ81boTg4HvGR8m7aeNANZmeg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=gouders.net; spf=pass smtp.mailfrom=gouders.net; dkim=pass (1024-bit key) header.d=gouders.net header.i=@gouders.net header.b=GqdWl+iN; arc=none smtp.client-ip=202.61.206.94
 Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=gouders.net
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gouders.net
 Received: from localhost (ltea-047-065-176-090.pools.arcor-ip.net [47.65.176.90])
 	(authenticated bits=0)
-	by mx10.gouders.net (8.18.1/8.17.1.9) with ESMTPSA id 55M9nb9f008428
+	by mx10.gouders.net (8.18.1/8.17.1.9) with ESMTPSA id 55MAaC08010811
 	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NO);
-	Sun, 22 Jun 2025 11:49:38 +0200
+	Sun, 22 Jun 2025 12:36:12 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gouders.net; s=gnet;
-	t=1750585778; bh=R91m7vrDhOZaWWyosswcioNBx+rQpQ5No1HgZzm8RTA=;
+	t=1750588572; bh=Hxe/6yNvT02j36wC5bSR/rErPMCarkBGnaHcWadxuzU=;
 	h=From:To:Cc:Subject:In-Reply-To:References:Date;
-	b=O6ti8sbJMZsvBXPjMAdRFCWXK4522lGySkbPICiH+TbMZgNXmjUgRPtbwH+pH7nYs
-	 elo/IrpQ3+xTKjSvibfsnjgRwVMJit3Ko/TFj2zGd+ZOXzwTpbKrcQCsE0OzwVxzBP
-	 1uacS8tqVjARICeQNYgvbOoaQ53uG7AeLOdEk0ik=
+	b=GqdWl+iNiW2uQrO3UIurxDVxXchg0+1hSpPv9qf+Z7Hy2NnOShqapw0v/GMvMziXL
+	 OlBRHCFb0MRoPIAs/so5IVZgY/TKLptGOY4SH4U8c7TslD2oIf3VhE01xc4RJcKq31
+	 fwjfQFNBuUwoO179175hSTKuTGxvnDEArD85bHPc=
 From: Dirk Gouders <dirk@gouders.net>
 To: util-linux@vger.kernel.org
-Cc: "Haelwenn (lanodan) Monnier"
- <contact-BazVNOuc66DwXD0AkxfrAg@public.gmane.org>
+Cc: "Haelwenn (lanodan) Monnier" <contact@hacktivis.me>
 Subject: Re: [PATCH] rename: change "expression" to "original"
 In-Reply-To: <1038hjr$5nr$1@ciao.gmane.io> (Nuno Silva's message of "Sun, 22
 	Jun 2025 10:15:39 +0100")
 References: <20250621232642.17613-2-contact@hacktivis.me>
 	<1038hjr$5nr$1@ciao.gmane.io>
 User-Agent: Gnus/5.13 (Gnus v5.13)
-Date: Sun, 22 Jun 2025 11:49:37 +0200
-Message-ID: <ghpleww1fy.fsf@gouders.net>
+Date: Sun, 22 Jun 2025 12:36:12 +0200
+Message-ID: <ghjz54vzab.fsf@gouders.net>
 Precedence: bulk
 X-Mailing-List: util-linux@vger.kernel.org
 List-Id: <util-linux.vger.kernel.org>
@@ -61,6 +60,8 @@ List-Subscribe: <mailto:util-linux+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:util-linux+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain
+
+Resend with Cc address from original posting:
 
 Nuno Silva <nunojsilva@ist.utl.pt> writes:
 
