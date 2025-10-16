@@ -1,69 +1,69 @@
-Return-Path: <util-linux+bounces-912-lists+util-linux=lfdr.de@vger.kernel.org>
+Return-Path: <util-linux+bounces-909-lists+util-linux=lfdr.de@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from dfw.mirrors.kernel.org (dfw.mirrors.kernel.org [IPv6:2605:f480:58:1:0:1994:3:14])
-	by mail.lfdr.de (Postfix) with ESMTPS id 15F0FBE44A4
-	for <lists+util-linux@lfdr.de>; Thu, 16 Oct 2025 17:40:07 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 78A81BE449B
+	for <lists+util-linux@lfdr.de>; Thu, 16 Oct 2025 17:39:58 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by dfw.mirrors.kernel.org (Postfix) with ESMTPS id CA4675602D4
-	for <lists+util-linux@lfdr.de>; Thu, 16 Oct 2025 15:39:08 +0000 (UTC)
+	by dfw.mirrors.kernel.org (Postfix) with ESMTPS id 54AAC543CB8
+	for <lists+util-linux@lfdr.de>; Thu, 16 Oct 2025 15:39:06 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id ED1EF34DCF4;
-	Thu, 16 Oct 2025 15:38:48 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9AC6834DCE6;
+	Thu, 16 Oct 2025 15:38:47 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=ibm.com header.i=@ibm.com header.b="TToahXbf"
+	dkim=pass (2048-bit key) header.d=ibm.com header.i=@ibm.com header.b="ZvdwsVcT"
 X-Original-To: util-linux@vger.kernel.org
-Received: from mx0b-001b2d01.pphosted.com (mx0b-001b2d01.pphosted.com [148.163.158.5])
+Received: from mx0a-001b2d01.pphosted.com (mx0a-001b2d01.pphosted.com [148.163.156.1])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A4BC434DCC6
-	for <util-linux@vger.kernel.org>; Thu, 16 Oct 2025 15:38:44 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=148.163.158.5
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5352C34DCD2
+	for <util-linux@vger.kernel.org>; Thu, 16 Oct 2025 15:38:45 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=148.163.156.1
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1760629128; cv=none; b=JiHww8+WXQOvygqSgqrGnZB1ObjJLn6ja7j7qm/MeZXNgEC7up7DFHdYnt8aoWJidfUUn4DIUEM4LwgRjBPoyvz7u0bXFB0H+qM6IMn9rEUFWcDQNO1kgWJ8SDbwxW0nIY3gtBvkOFK2n0IX94CgxH9J8Wc9Z9kxqVVv0WpSAA0=
+	t=1760629127; cv=none; b=mnDWowL5rCdqZJgjk9whz0YXrNbEkLjid4H4hK2h/e9VX8QPRD8VphmPF0Ueba9agnUIbvUKDX5I8qQuc0vNGRbohV9qfYy54l/vWC6GER8fh2lvFI52/mEZvxAYDSzt7reoL7Y7Ugjd56psZP3xhixt3O/OCuD2OTI5F/o7Dyc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1760629128; c=relaxed/simple;
-	bh=hJk9P5HVXa/w5/0/+niXpK6HLY7wUGFWlAEwZj8XYHg=;
+	s=arc-20240116; t=1760629127; c=relaxed/simple;
+	bh=e1VpUg42iH/hiGOxvzyKCAujiTboZqGjcuJe0JwbSYc=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=d1D35Mtvl7RMakjPPZ2LTnpZ1FGsISvftqsOLULixuF++x8w5q7nSKTQkil45sA4VV+FAJQCSAlErPSf8FRSyZp4FpmRUHfjvJOs4KHulO6HimYvjEQL5Mofz1hRE/9uazvQktPz03Px17yKs8Zf6Fi0FlcGNqq314UCjAy6XTQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.ibm.com; spf=pass smtp.mailfrom=linux.ibm.com; dkim=pass (2048-bit key) header.d=ibm.com header.i=@ibm.com header.b=TToahXbf; arc=none smtp.client-ip=148.163.158.5
+	 MIME-Version:Content-Type; b=u0NpURGLk0YKFGAEvw6jJlaIOFhdAiwqv0KCHgJAzWl1vBqHyyDL0VJZA4HM7A0vYN+jgfS09p1nLIK9oZgUVkIYWkCDVUy6dr9Li29ZtppRfsin48RgdZH7yK7HwO0jrEdI8tsx/MUncdERLagHLcRsdzORrlew7+6hKzUx81A=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.ibm.com; spf=pass smtp.mailfrom=linux.ibm.com; dkim=pass (2048-bit key) header.d=ibm.com header.i=@ibm.com header.b=ZvdwsVcT; arc=none smtp.client-ip=148.163.156.1
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.ibm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.ibm.com
-Received: from pps.filterd (m0360072.ppops.net [127.0.0.1])
-	by mx0a-001b2d01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 59GApMN6021041;
+Received: from pps.filterd (m0353729.ppops.net [127.0.0.1])
+	by mx0a-001b2d01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 59GBRLci010143;
 	Thu, 16 Oct 2025 15:38:42 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com; h=cc
 	:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=pp1; bh=0OWY+c
-	BTWCHkBcgLVPmGrMHklaDFf8fjj3M2Yue9dsQ=; b=TToahXbfjFuYZHEVQ/8tzs
-	nLERcMQNsO4SgSbVUtFKgUHhMO+4Ko3/MqDi0c5GPhtzriCSoLuESshBHKRb0dY7
-	U2j5Dd6yxkWbMobR4Kfrc/zmZ2/sKjtonuOC8A9u6oQSD1AKRdIYx34QkZR6cV+c
-	fjJABPUY/4Kl0XAimENiQSgujqaXU7NcNggmgG4KyWwk823PMU50RIK7nQUaBOw8
-	D19jomFY7VdclwpPEooSZVxXS+QF9iZEP4+a6uVEpJpiEyOIOUuHG/2BoOxK2tQi
-	WEElKFGjREHGQxUpdb6Q7O70tdRyLPDIM/mOAI7NSgNjkqx7GfSmYDxtiQ10JIcA
+	:message-id:mime-version:references:subject:to; s=pp1; bh=sqDemh
+	DfqzdJ1vovX28xeo/UEv3I8imVZ5SgQ9nEmDw=; b=ZvdwsVcT3+z63DvmJa3qle
+	lj+Xi9LROHB7t8TXEhBQ/zxCk58R/g2cDIB5X9XNXe963+WiWkMhyo5e0SaJR3+u
+	R1HZteyxeO4FKDH/qFOfRctR/SROYG2iBQXWBwojiczRq/M3fSfNAQ01tN2LGFzu
+	EM1ojsFmGAYAfevPcbiv+eJN8rktzSPR0EhRo+pli/xnelw+ewdA0uApDIgVvdin
+	lFwTs8uyyR4gwXC5v8ns1JEShWj+HrYhnTMOuZDxvNCsrJ2U1EA0Fjpm84/MpuDR
+	Y4mo2U1pVm62qmp6T7hgtYMPY60WajECDArM5kQIIY7cMPuj8w4PMKDKyjwaaA5g
 	==
-Received: from ppma23.wdc07v.mail.ibm.com (5d.69.3da9.ip4.static.sl-reverse.com [169.61.105.93])
-	by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 49qew0ae7r-1
+Received: from ppma11.dal12v.mail.ibm.com (db.9e.1632.ip4.static.sl-reverse.com [50.22.158.219])
+	by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 49qewubn8e-1
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
 	Thu, 16 Oct 2025 15:38:42 +0000 (GMT)
-Received: from pps.filterd (ppma23.wdc07v.mail.ibm.com [127.0.0.1])
-	by ppma23.wdc07v.mail.ibm.com (8.18.1.2/8.18.1.2) with ESMTP id 59GEIWmM016759;
+Received: from pps.filterd (ppma11.dal12v.mail.ibm.com [127.0.0.1])
+	by ppma11.dal12v.mail.ibm.com (8.18.1.2/8.18.1.2) with ESMTP id 59GDrWdi028035;
 	Thu, 16 Oct 2025 15:38:41 GMT
 Received: from smtprelay01.fra02v.mail.ibm.com ([9.218.2.227])
-	by ppma23.wdc07v.mail.ibm.com (PPS) with ESMTPS id 49r32k6egd-1
+	by ppma11.dal12v.mail.ibm.com (PPS) with ESMTPS id 49tdg9dny9-1
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
 	Thu, 16 Oct 2025 15:38:41 +0000
 Received: from smtpav04.fra02v.mail.ibm.com (smtpav04.fra02v.mail.ibm.com [10.20.54.103])
-	by smtprelay01.fra02v.mail.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id 59GFcb9261276558
+	by smtprelay01.fra02v.mail.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id 59GFcbLv61276560
 	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
 	Thu, 16 Oct 2025 15:38:37 GMT
 Received: from smtpav04.fra02v.mail.ibm.com (unknown [127.0.0.1])
-	by IMSVA (Postfix) with ESMTP id 8E84E200DC;
+	by IMSVA (Postfix) with ESMTP id BCDE4200DF;
 	Thu, 16 Oct 2025 15:38:37 +0000 (GMT)
 Received: from smtpav04.fra02v.mail.ibm.com (unknown [127.0.0.1])
-	by IMSVA (Postfix) with ESMTP id 5DC12200DF;
+	by IMSVA (Postfix) with ESMTP id 937F3200DE;
 	Thu, 16 Oct 2025 15:38:37 +0000 (GMT)
 Received: from tuxmaker.lnxne.boe (unknown [9.152.85.9])
 	by smtpav04.fra02v.mail.ibm.com (Postfix) with ESMTP;
@@ -74,9 +74,9 @@ Cc: Gerald Schaefer <gerald.schaefer@linux.ibm.com>,
         Heiko Carstens <hca@linux.ibm.com>, Vasily Gorbik <gor@linux.ibm.com>,
         Alexander Gordeev <agordeev@linux.ibm.com>,
         Sumanth Korikkar <sumanthk@linux.ibm.com>
-Subject: [PATCH v2 3/6] chmem: add support for dynamic (de)configuration of hotplug memory
-Date: Thu, 16 Oct 2025 17:38:03 +0200
-Message-ID: <20251016153808.3565873-4-sumanthk@linux.ibm.com>
+Subject: [PATCH v2 4/6] chmem: add chmem documentation for dynamic (de)configuration of memory
+Date: Thu, 16 Oct 2025 17:38:04 +0200
+Message-ID: <20251016153808.3565873-5-sumanthk@linux.ibm.com>
 X-Mailer: git-send-email 2.48.1
 In-Reply-To: <20251016153808.3565873-1-sumanthk@linux.ibm.com>
 References: <20251016153808.3565873-1-sumanthk@linux.ibm.com>
@@ -89,141 +89,48 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-TM-AS-GCONF: 00
-X-Proofpoint-ORIG-GUID: EjgCHhJTNyUtRoCdLvC6HVNEa8XHF_Kv
-X-Authority-Analysis: v=2.4 cv=eJkeTXp1 c=1 sm=1 tr=0 ts=68f11182 cx=c_pps
- a=3Bg1Hr4SwmMryq2xdFQyZA==:117 a=3Bg1Hr4SwmMryq2xdFQyZA==:17
+X-Proofpoint-GUID: NsHEfZ3tqkEGXXd5Qn8X9vumS9bcGR40
+X-Authority-Analysis: v=2.4 cv=Kr1AGGWN c=1 sm=1 tr=0 ts=68f11182 cx=c_pps
+ a=aDMHemPKRhS1OARIsFnwRA==:117 a=aDMHemPKRhS1OARIsFnwRA==:17
  a=IkcTkHD0fZMA:10 a=x6icFKpwvdMA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=VnNF1IyMAAAA:8 a=eqOK5gE0MLgnCjM6HjkA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMDExMDAxNCBTYWx0ZWRfX80apWNzSb4cy
- XmtW6se6ZXGAmakxfL7TgTEApexiQtplZ1VOksKMCl4FFKEuMZVO+5mI7/D8pw1q3jin3793CQM
- 3KRRNYIdkAy+I/ts+U/L+KA/nf72jzkJBUhrSIrT54xIoUAFP0Laqh/96HrwLCA7OQz93Yb4M7l
- 7yisMdBoWIi5rpZciL5xOoPCr9uAVEPfy58XxCwFr9Jv1oAU4sF6nGYIyxBPa1sZRimcVmjZ4f1
- r8X5eF5ClNTTuwcFqeM85EF4C4ThiH/j2nZREV14+6HRm8FXT1CghWkQ7BgJwKCxFJ+cNziB1bo
- UQr2wJ0oL2YHAa8qsIUFgHlkEHQttGnNGOrLgaVe6kP/hrd3x6jNHbvB+LEhl8MQN3Pe3IaOllH
- grkjYLD5S5efWpQP4aBT/e0rwKAFeg==
-X-Proofpoint-GUID: EjgCHhJTNyUtRoCdLvC6HVNEa8XHF_Kv
+ a=VnNF1IyMAAAA:8 a=chBBJnHQjsqFfOd3Ob0A:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
+X-Proofpoint-ORIG-GUID: NsHEfZ3tqkEGXXd5Qn8X9vumS9bcGR40
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMDExMDAxNCBTYWx0ZWRfX0xhoYJjAG+ND
+ h2P1NJbvg04ZHnAup8qU1U9gLDIGxsyBTELwXWZ4pYXo1jRm2JDTZiiKwqDWMCx/+cB6xXMWepa
+ q9k/ZDswI6LNUI74ITp6rZyafBDaHNbCD7FZY22LGTB+ddroOMhgYEjW5jAmBvciKeQVOlqQfbj
+ m7/CWxQ8XiaGs78kjswVLkFdWFq0kcZG1qTKrvgvKGEE6E/+T040jxHKvKtTNyarJku/8espe1k
+ /TY+bRVl35n5uj421MqOrf6+e4WINDwqd+L5UUtB2qoFPtt5qpCeap7cC3q5LToMFSPXRkgIIGH
+ holeqCPZ+eUNKJtfQDar/XjPUVVtR7X5nAJjzTq0VnGW6VolEyTKPHmCTaeh/noePYRhmS8wYii
+ LaWNHv5lnF6nlD+X1bg4aROZij8CtQ==
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.80.40
  definitions=2025-10-16_03,2025-10-13_01,2025-03-28_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- suspectscore=0 lowpriorityscore=0 spamscore=0 clxscore=1015 impostorscore=0
- phishscore=0 malwarescore=0 adultscore=0 priorityscore=1501 bulkscore=0
+ spamscore=0 priorityscore=1501 lowpriorityscore=0 bulkscore=0 adultscore=0
+ phishscore=0 suspectscore=0 malwarescore=0 clxscore=1015 impostorscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.19.0-2510020000 definitions=main-2510110014
 
-Extend chmem to use the new s390 kernel interface for configuring and
-deconfiguring hotpluggable memory blocks, with memmap-on-memory support.
+Describe chmem configure, deconfigure and memmap-on-memory options:
 
-Background:
-On s390, memmap-on-memory was introduced to ensure that the struct page
-array (metadata) for hotpluggable standby memory is allocated from the
-memory block itself. This allowed hot-add operations even under memory
-pressure, particularly in cases with a strong imbalance between
-boot-time online memory and standby memory.
+ff18dcb19aab ("s390/sclp: Add support for dynamic (de)configuration of
+memory") s390 kernel no longer pre-adds all standby memory at boot.
+Instead, users must explicitly configure a block before it can be used
+for online/offline actions. At configuration time, users can dynamically
+decide whether to use optional memmap-on-memory for each memory block,
+where value of 1 allocates metadata (such as struct pages array) from
+the hotplug memory itself, enabling hot-add operations even under memory
+pressure. A value of 0 stores metadata in regular system memory, which
+may require additional free memory, but enables continuous physical
+memory across memory blocks.
 
-The original design, however, had few limitations:
-* All hotpluggable standby memory was added at boot.
-* The use of memmap-on-memory was global and static, decided at boot
-  time. Either all standby blocks used it, or none of them did.
-* memmap-on-memory choice could not be changed at runtime, limiting
-  flexibility. For example, when continuous physical memory was required
-  later across memory blocks.
-
-The s390 kernel ff18dcb19aab ("s390/sclp: Add support for dynamic
-(de)configuration of memory") no longer pre-adds all standby memory at
-boot. Instead, users must explicitly configure a block before it can be
-used for online/offline actions.  At configuration time, users can
-dynamically decide whether to use optional memmap-on-memory for each
-memory block, where value of 1 allocates metadata (such as struct pages
-array) from the hotplug memory itself, enabling hot-add operations even
-under memory pressure. A value of 0 stores metadata in regular system
-memory and enables continuous physical memory across memory blocks.
-
-s390 kernel sysfs interface to configure/deconfigure memory with
-memmap-on-memory support looks as shown below:
-
-1. Configure memory
-echo 1 > /sys/firmware/memory/memoryX/config  
-
-2. Deconfigure memory
-echo 0 > /sys/firmware/memory/memoryX/config
-
-3. Enable memmap-on-memory
-echo 1 > /sys/firmware/memory/memoryX/memmap_on_memory
-
-4. Disable memmap-on-memory
-echo 0 > /sys/firmware/memory/memoryX/memmap_on_memory
-
-* Initial memory layout:
-lsmem -o RANGE,SIZE,STATE,BLOCK,CONFIGURED,MEMMAP-ON-MEMORY
-RANGE                   SIZE   STATE   BLOCK CONFIGURED MEMMAP-ON-MEMORY
-0x00000000-0x7fffffff   2G     online  0-15  yes        no
-0x80000000-0xffffffff   2G     offline 16-31 no         yes
-
-Memory block size:                128M
-Total online memory:                2G
-Total offline memory:               2G
-Memmap on memory parameter:        yes
-
-* Configure memory with memmap-on-memory.
-chmem -c 128M -m 1
-lsmem -o RANGE,SIZE,STATE,BLOCK,CONFIGURED,MEMMAP-ON-MEMORY
-RANGE                   SIZE   STATE    BLOCK CONFIGURED MEMMAP-ON-MEMORY
-0x00000000-0x7fffffff   2G     online   0-15  yes        no
-0x80000000-0x87ffffff   128M   offline  16    yes        yes
-0x88000000-0xffffffff   1.9G   offline  17-31 no         yes
-
-Memory block size:                128M
-Total online memory:                2G
-Total offline memory:               2G
-Memmap on memory parameter:        yes
-
-* Deconfigure memory
-chmem -g 128M
-lsmem -o RANGE,SIZE,STATE,BLOCK,CONFIGURED,MEMMAP-ON-MEMORY
-RANGE                   SIZE   STATE    BLOCK CONFIGURED MEMMAP-ON-MEMORY
-0x00000000-0x7fffffff   2G     online   0-15  yes        no
-0x80000000-0xffffffff   2G     offline  16-31 no         yes
-
-Memory block size:                128M
-Total online memory:                2G
-Total offline memory:               2G
-Memmap on memory parameter:        yes
-
-* Online memory.
-If the memory is in deconfigured state, configure and online it.
-
-chmem -e 128M -v
-Memory Block 16 (0x0000000080000000-0x0000000087ffffff) configured
-Memory Block 16 (0x0000000080000000-0x0000000087ffffff) enabled
-
-lsmem -o RANGE,SIZE,STATE,BLOCK,CONFIGURED,MEMMAP-ON-MEMORY
-RANGE                   SIZE   STATE    BLOCK CONFIGURED MEMMAP-ON-MEMORY
-0x00000000-0x7fffffff    2G    online   0-15  yes        no
-0x80000000-0x87ffffff    128M  online   16    yes        yes
-0x88000000-0xffffffff    1.9G  offline  17-31 no         yes
-
-Memory block size:                128M
-Total online memory:              2.1G
-Total offline memory:             1.9G
-Memmap on memory parameter:        yes
-
-* Offline memory
-If the memory is in online state, then offline it and deconfigure it.
-
-chmem -d 128M -v
-Memory Block 16 (0x0000000080000000-0x0000000087ffffff) disabled
-Memory Block 16 (0x0000000080000000-0x0000000087ffffff) deconfigured
-
-lsmem -o RANGE,SIZE,STATE,BLOCK,CONFIGURED,MEMMAP-ON-MEMORY
-RANGE                   SIZE   STATE    BLOCK CONFIGURED MEMMAP-ON-MEMORY
-0x00000000-0x7fffffff   2G     online   0-15  yes        no
-0x80000000-0xffffffff   2G     offline  16-31 no         yes
-
-Memory block size:                128M
-Total online memory:                2G
-Total offline memory:               2G
-Memmap on memory parameter:        yes
+Add documentation to reflect the following options:
+* chmem --configure 128M --memmap-on-memory 1
+* chmem --deconfigure 128M
+* chmem --enable 128M # implicitly configure memory if supported by
+  architecture and online it
+* chmem --disable 128M  # offline memory and implicitly deconfigure if
+  supported by the architecture.
 
 Just like online and offline actions, memory configuration and
 deconfiguration can be controlled through similar options. Also,
@@ -231,543 +138,103 @@ memmap-on-memory setting can be changed, only when the memory block is
 in deconfigured state. This means, it is usable only via --configure
 option.
 
+Reviewed-by: Maria Eisenhaendler <maria1@de.ibm.com>
 Signed-off-by: Sumanth Korikkar <sumanthk@linux.ibm.com>
 ---
- sys-utils/chmem.c | 371 ++++++++++++++++++++++++++++++++++++++++++----
- 1 file changed, 342 insertions(+), 29 deletions(-)
+ sys-utils/chmem.8.adoc | 47 +++++++++++++++++++++++++++++++++++++-----
+ 1 file changed, 42 insertions(+), 5 deletions(-)
 
-diff --git a/sys-utils/chmem.c b/sys-utils/chmem.c
-index bee2a90f8..51240bf5a 100644
---- a/sys-utils/chmem.c
-+++ b/sys-utils/chmem.c
-@@ -37,11 +37,16 @@
- #define CHMEM_EXIT_SOMEOK		64
+diff --git a/sys-utils/chmem.8.adoc b/sys-utils/chmem.8.adoc
+index 5067a98b8..537beec63 100644
+--- a/sys-utils/chmem.8.adoc
++++ b/sys-utils/chmem.8.adoc
+@@ -12,7 +12,7 @@ chmem - configure memory
  
- #define _PATH_SYS_MEMORY		"/sys/devices/system/memory"
-+#define _PATH_SYS_MEMCONFIG		"/sys/firmware/memory"
+ == SYNOPSIS
  
- struct chmem_desc {
- 	struct path_cxt	*sysmem;	/* _PATH_SYS_MEMORY handler */
-+	struct path_cxt *sysmemconfig;	/* _PATH_SYS_MEMCONFIG directory handler */
- 	struct dirent	**dirs;
-+	struct dirent   **memconfig_dirs;
- 	int		ndirs;
-+	int		memconfig_ndirs;
-+	int		memmap_on_memory;
- 	uint64_t	block_size;
- 	uint64_t	start;
- 	uint64_t	end;
-@@ -50,11 +55,14 @@ struct chmem_desc {
- 	unsigned int	is_size	   : 1;
- 	unsigned int	verbose	   : 1;
- 	unsigned int	have_zones : 1;
-+	unsigned int	have_memconfig : 1;
- };
+-*chmem* [*-h*] [*-V*] [*-v*] [*-e*|*-d*] [_SIZE_|_RANGE_|*-b* _BLOCKRANGE_] [*-z* _ZONE_]
++*chmem* [*-h*] [*-V*] [*-v*] [*-c*|*-e*|*-d*|*-g*] [_SIZE_|_RANGE_|*-b* _BLOCKRANGE_] [*-z* _ZONE_] [*-m* _MEMMAP-ON-MEMORY_]
  
- enum {
- 	CMD_MEMORY_ENABLE = 0,
- 	CMD_MEMORY_DISABLE,
-+	CMD_MEMORY_CONFIGURE,
-+	CMD_MEMORY_DECONFIGURE,
- 	CMD_NONE
- };
+ == DESCRIPTION
  
-@@ -101,16 +109,129 @@ static void idxtostr(struct chmem_desc *desc, uint64_t idx, char *buf, size_t bu
- 		 idx, start, end);
- }
+@@ -26,23 +26,48 @@ The *chmem* command sets a particular size or range of memory online or offline.
  
--static int chmem_size(struct chmem_desc *desc, int enable, int zone_id)
-+static bool chmem_memmap_enabled(struct chmem_desc *desc)
-+{
-+	if (desc->memmap_on_memory == 0 || desc->memmap_on_memory == 1)
-+		return true;
-+	else
-+		return false;
-+}
+ * Specify _ZONE_ as the name of a memory zone, as shown in the output of the *lsmem -o +ZONES* command. The output shows one or more valid memory zones for each memory range. If multiple zones are shown, then the memory range currently belongs to the first zone. By default, *chmem* will set memory online to the zone Movable, if this is among the valid zones. This default can be changed by specifying the *--zone* option with another valid zone. For memory ballooning, it is recommended to select the zone Movable for memory online and offline, if possible. Memory in this zone is much more likely to be able to be offlined again, but it cannot be used for arbitrary kernel allocations, only for migratable pages (e.g., anonymous and page cache pages). Use the *--help* option to see all available zones.
+ 
++* Specify _MEMMAP-ON-MEMORY_ as 1 or 0. A value of 1 allocates hotplug metadata (such as the struct pages array) from the hotplug memory itself, enabling hot-add operations even under memory pressure and without requiring additional system memory to do so. A value of 0 stores hotplugged memory metadata in regular system memory, which helps avoid issues related to fragmentation of continuous physical memory across memory blocks. The value can only be set when the memory block is in a deconfigured state, and *--memmap-on-memory* is valid only with *--configure*. If not specified, and if supported, *chmem* uses the default value shown in *lsmem* output.
 +
-+static int chmem_set_memmap_on_memory(struct chmem_desc *desc, char *name)
-+{
-+	int rc, index;
++The *--enable* option configures the memory, if this is supported by the architecture. If configuring memory is not supported by the architecture, *--enable* still brings the memory online.
 +
-+	index = strtou64_or_err(name + 6, _("Failed to parse index"));
-+	rc = ul_path_writef_u64(desc->sysmemconfig, desc->memmap_on_memory,
-+				"%s/memmap_on_memory", name);
-+	if (rc) {
-+		char str[64];
-+		idxtostr(desc, index, str, sizeof(str));
-+		warn(_("%s memmap-on-memory failed"), str);
-+	}
-+	return rc;
-+}
++The *--disable* option brings the memory offline and performs an optional deconfigure step if this is supported by the architecture.
 +
-+static int chmem_config(struct chmem_desc *desc, char *name, int configure)
-+{
-+	int mblock_configured, memmap, rc, index;
-+	char str[BUFSIZ], state[BUFSIZ];
++The *--configure* option requests memory from the hypervisor without bringing it online, when supported by the architecture, allowing explicit control and use of *--memmap-on-memory*.
 +
-+	index = strtou64_or_err(name + 6, _("Failed to parse index"));
-+	idxtostr(desc, index, str, sizeof(str));
-+	rc = ul_path_readf_s32(desc->sysmemconfig, &mblock_configured, "%s/config", name);
-+	if (rc)
-+		goto out;
-+	rc = ul_path_readf_s32(desc->sysmemconfig, &memmap, "%s/memmap_on_memory", name);
-+	if (rc)
-+		goto out;
-+	if (mblock_configured) {
-+		if (configure) {
-+			if (chmem_memmap_enabled(desc) &&
-+					memmap != desc->memmap_on_memory) {
-+				if (!desc->is_size || desc->verbose)
-+					fprintf(stdout,
-+						_("%s must be deconfigured before using -m option\n"), str);
-+				rc = -1;
-+			} else if (desc->is_size) {
-+				/*
-+				 * Allow chmem_onoff_size() to proceed with
-+				 * configuring different memory blocks when the
-+				 * current block is already configured.
-+				 */
-+				rc = -1;
-+			} else if (desc->verbose) {
-+				fprintf(stdout, _("%s already configured\n"), str);
-+			}
-+			goto out;
-+		} else if (ul_path_readf_buffer(desc->sysmem, state,
-+						sizeof(state), "%s/state", name) > 0 &&
-+			   strncmp("online", state, 6) == 0) {
-+			if (!desc->is_size || desc->verbose)
-+				fprintf(stdout, _("%s must be offline before deconfiguration\n"), str);
-+			rc = -1;
-+			goto out;
-+		}
-+	} else {
-+		/*
-+		 * If memory block is currently in deconfigured state, set
-+		 * memmap-on-memory if -m option is enabled.
-+		 */
-+		if (chmem_memmap_enabled(desc)) {
-+			rc = chmem_set_memmap_on_memory(desc, name);
-+			if (rc)
-+				goto out;
-+		} else if (!configure) {
-+			/*
-+			 * Allow chmem_onoff_size() to proceed with
-+			 * deconfiguring different memory blocks when the
-+			 * current block is already deconfigured.
-+			 */
-+			if (desc->is_size)
-+				rc = -1;
-+			else if (desc->verbose)
-+				fprintf(stdout, _("%s already deconfigured\n"), str);
-+			goto out;
-+		}
-+	}
-+	rc = ul_path_writef_u64(desc->sysmemconfig, configure ? 1 : 0, "%s/config", name);
-+	if (rc) {
-+		if (!desc->is_size) {
-+			warn(configure ? _("%s configure failed") :
-+					 _("%s deconfigure failed"), str);
-+		} else if (desc->verbose) {
-+			if (configure)
-+				fprintf(stdout, _("%s configure failed\n"), str);
-+			else
-+				fprintf(stdout, _("%s deconfigure failed\n"), str);
-+		}
-+	} else if (desc->verbose) {
-+		if (configure)
-+			fprintf(stdout, _("%s configured\n"), str);
-+		else
-+			fprintf(stdout, _("%s deconfigured\n"), str);
-+	}
-+out:
-+	return rc;
-+}
++The *--deconfigure* option returns memory resources to the hypervisor if supported by the architecture.
 +
-+static int chmem_configured(struct chmem_desc *desc, char *name)
-+{
-+	int mblock_configured = 0;
+ _SIZE_ and _RANGE_ must be aligned to the Linux memory block size, as shown in the output of the *lsmem*(1) command.
+ 
+ Setting memory online can fail for various reasons. On virtualized systems it can fail if the hypervisor does not have enough memory left, for example because memory was overcommitted. Setting memory offline can fail if Linux cannot free the memory. If only part of the requested memory can be set online or offline, a message tells you how much memory was set online or offline instead of the requested amount.
+ 
+-When setting memory online *chmem* starts with the lowest memory block numbers. When setting memory offline *chmem* starts with the highest memory block numbers.
++When setting memory online or when configuring memory, *chmem* starts with the lowest memory block numbers. When setting memory offline or deconfiguring memory, *chmem* starts with the highest memory block numbers.
 +
-+	ul_path_readf_s32(desc->sysmemconfig, &mblock_configured, "%s/config", name);
-+	return mblock_configured;
-+}
++== ARCHITECTURE
 +
-+static int chmem_onoff_size(struct chmem_desc *desc, int enable, int zone_id)
- {
- 	char *name, *onoff, line[BUFSIZ], str[BUFSIZ];
- 	uint64_t size, index;
-+	int i, rc = 0, ndirs;
- 	const char *zn;
--	int i, rc;
- 
- 	size = desc->size;
- 	onoff = enable ? "online" : "offline";
--	i = enable ? 0 : desc->ndirs - 1;
- 
- 	if (enable && zone_id >= 0) {
- 		if (zone_id == ZONE_MOVABLE)
-@@ -118,15 +239,30 @@ static int chmem_size(struct chmem_desc *desc, int enable, int zone_id)
- 		else
- 			onoff = "online_kernel";
- 	}
--
--	for (; i >= 0 && i < desc->ndirs && size; i += enable ? 1 : -1) {
--		name = desc->dirs[i]->d_name;
-+	ndirs = desc->have_memconfig ? desc->memconfig_ndirs : desc->ndirs;
-+	i = enable ? 0 : ndirs - 1;
-+	for (; i >= 0 && i < ndirs && size; i += enable ? 1 : -1) {
-+		if (desc->have_memconfig)
-+			name = desc->memconfig_dirs[i]->d_name;
-+		else
-+			name = desc->dirs[i]->d_name;
- 		index = strtou64_or_err(name + 6, _("Failed to parse index"));
--
--		if (ul_path_readf_buffer(desc->sysmem, line, sizeof(line), "%s/state", name) > 0
--		    && strncmp(onoff, line, 6) == 0)
-+		if (enable && desc->have_memconfig && !chmem_configured(desc, name)) {
-+			/* Configure memory block */
-+			rc = chmem_config(desc, name, enable);
-+			if (rc)
-+				continue;
-+		} else if (ul_path_readf_buffer(desc->sysmem, line, sizeof(line), "%s/state", name) > 0) {
-+			if (strncmp(onoff, line, 6) == 0)
-+				continue;
-+		} else if (!enable) {
-+			/*
-+			 * If /sys/devices/system/memory/memoryX is
-+			 * unavailable, memory block is offline and
-+			 * deconfigured.
-+			 */
- 			continue;
--
-+		}
- 		if (desc->have_zones) {
- 			ul_path_readf_buffer(desc->sysmem, line, sizeof(line), "%s/valid_zones", name);
- 			if (zone_id >= 0) {
-@@ -143,7 +279,6 @@ static int chmem_size(struct chmem_desc *desc, int enable, int zone_id)
- 					onoff = "online";
- 			}
- 		}
--
- 		idxtostr(desc, index, str, sizeof(str));
- 		rc = ul_path_writef_string(desc->sysmem, onoff, "%s/state", name);
- 		if (rc != 0 && desc->verbose) {
-@@ -157,6 +292,12 @@ static int chmem_size(struct chmem_desc *desc, int enable, int zone_id)
- 			else
- 				fprintf(stdout, _("%s disabled\n"), str);
- 		}
-+		if (!rc && !enable && desc->have_memconfig) {
-+			/* Deconfigure memory block */
-+			rc = chmem_config(desc, name, enable);
-+			if (rc)
-+				continue;
-+		}
- 		if (rc == 0)
- 			size--;
- 	}
-@@ -175,12 +316,80 @@ static int chmem_size(struct chmem_desc *desc, int enable, int zone_id)
- 	return size == 0 ? 0 : size == desc->size ? -1 : 1;
- }
- 
--static int chmem_range(struct chmem_desc *desc, int enable, int zone_id)
-+static int chmem_config_size(struct chmem_desc *desc, int configure)
-+{
-+	uint64_t size;
-+	char *name;
-+	int i, rc;
++* s390 architecture:
 +
-+	if (!desc->have_memconfig) {
-+		if (configure)
-+			fprintf(stdout,
-+				_("Skip configuration — use chmem -e instead\n"));
-+		else
-+			fprintf(stdout,
-+				_("Skip deconfiguration - use chmem -d instead\n"));
-+		return -1;
-+	}
-+	size = desc->size;
-+	i = configure ? 0 : desc->memconfig_ndirs - 1;
-+	for (; i >= 0 && i < desc->memconfig_ndirs && size; i += configure ? 1 : -1) {
-+		name = desc->memconfig_dirs[i]->d_name;
-+		rc = chmem_config(desc, name, configure);
-+		if (rc == 0)
-+			size--;
-+	}
-+	if (size) {
-+		uint64_t bytes;
-+		char *sizestr;
++_MEMMAP-ON-MEMORY_: For memory blocks configured online at boot, the default value is 0 because they are added without memmap-on-memory support. Memory added dynamically at runtime uses the default value displayed in *lsmem* output.
+ 
+ == OPTIONS
+ 
+ *-b*, *--blocks*::
+ Use a _BLOCKRANGE_ parameter instead of _RANGE_ or _SIZE_ for the *--enable* and *--disable* options.
+ 
++*-c*, *--configure*::
++Set the specified _RANGE_, _SIZE_, or _BLOCKRANGE_ of memory to be configured.
 +
-+		bytes = (desc->size - size) * desc->block_size;
-+		sizestr = size_to_human_string(SIZE_SUFFIX_1LETTER, bytes);
-+		if (configure)
-+			fprintf(stdout, _("Could only configure %s of memory\n"), sizestr);
-+		else
-+			fprintf(stdout, _("Could only deconfigure %s of memory\n"), sizestr);
-+		free(sizestr);
-+	}
-+	return size == 0 ? 0 : size == desc->size ? -1 : 1;
-+}
+ *-d*, *--disable*::
+ Set the specified _RANGE_, _SIZE_, or _BLOCKRANGE_ of memory offline.
+ 
+ *-e*, *--enable*::
+ Set the specified _RANGE_, _SIZE_, or _BLOCKRANGE_ of memory online.
+ 
++*-g*, *--deconfigure*::
++Set the specified _RANGE_, _SIZE_, or _BLOCKRANGE_ of memory to be deconfigured.
 +
-+static int chmem_config_range(struct chmem_desc *desc, int configure)
-+{
-+	uint64_t index, todo;
-+	char *name;
-+	int rc, i;
++*-m*, *--memmap-on-memory*::
++Select memmap-on-memory for the specified _RANGE_, _SIZE_, or _BLOCKRANGE_ of memory. This option is valid only with *--configure*.
 +
-+	if (!desc->have_memconfig) {
-+		if (configure)
-+			fprintf(stdout,
-+				_("Skip configuration — use chmem -e instead\n"));
-+		else
-+			fprintf(stdout,
-+				_("Skip deconfiguration - use chmem -d instead\n"));
-+		return -1;
-+	}
-+	todo = desc->end - desc->start + 1;
-+	for (i = 0; i < desc->memconfig_ndirs; i++) {
-+		name = desc->memconfig_dirs[i]->d_name;
-+		index = strtou64_or_err(name + 6, _("Failed to parse index"));
-+		if (index < desc->start)
-+			continue;
-+		if (index > desc->end)
-+			break;
-+		rc = chmem_config(desc, name, configure);
-+		if (rc == 0)
-+			todo--;
-+	}
-+	return todo == 0 ? 0 : todo == desc->end - desc->start + 1 ? -1 : 1;
-+}
+ *-z*, *--zone*::
+ Select the memory _ZONE_ where to set the specified _RANGE_, _SIZE_, or _BLOCKRANGE_ of memory online or offline. By default, memory will be set online to the zone Movable, if possible.
+ 
+@@ -70,13 +95,25 @@ partial success
+ This command requests 1024 MiB of memory to be set online.
+ 
+ *chmem -e 2g*::
+-This command requests 2 GiB of memory to be set online.
++This command requests 2 GB of memory to be brought online and, if supported by the architecture, configures the memory beforehand.
+ 
+ *chmem --disable 0x00000000e4000000-0x00000000f3ffffff*::
+-This command requests the memory range starting with 0x00000000e4000000 and ending with 0x00000000f3ffffff to be set offline.
++This command takes the memory range from 0x00000000e4000000 to 0x00000000f3ffffff offline and deconfigures it if supported by the architecture.
+ 
+ *chmem -b -d 10*::
+-This command requests the memory block number 10 to be set offline.
++This command takes memory block number 10 offline.
 +
-+static int chmem_onoff_range(struct chmem_desc *desc, int enable, int zone_id)
- {
- 	char *name, *onoff, line[BUFSIZ], str[BUFSIZ];
- 	uint64_t index, todo;
-+	int i, rc, ndirs;
- 	const char *zn;
--	int i, rc;
- 
- 	todo = desc->end - desc->start + 1;
- 	onoff = enable ? "online" : "offline";
-@@ -192,22 +401,43 @@ static int chmem_range(struct chmem_desc *desc, int enable, int zone_id)
- 			onoff = "online_kernel";
- 	}
- 
--	for (i = 0; i < desc->ndirs; i++) {
--		name = desc->dirs[i]->d_name;
-+	ndirs = desc->have_memconfig ? desc->memconfig_ndirs : desc->ndirs;
-+	for (i = 0; i < ndirs; i++) {
-+		name = desc->have_memconfig ? desc->memconfig_dirs[i]->d_name :
-+					      desc->dirs[i]->d_name;
- 		index = strtou64_or_err(name + 6, _("Failed to parse index"));
- 		if (index < desc->start)
- 			continue;
- 		if (index > desc->end)
- 			break;
-+		if (enable && desc->have_memconfig && !chmem_configured(desc, name)) {
-+			/* Configure memory block */
-+			rc = chmem_config(desc, name, enable);
-+			if (rc)
-+				continue;
-+		}
- 		idxtostr(desc, index, str, sizeof(str));
--		if (ul_path_readf_buffer(desc->sysmem, line, sizeof(line), "%s/state", name) > 0
--		    && strncmp(onoff, line, 6) == 0) {
--			if (desc->verbose && enable)
--				fprintf(stdout, _("%s already enabled\n"), str);
--			else if (desc->verbose && !enable)
--				fprintf(stdout, _("%s already disabled\n"), str);
--			todo--;
--			continue;
-+		if (ul_path_readf_buffer(desc->sysmem, line, sizeof(line), "%s/state", name) > 0) {
-+			if (strncmp(onoff, line, 6) == 0) {
-+				if (desc->verbose && enable)
-+					fprintf(stdout, _("%s already enabled\n"), str);
-+				else if (desc->verbose && !enable)
-+					fprintf(stdout, _("%s already disabled\n"), str);
-+				todo--;
-+				continue;
-+			}
-+		} else {
-+			/*
-+			 * If /sys/devices/system/memory/memoryX is
-+			 * unavailable, memory block is offline and
-+			 * deconfigured.
-+			 */
-+			if (!enable) {
-+				if (desc->verbose)
-+					fprintf(stdout, _("%s already disabled\n"), str);
-+				todo--;
-+				continue;
-+			}
- 		}
- 
- 		if (desc->have_zones) {
-@@ -243,6 +473,12 @@ static int chmem_range(struct chmem_desc *desc, int enable, int zone_id)
- 			else
- 				fprintf(stdout, _("%s disabled\n"), str);
- 		}
-+		if (!rc && !enable && desc->have_memconfig) {
-+			/* Deconfigure memory block */
-+			rc = chmem_config(desc, name, enable);
-+			if (rc)
-+				continue;
-+		}
- 		if (rc == 0)
- 			todo--;
- 	}
-@@ -256,6 +492,16 @@ static int filter(const struct dirent *de)
- 	return isdigit_string(de->d_name + 6);
- }
- 
-+static void read_conf(struct chmem_desc *desc)
-+{
-+	if (!desc->have_memconfig)
-+		return;
-+	desc->memconfig_ndirs = scandir(_PATH_SYS_MEMCONFIG, &desc->memconfig_dirs,
-+					filter, versionsort);
-+	if (desc->memconfig_ndirs <= 0)
-+		err(EXIT_FAILURE, _("Failed to read %s"), _PATH_SYS_MEMCONFIG);
-+}
++*chmem -b -c 10 -m 1*::
++This command configures memory block 10 with  _MEMMAP-ON-MEMORY_ set. The block must be in a deconfigured state.
 +
- static void read_info(struct chmem_desc *desc)
- {
- 	char line[128];
-@@ -269,6 +515,7 @@ static void read_info(struct chmem_desc *desc)
- 	desc->block_size = strtoumax(line, NULL, 16);
- 	if (errno)
- 		goto fail;
-+	read_conf(desc);
- 	return;
- fail:
- 	err(EXIT_FAILURE, _("Failed to read %s"), _PATH_SYS_MEMORY);
-@@ -347,6 +594,9 @@ static void __attribute__((__noreturn__)) usage(void)
- 	fputs(_(" -d, --disable      disable memory\n"), out);
- 	fputs(_(" -b, --blocks       use memory blocks\n"), out);
- 	fputs(_(" -z, --zone <name>  select memory zone (see below)\n"), out);
-+	fputs(_(" -c, --configure    configure range\n"), out);
-+	fputs(_(" -g, --deconfigure  deconfigure range\n"), out);
-+	fputs(_(" -m, --memmap-on-memory select memmap-on-memory\n"), out);
- 	fputs(_(" -v, --verbose      verbose output\n"), out);
- 	fprintf(out, USAGE_HELP_OPTIONS(20));
- 
-@@ -359,6 +609,52 @@ static void __attribute__((__noreturn__)) usage(void)
- 	exit(EXIT_SUCCESS);
- }
- 
-+static int chmem_range(struct chmem_desc *desc, int cmd, int zone_id)
-+{
-+	int rc = -1;
++*chmem -b -c 10*::
++This command configures memory block 10 with the default _MEMMAP-ON-MEMORY_ setting. The default value is displayed in *lsmem --output-all*. The block must be in a deconfigured state.
 +
-+	switch (cmd) {
-+	case CMD_MEMORY_ENABLE:
-+		rc = chmem_onoff_range(desc, 1, zone_id);
-+		break;
-+	case CMD_MEMORY_DISABLE:
-+		rc = chmem_onoff_range(desc, 0, zone_id);
-+		break;
-+	case CMD_MEMORY_CONFIGURE:
-+		rc = chmem_config_range(desc, 1);
-+		break;
-+	case CMD_MEMORY_DECONFIGURE:
-+		rc = chmem_config_range(desc, 0);
-+		break;
-+	default:
-+		break;
-+	}
-+	return rc;
-+}
++*chmem -b -g 10*::
++This command deconfigures memory block 10. The block must be offline.
 +
-+static int chmem_size(struct chmem_desc *desc, int cmd, int zone_id)
-+{
-+	int rc = -1;
-+
-+	switch (cmd) {
-+	case CMD_MEMORY_ENABLE:
-+		rc = chmem_onoff_size(desc, 1, zone_id);
-+		break;
-+	case CMD_MEMORY_DISABLE:
-+		rc = chmem_onoff_size(desc, 0, zone_id);
-+		break;
-+	case CMD_MEMORY_CONFIGURE:
-+		rc = chmem_config_size(desc, 1);
-+		break;
-+	case CMD_MEMORY_DECONFIGURE:
-+		rc = chmem_config_size(desc, 0);
-+		break;
-+	default:
-+		break;
-+	}
-+	return rc;
-+}
-+
- int main(int argc, char **argv)
- {
- 	struct chmem_desc _desc = { 0 }, *desc = &_desc;
-@@ -374,11 +670,15 @@ int main(int argc, char **argv)
- 		{"verbose",	no_argument,		NULL, 'v'},
- 		{"version",	no_argument,		NULL, 'V'},
- 		{"zone",	required_argument,	NULL, 'z'},
-+		{"configure",	no_argument,		NULL, 'c'},
-+		{"deconfigure", no_argument,		NULL, 'g'},
-+		{"memmap-on-memory", required_argument,	NULL, 'm'},
- 		{NULL,		0,			NULL, 0}
- 	};
++*chmem -d 5g*::
++This command takes 5 GB of memory offline and deconfigures it if supported by the architecture. Blocks that are already offline but still configured are skipped and must be explicitly deconfigured with *--deconfigure*.
  
- 	static const ul_excl_t excl[] = {	/* rows and cols in ASCII order */
--		{ 'd','e' },
-+		{ 'd', 'e', 'g', 'm' },
-+		{ 'c', 'd', 'e', 'g' },
- 		{ 0 }
- 	};
- 	int excl_st[ARRAY_SIZE(excl)] = UL_EXCL_STATUS_INIT;
-@@ -389,13 +689,18 @@ int main(int argc, char **argv)
- 	close_stdout_atexit();
- 
- 	ul_path_init_debug();
-+	desc->memmap_on_memory = -1;
- 	desc->sysmem = ul_new_path(_PATH_SYS_MEMORY);
- 	if (!desc->sysmem)
- 		err(EXIT_FAILURE, _("failed to initialize %s handler"), _PATH_SYS_MEMORY);
--
-+	desc->sysmemconfig = ul_new_path(_PATH_SYS_MEMCONFIG);
-+	if (!desc->sysmemconfig)
-+		err(EXIT_FAILURE, _("failed to initialize %s handler"), _PATH_SYS_MEMCONFIG);
-+	if (ul_path_access(desc->sysmemconfig, F_OK, "memory0") == 0)
-+		desc->have_memconfig = 1;
- 	read_info(desc);
- 
--	while ((c = getopt_long(argc, argv, "bdehvVz:", longopts, NULL)) != -1) {
-+	while ((c = getopt_long(argc, argv, "bcdeghm:vVz:", longopts, NULL)) != -1) {
- 
- 		err_exclusive_options(c, longopts, excl, excl_st);
- 
-@@ -415,7 +720,15 @@ int main(int argc, char **argv)
- 		case 'z':
- 			zone = xstrdup(optarg);
- 			break;
--
-+		case 'c':
-+			cmd = CMD_MEMORY_CONFIGURE;
-+			break;
-+		case 'g':
-+			cmd = CMD_MEMORY_DECONFIGURE;
-+			break;
-+		case 'm':
-+			desc->memmap_on_memory = atoi(optarg);
-+			break;
- 		case 'h':
- 			usage();
- 		case 'V':
-@@ -448,9 +761,9 @@ int main(int argc, char **argv)
- 	}
- 
- 	if (desc->is_size)
--		rc = chmem_size(desc, cmd == CMD_MEMORY_ENABLE ? 1 : 0, zone_id);
-+		rc = chmem_size(desc, cmd, zone_id);
- 	else
--		rc = chmem_range(desc, cmd == CMD_MEMORY_ENABLE ? 1 : 0, zone_id);
-+		rc = chmem_range(desc, cmd, zone_id);
- 
- 	ul_unref_path(desc->sysmem);
+ == SEE ALSO
  
 -- 
 2.41.0
