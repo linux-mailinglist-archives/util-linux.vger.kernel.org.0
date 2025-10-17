@@ -1,151 +1,127 @@
-Return-Path: <util-linux+bounces-907-lists+util-linux=lfdr.de@vger.kernel.org>
+Return-Path: <util-linux+bounces-913-lists+util-linux=lfdr.de@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
-Received: from sv.mirrors.kernel.org (sv.mirrors.kernel.org [IPv6:2604:1380:45e3:2400::1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4E146BE44DA
-	for <lists+util-linux@lfdr.de>; Thu, 16 Oct 2025 17:42:15 +0200 (CEST)
+Received: from am.mirrors.kernel.org (am.mirrors.kernel.org [IPv6:2604:1380:4601:e00::3])
+	by mail.lfdr.de (Postfix) with ESMTPS id 54644BE735B
+	for <lists+util-linux@lfdr.de>; Fri, 17 Oct 2025 10:38:36 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by sv.mirrors.kernel.org (Postfix) with ESMTPS id 94CCF5849E5
-	for <lists+util-linux@lfdr.de>; Thu, 16 Oct 2025 15:39:04 +0000 (UTC)
+	by am.mirrors.kernel.org (Postfix) with ESMTPS id 598E419C6FC3
+	for <lists+util-linux@lfdr.de>; Fri, 17 Oct 2025 08:38:53 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0109734BA5A;
-	Thu, 16 Oct 2025 15:38:47 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 10CEE2C21E8;
+	Fri, 17 Oct 2025 08:38:04 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=ibm.com header.i=@ibm.com header.b="PtzrD3cy"
+	dkim=pass (1024-bit key) header.d=telfort.nl header.i=@telfort.nl header.b="WHSsW//5"
 X-Original-To: util-linux@vger.kernel.org
-Received: from mx0b-001b2d01.pphosted.com (mx0b-001b2d01.pphosted.com [148.163.158.5])
+Received: from ewsoutbound.kpnmail.nl (ewsoutbound.kpnmail.nl [195.121.94.167])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EAF8E34DCD0
-	for <util-linux@vger.kernel.org>; Thu, 16 Oct 2025 15:38:44 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=148.163.158.5
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BF5EF26F2B2
+	for <util-linux@vger.kernel.org>; Fri, 17 Oct 2025 08:37:59 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=195.121.94.167
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1760629126; cv=none; b=Q9aoxIsz32ChIRvwVW2GXTrvzUsaLGUAqITz5wjPXwMNz2viSm1hRq3oALfR0Llybcu8RQI+Q0qu4I6+BLqYIrZ10X1lddRLCVlTwL0Il2kgjqyXrajfksTPKlnbPawGzKEoFPFlvS8GRogYmNI15wugXClxQrl5BUB9XZDqIGo=
+	t=1760690283; cv=none; b=X3Q/RnBFifAmC06ayhURjxCCJlxAS3531ykNUgAwsgwmpqw6DEeCknjk4wWuJv/ss+Ts5viy5BUEH9tg8IJp1TpC+IaHOMhvRbqowFlerhjhOWyaoC/kwVaPZykG1GxJysOZkm8qr15OLX1YfzOEGNZn6c1hbUMR8QalqY+VWJs=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1760629126; c=relaxed/simple;
-	bh=cI+uBWzbwuVfEF7BijHJcahpwSUBDV5Eg46BXYVxqQ0=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=XM53n301+5TT44yuJl9SZxFTFoZGwFWP2zGvEFzTScbDaeIdawnnksA2HLSjNT8cJbpAra8Pw99fM8gM8pmWdNOvg0Wuvva5Yk9WLZ68bk8K5mvr3qH/yeC/R450zPLUHBXbxUiWQoDkAorp486x93hECr7gmQdqa6XcwswRUIs=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.ibm.com; spf=pass smtp.mailfrom=linux.ibm.com; dkim=pass (2048-bit key) header.d=ibm.com header.i=@ibm.com header.b=PtzrD3cy; arc=none smtp.client-ip=148.163.158.5
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.ibm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.ibm.com
-Received: from pps.filterd (m0356516.ppops.net [127.0.0.1])
-	by mx0a-001b2d01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 59GAcWK3012300;
-	Thu, 16 Oct 2025 15:38:42 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com; h=cc
-	:content-transfer-encoding:date:from:in-reply-to:message-id
-	:mime-version:references:subject:to; s=pp1; bh=6L6kUgJYz1uVtofmf
-	IrfYoka2udEJtloka9oIzNNz3U=; b=PtzrD3cyjEvWqFQe9blDzOTFtPF9DCSVQ
-	Tw4vQfkM38iqZbdZ9AvHul/JDX0neJxdUQgI0DUjpEX2ecNIicPmaFMYQybtVNx3
-	TZyyxCKEDBn8deMuKo/xFTAN2a57GM1b90N7foBn2DcqB1IhfGBo5RBqYuR1fuht
-	3A541xQKXoudkRBH/TEvQ7UkKooZvAhbBolO4Bi8e7hU/QE2+5uC3JfPIYKbKZbO
-	dqKPdfOq6fF5HsebA+vKQejcPtfTEnB1/fIlrp3yXBuZzjrj2TIgwT9mMxzbkbFM
-	z0s7Xdc6c+u4vyy2l03dNNXnX7ENz9ocHu19R0rWMa7BlByGLKSsw==
-Received: from ppma21.wdc07v.mail.ibm.com (5b.69.3da9.ip4.static.sl-reverse.com [169.61.105.91])
-	by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 49qcnrjsv2-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Thu, 16 Oct 2025 15:38:42 +0000 (GMT)
-Received: from pps.filterd (ppma21.wdc07v.mail.ibm.com [127.0.0.1])
-	by ppma21.wdc07v.mail.ibm.com (8.18.1.2/8.18.1.2) with ESMTP id 59GDmu4q018823;
-	Thu, 16 Oct 2025 15:38:42 GMT
-Received: from smtprelay06.fra02v.mail.ibm.com ([9.218.2.230])
-	by ppma21.wdc07v.mail.ibm.com (PPS) with ESMTPS id 49r2jmxhba-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Thu, 16 Oct 2025 15:38:42 +0000
-Received: from smtpav04.fra02v.mail.ibm.com (smtpav04.fra02v.mail.ibm.com [10.20.54.103])
-	by smtprelay06.fra02v.mail.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id 59GFccio31654326
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
-	Thu, 16 Oct 2025 15:38:38 GMT
-Received: from smtpav04.fra02v.mail.ibm.com (unknown [127.0.0.1])
-	by IMSVA (Postfix) with ESMTP id 1A0E1200DC;
-	Thu, 16 Oct 2025 15:38:38 +0000 (GMT)
-Received: from smtpav04.fra02v.mail.ibm.com (unknown [127.0.0.1])
-	by IMSVA (Postfix) with ESMTP id E585D200DF;
-	Thu, 16 Oct 2025 15:38:37 +0000 (GMT)
-Received: from tuxmaker.lnxne.boe (unknown [9.152.85.9])
-	by smtpav04.fra02v.mail.ibm.com (Postfix) with ESMTP;
-	Thu, 16 Oct 2025 15:38:37 +0000 (GMT)
-From: Sumanth Korikkar <sumanthk@linux.ibm.com>
-To: Karel Zak <kzak@redhat.com>, util-linux@vger.kernel.org
-Cc: Gerald Schaefer <gerald.schaefer@linux.ibm.com>,
-        Heiko Carstens <hca@linux.ibm.com>, Vasily Gorbik <gor@linux.ibm.com>,
-        Alexander Gordeev <agordeev@linux.ibm.com>,
-        Sumanth Korikkar <sumanthk@linux.ibm.com>
-Subject: [PATCH v2 6/6] lsmem,chmem: add configure/deconfigure bash completion options
-Date: Thu, 16 Oct 2025 17:38:06 +0200
-Message-ID: <20251016153808.3565873-7-sumanthk@linux.ibm.com>
-X-Mailer: git-send-email 2.48.1
-In-Reply-To: <20251016153808.3565873-1-sumanthk@linux.ibm.com>
-References: <20251016153808.3565873-1-sumanthk@linux.ibm.com>
+	s=arc-20240116; t=1760690283; c=relaxed/simple;
+	bh=TtyE5G9A7i6+Cbpz+NEnb6Wz42c1fBryolSnIELhrSs=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=sWsG8/gLr7jxAiqqeu7ib1PHWIIBFY1ze0qQF2igoXKjB3cJWpeI6AggfnNhGR2ow4b/1rXzhpIdDj8ny0fOcVbNUphYzC3ZpmLuRxzFc09rNTGi27Rp3BUVEcswRv9+KjBH7J7kWd1FnOmpVHuPhP499WkmeOf1QoX4p0R8CP0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=telfort.nl; spf=pass smtp.mailfrom=telfort.nl; dkim=pass (1024-bit key) header.d=telfort.nl header.i=@telfort.nl header.b=WHSsW//5; arc=none smtp.client-ip=195.121.94.167
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=telfort.nl
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=telfort.nl
+X-KPN-MessageId: be01100a-ab34-11f0-a27d-005056abbe64
+Received: from smtp.kpnmail.nl (unknown [10.31.155.38])
+	by ewsoutbound.so.kpn.org (Halon) with ESMTPS
+	id be01100a-ab34-11f0-a27d-005056abbe64;
+	Fri, 17 Oct 2025 10:39:06 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=telfort.nl; s=telfort01;
+	h=content-type:from:to:subject:mime-version:date:message-id;
+	bh=TtyE5G9A7i6+Cbpz+NEnb6Wz42c1fBryolSnIELhrSs=;
+	b=WHSsW//58AM0DEEqjfQwJHyL6PueGPJdNY1yBj0UzYX89q2LEXg96n7p/5UKt2bZ1wZXf3VH2NRPe
+	 M8WbS5AaQSTtsQE/xrZSk5lQE1zUmlSHSFHo1iUoL1LvkUluJozBQ+HYX6kYt1l5rzn07kREBtA0Fv
+	 /jAtiWRnGva9AP5M=
+X-KPN-MID: 33|BSYnotMn3BEDIPgIS4ytrxbVj9FauKwWirmnFL7aa9GpjK0IJc+Y2Cn+OS3dm9U
+ jEOKxcBWIBudZj6W5LbJm7zPNH9PJbDaZYFcyBFYA/5g=
+X-KPN-VerifiedSender: Yes
+X-CMASSUN: 33|ivYUhDWj7wpgwVl3F3lHILReWANvCANsNVeRVG5dbqj1AXF2sYirg99WlH1kR29
+ McOZSHNKzXBDRLkV4xgInAQ==
+Received: from [192.168.2.23] (77-163-176-192.fixed.kpn.net [77.163.176.192])
+	by smtp.kpnmail.nl (Halon) with ESMTPSA
+	id 91b8e8e4-ab34-11f0-a6c9-005056abf0db;
+	Fri, 17 Oct 2025 10:37:52 +0200 (CEST)
+Message-ID: <3ec10487-0195-4dff-b056-37ada0d6d5ee@telfort.nl>
+Date: Fri, 17 Oct 2025 10:37:50 +0200
 Precedence: bulk
 X-Mailing-List: util-linux@vger.kernel.org
 List-Id: <util-linux.vger.kernel.org>
 List-Subscribe: <mailto:util-linux+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:util-linux+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-TM-AS-GCONF: 00
-X-Authority-Analysis: v=2.4 cv=M5ZA6iws c=1 sm=1 tr=0 ts=68f11182 cx=c_pps
- a=GFwsV6G8L6GxiO2Y/PsHdQ==:117 a=GFwsV6G8L6GxiO2Y/PsHdQ==:17
- a=x6icFKpwvdMA:10 a=VkNPw1HP01LnGYTKEx00:22 a=VnNF1IyMAAAA:8
- a=n9yHTBj7tZKTC83s7TEA:9
-X-Proofpoint-GUID: 89gaCsiotRVk-NxoITdm3mGX0ZPv6Yaw
-X-Proofpoint-ORIG-GUID: 89gaCsiotRVk-NxoITdm3mGX0ZPv6Yaw
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMDEwMDE0MCBTYWx0ZWRfX5WMFVQ1eVpFT
- 4sTRwSqaTj/WxtQT3cxZEhNgbKv+3ELy9LEJ1v//trLeb6lZT2rDplmh5W0b27NHx7YrVLE4nrg
- FAMi0+ggZ/RhddJkusJQptELNb4vvhq2JZ2mSlPT/ExQqwbFychqx80yRFrnZH/OEcvMoE+scfp
- oZ7oxDkkng2xHN0KAKI/9GiWzQsT/Dx+2nXzu+ce9FR5q6fkJuxNOYkoz9zFN5n0sXq4MPac2Lv
- WGqxNXIejaKkRP6KIXK3luB5jJoKmP9gSUmr9V/nV5Sb1Fn7Etzqk13Cozozh3M0xXOBtf/H1n6
- cdvfWVT1heOquYCvsCnOHYII1nEtiE+7WB346QoZx7+6T/cgLfb0uS1O3+ozmaDhJ9GlNhI4EJZ
- JHXoHVDTypWv6grAI04URJWgeur5OQ==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.80.40
- definitions=2025-10-16_03,2025-10-13_01,2025-03-28_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- malwarescore=0 bulkscore=0 spamscore=0 clxscore=1015 impostorscore=0
- phishscore=0 adultscore=0 suspectscore=0 priorityscore=1501
- lowpriorityscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.19.0-2510020000
- definitions=main-2510100140
+User-Agent: Mozilla Thunderbird
+Subject: Re: `losetup --remove` is confusing, and misuse silently fails
+To: Karel Zak <kzak@redhat.com>
+Cc: Util-Linux <util-linux@vger.kernel.org>,
+ wguanghao <wuguanghao3@huawei.com>
+References: <a5909aac-3f54-4fce-8785-410535dd4098@telfort.nl>
+ <wog3s3sk34ewa6ulgspplk6fhb4hwd3nd55wse3gk2dsl6avyl@yqoq3miwfx5n>
+Content-Language: en-US, nl-NL, es-ES
+From: Benno Schulenberg <bensberg@telfort.nl>
+In-Reply-To: <wog3s3sk34ewa6ulgspplk6fhb4hwd3nd55wse3gk2dsl6avyl@yqoq3miwfx5n>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="------------scsuti0YzfEQf3uNdF8lLuEd"
 
-Add bash completion for configure/deconfigure options in chmem and lsmem.
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------------scsuti0YzfEQf3uNdF8lLuEd
+Content-Type: multipart/mixed; boundary="------------NJYj08dCmP6WjcrMXByjv6Db";
+ protected-headers="v1"
+From: Benno Schulenberg <bensberg@telfort.nl>
+To: Karel Zak <kzak@redhat.com>
+Cc: Util-Linux <util-linux@vger.kernel.org>,
+ wguanghao <wuguanghao3@huawei.com>
+Message-ID: <3ec10487-0195-4dff-b056-37ada0d6d5ee@telfort.nl>
+Subject: Re: `losetup --remove` is confusing, and misuse silently fails
+References: <a5909aac-3f54-4fce-8785-410535dd4098@telfort.nl>
+ <wog3s3sk34ewa6ulgspplk6fhb4hwd3nd55wse3gk2dsl6avyl@yqoq3miwfx5n>
+In-Reply-To: <wog3s3sk34ewa6ulgspplk6fhb4hwd3nd55wse3gk2dsl6avyl@yqoq3miwfx5n>
 
-Signed-off-by: Sumanth Korikkar <sumanthk@linux.ibm.com>
----
- bash-completion/chmem | 3 +++
- bash-completion/lsmem | 2 +-
- 2 files changed, 4 insertions(+), 1 deletion(-)
+--------------NJYj08dCmP6WjcrMXByjv6Db
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: base64
 
-diff --git a/bash-completion/chmem b/bash-completion/chmem
-index 3e3af87ac..f10646677 100644
---- a/bash-completion/chmem
-+++ b/bash-completion/chmem
-@@ -14,6 +14,9 @@ _chmem_module()
- 			OPTS="
- 				--enable
- 				--disable
-+				--configure
-+				--deconfigure
-+				--memmap-on-memory
- 				--blocks
- 				--verbose
- 				--zone
-diff --git a/bash-completion/lsmem b/bash-completion/lsmem
-index 7d6e84247..185a15fd2 100644
---- a/bash-completion/lsmem
-+++ b/bash-completion/lsmem
-@@ -9,7 +9,7 @@ _lsmem_module()
- 			local prefix realcur OUTPUT_ALL OUTPUT
- 			realcur="${cur##*,}"
- 			prefix="${cur%$realcur}"
--			OUTPUT_ALL='RANGE SIZE STATE REMOVABLE BLOCK NODE ZONES'
-+			OUTPUT_ALL='RANGE SIZE STATE REMOVABLE BLOCK NODE ZONES CONFIGURED MEMMAP-ON-MEMORY'
- 			for WORD in $OUTPUT_ALL; do
- 				if ! [[ $prefix == *"$WORD"* ]]; then
- 					OUTPUT="$WORD ${OUTPUT:-""}"
--- 
-2.41.0
+DQpPcCAxNi0xMC0yMDI1IG9tIDEyOjI4IHNjaHJlZWYgS2FyZWwgWmFrOg0KPiBodHRwczov
+L2dpdGh1Yi5jb20vdXRpbC1saW51eC91dGlsLWxpbnV4L3B1bGwvMzgwMw0KDQpMb29rcyBn
+b29kIHRvIG1lLiAgSW4gcGFydGljdWxhciB0aGUgZG9jdW1lbnRhdGlvbiBwYXRjaDogaXQg
+d2FzIHRoZQ0KcG9vciBkZXNjcmlwdGlvbiBvZiAtLXJlbW92ZSB0aGF0IG1hZGUgbWUgc2Ny
+dXRpbml6ZSBgbG9zZXR1cGAuICA6KQ0KDQpJdCB3b3VsZCBiZSBuaWNlLCB0aG91Z2gsIHRv
+IHNlZSBhIFJlcG9ydGVkLWJ5IHRhZyBvbiB0aGUgZmlyc3QgcGF0Y2gsDQp0aGUgZXJyb3Ig
+ZmVlZGJhY2suDQoNCg0KQmVubm8NCg0K
 
+--------------NJYj08dCmP6WjcrMXByjv6Db--
+
+--------------scsuti0YzfEQf3uNdF8lLuEd
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+wsF5BAABCAAjFiEEFo5vQpe/16ea/USWUUu+Lrjhlh8FAmjyAF4FAwAAAAAACgkQUUu+Lrjhlh+k
+JhAAuxEgspqKHI891E2Dl6wG4taq80Z0oW2Gx4TPEFZUHekurQBxtvg+KwwlXEs1zcfBna2UxMRj
+Em6fG5dM0yMoYqhzUQ1irceuTwRYaP0TG/+mzaj/BeEcaHX0MOvOPqDexMI5KiNfLg0CYgp7a/1n
+Y2CY7VPQ5KhnkGBoe0aBmHR/Qh/441FSH2hqFOgUwpVKftfLSzFwmkgdquEa8klyAzQlWgEtJ5In
+fguh2liOR18eYYIt8jI6ECzEd0JnEdqkmZMeAjVT94Yfebx5U61VpJIcQvIOw6F5AeOYnW5CfPHh
+fUP452ILptCQ12LEcLso0WtzFEk3CzLRJyiNqwSSmNhB5De7hHgojz8eppnNniELyJwXamzVrV82
+oazXJ5loPFrLVCSJDm3R/ziCPZcCXv054u36b9zdlYdV5bGoCJl/sJjY7qLklWLWXdgjP/vXsx9+
+Y9obIoyeOXtKvCBL4U6d+e1rRZgHUawvtwFsbHh0HhkYBHxQKH/A9gwK32hd3LGJPjSL6byc+x4H
+EPyLAlEVNTZ/YGrKIOYrUYu4Y1PqUiZ58GuayUU06XNUUNs79SyWjEcUxuhBmhEN0dqohSBUJp+A
+nvnM0hmAN7j0k5uALcjeabXSoNKUusYlon429+DFZuwBT1bz9y/eoVsDm+WxEhVqOJsY0MrV2YTq
+Nus=
+=nt/S
+-----END PGP SIGNATURE-----
+
+--------------scsuti0YzfEQf3uNdF8lLuEd--
 
