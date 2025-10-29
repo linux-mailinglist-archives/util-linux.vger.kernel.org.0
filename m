@@ -1,73 +1,62 @@
-Return-Path: <util-linux+bounces-917-lists+util-linux=lfdr.de@vger.kernel.org>
+Return-Path: <util-linux+bounces-920-lists+util-linux=lfdr.de@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
-Received: from dfw.mirrors.kernel.org (dfw.mirrors.kernel.org [IPv6:2605:f480:58:1:0:1994:3:14])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7CE35C16B00
-	for <lists+util-linux@lfdr.de>; Tue, 28 Oct 2025 20:55:14 +0100 (CET)
+Received: from ams.mirrors.kernel.org (ams.mirrors.kernel.org [IPv6:2a01:60a::1994:3:14])
+	by mail.lfdr.de (Postfix) with ESMTPS id 52BA1C19EBA
+	for <lists+util-linux@lfdr.de>; Wed, 29 Oct 2025 12:05:24 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by dfw.mirrors.kernel.org (Postfix) with ESMTPS id 578E34F1495
-	for <lists+util-linux@lfdr.de>; Tue, 28 Oct 2025 19:55:09 +0000 (UTC)
+	by ams.mirrors.kernel.org (Postfix) with ESMTPS id 06219353C73
+	for <lists+util-linux@lfdr.de>; Wed, 29 Oct 2025 11:05:24 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2387534679C;
-	Tue, 28 Oct 2025 19:54:52 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2F1413081CB;
+	Wed, 29 Oct 2025 11:05:19 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=amazon.com header.i=@amazon.com header.b="Vi9a06kb"
+	dkim=pass (1024-bit key) header.d=telfort.nl header.i=@telfort.nl header.b="Dlx/5Ay0"
 X-Original-To: util-linux@vger.kernel.org
-Received: from pdx-out-003.esa.us-west-2.outbound.mail-perimeter.amazon.com (pdx-out-003.esa.us-west-2.outbound.mail-perimeter.amazon.com [44.246.68.102])
+Received: from ewsoutbound.kpnmail.nl (ewsoutbound.kpnmail.nl [195.121.94.170])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6A2AE3502B5
-	for <util-linux@vger.kernel.org>; Tue, 28 Oct 2025 19:54:50 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=44.246.68.102
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1F5B9304BA4
+	for <util-linux@vger.kernel.org>; Wed, 29 Oct 2025 11:05:16 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=195.121.94.170
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1761681291; cv=none; b=D90r5pFdkVlMTSEaa0tUxK4Oh4G5JZpi4fH65d2oTYrhLhNXG9wzKNn6gZhE9TZHJ3EaxKMKoYXNU+a/gpqgAqqowlKjtyPf6KUMyPP8MfwqHPQ077S2WcCQIHM5pVrYP1QD+rDQ13umnI94u3pCoP8ZlYwd36r1Azyd+8+KdjA=
+	t=1761735919; cv=none; b=gjhvDDB9SE1zzXv2bOD8PY/nE1e0YzPhLHdcCYUyrgx+tOnEJhAEwipg31yI4ycnVa8AhUtObGFB6aJw2meY8dWHPAF80cuaRAjlLts4GU8AlKPkhmnUNG4olKgGFiqYPubWHv7vAwbbo+jPifAyWk1cFmTGk1ExWDl3YgYE8jk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1761681291; c=relaxed/simple;
-	bh=niqyAXEmjMPgSMg4gNQ5siOSqlu6FggtSaBdFGfULTY=;
-	h=From:To:CC:Subject:Date:Message-ID:MIME-Version:Content-Type; b=JUkO701CDkTWWMWOjpRsKsO74dJo7hqJi+fIKkPgADGP3DH+FK+V1eXzGznNzQn7ffFaPgFLJwfi1++ety6eBYPmnsyCqP4oYCPr2UKJvokKdE0CF48GazN3BkRr0yvH+ZBgmJxVhs9Y7zjGw03LfkYznDtV4l0W/7ATTnkeqro=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=amazon.com; spf=pass smtp.mailfrom=amazon.com; dkim=pass (2048-bit key) header.d=amazon.com header.i=@amazon.com header.b=Vi9a06kb; arc=none smtp.client-ip=44.246.68.102
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=amazon.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=amazon.com
+	s=arc-20240116; t=1761735919; c=relaxed/simple;
+	bh=D1SfoU9LCzwwxk5aeKn5Wp6hCt+zM8YxMfa1d0W2H1g=;
+	h=From:To:Subject:Date:Message-ID:MIME-Version; b=kxVHMvxXPG7RBGs/lTU/30yVLHNrynMiB9aFUEKvkKAzlxdC4yNipz4pRXW6kCJRo/1FYfnH+FtVd81WsoStjIzqpSmnYmbiX+akVlANWcTJeAQmdlFhJwetiN30cRbA6pSOk2FKg7Di3Axxx9Z5BxWcRSOlqMeAeWyQGtGy6t0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=telfort.nl; spf=pass smtp.mailfrom=telfort.nl; dkim=pass (1024-bit key) header.d=telfort.nl header.i=@telfort.nl header.b=Dlx/5Ay0; arc=none smtp.client-ip=195.121.94.170
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=telfort.nl
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=telfort.nl
+X-KPN-MessageId: 1f741372-b4b7-11f0-9c77-005056ab378f
+Received: from smtp.kpnmail.nl (unknown [10.31.155.39])
+	by ewsoutbound.so.kpn.org (Halon) with ESMTPS
+	id 1f741372-b4b7-11f0-9c77-005056ab378f;
+	Wed, 29 Oct 2025 12:05:04 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=amazon.com; i=@amazon.com; q=dns/txt; s=amazoncorp2;
-  t=1761681290; x=1793217290;
-  h=from:to:cc:subject:date:message-id:mime-version:
-   content-transfer-encoding;
-  bh=ekXTKVPDcTjJPJUPaD1eG2214RDjP+ePtK+vkx9WJgI=;
-  b=Vi9a06kb6n8llJywGPfY6Kv/kmCEUMEwoseqRU5rolF/eWFDTFWccPOw
-   TittB8Seb5OXp9I0Fs4oIrN9VJh24WELSBU9eaN+nDxTXzaar5dZ0oZ6I
-   4sVC5o9iAa9FXk2ROD+16ndzRNQ7zhfLau07+LF+tA2KE/fX58JB8+kil
-   5d1f4zizYA+lGt3unnwVxt+q5ldlvIvQib9GORwGO0BHKdyZ+yKLFcvuJ
-   yxuhBzwrhS5pYfx/Jv83SJE7zdM8Ew6StGDbOX0uevc5aExHJsdrKyILJ
-   XX1jTnBtqXKb4MXA/HQrFKFmIZ5tfyd0+Z/xaIbLpu99gU6R6xaB8sQ3y
-   Q==;
-X-CSE-ConnectionGUID: sS7l06QoRaqKtY3/VBIhnQ==
-X-CSE-MsgGUID: 1FTowNPBSsy03n2pdXcllQ==
-X-IronPort-AV: E=Sophos;i="6.19,261,1754956800"; 
-   d="scan'208";a="5900751"
-Received: from ip-10-5-9-48.us-west-2.compute.internal (HELO smtpout.naws.us-west-2.prod.farcaster.email.amazon.dev) ([10.5.9.48])
-  by internal-pdx-out-003.esa.us-west-2.outbound.mail-perimeter.amazon.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 28 Oct 2025 19:54:49 +0000
-Received: from EX19MTAUWC001.ant.amazon.com [205.251.233.105:15331]
- by smtpin.naws.us-west-2.prod.farcaster.email.amazon.dev [10.0.58.51:2525] with esmtp (Farcaster)
- id 3edef0e6-29ae-4ad5-94cd-f60990cb79b1; Tue, 28 Oct 2025 19:54:49 +0000 (UTC)
-X-Farcaster-Flow-ID: 3edef0e6-29ae-4ad5-94cd-f60990cb79b1
-Received: from EX19D010UWA004.ant.amazon.com (10.13.138.204) by
- EX19MTAUWC001.ant.amazon.com (10.250.64.174) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.2562.20;
- Tue, 28 Oct 2025 19:54:49 +0000
-Received: from u14c311f44f1758.ant.amazon.com.com (10.187.170.41) by
- EX19D010UWA004.ant.amazon.com (10.13.138.204) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.2562.29;
- Tue, 28 Oct 2025 19:54:48 +0000
-From: Munehisa Kamata <kamatam@amazon.com>
-To: <util-linux@vger.kernel.org>
-CC: <adanaila@amazon.com>, Munehisa Kamata <kamatam@amazon.com>
-Subject: [PATCH] wdctl: remove -d option leftover
-Date: Tue, 28 Oct 2025 12:54:17 -0700
-Message-ID: <20251028195417.3569126-1-kamatam@amazon.com>
-X-Mailer: git-send-email 2.43.0
+	d=telfort.nl; s=telfort01;
+	h=mime-version:message-id:date:subject:to:from;
+	bh=ljAU9FbdbI/5kGnFR81yyXIIA5UT1cdM9isb7FAa/ng=;
+	b=Dlx/5Ay00yRLNR27omZAIOXBe34EpqctOk8LfeETuC8LU3auVc/bC7+5MYNhtu36oJMAReH2RCXrh
+	 YQBFFVwT+Uy0HY/5Pr4sNHgzEAlLyej0SsuNuMcFFG8788AAnnmx/a3OcxRcCObUSezrLzm3z5R6Q+
+	 kLWIuEnvlvuo/LgI=
+X-KPN-MID: 33|oh+5Tfpe/28IFhAj7OvEvT6hIoWDUo55L0i4v9oRtqeN13fPsOc2Fd3s1ol/dFU
+ XxheJ2NW1QAxCBNudA66RSA==
+X-KPN-VerifiedSender: Yes
+X-CMASSUN: 33|L9dQCV21WnTebsBPmSgMiF7iy0p23p3oNAWr1hOE2JDDAApaFHTiKV7pUyDvGnb
+ 1jFYqakmaERxDKBhFd3Rl8Q==
+Received: from localhost (77-163-176-192.fixed.kpn.net [77.163.176.192])
+	by smtp.kpnmail.nl (Halon) with ESMTPSA
+	id fdadcc86-b4b6-11f0-8004-005056ab7447;
+	Wed, 29 Oct 2025 12:04:08 +0100 (CET)
+From: Benno Schulenberg <bensberg@telfort.nl>
+To: util-linux@vger.kernel.org
+Subject: [PATCH 1/3] losetup: sort 'O' correctly for the mutual-exclusive check to work
+Date: Wed, 29 Oct 2025 12:03:56 +0100
+Message-ID: <20251029110358.18170-1-bensberg@telfort.nl>
+X-Mailer: git-send-email 2.51.2
 Precedence: bulk
 X-Mailing-List: util-linux@vger.kernel.org
 List-Id: <util-linux.vger.kernel.org>
@@ -75,43 +64,28 @@ List-Subscribe: <mailto:util-linux+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:util-linux+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: EX19D046UWB001.ant.amazon.com (10.13.139.187) To
- EX19D010UWA004.ant.amazon.com (10.13.138.204)
 
--d option was removed in commit f56338b43973 ("wdctl: allow to specify more
-than one device"), but the optstring wasn't updated at that time and wdctl
-can still accept the option halfway as below:
+The options need to be in strict ascending order.
 
- $ wdctl -d
- wdctl: option requires an argument -- 'd'
-
-whereas it should say:
-
- wdctl: invalid option -- 'd'
-
-So update the optstring.
-
-Fixes: f56338b43973 ("wdctl: allow to specify more than one device")
-Signed-off-by: Munehisa Kamata <kamatam@amazon.com>
+Signed-off-by: Benno Schulenberg <bensberg@telfort.nl>
 ---
- sys-utils/wdctl.c | 2 +-
+ sys-utils/losetup.c | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/sys-utils/wdctl.c b/sys-utils/wdctl.c
-index f3ae0e3f8..0cf8ee7a4 100644
---- a/sys-utils/wdctl.c
-+++ b/sys-utils/wdctl.c
-@@ -779,7 +779,7 @@ int main(int argc, char *argv[])
- 	close_stdout_atexit();
- 
- 	while ((c = getopt_long(argc, argv,
--				"d:f:g:hFnITp:o:s:OrVx", long_opts, NULL)) != -1) {
-+				"f:g:hFnITp:o:s:OrVx", long_opts, NULL)) != -1) {
- 
- 		err_exclusive_options(c, long_opts, excl, excl_st);
- 
+diff --git a/sys-utils/losetup.c b/sys-utils/losetup.c
+index c2eec5600..2a3257473 100644
+--- a/sys-utils/losetup.c
++++ b/sys-utils/losetup.c
+@@ -739,7 +739,7 @@ int main(int argc, char **argv)
+ 	static const ul_excl_t excl[] = {	/* rows and cols in ASCII order */
+ 		{ 'D','a','c','d','f','j',OPT_REMOVE },
+ 		{ 'D','c','d','f','l',OPT_REMOVE },
+-		{ 'D','c','d','f','O',OPT_REMOVE },
++		{ 'D','O','c','d','f',OPT_REMOVE },
+ 		{ 'J',OPT_RAW },
+ 		{ 0 }
+ 	};
 -- 
-2.43.0
+2.51.2
 
 
