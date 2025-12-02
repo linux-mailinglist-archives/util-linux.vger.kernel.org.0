@@ -1,106 +1,119 @@
-Return-Path: <util-linux+bounces-947-lists+util-linux=lfdr.de@vger.kernel.org>
+Return-Path: <util-linux+bounces-949-lists+util-linux=lfdr.de@vger.kernel.org>
 X-Original-To: lists+util-linux@lfdr.de
 Delivered-To: lists+util-linux@lfdr.de
 Received: from ams.mirrors.kernel.org (ams.mirrors.kernel.org [213.196.21.55])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6F198C89CDF
-	for <lists+util-linux@lfdr.de>; Wed, 26 Nov 2025 13:40:36 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6C1A7C9CE28
+	for <lists+util-linux@lfdr.de>; Tue, 02 Dec 2025 21:17:55 +0100 (CET)
 Received: from smtp.subspace.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ams.mirrors.kernel.org (Postfix) with ESMTPS id 146E53546F1
-	for <lists+util-linux@lfdr.de>; Wed, 26 Nov 2025 12:40:36 +0000 (UTC)
+	by ams.mirrors.kernel.org (Postfix) with ESMTPS id 15AB7347FF3
+	for <lists+util-linux@lfdr.de>; Tue,  2 Dec 2025 20:17:55 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 208702FFDD2;
-	Wed, 26 Nov 2025 12:40:32 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=0x65c.net header.i=@0x65c.net header.b="V4D33gVE"
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id E69DE21CFF6;
+	Tue,  2 Dec 2025 20:17:50 +0000 (UTC)
 X-Original-To: util-linux@vger.kernel.org
-Received: from m239-4.eu.mailgun.net (m239-4.eu.mailgun.net [185.250.239.4])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from dsmtpq3-prd-nl1-vfz.edge.unified.services (dsmtpq3-prd-nl1-vfz.edge.unified.services [84.116.6.73])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 917AEEED8
-	for <util-linux@vger.kernel.org>; Wed, 26 Nov 2025 12:40:29 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.250.239.4
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 283A779CF
+	for <util-linux@vger.kernel.org>; Tue,  2 Dec 2025 20:17:48 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=84.116.6.73
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1764160831; cv=none; b=mUtQrNo1TAdpnQxqbfOLvTZGTgWU60W4n57+CldUSySwo1oQ4CislOhUBjWN2RIK/F9XwZmPYpJelyG1thcRq2GBFv4L2h2P1RDxusbQEVLLC01jATQnApFT/acB0/NQccjV6e/psiIiBCjQBKFyFa5EknEgTOwDlkmLSwiSNdM=
+	t=1764706670; cv=none; b=Q71Nx1TDF6qNhiyUgZD7plJa4Dp2Y5bwn39KSP5FU4e71DfB5m/AcbnG3+1sYtTvPr0nUZC5/ULbeUyyzBrGcU1WjZe+kRJhB6I2gbcgpZobRBJTnzGHi2nifb7wkxFbu0Y3FcVt1PLbwsuYnLHSAgcxEoaBlfX8V7dfu//fO8U=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1764160831; c=relaxed/simple;
-	bh=eMw5ZfGz/GbRXBLaxE4P9qrErgZjDAdpQkqsqUDTe1Q=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=aoElJRegnCJmL7Ok/3oClq0LPZJBM+6K3Xb8IXACvvXoDKBskI9k8cJDG9vUbxfL2VyzgiyxDNVo4uTOZ1tq0f5jRLtwfwlA0E8evaiPNNLuHhyqGc+YGEF7AFi+RiwmABXr+OL22Hzh7Oe+E7ACRWXNDAsrfZP6/jpqU/stUWo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=0x65c.net; spf=pass smtp.mailfrom=0x65c.net; dkim=pass (2048-bit key) header.d=0x65c.net header.i=@0x65c.net header.b=V4D33gVE; arc=none smtp.client-ip=185.250.239.4
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=0x65c.net
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=0x65c.net
-DKIM-Signature: a=rsa-sha256; v=1; c=relaxed/relaxed; d=0x65c.net; q=dns/txt; s=email; t=1764160827; x=1764168027;
- h=Content-Transfer-Encoding: Content-Type: Cc: To: To: Subject: Subject: Message-ID: Date: From: From: In-Reply-To: References: MIME-Version: Sender: Sender;
- bh=QgzwzY4CM468oRAigoVmey9NWfmnaAwDVQ3XJixIoAw=;
- b=V4D33gVEko1Jpk5n6gAWutquwIRH52I+0EnBLGTifk23BAV62+j+37krmJ27W/MI+4j65nQmLcFelk2B55EhWpExIZM3FOma+UUJHAQ/NZF2k5f1mHS4iOHAJXRubct7Zo6LL6uKVauFH1XAOhW8YMuWuQRhbsiH9MsaXy4Mk2YRtsbCjtaXyLLnkuf5yfOWgBezQo0l8pMDt4P4oqOWs5FNG/SYXQUbGjj0fjN7o2ko8KfNfC1S+iRelCFBk8zU6pD3199aSaTgi8Ee3+fPssTPxotIVPl8lQFjXhiMRUtggihUkzH+s/D9Rvz6YGpVsz9xZ9IP8VN4mdlJXSrcWg==
-X-Mailgun-Sid: WyJlNDM3YyIsInV0aWwtbGludXhAdmdlci5rZXJuZWwub3JnIiwiNTRlZjQiXQ==
-Received: from mail-yw1-f177.google.com (mail-yw1-f177.google.com [209.85.128.177]) by
- 46937093e9ecc18116807af5627b7515da24d02112854031a38f33b57a6923ed with SMTP id
- 6926f539ced19bbbbbc4764a (version=TLS1.3, cipher=TLS_AES_128_GCM_SHA256);
- Wed, 26 Nov 2025 12:40:25 GMT
-X-Mailgun-Sending-Ip: 185.250.239.4
-Sender: alessandro@0x65c.net
-Received: by mail-yw1-f177.google.com with SMTP id 00721157ae682-787e35ab178so63708197b3.2
-        for <util-linux@vger.kernel.org>; Wed, 26 Nov 2025 04:40:25 -0800 (PST)
-X-Gm-Message-State: AOJu0YyAUuthn2HdVww22D1OxPHDwHNv0fW0BQVlPQ+rGACxptB3+1h6
-	f+D6qWVpgY9h4lbPxHnaLG8/xK3hAqo1f9ZDjcIP80a+Zjubd2btHxO/8ZBv83TYDjXFb9Nj8sC
-	PBvGqBS2bQAPO5LOm22bEKQpB3oo1RCI=
-X-Google-Smtp-Source: AGHT+IHIISDrq1maGj8YSEP5zOvq/mzVLgWGYDxgPCEr7TDZek9jj95c/0cPz9FJbKGrwj1pSriYfePK9tXxwTYnQiA=
-X-Received: by 2002:a05:690c:6188:b0:787:caf4:574b with SMTP id
- 00721157ae682-78a8b478085mr155152767b3.6.1764160825154; Wed, 26 Nov 2025
- 04:40:25 -0800 (PST)
+	s=arc-20240116; t=1764706670; c=relaxed/simple;
+	bh=nmjOGzohmk/Dk3lHke2aqu7l5SXEVvYNJrNNlpz0fOQ=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=GdTEC+2mCxk+VuiMoD/DDzf+nwokH9+TJKsukvH+H+1nTm9H2slizctulpRBTxyfkYtAOJ+FmoNWEB+kfSlSrdC/S+2QBQ5s/aB/eYfSXGBbjQ8j+KE6qh1hNnLNzL6jBYHy0sbCuyuSCmTA7sXWRsM2hvLouf/jrxwdX7O2pcI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=mrns.nl; spf=none smtp.mailfrom=mrns.nl; arc=none smtp.client-ip=84.116.6.73
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=mrns.nl
+Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=mrns.nl
+Received: from csmtpq2-prd-nl1-vfz.edge.unified.services ([84.116.50.17])
+	by dsmtpq3-prd-nl1-vfz.edge.unified.services with esmtps  (TLS1.3) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+	(Exim 4.95)
+	(envelope-from <dick@mrns.nl>)
+	id 1vQWma-0011dV-KX
+	for util-linux@vger.kernel.org;
+	Tue, 02 Dec 2025 21:15:32 +0100
+Received: from csmtp4-prd-nl1-vfz.nl1.unified.services ([100.107.80.23] helo=csmtp4-prd-nl1-vfz.edge.unified.services)
+	by csmtpq2-prd-nl1-vfz.edge.unified.services with esmtp (Exim 4.95)
+	(envelope-from <dick@mrns.nl>)
+	id 1vQWmT-0049vC-2M
+	for util-linux@vger.kernel.org;
+	Tue, 02 Dec 2025 21:15:25 +0100
+Received: from routi.mrns.nl ([212.204.155.133])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 256/256 bits)
+	(Client did not present a certificate)
+	by csmtp4-prd-nl1-vfz.edge.unified.services with ESMTPSA
+	id QWmRvgkHgimrqQWmRvMyGl; Tue, 02 Dec 2025 21:15:24 +0100
+X-Env-Mailfrom: dick@mrns.nl
+X-Env-Rcptto: util-linux@vger.kernel.org
+X-SourceIP: 212.204.155.133
+X-CNFS-Analysis: v=2.4 cv=R62p39RX c=1 sm=1 tr=0 ts=692f48dd cx=a_exe
+ a=+NQzl7YsTyKB6E3DpOjMZQ==:117 a=+NQzl7YsTyKB6E3DpOjMZQ==:17
+ a=wP3pNCr1ah4A:10 a=4425vRj2VURtf0qpTaoA:9
+X-Authenticated-Sender: ieb1yoh3@ziggo.nl
+Received: by routi.mrns.nl (sSMTP sendmail emulation); Tue, 02 Dec 2025 21:15:23 +0100
+From: Dick Marinus <dick@mrns.nl>
+To: util-linux@vger.kernel.org
+Cc: Dick Marinus <dick@mrns.nl>
+Subject: [PATCH 0/1] copyfilerange: new command to call copy-file-range
+Date: Tue,  2 Dec 2025 21:14:17 +0100
+Message-ID: <20251202201500.1029349-1-dick@mrns.nl>
+X-Mailer: git-send-email 2.51.1
 Precedence: bulk
 X-Mailing-List: util-linux@vger.kernel.org
 List-Id: <util-linux.vger.kernel.org>
 List-Subscribe: <mailto:util-linux+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:util-linux+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20251123153246.1056874-1-alessandro@0x65c.net> <wrmeywniicltshcczypjo7or6hnds7wkkgaaiizbsvvzkwaab6@minsmj74e6wm>
-In-Reply-To: <wrmeywniicltshcczypjo7or6hnds7wkkgaaiizbsvvzkwaab6@minsmj74e6wm>
-From: Alessandro Ratti <alessandro@0x65c.net>
-Date: Wed, 26 Nov 2025 13:40:14 +0100
-X-Gmail-Original-Message-ID: <CAKiXHKegnt0cca+NpdA=3CiRxbiXyYZGmRVoF4Jz+wxw92cvxA@mail.gmail.com>
-X-Gm-Features: AWmQ_bkhTgqIatMZhlJYOq9F--06308tBZPSzYZUhstFv9mmmFPHNdXwxekvwZE
-Message-ID: <CAKiXHKegnt0cca+NpdA=3CiRxbiXyYZGmRVoF4Jz+wxw92cvxA@mail.gmail.com>
-Subject: Re: [PATCH 0/3] Consistent shell resolution across util-linux
-To: Karel Zak <kzak@redhat.com>
-Cc: util-linux@vger.kernel.org, thomas@t-8ch.de, 
-	Alessandro Ratti <alessandroratti@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 7bit
+X-CMAE-Envelope: MS4xfOMYiN5IOj+ssupi/a5avGdPWjETQU1BajhVpTyS63mOa8B2O0NRxn0OgXVwU5+mSH2qPCTgmwdYppIDQQXSdyxzX8Bn2DlRiX6n/ZxY6M7X0CIQuLcr
+ szkJVPIgsFIVUzRHH/XnqAld7kNT1JN7GDk2MJds6hTGxbCeHKDnspiP+6q7yXhr+oG/zpmzdEBabRvwUWyUh+Oohg3L7dRyAGo=
 
-On Wed, 26 Nov 2025 at 12:51, Karel Zak <kzak@redhat.com> wrote:
->
->
->  Hi Alessandro,
->
->  thanks!
->
-> On Sun, Nov 23, 2025 at 04:32:43PM +0100, Alessandro Ratti wrote:
-> > This patch series addresses inconsistent default shell handling across
-> > util-linux tools, which caused user-reported data loss when script(1)
-> > defaulted to /bin/sh without respecting the user's configured shell.
-> >
-> > The series:
-> > 1. Introduces ul_default_shell() for consistent shell resolution
-> > 2. Updates interactive tools to use the new function
-> > 3. Standardizes _PATH_BSHELL usage in security-sensitive tools
-> >
-> > This implements the solution discussed in:
-> > https://github.com/util-linux/util-linux/issues/3865
->
-> How about creating a pull request on GitHub? It will help us with the
-> review, etc.
+Hello!
 
-Thanks. I opened a PR on GitHub [1] as you suggested.
-I=E2=80=99d be grateful for any feedback or pointers on the review.
+I finally finished my work on a command to create reflinked files. Since
+my last post on this mailing list I found the copy_file_range system
+call and I named this command after it.
 
-Thank you for your time and consideration.
+I decided to contribute this command first, when this is done I will
+post another command to find duplicate blocks in two files, which can
+serve as input of this command.
 
-Best regards
-Alessandro
+This command should be usable for other use cases as well, it's also
+possible to create sparse files and it can be used instead of how many
+people use dd if= of= skip= count=
 
-[1]: https://github.com/util-linux/util-linux/pull/3876
+I tried to implement everything in a similar way as used by the other
+sources in this project (and I learned a lot from it).
+
+Nothing is set in stone although I want to keep to the Unix philosophy
+and not any wild features to this command.
+
+Please let me know what can (or must) be added or improved.
+
+Dick Marinus (1):
+  copyfilerange: new command to call copy-file-range
+
+ .gitignore                                 |   1 +
+ configure.ac                               |   3 +
+ meson.build                                |  14 ++
+ meson_options.txt                          |   2 +
+ misc-utils/Makemodule.am                   |   9 +
+ misc-utils/copyfilerange.1.adoc            |  78 +++++++
+ misc-utils/copyfilerange.c                 | 226 +++++++++++++++++++++
+ misc-utils/meson.build                     |   5 +
+ tests/commands.sh                          |   1 +
+ tests/expected/copyfilerange/copyfilerange |   4 +
+ tests/ts/copyfilerange/copyfilerange       |  40 ++++
+ 11 files changed, 383 insertions(+)
+ create mode 100644 misc-utils/copyfilerange.1.adoc
+ create mode 100644 misc-utils/copyfilerange.c
+ create mode 100644 tests/expected/copyfilerange/copyfilerange
+ create mode 100755 tests/ts/copyfilerange/copyfilerange
+
+-- 
+2.51.1
+
 
