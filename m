@@ -1,165 +1,121 @@
-Return-Path: <util-linux+bounces-1050-lists+util-linux=lfdr.de@vger.kernel.org>
+Return-Path: <util-linux+bounces-1051-lists+util-linux=lfdr.de@vger.kernel.org>
 Delivered-To: lists+util-linux@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id +nxxDSeFkWk1jgEAu9opvQ
-	(envelope-from <util-linux+bounces-1050-lists+util-linux=lfdr.de@vger.kernel.org>)
-	for <lists+util-linux@lfdr.de>; Sun, 15 Feb 2026 09:34:47 +0100
+	id yDtZJfqNlWmbSQIAu9opvQ
+	(envelope-from <util-linux+bounces-1051-lists+util-linux=lfdr.de@vger.kernel.org>)
+	for <lists+util-linux@lfdr.de>; Wed, 18 Feb 2026 11:01:30 +0100
 X-Original-To: lists+util-linux@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4F45413E4B7
-	for <lists+util-linux@lfdr.de>; Sun, 15 Feb 2026 09:34:46 +0100 (CET)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
+	by mail.lfdr.de (Postfix) with ESMTPS id 03034155106
+	for <lists+util-linux@lfdr.de>; Wed, 18 Feb 2026 11:01:24 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 58B533013276
-	for <lists+util-linux@lfdr.de>; Sun, 15 Feb 2026 08:34:43 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id B8C673006828
+	for <lists+util-linux@lfdr.de>; Wed, 18 Feb 2026 10:01:22 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7D97C2957B6;
-	Sun, 15 Feb 2026 08:34:42 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 57D14211A14;
+	Wed, 18 Feb 2026 10:01:21 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="SJhFgVrX"
+	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="PKfMyr5N"
 X-Original-To: util-linux@vger.kernel.org
-Received: from mail-wm1-f51.google.com (mail-wm1-f51.google.com [209.85.128.51])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 00417279DC2
-	for <util-linux@vger.kernel.org>; Sun, 15 Feb 2026 08:34:40 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.51
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D996326B777
+	for <util-linux@vger.kernel.org>; Wed, 18 Feb 2026 10:01:19 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=170.10.129.124
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1771144482; cv=none; b=lOvWCl1RT8jWTogGKEwvlxFOo+MzVDTjUQICHw7cXOQjAGP6Coeg0pSDvNH6h63osM5+chkR9EN3OmkG6eSnSrEJTVtcJCSuoRbeOqB8NONDJItp/9L+XFZkXV8F2p8fpqHeH8OaVi4e1edrdhVczSoTSTtfB7m8k0tEas2emdc=
+	t=1771408881; cv=none; b=ZF+B1NgPxSPCtpboXJhX+tTTvqopUMKxQ5l8iaucbBxCrBJviA5hKrOFje3o+3OGwWC0OtutnubwK0Upwc4AWAiEC+7O8haCZQrEjgolAb4uP47LDFYhPRDSEqkiKasOnwgPpIYODNG9JOGTVngcGUrpH2W169Xs1o8w53Egqjs=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1771144482; c=relaxed/simple;
-	bh=aDheW/VQ3pU2GXXH6hZlLeYPCjWtolXw3Zz4YLdWKIo=;
-	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
-	 MIME-Version; b=hSjc3nFnBd49BES9hvIeKMjOUhxPVORuMxXnpMBxjleT3ah00uTloaxrxFqxjCDv7g2DjB4Gp8qZq1FZm1GbJoTsYVlO3/rAhc9Rwbmtn4HDPZ+sb9tiwmc102HMEk+rpT3aniNSwlTBkwA++5mzhaU+CHDtuJNve8gSAgSRldk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=SJhFgVrX; arc=none smtp.client-ip=209.85.128.51
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-wm1-f51.google.com with SMTP id 5b1f17b1804b1-48374014a77so17781665e9.3
-        for <util-linux@vger.kernel.org>; Sun, 15 Feb 2026 00:34:40 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1771144479; x=1771749279; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=RxOIDAoXiT8jwwvpZ7Wiv1o0m0jQpEybtRXCHeu85Jc=;
-        b=SJhFgVrX1Vy8Kzf0SslYb6/bNdzyOiMsMJab8YOHPGHXUMhY/d3iFcOuDoymtrlsna
-         nHfreUgFPj9iYlOZ/ufROJ4K5yRk8f0mEE8xb3f8mXQnMZZ0mvdbTFla+r3lY+ya8o5e
-         cw6AnyVwdu7cqrc61ygaexWkMV10i1qgoB5UgFviGFwejjyUY33vZ3V4dN2apb2bF4oA
-         VvsDCTc1aqF1aGo1tJ+5YSYUhHDuqPpvU4OxdOMqC0tqXl9U+eQf+VOiYmDSvT/FFIur
-         wXkYBlUfrkxrjoAFNmLW7Nf3Z7b5PR9aeV9lXvBIRkp5DpZmjSh+kGlMTx+a0Y6tqXfo
-         WnrA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1771144479; x=1771749279;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=RxOIDAoXiT8jwwvpZ7Wiv1o0m0jQpEybtRXCHeu85Jc=;
-        b=sz4cfH0p1+SS84sx9NQilmpdye3KPaSNneakVeBcuSvPB8aVtVsG6WvAACvTfOnS9A
-         Hclv/95304yH0WOTBKG6Dh8fZhZeUPkG9Au3eFfX2ZmMqlBjvcmTgCe3WuW4ntyO1lu7
-         kRw75SfX/doNRgcjn8cPwyQEm3MPxskHtImnjTPOYkUcNImV1NHHQAwn1s2BOzzfTTIY
-         WVXrJ95Ma/xSdmm8ThrWypuGp7qTuyBly5MkDpt7MWtjP9pId8y6IsZFxiGK1I893Ask
-         5qhkqpj/uFuvrsO1KmxXqMgi0QCnj6H5AkserYUbsbzIKGtyA/ied6Giex4wdUoqlXvt
-         7b4Q==
-X-Gm-Message-State: AOJu0YzRMz1+UElgLdJwaxzKwIAcbPcaWvYKlgQ4n2T/c2+MH+Amtqa8
-	gJXm0goon7TehesNjzcYb1I5LiynNYS8dinVoadkwpE4mSbOfldgp6w/3/8d8FBFQp8=
-X-Gm-Gg: AZuq6aKOGyMgzxNo4zxEtJOY9ToFGwrsWKcBqAmTF6hvj5c9HvHG8UD8ERmNGZKZVKq
-	sRTbkQVhglu3BCY++nw15cqp7Th+PgpzMTa74SmucjDwsCuNJ0vw/Ae/d1U0+xAROJiRdF6y1xI
-	5Cgl7wgbt/r/gV5kH4IsNyunoV4Y6772KpKqw93NTJf8149jam2k0FgHJbn/FFhTGNRUHY4LMch
-	ahPEVQK5oUXLSadMFSXcZXNb62CcuKNAn6GcLMrPWh6FUsWOGLEguIc9cBZ8kEKpoaIa3DVcKDP
-	buKjVMZqaZD/uUSX7Gdxv7uO3DrxPQlfcjsx8COfqjZZ135bDG7TEhazV7kw+Ck9j04fTAS3i3E
-	zF/0LAlIlHqwNURQQlnfNWhsYLkZhqh+i5juF1bv192zsROigxQBEMx1YJ0jtOPw4VzLKwQ1BPY
-	w8Rq4sobaH7OHu6/fCbl5mNHaV
-X-Received: by 2002:a05:600c:c04b:20b0:483:7eea:b185 with SMTP id 5b1f17b1804b1-4837eeab9e2mr41409835e9.16.1771144478845;
-        Sun, 15 Feb 2026 00:34:38 -0800 (PST)
-Received: from system.. ([178.131.176.225])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-483709fdd39sm93326795e9.0.2026.02.15.00.34.37
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 15 Feb 2026 00:34:38 -0800 (PST)
-From: sina-abroshan <sina.abroshan@gmail.com>
-To: util-linux@vger.kernel.org
-Cc: kzak@redhat.com,
-	bensberg@coevern.nl,
-	Sina Abroshan <sina.abroshan@gmail.com>
-Subject: [PATCH] lsblk: improve error reporting for invalid device paths
-Date: Sun, 15 Feb 2026 12:04:17 +0330
-Message-Id: <20260215083417.185974-1-sina.abroshan@gmail.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20260212112423.2400888-1-sina.abroshan@gmail.com>
+	s=arc-20240116; t=1771408881; c=relaxed/simple;
+	bh=GZ8haOuC183/LswHWHYFXNBZzof0K5s0mQSR5rvfCeo=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=I55efVQoNVYDGCTEQrxoDZoGwoKwY7rpcap4Ebx61QC7bFJEOuvD8YxB6XrwzfmHKmoIlEncfoTBrY5uKoN7YPFGKYEQywMoTXDw9JomNAAYbRCbqZKNy9fQxMatLZ8Zi2QnRNrms8BuGajNftoXiNTYQ6rOV7bV1sWdPIGpAlk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=PKfMyr5N; arc=none smtp.client-ip=170.10.129.124
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redhat.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1771408878;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references;
+	bh=rU51F5JoLeW1GC2OioyG8s3c3QDo0RAlVzmHvuYFW3U=;
+	b=PKfMyr5N+NUEb9qhNHJZUeF/YUr2Km/WiLAZ7wqXCPy0V0xLmnwq+C0THdGXiX10VZaqXy
+	GEm94i5RKZ9T51nziHFtpoiAQ5L46ASrFY3lbcpVz2MCUtzcMxYZ4pzC10zYRWX3Z0UYUR
+	7MiQoTw8Ba204Ev+7q3bGKAckoAeHgc=
+Received: from mx-prod-mc-05.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
+ relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-503-2R5_zS7tMlO3CNL7ACePHg-1; Wed,
+ 18 Feb 2026 05:01:14 -0500
+X-MC-Unique: 2R5_zS7tMlO3CNL7ACePHg-1
+X-Mimecast-MFC-AGG-ID: 2R5_zS7tMlO3CNL7ACePHg_1771408873
+Received: from mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com (mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.93])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by mx-prod-mc-05.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS id CD7771933F96;
+	Wed, 18 Feb 2026 10:01:13 +0000 (UTC)
+Received: from ws (unknown [10.45.225.57])
+	by mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS id 5F4601800666;
+	Wed, 18 Feb 2026 10:01:12 +0000 (UTC)
+Date: Wed, 18 Feb 2026 11:01:09 +0100
+From: Karel Zak <kzak@redhat.com>
+To: sina-abroshan <sina.abroshan@gmail.com>
+Cc: util-linux@vger.kernel.org, bensberg@coevern.nl
+Subject: Re: [PATCH] lsblk: improve error reporting for invalid device paths
+Message-ID: <msyljenx3rqwsxsz4hitxvmptzgafff3h477v7endvvb43rgt6@uunolvb67ttf>
 References: <20260212112423.2400888-1-sina.abroshan@gmail.com>
+ <20260215083417.185974-1-sina.abroshan@gmail.com>
 Precedence: bulk
 X-Mailing-List: util-linux@vger.kernel.org
 List-Id: <util-linux.vger.kernel.org>
 List-Subscribe: <mailto:util-linux+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:util-linux+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260215083417.185974-1-sina.abroshan@gmail.com>
+X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.93
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-0.16 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
+X-Spamd-Result: default: False [-1.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	R_MISSING_CHARSET(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20230601];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64];
+	MID_RHS_NOT_FQDN(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[redhat.com,quarantine];
+	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
+	R_DKIM_ALLOW(-0.20)[redhat.com:s=mimecast20190719];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	MIME_TRACE(0.00)[0:+];
-	TO_DN_SOME(0.00)[];
-	FREEMAIL_CC(0.00)[redhat.com,coevern.nl,gmail.com];
-	TAGGED_FROM(0.00)[bounces-1050-lists,util-linux=lfdr.de];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
-	RCPT_COUNT_THREE(0.00)[4];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[sinaabroshan@gmail.com,util-linux@vger.kernel.org];
+	TAGGED_FROM(0.00)[bounces-1051-lists,util-linux=lfdr.de];
 	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[gmail.com:+];
-	RCVD_COUNT_FIVE(0.00)[5];
+	FREEMAIL_TO(0.00)[gmail.com];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RSPAMD_URIBL_FAIL(0.00)[karelzak.blogspot.com:query timed out];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	RCPT_COUNT_THREE(0.00)[3];
+	TO_DN_SOME(0.00)[];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[kzak@redhat.com,util-linux@vger.kernel.org];
+	DKIM_TRACE(0.00)[redhat.com:+];
+	RCVD_COUNT_FIVE(0.00)[6];
+	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
 	TAGGED_RCPT(0.00)[util-linux];
-	MID_RHS_MATCH_FROM(0.00)[];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns]
-X-Rspamd-Queue-Id: 4F45413E4B7
+	MISSING_XM_UA(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns]
+X-Rspamd-Queue-Id: 03034155106
 X-Rspamd-Action: no action
 
-From: Sina Abroshan <sina.abroshan@gmail.com>
+On Sun, Feb 15, 2026 at 12:04:17PM +0330, sina-abroshan wrote:
+>  misc-utils/lsblk.c | 7 ++++++-
+>  1 file changed, 6 insertions(+), 1 deletion(-)
 
-Differentiate stat() failures from non-block-device cases,
-so users get accurate errno-based error messages.
+Applied, thanks.
 
-Signed-off-by: Sina Abroshan <sina.abroshan@gmail.com>
-
----
-v2:
- - Use tabs instead of spaces
- - Drop unnecessary _() around "%s"
----
- misc-utils/lsblk.c | 7 ++++++-
- 1 file changed, 6 insertions(+), 1 deletion(-)
-
-diff --git a/misc-utils/lsblk.c b/misc-utils/lsblk.c
-index 3d2bc21a6..6a8769bc7 100644
---- a/misc-utils/lsblk.c
-+++ b/misc-utils/lsblk.c
-@@ -1797,7 +1797,12 @@ static int __process_one_device(struct lsblk_devtree *tr, char *devname, dev_t d
- 
- 		DBG(DEV, ul_debug("%s: reading alone device", devname));
- 
--		if (stat(devname, &st) || !S_ISBLK(st.st_mode)) {
-+		if (stat(devname, &st) != 0) {
-+			warn("%s", devname);
-+			goto leave;
-+		}
-+
-+		if (!S_ISBLK(st.st_mode)) {
- 			warnx(_("%s: not a block device"), devname);
- 			goto leave;
- 		}
 -- 
-2.34.1
+ Karel Zak  <kzak@redhat.com>
+ http://karelzak.blogspot.com
 
 
