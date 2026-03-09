@@ -1,172 +1,160 @@
-Return-Path: <util-linux+bounces-1085-lists+util-linux=lfdr.de@vger.kernel.org>
+Return-Path: <util-linux+bounces-1087-lists+util-linux=lfdr.de@vger.kernel.org>
 Delivered-To: lists+util-linux@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id eOY/NMfzrmnZKgIAu9opvQ
-	(envelope-from <util-linux+bounces-1085-lists+util-linux=lfdr.de@vger.kernel.org>)
-	for <lists+util-linux@lfdr.de>; Mon, 09 Mar 2026 17:22:31 +0100
+	id AJTBNvjxrmnZKgIAu9opvQ
+	(envelope-from <util-linux+bounces-1087-lists+util-linux=lfdr.de@vger.kernel.org>)
+	for <lists+util-linux@lfdr.de>; Mon, 09 Mar 2026 17:14:48 +0100
 X-Original-To: lists+util-linux@lfdr.de
-Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id CF0DB23CA3B
-	for <lists+util-linux@lfdr.de>; Mon, 09 Mar 2026 17:22:30 +0100 (CET)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [IPv6:2600:3c04:e001:36c::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 73CE723C8F3
+	for <lists+util-linux@lfdr.de>; Mon, 09 Mar 2026 17:14:48 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sin.lore.kernel.org (Postfix) with ESMTP id 2DFA330131A1
-	for <lists+util-linux@lfdr.de>; Mon,  9 Mar 2026 16:08:30 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id CBAD3303B5C5
+	for <lists+util-linux@lfdr.de>; Mon,  9 Mar 2026 16:10:29 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 165193E5EC8;
-	Mon,  9 Mar 2026 16:08:27 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id D56043CCA11;
+	Mon,  9 Mar 2026 16:10:23 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=telfort.nl header.i=@telfort.nl header.b="EHzun8pr"
+	dkim=pass (1024-bit key) header.d=telfort.nl header.i=@telfort.nl header.b="H+zXUhFr"
 X-Original-To: util-linux@vger.kernel.org
-Received: from ewsoutbound.kpnmail.nl (ewsoutbound.kpnmail.nl [195.121.94.168])
+Received: from ewsoutbound.kpnmail.nl (ewsoutbound.kpnmail.nl [195.121.94.169])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EC3DC3DFC85
-	for <util-linux@vger.kernel.org>; Mon,  9 Mar 2026 16:08:22 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=195.121.94.168
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 709EA3E5ED0
+	for <util-linux@vger.kernel.org>; Mon,  9 Mar 2026 16:10:22 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=195.121.94.169
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1773072506; cv=none; b=jmELA0IqSsFFR+Ou8CF507FnIiDuokDzfOFVUJaAw49ZxZ/WExFobOvEo//4rymPJkQ/mz7+pVsi5EwZIcwuJnMPhmuqalAlWaSkALxnwKaIUiS6zBHcXJ0Pmnc3HyLgCCI16l8XAdFzekvZYI+Xt9Hke1HHpr9qzz1aVvJYaUg=
+	t=1773072623; cv=none; b=SexDl7Gyzg1VoIFgQpj21YNixTpKp6U5faCCWRW2fMZp32xVaclK3Rj6WmsW15MBI3xh0byRg+LIiDrgHv4dVIlSKsYp6QtSN9pkW1QuKUDlUHynhj9nRimDS/1rBmj4rXwTg014sqTwN8dnYQDC+tr8sMpNsbIplSu+L4MflKc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1773072506; c=relaxed/simple;
-	bh=62U8YXRiZgQpiNwrwA2Okks2rSNs57JcxN1NHZNMjRM=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=Ax1jHatbqKgu7waU82pe67cEuUdhPlt2d3h6W9IVwuFR9zSNIHI+dj47a4OeJMRmwX9+cvYvAL2yWeuW9sjumxdtWA22Tu38fZQ+Fq8NtednWndPTX3t6Cqo1p1bWPWJM+TsqK2PfNmtri1ANZjX5zfP9n5SgFTiMfkiVfwaPCU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=telfort.nl; spf=pass smtp.mailfrom=telfort.nl; dkim=pass (1024-bit key) header.d=telfort.nl header.i=@telfort.nl header.b=EHzun8pr; arc=none smtp.client-ip=195.121.94.168
+	s=arc-20240116; t=1773072623; c=relaxed/simple;
+	bh=q+DHkmzk72PMQ522rT0tMFg9RirQ+x8soDwTfYI9ZwQ=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=RBJ1fSkgInKAvMwNFYfiYRinRcUvLJxTzr2JAvyiUtoXdIA3pEvqktnABXkyJSPSXC8w/qZFDWSZ1uaPcU7ATqW1o4LXwRkRbN0lLHwG8Yb/gP6iG/qVbCy4wUoWRvfQvprm0YRrHmNJuPbzGhOYD5/85sASlqlNlrlP9ho33CI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=telfort.nl; spf=pass smtp.mailfrom=telfort.nl; dkim=pass (1024-bit key) header.d=telfort.nl header.i=@telfort.nl header.b=H+zXUhFr; arc=none smtp.client-ip=195.121.94.169
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=telfort.nl
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=telfort.nl
-X-KPN-MessageId: 30f59f1c-1bd2-11f1-92a5-005056aba152
-Received: from smtp.kpnmail.nl (unknown [10.31.155.39])
+X-KPN-MessageId: 50411a37-1bd2-11f1-b183-005056abad63
+Received: from smtp.kpnmail.nl (unknown [10.31.155.38])
 	by ewsoutbound.so.kpn.org (Halon) with ESMTPS
-	id 30f59f1c-1bd2-11f1-92a5-005056aba152;
-	Mon, 09 Mar 2026 17:08:20 +0100 (CET)
+	id 50411a37-1bd2-11f1-b183-005056abad63;
+	Mon, 09 Mar 2026 17:09:12 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=telfort.nl; s=telfort01;
-	h=content-type:from:to:subject:mime-version:date:message-id;
-	bh=62U8YXRiZgQpiNwrwA2Okks2rSNs57JcxN1NHZNMjRM=;
-	b=EHzun8prJlmqPoSeNWVez153SYV786WOB6VFOIErvjGEaY0fX7F/fXLFEJRUiHglMfIl2rF4qTO76
-	 +LylrRizqZZ2R5bMRoTr70XXWuMdOOk5UkCSwUTzvyM3jGtcKBQXHpmBPPwrY76TsryzoYQ5UQyFQR
-	 xpiq6jAN6WXCwTeI=
-X-KPN-MID: 33|xhdZaFaxVK/ezJ4DtUQua80vRX1fN/HkZL+the7yOohs9ZD84tT/wd5ZHKQeXMM
- i/n56lenQSneIUHMfqqYsmxQX0JVo14gRKOpRf02R+4I=
+	h=mime-version:message-id:date:subject:to:from;
+	bh=7NrmTc92+saJ/1EN4PhpOpY/vL9LWH7Zfkisagm/jjQ=;
+	b=H+zXUhFrKTyJHy7DUMHcfvxGgt/8wAzIo8zBqpbgXSX6q6SOgmKqx7ZPkqS/t+0Ufa0NcKorQnvdW
+	 MCgeiTeQnfLRoChZ1WLFG29mR/ATi7IV/0vsT/CbvLPa5zZXTfLbo1+aqTyJCnReW0PEvZ8U/OVxX2
+	 DhHiZH1twiFUJWS4=
+X-KPN-MID: 33|YaXnW8krLz2hfyZ2q5rUHwRFH24hNTBJbYBOxMun2gaIFQq3pczcHDTWYAkRHN/
+ tU4kEKdPa3gDs6/Sr/2hXig==
 X-KPN-VerifiedSender: Yes
-X-CMASSUN: 33|w+fF84QmEQimRBnQviadgjOd8DEjNvNfkGCplaTp3TszS+yTqZ9PyuRFFsIOTuc
- wUy+XO1bc3rWNG4FP6Wdxow==
-Received: from [192.168.2.23] (77-163-176-192.fixed.kpn.net [77.163.176.192])
+X-CMASSUN: 33|WWRVbktaxzaQzYc/AO2CmjnD8NlTp2ga8gnnuIZya7Y2AXtYwKRmJcYAky1nYc9
+ 9ltqysvwTbykKkmtoVNrlkw==
+Received: from localhost (77-163-176-192.fixed.kpn.net [77.163.176.192])
 	by smtp.kpnmail.nl (Halon) with ESMTPSA
-	id 30dcd359-1bd2-11f1-8011-005056ab7447;
-	Mon, 09 Mar 2026 17:08:20 +0100 (CET)
-Message-ID: <713c6323-e80e-47fc-9389-520b963a3129@telfort.nl>
-Date: Mon, 9 Mar 2026 17:08:19 +0100
+	id 5021709a-1bd2-11f1-a6cb-005056abf0db;
+	Mon, 09 Mar 2026 17:09:12 +0100 (CET)
+From: Benno Schulenberg <bensberg@telfort.nl>
+To: util-linux@vger.kernel.org
+Cc: Dick Marinus <dick@mrns.nl>
+Subject: [PATCH 1/2] copyfilerange: (usage) correct the markup and improve the wording
+Date: Mon,  9 Mar 2026 17:09:02 +0100
+Message-ID: <20260309160903.15490-1-bensberg@telfort.nl>
+X-Mailer: git-send-email 2.53.0
 Precedence: bulk
 X-Mailing-List: util-linux@vger.kernel.org
 List-Id: <util-linux.vger.kernel.org>
 List-Subscribe: <mailto:util-linux+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:util-linux+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: improvements to terminal-colors.d.5.adoc were undone
-To: Karel Zak <kzak@redhat.com>
-Cc: util-linux@vger.kernel.org,
- =?UTF-8?Q?Mario_Bl=C3=A4ttermann?= <mario.blaettermann@gmail.com>
-References: <cm7cun3pymf6quqcupreoegjj6ycwv3rvbap6ezpvfidvtt4lf@rq74bm7girgz>
-Content-Language: en-US, nl-NL, es-ES
-From: Benno Schulenberg <bensberg@telfort.nl>
-In-Reply-To: <cm7cun3pymf6quqcupreoegjj6ycwv3rvbap6ezpvfidvtt4lf@rq74bm7girgz>
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="------------FbLqfDu9Kh0J4pyYA7gHtaFd"
-X-Rspamd-Queue-Id: CF0DB23CA3B
+Content-Transfer-Encoding: 8bit
+X-Rspamd-Queue-Id: 73CE723C8F3
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-3.16 / 15.00];
-	SIGNED_PGP(-2.00)[];
-	MIME_BASE64_TEXT_BOGUS(1.00)[];
+X-Spamd-Result: default: False [-0.66 / 15.00];
+	MID_CONTAINS_FROM(1.00)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
+	R_MISSING_CHARSET(0.50)[];
 	DMARC_POLICY_ALLOW(-0.50)[telfort.nl,reject];
-	MIME_GOOD(-0.20)[multipart/signed,multipart/mixed,text/plain];
 	R_DKIM_ALLOW(-0.20)[telfort.nl:s=telfort01];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64:c];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c04:e001:36c::/64:c];
 	MAILLIST(-0.15)[generic];
-	MIME_BASE64_TEXT(0.10)[];
+	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-1085-lists,util-linux=lfdr.de];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCVD_TLS_LAST(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	MIME_TRACE(0.00)[0:+,1:+,2:+,3:~];
-	FORGED_SENDER_MAILLIST(0.00)[];
 	TO_DN_SOME(0.00)[];
-	FREEMAIL_CC(0.00)[vger.kernel.org,gmail.com];
-	RCPT_COUNT_THREE(0.00)[3];
-	HAS_ATTACHMENT(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
-	NEURAL_HAM(-0.00)[-1.000];
+	TAGGED_FROM(0.00)[bounces-1087-lists,util-linux=lfdr.de];
+	MIME_TRACE(0.00)[0:+];
+	RCVD_TLS_LAST(0.00)[];
+	RCPT_COUNT_TWO(0.00)[2];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RECEIVED_HELO_LOCALHOST(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:2600:3c04::/32, country:SG];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[bensberg@telfort.nl,util-linux@vger.kernel.org];
+	FROM_HAS_DN(0.00)[];
 	DKIM_TRACE(0.00)[telfort.nl:+];
-	MID_RHS_MATCH_FROM(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[5];
 	TAGGED_RCPT(0.00)[util-linux];
+	NEURAL_HAM(-0.00)[-0.997];
 	FREEMAIL_FROM(0.00)[telfort.nl];
-	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sin.lore.kernel.org:rdns,sin.lore.kernel.org:helo,telfort.nl:dkim,telfort.nl:mid]
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo,telfort.nl:dkim,telfort.nl:email,telfort.nl:mid,mrns.nl:email]
 X-Rspamd-Action: no action
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------FbLqfDu9Kh0J4pyYA7gHtaFd
-Content-Type: multipart/mixed; boundary="------------P0oOh5OdjOROJZU2sGL0zjbt";
- protected-headers="v1"
-From: Benno Schulenberg <bensberg@telfort.nl>
-To: Karel Zak <kzak@redhat.com>
-Cc: util-linux@vger.kernel.org,
- =?UTF-8?Q?Mario_Bl=C3=A4ttermann?= <mario.blaettermann@gmail.com>
-Message-ID: <713c6323-e80e-47fc-9389-520b963a3129@telfort.nl>
-Subject: improvements to terminal-colors.d.5.adoc were undone
-References: <cm7cun3pymf6quqcupreoegjj6ycwv3rvbap6ezpvfidvtt4lf@rq74bm7girgz>
-In-Reply-To: <cm7cun3pymf6quqcupreoegjj6ycwv3rvbap6ezpvfidvtt4lf@rq74bm7girgz>
+The <source>, <destination>, and <range> arguments are required,
+so do not mark them as optional (with the square brackets).
+Also, trim the redundant lines about the source and destination
+files, improve the explanation for the <range> argument, and
+keep the text within 80 columns.
 
---------------P0oOh5OdjOROJZU2sGL0zjbt
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: base64
+Furthermore, list the short options first (as is custom), and
+match the indentaion of the -h and -V options to the others.
 
-DQpPcCAwOS0wMy0yMDI2IG9tIDExOjUxIHNjaHJlZWYgS2FyZWwgWmFrOg0KPj4gICBsaWIv
-dGVybWluYWwtY29sb3JzLmQuNS5hZG9jIHwgMjQgKysrKysrKysrKy0tLS0tLS0tLS0tLS0t
-DQo+PiAgIDEgZmlsZSBjaGFuZ2VkLCAxMCBpbnNlcnRpb25zKCspLCAxNCBkZWxldGlvbnMo
-LSkNCj4gDQo+IEJvdGggcGF0Y2hlcyBoYXZlIGJlZW4gYXBwbGllZC4gVGhhbmsgeW91LCBh
-bmQgc29ycnkgZm9yIHRoZSBkZWxheS4NCg0KVGhlIHNlY29uZCBwYXRjaCB3YXMgYXBwbGll
-ZCBpbiBjb21taXQgMzI1MjE0MjUyMSwgYnV0IHRocmVlIGNvbW1pdHMNCmxhdGVyLCBtZXJn
-ZSBjb21taXQgZDcwOGZjN2RiNiB1bmRvZXMgYWxsIHRoZSBpbXByb3ZlbWVudHMgSSBtYWRl
-LiAgOi8NCg0KQWxzbywgdGhhdCBtZXJnZSBjb21taXQgc2F5cyB0aGF0IGl0IGp1c3QgcmVt
-b3ZlcyB0aGUgYmFja3RpY2tzIGZyb20gYQ0KdGFibGUsIGJ1dCBpdCBhY3R1YWxseSBjaGFu
-Z2VzIGJhY2sgdHdvIHNpbXBsZSBsaXN0cyB0byBsYXJnZSwgYnVsa3kNCnRhYmxlcy4gIEJl
-Zm9yZSB0aGUgY29udmVyc2lvbiB0byBhZG9jLCB0aG9zZSB0YWJsZXMgd2VyZSBzaW1wbGUg
-bGlzdHMuDQpBIHllYXIgYWdvLCBjb21taXQgYjNjM2Q4NjVlYiByZWR1Y2VkIHRoZSBidWxr
-eSB0YWJsZXMgYmFjayB0byBzaW1wbGUNCmxpc3RzLiAgQ2FuIHdlIHBsZWFzZSBrZWVwIHRo
-ZXNlIHNpbXBsZSBsaXN0cz8NCg0KSW4gb3RoZXIgd29yZHM6IHBsZWFzZSByZXZlcnQgY29t
-bWl0IGY1ZDJjM2U0YjAuICBBbmQgcmVhcHBseSBjb21taXQNCjMyNTIxNDI1MjEuDQoNCg0K
-QmVubm8NCg0K
+CC: Dick Marinus <dick@mrns.nl>
+Signed-off-by: Benno Schulenberg <bensberg@telfort.nl>
+---
+ misc-utils/copyfilerange.c | 18 ++++++++----------
+ 1 file changed, 8 insertions(+), 10 deletions(-)
 
---------------P0oOh5OdjOROJZU2sGL0zjbt--
+diff --git a/misc-utils/copyfilerange.c b/misc-utils/copyfilerange.c
+index 20f0373bd..a72c81cd1 100644
+--- a/misc-utils/copyfilerange.c
++++ b/misc-utils/copyfilerange.c
+@@ -55,25 +55,23 @@ static void __attribute__((__noreturn__)) usage(void)
+ 	FILE *out = stdout;
+ 	fputs(USAGE_HEADER, out);
+ 	fprintf(out,
+-		_(" %1$s [options] [<source>] [<destination>] [<range>...]\n"),
++		_(" %1$s [options] <source> <destination> <range>...\n"),
+ 		program_invocation_short_name);
+ 
+ 	fputs(USAGE_SEPARATOR, out);
+-	fputsln(_("Copy file ranges from source to destination file."), out);
++	fputsln(_("Copy the specified range(s) from source to destination file."), out);
+ 
+ 	fputs(USAGE_SEPARATOR, out);
+-	fputsln(_(" source                      source filename"), out);
+-	fputsln(_(" destination                 destination filename"), out);
+-	fputsln(_(" range                       source_offset:dest_offset:length, all values are in bytes"), out);
+-	fputsln(_("                             if length is set to 0 as much as available will be copied"), out);
+-	fputsln(_("                             when the offset is omitted the last file position is used"), out);
++	fputsln(_("Each <range> is of the form <source_offset>:<destination_offset>:<length>,\n"
++	          "with all values in bytes. If <length> is 0, as much data as available will\n"
++	          "be copied. When an offset is omitted, the last file position is used."), out);
+ 
+ 	fputs(USAGE_OPTIONS, out);
+-	fputsln(_(" --ranges, -r filename       read range(s) separated by newlines from filename"), out);
+-	fputsln(_(" --verbose, -v               verbose mode"), out);
++	fputsln(_(" -r, --ranges <file>     read range(s) separated by newlines from this file"), out);
++	fputsln(_(" -v, --verbose           verbose mode"), out);
+ 
+ 	fputs(USAGE_SEPARATOR, out);
+-	fprintf(out, USAGE_HELP_OPTIONS(16));
++	fprintf(out, USAGE_HELP_OPTIONS(25));
+ 
+ 	fprintf(out, USAGE_MAN_TAIL("copyfilerange(1)"));
+ 	exit(EXIT_SUCCESS);
+-- 
+2.53.0
 
---------------FbLqfDu9Kh0J4pyYA7gHtaFd
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-wsF5BAABCAAjFiEEFo5vQpe/16ea/USWUUu+Lrjhlh8FAmmu8HQFAwAAAAAACgkQUUu+Lrjhlh81
-iA//TWfM+OddX4AMYcI70VGZjxmT3Seb43G0YYq3jFJb1+TrEW5wqoJmkwrFhuR6d6dyn9uwBdwQ
-4HA/LhVzYdae4aXAOmq9ZlHJhLKK0Df/DGAWULVFIlb1r5z/N22Cr8OtaOquPCKT8MgfDkWYxfUz
-7vF9JZgEWCoz1UM3xJFIVdhZjkYxzew6K8rZy/70Crwwvh/LpdUlTwXDf2BAyCIr+d97REmfHx+l
-DKbgWGTbKycp/QrR0T5PK1BuI7yN0I53+ySFcb1pWBa+tcNQZmiCcwvjnxv5Gpi6C7PN0YqB5lSZ
-0GnPpqdrGF7RhmEUoQMk+5buWrkrK3oTSZp2sZLmhl4yYF0+tLHH5QMnlozJ8kW7qynEVtXIUrxO
-FFWpcAGzljKEUWxLYYwS6Zz6KPf2Tkiso3PiBAr52oub+1PHu7bcSuARW3Qmj0ZdmqrXESvOpTyn
-j+1xE/j00tnGsmW5ajCrZgPeDynKLzzlqKp0bE0Y+yJ22GcOLfExTqBGxxwxXachO+m0m6fsuGIg
-H0SCZwcZOKp0FvDWtjmX3cEChaIhsPXs+G55G1cJADp45+6ISy55lbhRHh8CuRAnGMQfui0hqgnc
-24jEyjjylXNj90WZlPz5490kech79ykNsXyIPMESmrSGKTci7Y1AIl/inYzXzieInFDA+EvQcrt3
-5HU=
-=VXgY
------END PGP SIGNATURE-----
-
---------------FbLqfDu9Kh0J4pyYA7gHtaFd--
 
