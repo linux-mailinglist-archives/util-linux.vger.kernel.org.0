@@ -1,230 +1,130 @@
-Return-Path: <util-linux+bounces-1086-lists+util-linux=lfdr.de@vger.kernel.org>
+Return-Path: <util-linux+bounces-1088-lists+util-linux=lfdr.de@vger.kernel.org>
 Delivered-To: lists+util-linux@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id cHhzOvDxrmnZKgIAu9opvQ
-	(envelope-from <util-linux+bounces-1086-lists+util-linux=lfdr.de@vger.kernel.org>)
-	for <lists+util-linux@lfdr.de>; Mon, 09 Mar 2026 17:14:40 +0100
+	id UGj/GrDNr2nWcAIAu9opvQ
+	(envelope-from <util-linux+bounces-1088-lists+util-linux=lfdr.de@vger.kernel.org>)
+	for <lists+util-linux@lfdr.de>; Tue, 10 Mar 2026 08:52:16 +0100
 X-Original-To: lists+util-linux@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6C01C23C8E3
-	for <lists+util-linux@lfdr.de>; Mon, 09 Mar 2026 17:14:40 +0100 (CET)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 6559E246A62
+	for <lists+util-linux@lfdr.de>; Tue, 10 Mar 2026 08:52:15 +0100 (CET)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id C83153044A56
-	for <lists+util-linux@lfdr.de>; Mon,  9 Mar 2026 16:09:25 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id 4D275300404B
+	for <lists+util-linux@lfdr.de>; Tue, 10 Mar 2026 07:52:10 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 69C643ACF17;
-	Mon,  9 Mar 2026 16:09:24 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3F362362127;
+	Tue, 10 Mar 2026 07:52:07 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=telfort.nl header.i=@telfort.nl header.b="PoNwUk9y"
+	dkim=pass (1024-bit key) header.d=mrns.nl header.i=@mrns.nl header.b="HHLu+AiZ"
 X-Original-To: util-linux@vger.kernel.org
-Received: from ewsoutbound.kpnmail.nl (ewsoutbound.kpnmail.nl [195.121.94.169])
+Received: from dsmtpq4-prd-nl1-vfz.edge.unified.services (dsmtpq4-prd-nl1-vfz.edge.unified.services [84.116.6.66])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D045E3BFE21
-	for <util-linux@vger.kernel.org>; Mon,  9 Mar 2026 16:09:22 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=195.121.94.169
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C0F3C3644B3
+	for <util-linux@vger.kernel.org>; Tue, 10 Mar 2026 07:52:05 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=84.116.6.66
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1773072564; cv=none; b=rBUi9meVjhoG9HFP6REuXKTpiA9Koz59De3WbmAKi9+792LXQyaIDNBWr80Sqzc2ECJJzf+YUai6KUY7d1hKSRXZEoIHczYrk8G+PnCy/sAtCsR1ldwtRR1MbXiQDKAPka0nzttvlylITdcO3v8m34GG2ytnZ1IFRlpWc4FF28c=
+	t=1773129127; cv=none; b=BuZEG3bhMCn7RpLjzkpQFK0Wh5jVDtf2/ocqypudVemX0XTYgTGAiATtOTiXm52eYkUUZxhcicAz2aWuisrwP7c4Ah/oUPrpJBbmlu8YI/7N/pL8gRfceVrvw9K1M6GXemaI6jUJoocxXWtmdTe5++gbuU3RHsbLYb92s/9cIws=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1773072564; c=relaxed/simple;
-	bh=3IH3LX/4MobpVPR23C8RGxHTjMOLVxnxbkEH3POpeZg=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=I2OUY90bEY+9rYVhnnfiSqZVuOVmKMfZk+PSiX64UBmz4PA9PsyLhXmpEHm6ryXZWhY5wgQ0vKBdaNcvevVJPNK+zeDwPOZjobXwAM8rmycYhW/j8RsWmFAlDA0v1lSrO2KXZI/BgmNxdGb1STMmjSYX17hUPIjPbwTcNNtZWy4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=telfort.nl; spf=pass smtp.mailfrom=telfort.nl; dkim=pass (1024-bit key) header.d=telfort.nl header.i=@telfort.nl header.b=PoNwUk9y; arc=none smtp.client-ip=195.121.94.169
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=telfort.nl
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=telfort.nl
-X-KPN-MessageId: 552539e0-1bd2-11f1-b183-005056abad63
-Received: from smtp.kpnmail.nl (unknown [10.31.155.38])
-	by ewsoutbound.so.kpn.org (Halon) with ESMTPS
-	id 552539e0-1bd2-11f1-b183-005056abad63;
-	Mon, 09 Mar 2026 17:09:21 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=telfort.nl; s=telfort01;
-	h=mime-version:message-id:date:subject:to:from;
-	bh=sAtrhP33CXst98wL7s5/uL29QhyFTESaqW/YnDNpsN4=;
-	b=PoNwUk9y1oaFXEA371JWXgqjzgtwm0PILrY4TDlvPcfuXB+WOr5Du60C3kJGRRyFQcidcbH7yhNij
-	 CVYEVOWlYl400WouuxicZBOq5D6JhQHi7uQqSX0oSaJjIi+C1tRXuRJ/qaOfHjctULVvrd27I+Xl+X
-	 6uwajqOl+x9cYAOk=
-X-KPN-MID: 33|G7HUlPUgYRBXH74OhA2DLnUm5510wu/6sUomyNLkKSOinaX/Dhz4gQ332RSnMc0
- HNvHGjtB/EFBxEa9ii0RtVvWJtMZ/1PfxfuDWGNlLk0M=
-X-KPN-VerifiedSender: Yes
-X-CMASSUN: 33|SIEPx4mfeSJTwZlKvJojkaSnsC7W57gdhMP/174+Ow9az0zxFf2vMzFhIB0vfJF
- fK/6sVkie96CxWVXoQ1e+Zw==
-Received: from localhost (77-163-176-192.fixed.kpn.net [77.163.176.192])
-	by smtp.kpnmail.nl (Halon) with ESMTPSA
-	id 5509c0e7-1bd2-11f1-a6cb-005056abf0db;
-	Mon, 09 Mar 2026 17:09:21 +0100 (CET)
-From: Benno Schulenberg <bensberg@telfort.nl>
-To: util-linux@vger.kernel.org
-Cc: Dick Marinus <dick@mrns.nl>
-Subject: [PATCH 2/2] copyfilerange: (man) correct the markup and improve the wordings
-Date: Mon,  9 Mar 2026 17:09:03 +0100
-Message-ID: <20260309160903.15490-2-bensberg@telfort.nl>
-X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20260309160903.15490-1-bensberg@telfort.nl>
-References: <20260309160903.15490-1-bensberg@telfort.nl>
+	s=arc-20240116; t=1773129127; c=relaxed/simple;
+	bh=SoBgsrRXrEDBfDAwTManJZY28675857deiNp/s2WUvU=;
+	h=Content-Type:MIME-Version:In-Reply-To:References:Subject:From:Cc:
+	 To:Date:Message-ID; b=DgIjH8esoR/aXX5jyGfpx4wLKfjKGN7ueJRIfgRgbREbNIspjyeYunDpjksfOn8JIveWMgKMr9vJuIQQT3DDWfjkqTt2w0IwKiLeaDAdTioUsq5+BkieN9Umq4CV6T/geYD7pGumJODP6TZbCYBlLa1yvHPTjmbhMeCAx3++rZY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=mrns.nl; spf=none smtp.mailfrom=mrns.nl; dkim=pass (1024-bit key) header.d=mrns.nl header.i=@mrns.nl header.b=HHLu+AiZ; arc=none smtp.client-ip=84.116.6.66
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=mrns.nl
+Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=mrns.nl
+Received: from csmtpq4-prd-nl1-vfz.edge.unified.services ([84.116.50.10])
+	by dsmtpq4-prd-nl1-vfz.edge.unified.services with esmtps  (TLS1.3) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+	(Exim 4.95)
+	(envelope-from <dick@mrns.nl>)
+	id 1vzroK-00CjQf-MZ
+	for util-linux@vger.kernel.org;
+	Tue, 10 Mar 2026 08:47:24 +0100
+Received: from csmtp5-prd-nl1-vfz.nl1.unified.services ([100.107.80.45] helo=csmtp5-prd-nl1-vfz.edge.unified.services)
+	by csmtpq4-prd-nl1-vfz.edge.unified.services with esmtp (Exim 4.95)
+	(envelope-from <dick@mrns.nl>)
+	id 1vzroC-00De1Q-GI
+	for util-linux@vger.kernel.org;
+	Tue, 10 Mar 2026 08:47:16 +0100
+Received: from routi.mrns.nl ([85.147.219.207])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 256/256 bits)
+	(Client did not present a certificate)
+	by csmtp5-prd-nl1-vfz.edge.unified.services with ESMTPSA
+	id zroCvMk7YeS3pzroCvRiM8; Tue, 10 Mar 2026 08:47:16 +0100
+X-Env-Mailfrom: dick@mrns.nl
+X-Env-Rcptto: util-linux@vger.kernel.org
+X-SourceIP: 85.147.219.207
+X-CNFS-Analysis: v=2.4 cv=NebWEWD4 c=1 sm=1 tr=0 ts=69afcc84 cx=a_exe
+ a=QfPJp9Xx0fncKAcDTfo4/A==:117 a=QfPJp9Xx0fncKAcDTfo4/A==:17
+ a=IkcTkHD0fZMA:10 a=Yq5XynenixoA:10 a=LQrtYbNyCH8A:10
+ a=1rOlcF-JzrcUQ1hiaewA:9 a=QEXdDO2ut3YA:10
+X-Authenticated-Sender: ieb1yoh3@ziggo.nl
+Received: by routi.mrns.nl (sSMTP sendmail emulation); Tue, 10 Mar 2026 08:47:15 +0100
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=mrns.nl;
+ i=@mrns.nl; q=dns/txt; s=mail; t=1773128835; h=content-type :
+ mime-version : content-transfer-encoding : in-reply-to : references :
+ subject : from : cc : to : date : message-id : from;
+ bh=SoBgsrRXrEDBfDAwTManJZY28675857deiNp/s2WUvU=;
+ b=HHLu+AiZw82kbqT75woYhyBc6AbclEFLO+q3zAWQv7XrDHiYF3s3hhpyHguZuC2Wdpsok
+ faGyRHWhWB/ge5JCFq0F+ksvS7LBPKo7gkIzUjq76Atzm025EpPLZo60fhifoFMTBcRW0fL
+ mnVV0uGvxeU7QOHQqEVNQKEoDqFbYOc=
+Content-Type: text/plain; charset="utf-8"
 Precedence: bulk
 X-Mailing-List: util-linux@vger.kernel.org
 List-Id: <util-linux.vger.kernel.org>
 List-Subscribe: <mailto:util-linux+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:util-linux+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Rspamd-Queue-Id: 6C01C23C8E3
+Content-Transfer-Encoding: quoted-printable
+In-Reply-To: <20260309160903.15490-2-bensberg@telfort.nl>
+References: <20260309160903.15490-1-bensberg@telfort.nl> <20260309160903.15490-2-bensberg@telfort.nl>
+Subject: Re: [PATCH 2/2] copyfilerange: (man) correct the markup and improve the wordings
+From: Dick Marinus <dick@mrns.nl>
+Cc:
+To: Benno Schulenberg <bensberg@telfort.nl>, util-linux@vger.kernel.org
+Date: Tue, 10 Mar 2026 08:47:15 +0100
+Message-ID: <177312883579.3137133.9262096927051904264@routi.mrns.nl>
+User-Agent: alot/0.12
+X-CMAE-Envelope: MS4xfBmMwD8baOxHIV4QtMYQaD5/Ysc7gyt8djtXeU3jQij8dNQ0woDA2H5XWB0yuQoJytwrKXKu94peUgdqZSxZrUS4tQTkjvbFK96fYjVKgFnaPj2P63he
+ PrvkrejI9Zlfucfu2i4UgnkoR4wYlmsaJsxbdqHl/H1MyRv0YrN01VdMFlvHh9SQi/ZxB9pxzLJDMxb2/YN+lHtLfUSxOIdGcA02qcHljW2GFFhsUGzqwCVk
+X-Rspamd-Queue-Id: 6559E246A62
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-0.66 / 15.00];
-	MID_CONTAINS_FROM(1.00)[];
+X-Spamd-Result: default: False [-1.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	R_MISSING_CHARSET(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[telfort.nl,reject];
-	R_DKIM_ALLOW(-0.20)[telfort.nl:s=telfort01];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64:c];
+	R_DKIM_ALLOW(-0.20)[mrns.nl:s=mail];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TO_DN_SOME(0.00)[];
-	TAGGED_FROM(0.00)[bounces-1086-lists,util-linux=lfdr.de];
-	MIME_TRACE(0.00)[0:+];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sin.lore.kernel.org:rdns,sin.lore.kernel.org:helo];
 	RCVD_TLS_LAST(0.00)[];
 	RCPT_COUNT_TWO(0.00)[2];
+	FREEMAIL_TO(0.00)[telfort.nl,vger.kernel.org];
+	TAGGED_FROM(0.00)[bounces-1088-lists,util-linux=lfdr.de];
+	MIME_TRACE(0.00)[0:+];
+	HAS_X_AS(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	RECEIVED_HELO_LOCALHOST(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	DMARC_NA(0.00)[mrns.nl];
+	DKIM_TRACE(0.00)[mrns.nl:+];
+	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
+	TO_DN_SOME(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[bensberg@telfort.nl,util-linux@vger.kernel.org];
+	FROM_NEQ_ENVFROM(0.00)[dick@mrns.nl,util-linux@vger.kernel.org];
 	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[telfort.nl:+];
-	RCVD_COUNT_FIVE(0.00)[5];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	NEURAL_HAM(-0.00)[-0.999];
 	TAGGED_RCPT(0.00)[util-linux];
-	NEURAL_HAM(-0.00)[-0.996];
-	FREEMAIL_FROM(0.00)[telfort.nl];
+	MID_RHS_MATCH_FROMTLD(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,telfort.nl:dkim,telfort.nl:email,telfort.nl:mid,mrns.nl:email]
+	RCVD_COUNT_SEVEN(0.00)[7]
 X-Rspamd-Action: no action
 
-CC: Dick Marinus <dick@mrns.nl>
-Signed-off-by: Benno Schulenberg <bensberg@telfort.nl>
----
- misc-utils/copyfilerange.1.adoc | 61 ++++++++++++++-------------------
- 1 file changed, 25 insertions(+), 36 deletions(-)
+Hi Benno,
 
-diff --git a/misc-utils/copyfilerange.1.adoc b/misc-utils/copyfilerange.1.adoc
-index 4d214f4db..303a1a7b2 100644
---- a/misc-utils/copyfilerange.1.adoc
-+++ b/misc-utils/copyfilerange.1.adoc
-@@ -4,54 +4,43 @@
- :man manual: User Commands
- :man source: util-linux {release-version}
- :page-layout: base
--:range: copyfilerange
-+:command: copyfilerange
- 
- == NAME
- 
--copyfilerange - Copy file ranges from source to destination file.
-+copyfilerange - copy range(s) from source to destination file
- 
- == SYNOPSIS
- 
--*copyfilerange* [options] [<source>] [<destination>] [<range>...]
-+*copyfilerange* [options] _source_ _destination_ _range_...
- 
- == DESCRIPTION
- 
--*copyfilerange* copy file ranges from source to destination file
--*copyfilerange* is a simple utility to call the *copy_file_range*(2) system call.
-+The *copyfilerange* command copies byte ranges from source to destination file.
-+It is a wrapper around the *copy_file_range*(2) system call.
- 
--It can be used write files with unallocated gaps (sparse files) and/or share blocks between multiple files (reflinks).
-+The command can be used to create files with unallocated gaps (sparse files)
-+and/or with shared blocks between multiple files (reflinks).
- 
--== ARGUMENTS
-+Each _range_ is of the form _source_offset_**:**_destination_offset_**:**_length_,
-+with all values in bytes. If _length_ is 0, then as much data as is available is
-+copied. Multiple ranges may be supplied.
- 
--*source*::
--Source filename
--
--*destination*::
--Destination filename
--
--*range*::
--
--Consists of a range specified as *source_offset:dest_offset:length*
--
--All values are in bytes, if length is set to 0 copy as much as available.
--Multiple range can be supplied.
--
--When one or more of the offsets are omitted the operation will use the last used location, starting with 0
-+When one or both of the offsets are omitted, the operation uses the last-used
-+file location, starting with 0.
- 
- == OPTIONS
- 
--*-v*, *--verbose*::
--Verbose output of copied file ranges
-+*-r*, *--ranges* _file_::
-+Read range(s) separated by newlines from this _file_.
- 
--*-r*, *--ranges*::
--Ranges filename
-+*-v*, *--verbose*::
-+Verbose output of the copied ranges.
- 
- include::man-common/help-version.adoc[]
- 
- == EXIT STATUS
- 
--*copyfilerange* has the following exit status values:
--
- *0*::
- success
- *1*::
-@@ -59,7 +48,7 @@ unspecified failure
- 
- == NOTES
- 
--The *copy_file_range*(2) system call has some serious caveats, the source and destination files must use the same filesystem type and some virtual filesystems (like procfs) won't work. *copy_file_range*(2) will use reflinks when the filesystem supports this. To use reflinks the file range most often needs to align with the filesystem block size on both the source and destination file.
-+The *copy_file_range*(2) system call has some serious caveats: the source and destination files must use the same filesystem type, and some virtual filesystems (like procfs) won't work. *copy_file_range*(2) will use reflinks when the filesystem supports this. To use reflinks, the file range most often needs to align with the filesystem block size on both the source and destination file.
- 
- == AUTHORS
- 
-@@ -68,21 +57,21 @@ mailto:dick@mrns.nl[Dick Marinus]
- == EXAMPLES
- 
- ....
--~$ copyfilerange original-file reflink ::
-+copyfilerange original-file reflink ::
- 
--~$ copyfilerange original-file first-block ::4096
-+copyfilerange original-file first-block ::4096
- 
--~$ copyfilerange original-file even-blocks -r <(seq 0 8192 40960|awk '{print $1"::4096"}')
-+copyfilerange original-file even-blocks -r <(seq 0 8192 40960|awk '{print $1"::4096"}')
- 
--~$ copyfilerange original-file sparse-file 0:1M:1
-+copyfilerange original-file sparse-file 0:1M:1
- 
--~$ copyfilerange original-file split-first-mb ::1M
-+copyfilerange original-file split-first-mb ::1M
- 
--~$ copyfilerange original-file split-remainder 1M::
-+copyfilerange original-file split-remainder 1M::
- 
--~$ copyfilerange split-first-mb join ::
-+copyfilerange split-first-mb join ::
- 
--~$ copyfilerange split-remainder join 1M::
-+copyfilerange split-remainder join 1M::
- ....
- 
- == SEE ALSO
--- 
-2.53.0
+Thank you for cleaning up the documentation for copyfilerange, much
+better!
 
+Kind regards,
+Dick Marinus
 
