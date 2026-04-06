@@ -1,170 +1,194 @@
-Return-Path: <util-linux+bounces-1125-lists+util-linux=lfdr.de@vger.kernel.org>
+Return-Path: <util-linux+bounces-1126-lists+util-linux=lfdr.de@vger.kernel.org>
 Delivered-To: lists+util-linux@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id DDISNdnz0Gn2CgcAu9opvQ
-	(envelope-from <util-linux+bounces-1125-lists+util-linux=lfdr.de@vger.kernel.org>)
-	for <lists+util-linux@lfdr.de>; Sat, 04 Apr 2026 13:19:53 +0200
+	id GiPsNSAK02mXdQcAu9opvQ
+	(envelope-from <util-linux+bounces-1126-lists+util-linux=lfdr.de@vger.kernel.org>)
+	for <lists+util-linux@lfdr.de>; Mon, 06 Apr 2026 03:19:28 +0200
 X-Original-To: lists+util-linux@lfdr.de
 Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
-	by mail.lfdr.de (Postfix) with ESMTPS id 40D2139AEDD
-	for <lists+util-linux@lfdr.de>; Sat, 04 Apr 2026 13:19:52 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 30E773A100F
+	for <lists+util-linux@lfdr.de>; Mon, 06 Apr 2026 03:19:28 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by tor.lore.kernel.org (Postfix) with ESMTP id D1C7E300C83E
-	for <lists+util-linux@lfdr.de>; Sat,  4 Apr 2026 11:19:51 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 1AC3130062C4
+	for <lists+util-linux@lfdr.de>; Mon,  6 Apr 2026 01:19:27 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 15DAA2C21F2;
-	Sat,  4 Apr 2026 11:19:51 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5750F1482E8;
+	Mon,  6 Apr 2026 01:19:24 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=debian.org header.i=@debian.org header.b="Z0F9jZrL"
+	dkim=pass (2048-bit key) header.d=numin-it.20251104.gappssmtp.com header.i=@numin-it.20251104.gappssmtp.com header.b="JCq2txIG"
 X-Original-To: util-linux@vger.kernel.org
-Received: from stravinsky.debian.org (stravinsky.debian.org [82.195.75.108])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-dl1-f52.google.com (mail-dl1-f52.google.com [74.125.82.52])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6A6C62C0F7F
-	for <util-linux@vger.kernel.org>; Sat,  4 Apr 2026 11:19:48 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=82.195.75.108
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1775301590; cv=none; b=qZ8J6nWqkKTBk3xhlVAomE1aXvOs5nEoUOspgZPS1++6jr7+uc2htpkwHP01Yh1yTDLzJKg4bGT3mCbpY0N6NhrUITaqazDZP7sb7gN/FU/fab9kB5uF2fTKs4ywYZ1GaV8nzoCkU3Gv1H9UMi6UGSuOjcSLxAFDvotOjlxWuN4=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1775301590; c=relaxed/simple;
-	bh=PrdvS0YV0zu/WkTT7Dmz3+Lvx0p5O/EaF8lQp41sDZU=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=NEgbPPoWvA2IPQAJZAbbVJ8KCmCZqEtWVh8qmQLOLt9Jxz2YD2Md7W57njMgl8JWXTXI3248jbFrb0iKn+7V5tt0JCflOt8/ITUUGFGC3syyTmBkXSJVX5Gm7C0PgTPrAqh0HFrMUVgtjrEz3TxPYPN7wn7lY5QMkFheNHj4CBk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=debian.org; spf=none smtp.mailfrom=debian.org; dkim=pass (2048-bit key) header.d=debian.org header.i=@debian.org header.b=Z0F9jZrL; arc=none smtp.client-ip=82.195.75.108
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=debian.org
-Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=debian.org
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=debian.org;
-	s=smtpauto.stravinsky; h=X-Debian-User:In-Reply-To:Content-Type:MIME-Version:
-	References:Message-ID:Subject:Cc:To:From:Date:Reply-To:
-	Content-Transfer-Encoding:Content-ID:Content-Description;
-	bh=ayrv+xWrc7orqmrPRLMw6rXtv0huH2To2O034XKsHBk=; b=Z0F9jZrLkK0l1AYRLFD3DGUlQV
-	4O6yLHbohh9vnIX/tDGCMA4vPjJCSqf7vTm7y65XpzHhMXlvfj80kxtelvQwpgtIOHH6q3zOYK92m
-	8s1ra7nQKBMKj2yLNCG0SG8s5rWVBZvi8yqSbO4xJne6XJXa9iSwrF5vljpeF3yoQl/3r9hkTNO7f
-	ELQGGtiASoZ7PasFOh3ZcsTnUTwOMAi8OzCqV3/tjRCkT/XU9ZeVOWsPAgV/AF0a3RQP4YokZ2PRL
-	XDpKG4izrsEoFC/Ru0hGokCviGAgrN0MATttV7kD5Z0ZTRxuum5EnpEP2Z/McCMMYjGVn7UfXG4lu
-	LE1KA6yA==;
-Received: from authenticated user
-	by stravinsky.debian.org with esmtpsa (TLS1.3:ECDHE_X25519__RSA_PSS_RSAE_SHA256__AES_256_GCM:256)
-	(Exim 4.96)
-	(envelope-from <zeha@debian.org>)
-	id 1w8z2U-005HO2-0M;
-	Sat, 04 Apr 2026 11:19:41 +0000
-Date: Sat, 4 Apr 2026 13:19:39 +0200
-From: Chris Hofstaedtler <zeha@debian.org>
-To: Christian Albrecht Goeschel Ndjomouo <cgoesc2@wgu.edu>
-Cc: Katie May <katie.may@canonical.com>, 1132588@bugs.debian.org, 
-	util-linux@vger.kernel.org, Karel Zak <kzak@redhat.com>, Johannes Stezenbach <js@sig21.net>
-Subject: Re: Bug#1132588: runuser: missing whitelist-environment option
-Message-ID: <adDx4uLKdmKyzhCf@zeha.at>
-References: <CA+499YPv1qATJg3SWqz_UrY77Lksibs5UJAaAhck0Vct3EdSuQ@mail.gmail.com>
- <ac-hE5WXBkG4pKZa@per.namespace.at>
- <SJ0P220MB0541E236A2387E8EBDB7C94BE95EA@SJ0P220MB0541.NAMP220.PROD.OUTLOOK.COM>
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8029735893
+	for <util-linux@vger.kernel.org>; Mon,  6 Apr 2026 01:19:22 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=74.125.82.52
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1775438364; cv=pass; b=WOo7pAgTmLqQjGEQ93gbwrLrmtDbDaEhQEFaB71HuwhfvK1TUQQtEPXF4tVc9KuDDFct7ZUVcbJ46xTUJi+NyBaFxi7HydDVPBE7gbHaTdWe/1uG7wklbm9IVncdV+EnVBXIxIqcSrrBltlq1sC67Lx5IGAkihpOaCok7frjsoE=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1775438364; c=relaxed/simple;
+	bh=iV6awCLhdOy2Xa4sGsD2NjX6XGXUrnRDHeI9t6MZvs0=;
+	h=MIME-Version:From:Date:Message-ID:Subject:To:Content-Type; b=dWb6/u1dDYKyuiRxl9l9kwLx3cWYhCvKukNTsfQExvUAO9UhUSR1yG42e9LzpQDNX8MME83757Lf9uBdjMBtviYqIFpds5+2hJuUIdKTudiPHh6PIcFzkGLFXEmVWUrnsF86ld1firz15rtw5k14aKc8yUOxRwQHjXBtG0/EPkE=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=numin.it; spf=none smtp.mailfrom=numin.it; dkim=pass (2048-bit key) header.d=numin-it.20251104.gappssmtp.com header.i=@numin-it.20251104.gappssmtp.com header.b=JCq2txIG; arc=pass smtp.client-ip=74.125.82.52
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=numin.it
+Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=numin.it
+Received: by mail-dl1-f52.google.com with SMTP id a92af1059eb24-12c0b72daf7so1401084c88.0
+        for <util-linux@vger.kernel.org>; Sun, 05 Apr 2026 18:19:22 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1775438361; cv=none;
+        d=google.com; s=arc-20240605;
+        b=fbfD+/0hqY2ZCvno+7oyrckm29nXwWkxjct2rKLkdnmWfMvP6w05vG5MHUz5mA0aBF
+         VFHlU2TopMxBjfnfjfBypGh/FufC4v/yoxpEUjIyryfNccaJ+u2sUn6hAweK5QnwzFtS
+         Z3bX2ZowcP3hxhJe8G+ndzTykSmDgOklByQRmr8I0B/abAniqDW8FzzmQgADjfrkIH7L
+         Cr9PsPdVRnJqJVD8vjVGjqMFmiScHo+dp6sqi4uY30iVSuUY5Wv2bxZJZTUv9DTWLn4R
+         GboffHcU6hCGglPTR88GnaJ+6fq3Z5sTkIom1GjHvm5XBW1csLCltTBwxJyspYznXjxI
+         X/mQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
+        h=to:subject:message-id:date:from:mime-version:dkim-signature;
+        bh=7NATwbc3c9yTSBmyR9rrG5gOLsCYIvBd/KAf9xL/puo=;
+        fh=wGiqS6fCIXmTY01ukAaQ0f8K0pJvn/8Cx9cBD0x5bgc=;
+        b=V3haOtZmNYzCoNCq5JRtsgb7XiCISnM9ai+yAiAuheViNMKTyacW75xjjblY5UrRA3
+         NzX6axZmh2rmfFBgeboXbgi15/sbQsVrb3jjxREolDmO+qJWuJY2rELxzq0D99EG/TaG
+         LNicTK6eYvxzAkC9hQbLYrDKPPlHVIMZuZGSVC49uKg2a7UC1fS2TwYBJxg+EvKD8dwd
+         E2zS/cnjlPEjp3vCUxM58hByrtNMSaDwnP46+JIrycTqJuqIgitw0Hd7JLR/mtnMpmeE
+         TCY0wFfs8D52vZJ37nGQYv8/3WYhbAV6XBvAVV+e1NGUpOtbhJuItV4o9eNpxOHYt1WX
+         +QTw==;
+        darn=vger.kernel.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=numin-it.20251104.gappssmtp.com; s=20251104; t=1775438361; x=1776043161; darn=vger.kernel.org;
+        h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+         :date:message-id:reply-to;
+        bh=7NATwbc3c9yTSBmyR9rrG5gOLsCYIvBd/KAf9xL/puo=;
+        b=JCq2txIGGYePhgytJJmONdVLM+mhG1WByXMNomXzG2kgcN08Mh+1JUPpjk5IcWmyv3
+         jCA/s1YWD5uvXMzsHNEWaDokSfdkjZuSuxTLs/4/cS9589ZQAkxj4uukr/X7kepVU9+u
+         kGQ//vARLJvNEH61paV7SO5+GDoLq307mMeiKgWqIWVQrTVYzvHqaIkVVgX08GO3sa+b
+         1KJFMnV0Z+IsCBrf1NKZh8CjxeDozmAuB9ryoxW5cY8m76yh/A6RA77Gy9yW6ZyF1DT2
+         xy4SWnExqdQaI+lvnab/FGkn6I4psLLVZ99sXxpranECoUyE/GGZ4VAhF3UagqP8ITh+
+         ptDA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1775438361; x=1776043161;
+        h=to:subject:message-id:date:from:mime-version:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=7NATwbc3c9yTSBmyR9rrG5gOLsCYIvBd/KAf9xL/puo=;
+        b=jVu4m4x6qXhdEr/OJIRiM+YEiwnywUX4wUBZ7o7Pubm5X3qL3bwlPLWoxBtBPtWCoA
+         dZWKrt6GHQIJD+Rz7XadAQUCCdfCdY+Qvk0LLRG9sUuZcqB1z0WDU/j7Hvl4qldN62bM
+         9EaXoI47lN78x7vor11Xy7E8dURt3DCYQqf4pelfEooJl48vvs6CNAvHqWH5ve+oRnZJ
+         akwbKcF3MRIWOdoC/hpm3IOjnJ/eSwu4hZZL5Nlr8+F78xKKfuhq3jz6tnEbhQh9c8Z1
+         bVV8DeC5EgRRZ0IRe4yxtjrcGX4KHGEGr+X6JdutrF7M7zIPZTQFUOEOP9bIvVVck3JO
+         GVGg==
+X-Gm-Message-State: AOJu0YxWS0d8Xiim68bm60ft0dlnqrAQDUPTzxXZ3WW3qP8/k1WUmA3B
+	pOYqcJgL22flzIsJ+YLXUE4MqHSJDU4l2a7wlXdh8YErH2jM+/ALT2w1Pc2q7kC5S1cy/v77B1s
+	bsJAdWIwFqsw9d9G9OdnyVAAVXv+zVN50kZN7KQSsIA+4B7ieArc606M=
+X-Gm-Gg: AeBDietacTdu1kXa8lz2omQh+p4kVS15m+3uRDMhja31LshQ/8hleQb5mR2C6gDLYiF
+	ZPbpbY9vphoNgy98ZlToOjv6dQlS2bLITIR69Nm+ZKrBJ+mxFS04WiilZwtE6AxWVt0pVgSCRhV
+	6p7VqAvc2N83KCHNQRA+OShv3r+/2wHhShcgihdTgKOQwz3fofE9OIMeWAmIvBeJ3oTC/klGXAO
+	0ItdR5tYj+nJnaDjM3snDIli3FZT+DoXbh78+FjeUjKuo5kiRcXEcz1lUIxdxCUUTe96vmTJUKQ
+	WP2kAmA2PTSueYdfjY7r2J4WSIcP4Mdn9Tt3QyB2wAh1bK1pwqnit/Pk4roTmYCC1GhBBxjpYah
+	JRTc=
+X-Received: by 2002:a05:7300:3252:b0:2c5:b23e:48a5 with SMTP id
+ 5a478bee46e88-2cbf99ecbebmr5230926eec.1.1775438361272; Sun, 05 Apr 2026
+ 18:19:21 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: util-linux@vger.kernel.org
 List-Id: <util-linux.vger.kernel.org>
 List-Subscribe: <mailto:util-linux+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:util-linux+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Disposition: inline
-In-Reply-To: <SJ0P220MB0541E236A2387E8EBDB7C94BE95EA@SJ0P220MB0541.NAMP220.PROD.OUTLOOK.COM>
-X-Debian-User: zeha
+From: Morgan <me@numin.it>
+Date: Sun, 5 Apr 2026 18:18:29 -0700
+X-Gm-Features: AQROBzC8KmvNJA5-QBbZQtKlb0G0Y5qM5tUaZikLt-z9cijR-OQtgL_FcY5uKnc
+Message-ID: <CAEUYr6ZjVX1bd-xcBGtFN_ZYwQnXDYsw7d1-7sTpF2BbgfrR+g@mail.gmail.com>
+Subject: [PATCH] pidfd-utils: include correct struct statfs header for darwin
+To: util-linux@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
 X-Spamd-Result: default: False [-1.66 / 15.00];
-	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	R_DKIM_ALLOW(-0.20)[debian.org:s=smtpauto.stravinsky];
+	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=2];
+	R_DKIM_ALLOW(-0.20)[numin-it.20251104.gappssmtp.com:s=20251104];
 	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
+	RCVD_TLS_LAST(0.00)[];
 	RCVD_COUNT_THREE(0.00)[4];
 	FROM_HAS_DN(0.00)[];
+	DMARC_NA(0.00)[numin.it];
+	TAGGED_FROM(0.00)[bounces-1126-lists,util-linux=lfdr.de];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	RCVD_TLS_LAST(0.00)[];
-	DMARC_NA(0.00)[debian.org];
-	TO_DN_SOME(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	TAGGED_FROM(0.00)[bounces-1125-lists,util-linux=lfdr.de];
-	MISSING_XM_UA(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[zeha@debian.org,util-linux@vger.kernel.org];
-	DKIM_TRACE(0.00)[debian.org:+];
-	NEURAL_HAM(-0.00)[-1.000];
+	RCPT_COUNT_ONE(0.00)[1];
+	DKIM_TRACE(0.00)[numin-it.20251104.gappssmtp.com:+];
 	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
+	MISSING_XM_UA(0.00)[];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[me@numin.it,util-linux@vger.kernel.org];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	TO_DN_NONE(0.00)[];
 	TAGGED_RCPT(0.00)[util-linux];
-	RCPT_COUNT_FIVE(0.00)[6];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,zeha.at:mid,wgu.edu:email]
-X-Rspamd-Queue-Id: 40D2139AEDD
+	NEURAL_HAM(-0.00)[-1.000];
+	MIME_TRACE(0.00)[0:+];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[numin.it:email,wgu.edu:email,tor.lore.kernel.org:helo,tor.lore.kernel.org:rdns,numin-it.20251104.gappssmtp.com:dkim]
+X-Rspamd-Queue-Id: 30E773A100F
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-Hi Christian,
+From 145b6a66dcc725de3c3161db62db7047eb407214 Mon Sep 17 00:00:00 2001
+From: Morgan Jones <me@numin.it>
+Date: Sun, 5 Apr 2026 18:03:54 -0700
+Subject: [PATCH] pidfd-utils: include correct struct statfs header for darwin
 
-* Christian Albrecht Goeschel Ndjomouo <cgoesc2@wgu.edu> [260404 01:25]:
->The issue is indeed caused by the mentioned commit ac0147f, however
->the change is necessary for proper functioning of su(1). Nevertheless, I
->have created a PR that separates the short option strings used for su(1)
->and runuser(1) as we need a different scanning mode for the former.
->
->I have also added regression tests for runuser(1) and slightly improved
->the one for su(1) so we can catch regressions earlier.
+Fixes the build on Darwin since struct statfs is in sys/mount.h
+and sys/vfs.h doesn't even exist. Just conditionally include all the
+headers.
+---
+include/statfs_magic.h | 16 ++++++++++++++++
+lib/pidfd-utils.c      |  3 ---
+2 files changed, 16 insertions(+), 3 deletions(-)
 
-About su(1), in the meantime a Debian user filed a bug that su(1) 
-regressed, too: https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1132610
-To quote:
+diff --git a/include/statfs_magic.h b/include/statfs_magic.h
+index 6921abaa4..28977f392 100644
+--- a/include/statfs_magic.h
++++ b/include/statfs_magic.h
+@@ -5,10 +5,26 @@
+#ifndef UTIL_LINUX_STATFS_MAGIC_H
+#define UTIL_LINUX_STATFS_MAGIC_H
 
-| The command 'su <user> -s /bin/sh -c "echo foo"' now runs
-| 'bash -s /bin/sh -c "echo foo"' instead of just
-| '/bin/sh -c "echo foo"', which causes bash to hang reading commands
-| from stdin.
-| 
-| This breaks suspend via in my setup which uses
-| /usr/share/acpi-support/screenblank from the acpi-support package:
-| 
-|        if pidof xscreensaver >/dev/null; then
-|                su "$XUSER" -s /bin/sh -c "xscreensaver-command -throttle"
-|        fi
++#ifdef HAVE_SYS_TYPES_H
++# include <sys/types.h>
++#endif
++
++#ifdef HAVE_SYS_STAT_H
++# include <sys/stat.h>
++#endif
++
+#ifdef HAVE_SYS_STATFS_H
+# include <sys/statfs.h>
+#endif
 
-And:
++#ifdef HAVE_SYS_VFS_H
++# include <sys/vfs.h>
++#endif
++
++#ifdef HAVE_SYS_MOUNT_H
++# include <sys/mount.h>
++#endif
++
+/*
+ * If possible then don't depend on internal libc __SWORD_TYPE type.
+ */
+diff --git a/lib/pidfd-utils.c b/lib/pidfd-utils.c
+index a83735920..f7c649144 100644
+--- a/lib/pidfd-utils.c
++++ b/lib/pidfd-utils.c
+@@ -5,9 +5,6 @@
+ * Authors: Christian Goeschel Ndjomouo <cgoesc2@wgu.edu> [2025]
+ */
+#include <stdlib.h>
+-#include <sys/stat.h>
+-#include <sys/vfs.h>
+-#include <sys/types.h>
+#include <errno.h>
+#include <err.h>
 
-| Actually the su man page says:
-| 
-| SYNOPSIS
-|       su [options] [-] [user|UID [argument...]]
-| 
-| So one could argue that the acpi-support script's use of
-| 'su "$XUSER" -s /bin/sh -c "..."' is buggy.
-| 'su -s /bin/sh "$XUSER" -c "..."' works.
-| 
-| However, the acpi-support scripts (/usr/share/acpi-support/screenblank
-| and /etc/acpi/lid.sh, have not checked others) worked with previous versions
-| of util-linux.
-
-It would seem that various versions of passing the command to su(1) 
-are in use, and constraining them will break all these usages.
-
->With the patch the issue with runuser should be fixed. Can you please
->validate this ?
->
->PR: https://github.com/util-linux/util-linux/pull/4185
->
->Edit:
->
->After taking a closer look at the runuser(1) man page it seems to me that
->the actual documented syntax implies that options should always be put
->before the username and potential arguments that are to be passed to the
->shell or defined command. This aligns with the usage of su(1) and seems
->more coherent. Let's see what Karel thinks about this :D
-
-I only had a quick look at runuser --help and the man page, and 
-while it seems to imply that "-" and "-l" are supposed to do the 
-same thing, I doubt this is what was intended and/or the actual
-implementation.
-
-At this point I also doubt that even if the documentation supports 
-the new behaviour it's worth breaking all the existing users.
-
-Chris
-
+--
+2.50.1
 
