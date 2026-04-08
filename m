@@ -1,142 +1,153 @@
-Return-Path: <util-linux+bounces-1131-lists+util-linux=lfdr.de@vger.kernel.org>
+Return-Path: <util-linux+bounces-1132-lists+util-linux=lfdr.de@vger.kernel.org>
 Delivered-To: lists+util-linux@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id KEqDMi0U1mnwAwgAu9opvQ
-	(envelope-from <util-linux+bounces-1131-lists+util-linux=lfdr.de@vger.kernel.org>)
-	for <lists+util-linux@lfdr.de>; Wed, 08 Apr 2026 10:39:09 +0200
+	id aNTaJJEv1mlZBwgAu9opvQ
+	(envelope-from <util-linux+bounces-1132-lists+util-linux=lfdr.de@vger.kernel.org>)
+	for <lists+util-linux@lfdr.de>; Wed, 08 Apr 2026 12:36:01 +0200
 X-Original-To: lists+util-linux@lfdr.de
-Received: from sto.lore.kernel.org (sto.lore.kernel.org [IPv6:2600:3c09:e001:a7::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 716583B9324
-	for <lists+util-linux@lfdr.de>; Wed, 08 Apr 2026 10:39:09 +0200 (CEST)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [IPv6:2600:3c15:e001:75::12fc:5321])
+	by mail.lfdr.de (Postfix) with ESMTPS id 8FC4B3BA9EC
+	for <lists+util-linux@lfdr.de>; Wed, 08 Apr 2026 12:36:00 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sto.lore.kernel.org (Postfix) with ESMTP id D6BA830071E1
-	for <lists+util-linux@lfdr.de>; Wed,  8 Apr 2026 08:39:08 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id 29E2F3006D4A
+	for <lists+util-linux@lfdr.de>; Wed,  8 Apr 2026 10:35:56 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id EAF013A7586;
-	Wed,  8 Apr 2026 08:39:05 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9C9803AB296;
+	Wed,  8 Apr 2026 10:35:53 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="cNMlIbVO"
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="gdatpucl"
 X-Original-To: util-linux@vger.kernel.org
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 82E2739EF23
-	for <util-linux@vger.kernel.org>; Wed,  8 Apr 2026 08:39:04 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=170.10.129.124
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1773C37F75C
+	for <util-linux@vger.kernel.org>; Wed,  8 Apr 2026 10:35:51 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1775637545; cv=none; b=s8eKLP8OcOoUrP2u7d3IAb+qLRBDtT00LszBZ+cqZynxEkqMwnDHw8dIYovYQ82W8YxFF8ptoYQ3j3bS+4y5uexCq0X2PMi2vh9S4Ry58NWXbFPG1tyHO2uLh/9l3uqgEn0JeLCBUpRJH1sB6I0pKjt5HEoc6kaqrd/1Ta7EuCk=
+	t=1775644552; cv=none; b=h7xprsTnZnMsxDuDYVJG9tzIlBI/YuhFPAVWQ96cyI9Us2X7oXomyFGkMwwUOdDsgBb0D1sI0OlrWhU6IIFLZeNo9Q01OP9HU1yDv5+Yeef9LUDu5BHqg17ORtOmCKJ3SI/NQBmTAcMFlwn6sjpKMOXl+hnstBto+nE1y3kfZ2Q=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1775637545; c=relaxed/simple;
-	bh=cxx5yjgJZvK15elaUVmZ74AodyCaTJ7rDJKxGAm+ShE=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=jZ+8Sgs1lWBmDBLj1vH5sBg2vyMylMWjQKvaGu9mAdN3zR3c3fVYzjh8sj90/hyL5lBBWsUeA1dCyTwOOmKM+aqRwNOFRaOIwcvBO700/nMNIaRocI2uniaacM92jqmaLcU1WrfTusLZMoLRQsUsZJS+d6AEmAX8Kf4Zp0X02dA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=cNMlIbVO; arc=none smtp.client-ip=170.10.129.124
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redhat.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1775637543;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=+xYPI6xxNgfwzLT2f4itXNGhii3iTYM0pKw74AoRL2s=;
-	b=cNMlIbVOdwWkVLn82wxmFkKyST1w0XGgRKVTMscgXUxBRxibQK3m8xz6wyraCgde9eMQ0z
-	5FD3dkXkuqY7T7qAAfmuSRtqGJUJ/SflrpFm6FlIC1taFcbqqQDJnmLAWVCitoJ1SbwDXC
-	3W3k3RhcSBl762cs9yUoTYHesxzW7lc=
-Received: from mx-prod-mc-05.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
- relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-617-7wC59uvsM9-LHgxyuzBp3A-1; Wed,
- 08 Apr 2026 04:39:01 -0400
-X-MC-Unique: 7wC59uvsM9-LHgxyuzBp3A-1
-X-Mimecast-MFC-AGG-ID: 7wC59uvsM9-LHgxyuzBp3A_1775637541
-Received: from mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com (mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.111])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by mx-prod-mc-05.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS id 94A5319560B6;
-	Wed,  8 Apr 2026 08:39:00 +0000 (UTC)
-Received: from ws (unknown [10.44.49.192])
-	by mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS id 78617180035F;
-	Wed,  8 Apr 2026 08:38:58 +0000 (UTC)
-Date: Wed, 8 Apr 2026 10:38:56 +0200
-From: Karel Zak <kzak@redhat.com>
-To: Benno Schulenberg <bensberg@telfort.nl>
-Cc: Util-Linux <util-linux@vger.kernel.org>, 
-	Mario =?utf-8?Q?Bl=C3=A4ttermann?= <mario.blaettermann@gmail.com>
-Subject: Re: the bad effect of tables on msgids
-Message-ID: <dseehzodgm5vt2bmqewjf5oilq2vgfjno3ty6svabzf5q5ulo7@obi2pce56mfh>
-References: <a6d150cf-b653-453f-a3a4-d6750cf9f04e@telfort.nl>
- <8de6593e-f696-4b6a-a431-a09dccc4263a@telfort.nl>
+	s=arc-20240116; t=1775644552; c=relaxed/simple;
+	bh=Rkg1Maz7twIyVdIfvelAkJXLrR+l1GeLSJLbxlvEug4=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=gCKfuQeAcmGJYNqsYrbPlcYRq4dLc5YPvcpYy7tTJNaYx3yY9ErxCjn0RSIqsCxRlQazKZNH7vUntkaeZQNgh6JAP6Jdh8JNN5JnfgkHW+SRMTw+6hk8UZ/LgejLxDZpFdDyWW4oOed3gERGaJPpW+9OFjy/p4NJVYSHxT82ccQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=gdatpucl; arc=none smtp.client-ip=10.30.226.201
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id B8B45C19421;
+	Wed,  8 Apr 2026 10:35:49 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1775644550;
+	bh=Rkg1Maz7twIyVdIfvelAkJXLrR+l1GeLSJLbxlvEug4=;
+	h=From:To:Cc:Subject:Date:From;
+	b=gdatpucljeGU2HAES+MlgvhM9snt7MjZSyxjfYLtPe9TjJnlrCQtl9rT8XIQgUQ2B
+	 Ia4umdpsrNmmBkT8gTBJWCEUckd/vzihwiapomtFpG4P+c7kiywpFD9JsLrU8MMQLY
+	 +odqH/fqWYgdObmWu/I9fz2SMSDySdLFGWPDq6yl1KsQ1fE9D6wtwl7L0xr3G3cVSo
+	 lQMpAlYQPVptMSv6EMmS4YVnZIf5PaikqdCq/Ih7wddC8fWoiOekhyiPQsNzh4WwnI
+	 LidpU0lqtFYc5rmPHd6qddCMadzA6rZz8U+BzmWpBXFJSEFrv0EjQOyoV1IoEeTN22
+	 uVaUJ1R9GEIGQ==
+From: cem@kernel.org
+To: kzak@redhat.com
+Cc: util-linux@vger.kernel.org,
+	zkabelac@redhat.com,
+	amulhern@redhat.com
+Subject: [PATCH RFC 0/2] Fix API breakage in libblkid
+Date: Wed,  8 Apr 2026 12:35:24 +0200
+Message-ID: <20260408103538.134308-1-cem@kernel.org>
+X-Mailer: git-send-email 2.53.0
 Precedence: bulk
 X-Mailing-List: util-linux@vger.kernel.org
 List-Id: <util-linux.vger.kernel.org>
 List-Subscribe: <mailto:util-linux+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:util-linux+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <8de6593e-f696-4b6a-a431-a09dccc4263a@telfort.nl>
-X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.111
-X-Spamd-Result: default: False [-1.66 / 15.00];
+Content-Transfer-Encoding: 8bit
+X-Spamd-Result: default: False [-0.66 / 15.00];
+	MID_CONTAINS_FROM(1.00)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[redhat.com,quarantine];
-	MID_RHS_NOT_FQDN(0.50)[];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c09:e001:a7::/64:c];
-	R_DKIM_ALLOW(-0.20)[redhat.com:s=mimecast20190719];
+	R_MISSING_CHARSET(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c15:e001:75::/64:c];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-1131-lists,util-linux=lfdr.de];
-	TO_DN_ALL(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
-	FREEMAIL_TO(0.00)[telfort.nl];
-	FREEMAIL_CC(0.00)[vger.kernel.org,gmail.com];
-	FROM_HAS_DN(0.00)[];
-	RCPT_COUNT_THREE(0.00)[3];
-	MIME_TRACE(0.00)[0:+];
-	RCVD_COUNT_FIVE(0.00)[6];
+	RCVD_COUNT_THREE(0.00)[4];
+	TAGGED_FROM(0.00)[bounces-1132-lists,util-linux=lfdr.de];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	DKIM_TRACE(0.00)[kernel.org:+];
+	ASN(0.00)[asn:63949, ipnet:2600:3c15::/32, country:SG];
+	FROM_NO_DN(0.00)[];
+	TO_DN_NONE(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[kzak@redhat.com,util-linux@vger.kernel.org];
-	DKIM_TRACE(0.00)[redhat.com:+];
+	FROM_NEQ_ENVFROM(0.00)[cem@kernel.org,util-linux@vger.kernel.org];
+	RCPT_COUNT_THREE(0.00)[4];
 	NEURAL_HAM(-0.00)[-1.000];
-	ASN(0.00)[asn:63949, ipnet:2600:3c09::/32, country:SG];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[util-linux];
-	MISSING_XM_UA(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sto.lore.kernel.org:helo,sto.lore.kernel.org:rdns,karelzak.blogspot.com:url]
-X-Rspamd-Queue-Id: 716583B9324
+	MIME_TRACE(0.00)[0:+];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns]
+X-Rspamd-Queue-Id: 8FC4B3BA9EC
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On Thu, Apr 02, 2026 at 03:38:39PM +0200, Benno Schulenberg wrote:
-> 
-> Op 24-03-2026 om 16:49 schreef Benno Schulenberg:
-> > [...]  changing simple lists to tables 1) more than triples the space that
-> > the information takes up on the manpage, making it less easily digestible,
-> > AND 2) makes it harder to translate.  I don't see any advantages to using
-> > tables.  If there are any, please enlighten me.
-> 
-> Ping?
+From: Carlos Maiolino <cem@kernel.org>
 
-I have no strong opinion about it. For me, as a user, it is important
-to have data in man pages structured and easy to navigate without
-reading large paragraphs.
+Patch d05a84b22e54 ("libblkid: check for private DM device before open")
+broke blkid_new_probe_from_filename() API.
 
-As a maintainer, I'd like to keep translators happy, which means
-having text in chunks that are readable and in an easy-to-manage
-format to avoid formatting bugs during translations.
+Before the patch users were able, via the low-level API, to open and
+create blkid probes via the device's filename even from private
+device-mapper devices.
 
-> > If there are no advantages to using tables instead of lists, please
-> > revert to using lists for simple "tabular" listings of information.
+This change broke Stratis project and xfsprogs.
+xfsprogs uses blkid_new_probe_from_filename() to gather topology
+information from the device, and the above mentioned change now prevents
+it to be done on device-mapper private devices, as Stratis does by
+attempting to initialize a XFS filesystem on it.
 
-If you see a way to make things usable for others with a list, go ahead.
+Quoting the patch description:
 
-    Karel
+"
+    blkid_new_probe_from_filename() opens the device before calling
+    blkid_probe_set_device(), which checks sysfs_devno_is_dm_private()
+    and sets BLKID_FL_NOSCAN_DEV.  But the open() itself bumps the
+    kernel open count, so a concurrent DM_DEVICE_REMOVE ioctl sees
+    EBUSY even though blkid never actually probes the device.
+"
 
+I don't think the last statement here is correct.
+blkid_probe_set_device() marks the probe as BLKID_FL_NOSCAN_DEV, but it
+does not error out, so, for low-level API calls, we simply ended up
+with a probe with BLKID_FL_NOSCAN_DEV set. But the call succeeded and we
+ended up with a probe to use and query device's information.
+
+As far as I understood it, the patch aimed to close a possible race
+window when issuing a DM_DEVICE_REMOVE ioctl() to the same device being
+probed by blkid_new_probe_from_filename().
+
+Regarding the race window which this patch, at least for the low-level
+API users, this seems to be something that should be dealt in the user's
+side, not within the library. But I didn't dig into the details of the
+aforementioned race.
+
+Please take the above with a grain of salt though, we've been using
+libblkid for ages, but I never actually looked into the implementation
+until today, so, hopefully I did get the details right.
+
+As for xfsprogs, I have a patch which 'fixes' it replacing
+blkid_new_probe_from_filename() by blkid_probe_set_device(), but this is
+just taping over the root cause, which is the API breakage.
+
+
+Carlos Maiolino (2):
+  Revert "libblkid: add debug message for private DM device skip"
+  Revert "libblkid: check for private DM device before open"
+
+ libblkid/src/probe.c | 15 +--------------
+ 1 file changed, 1 insertion(+), 14 deletions(-)
+
+Signed-off-by: Carlos Maiolino <cmaiolino@redhat.com>
 -- 
- Karel Zak  <kzak@redhat.com>
- http://karelzak.blogspot.com
+2.53.0
 
 
