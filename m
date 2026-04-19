@@ -1,129 +1,199 @@
-Return-Path: <util-linux+bounces-1141-lists+util-linux=lfdr.de@vger.kernel.org>
+Return-Path: <util-linux+bounces-1142-lists+util-linux=lfdr.de@vger.kernel.org>
 Delivered-To: lists+util-linux@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id sHRNKaq42GnnhAgAu9opvQ
-	(envelope-from <util-linux+bounces-1141-lists+util-linux=lfdr.de@vger.kernel.org>)
-	for <lists+util-linux@lfdr.de>; Fri, 10 Apr 2026 10:45:30 +0200
+	id LikfNenm5GkNbwEAu9opvQ
+	(envelope-from <util-linux+bounces-1142-lists+util-linux=lfdr.de@vger.kernel.org>)
+	for <lists+util-linux@lfdr.de>; Sun, 19 Apr 2026 16:30:01 +0200
 X-Original-To: lists+util-linux@lfdr.de
 Received: from sea.lore.kernel.org (sea.lore.kernel.org [IPv6:2600:3c0a:e001:db::12fc:5321])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3417D3D448D
-	for <lists+util-linux@lfdr.de>; Fri, 10 Apr 2026 10:45:30 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1DF654245C1
+	for <lists+util-linux@lfdr.de>; Sun, 19 Apr 2026 16:30:01 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 7B2E5302A517
-	for <lists+util-linux@lfdr.de>; Fri, 10 Apr 2026 08:42:26 +0000 (UTC)
+	by sea.lore.kernel.org (Postfix) with ESMTP id E437D300D87A
+	for <lists+util-linux@lfdr.de>; Sun, 19 Apr 2026 14:29:56 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 205293AD50D;
-	Fri, 10 Apr 2026 08:42:26 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 466293081BE;
+	Sun, 19 Apr 2026 14:29:56 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=debian.org header.i=@debian.org header.b="hENc7Zqv"
+	dkim=pass (1024-bit key) header.d=telfort.nl header.i=@telfort.nl header.b="tPUnYb84"
 X-Original-To: util-linux@vger.kernel.org
-Received: from stravinsky.debian.org (stravinsky.debian.org [82.195.75.108])
+Received: from ewsoutbound.kpnmail.nl (ewsoutbound.kpnmail.nl [195.121.94.170])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 034593ACF13
-	for <util-linux@vger.kernel.org>; Fri, 10 Apr 2026 08:42:22 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=82.195.75.108
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 481324400
+	for <util-linux@vger.kernel.org>; Sun, 19 Apr 2026 14:29:53 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=195.121.94.170
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1775810545; cv=none; b=Chz065mPpee0Dsw/1Bn/stVMIEtNQ1TqAhKyhTWI7oyxvjuPCcAlMATOY3ENpNvDomp+G8QenOg/996DKWAs+Gfc7dJ82oFrBpKYygjzmF+3xtu/njHb1FcdK63zNF6U4waDj9mjWgn5NV18EG6TZd2aYfIK7CJhVMxbbown60A=
+	t=1776608996; cv=none; b=Nv/2MSik4U/h2pdK0c5x9qnqSOyrS4T+30H1Oh0j+sgs9PfWDn6I3oqcUXJi0vHIi/c3dTEiu0Aj15TEjkbXmwqa7xi4mXaxNT+an8WcrdNsuaCblafDQ4k/+yk9L47hSerXvbS1VIxUF+k79tIKBgTmLltjw/EXuyIf4Fcxpn8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1775810545; c=relaxed/simple;
-	bh=vePbohoB5UYKlKyDpqXz560blimOiW57qe6SzaPsqkQ=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=HxlLv5F0hvMc/EI8RD2puEoe5aoX1fZYjlXoXKqLMY6vu9znapmrk0EM8TJFANP6H//5XX/4E04PwxeCyB32LNo+3oJ6g6GCHpW5RNdIkeVh3b7bC5hOtJ9uxfHBmY0JmCaNyQXLsojqqq0Stmj3d6LMrmxjm2rIkEMdSNZ5Bbw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=debian.org; spf=none smtp.mailfrom=debian.org; dkim=pass (2048-bit key) header.d=debian.org header.i=@debian.org header.b=hENc7Zqv; arc=none smtp.client-ip=82.195.75.108
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=debian.org
-Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=debian.org
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=debian.org;
-	s=smtpauto.stravinsky; h=X-Debian-User:In-Reply-To:Content-Type:MIME-Version:
-	References:Message-ID:Subject:Cc:To:From:Date:Reply-To:
-	Content-Transfer-Encoding:Content-ID:Content-Description;
-	bh=tZgp26yq4j4web/8Mm+xdg+4CT1SWvhvU44slQ2/spU=; b=hENc7Zqv+m4woZjF2FLoHSeVDN
-	2r+lcf5t/APa/rV5TUlzikSyt5QkCZ478ZOKt9CSsP2d9SCw4zWdetPO78bJCrsu49FosNl98TEmZ
-	9MXnKX1IQtiFrJW8hL4CgAM1nocD8gs4bKhQlcHMF0lcn/QUXUw2DYF4fgY/jvHYotFCB3tpgibot
-	XQHEADE+xrJso7qbF8/rAbYH5IRHWVE6XtvZ45PFrcLTK0K2U/r8r01IcRsAHYwnOIgnhdj8vZduL
-	cFdaCZmCAGYVt0FvmAROUPkOZszEn/Z0PgNUYGqa+44+lh7QSLwCCoi0wNIyTKrO8RA8mynarz9te
-	awTsHTNg==;
-Received: from authenticated user
-	by stravinsky.debian.org with esmtpsa (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__AES_256_GCM:256)
-	(Exim 4.96)
-	(envelope-from <zeha@debian.org>)
-	id 1wB7RR-009rDA-0w;
-	Fri, 10 Apr 2026 08:42:17 +0000
-Date: Fri, 10 Apr 2026 10:42:15 +0200
-From: Chris Hofstaedtler <zeha@debian.org>
-To: Karel Zak <kzak@redhat.com>, 1132887@bugs.debian.org
-Cc: Evgeny Kapun <abacabadabacaba@gmail.com>, util-linux@vger.kernel.org,
-	wanbingjiang@webray.com.cn
-Subject: Re: Bug#1132887: script: "script file -c command" stopped working
-Message-ID: <adi3573O-5gr9m2q@per.namespace.at>
-References: <88e0b54d-3c86-46ca-ab3f-e116073216d6@gmail.com>
- <adS9qeW8w0bmUukR@per.namespace.at>
- <88e0b54d-3c86-46ca-ab3f-e116073216d6@gmail.com>
- <x7m64hxjjld7rkfjwuta75hzmj3f6en57mpvdfttzdliebdqxn@ym5mhuzim23o>
+	s=arc-20240116; t=1776608996; c=relaxed/simple;
+	bh=nMVH49mh8OmRVVVH72ePfam4u14YKFHJoVaa8apcvEQ=;
+	h=Message-ID:Date:MIME-Version:From:Subject:To:Cc:References:
+	 In-Reply-To:Content-Type; b=rP04PgQgXow9zWfIVSPJJeoD3iB8tYSWNQxaw/yFeP6mZgKDDDNJEM+5BbFQeDW/4F26y3UPTioEJyvFewQLqHk/WwtdqphrSTCLrvpe52h6D0+Ji2EBu3GdGH2u3eQ9//aYlV82I5yjs9R0mgU7xlzisl4pEj1ZppJtvicD5hA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=telfort.nl; spf=pass smtp.mailfrom=telfort.nl; dkim=pass (1024-bit key) header.d=telfort.nl header.i=@telfort.nl header.b=tPUnYb84; arc=none smtp.client-ip=195.121.94.170
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=telfort.nl
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=telfort.nl
+X-KPN-MessageId: 3622ab3a-3bfc-11f1-8a9c-005056ab378f
+Received: from smtp.kpnmail.nl (unknown [10.31.155.39])
+	by ewsoutbound.so.kpn.org (Halon) with ESMTPS
+	id 3622ab3a-3bfc-11f1-8a9c-005056ab378f;
+	Sun, 19 Apr 2026 16:29:45 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=telfort.nl; s=telfort01;
+	h=content-type:to:subject:from:mime-version:date:message-id;
+	bh=nMVH49mh8OmRVVVH72ePfam4u14YKFHJoVaa8apcvEQ=;
+	b=tPUnYb84RFylZ1EIfSlNcuFEETCGaDvfv/cwYgwOe6xlNuILadDBIoPyrs1zIDoko5xGub966qJBd
+	 27FmQccMZwyWzxvFT3aAmhf023nfAw8k2iip/ZUaq42WCM4ub+ZowDLHmOUVJiEn/Ide0MEEWxwgYx
+	 M6jZKgdLtv3Ih28k=
+X-KPN-MID: 33|2uEyGtoNA0irFMc73pvsUn1DLvlJPKimBnbofXaslT/4ByojvCN1/u0FxWbfQmY
+ 366V7CRxjk+NwWikjjYFeaFhs1yeljaFAAs2YxcDYfHQ=
+X-KPN-VerifiedSender: Yes
+X-CMASSUN: 33|dSRCm+Ydoc6KI2suTgZWovaRqaw69vdIu1iDGtKyplFVjw5x1ESRz/RSNPTfpl3
+ kdGTMvQFLCA8EO+hj1vWJnw==
+Received: from [192.168.2.23] (77-163-176-192.fixed.kpn.net [77.163.176.192])
+	by smtp.kpnmail.nl (Halon) with ESMTPSA
+	id 3602f1ef-3bfc-11f1-8011-005056ab7447;
+	Sun, 19 Apr 2026 16:29:45 +0200 (CEST)
+Message-ID: <b0015454-813c-42fd-bba9-733e07efe19e@telfort.nl>
+Date: Sun, 19 Apr 2026 16:29:44 +0200
 Precedence: bulk
 X-Mailing-List: util-linux@vger.kernel.org
 List-Id: <util-linux.vger.kernel.org>
 List-Subscribe: <mailto:util-linux+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:util-linux+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-In-Reply-To: <x7m64hxjjld7rkfjwuta75hzmj3f6en57mpvdfttzdliebdqxn@ym5mhuzim23o>
-X-Debian-User: zeha
-X-Spamd-Result: default: False [-1.66 / 15.00];
+User-Agent: Mozilla Thunderbird
+From: Benno Schulenberg <bensberg@telfort.nl>
+Subject: Re: the bad effect of tables on msgids
+To: Karel Zak <kzak@redhat.com>
+Cc: Util-Linux <util-linux@vger.kernel.org>,
+ =?UTF-8?Q?Mario_Bl=C3=A4ttermann?= <mario.blaettermann@gmail.com>
+References: <a6d150cf-b653-453f-a3a4-d6750cf9f04e@telfort.nl>
+ <8de6593e-f696-4b6a-a431-a09dccc4263a@telfort.nl>
+ <dseehzodgm5vt2bmqewjf5oilq2vgfjno3ty6svabzf5q5ulo7@obi2pce56mfh>
+Content-Language: en-US, nl-NL, es-ES
+In-Reply-To: <dseehzodgm5vt2bmqewjf5oilq2vgfjno3ty6svabzf5q5ulo7@obi2pce56mfh>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="------------oq70zORdVCH2RZGt9KOnR0tb"
+X-Spamd-Result: default: False [-3.16 / 15.00];
+	SIGNED_PGP(-2.00)[];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	R_DKIM_ALLOW(-0.20)[debian.org:s=smtpauto.stravinsky];
-	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64:c];
+	MIME_BASE64_TEXT_BOGUS(1.00)[];
+	DMARC_POLICY_ALLOW(-0.50)[telfort.nl,reject];
+	MIME_GOOD(-0.20)[multipart/signed,multipart/mixed,text/plain];
+	R_DKIM_ALLOW(-0.20)[telfort.nl:s=telfort01];
+	R_SPF_ALLOW(-0.20)[+ip6:2600:3c0a:e001:db::/64];
 	MAILLIST(-0.15)[generic];
-	MIME_GOOD(-0.10)[text/plain];
+	MIME_BASE64_TEXT(0.10)[];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	FROM_HAS_DN(0.00)[];
-	DMARC_NA(0.00)[debian.org];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-1141-lists,util-linux=lfdr.de];
-	TO_DN_SOME(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	FREEMAIL_CC(0.00)[gmail.com,vger.kernel.org,webray.com.cn];
+	TAGGED_FROM(0.00)[bounces-1142-lists,util-linux=lfdr.de];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCPT_COUNT_FIVE(0.00)[5];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[zeha@debian.org,util-linux@vger.kernel.org];
-	DKIM_TRACE(0.00)[debian.org:+];
+	TO_DN_ALL(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	MIME_TRACE(0.00)[0:+,1:+,2:+,3:~];
+	FREEMAIL_CC(0.00)[vger.kernel.org,gmail.com];
+	RCPT_COUNT_THREE(0.00)[3];
+	HAS_ATTACHMENT(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[5];
 	NEURAL_HAM(-0.00)[-1.000];
-	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[bensberg@telfort.nl,util-linux@vger.kernel.org];
+	DKIM_TRACE(0.00)[telfort.nl:+];
+	MID_RHS_MATCH_FROM(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[util-linux];
-	MISSING_XM_UA(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,per.namespace.at:mid]
-X-Rspamd-Queue-Id: 3417D3D448D
+	FREEMAIL_FROM(0.00)[telfort.nl];
+	ASN(0.00)[asn:63949, ipnet:2600:3c0a::/32, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:helo,sea.lore.kernel.org:rdns,telfort.nl:dkim,telfort.nl:mid]
+X-Rspamd-Queue-Id: 1DF654245C1
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On Tue, Apr 07, 2026 at 03:26:58PM +0200, Karel Zak wrote:
-> On Tue, Apr 07, 2026 at 10:17:45AM +0200, Chris Hofstaedtler wrote:
-> > thank you for the report, CC'ing upstream.
-> > 
-> > On Tue, Apr 07, 2026 at 07:07:59AM +0300, Evgeny Kapun wrote:
-> > > If I run script(1) as "script file -c command", it returns an error:
-> > > 
-> > > script: unexpected number of arguments
-> > > Try 'script --help' for more information.
-> > > 
-> > > It used to work in earlier versions, so now scripts that rely on the old
-> > > behavior are broken.
-> 
-> I have created bugfix for this, see https://github.com/util-linux/util-linux/pull/4201
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------------oq70zORdVCH2RZGt9KOnR0tb
+Content-Type: multipart/mixed; boundary="------------GOSl5kS4uDMkp1lSQoas6BjL";
+ protected-headers="v1"
+From: Benno Schulenberg <bensberg@telfort.nl>
+To: Karel Zak <kzak@redhat.com>
+Cc: Util-Linux <util-linux@vger.kernel.org>,
+ =?UTF-8?Q?Mario_Bl=C3=A4ttermann?= <mario.blaettermann@gmail.com>
+Message-ID: <b0015454-813c-42fd-bba9-733e07efe19e@telfort.nl>
+Subject: Re: the bad effect of tables on msgids
+References: <a6d150cf-b653-453f-a3a4-d6750cf9f04e@telfort.nl>
+ <8de6593e-f696-4b6a-a431-a09dccc4263a@telfort.nl>
+ <dseehzodgm5vt2bmqewjf5oilq2vgfjno3ty6svabzf5q5ulo7@obi2pce56mfh>
+In-Reply-To: <dseehzodgm5vt2bmqewjf5oilq2vgfjno3ty6svabzf5q5ulo7@obi2pce56mfh>
 
-I've applied this fix to Debian as 2.42-2.
+--------------GOSl5kS4uDMkp1lSQoas6BjL
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: base64
 
-> Seems we will need v2.42.1 ASAP :-)
+DQpPcCAwOC0wNC0yMDI2IG9tIDEwOjM4IHNjaHJlZWYgS2FyZWwgWmFrOg0KPiBJIGhhdmUg
+bm8gc3Ryb25nIG9waW5pb24gYWJvdXQgaXQuIEZvciBtZSwgYXMgYSB1c2VyLCBpdCBpcyBp
+bXBvcnRhbnQNCj4gdG8gaGF2ZSBkYXRhIGluIG1hbiBwYWdlcyBzdHJ1Y3R1cmVkIGFuZCBl
+YXN5IHRvIG5hdmlnYXRlIHdpdGhvdXQNCj4gcmVhZGluZyBsYXJnZSBwYXJhZ3JhcGhzLg0K
+DQpBcyBzYWlkOiBzaW1wbGUgbGlzdCBhcmUgbGVzcyB0aGFuIHRocmVlIHRpbWVzIHRoZSBz
+aXplIG9mIHRhYmxlcywNCm1ha2luZyB0aGVtIGVhc2llciB0byBuYXZpZ2F0ZS4gIEFuZCB0
+aGUgbGlzdHMgYXJlIG5pY2VseSBpbmRlbnRlZCwNCndoZXJlYXMgdGFibGVzIGFyZSBmbHVz
+aCB3aXRoIHRoZSBsZWZ0IG1hcmdpbixsZWF2aW5nIGEgYmlnIHVnbHktDQpsb29raW5nIGVt
+cHR5IHNwYWNlIG9uIHRoZSByaWdodC4NCg0KPiBJZiB5b3Ugc2VlIGEgd2F5IHRvIG1ha2Ug
+dGhpbmdzIHVzYWJsZSBmb3Igb3RoZXJzIHdpdGggYSBsaXN0LCBnbyBhaGVhZC4NCg0KV2hl
+biBJIGRvOg0KDQogICBnaXQgY2hlY2tvdXQgdjIuNDINCiAgIG1ha2UgZGlzdGNsZWFuDQog
+ICAuL2F1dG9nZW4uc2gNCiAgIC4vY29uZmlndXJlDQogICBtYWtlIGdlbi1wb21hbi1kaXN0
+DQogICBnaXQgZGlmZiBwby1tYW4vdXRpbC1saW51eC1tYW4ucG90DQoNCnRoZW4gSSBnZXQg
+ZGlmZmVyZW5jZXM6IGFkZGVkICIjLCBuby13cmFwIiB0YWdzIGFuZCBhZGRlZCBuZXdsaW5l
+cyAoXG4pDQooc2VlIGJlbG93KSwgYm90aCB3aXRoIGdldHRleHQtMC4yMSBhbmQgd2l0aCBn
+ZXR0ZXh0LTEuMC4gIFRoYXQgcHJvYmFibHkNCmV4cGxhaW5zIHdoeSBhIHNpbXBsZSBsaXN0
+ICh0aGF0IGlzOiBhICJkZWxpbWl0ZWQgYmxvY2siKSBsb29rcyBnb29kIGZvcg0KbWUgaW4g
+dGhlIG5ld2x5IGdlbmVyYXRlZCBQT1QgZmlsZSwgYnV0IGVuZHMgdXAgYSBtZXNzeSBsb25n
+IHN0cmluZyBpbg0KdGhlIGRpc3RyaWJ1dGVkIHV0aWwtbGludXgtbWFuLnBvdC4NCg0KV2hh
+dCBpcyBpdCB0aGUgdXRpbC1saW51eCBidWlsZCBlbnZpcm9ubWVudCB0aGF0IHByZXZlbnRz
+IHRoZXNlDQoibm8td3JhcCIgdGFncyBhbmQgdGhlIGV4dHJhIG5ld2xpbmVzIHRoYXQgYXJl
+IGluIG15IGJ1aWxkPw0KDQoNCkBAIC00NjEsNyArNDYzLDggQEAgbXNnc3RyICIiDQoNCiAg
+Iy4gdHlwZTogUGxhaW4gdGV4dA0KICAjOiAuLi9kaXNrLXV0aWxzL2FkZHBhcnQuOC5hZG9j
+OjI0DQotbXNnaWQgIiphZGRwYXJ0KiBfZGV2aWNlIHBhcnRpdGlvbiBzdGFydCBsZW5ndGhf
+Ig0KKyMsIG5vLXdyYXANCittc2dpZCAiKmFkZHBhcnQqIF9kZXZpY2UgcGFydGl0aW9uIHN0
+YXJ0IGxlbmd0aF9cbiINCiAgbXNnc3RyICIiDQoNCiAgIy4gdHlwZTogVGl0bGUgPT0NCkBA
+IC01NTIsMTAgKzU1NSwxMSBAQCBtc2dzdHIgIiINCg0KICAjLiB0eXBlOiBQbGFpbiB0ZXh0
+DQogICM6IC4uL2Rpc2stdXRpbHMvYWRkcGFydC44LmFkb2M6MjgNCisjLCBuby13cmFwDQog
+IG1zZ2lkICIiDQogICIqYWRkcGFydCogdGVsbHMgdGhlIExpbnV4IGtlcm5lbCBhYm91dCB0
+aGUgZXhpc3RlbmNlIG9mIHRoZSBzcGVjaWZpZWQgIg0KICAicGFydGl0aW9uLiBUaGUgY29t
+bWFuZCBpcyBhIHNpbXBsZSB3cmFwcGVyIGFyb3VuZCB0aGUgXCJhZGQgcGFydGl0aW9uXCIg
+Ig0KLSJpb2N0bC4iDQorImlvY3RsLlxuIg0KICBtc2dzdHIgIiINCg0KICAjLiB0eXBlOiBQ
+bGFpbiB0ZXh0DQpAQCAtNjk1LDcgKzY5OSwxMyBAQCBtc2dzdHIgIiINCg0KICAjLiB0eXBl
+OiBQbGFpbiB0ZXh0DQogICM6IC4uL2Rpc2stdXRpbHMvYWRkcGFydC44LmFkb2M6NTQNCi1t
+c2dpZCAiKmRlbHBhcnQqKDgpLCAqZmRpc2sqKDgpLCAqcGFydGVkKig4KSwgKnBhcnRwcm9i
+ZSooOCksICpwYXJ0eCooOCkiDQorIywgbm8td3JhcA0KK21zZ2lkICIiDQorIipkZWxwYXJ0
+Kig4KSxcbiINCisiKmZkaXNrKig4KSxcbiINCisiKnBhcnRlZCooOCksXG4iDQorIipwYXJ0
+cHJvYmUqKDgpLFxuIg0KKyIqcGFydHgqKDgpXG4iDQogIG1zZ3N0ciAiIg0KDQoNCkJlbm5v
+DQo=
 
-:-)
+--------------GOSl5kS4uDMkp1lSQoas6BjL--
 
+--------------oq70zORdVCH2RZGt9KOnR0tb
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature.asc"
 
-Thank you!
-Chris
+-----BEGIN PGP SIGNATURE-----
 
+wsF5BAABCAAjFiEEFo5vQpe/16ea/USWUUu+Lrjhlh8FAmnk5tgFAwAAAAAACgkQUUu+Lrjhlh9E
+VA/9GHj6SU7z/QFqoj1ZsvWiwpKmV9f60eUjimGL+ReYnzM+c9q6hjxDsrgLuLjMQ/brBxhQVmFy
+ZpXlqHBqkQX8rPF7I6klq3HBdsgXzrjb/pc+GUUkENb+yAvKMhuwxgJVrSrIMMZmmlTevZwo+5iE
+Wq1ba1ucFVAQwWpUnfIOCr+qEDQlHtxOmrvp8bUl/Jw1bgzQdskSFHoOMR9XbMMdXCUW3X2hS0xD
+nZDrce/14fX02E2DuKlxi6/+gXv+etya23M43/LWdnTUaWo2BTCNvuqicSeNC6MaLvjeYwIjs6kG
+X/Jnb2gKa0iTWahf9o9OU2+XZrOMbqYGrN0lzwhzY87Aq59okALPnJCakoEzBM64vSc3OhsACSsy
+5gdFGcAPavS3+7XN/Py+RCTs2rJ4LSK13as0zwcvC05Cazxistf87L8AQoBROJRGGFdyYCPDy8Cl
+YHY7f5pLqmYwtC76Wx7xmp8RMG076xOwGAogqjcyw2avWQBjI51jZcRoc0+d6px42HKHTtuBvppe
+uKNbQYICfbIkbSd1O9iqFUEl1tPK/mKbdx0FpAfZjsLLhR2l9fpjlrLd3isdu3trXK+ZCe5gM+3w
+eCHw3Q7/JRY/wHzFbB1XModtO1dIVFwqanJMpUBl7bdojLtm9I+xml34m5R7Ejm52qviKp95BpRm
+seM=
+=M3Aw
+-----END PGP SIGNATURE-----
+
+--------------oq70zORdVCH2RZGt9KOnR0tb--
 
