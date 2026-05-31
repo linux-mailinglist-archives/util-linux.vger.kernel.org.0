@@ -1,172 +1,156 @@
-Return-Path: <util-linux+bounces-1169-lists+util-linux=lfdr.de@vger.kernel.org>
+Return-Path: <util-linux+bounces-1170-lists+util-linux=lfdr.de@vger.kernel.org>
 Delivered-To: lists+util-linux@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id qI04LfZGHGotMAkAu9opvQ
-	(envelope-from <util-linux+bounces-1169-lists+util-linux=lfdr.de@vger.kernel.org>)
-	for <lists+util-linux@lfdr.de>; Sun, 31 May 2026 16:34:30 +0200
+	id 8EiOAWGSHGpdPQkAu9opvQ
+	(envelope-from <util-linux+bounces-1170-lists+util-linux=lfdr.de@vger.kernel.org>)
+	for <lists+util-linux@lfdr.de>; Sun, 31 May 2026 21:56:17 +0200
 X-Original-To: lists+util-linux@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id AAD7B616AEA
-	for <lists+util-linux@lfdr.de>; Sun, 31 May 2026 16:34:28 +0200 (CEST)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
+	by mail.lfdr.de (Postfix) with ESMTPS id 1FB6A617C7C
+	for <lists+util-linux@lfdr.de>; Sun, 31 May 2026 21:56:16 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 82A3E3021E9F
-	for <lists+util-linux@lfdr.de>; Sun, 31 May 2026 14:34:18 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id 5C9473003829
+	for <lists+util-linux@lfdr.de>; Sun, 31 May 2026 19:56:13 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id BDC003242B2;
-	Sun, 31 May 2026 14:34:17 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4C0CF31986C;
+	Sun, 31 May 2026 19:56:12 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=guam.net header.i=@guam.net header.b="jc4zX00L";
-	dkim=pass (1024-bit key) header.d=guam.net header.i=@guam.net header.b="anW8JbHq"
+	dkim=pass (2048-bit key) header.d=max.gautier.name header.i=@max.gautier.name header.b="Jy9SqzAW"
 X-Original-To: util-linux@vger.kernel.org
-Received: from palakse4.guam.net (202.128.5.240.guam.net [202.128.5.240])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from taslin.fdn.fr (taslin.fdn.fr [80.67.169.77])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C941720C461
-	for <util-linux@vger.kernel.org>; Sun, 31 May 2026 14:34:14 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=202.128.5.240
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CB512231A23
+	for <util-linux@vger.kernel.org>; Sun, 31 May 2026 19:56:09 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=80.67.169.77
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1780238057; cv=none; b=MzwXWbIFqK05U7ENV8vOpg9UP1BVHLhfe7KKfL212bM9ZYYmefCVtZ8uWhr1lK+GGOoYlRV4axS6iIGhubdBxTbSmpTvp3gxebq4eQ7yFQ67hd1R2ImEMpdEelKzywaESnuCVXlzaldByko9gIoD2aMofeNV6qM8BbXrxrAqRbU=
+	t=1780257372; cv=none; b=BD4LXhijWfrOZ+XWh6DDd0u8NHSLm1K6GcYYzd9RJfffjevTiifL8/4fawRiwKmH1TKVUwipXP+ygRXptJ/hnnlyFuSadjlxierC/JeXaQVv0tscJZBqLD/mODTQABxQNU3FMhmpGnNBsK47KGMgb56REvfHX4d73BOE62ustww=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1780238057; c=relaxed/simple;
-	bh=AhmCk1LP59t77JHOpVpO7gQv3nKlfXabv8MazSZ3ATc=;
-	h=From:To:Date:MIME-Version:Subject:Message-ID:Content-type; b=SEZf/w7K0YZM4ZyWE4xkdVuCEaxY9D0icMuPrtiM5Mr+1rajem3hY9AM3Pe/Hj0XNO42rfCAhAQwF8LihxA31wqdWjEAuEs+mJmX4hcAibyqdWIk4TWWrOzcZ3qMpCBZXQ7e10u/a6iX1BC07PBPEhupLr4zLqIuCiOsAEPnTpA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=guam.net; spf=pass smtp.mailfrom=guam.net; dkim=pass (1024-bit key) header.d=guam.net header.i=@guam.net header.b=jc4zX00L; dkim=pass (1024-bit key) header.d=guam.net header.i=@guam.net header.b=anW8JbHq; arc=none smtp.client-ip=202.128.5.240
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=guam.net
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=guam.net
-Received: from smtp4.guam.net (unknown [10.41.4.8])
-	by palakse4.guam.net (Postfix) with ESMTPS id 799D23714D
-	for <util-linux@vger.kernel.org>; Mon,  1 Jun 2026 00:27:03 +1000 (ChST)
-DMARC-Filter: OpenDMARC Filter v1.4.2 palakse4.guam.net 799D23714D
-Authentication-Results: OpenDMARC; dmarc=pass (p=reject dis=none) header.from=guam.net
-Authentication-Results: OpenDMARC; spf=pass smtp.mailfrom=guam.net
-DKIM-Filter: OpenDKIM Filter v2.11.0 palakse4.guam.net 799D23714D
-Authentication-Results: palakse4.guam.net;
-	dkim=pass (1024-bit key, unprotected) header.d=guam.net header.i=@guam.net header.a=rsa-sha256 header.s=default header.b=jc4zX00L;
-	dkim=pass (1024-bit key) header.d=guam.net header.i=@guam.net header.a=rsa-sha256 header.s=default header.b=anW8JbHq
-Received: from localhost (localhost [127.0.0.1])
-	by smtp4.guam.net (Postfix) with ESMTP id B9088200A241
-	for <util-linux@vger.kernel.org>; Mon,  1 Jun 2026 00:26:55 +1000 (ChST)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.guam.net B9088200A241
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=guam.net; s=default;
-	t=1780237615; bh=YqVn+wB8prkjPAQNUiKOCvX8bgNIBMfmBnqlvE8pR74=;
-	h=From:To:Date:Subject:Reply-to:From;
-	b=jc4zX00LxaTj5qcTkvFcAm+Vi3Wj3uTqPe1doKevCQotGK9azGpdFhfCs165wuRGf
-	 23omzJMZGGm7c2dI4q0LYLYTMRQ+7mNe4qyNU+vvU3gzraQ3/BqTuBL66w8R1Hk0WY
-	 1RPkpj671FJbULh7KQW2KNwYuVIQnhHZ6oEoe0EM=
-X-Virus-Scanned: amavis at guam.net
-Received: from smtp4.guam.net ([127.0.0.1])
- by localhost (dpacsmtp.guam.net [127.0.0.1]) (amavis, port 10026) with ESMTP
- id COVfZZyc04Ss for <util-linux@vger.kernel.org>;
- Mon,  1 Jun 2026 00:26:54 +1000 (ChST)
-Received: from [192.168.1.18] (ip184-182-116-20.lv.lv.cox.net [184.182.116.20])
-	(Authenticated sender: mikes)
-	by smtp4.guam.net (Postfix) with ESMTPSA id 41D38200A242
-	for <util-linux@vger.kernel.org>; Mon,  1 Jun 2026 00:26:54 +1000 (ChST)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.guam.net 41D38200A242
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=guam.net; s=default;
-	t=1780237614; bh=YqVn+wB8prkjPAQNUiKOCvX8bgNIBMfmBnqlvE8pR74=;
-	h=From:To:Date:Subject:Reply-to:From;
-	b=anW8JbHqe5+CP3ENcK/DcEcEU0q28jbFL/f22a1aHu8sUTtKzne0FSOJYQtZ31uvn
-	 WsVMfuTPn1XzZ4kT/yd0vC/nue8pu/wCrfFj/15bVYVsJOD7R8IkC51yr6cinZd1FR
-	 il1gR8mZfhtvdS+Y60AOhXIcSf7angGOCNlonRh4=
-From: "Michael D. Setzer II" <mikes@guam.net>
+	s=arc-20240116; t=1780257372; c=relaxed/simple;
+	bh=S0MguQ8Kb8tkXzVUig/Bbcf6m5KLJOKWxJmQQs/lmb4=;
+	h=Date:From:To:Subject:Message-ID:MIME-Version:Content-Type:
+	 Content-Disposition; b=uE+TsZ0iljXChu5NEiwXC0vo3q2/5Nt98dWpGYU+nxXAp43x4boH/3XBvt5TqDD4pgd3k8wBa5G7Ltwr9FdNgxnwOuJfY+TMUbbK83YaQWMcBdMjVBUrTkd7Gf7c504FZ4VriuLkbBvlkQoNTHbC3Jhbfkc6GzjfuHDs6uLYwDc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=max.gautier.name; spf=pass smtp.mailfrom=max.gautier.name; dkim=pass (2048-bit key) header.d=max.gautier.name header.i=@max.gautier.name header.b=Jy9SqzAW; arc=none smtp.client-ip=80.67.169.77
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=max.gautier.name
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=max.gautier.name
+Received: from localhost (unknown [IPv6:2a0c:e303:0:cc00:ba0f:ae98:a175:1ae])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange ECDHE (P-256) server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	(No client certificate requested)
+	by taslin.fdn.fr (Postfix) with ESMTPSA id 53D2560246
+	for <util-linux@vger.kernel.org>; Sun, 31 May 2026 21:46:56 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=max.gautier.name;
+	s=fdn; t=1780256816;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding;
+	bh=ikMwGwrMwlc9U+7Y5TNbQM0x35NdJu//rewxzmT79LU=;
+	b=Jy9SqzAWzre+vUeQPsV3tU94Xc1xVFdRMcUKVM2/O5akY8PKPlRsHaakpOSevu3OYyneh9
+	RoMEHYqJgn3kdR7BoPVp/OneLkWHydtaDhZMGU7fPPuS2VpBYDwgzMi4OLTAHBI842MVb8
+	gxMEVRi85MP5GYco7b9Dsb8uPrg9LH8QJQO6bnJk7EBxsrwBepFYl85XAEcECKwRmvAVk8
+	bpCRn4gAODwrYU5ehA5JsHG/89Sk9iME29lQvBYKlKXHZSkkw10/6FEm8hdFa9dEsL95ag
+	o15IybUL60q/2dCoAtK6rBBQeJMcDHwlOc+7G4QjvUXqfo/74ZNIkQJrxf8Jbg==
+Date: Sun, 31 May 2026 21:46:45 +0200
+From: Max Gautier <mg@max.gautier.name>
 To: util-linux@vger.kernel.org
-Date: Mon, 1 Jun 2026 00:26:52 +1000
+Subject: Question: GPT GUID for dm-integrity separate metadata partition
+Message-ID: <ahyQJUrpRIJY7JfR@framework>
 Precedence: bulk
 X-Mailing-List: util-linux@vger.kernel.org
 List-Id: <util-linux.vger.kernel.org>
 List-Subscribe: <mailto:util-linux+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:util-linux+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Subject: Question on fstrim not operating the way I expected.
-Reply-to: mikes@guam.net
-Message-ID: <6A1C452C.9366.324AC3@mikes.guam.net>
-X-Confirm-Reading-To: mikes@guam.net
-X-pmrqc: 1
-Return-receipt-to: mikes@guam.net
-Priority: normal
-X-mailer: Pegasus Mail for Windows (v4.91.1746)
-Content-type: text/plain; charset=US-ASCII
-Content-transfer-encoding: 7BIT
-Content-description: Mail message body
-X-Spamd-Result: default: False [0.84 / 15.00];
-	CD_MM_BODY(2.00)[];
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+X-Spamd-Result: default: False [-1.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	CTE_CASE(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[guam.net,reject];
-	XM_CASE(0.50)[];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
-	R_DKIM_ALLOW(-0.20)[guam.net:s=default];
+	MID_RHS_NOT_FQDN(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[max.gautier.name,none];
+	R_DKIM_ALLOW(-0.20)[max.gautier.name:s=fdn];
+	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	MIME_TRACE(0.00)[0:+];
-	HAS_CD_HEADER(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	TAGGED_FROM(0.00)[bounces-1169-lists,util-linux=lfdr.de];
+	RCVD_TLS_LAST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-1170-lists,util-linux=lfdr.de];
+	FROM_HAS_DN(0.00)[];
+	RCVD_COUNT_THREE(0.00)[4];
 	RCPT_COUNT_ONE(0.00)[1];
 	RECEIVED_HELO_LOCALHOST(0.00)[];
-	RCVD_TLS_LAST(0.00)[];
-	DKIM_TRACE(0.00)[guam.net:+];
-	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,guam.net:email,guam.net:replyto,guam.net:dkim,gmx.com:email];
-	HAS_REPLYTO(0.00)[mikes@guam.net];
-	REPLYTO_ADDR_EQ_FROM(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	DKIM_TRACE(0.00)[max.gautier.name:+];
+	MISSING_XM_UA(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
 	TO_DN_NONE(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[mikes@guam.net,util-linux@vger.kernel.org];
-	FROM_HAS_DN(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
-	MID_RHS_MATCH_FROMTLD(0.00)[];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
-	NEURAL_HAM(-0.00)[-0.965];
+	FROM_NEQ_ENVFROM(0.00)[mg@max.gautier.name,util-linux@vger.kernel.org];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	NEURAL_HAM(-0.00)[-1.000];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[util-linux];
-	RCVD_COUNT_SEVEN(0.00)[7]
-X-Rspamd-Queue-Id: AAD7B616AEA
+	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sin.lore.kernel.org:rdns,sin.lore.kernel.org:helo,max.gautier.name:dkim]
+X-Rspamd-Queue-Id: 1FB6A617C7C
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-Have maintain a disk imaging program going back to 2004, and 
-had script to clean partitions by writing nulls to unused sectors.
-But with solid state drives that added wear to drives.
-Thought fstrim would be a better solution.
-My G4L program loads in ram with no partitions mounted. 
-It then mounts the partition and runs fstrim once showing the space 
-it finds, and then runs again show 0 space to trim.
-Then partitions are unmount before backing up the partitions or 
-drives. 
-But if I run the fstrim again, it shows exactly the same numbers on 
-first pass and then zeros on second pass. So looks like fstrim is only 
-making changes to memory. Is very fast thou.
-Mad an image of a 1T drive with the fstrim process, and it created 
-an 82G image file. 
-Ran Zerofree which my script offers as a second option, and made 
-another image file, and it produced a 78G image file?
-fstrim is very fast, but appears to not clear anything on physical 
-disk.
-zerofree is a much longer process. Takes about 30 minutes on 1TB 
-drive, but does only write to non-zero blocks.
-Older dd option would write to all unsed blocks, so would put wear.
+Hello,
 
-Creating he image file takes about 34 minutes to image 1TB disk, 
-but zerofree taking about 30 minutes make total time 64 minutes.
+Some context:
+When using dm-integrity in Linux (device mapper target to provides
+transparent data integrity protection), one has a the option to use a
+separate device to store the integrity protection, (which can supposedly
+help offset the performance penalty on dm-integry by using a nvme for
+HDDs).
 
-Usually the fstrim only takes 10 to 30 seconds.
+While setting up my system (new RAID array on top of dm-integrity on
+each RAID member), I asked myself what GPT type those separate integrity
+partition should have, to avoid being confused as something else by
+other tooling.
+(for example systemd auto-mount some partition type, so I suppose some
+other tooling could have similar behavior)
+
+I considered 'Linux filesystem' and 'Linux reserved', but the first is
+not accurate and I could not find info on the second, so I do not know
+if it's reserved for future use (would seem odd seems GUID are
+plentiful) or for setup where we just don't want tooling to touch it ?
+
+I don't think Linux RAID is accurate either, (that would be the
+partition on the data disks instead).
+
+What's the recommendation when creating a partition not fitting any of
+the existing documented GUID ?
+
 
 Thanks.
 
-+------------------------------------------------------------+
- Michael D. Setzer II - Computer Science Instructor (Retired)     
- mailto:mikes@guam.net                            
- mailto:msetzerii@gmail.com
- mailto:msetzerii@gmx.com
- Guam - Where America's Day Begins                        
- G4L Disk Imaging Project maintainer 
- http://sourceforge.net/projects/g4l/
-+------------------------------------------------------------+
+
+(In case this makes matter clearer, here is my intended setup):
+
+# lsblk
+NAME        MAJ:MIN RM  SIZE RO TYPE  MOUNTPOINTS
+NAME        MAJ:MIN RM  SIZE RO TYPE  MOUNTPOINTS
+# Those are the raid disk with the data
+sda           8:0    0 14.6T  0 disk  
+└─sda1        8:1    0 14.6T  0 part  
+sdb           8:16   0 14.6T  0 disk  
+└─sdb1        8:17   0 14.6T  0 part  
+sdc           8:32   0 14.6T  0 disk  
+└─sdc1        8:33   0 14.6T  0 part  
+nvme0n1     259:0    0  1.8T  0 disk  
+├─nvme0n1p1 259:1    0    4G  0 part  
+├─nvme0n1p2 259:2    0  150G  0 part  
+│ └─root    253:0    0  150G  0 crypt /
+│ # Those are the separate integrity partition (not sure exactly how
+│   much space I need for now)
+├─nvme0n1p3 259:3    0  ???G  0 part  
+├─nvme0n1p4 259:4    0  ???G  0 part  
+└─nvme0n1p5 259:5    0  ???G  0 part  
 
 
-
+-- 
+Max Gautier
 
