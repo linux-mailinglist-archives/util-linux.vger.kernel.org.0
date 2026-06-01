@@ -1,72 +1,71 @@
-Return-Path: <util-linux+bounces-1171-lists+util-linux=lfdr.de@vger.kernel.org>
+Return-Path: <util-linux+bounces-1172-lists+util-linux=lfdr.de@vger.kernel.org>
 Delivered-To: lists+util-linux@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id wFm3Li15HWrEbAkAu9opvQ
-	(envelope-from <util-linux+bounces-1171-lists+util-linux=lfdr.de@vger.kernel.org>)
-	for <lists+util-linux@lfdr.de>; Mon, 01 Jun 2026 14:21:01 +0200
+	id MKViGCZ8HWrEbAkAu9opvQ
+	(envelope-from <util-linux+bounces-1172-lists+util-linux=lfdr.de@vger.kernel.org>)
+	for <lists+util-linux@lfdr.de>; Mon, 01 Jun 2026 14:33:42 +0200
 X-Original-To: lists+util-linux@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0201661F2C9
-	for <lists+util-linux@lfdr.de>; Mon, 01 Jun 2026 14:21:00 +0200 (CEST)
+Received: from tor.lore.kernel.org (tor.lore.kernel.org [172.105.105.114])
+	by mail.lfdr.de (Postfix) with ESMTPS id C564B61F4E3
+	for <lists+util-linux@lfdr.de>; Mon, 01 Jun 2026 14:33:41 +0200 (CEST)
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 573FA30616B7
-	for <lists+util-linux@lfdr.de>; Mon,  1 Jun 2026 12:10:49 +0000 (UTC)
+	by tor.lore.kernel.org (Postfix) with ESMTP id 35E1E307FE37
+	for <lists+util-linux@lfdr.de>; Mon,  1 Jun 2026 12:27:02 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 14133369D42;
-	Mon,  1 Jun 2026 12:10:48 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7D2F8342C8B;
+	Mon,  1 Jun 2026 12:26:59 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="TopKDxc+"
+	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="HdnDw8Ws"
 X-Original-To: util-linux@vger.kernel.org
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6B70235AC17
-	for <util-linux@vger.kernel.org>; Mon,  1 Jun 2026 12:10:46 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=170.10.129.124
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1C3EA157A5A
+	for <util-linux@vger.kernel.org>; Mon,  1 Jun 2026 12:26:57 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=170.10.133.124
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1780315847; cv=none; b=HcHMRrW7ZSmVUf9AIf7I3lU1/WcwD2s88wPpfjDhJIBH0PJKyl2pczm7mUH389XSKdtX8Jawn1jheYqrz85hvDegNJqfeO1J5ijFGbYaz/dZjxZfJO5tOBcNQbGCJykZqIAbX3XwT9ALc4icDbsnQe/GFX/+nlC0llOlVKXE+BU=
+	t=1780316819; cv=none; b=OE/CtFZYs+v+fHeR28Cs8Ssg7/Pju6eJa5/ejpXZ/mSNUF1oyyf7TrYU9iv6ajh+TNzdQ42hrp1pjjF395CCcEfYXhLp9iTwFxBmuSfcI+IFfaQ8kGT5Ftof0LIcPQsNGIpCe1ED8jXjtjXFbiJnUSxCCtL3dyVsHnREZuL//8E=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1780315847; c=relaxed/simple;
-	bh=XDuE9TY1PJWfCZqjMwqhN7CKpXcc69DjeJLudgbV8EI=;
+	s=arc-20240116; t=1780316819; c=relaxed/simple;
+	bh=UUUt2Jibm+DscUw6m4URloTa/hwhopB/DCoKI9cZ8+c=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=l/rcn6KoIPezeUhfV1X2bsesB1d+HNLZeZTyCwxoDjmRb/g7rsUBJrBrjZ3rqPRg4GLU6OKuiFLCQgwMX8S+/77Rdww3Oo+Z8R3vhGUpi/QUQnVFJHTBCykN/xKfXFkLQaOu27MQ3ly2WSRLFbwXzf3yk9r4dYNyIlkB2YC5aWk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=TopKDxc+; arc=none smtp.client-ip=170.10.129.124
+	 Content-Type:Content-Disposition:In-Reply-To; b=pRxuJ7QYv3X/nlD9SdTwfyrHEiX3HKbPyQMliIzdhWB58DHxxWtBnrkJrvC30H94HuAspnSmOmpWkpl2YIqlVR2TyOcmveD/McQ0iazZlzK7qoCwqBAEQ/yB95pIMh9pqTBt07XPAWOLB1OmicoSx2ykOblWGM/9w8HDzKrpwoY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=HdnDw8Ws; arc=none smtp.client-ip=170.10.133.124
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redhat.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1780315845;
+	s=mimecast20190719; t=1780316817;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 in-reply-to:in-reply-to:references:references;
-	bh=ubDMDM6wGspJnyNY0ZzFFo1/bXU2Y+EqKXd1zfPgBZI=;
-	b=TopKDxc+5z4d4+9Jr3oK7CkATuCLm7aHccqoaoqVaTOUNHGkeYFMBWnhrVFLmRNVizUHfG
-	or4Wg/UqZN4mkII8bHi6WGxbpN3sUHWeudVkj+u09Qf6J87U+kU7ArfF8vOneeCsk5TLm+
-	mA2+0DQqFjlzrbXVIsznGHfLfNc8+XE=
-Received: from mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com
+	bh=PGjnvcvQYQ25fkSQgx6fryr3ExukFIPG4oQ3zbTzl/s=;
+	b=HdnDw8WsmqKzwAvSdCxQRwom6iCxsqcD0vtTs3pGwW8cOGqxkDCYUrxzaGCpsocNJFUAmD
+	hEnLFi/ZA21HUy6l/AdRsmfwrzhgBsDwBRoe7zqdaPE+hLwLvNZUXn/tacrl17y8eR+nzx
+	8YG5iwtpGXEqfJ3jIs3DsYjpboR+st0=
+Received: from mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com
  (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
  relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-159-U-uwmR_ROa-TbWXPzfJkQQ-1; Mon,
- 01 Jun 2026 08:10:44 -0400
-X-MC-Unique: U-uwmR_ROa-TbWXPzfJkQQ-1
-X-Mimecast-MFC-AGG-ID: U-uwmR_ROa-TbWXPzfJkQQ_1780315843
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-356-x0vT1v8cOXaa-USdIvfD2A-1; Mon,
+ 01 Jun 2026 08:26:53 -0400
+X-MC-Unique: x0vT1v8cOXaa-USdIvfD2A-1
+X-Mimecast-MFC-AGG-ID: x0vT1v8cOXaa-USdIvfD2A_1780316812
 Received: from mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com (mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.12])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS id 1C09818005B8;
-	Mon,  1 Jun 2026 12:10:43 +0000 (UTC)
+	by mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS id 835431800451;
+	Mon,  1 Jun 2026 12:26:52 +0000 (UTC)
 Received: from ws (unknown [10.44.32.253])
-	by mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS id 0A9D019560A2;
-	Mon,  1 Jun 2026 12:10:41 +0000 (UTC)
-Date: Mon, 1 Jun 2026 14:10:39 +0200
+	by mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS id A0D8419560A2;
+	Mon,  1 Jun 2026 12:26:51 +0000 (UTC)
+Date: Mon, 1 Jun 2026 14:26:48 +0200
 From: Karel Zak <kzak@redhat.com>
-To: Thomas Petazzoni <thomas.petazzoni@bootlin.com>
-Cc: util-linux@vger.kernel.org, 
-	Shubham Chakraborty <chakrabortyshubham66@gmail.com>
-Subject: Re: [PATCH] include/mountutils.h: fix LSMT_ROOT definition
-Message-ID: <ehtjxe4s2nqi6rqgstoelre27kh3xezvsqvaggascmutoicxdu@ohj5fmljs6r3>
-References: <20260530094932.2351791-1-thomas.petazzoni@bootlin.com>
+To: Max Gautier <mg@max.gautier.name>
+Cc: util-linux@vger.kernel.org
+Subject: Re: Question: GPT GUID for dm-integrity separate metadata partition
+Message-ID: <dekoqnth4brpwuopmhbzudhcw6bpbspog4hbcqyvy65t3nq6rt@ea2k25rl3fpu>
+References: <ahyQJUrpRIJY7JfR@framework>
 Precedence: bulk
 X-Mailing-List: util-linux@vger.kernel.org
 List-Id: <util-linux.vger.kernel.org>
@@ -75,51 +74,60 @@ List-Unsubscribe: <mailto:util-linux+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20260530094932.2351791-1-thomas.petazzoni@bootlin.com>
+In-Reply-To: <ahyQJUrpRIJY7JfR@framework>
 X-Scanned-By: MIMEDefang 3.0 on 10.30.177.12
 X-Spamd-Result: default: False [-1.66 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[redhat.com,quarantine];
 	MID_RHS_NOT_FQDN(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[redhat.com,quarantine];
 	R_DKIM_ALLOW(-0.20)[redhat.com:s=mimecast20190719];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
+	R_SPF_ALLOW(-0.20)[+ip4:172.105.105.114:c];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-1171-lists,util-linux=lfdr.de];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	MIME_TRACE(0.00)[0:+];
 	RCVD_TLS_LAST(0.00)[];
-	FREEMAIL_CC(0.00)[vger.kernel.org,gmail.com];
-	FORGED_SENDER_MAILLIST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-1172-lists,util-linux=lfdr.de];
 	FROM_HAS_DN(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCPT_COUNT_TWO(0.00)[2];
+	MIME_TRACE(0.00)[0:+];
+	DKIM_TRACE(0.00)[redhat.com:+];
 	MISSING_XM_UA(0.00)[];
-	RCPT_COUNT_THREE(0.00)[3];
-	RCVD_COUNT_FIVE(0.00)[6];
+	TO_DN_SOME(0.00)[];
 	PRECEDENCE_BULK(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[kzak@redhat.com,util-linux@vger.kernel.org];
-	DKIM_TRACE(0.00)[redhat.com:+];
-	NEURAL_HAM(-0.00)[-0.999];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[6];
 	TAGGED_RCPT(0.00)[util-linux];
-	TO_DN_SOME(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo]
-X-Rspamd-Queue-Id: 0201661F2C9
+	NEURAL_HAM(-0.00)[-0.999];
+	ASN(0.00)[asn:63949, ipnet:172.105.96.0/20, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[tor.lore.kernel.org:rdns,tor.lore.kernel.org:helo]
+X-Rspamd-Queue-Id: C564B61F4E3
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On Sat, May 30, 2026 at 11:49:32AM +0200, Thomas Petazzoni wrote:
->  #ifdef LSMT_ROOT
->  # define LSMT_ROOT ...
->  #endif
-> 
-> Should obviously have been:
-> 
->  #ifndef LSMT_ROOT
->  # define LSMT_ROOT ...
->  #endif
+On Sun, May 31, 2026 at 09:46:45PM +0200, Max Gautier wrote:
+> While setting up my system (new RAID array on top of dm-integrity on
+> each RAID member), I asked myself what GPT type those separate integrity
+> partition should have, to avoid being confused as something else by
+> other tooling.
+> (for example systemd auto-mount some partition type, so I suppose some
+> other tooling could have similar behavior)
 
-Ah, nice. Applied (and also backported to stable/v2.42), thanks!
+For decades, partition type GUIDs have been mostly cosmetic on Linux.
+The kernel doesn't use them to decide anything - it probes
+filesystem/device content directly. The partition type is just
+metadata, "nice to have" for documentation purposes.
+
+The one notable exception is systemd's Discoverable Partitions
+Specification, which defines specific GUIDs for root, /usr, /home,
+swap, etc. Tools like systemd-gpt-auto-generator use these to
+auto-discover and auto-mount partitions.
+
+For your case, "Linux reserved" (8DA63339-0007-60C0-C436-083AC8230908)
+seems like a reasonable choice. It's recognized by partitioning tools
+(fdisk, gdisk) but is not part of the Discoverable Partitions
+Specification, so systemd won't try to auto-discover or auto-mount it.
 
     Karel
 
