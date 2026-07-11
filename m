@@ -1,145 +1,157 @@
-Return-Path: <util-linux+bounces-1187-lists+util-linux=lfdr.de@vger.kernel.org>
+Return-Path: <util-linux+bounces-1188-lists+util-linux=lfdr.de@vger.kernel.org>
 Delivered-To: lists+util-linux@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id NHOXH/xCMWqHfgUAu9opvQ
-	(envelope-from <util-linux+bounces-1187-lists+util-linux=lfdr.de@vger.kernel.org>)
-	for <lists+util-linux@lfdr.de>; Tue, 16 Jun 2026 14:35:08 +0200
+	id G27gKRfFUmr9TQMAu9opvQ
+	(envelope-from <util-linux+bounces-1188-lists+util-linux=lfdr.de@vger.kernel.org>)
+	for <lists+util-linux@lfdr.de>; Sun, 12 Jul 2026 00:35:03 +0200
 X-Original-To: lists+util-linux@lfdr.de
-Received: from sea.lore.kernel.org (sea.lore.kernel.org [172.234.253.10])
-	by mail.lfdr.de (Postfix) with ESMTPS id D365C68F5F8
-	for <lists+util-linux@lfdr.de>; Tue, 16 Jun 2026 14:35:07 +0200 (CEST)
+Received: from sin.lore.kernel.org (sin.lore.kernel.org [104.64.211.4])
+	by mail.lfdr.de (Postfix) with ESMTPS id 9FA937430F1
+	for <lists+util-linux@lfdr.de>; Sun, 12 Jul 2026 00:35:02 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=redhat.com header.s=mimecast20190719 header.b=Zm0DgN4T;
-	spf=pass (mail.lfdr.de: domain of "util-linux+bounces-1187-lists+util-linux=lfdr.de@vger.kernel.org" designates 172.234.253.10 as permitted sender) smtp.mailfrom="util-linux+bounces-1187-lists+util-linux=lfdr.de@vger.kernel.org";
-	dmarc=pass (policy=quarantine) header.from=redhat.com;
+	dkim=pass header.d=debian.org header.s=smtpauto.stravinsky header.b=QLjSbBtP;
+	dmarc=pass (policy=none) header.from=debian.org;
+	spf=pass (mail.lfdr.de: domain of "util-linux+bounces-1188-lists+util-linux=lfdr.de@vger.kernel.org" designates 104.64.211.4 as permitted sender) smtp.mailfrom="util-linux+bounces-1188-lists+util-linux=lfdr.de@vger.kernel.org";
 	arc=pass ("subspace.kernel.org:s=arc-20240116:i=1")
 Received: from smtp.subspace.kernel.org (conduit.subspace.kernel.org [100.90.174.1])
-	by sea.lore.kernel.org (Postfix) with ESMTP id 66828314EA79
-	for <lists+util-linux@lfdr.de>; Tue, 16 Jun 2026 12:34:36 +0000 (UTC)
+	by sin.lore.kernel.org (Postfix) with ESMTP id C7BE33004D3E
+	for <lists+util-linux@lfdr.de>; Sat, 11 Jul 2026 22:34:59 +0000 (UTC)
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id D0C07332EC8;
-	Tue, 16 Jun 2026 12:34:35 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id DC6B02D0617;
+	Sat, 11 Jul 2026 22:34:56 +0000 (UTC)
 X-Original-To: util-linux@vger.kernel.org
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+Received: from stravinsky.debian.org (stravinsky.debian.org [82.195.75.108])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5F6E526C3B0
-	for <util-linux@vger.kernel.org>; Tue, 16 Jun 2026 12:34:34 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B9A8D26ACC
+	for <util-linux@vger.kernel.org>; Sat, 11 Jul 2026 22:34:54 +0000 (UTC)
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1781613275; cv=none; b=H7SteeC3kwdvmPIJuWTuC/XZ8ZYjFcK8rnNlX8taVHZDEWO1pUTFkfmUlbnN1bZg8Ggt3ZaL0lN/jUYpOd5oQRJuBGICZ7XtoMB8TCRl0UcrKhZzLkzhnlxZBtHzXRdCOZ+gGSQR//Tw5T3D+fOnvUUS6wXUB4/faDairzoWgSU=
+	t=1783809296; cv=none; b=rH33f2H53BhINUeBDQUk2i/2VArcdtOOew8ZcGWcu9eX4pE6rl7jM+pg3rrf1d8jQ92idbZZZOe+yB/HuTNTQMKOMITa8J7SSDRykp273hQ8bJQ4GBZeLZGVuW6qzhN536/gFofsw4RHYuL/pyTFow/hJum3chfqYDcAK2woxms=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1781613275; c=relaxed/simple;
-	bh=dHYXSuMIuncDCQHUa2kWZmPKgrl3nU1x2uQFJeuEmQU=;
-	h=Date:From:To:Subject:Message-ID:MIME-Version:Content-Type:
-	 Content-Disposition; b=I8Z+iymk5bWji9oNVqeeseO2zrchi0IjkLsS8CslByiIt7ej56megAABJ/jA0n3vtmOuPmQEbUXGDZE6FsYlZUtflWEwXnFmIlPfd9freUDtRttSrXfhSs3EpH9/1V+yRD3HHLrwheayV1H14YNcWxC7F3us6x8x0fUJI7W6LRI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=Zm0DgN4T; arc=none smtp.client-ip=170.10.129.124
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1781613273;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:mime-version:mime-version:content-type:content-type;
-	bh=l7dJghem+f0E2akGXB5TbSpsh9R99AMpixwdVcMXjus=;
-	b=Zm0DgN4TCxkuF6WgKZh8Bh7SYQ1Ef13KpONKISZdSbFGY7eeRPT513FUmVx8/np1ZfPNU/
-	2XgYOERSAj+sCWDh4Kqp3T1k8D9B+IPjBGrg6giyK05smqcBgqcenz2JsH/ZJZO8O6eb8k
-	WYZpLQmpAczWTL3C3lYuuvhdfBCYu9Y=
-Received: from mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
- relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-629-xPlpVIcHPxelqkxmk4Yq9w-1; Tue,
- 16 Jun 2026 08:34:30 -0400
-X-MC-Unique: xPlpVIcHPxelqkxmk4Yq9w-1
-X-Mimecast-MFC-AGG-ID: xPlpVIcHPxelqkxmk4Yq9w_1781613269
-Received: from mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com (mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.93])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS id 3C3FC18004A9;
-	Tue, 16 Jun 2026 12:34:29 +0000 (UTC)
-Received: from ws (unknown [10.44.50.174])
-	by mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS id E007C1800594;
-	Tue, 16 Jun 2026 12:34:26 +0000 (UTC)
-Date: Tue, 16 Jun 2026 14:34:23 +0200
-From: Karel Zak <kzak@redhat.com>
-To: linux-kernel@vger.kernel.org, linux-fsdevel@vger.kernel.org, 
-	util-linux@vger.kernel.org
-Subject: [ANNOUNCE] util-linux v2.42.2 and v2.41.5
-Message-ID: <c2fo4x3lcppsj77k564i4qodmon3wagx47qf4mqwjwdtiplupg@jmaqrlzp273h>
+	s=arc-20240116; t=1783809296; c=relaxed/simple;
+	bh=jhQjPty0O2ydvAsZ1nx2Z4XRM1JBQhU0HTAKDmV6Lh8=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=u7vNCCa9goTM/ExVILvtkhG0mws1hZVmX8l+8nX/9l7Y3fgEEJpI17dWRrcB6sADI2S+rwUtgQ3p8CO4eGrBpbw1atAi2M4be1i+tSPFPhhUJgbMgfrK5rFeq+RwG7wjMlP5uBzy8OwjS5g0vSk6gvW709hCSd83eAcUOuvhQU4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=debian.org; spf=pass smtp.mailfrom=debian.org; dkim=pass (2048-bit key) header.d=debian.org header.i=@debian.org header.b=QLjSbBtP; arc=none smtp.client-ip=82.195.75.108
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=debian.org;
+	s=smtpauto.stravinsky; h=X-Debian-User:In-Reply-To:Content-Transfer-Encoding:
+	Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To:From:Date:
+	Reply-To:Content-ID:Content-Description;
+	bh=MT02yLL16ZtjtQ0o02J8EyXSPsUc+1JVZ3SOzwj2xh0=; b=QLjSbBtP3RHJFRBNXN4a30gfdM
+	PVxZtXQZ5yvEZ6FqtFtllKrODG7JfEM3nzI95w61vS6ZK/UmSYdJ7qIiBUwbmOofiN9MRaUWYweXN
+	EOFklePGlg1Lwa1bjG6Io1eSZnbH0jKcuvBYBhL1bgU6vzmA+4eQNVT1X7DUrkFdKhJz1uTfX5vN5
+	/p9XjZun3MEJJMkx9qUTz6ooWUT+3Pdbx0WezeaWfRzb4qSGbVxoBcGbCONQO8WAm35KR22CjsRiW
+	/K3zl9nNsH2HxKARcUea12nJqCHl2m4XPN/YvOlPKaeoN2Q066FFSILDfoT6CmKY3e82vjCsBcfAK
+	IG+CCQYw==;
+Received: from authenticated-user
+	by stravinsky.debian.org with esmtpsa (TLS1.3:ECDHE_X25519__RSA_PSS_RSAE_SHA256__AES_256_GCM:256)
+	(Exim 4.96)
+	(envelope-from <zeha@debian.org>)
+	id 1wigHV-000HUb-17;
+	Sat, 11 Jul 2026 22:34:45 +0000
+Date: Sat, 11 Jul 2026 19:34:41 -0300
+From: Chris Hofstaedtler <zeha@debian.org>
+To: util-linux@vger.kernel.org
+Cc: Marc Lehmann <debian-reportbug@plan9.de>, 1141670@bugs.debian.org, 
+	=?utf-8?B?0L3QsNCx?= <nabijaczleweli@nabijaczleweli.xyz>
+Subject: Re: Bug#1141670: util-linux: very slow code and undefined behaviour
+ in handle_interrupt
+Message-ID: <alLEV6xOOwA1RzU_@zeha.at>
+References: <178350371646.36377.6056214111743171473.reportbug@cerebro.laendle>
 Precedence: bulk
 X-Mailing-List: util-linux@vger.kernel.org
 List-Id: <util-linux.vger.kernel.org>
 List-Subscribe: <mailto:util-linux+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:util-linux+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Disposition: inline
-X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.93
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <178350371646.36377.6056214111743171473.reportbug@cerebro.laendle>
+X-Debian-User: zeha
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-1.66 / 15.00];
+X-Spamd-Result: default: False [-2.16 / 15.00];
 	ARC_ALLOW(-1.00)[subspace.kernel.org:s=arc-20240116:i=1];
-	MID_RHS_NOT_FQDN(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[redhat.com,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip4:172.234.253.10:c];
-	R_DKIM_ALLOW(-0.20)[redhat.com:s=mimecast20190719];
+	DMARC_POLICY_ALLOW(-0.50)[debian.org,none];
+	R_SPF_ALLOW(-0.20)[+ip4:104.64.211.4:c];
+	R_DKIM_ALLOW(-0.20)[debian.org:s=smtpauto.stravinsky];
 	MAILLIST(-0.15)[generic];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TAGGED_FROM(0.00)[bounces-1187-lists,util-linux=lfdr.de];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	TAGGED_FROM(0.00)[bounces-1188-lists,util-linux=lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	FORGED_SENDER(0.00)[kzak@redhat.com,util-linux@vger.kernel.org];
-	FORGED_RECIPIENTS(0.00)[m:linux-kernel@vger.kernel.org,m:linux-fsdevel@vger.kernel.org,m:util-linux@vger.kernel.org,s:lists@lfdr.de];
+	FORGED_RECIPIENTS(0.00)[m:util-linux@vger.kernel.org,m:debian-reportbug@plan9.de,m:1141670@bugs.debian.org,m:nabijaczleweli@nabijaczleweli.xyz,s:lists@lfdr.de];
+	RCVD_COUNT_THREE(0.00)[4];
+	FORGED_SENDER(0.00)[zeha@debian.org,util-linux@vger.kernel.org];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	FORWARDED(0.00)[lists@lfdr.de];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	DKIM_TRACE(0.00)[redhat.com:+];
-	ASN(0.00)[asn:63949, ipnet:172.234.224.0/19, country:SG];
+	FROM_HAS_DN(0.00)[];
 	MISSING_XM_UA(0.00)[];
+	RCPT_COUNT_THREE(0.00)[4];
 	FORGED_SENDER_FORWARDING(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[6];
-	PRECEDENCE_BULK(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[kzak@redhat.com,util-linux@vger.kernel.org];
-	RCPT_COUNT_THREE(0.00)[3];
-	TO_DN_NONE(0.00)[];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	ALIAS_RESOLVED(0.00)[];
-	MIME_TRACE(0.00)[0:+];
+	PRECEDENCE_BULK(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[zeha@debian.org,util-linux@vger.kernel.org];
+	DKIM_TRACE(0.00)[debian.org:+];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[util-linux];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sea.lore.kernel.org:rdns,sea.lore.kernel.org:helo,vger.kernel.org:from_smtp]
+	TO_DN_SOME(0.00)[];
+	ASN(0.00)[asn:63949, ipnet:104.64.192.0/19, country:SG];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[vger.kernel.org:from_smtp,zeha.at:mid,sin.lore.kernel.org:helo,sin.lore.kernel.org:rdns]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: D365C68F5F8
+X-Rspamd-Queue-Id: 9FA937430F1
 
-  The util-linux releases v2.42.2 and v2.41.5 are now available at
+Hi util-linux maintainers,
 
-    https://www.kernel.org/pub/linux/utils/util-linux/v2.42/
-    https://www.kernel.org/pub/linux/utils/util-linux/v2.41/
+the following was reported to Debian, regarding the hardlink 
+utility. It appears to be an upstream issue. Maybe someone can look 
+at it. CC:ing наб who seems to have touched the relevant function 
+last.
 
-  Both releases contain security fixes for libmount and libblkid:
+Thanks,
+Chris
 
-   CVE-2026-53613 - mount(8) TOCTOU race on target path
-   CVE-2026-53612 - mount(8) TOCTOU race on post-mount owner/mode change
-   CVE-2026-53614 - mount(8) SUID bypass via LIBMOUNT_FORCE_MOUNT2
-   libblkid use-after-free in nested partition probing
-
-  v2.42.2 additionally includes a follow-up fix for CVE-2026-27456
-  (loop device symlink attack) -- the v2.42.1 fix used O_NOFOLLOW
-  which only rejects symlinks at the last path component; this update
-  uses openat2(RESOLVE_NO_SYMLINKS) to reject symlinks at any component.
-
-  Note for v2.41 downstream maintainers: the same loopdev follow-up
-  fix for CVE-2026-27456 is available on the stable/v2.41 branch
-  (commit 2dacaf3ee) but did not make it into the v2.41.5 tarball.
-  Please cherry-pick it into your builds.
-
-  Release notes:
-    https://www.kernel.org/pub/linux/utils/util-linux/v2.42/v2.42.2-ReleaseNotes
-    https://www.kernel.org/pub/linux/utils/util-linux/v2.41/v2.41.5-ReleaseNotes
-
-  Feedback and bug reports, as always, are welcomed.
-
-    Karel
-
--- 
- Karel Zak  <kzak@redhat.com>
- http://karelzak.blogspot.com
-
+* Marc Lehmann <debian-reportbug@plan9.de> [260708 07:23]:
+>Version: 2.41-5
+>
+>Dear Maintainer,
+>
+>while strace'ing to find out why hardlink is so slow, IO found it does this sequence between every fstatat call:
+>
+>   gettid()                                = 36482
+>   getpid()                                = 36482
+>   tgkill(36482, 36482, 0)                 = 0
+>
+>this seems to be a pretty weird thing to do in a tighht scanning
+>loop. Looking at the code, handle_interrupt is responsible:
+>
+>   /**
+>    * handle_interrupt - Handle a signal
+>    */
+>   static void handle_interrupt(void)
+>   {
+>           switch (last_signal) {
+>           case SIGUSR1:
+>                   print_stats();
+>                   putchar('\n');
+>                   break;
+>           default:
+>                   signal(last_signal, SIG_DFL);
+>                   raise(last_signal);
+>                   break;
+>           }
+>           last_signal = 0;
+>   }
+>
+>this is already a weird function to begin with, but crucially, it calls signal(0,... and raise(0).
+>
+>it seems to me the former is likely undefined behaviour and the latter is
+>just unnecessartily slow.
+>
+>most likely, handle_interrupt simply should not be called after every fstatat, or at all, without last_signal bering set beforehand.
+>
 
